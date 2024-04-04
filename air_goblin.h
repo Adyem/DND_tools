@@ -33,7 +33,7 @@ static const	t_stats AIR_GOBLIN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 28,
+	.health = 24,
 	.temp_hp = 0,
 	.ac = 14,
 	.str = 14,

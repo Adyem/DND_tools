@@ -33,7 +33,7 @@ static const	t_stats AIR_GOBLIN_SHAMAN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 20,
+	.health = 22,
 	.temp_hp = 0,
 	.ac = 12,
 	.str = 14,
