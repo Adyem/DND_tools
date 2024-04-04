@@ -9,7 +9,8 @@ HEADER		= include.h \
 			  zephyr.h \
 			  air_totem.h \
 			  air_goblin.h \
-			  air_goblin_shaman.h
+			  air_goblin_shaman.h \
+			  goblin.h
 
 SRC			= name.c \
 			  dnd_tools.c \
@@ -19,6 +20,7 @@ SRC			= name.c \
 			  zephyr_turn.c \
 			  air_totem.c \
 			  air_goblin.c \
+			  goblin.c \
 			  air_goblin_shaman.c \
 			  npc_stats.c \
 			  npc_set_stats.c \

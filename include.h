@@ -7,6 +7,7 @@
 # include "air_totem.h"
 # include "air_goblin.h"
 # include "air_goblin_shaman.h"
+# include "goblin.h"
 
 //utility
 # include "character.h"

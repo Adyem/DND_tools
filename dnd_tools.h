@@ -43,6 +43,12 @@ void	ft_air_goblin_attack(t_char *info);
 void	ft_air_goblin_ranged_attack(t_char *info);
 void	ft_air_goblin_turn(t_char *info);
 
+//Air Goblin (NPC)
+void	ft_goblin(int index, char **input);
+void	ft_goblin_attack(t_char *info);
+void	ft_goblin_ranged_attack(t_char *info);
+void	ft_goblin_turn(t_char *info);
+
 //Air Goblin Shaman (NPC)
 void	ft_air_goblin_shaman(int index, char **input);
 void	ft_air_goblin_shaman_attack(t_char *info);
