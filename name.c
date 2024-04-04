@@ -66,6 +66,10 @@ t_name	*ft_allocate_memory_name()
 	temp->next = ft_add_node("air_totem", ft_air_totem);
 	if (!temp->next)
 		ft_free_memory_name(name, 1);
+	temp = name->next;
+	temp->next = ft_add_node("grizzletooth", ft_grizzletooth);
+	if (!temp->next)
+		ft_free_memory_name(name, 1);
 	i = 1;
 	while (i <= 10)
 	{

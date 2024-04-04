@@ -43,11 +43,18 @@ void	ft_air_goblin_attack(t_char *info);
 void	ft_air_goblin_ranged_attack(t_char *info);
 void	ft_air_goblin_turn(t_char *info);
 
-//Air Goblin (NPC)
+//Goblin (NPC)
 void	ft_goblin(int index, char **input);
 void	ft_goblin_attack(t_char *info);
 void	ft_goblin_ranged_attack(t_char *info);
 void	ft_goblin_turn(t_char *info);
+
+//Grizzletooth (BOSS)
+void	ft_grizzletooth(int index, char **input);
+void	ft_grizzletooth_attack(t_char *info);
+void	ft_grizzletooth_ranged_attack(t_char *info);
+void	ft_grizzletooth_turn(t_char *info);
+
 
 //Air Goblin Shaman (NPC)
 void	ft_air_goblin_shaman(int index, char **input);

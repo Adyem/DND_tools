@@ -8,6 +8,7 @@
 # include "air_goblin.h"
 # include "air_goblin_shaman.h"
 # include "goblin.h"
+# include "grizzletooth.h"
 
 //utility
 # include "character.h"
