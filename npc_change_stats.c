@@ -28,11 +28,12 @@ void	ft_npc_set_stat(t_char *info, char **input)
 	else if (ft_strcmp_dnd(input[1], "hp") == 0)
 		ft_npc_update_hp(info, input);
 	else if (ft_strcmp_dnd(input[1], "bless") == 0)
-		ft_npc_update_bless(info, input);
+		ft_npc_update_buff(info, input, &info->bufs.bless.duration, "bless");
 	else if (ft_strcmp_dnd(input[1], "lightning_strike") == 0)
 		ft_npc_update_lightning_strike(info, input);
 	else if (ft_strcmp_dnd(input[1], "protective_winds") == 0)
-		ft_npc_update_protective_winds(info, input);
+		ft_npc_update_buff(info, input,
+			&info->bufs.protective_winds.duration, "protective winds");
 	else if (ft_strcmp_dnd(input[1], "to_hit") == 0)
 		ft_npc_check_ac(info, input);
 	else if (ft_strcmp_dnd(input[2], "save") == 0)

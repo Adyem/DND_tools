@@ -66,7 +66,7 @@ void	ft_air_goblin_shaman_turn(t_char *info);
 void	ft_air_totem(int index, char **input);
 
 //buff update
-void	ft_npc_update_bless(t_char *info, char **input);
+void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name);
 void	ft_update_buff_status(t_char *info, int current_dur, int duration, char *buff_name);
 
 //saving throws buffs
@@ -82,7 +82,6 @@ int		ft_skill_check_buff(t_char *info, int *roll, char *skill);
 void	ft_update_buf(t_char *info);
 void	ft_update_lightning_strike(t_char *info);
 void	ft_npc_update_lightning_strike(t_char *info, char **input);
-void	ft_npc_update_protective_winds(t_char *info, char **input);
 
 //general buffs
 int		ft_check_bless(t_char *info);

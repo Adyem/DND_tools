@@ -24,49 +24,25 @@ void ft_update_buff_status(t_char *info, int current_dur, int duration, char *bu
 	return ;
 }
 
-void	ft_npc_update_bless(t_char *info, char **input)
+void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name)
 {
 	int	number;
 
 	if (ft_check_value(input[2]))
 	{
-		ft_printf_fd(2, "1-Bless Error: Expecting a number between 0 and 50");
+		ft_printf_fd(2, "1-Bless Error: Expecting a number between 0 and 50\n");
 		return ;
 	}
 	number = ft_atoi(input[2]);
 	if (number >= 0 && number <= 50)
 	{
-		ft_update_buff_status(info, info->bufs.bless.duration, number, "bless");
-		if (number > info->bufs.bless.duration)
-			info->bufs.bless.duration = number;
+		ft_update_buff_status(info, *buff, number, name);
+		if (number > *buff)
+			*buff = number;
 		else if (number == 0)
-			info->bufs.bless.duration = number;
+			*buff = number;
 	}
 	else
-		ft_printf_fd(2, "2-Bless Error: Expecting a number between 0 and 50");
-	return ;
-}
-
-void	ft_npc_update_protective_winds(t_char *info, char **input)
-{
-	int	number;
-
-	if (ft_check_value(input[2]))
-	{
-		ft_printf_fd(2, "1-Bless Error: Expecting a number between 0 and 1");
-		return ;
-	}
-	number = ft_atoi(input[2]);
-	if (number >= 0 && number <= 1)
-	{
-		ft_update_buff_status(info, info->bufs.protective_winds.duration,
-			number, "protective winds");
-		if (number > info->bufs.protective_winds.duration)
-			info->bufs.protective_winds.duration = number;
-		else if (number == 0)
-			info->bufs.protective_winds.duration = number;
-	}
-	else
-		ft_printf_fd(2, "2-Bless Error: Expecting a number between 0 and 1");
+		ft_printf_fd(2, "2-Bless Error: Expecting a number between 0 and 50\n");
 	return ;
 }
