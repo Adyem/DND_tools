@@ -68,7 +68,7 @@ void	ft_npc_set_stat(t_char *info, char **input)
 	}
 	else
 	{
-		ft_printf_fd(2, "3-Maverick Invalid argument given\n");
+		ft_printf_fd(2, "4-%s Invalid argument given\n", info->name);
 		return ;
 	}
 	return ;
