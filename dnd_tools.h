@@ -127,4 +127,7 @@ void	ft_npc_write_file(t_char *info, t_stats *stats);
 void	ft_check_initiative(t_char *info);
 void	ft_roll_initiative(t_char *info);
 
+//command roll
+void	ft_command_roll(char **argv);
+
 #endif
