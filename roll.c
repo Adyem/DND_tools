@@ -39,6 +39,12 @@ void	ft_command_roll(char **argv)
 	char	*result;
 	int		i;
 
+	i = 0;
+	while (argv[i] && DEBUG == 1)
+	{
+		ft_printf("%s\n", argv[i]);
+		i++;
+	}
 	if (!argv[1])
 		return ;
 	result = NULL;
