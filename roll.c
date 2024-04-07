@@ -48,7 +48,6 @@ void	ft_command_roll(char **argv)
 	if (!argv[1])
 		return ;
 	result = NULL;
-	argv++;
 	i = 1;
 	while(argv[i])
 	{
