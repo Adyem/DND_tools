@@ -48,7 +48,8 @@ SRC			= name.c \
 			  read_line_check.c \
 			  roll.c \
 			  roll_utilities.c \
-			  roll_parse_dice.c
+			  roll_parse_dice.c \
+			  roll_validate_string.c
 
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -g

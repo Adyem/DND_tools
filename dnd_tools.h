@@ -131,5 +131,6 @@ void	ft_roll_initiative(t_char *info);
 void	ft_command_roll(char **argv);
 void	ft_free_parse(char **to_parse);
 int		ft_roll_excecute_droll(char *string, int *i, int j);
+int		ft_command_roll_validate(char *string);
 
 #endif

@@ -62,6 +62,11 @@ void	ft_command_roll(char **argv)
 		ft_printf("%s\n", result);
 	if (!result)
 		return ;
+	if (ft_command_roll_validate(result))
+	{
+		ft_printf_fd(2, "Roll error with the string: %s\n", result);
+		return ;
+	}
 	ft_command_roll_parse(result, 0);
 	free(result);
 	return ;
