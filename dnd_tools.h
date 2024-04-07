@@ -129,5 +129,7 @@ void	ft_roll_initiative(t_char *info);
 
 //command roll
 void	ft_command_roll(char **argv);
+void	ft_free_parse(char **to_parse);
+int		ft_roll_excecute_droll(char *string, int *i, int j);
 
 #endif

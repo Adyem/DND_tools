@@ -58,6 +58,11 @@ static void	ft_request_input(t_name *name)
 			i++;
 		found = 0;
 		temp = name;
+		if (ft_strcmp_dnd(input[0], "roll") == 0 && !found)
+		{
+			found = 1;
+			ft_command_roll(input);
+		}
 		if (i == 1 && ft_strcmp_dnd(input[0], "exit") == 0 && !found)
 		{
 			ft_free_input(input, input_string);

@@ -45,7 +45,10 @@ SRC			= name.c \
 			  update_buff_special.c \
 			  update_lightning_strike.c \
 			  to_hit.c \
-			  read_line_check.c
+			  read_line_check.c \
+			  roll.c \
+			  roll_utilities.c \
+			  roll_parse_dice.c
 
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -g
