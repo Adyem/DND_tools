@@ -2,10 +2,11 @@
 
 int	ft_roll_excecute_droll(char *string, int *i, int j)
 {
-	int	result;
-	int	first_number;
-	int	second_number;
-	int x;
+	char	*test;
+	int		result;
+	int		first_number;
+	int		second_number;
+	int 	x;
 
 	while(*i < j)
 	{
@@ -18,8 +19,9 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 			x++;
 			if (string[*i] >='0' && string[*i] <= '9')
 			{
-				while (string[*i] >= '0' && string[*i] <= '9')
-					(*i)--;
+				while (*i >= 0)
+					if (string[*i] >= '0' && string[*i] <= '9')
+						(*i)--;
 				(*i)++;
 				first_number = ft_atoi(&string[*i]);
 			}
@@ -32,12 +34,9 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 			result = ft_dice_roll(first_number, second_number);
 			if (!result)
 				return (1);
-			while (result)
-			{
-				string[*i] = result % 10 + '0';
-				result = result / 10;
-				(*i)++;
-			}
+			test = ft_roll_itoa(result, i, string);
+			if (!test)
+				return (1);
 			while (string[x] >= '0' && string[x] <= '9')
 				x++;
 			while (string[x])
