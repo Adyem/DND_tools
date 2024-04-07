@@ -6,7 +6,7 @@ static void	ft_command_roll_parse(char *string, int nested)
 	int	i;
 	int	j;
 
-	while (*string)
+	while (1)
 	{
 		i = 0;
 		while (string[i] != '(' && string[i])
@@ -29,6 +29,8 @@ static void	ft_command_roll_parse(char *string, int nested)
 				break ;
 			i++;
 		}
+		if (!(*string))
+			break ;
 	}
 	ft_printf("%s\n", string);
 	return ;
