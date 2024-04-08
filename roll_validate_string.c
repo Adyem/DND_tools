@@ -63,13 +63,30 @@ int	ft_command_roll_validate(char *string)
 		while (string[i] >= '0' || string[i] <= '9')
 			i++;
 		if (string[i] == '(')
+		{
 			if (ft_check_open_braces(string, i, &open_braces))
 				return(1);
+		}
 		else if (string[i] == ')')
+		{
 			if (ft_check_close_braces(string, i, open_braces, &close_braces))
 				return (1);
+		}
 		else if (string[i] == '-' || string[i] == '+')
+		{
+			if (ft_check_plus_minus(string, i))
+				return (1);
+		}
 		else if (string[i] == '/' || string[i] == '*')
+		{
+			if (ft_check_divide_multiply(string, i))
+				return (1);
+		}
+		else if (string[i] == 'd')
+		{
+			if (ft_check_dice(string, i))
+				return(1);
+		}
 		i++;
 	}
 	return (0);
