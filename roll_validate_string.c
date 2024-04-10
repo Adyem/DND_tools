@@ -1,4 +1,4 @@
-include "dnd_tools.h"
+#include "dnd_tools.h"
 
 static int	ft_check_open_braces(char *string, int i, int *open_braces)
 {
@@ -24,7 +24,7 @@ static int	ft_check_close_braces(char *string, int i,
 	return (0);
 }
 
-static int	ft_roll_check_arg(string)
+static int	ft_roll_check_arg(char *string)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ int	ft_check_plus_minus(char *string, int i)
 	return (0);
 }
 
-static int	ft_check_divide_multiply(string, i)
+static int	ft_check_divide_multiply(char *string, int i)
 {
 	if (i == 0)
 		return (1);
@@ -82,6 +82,20 @@ static int	ft_check_divide_multiply(string, i)
 
 static int	ft_check_dice(char *string, int i)
 {
+	if (i == 0)
+		return (0);
+	if (ft_roll_check_number_previous(string, i))
+		return (1);
+	if (string[i - 1] == '/' || string[i - 1] == '*')
+		return (0);
+	else if (i > 1)
+	{
+		if (string[i - 1] == '-' && (ft_roll_check_character(string[i - 2])))
+			return (1);
+		else if (string[i + 1] == '-' || !string[i + 1])
+			return (1);
+	}
+	return (0);
 }
 
 int	ft_command_roll_validate(char *string)
@@ -97,7 +111,7 @@ int	ft_command_roll_validate(char *string)
 		return (1);
 	while (string[i])
 	{
-		while (string[i] >= '0' || string[i] <= '9')
+		while (string[i] >= '0' && string[i] <= '9')
 			i++;
 		if (string[i] == '(')
 		{
@@ -124,7 +138,8 @@ int	ft_command_roll_validate(char *string)
 			if (ft_check_dice(string, i))
 				return(1);
 		}
-		i++;
+		if (string[i])
+			i++;
 	}
 	return (0);
 }

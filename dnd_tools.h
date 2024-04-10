@@ -136,5 +136,6 @@ int		ft_check_string_number(char *string);
 char	*ft_roll_itoa(int result, int *i, char *string);
 int		ft_roll_check_character(char c);
 int		ft_roll_check_number_next(char *string, int i);
+int		ft_roll_check_number_previous(char *string, int i);
 
 #endif
