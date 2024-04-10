@@ -8,21 +8,21 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 	int		second_number;
 	int 	x;
 
-	while(*i < j)
+	x = *i;
+	while(x < j)
 	{
 		if (!(string[*i]))
 			break ;
 		if (string[*i] == 'd')
 		{
-			x = *i;
 			(*i)--;
 			x++;
 			if (string[*i] >='0' && string[*i] <= '9')
 			{
-				while (*i >= 0)
-					if (string[*i] >= '0' && string[*i] <= '9')
-						(*i)--;
-				(*i)++;
+				while (*i > 0 && string[*i] >= '0' && string[*i] <= '9')
+					(*i)--;
+				if (string[*i] < '0' || string[*i] > '9')
+					(*i)++;
 				first_number = ft_atoi(&string[*i]);
 			}
 			else
@@ -30,6 +30,8 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 			if (string[x] >= '0' && string[x] <= '9')
 				second_number = ft_atoi(&string[x]);
 			else
+				return (1);
+			if (first_number <= 0 || second_number <= 0)
 				return (1);
 			result = ft_dice_roll(first_number, second_number);
 			if (!result)
@@ -53,5 +55,7 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 		}
 		(*i)++;
 	}
+	if (DEBUG == 1)
+		ft_printf("%s\n", string);
 	return (0);
 }
