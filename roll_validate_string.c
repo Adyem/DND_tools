@@ -1,4 +1,4 @@
-#include "dnd_tools.h"
+include "dnd_tools.h"
 
 static int	ft_check_open_braces(char *string, int i, int *open_braces)
 {
@@ -45,6 +45,43 @@ static int	ft_roll_check_arg(string)
 			return (1);
 	}
 	return (0);
+}
+
+int	ft_check_plus_minus(char *string, int i)
+{
+	int sign_seen;
+
+	sign_seen = 0;
+	if (i > 0)
+	{
+		if (string[i - 1] == '+' || string[i - 1] == '-')
+			sign_seen++;
+		else if (ft_roll_check_number_previous(string, i) &&
+				(ft_roll_check_character(string[i - 1])))
+			return (1);
+	}
+	else if (ft_roll_check_number_previous(string, i))
+		return (1);
+	if (!((string[i + 1] == '+' && !sign_seen) ||
+			(string[i + 1] == '-' && !sign_seen) ||
+			(string[i + 1] >= '0' && string[i + 1] <= '9')))
+		return (1);
+	return (0);
+}
+
+static int	ft_check_divide_multiply(string, i)
+{
+	if (i == 0)
+		return (1);
+	if (ft_roll_check_number_next(string, i))
+		return (1);
+	if (ft_roll_check_number_previous(string, i))
+		return (1);
+	return (0);
+}
+
+static int	ft_check_dice(char *string, int i)
+{
 }
 
 int	ft_command_roll_validate(char *string)
