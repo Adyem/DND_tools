@@ -113,7 +113,7 @@ static const	t_lightning_strike GRIZZLETOOTH_LIGHTNING_STRIKE =
 
 static const	t_air_totem GRIZZLETOOTH_AIR_TOTEM =
 {
-	.save_file = "air_totem.txt",
+	.save_file = "data/air_totem.txt",
 	.knock_back_distance = 0,
 	.erea_of_effect = 0,
 };

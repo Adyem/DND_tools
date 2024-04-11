@@ -112,7 +112,7 @@ static const	t_lightning_strike AIR_TOTEM_LIGHTNING_STRIKE =
 
 static const	t_air_totem AIR_TOTEM_AIR_TOTEM =
 {
-	.save_file = "air_totem.txt",
+	.save_file = "data/air_totem.txt",
 	.health = 0,
 	.ac = 0,
 	.knock_back_distance = 0,
