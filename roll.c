@@ -29,18 +29,13 @@ static void	ft_command_roll_parse(char *string, int nested)
 				break ;
 			i++;
 		}
-		i = 0;
-		if (ft_check_string_number(string))
-			return ;
-		else
-			continue ;
 		if (DEBUG == 1)
 			ft_printf("%s\n", string);
 		if (!(*string))
 			break ;
+		break ;
 	}
-	if (DEBUG == 1)
-		ft_printf("%s\n", string);
+	ft_printf("%s\n", string);
 	return ;
 }
 

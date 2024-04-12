@@ -15,12 +15,14 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 			break ;
 		if (string[*i] == 'd')
 		{
-			(*i)--;
+			if (*i > 0)
+				(*i)--;
 			x++;
 			if (string[*i] >='0' && string[*i] <= '9')
 			{
-				while (*i > 0 && string[*i] >= '0' && string[*i] <= '9')
-					(*i)--;
+				while (*i > 0)
+					if (string[*i] >= '0' && string[*i] <= '9')
+						(*i)--;
 				if (string[*i] < '0' || string[*i] > '9')
 					(*i)++;
 				first_number = ft_atoi(&string[*i]);
