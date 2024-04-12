@@ -21,8 +21,12 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 			if (string[*i] >='0' && string[*i] <= '9')
 			{
 				while (*i > 0)
+				{
 					if (string[*i] >= '0' && string[*i] <= '9')
 						(*i)--;
+					else
+						break ;
+				}
 				if (string[*i] < '0' || string[*i] > '9')
 					(*i)++;
 				first_number = ft_atoi(&string[*i]);
@@ -49,11 +53,7 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 				(*i)++;
 				x++;
 			}
-			while (string[*i])
-			{
-				string[*i] = '\0';
-				(*i)++;
-			}
+			string[*i] = '\0';
 		}
 		(*i)++;
 	}
