@@ -8,13 +8,13 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 	int		second_number;
 	int 	x;
 
-	x = *i;
-	while(x < j)
+	while(*i < j)
 	{
 		if (!(string[*i]))
 			break ;
 		if (string[*i] == 'd')
 		{
+			x = *i;
 			if (*i > 0)
 				(*i)--;
 			x++;

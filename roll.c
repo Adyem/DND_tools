@@ -35,7 +35,6 @@ static void	ft_command_roll_parse(char *string, int nested)
 			break ;
 		break ;
 	}
-	ft_printf("%s\n", string);
 	return ;
 }
 
