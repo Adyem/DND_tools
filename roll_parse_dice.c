@@ -19,24 +19,10 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 				(*i)--;
 			x++;
 			if (string[*i] >='0' && string[*i] <= '9')
-			{
-				while (*i > 0)
-				{
-					if (string[*i] >= '0' && string[*i] <= '9')
-						(*i)--;
-					else
-						break ;
-				}
-				if (string[*i] < '0' || string[*i] > '9')
-					(*i)++;
-				first_number = ft_atoi(&string[*i]);
-			}
+				first_number = ft_roll_convert_previous(string, *i);
 			else
 				first_number = 1;
-			if (string[x] >= '0' && string[x] <= '9')
-				second_number = ft_atoi(&string[x]);
-			else
-				return (1);
+			second_number = ft_roll_convert_next(string, x);
 			if (first_number <= 0 || second_number <= 0)
 				return (1);
 			result = ft_dice_roll(first_number, second_number);

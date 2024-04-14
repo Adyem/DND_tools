@@ -141,4 +141,8 @@ int		ft_roll_check_character(char c);
 int		ft_roll_check_number_next(char *string, int i);
 int		ft_roll_check_number_previous(char *string, int i);
 
+//roll convert numbers
+int		ft_roll_convert_previous(char *string, int i);
+int		ft_roll_convert_next(char *string, int i);
+
 #endif

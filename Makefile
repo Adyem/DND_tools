@@ -53,14 +53,24 @@ SRC			= name.c \
 			  roll_validate_utils.c \
 			  fclean.c
 
-CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -g
+CC          = gcc
+CFLAGS      = -Wall -Werror -Wextra -g
 
-LIBFT_DIR	= ./libft
-LIBFT		= $(LIBFT_DIR)/libftprintf.a
-OBJ_DIR		= ./objs
+LIBFT_DIR   = ./libft
+LIBFT       = $(LIBFT_DIR)/libftprintf.a
 
-LDFLAGS		= -L$(LIBFT_DIR) -lftprintf -lreadline
+OBJ_DIR     = ./objs
+OBJ_DIR_DEBUG = ./objs_debug
+
+ifeq ($(DEBUG),1)
+    CFLAGS += -DDEBUG=1
+    OBJ_DIR = $(OBJ_DIR_DEBUG)
+    TARGET = $(NAME_DEBUG)
+else
+    TARGET = $(NAME)
+endif
+
+LDFLAGS     = -L$(LIBFT_DIR) -lftprintf -lreadline
 
 OBJS = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
@@ -68,22 +78,19 @@ $(OBJ_DIR)/%.o: %.c $(HEADER)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
+all: $(TARGET)
 
-debug: CFLAGS += -DDEBUG=1
-debug: $(NAME_DEBUG)
+debug:
+	$(MAKE) all DEBUG=1
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
-
-$(NAME_DEBUG): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME_DEBUG) $(LDFLAGS)
+$(NAME) $(NAME_DEBUG): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR) $(OBJ_DIR_DEBUG)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 fclean: clean
@@ -91,4 +98,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re debug windows
+.PHONY: all clean fclean re debug
