@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-int	ft_read_line_yesorno(char *message)
+int	ft_read_line_confirm(char *message)
 {
 	char	*input;
 

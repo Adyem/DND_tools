@@ -6,7 +6,7 @@
 /*   By: adyem <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:16:10 by adyem             #+#    #+#             */
-/*   Updated: 2024/04/13 15:37:32 by adyem            ###   ########.fr       */
+/*   Updated: 2024/04/14 19:29:19 by adyem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_fclean(void)
 	command[1] = "-c";
 	command[2] = "rm -rf ./data/*";
 	command[3] = NULL;
-	if (ft_read_line_yesorno("type yes for confirm or no to abort: "))
+	if (ft_read_line_confirm("type yes for confirm or no to abort: "))
 			return ;
 	pid = fork();
 	if (pid == -1)

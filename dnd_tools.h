@@ -100,7 +100,7 @@ int		ft_set_stats(t_char *info, char **content);
 int		ft_check_stat(t_char *info, char *stat, int index);
 
 //readline checks
-int		ft_read_line_yesorno(char *mesage);
+int		ft_read_line_confirm(char *mesage);
 
 //dice rolling
 void	ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int save_mod);
