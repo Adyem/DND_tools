@@ -36,6 +36,10 @@ int	ft_dice_roll(int number, int faces)
 	int	result;
 	int	i;
 
+	if (faces == 1)
+		return (number);
+	if (faces < 1 || number < 1)
+		return (0);
 	result = 0;
 	i = 0;
 	roll = 0;
