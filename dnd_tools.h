@@ -133,13 +133,16 @@ void	ft_roll_initiative(t_char *info);
 //command roll
 void	ft_command_roll(char **argv);
 void	ft_free_parse(char **to_parse);
-int		ft_roll_excecute_droll(char *string, int *i, int j);
 int		ft_command_roll_validate(char *string);
 int		ft_check_string_number(char *string);
 char	*ft_roll_itoa(int result, int *i, char *string);
 int		ft_roll_check_character(char c);
 int		ft_roll_check_number_next(char *string, int i);
 int		ft_roll_check_number_previous(char *string, int i);
+
+//roll parser
+int		ft_roll_excecute_droll(char *string, int *i, int j);
+int		ft_roll_excecute_mp(char *string, int *i, int j);
 
 //roll convert numbers
 int		ft_roll_convert_previous(char *string, int i);

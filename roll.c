@@ -6,35 +6,37 @@ static void	ft_command_roll_parse(char *string, int nested)
 	int	i;
 	int	j;
 
-	while (1)
+	i = 0;
+	while (string[i] != '(' && string[i])
+		i++;
+	if (string[i] == '(')
+		ft_command_roll_parse(&string[i], 1);
+	else if (string[i] == ')' && nested == 0)
+		return ;
+	else if (!string[i] && nested == 1)
+		return ;
+	else if (string[i] == ')' && nested == 1)
+		j = i;
+	if (!string[i])
+		j = i;
+	i = 0;
+	while (i < j)
 	{
-		i = 0;
-		while (string[i] != '(' && string[i])
-			i++;
-		if (string[i] == '(')
-			ft_command_roll_parse(&string[i], 1);
-		else if (string[i] == ')' && nested == 0)
-			break ;
-		else if (!string[i] && nested == 1)
-			break ;
-		else if (string[i] == ')' && nested == 1)
-			j = i;
-		if (!string[i])
-			j = i;
-		i = 0;
-		while (i < j)
-		{
-			error = ft_roll_excecute_droll(string, &i, j);
-			if (error)
-				break ;
-			i++;
-		}
-		if (DEBUG == 1)
-			ft_printf("%s\n", string);
-		if (!(*string))
-			break ;
-		break ;
+		error = ft_roll_excecute_droll(string, &i, j);
+		if (error)
+			return ;
+		i++;
 	}
+	i = 0;
+	while (i < j)
+	{
+		error = ft_roll_excecute_mp(string, &i, j);
+		if (error)
+			return ;
+		i++;
+	}
+	if (DEBUG == 1)
+		ft_printf("%s\n", string);
 	return ;
 }
 
