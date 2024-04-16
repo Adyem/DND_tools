@@ -19,7 +19,7 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 				(*i)--;
 			x++;
 			if (string[*i] >= '0' && string[*i] <= '9')
-				first_number = ft_roll_convert_previous(string, *i);
+				first_number = ft_roll_convert_previous(string, i);
 			else
 				first_number = 1;
 			second_number = ft_roll_convert_next(string, x);

@@ -31,40 +31,27 @@ void	ft_free_parse(char **to_parse)
 	}
 }
 
-int	ft_roll_convert_previous(char *string, int i)
+int	ft_roll_convert_previous(char *string, int *i)
 {
 	int	result;
 
-	while (i > 0 && (string[i] >= '0' && string[i] <= '9'))
-		i--;
-	if (i > 0 && (string[i] == '+' || string[i] == '-'))
-		i--;
-	if (i > 0 && (string[i] == '+' || string[i] == '-'
-			|| string[i] == '*' || string[i] == '/'))
-		i--;
-	if (i > 0)
-		i++;
-	result = ft_atoi(&string[i]);
+	while (*i > 0 && (string[*i] >= '0' && string[*i] <= '9'))
+		(*i)--;
+	if (*i > 0 && (string[*i] == '+' || string[*i] == '-'))
+		(*i)--;
+	if (*i > 0 && (string[*i] == '+' || string[*i] == '-'
+			|| string[*i] == '*' || string[*i] == '/'))
+		(*i)++;
+	result = ft_atoi(&string[*i]);
 	if (DEBUG == 1)
-		ft_printf("the first number is %i\n", result);
+		ft_printf("the first number is %i and i=%i\n", result);
 	return (result);
 }
 
 int	ft_roll_convert_next(char *string, int i)
 {
 	int	result;
-	int	length;
 
-	length = ft_strlen(string) - 1;
-	while (i < length && (string[i] >= '0' && string[i] <= '9'))
-		i++;
-	if (i < length && (string[i] == '+' || string[i] == '-'))
-		i++;
-	if (i < length && (string[i] == '+' || string[i] == '-'
-			|| string[i] == '*' || string[i] == '/'))
-		i++;
-	if (i < length)
-		i--;
 	result = ft_atoi(&string[i]);
 	if (DEBUG == 1)
 		ft_printf("the second number is %i\n", result);
@@ -76,6 +63,8 @@ char	*ft_roll_itoa(int result, int *i, char *string)
 	char	*temp;
 	int		y;
 
+	if (DEBUG == 1)
+		ft_printf("the value of i=%i\n", *i);
 	temp = ft_itoa(result);
 	if (!temp)
 		return (NULL);
