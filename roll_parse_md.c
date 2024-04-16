@@ -22,10 +22,12 @@ int	ft_roll_excecute_mp(char *string, int *i, int j)
 			x++;
 			first_number = ft_roll_convert_previous(string, *i);
 			second_number = ft_roll_convert_next(string, x);
-			if (sign == '/')
+			if (sign == '/' && second_number != 0)
 				result = first_number / second_number;
 			else if (sign == '*')
 				result = first_number * second_number;
+			else
+				return (1);
 			temp = ft_roll_itoa(result, i, string);
 			if (!temp)
 				return (1);
