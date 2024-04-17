@@ -46,6 +46,6 @@ int	ft_roll_excecute_pm(char *string, int *i, int j)
 		(*i)++;
 	}
 	if (DEBUG == 1)
-		ft_printf("%s\n", string);
+		ft_printf("the result after pm is %s\n", string);
 	return (0);
 }

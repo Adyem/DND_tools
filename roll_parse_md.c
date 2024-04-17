@@ -46,6 +46,6 @@ int	ft_roll_excecute_md(char *string, int *i, int j)
 		(*i)++;
 	}
 	if (DEBUG == 1)
-		ft_printf("%s\n", string);
+		ft_printf("after md the result is %s\n", string);
 	return (0);
 }

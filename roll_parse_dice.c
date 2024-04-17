@@ -44,6 +44,6 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 		(*i)++;
 	}
 	if (DEBUG == 1)
-		ft_printf("%s\n", string);
+		ft_printf("after dicerolling result is %s\n", string);
 	return (0);
 }
