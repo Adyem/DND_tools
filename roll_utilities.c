@@ -58,16 +58,16 @@ int	ft_roll_convert_next(char *string, int i)
 	return (result);
 }
 
-char	*ft_roll_itoa(int result, int *i, char *string)
+int	ft_roll_itoa(int result, int *i, char *string)
 {
 	char	*temp;
 	int		y;
 
 	if (DEBUG == 1)
-		ft_printf("the value of i=%i\n", *i);
+		ft_printf("roll itoa: the value of i=%i\n", *i);
 	temp = ft_itoa(result);
 	if (!temp)
-		return (NULL);
+		return (1);
 	y = 0;
 	while (temp[y])
 	{
@@ -76,5 +76,7 @@ char	*ft_roll_itoa(int result, int *i, char *string)
 		y++;
 	}
 	free(temp);
-	return(string);
+	if (DEBUG == 1)
+		ft_printf("the string after roll itoa is %s\n", string);
+	return(0);
 }

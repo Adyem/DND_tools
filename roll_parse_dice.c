@@ -2,7 +2,6 @@
 
 int	ft_roll_excecute_droll(char *string, int *i, int j)
 {
-	char	*temp;
 	int		result;
 	int		first_number;
 	int		second_number;
@@ -28,11 +27,14 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 			result = ft_dice_roll(first_number, second_number);
 			if (!result)
 				return (1);
-			temp = ft_roll_itoa(result, i, string);
-			if (!temp)
+			if (ft_roll_itoa(result, i, string))
 				return (1);
+			if (DEBUG == 1)
+				ft_printf("1 the value of i = %i and x = %i\n", *i, x);
 			while (string[x] >= '0' && string[x] <= '9')
 				x++;
+			if (DEBUG == 1)
+				ft_printf("2 the value of i = %i and x = %i\n", *i, x);
 			while (string[x])
 			{
 				string[*i] = string[x];

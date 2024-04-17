@@ -2,7 +2,6 @@
 
 int	ft_roll_excecute_pm(char *string, int *i, int j)
 {
-	char	*temp;
 	char	sign;
 	int		result;
 	int		first_number;
@@ -30,8 +29,7 @@ int	ft_roll_excecute_pm(char *string, int *i, int j)
 				return (1);
 			if (DEBUG == 1)
 				ft_printf("result = %i and i=%i\n", result, *i);
-			temp = ft_roll_itoa(result, i, string);
-			if (!temp)
+			if (ft_roll_itoa(result, i, string))
 				return (1);
 			while (string[x] >= '0' && string[x] <= '9')
 				x++;
