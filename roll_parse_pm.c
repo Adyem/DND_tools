@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-int	ft_roll_excecute_md(char *string, int *i, int j)
+int	ft_roll_excecute_pm(char *string, int *i, int j)
 {
 	char	*temp;
 	char	sign;
@@ -13,7 +13,7 @@ int	ft_roll_excecute_md(char *string, int *i, int j)
 	{
 		if (!(string[*i]))
 			break ;
-		if (string[*i] == '/' || string[*i] == '*')
+		if (string[*i] == '+' || string[*i] == '-')
 		{
 			sign = string[*i];
 			x = *i;
@@ -22,10 +22,10 @@ int	ft_roll_excecute_md(char *string, int *i, int j)
 			x++;
 			first_number = ft_roll_convert_previous(string, i);
 			second_number = ft_roll_convert_next(string, x);
-			if (sign == '/' && second_number != 0)
-				result = first_number / second_number;
-			else if (sign == '*')
-				result = first_number * second_number;
+			if (sign == '+')
+				result = first_number + second_number;
+			else if (sign == '-')
+				result = first_number - second_number;
 			else
 				return (1);
 			if (DEBUG == 1)

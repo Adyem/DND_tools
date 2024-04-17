@@ -52,6 +52,7 @@ SRC			= name.c \
 			  roll_validate_string.c \
 			  roll_validate_utils.c \
 			  roll_parse_md.c \
+			  roll_parse_pm.c \
 			  fclean.c
 
 CC          = gcc

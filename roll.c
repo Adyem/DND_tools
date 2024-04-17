@@ -30,7 +30,15 @@ static void	ft_command_roll_parse(char *string, int nested)
 	i = 0;
 	while (i < j)
 	{
-		error = ft_roll_excecute_mp(string, &i, j);
+		error = ft_roll_excecute_md(string, &i, j);
+		if (error)
+			return ;
+		i++;
+	}
+	i = 0;
+	while (i < j)
+	{
+		error = ft_roll_excecute_pm(string, &i, j);
 		if (error)
 			return ;
 		i++;
