@@ -3,9 +3,12 @@
 void	ft_air_goblin_turn(t_char *info)
 {
 	ft_update_buf(info);
-	ft_printf("The goblin will try to make either a ranged or melee attack during his turn\n");
-	ft_printf("If on low health the air goblin will try to use nimble escape: %s",
+	ft_printf("The goblin will try to make either a ranged or melee" \
+		" attack during his turn\n\n");
+	ft_printf("If on low health the air goblin will try to use nimble escape: %s\n\n",
 		AIR_GOBLIN_NIMBLE_ESCAPE);
+	ft_printf("The goblin currently has %i/%i hp\n",
+		info->stats.health, info->dstats.health);
 }
 
 void	ft_air_goblin_ranged_attack(t_char *info)

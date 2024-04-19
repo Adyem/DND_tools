@@ -26,6 +26,8 @@ void	ft_zephyr_turn(t_char *info)
 	ft_update_buf(info);
 	ft_check_air_totem();
 	ft_zephyr_spells(info);
+	ft_printf("Zephyr currently has %i/%i hp\n",
+		info->stats.health, info->dstats.health);
 }
 
 void	ft_zephyr_ranged_attack(t_char *info)
