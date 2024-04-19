@@ -31,6 +31,8 @@ int	ft_roll_excecute_pm(char *string, int *i, int j)
 				ft_printf("result = %i and i=%i\n", result, *i);
 			if (ft_roll_itoa(result, i, string))
 				return (1);
+			if (string[x] == '-' || string[x] == '+')
+				x++;
 			while (string[x] >= '0' && string[x] <= '9')
 				x++;
 			while (string[x])

@@ -31,21 +31,20 @@ void	ft_free_parse(char **to_parse)
 	}
 }
 
-int	ft_roll_convert_previous(char *string, int *i)
+int ft_roll_convert_previous(char *string, int *i)
 {
-	int	result;
+    int result;
 
-	while (*i > 0 && (string[*i] >= '0' && string[*i] <= '9'))
-		(*i)--;
-	if (*i > 0 && (string[*i] == '+' || string[*i] == '-'))
-		(*i)--;
-	if (*i > 0 && (string[*i] == '+' || string[*i] == '-'
-			|| string[*i] == '*' || string[*i] == '/'))
-		(*i)++;
-	result = ft_atoi(&string[*i]);
-	if (DEBUG == 1)
-		ft_printf("the first number is %i and i=%i\n", result);
-	return (result);
+    while (*i > 0 && (string[*i] >= '0' && string[*i] <= '9'))
+        (*i)--;
+    if (*i > 0 && (string[*i - 1] == '+' || string[*i - 1] == '-'))
+        (*i)--;
+    if (string[*i] < '0' || string[*i] > '9')
+        (*i)++;
+    result = ft_atoi(&string[*i]);
+    if (DEBUG == 1)
+        ft_printf("the first number is %i and i=%i\n", result, *i);
+    return result;
 }
 
 int	ft_roll_convert_next(char *string, int i)

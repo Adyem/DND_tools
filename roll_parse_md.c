@@ -35,6 +35,8 @@ int	ft_roll_excecute_md(char *string, int *i, int j)
 				return (1);
 			if (DEBUG == 1)
 				ft_printf("the value of i = %i and x = %i\n", *i, x);
+			if (string[x] == '-' || string[x] == '+')
+				x++;
 			while (string[x] >= '0' && string[x] <= '9')
 				x++;
 			if (DEBUG == 1)
