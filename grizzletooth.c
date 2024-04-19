@@ -6,6 +6,8 @@ void	ft_grizzletooth_turn(t_char *info)
 	ft_printf("The grizzletooth will try to make either a ranged or melee attack during his turn\n");
 	ft_printf("If on low health the air grizzletooth will try to use nimble escape: %s",
 		GRIZZLETOOTH_NIMBLE_ESCAPE);
+	ft_printf("Grizzletooth currently has %i/%i hp\n",
+			info->stats.health, info->dstats.health);
 }
 
 void	ft_grizzletooth_ranged_attack(t_char *info)
