@@ -101,8 +101,14 @@ typedef struct	s_bufs
 	t_lightning_strike	lightning_strike;
 } t_bufs;
 
+typedef struct	s_hunters_mark
+{
+	int	duration;
+} t_hunters_mark;
+
 typedef struct s_debufs
 {
+	t_hunters_mark hunters_mark;
 } t_debufs;
 
 typedef struct s_crit_mod
@@ -118,6 +124,7 @@ typedef struct s_crit_mod
 
 typedef struct	s_char
 {
+	int			passive_perception;
 	int			initiative;
 	int			version_number;
 	char		*save_file;
