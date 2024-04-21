@@ -30,7 +30,7 @@ void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name)
 
 	if (ft_check_value(input[2]))
 	{
-		ft_printf_fd(2, "1-Bless Error: Expecting a number between 0 and 50\n");
+		ft_printf_fd(2, "1-Buff Error: Expecting a number between 0 and 50\n");
 		return ;
 	}
 	number = ft_atoi(input[2]);
@@ -43,6 +43,6 @@ void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name)
 			*buff = number;
 	}
 	else
-		ft_printf_fd(2, "2-Bless Error: Expecting a number between 0 and 50\n");
+		ft_printf_fd(2, "2-Buff Error: Expecting a number between 0 and 50\n");
 	return ;
 }

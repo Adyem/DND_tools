@@ -8,13 +8,13 @@ static void	ft_deal_damage(t_char *info, char **input, char *d_type, int resista
 
 	if (ft_check_value(input[1]))
 	{
-		ft_printf_fd(2, "damage 1: expecting a number higher then or equal to 0\n");
+		ft_printf_fd(2, "1-Damage: expecting a number higher then or equal to 0\n");
 		return ;
 	}
 	damage = ft_atoi(input[1]);
 	if (damage < 0)
 	{
-		ft_printf_fd(2, "damage 2: expecting a number higher then or equal to 0\n");
+		ft_printf_fd(2, "2-Damage: expecting a number higher then or equal to 0\n");
 		return ;
 	}
 	if (d_type && resistance > 0)

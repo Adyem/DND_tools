@@ -20,11 +20,9 @@ static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 	return ;
 }
 
-static void	ft_npc_write_file_2(t_char *info, t_stats *stats,
-	t_resistance *resistance, int fd)
+static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 {
 	(void)info;
-	(void)stats;
 	ft_printf_fd(fd, "ACID_RESISTANCE=%i\n", resistance->acid);
 	ft_printf_fd(fd, "BLUDGEONING_RESISTANCE=%i\n", resistance->bludgeoning);
 	ft_printf_fd(fd, "COLD_RESISTANCE=%i\n", resistance->cold);
@@ -54,7 +52,7 @@ void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance)
 	}
 	ft_npc_write_file_1(info, stats, fd);
 	if (info->version_number >= 2)
-		ft_npc_write_file_2(info, stats, resistance, fd);
+		ft_npc_write_file_2(info, resistance, fd);
 	close(fd);
 	return ;
 }
