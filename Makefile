@@ -26,7 +26,8 @@ SRC			= name.c \
 			  air_goblin_shaman.c \
 			  npc_stats.c \
 			  npc_set_stats.c \
-			  npc_change_stats.c \
+			  npc_change_stats_02.c \
+			  npc_change_stats_03.c \
 			  npc_update_buff_01.c \
 			  utils01.c \
 			  utils02.c \

@@ -8,9 +8,9 @@
 #include <stddef.h>
 
 //functions that are used in the struct need to be defined here
-void	ft_air_goblin_turn(t_char *info);
-void	ft_air_goblin_attack(t_char *info);
-void	ft_air_goblin_ranged_attack(t_char *info);
+void	ft_air_goblin_shaman_turn(t_char *info);
+void	ft_air_goblin_shaman_attack(t_char *info);
+void	ft_air_goblin_shaman_ranged_attack(t_char *info);
 
 //don't change the values in this struct they need to be all at -1!!!
 static const	t_stats AIR_GOBLIN_SHAMAN_STATS =
@@ -87,8 +87,8 @@ static const	t_attack AIR_GOBLIN_SHAMAN_ATTACK =
 
 static const	t_f_attack AIR_GOBLIN_SHAMAN_F_ATTACK =
 {
-	.attack = ft_air_goblin_attack,
-	.ranged_attack = ft_air_goblin_ranged_attack,
+	.attack = ft_air_goblin_shaman_attack,
+	.ranged_attack = ft_air_goblin_shaman_ranged_attack,
 };
 
 static const	t_bless AIR_GOBLIN_SHAMAN_BLESS =
@@ -147,7 +147,7 @@ static const	t_char AIR_GOBLIN_SHAMAN_INFO =
 	.save_file = "data/air_goblin_shaman.txt",
 	.name = "Air_goblin_shaman",
 	.advantage = 0,
-	.turn = ft_air_goblin_turn,
+	.turn = ft_air_goblin_shaman_turn,
 	.crit = AIR_GOBLIN_SHAMAN_CRIT,
 	.bufs = AIR_GOBLIN_SHAMAN_BUFFS,
 	.debufs = AIR_GOBLIN_SHAMAN_DEBUFFS,
