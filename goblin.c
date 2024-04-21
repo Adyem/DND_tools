@@ -59,7 +59,7 @@ void	ft_goblin_attack(t_char *info)
 	{
 		ft_printf("a crit (%i)\n", result);
 		damage = ft_dice_roll(2, 6) + dex_mod;
-		ft_printf("Goblin deals %i piercing damage\n", damage);
+		ft_printf("Goblin deals %i slashing damage\n", damage);
 	}
 	else
 	{
@@ -67,7 +67,7 @@ void	ft_goblin_attack(t_char *info)
 			result, dex_mod, info->attack_bonus.attack_bonus, mod, result
 			+ dex_mod + mod + info->attack_bonus.attack_bonus);
 		damage = ft_dice_roll(1, 6) + dex_mod;
-		ft_printf("Goblin deals %i piercing damage\n", damage);
+		ft_printf("Goblin deals %i slashing damage\n", damage);
 	}
 	return ;
 }

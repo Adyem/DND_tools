@@ -123,13 +123,30 @@ typedef struct s_crit_mod
 	int	skill_fail;
 } t_crit_mod;
 
-#define HUNTERS_MARK 50000
+#define HUNTERS_MARK 1
 
 typedef struct	s_concentration
 {
 	int	spell_id;
 	int	concentration;
 } t_concentration;
+
+typedef struct	s_resistance
+{
+	int	acid;
+	int	bludgeoning;
+	int	cold;
+	int	fire;
+	int	force;
+	int	lightning;
+	int	necrotic;
+	int	piercing;
+	int	poisen;
+	int	psychic;
+	int	radiant;
+	int	slashing;
+	int	thunder;
+} t_resistance;
 
 typedef struct	s_char
 {
@@ -145,6 +162,7 @@ typedef struct	s_char
 	t_bufs			bufs;
 	t_debufs		debufs;
 	t_concentration	concentration;
+	t_resistance	resistance;
 	t_f_attack		f_attack;
 	t_skillsm		skill_mod;
 	t_savem			save_mod;

@@ -154,6 +154,23 @@ static const	t_concentration TEMPLATE_CONCENTRATION =
 	.concentration = 0;
 };
 
+static const	t_resistance TEMPLATE_RESISTANCE =
+{
+	.acid = 0,
+	.bludgeoning = 0,
+	.cold = 0,
+	.fire = 0,
+	.force = 0,
+	.lightning = 0,
+	.necrotic = 0,
+	.piercing = 0,
+	.poisen = 0,
+	.psychic = 0,
+	.radiant = 0,
+	.slashing = 0,
+	.thunder = 0,
+}
+
 static const	t_char TEMPLATE_INFO =
 {
 	.passive_perception = 15,
@@ -166,6 +183,8 @@ static const	t_char TEMPLATE_INFO =
 	.crit = TEMPLATE_CRIT,
 	.bufs = TEMPLATE_BUFFS,
 	.debufs = TEMPLATE_DEBUFFS,
+	.concentration = TEMPLATE_CONCENTRATION,
+	.resistance = TEMPLATE_RESISTANCE,
 	.attack_bonus = TEMPLATE_ATTACK,
 	.f_attack = TEMPLATE_F_ATTACK,
 	.skill_mod = TEMPLATE_SKILL_MODS,

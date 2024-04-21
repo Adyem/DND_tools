@@ -29,7 +29,7 @@ void	ft_air_goblin_shaman_ranged_attack(t_char *info)
 	{
 		ft_printf("a crit (%i)\n", result);
 		damage = ft_dice_roll(2, 8) + stat_mod;
-		ft_printf("Air_goblin_shaman deals %i piercing damage\n", damage);
+		ft_printf("Air_goblin_shaman deals %i lightning damage\n", damage);
 	}
 	else
 	{
@@ -37,7 +37,7 @@ void	ft_air_goblin_shaman_ranged_attack(t_char *info)
 			result, stat_mod, info->attack_bonus.attack_bonus, mod, result
 			+ stat_mod + mod + info->attack_bonus.attack_bonus);
 		damage = ft_dice_roll(1, 8) + stat_mod;
-		ft_printf("Air_goblin_shaman deals %i piercing damage\n", damage);
+		ft_printf("Air_goblin_shaman deals %i lightning damage\n", damage);
 	}
 	return ;
 }
