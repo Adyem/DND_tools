@@ -78,8 +78,9 @@ int		ft_attack_roll_check_buffs(t_char *info, int *roll);
 //skill roll buffs
 int		ft_skill_check_buff(t_char *info, int *roll, char *skill);
 
-//change stats 2
+//change stats
 void	ft_npc_sstuff(t_char *info, char **input);
+void	ft_change_stats_04(t_char *info, char **input);
 
 //update buff
 void	ft_update_buf(t_char *info);

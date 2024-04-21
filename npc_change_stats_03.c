@@ -7,7 +7,7 @@ static void	ft_npc_update_hp(t_char *info, char **input)
 
 	if (ft_check_value(input[2]))
 	{
-		ft_printf_fd(2, "Expecting a positive or negative integer");
+		ft_printf_fd(2, "Expecting a positive or negative integer\n");
 		return ;
 	}
 	number = ft_atoi(input[2]);

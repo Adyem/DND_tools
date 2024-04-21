@@ -154,7 +154,7 @@ static const	t_concentration TEMPLATE_CONCENTRATION =
 	.concentration = 0;
 };
 
-static const	t_resistance TEMPLATE_RESISTANCE =
+static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
 {
 	.acid = 0,
 	.bludgeoning = 0,
@@ -164,12 +164,29 @@ static const	t_resistance TEMPLATE_RESISTANCE =
 	.lightning = 0,
 	.necrotic = 0,
 	.piercing = 0,
-	.poisen = 0,
+	.poison = 0,
 	.psychic = 0,
 	.radiant = 0,
 	.slashing = 0,
 	.thunder = 0,
-}
+};
+
+static const	t_resistance TEMPLATE_CURRENT_RESISTANCE =
+{
+	.acid = -1,
+	.bludgeoning = -1,
+	.cold = -1,
+	.fire = -1,
+	.force = -1,
+	.lightning = -1,
+	.necrotic = -1,
+	.piercing = -1,
+	.poison = -1,
+	.psychic = -1,
+	.radiant = -1,
+	.slashing = -1,
+	.thunder = -1,
+};
 
 static const	t_char TEMPLATE_INFO =
 {
@@ -184,7 +201,8 @@ static const	t_char TEMPLATE_INFO =
 	.bufs = TEMPLATE_BUFFS,
 	.debufs = TEMPLATE_DEBUFFS,
 	.concentration = TEMPLATE_CONCENTRATION,
-	.resistance = TEMPLATE_RESISTANCE,
+	.d_resistance = TEMPLATE_DEFAULT_RESISTANCE,
+	.c_resistance = TEMPLATE_CURRENT_RESISTANCE,
 	.attack_bonus = TEMPLATE_ATTACK,
 	.f_attack = TEMPLATE_F_ATTACK,
 	.skill_mod = TEMPLATE_SKILL_MODS,
@@ -194,6 +212,4 @@ static const	t_char TEMPLATE_INFO =
 };
 
 //Abilities
-#define TEMPLATE_NIMBLE_ESCAPE "can use disengage as a bonus action"
-
 #endif

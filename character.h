@@ -103,8 +103,8 @@ typedef struct	s_bufs
 
 typedef struct	s_hunters_mark
 {
-	int		duration;
-	char	*caster_name;
+	int		*duration;
+	char	**caster_name;
 } t_hunters_mark;
 
 typedef struct s_debufs
@@ -123,7 +123,8 @@ typedef struct s_crit_mod
 	int	skill_fail;
 } t_crit_mod;
 
-#define HUNTERS_MARK 1
+#define HUNTERS_MARK_ID 1
+#define HUNTERS_MARK_NAME "hunters mark"
 
 typedef struct	s_concentration
 {
@@ -141,7 +142,7 @@ typedef struct	s_resistance
 	int	lightning;
 	int	necrotic;
 	int	piercing;
-	int	poisen;
+	int	poison;
 	int	psychic;
 	int	radiant;
 	int	slashing;
@@ -162,7 +163,8 @@ typedef struct	s_char
 	t_bufs			bufs;
 	t_debufs		debufs;
 	t_concentration	concentration;
-	t_resistance	resistance;
+	t_resistance	d_resistance;
+	t_resistance	c_resistance;
 	t_f_attack		f_attack;
 	t_skillsm		skill_mod;
 	t_savem			save_mod;

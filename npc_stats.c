@@ -55,12 +55,14 @@ void	ft_npc_change_stats(t_char *info, int index, char **input)
 		if (info->turn)
 			info->turn(info);
 		else
-			ft_printf("No turn set for %s\n", info->name);
+			ft_printf("%s doesn't take anny actions on his/her turn\n", info->name);
 	}
 	else if (index == 2)
 		ft_npc_sstuff(info, input);
 	else if (index == 3)
 		ft_npc_set_stat(info, input);
+	else if	(index == 4)
+		ft_change_stats_04(info, input);
 	else
 		ft_printf_fd(2, "Error: too manny arguments given\n");
 	ft_npc_write_file(info, &info->stats);
