@@ -8,25 +8,32 @@ static void	ft_deal_damage(t_char *info, char **input, char *d_type, int resista
 
 	if (ft_check_value(input[1]))
 	{
-		ft_printf_fd(2, "expecting a int as input: damage\n");
+		ft_printf_fd(2, "damage 1: expecting a number higher then or equal to 0\n");
 		return ;
 	}
 	damage = ft_atoi(input[1]);
-	if (resistance > 0)
+	if (damage < 0)
 	{
-		ft_printf("%s is resistant to %s damage and takes %i%% less damage\n",
-			info->name, d_type, resistance);
+		ft_printf_fd(2, "damage 2: expecting a number higher then or equal to 0\n");
+		return ;
+	}
+	if (d_type && resistance > 0)
+	{
 		extra = damage * (resistance / 100);
+		ft_printf("%s is resistant to %s damage and takes %i%% less damage" \
+			" for a total of less damage%i\n",
+			info->name, d_type, resistance, extra);
 		damage = damage - extra;
 	}
-	else if (resistance < 0)
+	else if (d_type && resistance < 0)
 	{
-		ft_printf("%s is vulnerable to %s damage and takes %i%% more damage\n",
-			info->name, d_type, resistance);
 		extra = damage * ((resistance * -1) / 100);
+		ft_printf("%s is vulnerable to %s damage and takes %i%% more damage" \
+			" for a total of %i more damag e\n",
+			info->name, d_type, resistance, extra);
 		damage = damage + extra;
 	}
-	else if (resistance == 100)
+	else if (d_type && resistance == 100)
 	{
 		ft_printf("%s is immune to %s damage\n", info->name, d_type);
 		damage = 0;
@@ -38,14 +45,11 @@ static void	ft_deal_damage(t_char *info, char **input, char *d_type, int resista
 
 void	ft_change_stats_04(t_char *info, char **input)
 {
-	if (info->version_number < 2)
-	{
-		ft_printf_fd(2, "error version number of npc not high enough\n");
-		return ;
-	}
 	if (ft_strcmp_dnd(input[3], "damage") == 0)
 	{
-		if (ft_strcmp_dnd(input[2], "acid") == 0)
+		if (info->version_number < 2)
+			ft_deal_damage(info, input, NULL, 0);
+		else if (ft_strcmp_dnd(input[2], "acid") == 0)
 			ft_deal_damage(info, input, "acid", info->c_resistance.acid);
 		else if (ft_strcmp_dnd(input[2], "bludgeoning") == 0)
 			ft_deal_damage(info, input, "bludgeoning", info->c_resistance.bludgeoning);

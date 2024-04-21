@@ -39,7 +39,7 @@ void	ft_npc_change_stats(t_char *info, int index, char **input)
 	{
 		if (ft_strcmp_dnd(input[1], "init") == 0)
 		{
-			ft_npc_write_file(info, &info->dstats);
+			ft_npc_write_file(info, &info->dstats, &info->d_resistance);
 			ft_printf("Stats for %s written on a file\n", info->name);
 			return ;
 		}
@@ -65,6 +65,6 @@ void	ft_npc_change_stats(t_char *info, int index, char **input)
 		ft_change_stats_04(info, input);
 	else
 		ft_printf_fd(2, "Error: too manny arguments given\n");
-	ft_npc_write_file(info, &info->stats);
+	ft_npc_write_file(info, &info->stats, &info->c_resistance);
 	return ;
 }

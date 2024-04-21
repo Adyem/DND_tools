@@ -20,7 +20,28 @@ static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 	return ;
 }
 
-void	ft_npc_write_file(t_char *info, t_stats *stats)
+static void	ft_npc_write_file_2(t_char *info, t_stats *stats,
+	t_resistance *resistance, int fd)
+{
+	(void)info;
+	(void)stats;
+	ft_printf_fd(fd, "ACID_RESISTANCE=%i\n", resistance->acid);
+	ft_printf_fd(fd, "BLUDGEONING_RESISTANCE=%i\n", resistance->bludgeoning);
+	ft_printf_fd(fd, "COLD_RESISTANCE=%i\n", resistance->cold);
+	ft_printf_fd(fd, "FIRE_RESISTANCE=%i\n", resistance->fire);
+	ft_printf_fd(fd, "FORCE_RESISTANCE=%i\n", resistance->force);
+	ft_printf_fd(fd, "LIGHTNING_RESISTANCE=%i\n", resistance->lightning);
+	ft_printf_fd(fd, "NECROTIC_RESISTANCE=%i\n", resistance->necrotic);
+	ft_printf_fd(fd, "PIERCING_RESISTANCE=%i\n", resistance->piercing);
+	ft_printf_fd(fd, "POISON_RESISTANCE=%i\n", resistance->poison);
+	ft_printf_fd(fd, "PSYCHIC_RESISTANCE=%i\n", resistance->psychic);
+	ft_printf_fd(fd, "RADIANT_RESISTANCE=%i\n", resistance->radiant);
+	ft_printf_fd(fd, "SLASHING_RESISTANCE=%i\n", resistance->slashing);
+	ft_printf_fd(fd, "THUNDER_RESISTANCE=%i\n", resistance->thunder);
+	return ;
+}
+
+void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance)
 {
 	int	fd;
 
@@ -32,5 +53,8 @@ void	ft_npc_write_file(t_char *info, t_stats *stats)
 		return ;
 	}
 	ft_npc_write_file_1(info, stats, fd);
+	if (info->version_number >= 2)
+		ft_npc_write_file_2(info, stats, resistance, fd);
+	close(fd);
 	return ;
 }
