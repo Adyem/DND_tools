@@ -1,5 +1,5 @@
-#ifndef GRIZZLETOOTH_H
-# define GRIZZLETOOTH_H
+#ifndef TEMPLATE_H
+# define TEMPLATE_H
 //the guards above only capital letters
 
 #include "dnd_tools.h"
@@ -7,13 +7,14 @@
 #include "character.h"
 #include <stddef.h>
 
+//change Template, template, TEMPLATE to the name of the mob
 //functions that are used in the struct need to be defined here
-void	ft_grizzletooth_turn(t_char *info);
-void	ft_grizzletooth_attack(t_char *info);
-void	ft_grizzletooth_ranged_attack(t_char *info);
+void	ft_template_turn(t_char *info);
+void	ft_template_attack(t_char *info);
+void	ft_template_ranged_attack(t_char *info);
 
 //don't change the values in this struct they need to be all at -1!!!
-static const	t_stats GRIZZLETOOTH_STATS =
+static const	t_stats TEMPLATE_STATS =
 {
 	.phase = -1,
 	.turn = -1,
@@ -29,7 +30,7 @@ static const	t_stats GRIZZLETOOTH_STATS =
 };
 
 //these are the default stats u can change these
-static const	t_stats GRIZZLETOOTH_DEFAULT_STATS =
+static const	t_stats TEMPLATE_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
@@ -45,7 +46,7 @@ static const	t_stats GRIZZLETOOTH_DEFAULT_STATS =
 };
 
 //possible modifiers for saving throws u can change these
-static const	t_savem GRIZZLETOOTH_SAVE_MODS =
+static const	t_savem TEMPLATE_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -56,7 +57,7 @@ static const	t_savem GRIZZLETOOTH_SAVE_MODS =
 };
 
 //possible modifiers for skills u can change these
-static const	t_skillsm GRIZZLETOOTH_SKILL_MODS =
+static const	t_skillsm TEMPLATE_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,
@@ -79,29 +80,29 @@ static const	t_skillsm GRIZZLETOOTH_SKILL_MODS =
 };
 
 //possible attack modifiers change here
-static const	t_attack GRIZZLETOOTH_ATTACK =
+static const	t_attack TEMPLATE_ATTACK =
 {
 	.attack_bonus = 0,
 	.ranged_bonus = 0,
 };
 
-static const	t_f_attack GRIZZLETOOTH_F_ATTACK =
+static const	t_f_attack TEMPLATE_F_ATTACK =
 {
-	.attack = ft_grizzletooth_attack,
-	.ranged_attack = ft_grizzletooth_ranged_attack,
+	.attack = ft_template_attack,
+	.ranged_attack = ft_template_ranged_attack,
 };
 
-static const	t_bless GRIZZLETOOTH_BLESS =
-{
-	.duration = 0,
-};
-
-static const	t_protective_winds GRIZZLETOOTH_PROTECTIVE_WINDS =
+static const	t_bless TEMPLATE_BLESS =
 {
 	.duration = 0,
 };
 
-static const	t_lightning_strike GRIZZLETOOTH_LIGHTNING_STRIKE =
+static const	t_protective_winds TEMPLATE_PROTECTIVE_WINDS =
+{
+	.duration = 0,
+};
+
+static const	t_lightning_strike TEMPLATE_LIGHTNING_STRIKE =
 {
 	.duration = 0,
 	.amount = 0,
@@ -111,31 +112,32 @@ static const	t_lightning_strike GRIZZLETOOTH_LIGHTNING_STRIKE =
 	.extra_damage = 0,
 };
 
-static const	t_air_totem GRIZZLETOOTH_AIR_TOTEM =
+static const	t_air_totem TEMPLATE_AIR_TOTEM =
 {
 	.save_file = "data/air_totem.txt",
 	.knock_back_distance = 0,
 	.erea_of_effect = 0,
 };
 
-static const	t_bufs GRIZZLETOOTH_BUFFS =
+static const	t_bufs TEMPLATE_BUFFS =
 {
-	.bless = GRIZZLETOOTH_BLESS,
-	.protective_winds = GRIZZLETOOTH_PROTECTIVE_WINDS,
-	.lightning_strike = GRIZZLETOOTH_LIGHTNING_STRIKE,
+	.bless = TEMPLATE_BLESS,
+	.protective_winds = TEMPLATE_PROTECTIVE_WINDS,
+	.lightning_strike = TEMPLATE_LIGHTNING_STRIKE,
 };
 
-static const	t_hunters_mark GRIZZLETOOTH_HUNTERS_MARK =
+static const	t_hunters_mark TEMPLATE_HUNTERS_MARK =
 {
 	.duration = 0,
+	.caster_name = NULL,
 };
 
-static const	t_debufs GRIZZLETOOTH_DEBUFFS =
+static const	t_debufs TEMPLATE_DEBUFFS =
 {
-	.hunters_mark = GRIZZLETOOTH_HUNTERS_MARK,
+	.hunters_mark = TEMPLATE_HUNTERS_MARK,
 };
 
-static const	t_crit_mod GRIZZLETOOTH_CRIT =
+static const	t_crit_mod TEMPLATE_CRIT =
 {
 	.attack = 0,
 	.attack_d = 0,
@@ -146,27 +148,33 @@ static const	t_crit_mod GRIZZLETOOTH_CRIT =
 	.skill_fail = 0,
 };
 
-static const	t_char GRIZZLETOOTH_INFO =
+static const	t_concentration TEMPLATE_CONCENTRATION =
+{
+	.spell_id = 0;
+	.concentration = 0;
+};
+
+static const	t_char TEMPLATE_INFO =
 {
 	.passive_perception = 15,
 	.initiative = -1,
 	.version_number = 2,
-	.save_file = "data/grizzletooth.txt",
-	.name = "Grizzletooth",
+	.save_file = "data/template.txt",
+	.name = "Template",
 	.advantage = 0,
-	.turn = ft_grizzletooth_turn,
-	.crit = GRIZZLETOOTH_CRIT,
-	.bufs = GRIZZLETOOTH_BUFFS,
-	.debufs = GRIZZLETOOTH_DEBUFFS,
-	.attack_bonus = GRIZZLETOOTH_ATTACK,
-	.f_attack = GRIZZLETOOTH_F_ATTACK,
-	.skill_mod = GRIZZLETOOTH_SKILL_MODS,
-	.save_mod = GRIZZLETOOTH_SAVE_MODS,
-	.stats = GRIZZLETOOTH_STATS,
-	.dstats = GRIZZLETOOTH_DEFAULT_STATS,
+	.turn = ft_template_turn,
+	.crit = TEMPLATE_CRIT,
+	.bufs = TEMPLATE_BUFFS,
+	.debufs = TEMPLATE_DEBUFFS,
+	.attack_bonus = TEMPLATE_ATTACK,
+	.f_attack = TEMPLATE_F_ATTACK,
+	.skill_mod = TEMPLATE_SKILL_MODS,
+	.save_mod = TEMPLATE_SAVE_MODS,
+	.stats = TEMPLATE_STATS,
+	.dstats = TEMPLATE_DEFAULT_STATS,
 };
 
 //Abilities
-#define GRIZZLETOOTH_NIMBLE_ESCAPE "can use disengage as a bonus action"
+#define TEMPLATE_NIMBLE_ESCAPE "can use disengage as a bonus action"
 
 #endif

@@ -103,7 +103,8 @@ typedef struct	s_bufs
 
 typedef struct	s_hunters_mark
 {
-	int	duration;
+	int		duration;
+	char	*caster_name;
 } t_hunters_mark;
 
 typedef struct s_debufs
@@ -122,24 +123,33 @@ typedef struct s_crit_mod
 	int	skill_fail;
 } t_crit_mod;
 
+#define HUNTERS_MARK 50000
+
+typedef struct	s_concentration
+{
+	int	spell_id;
+	int	concentration;
+} t_concentration;
+
 typedef struct	s_char
 {
-	int			passive_perception;
-	int			initiative;
-	int			version_number;
-	char		*save_file;
-	char		*name;
-	int			advantage;
-	c_turn		turn;
-	t_crit_mod	crit;
-	t_attack	attack_bonus;
-	t_bufs		bufs;
-	t_debufs	debufs;
-	t_f_attack	f_attack;
-	t_skillsm	skill_mod;
-	t_savem		save_mod;
-	t_stats		stats;
-	t_stats		dstats;
+	int				passive_perception;
+	int				initiative;
+	int				version_number;
+	char			*save_file;
+	char			*name;
+	int				advantage;
+	c_turn			turn;
+	t_crit_mod		crit;
+	t_attack		attack_bonus;
+	t_bufs			bufs;
+	t_debufs		debufs;
+	t_concentration	concentration;
+	t_f_attack		f_attack;
+	t_skillsm		skill_mod;
+	t_savem			save_mod;
+	t_stats			stats;
+	t_stats			dstats;
 } t_char;
 
 #endif
