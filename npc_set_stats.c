@@ -46,31 +46,44 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 	int r_value;
 
 	r_value = 0;
-	if (ft_strncmp(content[i], "ACID_RESISTANCE=", 16) == 0)
+	if (ft_strncmp(content[i], "ACID_RESISTANCE=", 16) == 0
+			&& info->c_resistance.acid == -501)
 		info->c_resistance.acid = ft_check_stat(info, content[i], 16);
-	else if (ft_strncmp(content[i], "BLUDGEONING_RESISTANCE=", 24) == 0)
+	else if (ft_strncmp(content[i], "BLUDGEONING_RESISTANCE=", 24) == 0 
+			&& info->c_resistance.bludgeoning == -501)
 		info->c_resistance.bludgeoning = ft_check_stat(info, content[i], 24);
-	else if (ft_strncmp(content[i], "COLD_RESISTANCE=", 16) == 0)
+	else if (ft_strncmp(content[i], "COLD_RESISTANCE=", 16) == 0
+			&& info->c_resistance.cold == -501)
 		info->c_resistance.cold = ft_check_stat(info, content[i], 16);
-	else if (ft_strncmp(content[i], "FIRE_RESISTANCE=", 16) == 0)
+	else if (ft_strncmp(content[i], "FIRE_RESISTANCE=", 16) == 0
+			&& info->c_resistance.fire == -501)
 		info->c_resistance.fire = ft_check_stat(info, content[i], 16);
-	else if (ft_strncmp(content[i], "FORCE_RESISTANCE=", 17) == 0)
+	else if (ft_strncmp(content[i], "FORCE_RESISTANCE=", 17) == 0
+			&&  info->c_resistance.force == -501)
 		info->c_resistance.force = ft_check_stat(info, content[i], 17);
-	else if (ft_strncmp(content[i], "LIGHTNING_RESISTANCE=", 21) == 0)
+	else if (ft_strncmp(content[i], "LIGHTNING_RESISTANCE=", 21) == 0
+			&& info->c_resistance.lightning == -501)
 		info->c_resistance.lightning = ft_check_stat(info, content[i], 21);
-	else if (ft_strncmp(content[i], "NECROTIC_RESISTANCE=", 20) == 0)
+	else if (ft_strncmp(content[i], "NECROTIC_RESISTANCE=", 20) == 0
+			&& info->c_resistance.necrotic == -501)
 		info->c_resistance.necrotic = ft_check_stat(info, content[i], 20);
-	else if (ft_strncmp(content[i], "PIERCING_RESISTANCE=", 20) == 0)
+	else if (ft_strncmp(content[i], "PIERCING_RESISTANCE=", 20) == 0
+			&& info->c_resistance.piercing == -501)
 		info->c_resistance.piercing = ft_check_stat(info, content[i], 20);
-	else if (ft_strncmp(content[i], "POISON_RESISTANCE=", 18) == 0)
+	else if (ft_strncmp(content[i], "POISON_RESISTANCE=", 18) == 0
+			&& info->c_resistance.poison  == -501)
 		info->c_resistance.poison = ft_check_stat(info, content[i], 18);
-	else if (ft_strncmp(content[i], "PSYCHIC_RESISTANCE=", 19) == 0)
+	else if (ft_strncmp(content[i], "PSYCHIC_RESISTANCE=", 19) == 0
+			&& info->c_resistance.psychic == -501)
 		info->c_resistance.psychic = ft_check_stat(info, content[i], 19);
-	else if (ft_strncmp(content[i], "RADIANT_RESISTANCE=", 19) == 0)
+	else if (ft_strncmp(content[i], "RADIANT_RESISTANCE=", 19) == 0
+			&& info->c_resistance.radiant == -501)
 		info->c_resistance.radiant = ft_check_stat(info, content[i], 19);
-	else if (ft_strncmp(content[i], "SLASHING_RESISTANCE=", 20) == 0)
+	else if (ft_strncmp(content[i], "SLASHING_RESISTANCE=", 20) == 0
+			&& info->c_resistance.slashing == -501)
 		info->c_resistance.slashing = ft_check_stat(info, content[i], 20);
-	else if (ft_strncmp(content[i], "THUNDER_RESISTANCE=", 19) == 0)
+	else if (ft_strncmp(content[i], "THUNDER_RESISTANCE=", 19) == 0
+			&& info->c_resistance.thunder == -501)
 		info->c_resistance.thunder = ft_check_stat(info, content[i], 19);
 	else
 		r_value = 1;

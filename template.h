@@ -173,19 +173,19 @@ static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
 
 static const	t_resistance TEMPLATE_CURRENT_RESISTANCE =
 {
-	.acid = -1,
-	.bludgeoning = -1,
-	.cold = -1,
-	.fire = -1,
-	.force = -1,
-	.lightning = -1,
-	.necrotic = -1,
-	.piercing = -1,
-	.poison = -1,
-	.psychic = -1,
-	.radiant = -1,
-	.slashing = -1,
-	.thunder = -1,
+	.acid = -501,
+	.bludgeoning = -501,
+	.cold = -501,
+	.fire = -501,
+	.force = -501,
+	.lightning = -501,
+	.necrotic = -501,
+	.piercing = -501,
+	.poison = -501,
+	.psychic = -501,
+	.radiant = -501,
+	.slashing = -501,
+	.thunder = -501,
 };
 
 static const	t_char TEMPLATE_INFO =
