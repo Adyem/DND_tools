@@ -67,7 +67,8 @@ typedef struct	s_f_attack
 
 typedef struct	s_bless
 {
-	int	duration;
+	int		duration;
+	char	**target;
 } t_bless;
 
 typedef struct	s_protective_winds
@@ -103,6 +104,7 @@ typedef struct	s_bufs
 
 typedef struct	s_hunters_mark
 {
+	int		amount;
 	int		*duration;
 	char	**caster_name;
 } t_hunters_mark;

@@ -23,6 +23,12 @@ void	ft_npc_set_stat(t_char *info, char **input);
 int		ft_npc_open_file(t_char *info);
 void	ft_npc_init_stats(t_char *info);
 
+//Template
+void	ft_template_turn(t_char *info);
+void	ft_template_ranged_attack(t_char *info);
+void	ft_template_attack(t_char *info);
+void	ft_template(int index, char **input);
+
 //Maverick (BOSS)
 void	ft_maverick(int index, char **input);
 void	ft_maverick_turn(t_char *info);

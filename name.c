@@ -70,6 +70,10 @@ t_name	*ft_allocate_memory_name()
 	temp->next = ft_add_node("grizzletooth", ft_grizzletooth);
 	if (!temp->next)
 		ft_free_memory_name(name, 1);
+	temp = temp->next;
+	temp->next = ft_add_node("template", ft_template);
+	if (!temp->next)
+		ft_free_memory_name(name, 1);
 	i = 1;
 	while (i <= 10)
 	{

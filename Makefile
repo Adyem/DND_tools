@@ -11,7 +11,8 @@ HEADER		= include.h \
 			  air_goblin.h \
 			  air_goblin_shaman.h \
 			  goblin.h \
-			  grizzletooth.h
+			  grizzletooth.h \
+			  template.h
 
 SRC			= name.c \
 			  dnd_tools.c \
@@ -24,6 +25,7 @@ SRC			= name.c \
 			  goblin.c \
 			  grizzletooth.c \
 			  air_goblin_shaman.c \
+			  template.c \
 			  npc_stats.c \
 			  npc_set_stats.c \
 			  npc_change_stats_02.c \

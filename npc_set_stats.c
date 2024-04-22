@@ -49,7 +49,7 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 	if (ft_strncmp(content[i], "ACID_RESISTANCE=", 16) == 0
 			&& info->c_resistance.acid == -501)
 		info->c_resistance.acid = ft_check_stat(info, content[i], 16);
-	else if (ft_strncmp(content[i], "BLUDGEONING_RESISTANCE=", 24) == 0 
+	else if (ft_strncmp(content[i], "BLUDGEONING_RESISTANCE=", 23) == 0 
 			&& info->c_resistance.bludgeoning == -501)
 		info->c_resistance.bludgeoning = ft_check_stat(info, content[i], 24);
 	else if (ft_strncmp(content[i], "COLD_RESISTANCE=", 16) == 0
@@ -109,7 +109,7 @@ int	ft_set_stats(t_char *info, char **content)
 		}
 		else
 		{
-			ft_printf_fd(2, "Something is wrong with the save file for Maverick at the "\
+			ft_printf_fd(2, "1-Something is wrong with the save file for Maverick at the "\
 				"line: %s, please reinitialize the save\n", content[i]);
 			ft_free_content(content);
 			return (1);

@@ -1,6 +1,9 @@
 #ifndef INCLUDE_H
 # define INCLUDE_H
 
+//Example
+# include "template.h"
+
 //npc's
 # include "maverick.h"
 # include "zephyr.h"

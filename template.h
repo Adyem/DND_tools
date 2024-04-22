@@ -95,6 +95,7 @@ static const	t_f_attack TEMPLATE_F_ATTACK =
 static const	t_bless TEMPLATE_BLESS =
 {
 	.duration = 0,
+	.target = NULL,
 };
 
 static const	t_protective_winds TEMPLATE_PROTECTIVE_WINDS =
@@ -128,6 +129,7 @@ static const	t_bufs TEMPLATE_BUFFS =
 
 static const	t_hunters_mark TEMPLATE_HUNTERS_MARK =
 {
+	.amount = 0,
 	.duration = 0,
 	.caster_name = NULL,
 };
@@ -150,8 +152,8 @@ static const	t_crit_mod TEMPLATE_CRIT =
 
 static const	t_concentration TEMPLATE_CONCENTRATION =
 {
-	.spell_id = 0;
-	.concentration = 0;
+	.spell_id = 0,
+	.concentration = 0,
 };
 
 static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
