@@ -6,7 +6,7 @@
 /*   By: bvangene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:41:37 by bvangene          #+#    #+#             */
-/*   Updated: 2023/12/19 11:20:21 by bvangene         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:39:51 by adyem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_printf(const char *format, ...)
 		return (-1);
 	f_info->return_value = 0;
 	f_info->index = 0;
-	while (format[f_info->index])
+	while (format && format[f_info->index])
 	{
 		if ((int) format[f_info->index] == '%')
 			check_format(format, args, f_info);
