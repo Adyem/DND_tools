@@ -21,7 +21,7 @@ static void	ft_deal_damage(t_char *info, char **input, char *d_type, int resista
 	{
 		extra = damage * (resistance / 100);
 		ft_printf("%s is resistant to %s damage and takes %i%% less damage" \
-			" for a total of less damage%i\n",
+			" for a total of %i less damage\n",
 			info->name, d_type, resistance, extra);
 		damage = damage - extra;
 	}
@@ -29,7 +29,7 @@ static void	ft_deal_damage(t_char *info, char **input, char *d_type, int resista
 	{
 		extra = damage * ((resistance * -1) / 100);
 		ft_printf("%s is vulnerable to %s damage and takes %i%% more damage" \
-			" for a total of %i more damag e\n",
+			" for a total of %i more damage\n",
 			info->name, d_type, resistance, extra);
 		damage = damage + extra;
 	}
@@ -40,6 +40,8 @@ static void	ft_deal_damage(t_char *info, char **input, char *d_type, int resista
 	}
 	temp = info->stats.health;
 	info->stats.health = info->stats.health - damage;
+	if (info->stats.health < 0)
+		info->stats.health = 0;
 	ft_print_character_status(info, damage * -1, temp);
 }
 

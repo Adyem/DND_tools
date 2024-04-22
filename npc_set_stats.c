@@ -51,7 +51,7 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 		info->c_resistance.acid = ft_check_stat(info, content[i], 16);
 	else if (ft_strncmp(content[i], "BLUDGEONING_RESISTANCE=", 23) == 0 
 			&& info->c_resistance.bludgeoning == -501)
-		info->c_resistance.bludgeoning = ft_check_stat(info, content[i], 24);
+		info->c_resistance.bludgeoning = ft_check_stat(info, content[i], 23);
 	else if (ft_strncmp(content[i], "COLD_RESISTANCE=", 16) == 0
 			&& info->c_resistance.cold == -501)
 		info->c_resistance.cold = ft_check_stat(info, content[i], 16);
