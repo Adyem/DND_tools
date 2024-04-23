@@ -39,11 +39,10 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	return ;
 }
 
-void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance)
+void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, int fd)
 {
-	int	fd;
-
-	fd = open(info->save_file, O_WRONLY | O_CREAT | O_TRUNC,
+	if (fd == -1)
+		fd = open(info->save_file, O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR);
 	if (fd == -1)
 	{

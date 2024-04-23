@@ -63,10 +63,20 @@ static void	ft_request_input(t_name *name)
 			found = 1;
 			ft_command_roll(input);
 		}
-		if (i == 1 && ft_strcmp_dnd(input[0], "exit") == 0 && !found)
+		else if (i == 1 && ft_strcmp_dnd(input[0], "exit") == 0 && !found)
 		{
 			ft_free_input(input, input_string);
 			break ;
+		}
+		else if (i == 1 && ft_strcmp_dnd(input[0], "fclean") == 0 && !found)
+		{
+			ft_fclean();
+			found = 1;
+		}
+		else if (i == 1 && ft_strcmp_dnd(input[0], "initiative") == 0 && !found)
+		{
+			ft_open_all_files();
+			found = 1;
 		}
 		else
 		{
@@ -81,17 +91,7 @@ static void	ft_request_input(t_name *name)
 
 			}
 		}
-		if (i == 1 && ft_strcmp_dnd(input[0], "fclean") == 0 && !found)
-		{
-			ft_fclean();
-			found = 1;
-		}
-		if (i == 1 && ft_strcmp_dnd(input[0], "Exit") == 0 && !found)
-		{
-			ft_free_input(input, input_string);
-			break ;
-		}
-		else if (!found)
+		if (!found)
 			ft_printf_fd(2, "1-Error, unknown command: %s\n", input_string);
 		ft_free_input(input, input_string);
 	}

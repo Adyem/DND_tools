@@ -131,7 +131,7 @@ void	ft_npc_check_ac(t_char *info, char **input);
 
 //save file
 int		ft_npc_check_info(t_char *info);
-void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance);
+void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, int fd);
 
 //fclean
 void	ft_fclean(void);
@@ -139,6 +139,7 @@ void	ft_fclean(void);
 //initiative
 void	ft_check_initiative(t_char *info);
 void	ft_roll_initiative(t_char *info);
+void	ft_open_all_files(void);
 
 //command roll
 void	ft_command_roll(char **argv);

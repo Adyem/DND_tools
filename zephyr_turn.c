@@ -13,7 +13,7 @@ void	ft_zephyr_spells(t_char *info)
 		if (!air_totem)
 			return ;
 		*air_totem = AIR_TOTEM_INFO;
-		ft_npc_write_file(air_totem, &air_totem->dstats, &air_totem->c_resistance);
+		ft_npc_write_file(air_totem, &air_totem->dstats, &air_totem->c_resistance, -1);
 		ft_printf("Zephyr summoned an air totem, if a old totem was up it disappears\n");
 		free(air_totem);
 	}

@@ -35,6 +35,7 @@ SRC			= name.c \
 			  utils01.c \
 			  utils02.c \
 			  debug.c \
+			  initiative_all.c \
 			  initiative.c \
 			  free_memory.c \
 			  read_file.c \

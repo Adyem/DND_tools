@@ -23,6 +23,7 @@
 # include "libft/get_next_line/get_next_line.h"
 
 //default libraries
+# include <dirent.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
