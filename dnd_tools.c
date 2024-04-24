@@ -75,16 +75,16 @@ static void	ft_request_input(t_name *name)
 		}
 		else if (i == 1 && ft_strcmp_dnd(input[0], "initiative") == 0 && !found)
 		{
-			ft_open_all_files();
+			ft_open_all_files(name);
 			found = 1;
 		}
 		else
 		{
 			while (temp != NULL && !found)
 			{
-				if (1 > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
+				if (i > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
 				{
-					temp->function(i, input);
+					temp->function(i, input, 0);
 					found = 1;
 				}
 				temp = temp->next;

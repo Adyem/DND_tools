@@ -48,7 +48,7 @@ void	ft_maverick_attack(t_char *info)
 	return ;
 }
 
-void	ft_maverick(int index, char **input)
+void	ft_maverick(int index, char **input, int exception)
 {
 	t_char	*info;
 
@@ -56,7 +56,9 @@ void	ft_maverick(int index, char **input)
 	if (!info)
 		return ;
 	*info = MAVERICK_INFO;
+	if (exception)
+		return (info);
 	ft_npc_change_stats(info, index, input);
 	free(info);
-	return ;
+	return (NULL);
 }
