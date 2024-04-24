@@ -50,6 +50,7 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	info->name[ft_strlen(info->name)] = '.';
 	info->name = file_name - 5;
 	free(info->save_file);
+	ft_free_content(content);
 	return (info);
 }
 
@@ -97,6 +98,7 @@ void	ft_open_all_files(t_name *name)
 				continue ;
 			}
 			ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
+			free(info);
 			close(fd);
 		}
 	}
