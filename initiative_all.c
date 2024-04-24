@@ -15,8 +15,6 @@ static t_char	*ft_check_name(t_name *name, char *file_name)
 	{
 		info = temp->function(0, NULL, 1);
 		found = 1;
-		if (ft_strcmp_dnd(info->save_file, file_name) == 0)
-			break ;
 		temp = temp->next;
 	}
 	if (DEBUG == 1)
@@ -40,8 +38,18 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 		free(info);
 		return (NULL);
 	}
+	info->save_file = ft_strdup(file_name);
+	if (!info->save_file)
+		return (NULL);
+	if (DEBUG == 1)
+		ft_printf("name of the safe file is %s\n", file_name);
 	ft_initialize_info(info, content);
+	info->name = file_name + 5;
+	info->name[ft_strlen(info->name) - 4] = '\0';
 	ft_roll_initiative(info);
+	info->name[ft_strlen(info->name)] = '.';
+	info->name = file_name - 5;
+	free(info->save_file);
 	return (info);
 }
 
@@ -78,6 +86,8 @@ void	ft_open_all_files(t_name *name)
 			if (!info)
 				continue ;
 			close(fd);
+			if (DEBUG == 1)
+				ft_printf("2 name of the save file is %s\n", filepath);
 			fd = open(filepath, O_WRONLY | O_CREAT | O_TRUNC,
 				S_IRUSR | S_IWUSR);
 			if (fd == -1)
