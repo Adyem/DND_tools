@@ -70,24 +70,26 @@ void	ft_template_attack(t_char *info)
 	return ;
 }
 
-void	ft_template(int index, char **input)
+t_char	*ft_template(int index, char **input, int exception)
 {
 	char	*temp;
 	t_char	*info;
 
 	info = (t_char *)malloc(sizeof(t_char));
 	if (!info)
-		return ;
+		return (NULL);
 	*info = TEMPLATE_INFO;
+	if (exception)
+		return (info);
 	temp = ft_strjoin(input[0], ".txt");
 	if (!temp)
-		return ;
+		return (NULL);
 	info->save_file = ft_strjoin("data/", temp);
 	free (temp);
 	if (!info->save_file)
-		return ;
+		return (NULL);
 	ft_npc_change_stats(info, index, input);
 	free(info->save_file);
 	free(info);
-	return ;
+	return (NULL);
 }

@@ -2,19 +2,26 @@
 
 static t_char	*ft_check_name(t_name *name, char *file_name)
 {
+	int		found;
 	t_char	*info;
-	t_name	temp;
+	t_name	*temp;
 
+	if (DEBUG == 1)
+		ft_printf("%s\n", file_name);
+	info = NULL;
+	found = 0;
 	temp = name;
 	while (temp != NULL && !found)
 	{
-		if (ft_strncmp(file_name, temp->name, ft_strlen(file_name) - 4) == 0)
-		{
-			info = temp->function(0, NULL, 1);
-			found = 1;
-		}
+		info = temp->function(0, NULL, 1);
+		found = 1;
+		if (ft_strcmp_dnd(info->save_file, file_name) == 0)
+			break ;
 		temp = temp->next;
 	}
+	if (DEBUG == 1)
+		ft_printf("%p\n", info);
+	return (info);
 }
 
 static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
@@ -22,15 +29,18 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	t_char	*info;
 	char	**content;
 
-	info = ft_check_name(name);
+	if (DEBUG == 1)
+		ft_printf("printing file_name: %s", file_name);
+	info = ft_check_name(name, file_name);
+	if (!info)
+		return (NULL);
 	content = ft_read_file_dnd(fd);
 	if (!content)
 	{
 		free(info);
 		return (NULL);
 	}
-	ft_print_content(content);
-	ft_initialize_info(info, content, name);
+	ft_initialize_info(info, content);
 	ft_roll_initiative(info);
 	return (info);
 }
@@ -53,7 +63,7 @@ void	ft_open_all_files(t_name *name)
 	{
 		if (ft_strcmp_dnd(entry->d_name, ".") == 0 || ft_strcmp_dnd(entry->d_name, "..") == 0)
 			continue ;
-		snprintf(filepath, sizeof(filepath), "%s/%s", "data/", entry->d_name);
+		snprintf(filepath, sizeof(filepath), "%s/%s", "data", entry->d_name);
 		if (DEBUG == 1)
 			ft_printf("%s\n", filepath);
 		if (entry->d_type == DT_REG)
@@ -64,7 +74,7 @@ void	ft_open_all_files(t_name *name)
 				ft_printf_fd(2, "unable to open file: %s\n", strerror(errno));
 				continue ;
 			}
-			info = ft_read_all_files(fd; name, entry->d_name);
+			info = ft_read_all_files(fd, name, filepath);
 			if (!info)
 				continue ;
 			close(fd);

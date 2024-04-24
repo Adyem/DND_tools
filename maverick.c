@@ -48,13 +48,13 @@ void	ft_maverick_attack(t_char *info)
 	return ;
 }
 
-void	ft_maverick(int index, char **input, int exception)
+t_char	*ft_maverick(int index, char **input, int exception)
 {
 	t_char	*info;
 
 	info = (t_char *)malloc(sizeof(t_char));
 	if (!info)
-		return ;
+		return (NULL);
 	*info = MAVERICK_INFO;
 	if (exception)
 		return (info);
