@@ -127,6 +127,8 @@ typedef struct s_crit_mod
 
 #define HUNTERS_MARK_ID 1
 #define HUNTERS_MARK_NAME "hunters mark"
+#define BLESS_ID 2
+#define BLESS_NAME "bless"
 
 typedef struct	s_concentration
 {
