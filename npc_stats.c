@@ -21,10 +21,11 @@ int	ft_npc_open_file(t_char *info)
 	}
 	close(fd);
 	error = ft_initialize_info(info, content);
+	if (DEBUG == 1)
+		ft_printf("the value of error is %i\n", error);
 	if (error)
 		return (error);
 	error = ft_npc_check_info(info);
-	ft_print_content(content);
 	ft_free_content(content);
 	if (error)
 		error = 1;

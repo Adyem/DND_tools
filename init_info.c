@@ -21,8 +21,8 @@ int	ft_check_stat(t_char *info, char *stat, int index)
 			temp--;
 		}
 		ft_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n",
-				info->name ,stat);
-		return (-1);
+			info->name ,stat);
+		return (-99999);
 	}
 	result = ft_atoi(stat);
 	return (result);
@@ -43,6 +43,7 @@ int	ft_initialize_info(t_char *info, char **content)
 	int	error;
 
 	i = 0;
+	error = 0;
 	while (content[i])
 	{
 		j = 0;
@@ -54,7 +55,7 @@ int	ft_initialize_info(t_char *info, char **content)
 		}
 		i++;
 	}
-	error = ft_set_stats(info, content);
+	error += ft_set_stats(info, content);
 	ft_print_info(info);
 	return (error);
 }
