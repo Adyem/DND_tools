@@ -118,6 +118,7 @@ int		ft_dice_roll(int number, int faces);
 
 //free memory
 void	ft_free_content(char **content);
+void	ft_free_pc(t_pc *player);
 
 //debug
 void	ft_print_content(char **content);
@@ -140,6 +141,7 @@ void	ft_fclean(void);
 void	ft_check_initiative(t_char *info);
 void	ft_roll_initiative(t_char *info);
 void	ft_open_all_files(t_name *name);
+int		ft_check_stat_pc(t_pc *player, char **content, char *filename);
 
 //command roll
 void	ft_command_roll(char **argv);

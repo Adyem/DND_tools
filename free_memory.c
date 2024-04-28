@@ -1,5 +1,11 @@
 #include "dnd_tools.h"
 
+void	ft_free_pc(t_pc *player)
+{
+	free(player->name);
+	free(player);
+}
+
 void	ft_free_content(char **content)
 {
 	int	i;

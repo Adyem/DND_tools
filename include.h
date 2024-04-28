@@ -13,6 +13,9 @@
 # include "goblin.h"
 # include "grizzletooth.h"
 
+//player character
+# include "player_character.h"
+
 //utility
 # include "character.h"
 

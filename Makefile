@@ -12,7 +12,8 @@ HEADER		= include.h \
 			  air_goblin_shaman.h \
 			  goblin.h \
 			  grizzletooth.h \
-			  template.h
+			  template.h \
+			  player_character.h
 
 SRC			= name.c \
 			  dnd_tools.c \
@@ -36,6 +37,7 @@ SRC			= name.c \
 			  utils02.c \
 			  debug.c \
 			  initiative_all.c \
+			  initiative_pc.c \
 			  initiative.c \
 			  free_memory.c \
 			  read_file.c \

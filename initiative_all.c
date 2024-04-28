@@ -54,6 +54,35 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	return (info);
 }
 
+static void	ft_read_pc_file(int fd, char *filename)
+{
+	char	**content;
+	t_pc	*player;
+	int		error;
+
+	content = ft_read_file_dnd(fd);
+	if (!content)
+		return ;
+	player = malloc(sizeof(t_pc));
+	if (!player)
+	{
+		free(content);
+		return ;
+	}
+	player->name = NULL;
+	player->initiative = -2;
+	error = ft_check_stat_pc(player, content, filename);
+	if (error)
+	{
+		free(player);
+		ft_free_content(content);
+		return ;
+	}
+	ft_free_content(content);
+	ft_free_pc(player);
+	return ;
+}
+
 void	ft_open_all_files(t_name *name)
 {
 	t_char			*info;
@@ -65,7 +94,7 @@ void	ft_open_all_files(t_name *name)
 	dir = opendir("data");
 	if (dir == NULL)
 	{
-		perror("unable to open directory");
+		ft_printf_fd(2, "Unable to open directory: ", strerror(errno));
 		return ;
 	}
 	while ((entry = readdir(dir)) != NULL)
@@ -75,9 +104,17 @@ void	ft_open_all_files(t_name *name)
 		snprintf(filepath, sizeof(filepath), "%s/%s", "data", entry->d_name);
 		if (DEBUG == 1)
 			ft_printf("%s\n", filepath);
+		if (ft_strncmp(entry->d_name, "data--", 6) != 0)
+			continue ;
 		if (entry->d_type == DT_REG)
 		{
 			fd = open(filepath, O_RDONLY);
+			if (ft_strncmp(entry->d_name, "PC--", 6) != 0)
+			{
+				ft_read_pc_file(fd, entry->d_name);
+				close(fd);
+				continue ;
+			}
 			if (fd == -1)
 			{
 				ft_printf_fd(2, "unable to open file: %s\n", strerror(errno));
@@ -98,8 +135,8 @@ void	ft_open_all_files(t_name *name)
 				continue ;
 			}
 			ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
-			free(info);
 			close(fd);
+			free(info);
 		}
 	}
 	closedir(dir);
