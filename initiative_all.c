@@ -74,11 +74,15 @@ static void	ft_read_pc_file(int fd, char *filename)
 	error = ft_check_stat_pc(player, content, filename);
 	if (error)
 	{
-		free(player);
+		ft_free_pc(player);
 		ft_free_content(content);
 		return ;
 	}
 	ft_free_content(content);
+	error = ft_request_initiative(player);
+	if (!error)
+	{
+	}
 	ft_free_pc(player);
 	return ;
 }
