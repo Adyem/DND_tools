@@ -8,7 +8,10 @@ int	ft_request_initiative(t_pc *player)
 	
 	message = ft_strjoin("requesting initiative for ", player->name);
 	if (!message)
+	{
+		ft_printf_fd(2, "250 Error allocating memory: %s\n", strerror(errno));
 		return (1);
+	}
 	while ((input = readline(message)))
 	{
 		if (!input)

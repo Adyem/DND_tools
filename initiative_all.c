@@ -28,10 +28,15 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	char	**content;
 
 	if (DEBUG == 1)
-		ft_printf("printing file_name: %s", file_name);
+		ft_printf("printing file_name: %s\n", file_name);
 	info = ft_check_name(name, file_name);
 	if (!info)
+	{
+		ft_printf_fd(2, "255 Error allocating memory\n");
 		return (NULL);
+	}
+	if (DEBUG == 1)
+		ft_printf("Iniaitive file descriptor is %i\n", fd);
 	content = ft_read_file_dnd(fd);
 	if (!content)
 	{
@@ -40,7 +45,10 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	}
 	info->save_file = ft_strdup(file_name);
 	if (!info->save_file)
+	{
+		ft_printf_fd(2, "254 Error allocating memory\n");
 		return (NULL);
+	}
 	if (DEBUG == 1)
 		ft_printf("name of the safe file is %s\n", file_name);
 	ft_initialize_info(info, content);
@@ -54,7 +62,13 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	return (info);
 }
 
-static void	ft_read_pc_file(int fd, char *filename)
+static void	*ft_initiative_pc_error(char *message)
+{
+	ft_printf_fd(2, "%s", message);
+	return (NULL);
+}
+
+static t_pc	*ft_read_pc_file(int fd, char *filename)
 {
 	char	**content;
 	t_pc	*player;
@@ -62,12 +76,12 @@ static void	ft_read_pc_file(int fd, char *filename)
 
 	content = ft_read_file_dnd(fd);
 	if (!content)
-		return ;
+		return (ft_initiative_pc_error("251 Error allocating memory"));
 	player = malloc(sizeof(t_pc));
 	if (!player)
 	{
 		free(content);
-		return ;
+		return (ft_initiative_pc_error("252 Error allocating memory"));
 	}
 	player->name = NULL;
 	player->initiative = -2;
@@ -76,25 +90,50 @@ static void	ft_read_pc_file(int fd, char *filename)
 	{
 		ft_free_pc(player);
 		ft_free_content(content);
-		return ;
+		return (NULL);
 	}
 	ft_free_content(content);
 	error = ft_request_initiative(player);
 	if (!error)
 	{
 	}
-	ft_free_pc(player);
+	return (player);
+}
+
+void	ft_initiative_write(int	initiative, char *name)
+{
+	int	fd;
+
+	if (DEBUG == 1)
+		ft_printf("printing initiative to data file\n");
+	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_APPEND,
+			S_IRUSR | S_IWUSR);
+	if (fd == -1)
+	{
+		ft_printf_fd(2, "error opening data--initiative: %s\n", strerror(errno));
+		return ;
+	}
+	ft_printf_fd(fd, "%s %i\n", name, initiative);
 	return ;
 }
 
 void	ft_open_all_files(t_name *name)
 {
+	int				error;
 	t_char			*info;
+	t_pc			*player;
 	DIR				*dir;
 	struct dirent	*entry;
 	char			filepath[1024];
 	int				fd;
 
+	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR);
+	error = 0;
+	if (fd == -1)
+		error = 1;
+	else
+		close(fd);
 	dir = opendir("data");
 	if (dir == NULL)
 	{
@@ -103,20 +142,24 @@ void	ft_open_all_files(t_name *name)
 	}
 	while ((entry = readdir(dir)) != NULL)
 	{
-		if (ft_strcmp_dnd(entry->d_name, ".") == 0 || ft_strcmp_dnd(entry->d_name, "..") == 0)
+		if (ft_strcmp_dnd(entry->d_name, ".") == 0
+				|| ft_strcmp_dnd(entry->d_name, "..") == 0)
 			continue ;
 		snprintf(filepath, sizeof(filepath), "%s/%s", "data", entry->d_name);
 		if (DEBUG == 1)
 			ft_printf("%s\n", filepath);
-		if (ft_strncmp(entry->d_name, "data--", 6) != 0)
+		if (ft_strncmp(entry->d_name, "data--", 6) == 0)
 			continue ;
 		if (entry->d_type == DT_REG)
 		{
 			fd = open(filepath, O_RDONLY);
-			if (ft_strncmp(entry->d_name, "PC--", 6) != 0)
+			if (ft_strncmp(entry->d_name, "PC--", 6) == 0)
 			{
-				ft_read_pc_file(fd, entry->d_name);
+				player = ft_read_pc_file(fd, entry->d_name);
 				close(fd);
+				if (!player)
+					continue ;
+				ft_initiative_write(player->initiative, entry->d_name);
 				continue ;
 			}
 			if (fd == -1)
@@ -140,6 +183,8 @@ void	ft_open_all_files(t_name *name)
 			}
 			ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
 			close(fd);
+			if (error == 0)
+				ft_initiative_write(info->initiative, entry->d_name);
 			free(info);
 		}
 	}
