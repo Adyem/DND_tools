@@ -61,6 +61,11 @@ void	ft_grizzletooth_attack(t_char *info);
 void	ft_grizzletooth_ranged_attack(t_char *info);
 void	ft_grizzletooth_turn(t_char *info);
 
+//Goblin Shaman (NPC)
+t_char	*ft_goblin_shaman(int index, char **input, int exception);
+void	ft_goblin_shaman_attack(t_char *info);
+void	ft_goblin_shaman_ranged_attack(t_char *info);
+void	ft_goblin_shaman_turn(t_char *info);
 
 //Air Goblin Shaman (NPC)
 t_char	*ft_air_goblin_shaman(int index, char **input, int exception);
@@ -142,6 +147,7 @@ void	ft_check_initiative(t_char *info);
 void	ft_roll_initiative(t_char *info);
 void	ft_open_all_files(t_name *name);
 int		ft_check_stat_pc(t_pc *player, char **content, char *filename);
+int		ft_request_initiative(t_pc *player);
 
 //command roll
 void	ft_command_roll(char **argv);

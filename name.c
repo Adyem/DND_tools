@@ -119,6 +119,21 @@ t_name	*ft_allocate_memory_name()
 			ft_free_memory_name(name, 1);
 		i++;
 	}
+	i = 1;
+	while (i <= 10)
+	{
+		temp = temp->next;
+		new_name = ft_new_name("goblin_shaman", i);
+		if (!new_name)
+			ft_free_memory_name(name, 1);
+		if (DEBUG == 1)
+			ft_printf("%s\n", new_name);
+		temp->next = ft_add_node(new_name, ft_goblin_shaman);
+		free(new_name);
+		if (!temp->next)
+			ft_free_memory_name(name, 1);
+		i++;
+	}
 	return (name);
 }
 
