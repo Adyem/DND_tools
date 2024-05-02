@@ -33,15 +33,15 @@ static const	t_stats GOBLIN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 20,
+	.health = 32,
 	.temp_hp = 0,
-	.ac = 11,
-	.str = 12,
-	.dex = 12,
+	.ac = 15,
+	.str = 14,
+	.dex = 14,
 	.con = 10,
 	.inte = 10,
 	.wis = 10,
-	.cha = 8,
+	.cha = 10,
 };
 
 //possible modifiers for saving throws u can change these

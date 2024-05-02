@@ -33,12 +33,12 @@ static const	t_stats GRIZZLETOOTH_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 50,
+	.health = 100,
 	.temp_hp = 0,
-	.ac = 14,
-	.str = 12,
+	.ac = 15,
+	.str = 14,
 	.dex = 18,
-	.con = 10,
+	.con = 12,
 	.inte = 10,
 	.wis = 10,
 	.cha = 8,
@@ -81,8 +81,8 @@ static const	t_skillsm GRIZZLETOOTH_SKILL_MODS =
 //possible attack modifiers change here
 static const	t_attack GRIZZLETOOTH_ATTACK =
 {
-	.attack_bonus = 0,
-	.ranged_bonus = 0,
+	.attack_bonus = 2,
+	.ranged_bonus = 2,
 };
 
 static const	t_f_attack GRIZZLETOOTH_F_ATTACK =
