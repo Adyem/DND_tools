@@ -84,23 +84,20 @@ static t_pc	*ft_read_pc_file(int fd, char *filename, char *filepath)
 		free(content);
 		return (ft_initiative_pc_error("252 Error allocating memory"));
 	}
-	player->name = NULL;
-	player->initiative = -2;
 	error = ft_check_stat_pc(player, content, filename);
+	ft_free_content(content);
 	if (error)
 	{
 		ft_free_pc(player);
-		ft_free_content(content);
 		return (NULL);
 	}
-	ft_free_content(content);
 	error = ft_request_initiative(player);
 	if (!error)
 	{
 		fd = open(filepath, O_WRONLY | O_CREAT | O_TRUNC,
 				S_IRUSR | S_IWUSR);
 		if (fd != -1)
-			ft_save_pc(player);
+			ft_save_pc(player, fd);
 	}
 	return (player);
 }
@@ -158,7 +155,7 @@ void	ft_open_all_files(t_name *name)
 		if (entry->d_type == DT_REG)
 		{
 			fd = open(filepath, O_RDONLY);
-			if (ft_strncmp(entry->d_name, "PC--", 6) == 0)
+			if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
 			{
 				player = ft_read_pc_file(fd, entry->d_name, filepath);
 				if (!player)

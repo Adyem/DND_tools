@@ -40,13 +40,21 @@ static char	*ft_check_string(char *content, int index)
 int	ft_check_stat_pc(t_pc *player, char **content, char *filename)
 {
 	int	i;
+	int	j;
 
-	player->initiative = -1;
 	player->name = NULL;
+	player->initiative = -1;
 	i = 0;
 	while (content[i])
 	{
-		if (ft_strncmp(content[i], "INITIATIVE=", 11) == 0 && (player->initiative == -2))
+		j = 0;
+		while (content[i][j])
+		{
+			if (content[i][j] == '\n')
+				content[i][j] = '\0';
+			j++;
+		}
+		if (ft_strncmp(content[i], "INITIATIVE=", 11) == 0 && (player->initiative == -1))
 			player->initiative = ft_check_int(content[i], 11, filename);
 		else if (ft_strncmp(content[i], "NAME=", 5) == 0 && (player->name == NULL))
 		{
@@ -55,11 +63,21 @@ int	ft_check_stat_pc(t_pc *player, char **content, char *filename)
 				return (1);
 		}
 		else
+		{
+			ft_printf_fd(2, "3-There is an error with the line: %s\n", content[i]);
 			return (1);
+		}
+		i++;
 	}
 	if (!(player->initiative >= 0 && player->initiative <= 50))
+	{
+		ft_printf_fd(2, "initiative value not found: %i\n", player->initiative);
 		return (1);
+	}
 	if (!player->name)
+	{
+		ft_printf_fd(2, "player name not found\n");
 		return (1);
+	}
 	return (0);
 }

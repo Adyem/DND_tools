@@ -24,10 +24,10 @@ int		ft_npc_open_file(t_char *info);
 void	ft_npc_init_stats(t_char *info);
 
 //Template
+t_char	*ft_template(int index, char **input, int exception);
 void	ft_template_turn(t_char *info);
 void	ft_template_ranged_attack(t_char *info);
 void	ft_template_attack(t_char *info);
-t_char	*ft_template(int index, char **input, int exception);
 
 //Maverick (BOSS)
 t_char	*ft_maverick(int index, char **input, int exception);
@@ -138,10 +138,11 @@ void	ft_npc_check_ac(t_char *info, char **input);
 //save file
 int		ft_npc_check_info(t_char *info);
 void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, int fd);
-void	ft_save_pc(t_pc *player);
+void	ft_save_pc(t_pc *player, int fd);
 
 //fclean
 void	ft_fclean(void);
+void	ft_clean(void);
 
 //initiative
 void	ft_check_initiative(t_char *info);
@@ -169,5 +170,8 @@ int		ft_roll_parse_brackets(char *string, int *i, int j);
 //roll convert numbers
 int		ft_roll_convert_previous(char *string, int *i);
 int		ft_roll_convert_next(char *string, int i);
+
+//player
+void	ft_player(char **input);
 
 #endif

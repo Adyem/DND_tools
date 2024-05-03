@@ -10,7 +10,8 @@ int	ft_npc_check_info_2(t_char *info)
 	if (info->c_resistance.acid < -500 || info->c_resistance.acid > 500)
 		error += ft_printf_fd(2, "%s acid resistance value not found\n", info->name);
 	if (info->c_resistance.bludgeoning < -500 || info->c_resistance.bludgeoning > 500)
-		error += ft_printf_fd(2, "%s bludgeoning resistance value not found\n", info->name);
+		error += ft_printf_fd(2, "%s bludgeoning resistance value not found\n",
+				info->name);
 	if (info->c_resistance.cold < -500 || info->c_resistance.cold > 500)
 		error += ft_printf_fd(2, "%s cold resistance value not found\n", info->name);
 	if (info->c_resistance.fire < -500 || info->c_resistance.fire > 500)

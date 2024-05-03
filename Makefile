@@ -65,7 +65,8 @@ SRC			= name.c \
 			  roll_parse_md.c \
 			  roll_parse_pm.c \
 			  roll_parse_brackets.c \
-			  fclean.c
+			  fclean.c \
+			  player.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g

@@ -73,9 +73,19 @@ static void	ft_request_input(t_name *name)
 			ft_fclean();
 			found = 1;
 		}
+		else if (i == 1 && ft_strcmp_dnd(input[0], "clean") == 0 && !found)
+		{
+			ft_clean();
+			found = 1;
+		}
 		else if (i == 1 && ft_strcmp_dnd(input[0], "initiative") == 0 && !found)
 		{
 			ft_open_all_files(name);
+			found = 1;
+		}
+		else if (i == 3 && ft_strcmp_dnd(input[1], "player") == 0 && !found)
+		{
+			ft_player(input);
 			found = 1;
 		}
 		else
