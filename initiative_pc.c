@@ -41,6 +41,8 @@ int	ft_check_stat_pc(t_pc *player, char **content, char *filename)
 {
 	int	i;
 
+	player->initiative = -1;
+	player->name = NULL;
 	i = 0;
 	while (content[i])
 	{
@@ -55,5 +57,9 @@ int	ft_check_stat_pc(t_pc *player, char **content, char *filename)
 		else
 			return (1);
 	}
+	if (!(player->initiative >= 0 && player->initiative <= 50))
+		return (1);
+	if (!player->name)
+		return (1);
 	return (0);
 }
