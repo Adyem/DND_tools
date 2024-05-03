@@ -68,13 +68,14 @@ static void	*ft_initiative_pc_error(char *message)
 	return (NULL);
 }
 
-static t_pc	*ft_read_pc_file(int fd, char *filename)
+static t_pc	*ft_read_pc_file(int fd, char *filename, char *filepath)
 {
 	char	**content;
 	t_pc	*player;
 	int		error;
 
 	content = ft_read_file_dnd(fd);
+	close (fd);
 	if (!content)
 		return (ft_initiative_pc_error("251 Error allocating memory"));
 	player = malloc(sizeof(t_pc));
@@ -96,6 +97,13 @@ static t_pc	*ft_read_pc_file(int fd, char *filename)
 	error = ft_request_initiative(player);
 	if (!error)
 	{
+		fd = open(filepath, O_WRONLY | O_CREAT | O_TRUNC,
+				S_IRUSR | S_IWUSR);
+		if (fd != -1)
+		{
+			ft_printf_fd(2, "NAME=%s\n", player->name);
+			ft_printf_fd(2, "INITIATIVE=%i\n", player->initiative);
+		}
 	}
 	return (player);
 }
@@ -155,8 +163,7 @@ void	ft_open_all_files(t_name *name)
 			fd = open(filepath, O_RDONLY);
 			if (ft_strncmp(entry->d_name, "PC--", 6) == 0)
 			{
-				player = ft_read_pc_file(fd, entry->d_name);
-				close(fd);
+				player = ft_read_pc_file(fd, entry->d_name, filepath);
 				if (!player)
 					continue ;
 				ft_initiative_write(player->initiative, entry->d_name);
