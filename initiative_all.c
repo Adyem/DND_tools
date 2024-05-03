@@ -100,10 +100,7 @@ static t_pc	*ft_read_pc_file(int fd, char *filename, char *filepath)
 		fd = open(filepath, O_WRONLY | O_CREAT | O_TRUNC,
 				S_IRUSR | S_IWUSR);
 		if (fd != -1)
-		{
-			ft_printf_fd(2, "NAME=%s\n", player->name);
-			ft_printf_fd(2, "INITIATIVE=%i\n", player->initiative);
-		}
+			ft_save_pc(player);
 	}
 	return (player);
 }

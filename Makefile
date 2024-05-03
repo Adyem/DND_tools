@@ -46,6 +46,7 @@ SRC			= name.c \
 			  read_file.c \
 			  init_info.c \
 			  save_data.c \
+			  save_player.c \
 			  check_data.c \
 			  check_buff_attack.c \
 			  check_buff_save.c \

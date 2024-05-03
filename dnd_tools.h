@@ -138,6 +138,7 @@ void	ft_npc_check_ac(t_char *info, char **input);
 //save file
 int		ft_npc_check_info(t_char *info);
 void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, int fd);
+void	ft_save_pc(t_pc *player);
 
 //fclean
 void	ft_fclean(void);
