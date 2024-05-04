@@ -44,6 +44,7 @@ int	ft_check_stat_pc(t_pc *player, char **content, char *filename)
 
 	player->name = NULL;
 	player->initiative = -1;
+	player->next = NULL;
 	i = 0;
 	while (content[i])
 	{

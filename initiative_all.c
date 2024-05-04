@@ -104,7 +104,8 @@ static t_pc	*ft_read_pc_file(int fd, char *filename, char *filepath)
 
 void	ft_initiative_write(int	initiative, char *name)
 {
-	int	fd;
+	char	*temp;
+	int		fd;
 
 	if (DEBUG == 1)
 		ft_printf("printing initiative to data file\n");
@@ -115,7 +116,13 @@ void	ft_initiative_write(int	initiative, char *name)
 		ft_printf_fd(2, "error opening data--initiative: %s\n", strerror(errno));
 		return ;
 	}
+	temp = ft_strrchr(name, '.');
+	if (temp)
+		if (ft_strcmp_dnd(temp, ".txt"))
+			*temp = '\0';
 	ft_printf_fd(fd, "%s %i\n", name, initiative);
+	if (temp)
+		*temp = '.';
 	return ;
 }
 
