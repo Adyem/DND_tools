@@ -168,6 +168,7 @@ void	ft_open_all_files(t_name *name)
 				if (!player)
 					continue ;
 				ft_initiative_write(player->initiative, entry->d_name);
+				ft_free_pc(player);
 				continue ;
 			}
 			if (fd == -1)
@@ -197,5 +198,6 @@ void	ft_open_all_files(t_name *name)
 		}
 	}
 	closedir(dir);
+	ft_initiative_sort(open("data/data--initiative", O_RDONLY));
 	return ;
 }
