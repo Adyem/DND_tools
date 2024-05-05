@@ -7,6 +7,9 @@
 # define DEBUG 0
 #endif
 
+#define CRIT_SUCCES 999
+#define CRIT_FAIL -999
+
 typedef struct	s_name t_name;
 typedef t_char	*(*c_name)(int, char **, int);
 
