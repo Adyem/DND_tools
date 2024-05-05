@@ -19,19 +19,28 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 {
 	char *temp;
 
+	temp = ft_strchr(content, '\n');
+	if (temp)
+		*temp = '\0';
 	temp = ft_strchr(content, '=');
 	if (!temp)
 	{
 		ft_printf_fd(2, "Error did not find = sign\n");
 		return (ft_initiative_free_pc(head));
 	}
-	temp = '\0';
+	*temp = '\0';
 	temp++;
 	players->name = strdup(content);
 	if (!players->name)
+	{
+		ft_printf_fd(2, "254 Error allocating memory\n");
 		return (ft_initiative_free_pc(head));
+	}
 	if (ft_check_value(temp))
+	{
+		ft_printf_fd(2, "There is an error on the line: %s\n", temp);
 		return (ft_initiative_free_pc(head));
+	}
 	players->initiative = ft_atoi(content);
 	return (0);
 }
@@ -98,6 +107,7 @@ void	ft_initiative_sort(int fd)
 		ft_free_content(content);
 		return ;
 	}
+	ft_initiative_free_pc(players);
 	ft_free_content(content);
 	return ;
 }
