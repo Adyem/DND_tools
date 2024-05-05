@@ -21,7 +21,10 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 
 	temp = ft_strchr(content, '=');
 	if (!temp)
+	{
+		ft_printf_fd(2, "Error did not find = sign\n");
 		return (ft_initiative_free_pc(head));
+	}
 	temp = '\0';
 	temp++;
 	players->name = strdup(content);
