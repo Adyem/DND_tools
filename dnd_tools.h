@@ -151,6 +151,8 @@ void	ft_open_all_files(t_name *name);
 int		ft_check_stat_pc(t_pc *player, char **content, char *filename);
 int		ft_request_initiative(t_pc *player);
 void	ft_initiative_sort(int fd);
+void	ft_initiative_sort_2(t_pc *players);
+void	ft_initiative_print(void);
 
 //command roll
 void	ft_command_roll(char **argv);

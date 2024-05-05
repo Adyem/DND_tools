@@ -41,7 +41,10 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 		ft_printf_fd(2, "There is an error on the line: %s\n", temp);
 		return (ft_initiative_free_pc(head));
 	}
-	players->initiative = ft_atoi(content);
+	players->initiative = ft_atoi(temp);
+	if (DEBUG == 1)
+		ft_printf("the initiative from %s = %i\n",
+				players->name, players->initiative);
 	return (0);
 }
 
@@ -103,12 +106,11 @@ void	ft_initiative_sort(int fd)
 	if (!content)
 		return ;
 	players = ft_initiative_players_am(content);
-	if (!players)
-	{
-		ft_free_content(content);
-		return ;
-	}
-	ft_initiative_free_pc(players);
 	ft_free_content(content);
+	if (!players)
+		return ;
+	ft_initiative_sort_2(players);
+	ft_initiative_free_pc(players);
+	ft_initiative_print();
 	return ;
 }

@@ -41,7 +41,8 @@ SRC			= name.c \
 			  initiative_all.c \
 			  initiative_pc.c \
 			  initiative_request.c \
-			  initiative_sort.c \
+			  initiative_sort_1.c \
+			  initiative_sort_2.c \
 			  initiative.c \
 			  free_memory.c \
 			  read_file.c \

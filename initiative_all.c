@@ -118,8 +118,10 @@ void	ft_initiative_write(int	initiative, char *name)
 	}
 	temp = ft_strrchr(name, '.');
 	if (temp)
-		if (ft_strcmp_dnd(temp, ".txt"))
+		if (ft_strcmp_dnd(temp, ".txt") == 0)
 			*temp = '\0';
+	if (DEBUG == 1)
+		ft_printf("%s=%i\n", name, initiative);
 	ft_printf_fd(fd, "%s=%i\n", name, initiative);
 	if (temp)
 		*temp = '.';
