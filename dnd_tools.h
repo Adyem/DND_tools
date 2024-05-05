@@ -101,6 +101,9 @@ void	ft_npc_update_lightning_strike(t_char *info, char **input);
 //general buffs
 int		ft_check_bless(t_char *info);
 
+//concentration
+void	ft_check_concentration(t_char *info, int  damage);
+
 //advantage or disadvantage
 void	ft_reroll(t_char *info, int *result);
 
@@ -118,7 +121,7 @@ int		ft_check_stat(t_char *info, char *stat, int index);
 int		ft_read_line_confirm(char *mesage);
 
 //dice rolling
-void	ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int save_mod);
+int		ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int save_mod);
 int		ft_dice_roll(int number, int faces);
 
 //free memory

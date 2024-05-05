@@ -43,6 +43,9 @@ static void	ft_deal_damage(t_char *info, char **input, char *d_type, int resista
 	if (info->stats.health < 0)
 		info->stats.health = 0;
 	ft_print_character_status(info, damage * -1, temp);
+	if (info->concentration.concentration)
+		ft_check_concentration(info, damage);
+	return ;
 }
 
 void	ft_change_stats_04(t_char *info, char **input)

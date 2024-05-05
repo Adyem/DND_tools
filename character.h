@@ -132,8 +132,9 @@ typedef struct s_crit_mod
 
 typedef struct	s_concentration
 {
-	int	spell_id;
-	int	concentration;
+	int		spell_id;
+	int		concentration;
+	char	**targets;
 } t_concentration;
 
 typedef struct	s_resistance

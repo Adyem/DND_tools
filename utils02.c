@@ -52,7 +52,7 @@ void ft_print_character_status(t_char *info, int number, int temp)
 }
 
 
-void	ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int save_mod)
+int	ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int save_mod)
 {
 	int mod;
 	int	result;
@@ -72,7 +72,7 @@ void	ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int sav
 		ft_printf("%s rolled %i+%i+%i+%i on his/her %s saving throw for a total of %i\n",
 			info->name, roll, (ability_mod - 10) / 2, save_mod, mod, ability_score, result);
 	}
-	return ;
+	return (result);
 }
 
 void	ft_skill_throw(t_char *info, char *skill, int ability_mod, int skill_mod)
