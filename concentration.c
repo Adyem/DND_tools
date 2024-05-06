@@ -9,8 +9,8 @@ void ft_check_concentration(t_char *info, int damage)
 		return ;
 	result = ft_saving_throw(info, "constituion", info->stats.con, info->save_mod.con);
 	difficulty = 10;
-	if (difficulty < damage % 2)
-		difficulty = damage % 2;
+	if (difficulty < damage / 2)
+		difficulty = damage / 2;
 	if (result < difficulty)
 	{
 		ft_printf("%s failed on his/her concentration save\n", info->name);
