@@ -95,6 +95,9 @@ static const	t_f_attack TEMPLATE_F_ATTACK =
 static const	t_bless TEMPLATE_BLESS =
 {
 	.duration = 0,
+	.dice_amount_mod = 1,
+	.dice_faces_mod = 4,
+	.base_mod = 0,
 	.target = NULL,
 };
 
@@ -153,7 +156,11 @@ static const	t_crit_mod TEMPLATE_CRIT =
 static const	t_concentration TEMPLATE_CONCENTRATION =
 {
 	.spell_id = 0,
+	.dice_amount_mod = 0,
+	.dice_faces_mod = 0,
+	.base_mod = 0,
 	.concentration = 0,
+	.targets = NULL,
 };
 
 static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =

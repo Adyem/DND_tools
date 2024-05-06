@@ -68,6 +68,9 @@ typedef struct	s_f_attack
 typedef struct	s_bless
 {
 	int		duration;
+	int		dice_amount_mod;
+	int		dice_faces_mod;
+	int		base_mod;
 	char	**target;
 } t_bless;
 
@@ -132,8 +135,11 @@ typedef struct s_crit_mod
 
 typedef struct	s_concentration
 {
-	int		spell_id;
 	int		concentration;
+	int		spell_id;
+	int		dice_amount_mod;
+	int		dice_faces_mod;
+	int		base_mod;
 	char	**targets;
 } t_concentration;
 
