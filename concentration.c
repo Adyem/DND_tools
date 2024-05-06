@@ -16,6 +16,9 @@ void ft_check_concentration(t_char *info, int damage)
 		ft_printf("%s failed on his/her concentration save\n", info->name);
 		info->concentration.concentration = 0;
 		info->concentration.spell_id = 0;
+		info->concentration.dice_amount_mod = 0;
+		info->concentration.dice_faces_mod = 0;
+		info->concentration.base_mod = 0;
 		info->concentration.targets = NULL;
 	}
 	else
