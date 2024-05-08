@@ -69,7 +69,7 @@ void	ft_change_stats_04(t_char *info, char **input)
 		else if (ft_strcmp_dnd(input[2], "bludgeoning") == 0)
 			ft_deal_damage(info, input[1], "bludgeoning", info->c_resistance.bludgeoning, 1);
 		else if (ft_strcmp_dnd(input[2], "cold") == 0)
-			ft_deal_damage(info, input[1], "cold", info->c_resistance.coldn, 1);
+			ft_deal_damage(info, input[1], "cold", info->c_resistance.cold, 1);
 		else if (ft_strcmp_dnd(input[2], "fire") == 0)
 			ft_deal_damage(info, input[1], "fire", info->c_resistance.fire, 1);
 		else if (ft_strcmp_dnd(input[2], "force") == 0)

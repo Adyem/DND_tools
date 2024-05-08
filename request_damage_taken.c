@@ -20,7 +20,6 @@ int	ft_request_damage(t_char *info)
 	char	**input;
 	char	*line;
 	int		fail;
-	int		total;
 	
 	fail = 0;
 	while ((line = readline("How much damage was dealt: ")))
@@ -50,11 +49,10 @@ int	ft_request_damage(t_char *info)
 			ft_free_request_damage(line, input);
 			continue ;
 		}
-		if (ft_strcmp_dnd(info->input[0], "exit"))
+		if (ft_strcmp_dnd(input[0], "exit"))
 		{
-			ft_deal_damage(t_char *info, NULL, NULL, 0, 2);
+			ft_deal_damage(info, NULL, NULL, 0, 2);
 			ft_free_request_damage(line, input);
-			ft_deal_damage
 			break ;
 		}
 		if (info->version_number < 2)

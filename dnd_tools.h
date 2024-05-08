@@ -90,7 +90,9 @@ int		ft_save_check_buff(t_char *info, int *roll, char *ability_score);
 int		ft_attack_roll_check_buffs(t_char *info, int *roll);
 
 //damage
-void	ft_deal_damage(t_char *info, char *input, char *d_type, int resistance);
+void	ft_deal_damage(t_char *info, char *input, char *d_type, int resistance,
+			int concentration);
+int		ft_request_damage(t_char *info);
 
 //skill roll buffs
 int		ft_skill_check_buff(t_char *info, int *roll, char *skill);
