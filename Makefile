@@ -70,7 +70,9 @@ SRC			= name.c \
 			  fclean.c \
 			  player.c \
 			  concentration.c \
-			  request_damage_taken.c
+			  request_damage_taken.c \
+			  saving_throw.c \
+			  skill_throw.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g

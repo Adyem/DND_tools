@@ -51,59 +51,6 @@ void ft_print_character_status(t_char *info, int number, int temp)
 	return;
 }
 
-
-int	ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int save_mod)
-{
-	int mod;
-	int	result;
-	int	roll;
-
-	roll = ft_dice_roll(1, 20);
-	mod = ft_save_check_buff(info, &roll, ability_score);
-	if (roll <= 1 + info->crit.save_fail)
-	{
-		result = CRIT_FAIL;
-		ft_printf("%s rolled a critical fail (%i) on his/her %s saving throw\n",
-			info->name, roll, ability_score);
-	}
-	else if (roll >= 20 - info->crit.save)
-	{
-		result = CRIT_SUCCES;
-		ft_printf("%s rolled a crit (%i) on his/her %s saving throw\n",
-			info->name, roll, ability_score);
-	}
-	else
-	{
-		result = roll + (((ability_mod - 10) / 2) + save_mod + mod);
-		ft_printf("%s rolled %i+%i+%i+%i on his/her %s saving throw for a total of %i\n",
-			info->name, roll, (ability_mod - 10) / 2, save_mod, mod, ability_score, result);
-	}
-	return (result);
-}
-
-void	ft_skill_throw(t_char *info, char *skill, int ability_mod, int skill_mod)
-{
-	int mod;
-	int	result;
-	int	roll;
-
-	roll = ft_dice_roll(1, 20);
-	mod = ft_skill_check_buff(info, &result, skill);
-	if (roll <= 1 + info->crit.skill_fail)
-		ft_printf("%s rolled a critical fail (%i) on his/her %s\n",
-			info->name, roll, skill);
-	else if (roll >= 20 - info->crit.skill)
-		ft_printf("%s rolled a crit (%i) on his/her %s\n",
-			info->name, roll, skill);
-	else
-	{
-		result = roll + (((ability_mod - 10) / 2) + skill_mod + mod);
-		ft_printf("%s rolled %i+%i+%i+%i on his/her %s for a total of %i\n",
-			info->name, roll, (ability_mod - 10) / 2, skill_mod, mod, skill, result);
-	}
-	return ;
-}
-
 void	ft_reroll(t_char *info, int *result)
 {
 	int second_roll;

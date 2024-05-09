@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-int	ft_free_request_damage(char *line, char **input)
+static int	ft_free_request_damage(char *line, char **input)
 {
 	int	i;
 
