@@ -164,6 +164,11 @@ void	ft_open_all_files(t_name *name)
 		if (entry->d_type == DT_REG)
 		{
 			fd = open(filepath, O_RDONLY);
+			if (fd == -1)
+			{
+				ft_printf_fd(2, "unable to open file: %s\n", strerror(errno));
+				continue ;
+			}
 			if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
 			{
 				player = ft_read_pc_file(fd, entry->d_name, filepath);
@@ -173,15 +178,10 @@ void	ft_open_all_files(t_name *name)
 				ft_free_pc(player);
 				continue ;
 			}
-			if (fd == -1)
-			{
-				ft_printf_fd(2, "unable to open file: %s\n", strerror(errno));
-				continue ;
-			}
 			info = ft_read_all_files(fd, name, filepath);
+			close(fd);
 			if (!info)
 				continue ;
-			close(fd);
 			if (DEBUG == 1)
 				ft_printf("2 name of the save file is %s\n", filepath);
 			fd = open(filepath, O_WRONLY | O_CREAT | O_TRUNC,
