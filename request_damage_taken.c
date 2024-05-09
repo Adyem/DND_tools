@@ -1,17 +1,17 @@
 #include "dnd_tools.h"
 
-int	ft_free_request_damage(char *input, char **argv)
+int	ft_free_request_damage(char *line, char **input)
 {
 	int	i;
 
 	i = 0;
-	while (argv && argv[i])
+	while (input && input[i])
 	{
-		free(argv[i]);
+		free(input[i]);
 		i++;
 	}
-	free(argv);
 	free(input);
+	free(line);
 	return (1);
 }
 
@@ -26,6 +26,12 @@ int	ft_request_damage(t_char *info)
 	{
 		if (!line)
 			return (1);
+		if (ft_strcmp_dnd(line, "exit") == 0)
+		{
+			ft_deal_damage(info, NULL, NULL, 0, 2);
+			free(line);
+			return (0);
+		}
 		input = ft_split(line, ' ');
 		if (!input)
 		{
@@ -36,7 +42,10 @@ int	ft_request_damage(t_char *info)
 				continue ;
 			}
 			else
-				return (ft_free_request_damage(line, input));
+			{
+				free(line);
+				return (1);
+			}
 		}
 		if (ft_check_value(input[0]))
 		{
@@ -48,12 +57,6 @@ int	ft_request_damage(t_char *info)
 		{
 			ft_free_request_damage(line, input);
 			continue ;
-		}
-		if (ft_strcmp_dnd(input[0], "exit"))
-		{
-			ft_deal_damage(info, NULL, NULL, 0, 2);
-			ft_free_request_damage(line, input);
-			break ;
 		}
 		if (info->version_number < 2)
 			ft_deal_damage(info, input[0], NULL, 0, 0);
@@ -83,7 +86,6 @@ int	ft_request_damage(t_char *info)
 			ft_deal_damage(info, input[0], "slashing", info->c_resistance.slashing, 0);
 		else if (ft_strcmp_dnd(input[1], "thunder") == 0)
 			ft_deal_damage(info, input[0], "thunder", info->c_resistance.thunder, 0);
-		break ;
 	}
 	ft_free_request_damage(line, input);
 	return (0);
