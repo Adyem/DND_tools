@@ -5,7 +5,7 @@ void ft_check_concentration(t_char *info, int damage)
 	int	difficulty;
 	int	result;
 
-	if (info->version_number > 2 || !info->concentration.concentration)
+	if (info->version_number < 2 || !info->concentration.concentration)
 		return ;
 	result = ft_saving_throw(info, "constituion", info->stats.con, info->save_mod.con);
 	difficulty = 10;
