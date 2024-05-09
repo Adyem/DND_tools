@@ -85,6 +85,21 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 	else if (ft_strncmp(content[i], "THUNDER_RESISTANCE=", 19) == 0
 			&& info->c_resistance.thunder == -501)
 		info->c_resistance.thunder = ft_check_stat(info, content[i], 19);
+	else if (ft_strncmp(content[i], "CONCENTRATION=", 14) == 0 &&
+			info->concentration.concentration == 0)
+		info->concentration.concentration = ft_check_stat(info, content[i], 14);
+	else if (ft_strncmp(content[i], "CONC_SPELL_ID=", 14) == 0 &&
+			info->concentration.spell_id == 0)
+		info->concentration.spell_id = ft_check_stat(info, content[i], 14);
+	else if (ft_strncmp(content[i], "CONC_DICE_AMOUNT=", 17) == 0 &&
+			info->concentration.dice_amount_mod == 0)
+		info->concentration.dice_amount_mod = ft_check_stat(info, content[i], 17);
+	else if (ft_strncmp(content[i], "CONC_DICE_FACES=", 16) == 0 &&
+			info->concentration.dice_faces_mod == 0)
+		info->concentration.dice_faces_mod = ft_check_stat(info, content[i], 16);
+	else if (ft_strncmp(content[i], "CONC_BASE_MOD=", 14) == 0 &&
+			info->concentration.base_mod == 0)
+		info->concentration.base_mod = ft_check_stat(info, content[i], 14);
 	else
 		r_value = 1;
 	return(r_value);
