@@ -60,35 +60,16 @@ void	ft_deal_damage(t_char *info, char *input, char *d_type, int resistance,
 
 void	ft_change_stats_04(t_char *info, char **input)
 {
+	int	resistance;
+
 	if (ft_strcmp_dnd(input[3], "damage") == 0)
 	{
 		if (info->version_number < 2)
 			ft_deal_damage(info, input[1], NULL, 0, 1);
-		else if (ft_strcmp_dnd(input[2], "acid") == 0)
-			ft_deal_damage(info, input[1], "acid", info->c_resistance.acid, 1);
-		else if (ft_strcmp_dnd(input[2], "bludgeoning") == 0)
-			ft_deal_damage(info, input[1], "bludgeoning", info->c_resistance.bludgeoning, 1);
-		else if (ft_strcmp_dnd(input[2], "cold") == 0)
-			ft_deal_damage(info, input[1], "cold", info->c_resistance.cold, 1);
-		else if (ft_strcmp_dnd(input[2], "fire") == 0)
-			ft_deal_damage(info, input[1], "fire", info->c_resistance.fire, 1);
-		else if (ft_strcmp_dnd(input[2], "force") == 0)
-			ft_deal_damage(info, input[1], "force", info->c_resistance.force, 1);
-		else if (ft_strcmp_dnd(input[2], "lightning") == 0)
-			ft_deal_damage(info, input[1], "lightning", info->c_resistance.lightning, 1);
-		else if (ft_strcmp_dnd(input[2], "necrotic") == 0)
-			ft_deal_damage(info, input[1], "necrotic", info->c_resistance.necrotic, 1);
-		else if (ft_strcmp_dnd(input[2], "piercing") == 0)
-			ft_deal_damage(info, input[1], "piercing", info->c_resistance.piercing, 1);
-		else if (ft_strcmp_dnd(input[2], "poison") == 0)
-			ft_deal_damage(info, input[1], "poison", info->c_resistance.poison, 1);
-		else if (ft_strcmp_dnd(input[2], "psychic") == 0)
-			ft_deal_damage(info, input[1], "psychic", info->c_resistance.psychic, 1);
-		else if (ft_strcmp_dnd(input[2], "radiant") == 0)
-			ft_deal_damage(info, input[1], "radiant", info->c_resistance.radiant, 1);
-		else if (ft_strcmp_dnd(input[2], "slashing") == 0)
-			ft_deal_damage(info, input[1], "slashing", info->c_resistance.slashing, 1);
-		else if (ft_strcmp_dnd(input[2], "thunder") == 0)
-			ft_deal_damage(info, input[1], "thunder", info->c_resistance.thunder, 1);
+		else
+		{
+			resistance = ft_get_resistance(info, input[2]);
+			ft_deal_damage(info, input[1], input[2], resistance, 1);
+		}
     }
 }
