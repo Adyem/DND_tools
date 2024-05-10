@@ -103,12 +103,8 @@ void	ft_initiative_sort(int fd)
 	if (!content)
 		return ;
 	players = ft_initiative_players_am(content);
-	if (!players)
-	{
-		ft_free_content(content);
-		return ;
-	}
-	ft_initiative_free_pc(players);
+	if (players)
+		ft_initiative_free_pc(players);
 	ft_free_content(content);
 	return ;
 }
