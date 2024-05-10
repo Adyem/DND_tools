@@ -8,11 +8,17 @@ void	ft_initiative_print(void)
 
 	fd = open("data/data--initiative", O_RDONLY);
 	if (fd == -1)
-		return ;
+	{
+		ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
+		return;
+	}
 	content = ft_read_file_dnd(fd);
 	close(fd);
 	if (!content)
+	{
+		ft_printf_fd(2, "261-Error allocating memory\n");
 		return ;
+	}
 	ft_printf("\n\ninitiative rolls are:\n");
 	i = 0;
 	while (content[i])
@@ -24,8 +30,22 @@ void	ft_initiative_print(void)
 	return ;
 }
 
+void	ft_initiative_print_pc(t_pc *players)
+{
+	t_pc	*temp;
+
+	temp = players;
+	while (temp)
+	{
+		ft_printf("%s=%i\n", temp->name, temp->initiative);
+		temp = temp->next;
+	}
+	return ;
+}
+
 void	ft_initiative_sort_2(t_pc *players)
 {
+	int		turn;
 	int		fd;
 	t_pc	*temp;
 	t_pc	*highest;
@@ -33,23 +53,32 @@ void	ft_initiative_sort_2(t_pc *players)
 	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR);
 	if (fd == -1)
+	{
+		ft_printf_fd(2, "262-Error opening file: %s\n", strerror(errno));
 		return ;
+	}
+	turn = 0;
 	while (1)
 	{
 		temp = players;
-		highest = players;
-		if (temp->next)
+		highest = NULL;
+		while (temp)
 		{
-			temp = temp->next;
-			if (highest->initiative < temp->initiative)
+			if ((highest == NULL || temp->initiative > highest->initiative) &&
+					temp->initiative != -1)
 				highest = temp;
+			temp = temp->next;
 		}
-		if (highest->initiative == -1)
+		if (highest == NULL)
 			break ;
-		ft_printf_fd(fd, "%s=%i\n", highest->name, highest->initiative);
+		if (turn == 0)
+		{
+			ft_printf_fd(fd, "--TURN-- %s=%i\n", highest->name, highest->initiative);
+			turn = 1;
+		}
+		else
+			ft_printf_fd(fd, "%s=%i\n", highest->name, highest->initiative);
 		highest->initiative = -1;
-		free(highest->name);
-		highest->name = NULL;
 	}
 	close(fd);
 	return ;
