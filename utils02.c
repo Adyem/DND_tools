@@ -1,54 +1,31 @@
 #include "dnd_tools.h"
 
-void ft_print_character_status(t_char *info, int number, int temp)
+int	ft_dice_roll(int number, int faces)
 {
-	if (number == 0 && temp == 0)
-		ft_printf("%s remains unchanged and is dead\n", info->name);
-	else if (temp == info->dstats.health && info->stats.health == info->dstats.health)
-		ft_printf("%s remains at their current state and is at maximum hp (%i)\n",
-			info->name, info->dstats.health);
-	else if (number == 0)
-		ft_printf("%s remains at their current state, with health at %i\n",
-			info->name, info->stats.health);
-	else if (temp == 0)
+	int	roll;
+	int	result;
+	int	i;
+
+	if (faces == 1)
+		return (number);
+	if (faces < 1 || number < 1)
+		return (0);
+	result = 0;
+	i = 0;
+	roll = 0;
+	while (i < number)
 	{
-		if (number == info->dstats.health)
-			ft_printf("%s has been restored to their full health (%i)\n",
-				info->name, info->stats.health);
-		else if (info->stats.health == info->dstats.health)
-			ft_printf("%s has been fully revived from 0 to full %i health with %i surplus"\
-					"recovery\n", info->name, info->stats.health,
-					number - info->dstats.health);
-		else if (info->stats.health > 0)
-			ft_printf("%s has been revived with %i health\n", info->name, info->stats.health);
-		else
-			ft_printf("Efforts on %s were redundant, %i damage was unnecessary\n",
-					info->name, number * -1);
+		do
+			roll = rand();
+		while
+			(roll > (RAND_MAX - (RAND_MAX % faces)) + 1);
+		result += (roll % faces) + 1;
+		i++;
 	}
-	else if (temp == info->dstats.health && info->stats.health == info->dstats.health)
-		ft_printf("%s is already at peak condition %i, with %i surplus recovery\n",
-			info->name, info->stats.health, number);
-	else if (info->stats.health + number > info->dstats.health)
-		ft_printf("%s has been fully healed to peak condition %i with %i surplus recovery"\
-			"\n", info->name, info->stats.health, temp + number - info->dstats.health);
-	else
-	{
-		if (info->stats.health == 0)
-		{
-			if ((number * -1) == temp)
-				ft_printf("%s encountered a precise setback\n", info->name);
-			else
-				ft_printf("%s encountered a setback with %i excess damage\n",
-					info->name, (number * -1) - temp);
-        }
-		else if (number < 0)
-			ft_printf("%s has recieved %i damage and now has %i health remaining\n",
-				info->name, number * -1, info->stats.health);
-		else if (number > 0)
-			ft_printf("%s's health was enhanced by %i, reaching %i\n",
-				info->name, number, info->stats.health);
-	}
-	return;
+	if (DEBUG == 1)
+		ft_printf("The dice rolled %i on %i faces with %i amount of dice\n",
+				result, faces, number);
+	return (result);
 }
 
 void	ft_reroll(t_char *info, int *result)

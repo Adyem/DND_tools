@@ -73,7 +73,8 @@ SRC			= name.c \
 			  request_damage_taken.c \
 			  saving_throw.c \
 			  skill_throw.c \
-			  deal_damage.c
+			  deal_damage.c \
+			  print_hp_status.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g
