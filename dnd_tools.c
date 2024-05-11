@@ -83,6 +83,11 @@ static void	ft_request_input(t_name *name)
 			ft_open_all_files(name);
 			found = 1;
 		}
+		else if (i == 1 && ft_strcmp_dnd(input[0], "turn") == 0 && !found)
+		{
+			ft_turn_next(name);
+			found = 1;
+		}
 		else if (i == 3 && ft_strcmp_dnd(input[1], "player") == 0 && !found)
 		{
 			ft_player(input);
@@ -98,7 +103,6 @@ static void	ft_request_input(t_name *name)
 					found = 1;
 				}
 				temp = temp->next;
-
 			}
 		}
 		if (!found)

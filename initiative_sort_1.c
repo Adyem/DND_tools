@@ -40,7 +40,7 @@ static void	ft_initiative_players_init(t_pc *players)
 	players->initiative = -2;
 }
 
-static t_pc	*ft_initiative_players_am(char **content)
+t_pc	*ft_initiative_players_am(char **content)
 {
 	t_pc	*players;
 	t_pc	*temp;

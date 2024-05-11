@@ -79,6 +79,9 @@ void	ft_air_goblin_shaman_turn(t_char *info);
 //Air Totem (Totem)
 t_char	*ft_air_totem(int index, char **input, int exception);
 
+//Turn
+void	ft_turn_next(t_name *name);
+
 //buff update
 void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name);
 void	ft_update_buff_status(t_char *info, int current_dur, int duration, char *buff_name);
@@ -168,6 +171,7 @@ int		ft_request_initiative(t_pc *player);
 void	ft_initiative_sort(int fd);
 void	ft_initiative_sort_2(t_pc *players);
 void	ft_initiative_print(void);
+t_pc	*ft_initiative_players_am(char **content);
 
 //command roll
 void	ft_command_roll(char **argv);
