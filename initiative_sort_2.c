@@ -73,7 +73,7 @@ void	ft_initiative_sort_2(t_pc *players)
 			break ;
 		if (turn == 0)
 		{
-			ft_printf_fd(fd, "--TURN-- %s=%i\n", highest->name, highest->initiative);
+			ft_printf_fd(fd, "--TURN--%s=%i\n", highest->name, highest->initiative);
 			turn = 1;
 		}
 		else

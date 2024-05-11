@@ -1,20 +1,5 @@
 #include "dnd_tools.h"
 
-static int ft_initiative_free_pc(t_pc *players)
-{
-	t_pc	*temp;
-
-	while (players)
-	{
-		temp = players->next;
-		if (players->name)
-			free(players->name);
-		free(players);
-		players = temp;
-	}
-	return (1);
-}
-
 static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 {
 	char *temp;
@@ -26,7 +11,7 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 	if (!temp)
 	{
 		ft_printf_fd(2, "Error did not find = sign\n");
-		return (ft_initiative_free_pc(head));
+		return (ft_free_players(head));
 	}
 	*temp = '\0';
 	temp++;
@@ -34,12 +19,12 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 	if (!players->name)
 	{
 		ft_printf_fd(2, "254 Error allocating memory\n");
-		return (ft_initiative_free_pc(head));
+		return (ft_free_players(head));
 	}
 	if (ft_check_value(temp))
 	{
 		ft_printf_fd(2, "There is an error on the line: %s\n", temp);
-		return (ft_initiative_free_pc(head));
+		return (ft_free_players(head));
 	}
 	players->initiative = ft_atoi(temp);
 	if (DEBUG == 1)
@@ -79,7 +64,7 @@ static t_pc	*ft_initiative_players_am(char **content)
 		if (!temp->next)
 		{
 			ft_printf_fd(2, "Error allocating memory: players->next\n");
-			ft_initiative_free_pc(players);
+			ft_free_players(players);
 			return (NULL);
 		}
 		ft_initiative_players_init(temp->next);
@@ -110,7 +95,7 @@ void	ft_initiative_sort(int fd)
 	if (!players)
 		return ;
 	ft_initiative_sort_2(players);
-	ft_initiative_free_pc(players);
+	ft_free_players(players);
 	ft_initiative_print();
 	return ;
 }

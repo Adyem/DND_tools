@@ -1,14 +1,14 @@
 #include "dnd_tools.h"
 
 void	ft_deal_damage(t_char *info, char *input, char *d_type, int resistance,
-		int concentration)
+		int override)
 {
 	static int	total;
 	int			temp;
 	int			damage;
 	int			extra;
 
-	if (concentration == 1 || concentration == 0)
+	if (override == 1 || override == 0)
 	{
 		if (ft_check_value(input))
 		{
@@ -49,9 +49,9 @@ void	ft_deal_damage(t_char *info, char *input, char *d_type, int resistance,
 		total += damage;
 		ft_print_character_status(info, damage * -1, temp);
 	}
-	if (concentration == 1 || concentration == 2)
+	if (override == 1 || override == 2)
 	{
-		if (info->concentration.concentration)
+		if (info->version_number > 2 && info->concentration.concentration)
 			ft_check_concentration(info, total);
 		total = 0;
 	}
