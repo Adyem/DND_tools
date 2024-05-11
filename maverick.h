@@ -145,8 +145,8 @@ static const	t_char MAVERICK_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
-	.save_file = "data/Maverick.txt",
-	.name = "Maverick",
+	.save_file = "data/maverick.txt",
+	.name = "maverick",
 	.advantage = 0,
 	.turn = ft_maverick_turn,
 	.crit = MAVERICK_CRIT,
