@@ -91,7 +91,7 @@ static void	ft_turn_run(t_pc *players, t_name *name)
 	found = 0;
 	while(pc_temp && found == 0)
 	{
-		if (ft_strncmp("--turn-", pc_temp->name, 9) == 0)
+		if (ft_strncmp("--turn--", pc_temp->name, 8) == 0)
 		{
 			found = 1;
 			c_name = ft_strtrim(pc_temp->name, "--turn--");
@@ -100,9 +100,9 @@ static void	ft_turn_run(t_pc *players, t_name *name)
 				ft_printf_fd(2, "247-Error allocating memory strtrim\n");
 				return ;
 			}
+			n_temp = name;
 			while (n_temp != NULL && found != 2)
 			{
-				n_temp = name;
 				if (ft_strcmp_dnd(n_temp->name, c_name) == 0)
 				{
 					n_temp->function(1, &pc_temp->name, 0);
@@ -111,8 +111,9 @@ static void	ft_turn_run(t_pc *players, t_name *name)
 				n_temp = n_temp->next;
 			}
 		}
+		pc_temp = pc_temp->next;
 	}
-	if (found == 1)
+	if (found == 1 && pc_temp)
 		ft_printf("current turn is for %s\n", pc_temp->name);
 	return ;
 }
