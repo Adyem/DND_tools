@@ -85,7 +85,7 @@ static int	ft_turn_write(t_pc *players)
 	return (0);
 }
 
-static void	ft_turn_run(t_pc *players, t_name *name)
+static int	ft_turn_run(t_pc *players, t_name *name)
 {
 	t_pc	*pc_temp;
 	t_name	*n_temp;
@@ -103,7 +103,7 @@ static void	ft_turn_run(t_pc *players, t_name *name)
 			if (!name)
 			{
 				ft_printf_fd(2, "247-Error allocating memory strtrim\n");
-				return ;
+				return (1);
 			}
 			n_temp = name;
 			while (n_temp != NULL && found != 2)
@@ -120,7 +120,7 @@ static void	ft_turn_run(t_pc *players, t_name *name)
 			ft_printf("the current turn is for %s\n", &pc_temp->name[12]);
 		pc_temp = pc_temp->next;
 	}
-	return ;
+	return (0);
 }
 
 void	ft_turn_next(t_name *name)
@@ -148,16 +148,17 @@ void	ft_turn_next(t_name *name)
 		ft_free_players(players);
 		return ;
 	}
+	if (ft_turn_run(players, name))
+	{
+		ft_free_players(players);
+		return ;
+	}
 	if (ft_turn_move_marker(players))
 	{
 		ft_free_players(players);
 		return ;
 	}
-	if (ft_turn_write(players))
-	{
-		ft_free_players(players);
-		return ;
-	}
-	ft_turn_run(players, name);
+	ft_turn_write(players);
 	ft_free_players(players);
+	return ;
 }
