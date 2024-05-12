@@ -7,8 +7,12 @@ static int	ft_turn_check_marker(t_pc *players)
 
 	temp = players;
 	marker = 0;
-	if (ft_strncmp("--turn--", temp->name, 8) == 0)
-		marker++;
+	while (temp)
+	{
+		if (ft_strncmp("--turn--", temp->name, 8) == 0)
+			marker++;
+		temp = temp->next;
+	}
 	if (marker == 0)
 		ft_printf_fd(2, "File is corrupted no turn marker found\n");
 	else if (marker > 1)
@@ -53,6 +57,7 @@ static int	ft_turn_move_marker(t_pc *players)
 				free(players->name);
 				players->name = name;
 			}
+			break ;
 		}
 		temp = temp->next;
 	}
@@ -105,16 +110,16 @@ static void	ft_turn_run(t_pc *players, t_name *name)
 			{
 				if (ft_strcmp_dnd(n_temp->name, c_name) == 0)
 				{
-					n_temp->function(1, &pc_temp->name, 0);
+					n_temp->function(1, &c_name, 0);
 					found = 2;
 				}
 				n_temp = n_temp->next;
 			}
 		}
+		if (ft_strncmp("--turn--PC--", pc_temp->name, 12) == 0)
+			ft_printf("the current turn is for %s\n", &pc_temp->name[12]);
 		pc_temp = pc_temp->next;
 	}
-	if (found == 1 && pc_temp)
-		ft_printf("current turn is for %s\n", pc_temp->name);
 	return ;
 }
 
