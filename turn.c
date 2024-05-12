@@ -82,6 +82,7 @@ static int	ft_turn_write(t_pc *players)
 		ft_printf_fd(fd, "%s=%i\n", temp->name, temp->initiative);
 		temp = temp->next;
 	}
+	close(fd);
 	return (0);
 }
 
@@ -120,6 +121,7 @@ static int	ft_turn_run(t_pc *players, t_name *name)
 			ft_printf("the current turn is for %s\n", &pc_temp->name[12]);
 		pc_temp = pc_temp->next;
 	}
+	free(c_name);
 	return (0);
 }
 

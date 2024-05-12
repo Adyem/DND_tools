@@ -99,6 +99,7 @@ static t_pc	*ft_read_pc_file(int fd, char *filename, char *filepath)
 		if (fd != -1)
 			ft_save_pc(player, fd);
 	}
+	close(fd);
 	return (player);
 }
 
@@ -125,6 +126,7 @@ void	ft_initiative_write(int	initiative, char *name)
 	ft_printf_fd(fd, "%s=%i\n", name, initiative);
 	if (temp)
 		*temp = '.';
+	close(fd);
 	return ;
 }
 
