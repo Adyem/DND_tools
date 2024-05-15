@@ -64,3 +64,18 @@ char	**ft_read_file_dnd(int fd)
 	}
 	return (return_v);
 }
+
+char		**ft_open_and_read(char *file)
+{
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("Error opening file :%s\n", strerror(errno));
+		return (NULL);
+	}
+	content = ft_read_file_dnd(fd);
+	close(fd);
+	if (!content)
+		return (NULL);
+	return (content);
+}

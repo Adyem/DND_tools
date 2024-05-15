@@ -121,9 +121,12 @@ int		ft_get_resistance(t_char *info, char *type);
 //advantage or disadvantage
 void	ft_reroll(t_char *info, int *result);
 
+//open and read
+char	**ft_read_file_dnd(t_char *info, char **content);
+char	**ft_open_aand_read(char *file);
+
 //utils
 int		ft_strcmp_dnd(char *string1, char *string2);
-char	**ft_read_file_dnd(int fd);
 int		ft_initialize_info(t_char *info, char **content);
 int		ft_check_value(char *input);
 void	ft_print_character_status(t_char *info, int number, int temp);
