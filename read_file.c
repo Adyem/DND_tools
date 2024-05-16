@@ -67,6 +67,9 @@ char	**ft_read_file_dnd(int fd)
 
 char		**ft_open_and_read(char *file)
 {
+	int		fd;
+	char	**content;
+
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{

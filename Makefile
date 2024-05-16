@@ -75,7 +75,8 @@ SRC			= name.c \
 			  skill_throw.c \
 			  deal_damage.c \
 			  print_hp_status.c \
-			  turn.c
+			  turn.c \
+			  update_intiative_file.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g

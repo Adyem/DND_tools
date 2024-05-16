@@ -122,8 +122,8 @@ int		ft_get_resistance(t_char *info, char *type);
 void	ft_reroll(t_char *info, int *result);
 
 //open and read
-char	**ft_read_file_dnd(t_char *info, char **content);
-char	**ft_open_aand_read(char *file);
+char	**ft_read_file_dnd(int fd);
+char	**ft_open_and_read(char *file);
 
 //utils
 int		ft_strcmp_dnd(char *string1, char *string2);
@@ -175,6 +175,10 @@ void	ft_initiative_sort(int fd);
 void	ft_initiative_sort_2(t_pc *players);
 void	ft_initiative_print(void);
 t_pc	*ft_initiative_players_am(char **content);
+ 
+//initiative update file
+void	ft_initiative_remove(t_char *info);
+void	ft_initiative_add(t_char *info);
 
 //command roll
 void	ft_command_roll(char **argv);
