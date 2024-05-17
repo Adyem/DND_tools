@@ -1,4 +1,6 @@
+#include "character.h"
 #include "dnd_tools.h"
+#include "libft/libft/libft.h"
 
 void ft_initiative_remove(t_char *info)
 {
