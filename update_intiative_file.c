@@ -32,7 +32,7 @@ void ft_initiative_remove(t_char *info)
 		i++;
 	}
 	close(fd);
-	ft_free_content(content);
+    ft_free_content(content);
 	return ;
 }
 
