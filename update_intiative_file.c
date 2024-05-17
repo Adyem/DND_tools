@@ -64,12 +64,12 @@ void ft_initiative_add(t_char *info)
 				&& initiative > info->initiative)
 		{
 			ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
-			dded = 1;
+			added = 1;
 		}
 		ft_printf_fd(fd, "%s", content[i]);
 		i++;
 	}
 	close(fd);
-	ft_free_content(content);
+    ft_free_content(content);
 	return ;
 }
