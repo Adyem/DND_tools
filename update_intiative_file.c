@@ -48,7 +48,6 @@ void ft_initiative_add(t_char *info)
 	if (!content)
 		return ;
 	i = 0;
-	added = 0;
 	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC,
 		S_IRUSR | S_IWUSR);
 	if (fd == -1)
@@ -57,6 +56,7 @@ void ft_initiative_add(t_char *info)
 		ft_free_content(content);
 		return ;
 	}
+    added = 0;
 	i = 0;
 	while (content[i])
 	{
