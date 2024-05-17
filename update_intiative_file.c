@@ -53,12 +53,6 @@ void ft_initiative_add(t_char *info)
 		S_IRUSR | S_IWUSR);
 	if (fd == -1)
 	{
-		if (!added && sscanf(content[i], "%*[^=]=%d", &initiative) == 1
-				&& info->initiative > initiative)
-		{
-			ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
-			added = 1;
-		}
 		ft_printf_fd(2, "270-Error opening file: %s\n", strerror(errno));
 		ft_free_content(content);
 		return ;
@@ -66,6 +60,12 @@ void ft_initiative_add(t_char *info)
 	i = 0;
 	while (content[i])
 	{
+		if (!added && sscanf(content[i], "%*[^=]=%d", &initiative) == 1
+				&& initiative > info->initiative)
+		{
+			ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
+			dded = 1;
+		}
 		ft_printf_fd(fd, "%s", content[i]);
 		i++;
 	}
