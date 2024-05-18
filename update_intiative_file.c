@@ -77,6 +77,8 @@ void ft_initiative_add(t_char *info)
 
 	if (DEBUG == 1)
 		ft_printf("readding initiative %s\n", info->name);
+	if (info->initiative <= 0)
+		return ;
 	content = ft_open_and_read("data/data--initiative");
 	if (!content)
 		return ;

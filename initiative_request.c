@@ -32,7 +32,7 @@ int	ft_request_initiative(t_pc *player)
 		}
 		initiative = ft_atoi(input);
 		free(input);
-		if (!(initiative >= 1 || initiative <= 50))
+		if (!(initiative >= 1 && initiative <= 50))
 		{
 			ft_printf_fd(2, "requesting a number between 1 and 50\n");
 			continue ;
