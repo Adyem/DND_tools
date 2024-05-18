@@ -6,8 +6,14 @@ static void	ft_add_player(t_pc *player)
 	char	*filename;
 
 	filename = ft_strjoin("data/PC--", player->name);
+	if (!filename)
+	{
+		ft_printf_fd(2, "240-Error allocating memory add player strjoin\n");
+		return ;
+	}
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
 		S_IRUSR | S_IWUSR);
+	free(filename);
 	if (fd == -1)
 	{
 		ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
@@ -22,11 +28,12 @@ void ft_player(char **input)
 {
 	t_pc *player;
 
+	player = NULL;
 	if (input[1] && input[2])
 	{
 		if (ft_strcmp_dnd(input[0], "add") == 0)
 		{
-			player = malloc(sizeof(player));
+			player = malloc(sizeof(t_pc));
 			if (!player)
 			{
 				ft_printf_fd(2, "Error allocating memory for player");
@@ -39,4 +46,6 @@ void ft_player(char **input)
 	}
 	else
 		ft_printf_fd(2, "Error with input: player");
+	free(player);
+	return ;
 }

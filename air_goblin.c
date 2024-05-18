@@ -91,6 +91,7 @@ t_char	*ft_air_goblin(int index, char **input, int exception)
 	free (temp);
 	if (!info->save_file)
 		return (NULL);
+	info->name = input[0];
 	ft_npc_change_stats(info, index, input);
 	free(info->save_file);
 	free(info);

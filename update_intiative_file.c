@@ -6,6 +6,8 @@ void ft_initiative_remove(t_char *info)
 	int		i;
 	int		fd;
 
+	if (DEBUG == 1)
+		ft_printf("removing initiative %s\n", info->name);
 	content = ft_open_and_read("data/data--initiative");
 	if (!content)
 		return ;
@@ -21,10 +23,26 @@ void ft_initiative_remove(t_char *info)
 	i = 0;
 	while (content[i])
 	{
+		if (DEBUG == 1)
+		{
+			ft_printf("checking entry: %s\n", content[i]);
+			ft_printf("comparing with: %s\n", info->name);
+			ft_printf("ft_strncmp result: %d\n", ft_strncmp(info->name,
+					content[i], ft_strlen(info->name)));
+			ft_printf("content length: %i\n", ft_strlen(content[i]));
+			ft_printf("name length: %i\n", ft_strlen(info->name));
+			if (ft_strlen(content[i]) > ft_strlen(info->name))
+				ft_printf("character after name: %c\n", content[i][ft_strlen(info->name)]);
+			ft_printf("value to check: %s\n", &content[i][ft_strlen(info->name) + 1]);
+		}
 		if ((ft_strncmp(info->name, content[i], ft_strlen(info->name)) == 0)
 				&& (ft_strlen(content[i]) > ft_strlen(info->name))
-				&& (content[i][ft_strlen(info->name) + 1] == '='))
+				&& (content[i][ft_strlen(info->name)] == '=')
+				&& (ft_check_value(&content[i][ft_strlen(info->name) + 1])))
 		{
+			if (DEBUG == 1)
+				ft_printf("found one %s and %c\n", content[i],
+					content[i][ft_strlen(info->name)]);
 			i++;
 			continue ;
 		}
@@ -58,6 +76,8 @@ void ft_initiative_add(t_char *info)
 	int		added;
 	int		initiative;
 
+	if (DEBUG == 1)
+		ft_printf("readding initiative %s\n", info->name);
 	content = ft_open_and_read("data/data--initiative");
 	if (!content)
 		return ;
