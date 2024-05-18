@@ -1,4 +1,5 @@
 #include "dnd_tools.h"
+#include <stdint.h>
 
 void ft_initiative_remove(t_char *info)
 {
@@ -31,8 +32,7 @@ void ft_initiative_remove(t_char *info)
 					content[i], ft_strlen(info->name)));
 			ft_printf("content length: %i\n", ft_strlen(content[i]));
 			ft_printf("name length: %i\n", ft_strlen(info->name));
-			if (ft_strlen(content[i]) > ft_strlen(info->name))
-				ft_printf("character after name: %c\n", content[i][ft_strlen(info->name)]);
+			ft_printf("character after name: %c\n", content[i][ft_strlen(info->name)]);
 			ft_printf("value to check: %s\n", &content[i][ft_strlen(info->name) + 1]);
 		}
 		if ((ft_strncmp(info->name, content[i], ft_strlen(info->name)) == 0)
@@ -74,7 +74,6 @@ void ft_initiative_add(t_char *info)
 	int		i;
 	int		fd;
 	int		added;
-	int		initiative;
 
 	if (DEBUG == 1)
 		ft_printf("readding initiative %s\n", info->name);
@@ -92,11 +91,9 @@ void ft_initiative_add(t_char *info)
 	}
     added = 0;
 	i = 0;
-	while (content[i])
+	while (content[i] && added == 0)
 	{
-		if (!added && (sscanf(content[i], "%*[^=]=%d", &initiative) == 1)
-				&& (initiative > info->initiative)
-                && (ft_initiative_check(info,  content) == 0))
+		if (ft_initiative_check(info, content) == 0)
 		{
 			ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
 			added = 1;
