@@ -1,3 +1,4 @@
---turn--maverick=5
-PC--adyem=5
-goblin_02=3
+maverick=20
+goblin_01=9
+goblin_02=6
+--turn--PC--adyem=5

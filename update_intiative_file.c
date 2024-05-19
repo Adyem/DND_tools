@@ -107,6 +107,8 @@ void ft_initiative_add(t_char *info)
 	i = 0;
 	while (content[i])
 	{
+		if (DEBUG == 1)
+			ft_printf("%s\n", content[i]);
 		if (!added && (ft_initiative_check(info, content) == 0))
 		{
 			ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);

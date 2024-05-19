@@ -37,6 +37,12 @@ void	ft_npc_change_stats(t_char *info, int index, char **input)
 	int	error;
 	int	i;
 
+	i = 0;
+	while (DEBUG == 1 && input[i])
+	{
+		ft_printf("%s\n", input[i]);
+		i++;
+	}
 	if (index == 2)
 	{
 		if (ft_strcmp_dnd(input[1], "init") == 0)

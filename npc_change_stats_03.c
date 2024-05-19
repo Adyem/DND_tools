@@ -23,18 +23,6 @@ static void	ft_npc_update_hp(t_char *info, char **input)
 
 void	ft_npc_set_stat(t_char *info, char **input)
 {
-		int	i;
-
-	i = 0;
-	if (DEBUG == 1)
-	{
-		while (input[i])
-		{
-			ft_printf("%s\n", input[i]);
-			i++;
-		}
-		ft_printf("npc_set_stat\n");
-	}
 	if (ft_strcmp_dnd(input[1], "hp") == 0)
 		ft_npc_update_hp(info, input);
 	else if (ft_strcmp_dnd(input[1], "bless") == 0)

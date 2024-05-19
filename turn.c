@@ -91,6 +91,7 @@ static int	ft_turn_run(t_pc *players, t_name *name)
 	t_pc	*pc_temp;
 	t_name	*n_temp;
 	char	*c_name;
+	char	*temp[2];
 	int		found;
 
 	pc_temp = players;
@@ -101,7 +102,7 @@ static int	ft_turn_run(t_pc *players, t_name *name)
 		{
 			found = 1;
 			c_name = ft_strtrim(pc_temp->name, "--turn--");
-			if (!name)
+			if (!c_name)
 			{
 				ft_printf_fd(2, "247-Error allocating memory strtrim\n");
 				return (1);
@@ -111,7 +112,9 @@ static int	ft_turn_run(t_pc *players, t_name *name)
 			{
 				if (ft_strcmp_dnd(n_temp->name, c_name) == 0)
 				{
-					n_temp->function(1, &c_name, 0);
+					temp[0] = c_name;
+					temp[1] = NULL;
+					n_temp->function(1, temp, 0);
 					found = 2;
 				}
 				n_temp = n_temp->next;
