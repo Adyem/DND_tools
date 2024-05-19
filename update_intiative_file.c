@@ -95,7 +95,6 @@ void ft_initiative_add(t_char *info)
 	content = ft_open_and_read("data/data--initiative");
 	if (!content)
 		return ;
-	i = 0;
 	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC,
 		S_IRUSR | S_IWUSR);
 	if (fd == -1)
@@ -106,9 +105,9 @@ void ft_initiative_add(t_char *info)
 	}
     added = 0;
 	i = 0;
-	while (content[i] && added == 0)
+	while (content[i])
 	{
-		if (ft_initiative_check(info, content) == 0)
+		if (!added && (ft_initiative_check(info, content) == 0))
 		{
 			ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
 			added = 1;
