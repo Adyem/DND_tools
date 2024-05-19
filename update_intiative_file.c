@@ -3,7 +3,9 @@
 
 void ft_initiative_remove(t_char *info)
 {
+	char	*temp;
 	char	**content;
+	int		turn_marker;
 	int		i;
 	int		fd;
 
@@ -22,8 +24,16 @@ void ft_initiative_remove(t_char *info)
 		return ;
 	}
 	i = 0;
+	turn_marker = 0;
 	while (content[i])
 	{
+		if (ft_strncmp(content[i], "--turn--", 8) == 0)
+		{
+			turn_marker = 1;
+			temp = &content[i][8];
+		}
+		else
+			temp = content[i];
 		if (DEBUG == 1)
 		{
 			ft_printf("checking entry: %s\n", content[i]);
@@ -35,16 +45,19 @@ void ft_initiative_remove(t_char *info)
 			ft_printf("character after name: %c\n", content[i][ft_strlen(info->name)]);
 			ft_printf("value to check: %s\n", &content[i][ft_strlen(info->name) + 1]);
 		}
-		if ((ft_strncmp(info->name, content[i], ft_strlen(info->name)) == 0)
-				&& (ft_strlen(content[i]) > ft_strlen(info->name))
-				&& (content[i][ft_strlen(info->name)] == '=')
-				&& (ft_check_value(&content[i][ft_strlen(info->name) + 1])))
+		if ((ft_strncmp(info->name, temp, ft_strlen(info->name)) == 0)
+				&& (ft_strlen(temp) > ft_strlen(info->name))
+				&& (temp[ft_strlen(info->name)] == '=')
+				&& (ft_check_value(&temp[ft_strlen(info->name) + 1])))
 		{
 			if (DEBUG == 1)
 				ft_printf("found one %s and %c\n", content[i],
 					content[i][ft_strlen(info->name)]);
 			i++;
+			if (turn_marker)
+				ft_printf_fd(fd, "--turn--");
 			continue ;
+
 		}
 		ft_printf_fd(fd, "%s", content[i]);
 		i++;
