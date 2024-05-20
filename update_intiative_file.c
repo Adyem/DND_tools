@@ -1,5 +1,4 @@
 #include "dnd_tools.h"
-#include <stdint.h>
 
 void ft_initiative_remove(t_char *info)
 {
@@ -34,17 +33,6 @@ void ft_initiative_remove(t_char *info)
 		}
 		else
 			temp = content[i];
-		if (DEBUG == 1)
-		{
-			ft_printf("checking entry: %s\n", content[i]);
-			ft_printf("comparing with: %s\n", info->name);
-			ft_printf("ft_strncmp result: %d\n", ft_strncmp(info->name,
-					content[i], ft_strlen(info->name)));
-			ft_printf("content length: %i\n", ft_strlen(content[i]));
-			ft_printf("name length: %i\n", ft_strlen(info->name));
-			ft_printf("character after name: %c\n", content[i][ft_strlen(info->name)]);
-			ft_printf("value to check: %s\n", &content[i][ft_strlen(info->name) + 1]);
-		}
 		if ((ft_strncmp(info->name, temp, ft_strlen(info->name)) == 0)
 				&& (ft_strlen(temp) > ft_strlen(info->name))
 				&& (temp[ft_strlen(info->name)] == '=')
@@ -69,7 +57,9 @@ void ft_initiative_remove(t_char *info)
 
 static int ft_initiative_check(t_char *info, char **content)
 {
-    int i;
+	char	*mark;
+    int		i;
+	int		initiative;
 
     i = 0;
     while (content[i])
@@ -77,16 +67,27 @@ static int ft_initiative_check(t_char *info, char **content)
         if (ft_strncmp(content[i], info->name, ft_strlen(info->name)))
             return (1);
         i++;
+		mark = ft_strchr(content[i], '=');
+		if (!mark)
+			return (2);
+		mark++;
+		if (ft_check_value(mark))
+			return (2);
+		initiative = ft_atoi(mark);
+		if (info->initiative < initiative)
+			return (0);
     }
     return (0);
 }
 
 void ft_initiative_add(t_char *info)
 {
+	char	*n_line;
 	char	**content;
 	int		i;
 	int		fd;
 	int		added;
+	int		error;
 
 	if (DEBUG == 1)
 		ft_printf("readding initiative %s\n", info->name);
@@ -107,14 +108,31 @@ void ft_initiative_add(t_char *info)
 	i = 0;
 	while (content[i])
 	{
+		n_line = ft_strchr(content[i], '\n');
+		if (!n_line)
+		{
+			close(fd);
+			ft_free_content(content);
+			ft_printf_fd(2, "Error data--initiative file is corrupted\n");
+			return ;
+		}
+		*n_line = '\0';
 		if (DEBUG == 1)
 			ft_printf("%s\n", content[i]);
-		if (!added && (ft_initiative_check(info, content) == 0))
+		error = ft_initiative_check(info, content);
+		if (!added && error == 0)
 		{
 			ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
 			added = 1;
 		}
-		ft_printf_fd(fd, "%s", content[i]);
+		if (error != 1 && error != 0)
+		{
+			close(fd);
+			ft_free_content(content);
+			ft_printf_fd(2, "Error data--initiative file is corrupted\n");
+			return ;
+		}
+		ft_printf_fd(fd, "%s\n", content[i]);
 		i++;
 	}
 	close(fd);
