@@ -70,7 +70,7 @@ void	ft_template_attack(t_char *info)
 	return ;
 }
 
-t_char	*ft_template(int index, char **input, int exception)
+t_char	*ft_template(int index, char **input, t_name *name, int exception)
 {
 	char	*temp;
 	t_char	*info;
@@ -79,6 +79,7 @@ t_char	*ft_template(int index, char **input, int exception)
 	if (!info)
 		return (NULL);
 	*info = TEMPLATE_INFO;
+	info->struct_name = name;
 	if (exception)
 		return (info);
 	temp = ft_strjoin(input[0], ".txt");

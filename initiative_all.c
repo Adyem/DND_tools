@@ -13,7 +13,7 @@ static t_char	*ft_check_name(t_name *name, char *file_name)
 	temp = name;
 	while (temp != NULL && !found)
 	{
-		info = temp->function(0, NULL, 1);
+		info = temp->function(0, NULL, name, 1);
 		found = 1;
 		temp = temp->next;
 	}

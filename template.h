@@ -2,10 +2,13 @@
 # define TEMPLATE_H
 //the guards above only capital letters
 
-#include "dnd_tools.h"
-#include "include.h"
 #include "character.h"
+#include "include.h"
+#include "dnd_tools.h"
 #include <stddef.h>
+
+typedef struct	s_name t_name;
+typedef struct	s_char t_char;
 
 //change Template, template, TEMPLATE to the name of the mob
 //functions that are used in the struct need to be defined here

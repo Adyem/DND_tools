@@ -2,10 +2,13 @@
 # define AIR_TOTEM_H
 //the guards above only capital letters
 
-#include "dnd_tools.h"
-#include "include.h"
 #include "character.h"
+#include "include.h"
+#include "dnd_tools.h"
 #include <stddef.h>
+
+typedef struct	s_name t_name;
+typedef struct	s_char t_char;
 
 //functions that are used in the struct need to be defined here
 void	ft_air_totem_turn(t_char *info);

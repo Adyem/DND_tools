@@ -73,7 +73,7 @@ void	ft_air_goblin_shaman_attack(t_char *info)
 	return ;
 }
 
-t_char	*ft_air_goblin_shaman(int index, char **input, int exception)
+t_char	*ft_air_goblin_shaman(int index, char **input, t_name *name, int exception)
 {
 	char	*temp;
 	t_char	*info;
@@ -82,6 +82,7 @@ t_char	*ft_air_goblin_shaman(int index, char **input, int exception)
 	if (!info)
 		return (NULL);
 	*info = AIR_GOBLIN_SHAMAN_INFO;
+	info->struct_name = name;
 	if (exception)
 		return (info);
 	temp = ft_strjoin(input[0], ".txt");

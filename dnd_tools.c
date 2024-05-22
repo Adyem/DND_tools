@@ -99,7 +99,7 @@ static void	ft_request_input(t_name *name)
 			{
 				if (i > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
 				{
-					temp->function(i, input, 0);
+					temp->function(i, input, name, 0);
 					found = 1;
 				}
 				temp = temp->next;

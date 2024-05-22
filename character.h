@@ -1,10 +1,23 @@
 #ifndef CHARACTER_H
 # define CHARACTER_H
 
-typedef struct s_char t_char;
+#include <stddef.h>
+#include "include.h"
+
+typedef struct	s_char t_char;
+typedef struct	s_name t_name;
 
 typedef void	(*c_action)(t_char *);
 typedef void	(*c_turn)(t_char *);
+
+typedef t_char	*(*c_name)(int, char **, t_name *, int);
+
+typedef struct s_name
+{
+	char	*name;
+	c_name	function;
+	t_name	*next;
+} t_name;
 
 typedef struct	s_stats
 {
@@ -181,6 +194,7 @@ typedef struct	s_char
 	t_savem			save_mod;
 	t_stats			stats;
 	t_stats			dstats;
+	t_name			*struct_name;
 } t_char;
 
 #endif

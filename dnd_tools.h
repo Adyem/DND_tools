@@ -1,7 +1,7 @@
 #ifndef DND_TOOLS_H
 #define DND_TOOLS_H
 
-# include "include.h"
+#include "include.h"
 
 #ifndef DEBUG
 # define DEBUG 0
@@ -10,16 +10,6 @@
 #define CRIT_SUCCES 999
 #define CRIT_FAIL -999
 
-typedef struct	s_name t_name;
-typedef t_char	*(*c_name)(int, char **, int);
-
-typedef struct s_name
-{
-	char	*name;
-	c_name	function;
-	t_name	*next;
-} t_name;
-
 //NPC
 void	ft_npc_change_stats(t_char *info, int index, char **input);
 void	ft_npc_set_stat(t_char *info, char **input);
@@ -27,57 +17,57 @@ int		ft_npc_open_file(t_char *info);
 void	ft_npc_init_stats(t_char *info);
 
 //Template
-t_char	*ft_template(int index, char **input, int exception);
+t_char	*ft_template(int index, char **input, t_name *name, int exception);
 void	ft_template_turn(t_char *info);
 void	ft_template_ranged_attack(t_char *info);
 void	ft_template_attack(t_char *info);
 
 //Maverick (BOSS)
-t_char	*ft_maverick(int index, char **input, int exception);
+t_char	*ft_maverick(int index, char **input, t_name *name, int exception);
 void	ft_maverick_turn(t_char *info);
 void	ft_maverick_attack(t_char *info);
 void	ft_maverick_print_f(int first, int second);
 void	ft_maverick_print_s(int first, int second);
 
 //Zephyr (BOSS)
-t_char	*ft_zephyr(int index, char **input, int exception);
+t_char	*ft_zephyr(int index, char **input, t_name *name, int exception);
 void	ft_zephyr_attack(t_char *info);
 void	ft_zephyr_ranged_attack(t_char *info);
 void	ft_zephyr_turn(t_char *info);
 void	ft_zephyr_spells(t_char *info);
 
 //Air Goblin (NPC)
-t_char	*ft_air_goblin(int index, char **input, int exception);
+t_char	*ft_air_goblin(int index, char **input, t_name *name, int exception);
 void	ft_air_goblin_attack(t_char *info);
 void	ft_air_goblin_ranged_attack(t_char *info);
 void	ft_air_goblin_turn(t_char *info);
 
 //Goblin (NPC)
-t_char	*ft_goblin(int index, char **input, int exception);
+t_char	*ft_goblin(int index, char **input, t_name *name, int exception);
 void	ft_goblin_attack(t_char *info);
 void	ft_goblin_ranged_attack(t_char *info);
 void	ft_goblin_turn(t_char *info);
 
 //Grizzletooth (BOSS)
-t_char	*ft_grizzletooth(int index, char **input, int exception);
+t_char	*ft_grizzletooth(int index, char **input, t_name *name, int exception);
 void	ft_grizzletooth_attack(t_char *info);
 void	ft_grizzletooth_ranged_attack(t_char *info);
 void	ft_grizzletooth_turn(t_char *info);
 
 //Goblin Shaman (NPC)
-t_char	*ft_goblin_shaman(int index, char **input, int exception);
+t_char	*ft_goblin_shaman(int index, char **input, t_name *name, int exception);
 void	ft_goblin_shaman_attack(t_char *info);
 void	ft_goblin_shaman_ranged_attack(t_char *info);
 void	ft_goblin_shaman_turn(t_char *info);
 
 //Air Goblin Shaman (NPC)
-t_char	*ft_air_goblin_shaman(int index, char **input, int exception);
+t_char	*ft_air_goblin_shaman(int index, char **input, t_name *name, int exception);
 void	ft_air_goblin_shaman_attack(t_char *info);
 void	ft_air_goblin_shaman_ranged_attack(t_char *info);
 void	ft_air_goblin_shaman_turn(t_char *info);
 
 //Air Totem (Totem)
-t_char	*ft_air_totem(int index, char **input, int exception);
+t_char	*ft_air_totem(int index, char **input, t_name *name, int exception);
 
 //Turn
 void	ft_turn_next(t_name *name);

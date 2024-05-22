@@ -114,7 +114,7 @@ static int	ft_turn_run(t_pc *players, t_name *name)
 				{
 					temp[0] = c_name;
 					temp[1] = NULL;
-					n_temp->function(1, temp, 0);
+					n_temp->function(1, temp, name, 0);
 					found = 2;
 				}
 				n_temp = n_temp->next;
