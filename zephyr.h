@@ -116,7 +116,7 @@ static const	t_lightning_strike ZEPHYR_LIGHTNING_STRIKE =
 
 static const	t_air_totem ZEPHYR_AIR_TOTEM =
 {
-	.save_file = "data/air_totem.txt",
+	.save_file = "data/air_totem",
 	.knock_back_distance = 20,
 	.erea_of_effect = 20,
 };
@@ -147,7 +147,7 @@ static const	t_char ZEPHYR_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
-	.save_file = "data/zephyr.txt",
+	.save_file = "data/zephyr",
 	.name = "zephyr",
 	.advantage = 0,
 	.turn = ft_zephyr_turn,

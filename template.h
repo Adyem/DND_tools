@@ -121,7 +121,7 @@ static const	t_lightning_strike TEMPLATE_LIGHTNING_STRIKE =
 
 static const	t_air_totem TEMPLATE_AIR_TOTEM =
 {
-	.save_file = "data/air_totem.txt",
+	.save_file = "data/air_totem",
 	.knock_back_distance = 0,
 	.erea_of_effect = 0,
 };
@@ -205,7 +205,7 @@ static const	t_char TEMPLATE_INFO =
 	.passive_perception = 15,
 	.initiative = -1,
 	.version_number = 2,
-	.save_file = "data/template.txt",
+	.save_file = "data/template",
 	.name = "template",
 	.advantage = 0,
 	.turn = ft_template_turn,

@@ -115,7 +115,7 @@ static const	t_lightning_strike MAVERICK_LIGHTNING_STRIKE =
 
 static const	t_air_totem MAVERICK_AIR_TOTEM =
 {
-	.save_file = "data/air_totem.txt",
+	.save_file = "data/air_totem",
 	.health = 0,
 	.ac = 0,
 	.knock_back_distance = 0,
@@ -148,7 +148,7 @@ static const	t_char MAVERICK_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
-	.save_file = "data/maverick.txt",
+	.save_file = "data/maverick",
 	.name = "maverick",
 	.advantage = 0,
 	.turn = ft_maverick_turn,

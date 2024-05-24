@@ -116,7 +116,7 @@ static const	t_lightning_strike GRIZZLETOOTH_LIGHTNING_STRIKE =
 
 static const	t_air_totem GRIZZLETOOTH_AIR_TOTEM =
 {
-	.save_file = "data/air_totem.txt",
+	.save_file = "data/air_totem",
 	.knock_back_distance = 0,
 	.erea_of_effect = 0,
 };
@@ -147,7 +147,7 @@ static const	t_char GRIZZLETOOTH_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
-	.save_file = "data/grizzletooth.txt",
+	.save_file = "data/grizzletooth",
 	.name = "grizzletooth",
 	.advantage = 0,
 	.turn = ft_grizzletooth_turn,

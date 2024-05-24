@@ -74,7 +74,6 @@ void	ft_goblin_attack(t_char *info)
 
 t_char	*ft_goblin(int index, char **input, t_name *name, int exception)
 {
-	char	*temp;
 	t_char	*info;
 
 	info = (t_char *)malloc(sizeof(t_char));
@@ -84,11 +83,7 @@ t_char	*ft_goblin(int index, char **input, t_name *name, int exception)
 	info->struct_name = name;
 	if (exception)
 		return (info);
-	temp = ft_strjoin(input[0], ".txt");
-	if (!temp)
-		return (NULL);
-	info->save_file = ft_strjoin("data/", temp);
-	free (temp);
+	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
 		return (NULL);
 	info->name = input[0];

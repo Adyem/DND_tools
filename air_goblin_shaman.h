@@ -116,7 +116,7 @@ static const	t_lightning_strike AIR_GOBLIN_SHAMAN_LIGHTNING_STRIKE =
 
 static const	t_air_totem AIR_GOBLIN_SHAMAN_AIR_TOTEM =
 {
-	.save_file = "data/air_totem.txt",
+	.save_file = "data/air_totem",
 	.knock_back_distance = 0,
 	.erea_of_effect = 0,
 };
@@ -147,7 +147,7 @@ static const	t_char AIR_GOBLIN_SHAMAN_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
-	.save_file = "data/air_goblin_shaman.txt",
+	.save_file = "data/air_goblin_shaman",
 	.name = "air_goblin_shaman",
 	.advantage = 0,
 	.turn = ft_air_goblin_shaman_turn,
