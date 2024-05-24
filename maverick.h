@@ -51,10 +51,10 @@ static const	t_savem MAVERICK_SAVE_MODS =
 {
     .str = 4,
     .dex = 4,
+	.inte = 0,
+	.wis = 0,
+	.cha = 0,
     .con = 0,
-    .inte = 0,
-    .wis = 0,
-    .cha = 0,
 };
 
 //possible modifiers for skills u can change these
@@ -155,8 +155,8 @@ static const	t_char MAVERICK_INFO =
 	.crit = MAVERICK_CRIT,
 	.bufs = MAVERICK_BUFFS,
 	.debufs = MAVERICK_DEBUFFS,
-	.attack_bonus = MAVERICK_ATTACK,
 	.f_attack = MAVERICK_F_ATTACK,
+	.attack_bonus = MAVERICK_ATTACK,
 	.skill_mod = MAVERICK_SKILL_MODS,
 	.save_mod = MAVERICK_SAVE_MODS,
 	.stats = MAVERICK_STATS,
