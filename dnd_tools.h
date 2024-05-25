@@ -123,6 +123,7 @@ void	ft_print_character_status(t_char *info, int number, int temp);
 void	ft_skill_throw(t_char *info, char *skill, int ability_mod, int save_mod);
 int		ft_set_stats(t_char *info, char **content);
 int		ft_check_stat(t_char *info, char *stat, int index);
+char	**ft_set_stats_strings(char ** content, int index, int ofset, char **data);
 
 //readline checks
 int		ft_read_line_confirm(char *mesage);
