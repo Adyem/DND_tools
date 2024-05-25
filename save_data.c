@@ -25,12 +25,13 @@ static void	ft_npc_write_file_targets(char **targets, int fd)
 	int	i;
 
 	i = 0;
-	ft_printf_fd(fd, "CONC_TARGETS=");
 	if (targets)
 	{
 		while (targets[i])
-			ft_printf_fd(fd, "%s ", targets[i]);
-		ft_printf_fd(fd, "\n");
+		{
+			ft_printf_fd(fd, "CONC_TARGETS=%s\n", targets[i]);
+			i++;
+		}
 	}
 }
 
