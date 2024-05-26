@@ -124,6 +124,7 @@ void	ft_skill_throw(t_char *info, char *skill, int ability_mod, int save_mod);
 int		ft_set_stats(t_char *info, char **content);
 int		ft_check_stat(t_char *info, char *stat, int index);
 char	**ft_set_stats_con_targets(char *content, int ofset, char **data);
+int		ft_set_stats_check_name(char *name);
 
 //readline checks
 int		ft_read_line_confirm(char *mesage);
@@ -146,6 +147,9 @@ void	ft_free_memory_name(t_name *name, int exit_failure);
 
 //attacking
 void	ft_npc_check_ac(t_char *info, char **input);
+
+//casting
+void	ft_cast_hunters_mark(t_char *info, char **input);
 
 //save file
 int		ft_npc_check_info(t_char *info);

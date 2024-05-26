@@ -77,7 +77,9 @@ SRC			= name.c \
 			  print_hp_status.c \
 			  turn.c \
 			  update_intiative_file.c \
-			  npc_set_stats_string.c
+			  npc_set_stats_string.c \
+			  check_name.c \
+			  npĉ_cast_concentration.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g
