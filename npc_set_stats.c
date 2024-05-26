@@ -105,8 +105,22 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 	return(r_value);
 }
 
+static int	ft_set_stats_string(t_char *info, char **content, int i)
+{
+	if (ft_strncmp(content[i], "CONC_TARGETS=", 13) == 0)
+    {
+        info->concentration.targets = ft_set_stats_con_targets(content[i],
+				13, info->concentration.targets);
+        if (!info->concentration.targets)
+            return (-1);
+		return (0);
+    }
+    return (1);
+}
+
 int	ft_set_stats(t_char *info, char **content)
 {
+	int	error;
 	int	i;
 
 	i = 0;
@@ -121,6 +135,16 @@ int	ft_set_stats(t_char *info, char **content)
 		{
 			i++;
 			continue ;
+		}
+		if  (info->version_number >= 2 && (error = ft_set_stats_string(info, content, i)))
+		{
+			if (error > 0)
+			{
+				i++;
+				continue ;
+			}
+			else if (error < 0)
+				return (1);
 		}
 		else
 		{
