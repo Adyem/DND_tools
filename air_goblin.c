@@ -84,7 +84,7 @@ t_char	*ft_air_goblin(int index, char **input, t_name *name, int exception)
 	info->struct_name = name;
 	if (exception)
 		return (info);
-	info->save_file = ft_strjoin("data/", input[1]);
+	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
 		return (NULL);
 	info->name = input[0];
