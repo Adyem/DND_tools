@@ -148,6 +148,7 @@ static const	t_char AIR_TOTEM_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
+	.free_save = 0,
 	.save_file = "data/air_totem",
 	.name = "air_totem",
 	.advantage = 0,

@@ -147,6 +147,7 @@ static const	t_char GRIZZLETOOTH_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
+	.free_save = 0,
 	.save_file = "data/grizzletooth",
 	.name = "grizzletooth",
 	.advantage = 0,

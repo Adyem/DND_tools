@@ -60,6 +60,6 @@ t_char	*ft_maverick(int index, char **input, t_name *name, int exception)
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);
-	free(info);
+	ft_free_info(info);
 	return (NULL);
 }

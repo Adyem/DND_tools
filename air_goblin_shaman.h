@@ -147,6 +147,7 @@ static const	t_char AIR_GOBLIN_SHAMAN_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
+	.free_save = 1,
 	.save_file = "data/air_goblin_shaman",
 	.name = "air_goblin_shaman",
 	.advantage = 0,

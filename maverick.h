@@ -148,6 +148,7 @@ static const	t_char MAVERICK_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
+	.free_save = 0,
 	.save_file = "data/maverick",
 	.name = "maverick",
 	.advantage = 0,

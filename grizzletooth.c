@@ -83,11 +83,7 @@ t_char	*ft_grizzletooth(int index, char **input, t_name *name, int exception)
 	info->struct_name = name;
 	if (exception)
 		return (info);
-	info->save_file = ft_strjoin("data/", input[0]);
-	if (!info->save_file)
-		return (NULL);
 	ft_npc_change_stats(info, index, input);
-	free(info->save_file);
-	free(info);
+	ft_free_info(info);
 	return (NULL);
 }

@@ -88,7 +88,6 @@ t_char	*ft_goblin(int index, char **input, t_name *name, int exception)
 		return (NULL);
 	info->name = input[0];
 	ft_npc_change_stats(info, index, input);
-	free(info->save_file);
-	free(info);
+	ft_free_info(info);
 	return (NULL);
 }

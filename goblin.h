@@ -147,6 +147,7 @@ static const	t_char GOBLIN_INFO =
 {
 	.initiative = -1,
 	.version_number = 1,
+	.free_save = 1,
 	.save_file = "data/goblin",
 	.name = "goblin",
 	.advantage = 0,

@@ -205,6 +205,7 @@ static const	t_char TEMPLATE_INFO =
 	.passive_perception = 15,
 	.initiative = -1,
 	.version_number = 2,
+	.free_save = 1,
 	.save_file = "data/template",
 	.name = "template",
 	.advantage = 0,

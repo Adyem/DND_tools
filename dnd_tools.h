@@ -137,6 +137,7 @@ int		ft_dice_roll(int number, int faces);
 void	ft_free_content(char **content);
 void	ft_free_pc(t_pc *player);
 int 	ft_free_players(t_pc *players);
+void	ft_free_info(t_char *info);
 
 //debug
 void	ft_print_content(char **content);
