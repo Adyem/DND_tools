@@ -26,7 +26,7 @@ void	ft_initiative_print(void)
 		ft_printf("%s", content[i]);
 		i++;
 	}
-	ft_free_content(content);
+	ft_free_double_char(content);
 	return ;
 }
 

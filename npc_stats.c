@@ -26,7 +26,7 @@ int	ft_npc_open_file(t_char *info)
 	if (error)
 		return (error);
 	error = ft_npc_check_info(info);
-	ft_free_content(content);
+	ft_free_double_char(content);
 	if (error)
 		error = 1;
 	return (error);

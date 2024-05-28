@@ -105,6 +105,6 @@ void	ft_initiative_sort(int fd)
 	players = ft_initiative_players_am(content);
 	if (players)
 		ft_initiative_free_pc(players);
-	ft_free_content(content);
+	ft_free_double_char(content);
 	return ;
 }

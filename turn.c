@@ -145,7 +145,7 @@ void	ft_turn_next(t_name *name)
 	if (!content)
 		return ;
 	players = ft_initiative_players_am(content);
-	ft_free_content(content);
+	ft_free_double_char(content);
 	if (!players)
 		return ;
 	if (ft_turn_check_marker(players) != 1)

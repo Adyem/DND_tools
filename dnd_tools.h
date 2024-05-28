@@ -134,7 +134,7 @@ int		ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int sav
 int		ft_dice_roll(int number, int faces);
 
 //free memory
-void	ft_free_content(char **content);
+void	ft_free_double_char(char **content);
 void	ft_free_pc(t_pc *player);
 int 	ft_free_players(t_pc *players);
 void	ft_free_info(t_char *info);

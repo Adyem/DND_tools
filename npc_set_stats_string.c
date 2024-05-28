@@ -15,7 +15,7 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		data[0] = (char *)malloc((ft_strlen(content) + 1) * sizeof(char));
 		if (!data[0])
 		{
-			ft_free_content(data);
+			ft_free_double_char(data);
 			return (NULL);
 		}
 		data[0] = ft_strdup(&content[ofset]);
@@ -29,7 +29,7 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		temp = (char **)malloc((i + 2) * sizeof(char *));
 		if (!temp)
 		{
-			ft_free_content(data);
+			ft_free_double_char(data);
 			return (NULL);
 		}
 		i = 0;
@@ -43,7 +43,7 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		data[i] = ft_strdup(&content[ofset]);
 		if (!data[i])
 		{
-			ft_free_content(data);
+			ft_free_double_char(data);
 			return (NULL);
 		}
 		data[i + 1] = NULL;

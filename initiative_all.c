@@ -56,7 +56,7 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	ft_roll_initiative(info);
 	info->name = file_name - 5;
 	free(info->save_file);
-	ft_free_content(content);
+	ft_free_double_char(content);
 	return (info);
 }
 
@@ -83,7 +83,7 @@ static t_pc	*ft_read_pc_file(int fd, char *filename, char *filepath)
 		return (ft_initiative_pc_error("252 Error allocating memory"));
 	}
 	error = ft_check_stat_pc(player, content, filename);
-	ft_free_content(content);
+	ft_free_double_char(content);
 	if (error)
 	{
 		ft_free_pc(player);

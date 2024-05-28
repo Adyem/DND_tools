@@ -91,7 +91,7 @@ void	ft_initiative_sort(int fd)
 	if (!content)
 		return ;
 	players = ft_initiative_players_am(content);
-	ft_free_content(content);
+	ft_free_double_char(content);
 	if (!players)
 		return ;
 	ft_initiative_sort_2(players);

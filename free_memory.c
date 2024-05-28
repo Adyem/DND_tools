@@ -21,7 +21,7 @@ void	ft_free_pc(t_pc *player)
 	free(player);
 }
 
-void	ft_free_content(char **content)
+void	ft_free_double_char(char **content)
 {
 	int	i;
 

@@ -86,7 +86,7 @@ t_char	*ft_template(int index, char **input, t_name *name, int exception)
 		return (NULL);
 	ft_npc_change_stats(info, index, input);
 	if (info->version_number >= 2)
-		ft_free_content(info->concentration.targets);
+		ft_free_double_char(info->concentration.targets);
 	ft_free_info(info);
 	return (NULL);
 }
