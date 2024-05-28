@@ -17,10 +17,12 @@ int ft_set_stats_check_name(char *name)
     struct dirent* entry;
 	char filename[256];
 
+	if (!name)
+		return (-1);
     if ((dir = opendir(DATA_FOLDER)) == NULL)
 	{
-        perror("opendir");
-        return -1;
+		ft_printf_fd(2, "295-Error Opendir has failed: %s", strerror(errno));
+        return (-1);
     }
     while ((entry = readdir(dir)) != NULL)
 	{
@@ -32,9 +34,9 @@ int ft_set_stats_check_name(char *name)
         if (ft_strcmp_dnd(filename, name) == 0)
 		{
             closedir(dir);
-            return 0;
+            return (0);
 		}
     }
     closedir(dir);
-    return 1;
+    return (1);
 }
