@@ -18,7 +18,7 @@ void ft_initiative_remove(t_char *info)
 		S_IRUSR | S_IWUSR);
 	if (fd == -1)
 	{
-		ft_printf_fd(2, "270-Error opening file: %s\n", strerror(errno));
+		ft_printf_fd(2, "269-Error opening file: %s\n", strerror(errno));
 		ft_free_double_char(content);
 		return ;
 	}

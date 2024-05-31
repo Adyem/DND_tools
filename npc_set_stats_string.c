@@ -6,17 +6,17 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 	int		i;
 
 	if (ft_set_stats_check_name(content))
-			return (NULL);
+			return (ft_printf_fd(2, "292-Error Target does not exist\n"), NULL);
 	if (!data)
 	{
 		data = (char **)malloc(sizeof(char *) * 2);
 		if (!data)
-			return (NULL);
+			return (ft_printf_fd(2, "293-Error allocating memory\n"), NULL);
 		data[0] = (char *)malloc((ft_strlen(content) + 1) * sizeof(char));
 		if (!data[0])
 		{
 			ft_free_double_char(data);
-			return (NULL);
+			return (ft_printf_fd(2, "294-Error allocating memory\n"), NULL);
 		}
 		data[0] = ft_strdup(&content[ofset]);
 		data[1] = NULL;
@@ -30,7 +30,7 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		if (!temp)
 		{
 			ft_free_double_char(data);
-			return (NULL);
+			return (ft_printf_fd(2, "295-Error allocating memory\n"), NULL);
 		}
 		i = 0;
 		while (data[i])
@@ -44,7 +44,7 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		if (!data[i])
 		{
 			ft_free_double_char(data);
-			return (NULL);
+			return (ft_printf_fd(2, "296-Error allocating memory\n"), NULL);
 		}
 		data[i + 1] = NULL;
 	}

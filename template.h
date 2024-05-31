@@ -53,10 +53,10 @@ static const	t_savem TEMPLATE_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
-    .con = 0,
-    .inte = 0,
-    .wis = 0,
+	.inte = 0,
+	.wis = 0, 
     .cha = 0,
+	.con = 0,
 };
 
 //possible modifiers for skills u can change these
@@ -158,11 +158,11 @@ static const	t_crit_mod TEMPLATE_CRIT =
 
 static const	t_concentration TEMPLATE_CONCENTRATION =
 {
+	.concentration = 0,
 	.spell_id = 0,
 	.dice_amount_mod = 0,
 	.dice_faces_mod = 0,
 	.base_mod = 0,
-	.concentration = 0,
 	.targets = NULL,
 };
 
