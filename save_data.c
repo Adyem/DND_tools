@@ -56,6 +56,7 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_printf_fd(fd, "CONC_DICE_AMOUNT=%i\n", info->concentration.dice_amount_mod);
 	ft_printf_fd(fd, "CONC_DICE_FACES=%i\n", info->concentration.dice_faces_mod);
 	ft_printf_fd(fd, "CONC_BASE_MOD=%i\n", info->concentration.base_mod);
+	ft_printf_fd(fd, "CONC_DURATION=%i\n", info->concentration.duration);
 	ft_npc_write_file_targets(info->concentration.targets, fd);
 	return ;
 }

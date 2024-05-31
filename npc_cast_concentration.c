@@ -42,6 +42,7 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 	info->concentration.spell_id = HUNTERS_MARK_ID;
 	info->concentration.dice_faces_mod = 6;
 	info->concentration.dice_amount_mod = 1;
+	info->concentration.duration = 50;
 	fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR);
 	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);

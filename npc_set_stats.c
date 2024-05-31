@@ -100,6 +100,9 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 	else if (ft_strncmp(content[i], "CONC_BASE_MOD=", 14) == 0 &&
 			info->concentration.base_mod == 0)
 		info->concentration.base_mod = ft_check_stat(info, content[i], 14);
+	else if (ft_strncmp(content[i], "CONC_DURATION=", 14) == 0 &&
+             info->concentration.duration == 0)
+        info->concentration.duration = ft_check_stat(info, content[i], 14);
 	else
 		r_value = 1;
 	return(r_value);

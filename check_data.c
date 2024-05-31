@@ -34,6 +34,18 @@ int	ft_npc_check_info_2(t_char *info)
 		error += ft_printf_fd(2, "%s slashing resistance value not found\n", info->name);
 	if (info->c_resistance.thunder < -500 || info->c_resistance.thunder > 500)
 		error += ft_printf_fd(2, "%s thunder resistance value not found\n", info->name);
+	if (info->concentration.concentration < 0)
+        error += ft_printf_fd(2, "%s concentration value is negative\n", info->name);
+    if (info->concentration.spell_id < 0)
+        error += ft_printf_fd(2, "%s spell_id value is negative\n", info->name);
+    if (info->concentration.dice_amount_mod < 0)
+        error += ft_printf_fd(2, "%s dice_amount_mod value is negative\n", info->name);
+    if (info->concentration.dice_faces_mod < 0)
+        error += ft_printf_fd(2, "%s dice_faces_mod value is negative\n", info->name);
+    if (info->concentration.base_mod < 0)
+        error += ft_printf_fd(2, "%s base_mod value is negative\n", info->name);
+    if (info->concentration.duration < 0)
+        error += ft_printf_fd(2, "%s duration value is negative\n", info->name);
 	return (error);
 }
 

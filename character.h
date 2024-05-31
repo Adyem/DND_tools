@@ -153,6 +153,7 @@ typedef struct	s_concentration
 	int		dice_amount_mod;
 	int		dice_faces_mod;
 	int		base_mod;
+	int		duration;
 	char	**targets;
 } t_concentration;
 

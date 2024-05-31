@@ -163,6 +163,7 @@ static const	t_concentration TEMPLATE_CONCENTRATION =
 	.dice_amount_mod = 0,
 	.dice_faces_mod = 0,
 	.base_mod = 0,
+	.duration = 0,
 	.targets = NULL,
 };
 
