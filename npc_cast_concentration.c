@@ -4,6 +4,7 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 {
 	char	**temp;
 	int		i;
+	int		fd;
 	t_char	*target;
 
 	temp = NULL;
@@ -34,4 +35,15 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 			return ;
 		}
 	}
+	info->concentration.targets = (char **)ft_calloc((1 + 1), sizeof(char *));
+	if (!info->concentration.targets)
+		return (ft_printf_fd(2, "299-Error allocating memory targets\n"), (void)0);
+	info->concentration.concentration = 1;
+	info->concentration.spell_id = HUNTERS_MARK_ID;
+	info->concentration.dice_faces_mod = 6;
+	info->concentration.dice_amount_mod = 1;
+	fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR);
+	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
+	return ;
 }
