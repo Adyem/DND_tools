@@ -44,7 +44,7 @@ int	ft_npc_check_info_2(t_char *info)
         error += ft_printf_fd(2, "%s dice_faces_mod value is negative\n", info->name);
     if (info->concentration.base_mod < 0)
         error += ft_printf_fd(2, "%s base_mod value is negative\n", info->name);
-    if (info->concentration.duration < 0)
+    if (info->concentration.duration < -1)
         error += ft_printf_fd(2, "%s duration value is negative\n", info->name);
 	return (error);
 }
