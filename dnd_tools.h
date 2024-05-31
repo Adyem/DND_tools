@@ -126,6 +126,7 @@ int		ft_check_stat(t_char *info, char *stat, int index);
 char	**ft_set_stats_con_targets(char *content, int ofset, char **data);
 int		ft_set_stats_check_name(char *name);
 t_char	*ft_get_info(char *tf_name, t_name *name);
+char	**ft_resize_double_char(char **double_string, char *string, int size);
 
 //readline checks
 int		ft_read_line_confirm(char *mesage);

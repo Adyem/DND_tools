@@ -81,7 +81,8 @@ SRC			= name.c \
 			  check_name.c \
 			  npc_cast_concentration.c \
 			  free_info.c \
-			  get_character_info.c
+			  get_character_info.c \
+			  resize_double_char.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g
