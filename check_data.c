@@ -7,11 +7,8 @@ int	ft_npc_check_info_2(t_char *info)
 	error = 0;
 	if (info->version_number < 2)
 		return (0);
-	if (info->c_resistance.acid < -500 || info->c_resistance.acid > 500)
-		error += ft_printf_fd(2, "%s acid resistance value not found\n", info->name);
 	if (info->c_resistance.bludgeoning < -500 || info->c_resistance.bludgeoning > 500)
-		error += ft_printf_fd(2, "%s bludgeoning resistance value not found\n",
-				info->name);
+		error += ft_printf_fd(2, "%s bludgeoning resistance value not found\n", info->name);
 	if (info->c_resistance.cold < -500 || info->c_resistance.cold > 500)
 		error += ft_printf_fd(2, "%s cold resistance value not found\n", info->name);
 	if (info->c_resistance.fire < -500 || info->c_resistance.fire > 500)
@@ -45,7 +42,9 @@ int	ft_npc_check_info_2(t_char *info)
     if (info->concentration.base_mod < 0)
         error += ft_printf_fd(2, "%s base_mod value is negative\n", info->name);
     if (info->concentration.duration < -1)
-        error += ft_printf_fd(2, "%s duration value is negative\n", info->name);
+		error += ft_printf_fd(2, "%s duration value is negative\n", info->name);
+	if (info->c_resistance.acid < -500 || info->c_resistance.acid > 500)
+		error += ft_printf_fd(2, "%s acid resistance value not found\n", info->name);
 	return (error);
 }
 

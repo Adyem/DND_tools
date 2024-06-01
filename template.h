@@ -136,7 +136,6 @@ static const	t_bufs TEMPLATE_BUFFS =
 static const	t_hunters_mark TEMPLATE_HUNTERS_MARK =
 {
 	.amount = 0,
-	.duration = 0,
 	.caster_name = NULL,
 };
 

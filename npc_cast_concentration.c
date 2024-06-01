@@ -10,6 +10,7 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 	temp = NULL;
 	if (ft_set_stats_check_name(input[2]))
 		return (ft_printf_fd(2, "Error target does not exist"), (void)0);
+	ft_remove_concentration(info);
 	target = ft_get_info(input[2], info->struct_name);
 	if (!target)
 		return (ft_printf_fd(2, "295-Error getting info %s\n", input[2]), (void)0);
@@ -35,9 +36,17 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 			return ;
 		}
 	}
-	info->concentration.targets = (char **)ft_calloc((1 + 1), sizeof(char *));
-	if (!info->concentration.targets)
+	temp = (char **)ft_calloc((1 + 1), sizeof(char *));
+	if (!temp)
 		return (ft_printf_fd(2, "299-Error allocating memory targets\n"), (void)0);
+	ft_remove_concentration(info);
+	info->concentration.targets = temp;
+	i = 0;
+	while(input[2][i])
+	{
+		info->concentration.targets[0][i] = input[2][i];
+		i++;
+	}
 	info->concentration.concentration = 1;
 	info->concentration.spell_id = HUNTERS_MARK_ID;
 	info->concentration.dice_faces_mod = 6;

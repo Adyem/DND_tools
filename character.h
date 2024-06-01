@@ -121,7 +121,6 @@ typedef struct	s_bufs
 typedef struct	s_hunters_mark
 {
 	int		amount;
-	int		*duration;
 	char	**caster_name;
 } t_hunters_mark;
 
