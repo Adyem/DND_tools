@@ -24,6 +24,8 @@ int	ft_remove_concentration(t_char *info)
 			return (ft_printf_fd(2, "301-Error opening %s: %s\n",
 					info->save_file, strerror(errno)));
 		ft_npc_write_file(target, &target->stats, &info->c_resistance, fd);
+		close(fd);
+		break ;
 	}
 	info->concentration.concentration = 0;
 	info->concentration.spell_id = 0;

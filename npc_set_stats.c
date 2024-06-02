@@ -103,6 +103,9 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 	else if (ft_strncmp(content[i], "CONC_DURATION=", 14) == 0 &&
              info->concentration.duration == 0)
         info->concentration.duration = ft_check_stat(info, content[i], 14);
+	else if (ft_strncmp(content[i], "HUNTERS_MARK_AMOUNT=", 20) == 0 &&
+            info->debufs.hunters_mark.amount == 0)
+        info->debufs.hunters_mark.amount = ft_check_stat(info, content[i], 20);
 	else
 		r_value = 1;
 	return(r_value);
@@ -115,6 +118,14 @@ static int	ft_set_stats_string(t_char *info, char **content, int i)
         info->concentration.targets = ft_set_stats_con_targets(content[i],
 				13, info->concentration.targets);
         if (!info->concentration.targets)
+            return (-1);
+		return (0);
+    }
+	else if (ft_strncmp(content[i], "HUNTERS_MARK_CASTER=", 20) == 0)
+    {
+        info->debufs.hunters_mark.caster_name = ft_set_stats_con_targets(content[i],
+				20, info->debufs.hunters_mark.caster_name);
+        if (!info->debufs.hunters_mark.caster_name)
             return (-1);
 		return (0);
     }

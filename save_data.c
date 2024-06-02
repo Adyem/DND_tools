@@ -20,7 +20,7 @@ static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 	return ;
 }
 
-static void	ft_npc_write_file_targets(char *msg, char **targets, int fd)
+static void	ft_npc_write_file_double_char(char *msg, char **targets, int fd)
 {
 	int	i;
 
@@ -57,7 +57,10 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_printf_fd(fd, "CONC_DICE_FACES=%i\n", info->concentration.dice_faces_mod);
 	ft_printf_fd(fd, "CONC_BASE_MOD=%i\n", info->concentration.base_mod);
 	ft_printf_fd(fd, "CONC_DURATION=%i\n", info->concentration.duration);
-	ft_npc_write_file_targets("CONC_TARGETS=", info->concentration.targets, fd);
+	ft_npc_write_file_double_char("CONC_TARGETS=", info->concentration.targets, fd);
+	ft_printf_fd(fd, "HUNTERS_MARK_AMOUNT=%i\n", info->debufs.hunters_mark.amount);
+	ft_npc_write_file_double_char("HUNTERS_MARK_CASTER=", info->debufs.hunters_mark.caster_name, fd);
+
 	return ;
 }
 

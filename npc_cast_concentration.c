@@ -1,5 +1,29 @@
 #include "dnd_tools.h"
 
+static void	ft_cast_hm_second_appli(t_char *info, t_char *target, char **input)
+{
+	char	**temp;
+	int		i;
+
+	temp = ft_resize_double_char(target->debufs.hunters_mark.caster_name, input[2], 1);
+	if (temp)
+	{
+		i = 0;
+		while (target->debufs.hunters_mark.caster_name[i])
+		{
+			free(target->debufs.hunters_mark.caster_name[i]);
+			i++;
+		}
+		free(target->debufs.hunters_mark.caster_name);
+		target->debufs.hunters_mark.caster_name = temp;
+	}
+	else
+	{
+		ft_printf_fd(2, "297-Error allocating memory target\n");
+		return ;
+	}
+}
+
 void	ft_cast_hunters_mark(t_char *info, char **input)
 {
 	char	**temp;
@@ -7,7 +31,6 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 	int		fd;
 	t_char	*target;
 
-	temp = NULL;
 	if (ft_set_stats_check_name(input[2]))
 		return (ft_printf_fd(2, "Error target does not exist"), (void)0);
 	ft_remove_concentration(info);
@@ -17,25 +40,7 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 	if (!target->debufs.hunters_mark.caster_name)
 		target->debufs.hunters_mark.caster_name = (char **)malloc(2 * sizeof(char *));
 	else
-	{
-		temp = ft_resize_double_char(target->debufs.hunters_mark.caster_name, input[2], 1);
-		if (temp)
-		{
-			i = 0;
-			while (target->debufs.hunters_mark.caster_name[i])
-			{
-				free(target->debufs.hunters_mark.caster_name[i]);
-				i++;
-			}
-			free(target->debufs.hunters_mark.caster_name);
-			target->debufs.hunters_mark.caster_name = temp;
-		}
-		else
-		{
-			ft_printf_fd(2, "297-Error allocating memory target\n");
-			return ;
-		}
-	}
+		ft_cast_hm_second_appli(info, target, input);
 	temp = (char **)ft_calloc((1 + 1), sizeof(char *));
 	if (!temp)
 		return (ft_printf_fd(2, "299-Error allocating memory targets\n"), (void)0);
