@@ -54,6 +54,7 @@ int	ft_request_damage(t_char *info)
 	int		resistance;
 	
 	fail = 0;
+	input = NULL;
 	while ((line = readline("How much damage was dealt: ")))
 	{
 		if (!line)

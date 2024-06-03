@@ -94,6 +94,7 @@ static int	ft_turn_run(t_pc *players, t_name *name)
 	char	*temp[2];
 	int		found;
 
+	c_name = NULL;
 	pc_temp = players;
 	found = 0;
 	while(pc_temp && found == 0)

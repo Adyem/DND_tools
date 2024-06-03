@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-static void	ft_cast_hm_second_appli(t_char *info, t_char *target, char **input)
+static void	ft_cast_hm_second_appli(t_char *target, char **input)
 {
 	char	**temp;
 	int		i;
@@ -40,7 +40,7 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 	if (!target->debufs.hunters_mark.caster_name)
 		target->debufs.hunters_mark.caster_name = (char **)malloc(2 * sizeof(char *));
 	else
-		ft_cast_hm_second_appli(info, target, input);
+		ft_cast_hm_second_appli(target, input);
 	temp = (char **)ft_calloc((1 + 1), sizeof(char *));
 	if (!temp)
 		return (ft_printf_fd(2, "299-Error allocating memory targets\n"), (void)0);

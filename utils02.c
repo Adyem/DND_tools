@@ -45,3 +45,15 @@ void	ft_reroll(t_char *info, int *result)
 	}
 	return ;
 }
+
+int	ft_double_char_length(char **double_char)
+{
+	int	i;
+
+	if (!double_char)
+		return(0);
+	i = 0;
+	while (double_char[i])
+		i++;
+	return (i);
+}

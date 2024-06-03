@@ -81,6 +81,9 @@ int	ft_npc_check_info(t_char *info)
 		error += ft_printf_fd(2, "%s initiative value outside of bounds\n", info->name);
 	if (info->bufs.lightning_strike.duration <  0)
 		error += ft_printf_fd(2, "%s lightning strike duration outside of bounds\n", info->name);
+	if (info->debufs.hunters_mark.amount < 0 || info->debufs.hunters_mark.amount !=
+			ft_double_char_length(info->debufs.hunters_mark.caster_name))
+		error += ft_printf_fd(2, "%s hunters mark data is not correct\n", info->name);
 	if (info->bufs.protective_winds.duration < 0)
 		error += ft_printf_fd(2, "%s protective winds duration outside of bounds\n", info->name);
 	error += ft_npc_check_info_2(info);

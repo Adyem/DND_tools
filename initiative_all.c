@@ -54,7 +54,7 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	ft_initialize_info(info, content);
 	info->name = file_name + 5;
 	ft_roll_initiative(info);
-	info->name = file_name - 5;
+	info->name = file_name;
 	free(info->save_file);
 	ft_free_double_char(content);
 	return (info);

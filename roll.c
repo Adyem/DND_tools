@@ -6,6 +6,7 @@ static void	ft_command_roll_parse(char *string, int nested)
 	int	i;
 	int	j;
 
+	j = 0;
 	i = 0;
 	while (string[i] != '(' && string[i])
 		i++;

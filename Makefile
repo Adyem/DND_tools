@@ -85,7 +85,7 @@ SRC			= name.c \
 			  resize_double_char.c
 
 CC          = gcc
-CFLAGS      = -Wall -Werror -Wextra -g
+CFLAGS      = -Wall -Werror -Wextra -g -O0
 
 LIBFT_DIR   = ./libft
 LIBFT       = $(LIBFT_DIR)/libftprintf.a
