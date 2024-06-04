@@ -57,8 +57,6 @@ int	ft_request_damage(t_char *info)
 	input = NULL;
 	while ((line = readline("How much damage was dealt: ")))
 	{
-		if (!line)
-			return (1);
 		if (ft_strcmp_dnd(line, "exit") == 0)
 		{
 			ft_deal_damage(info, NULL, NULL, 0, 2);
@@ -96,6 +94,9 @@ int	ft_request_damage(t_char *info)
 		else
 		{
 			resistance = ft_get_resistance(info, input[1]);
+			if (resistance == -9999)
+				return (ft_printf_fd(2, "158-Error getting Resistance %s\n",
+					info->name), 1);
 			ft_deal_damage(info, input[0], input[1], resistance, 0);
 		}
 	}

@@ -105,6 +105,7 @@ int		ft_check_bless(t_char *info);
 //concentration
 void	ft_check_concentration(t_char *info, int  damage);
 int		ft_remove_concentration(t_char *info);
+void	ft_concentration_remove_hunters_mark(t_char *info, t_char *target);
 
 //resistance
 int		ft_get_resistance(t_char *info, char *type);

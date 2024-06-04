@@ -1,5 +1,12 @@
 #include "dnd_tools.h"
 
+static void	ft_concentration_remove_buf(t_char *info, t_char *target)
+{
+	if (info->concentration.spell_id == HUNTERS_MARK_ID)
+		ft_concentration_remove_hunters_mark(info, target);
+	return ;
+}
+
 int	ft_remove_concentration(t_char *info)
 {
 	int		i;
@@ -18,6 +25,7 @@ int	ft_remove_concentration(t_char *info)
 		if (!target)
 			return (ft_printf_fd(2, "300-Error getting info %s\n",
 					info->concentration.targets[i]));
+		ft_concentration_remove_buf(info, target);
 		fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC,
 				S_IRUSR | S_IWUSR);
 		if (fd == -1)
