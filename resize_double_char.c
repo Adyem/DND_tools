@@ -1,27 +1,35 @@
 #include "dnd_tools.h"
 
-char	**ft_resize_double_char(char **double_string, char *string, int size)
-{
-	char	**return_v;
-	int		i;
+char **ft_resize_double_char(char **double_string, char *string, int size) {
+    char **return_v;
+    int i;
+	int	j;
 
-	i = 0;
+    if (!double_string)
+        return (NULL);
+    i = 0;
 	while (double_string[i])
 		i++;
-	return_v = (char **)ft_calloc((i + size + 1), sizeof(char *));
+	return_v = (char **)calloc(i + size + 1, sizeof(char *));
 	if (!return_v)
 		return (NULL);
-	i = 0;
-	while (double_string[i])
+	j = 0;
+    while (j < i)
 	{
-		return_v[i] = double_string[i];
-		i++;
+        return_v[j] = double_string[j];
+		j++;
 	}
-	return_v[i] = ft_strdup(string);
-	if (!double_string)
+    return_v[i] = strdup(string);
+    if (!return_v[i])
 	{
-		free(return_v);
-		return (NULL);
+        free(return_v);
+        return (NULL);
+    }
+	j = i + 1;
+    while (j < i + size + 1)
+	{
+        return_v[j] = NULL;
+		j++;
 	}
-	return(return_v);
+	return (return_v);
 }

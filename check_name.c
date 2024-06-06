@@ -27,15 +27,18 @@ int ft_set_stats_check_name(char *name)
 		ft_printf_fd(2, "295-Error Opendir has failed: %s", strerror(errno));
         return (-2);
     }
-    while ((entry = readdir(dir)) != NULL)
+    while (1)
 	{
-		if (DEBUG == 1)
-			ft_printf("checking %s\n", entry);
+		entry = readdir(dir);
+		if (!entry)
+			break ;
         if (ft_strncmp(entry->d_name, PREFIX_TO_SKIP, strlen(PREFIX_TO_SKIP)) == 0)
             continue;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         remove_exclude_prefix(filename);
+		if (DEBUG == 1)
+			ft_printf("Checking %s %s\n", filename, name);
         if (ft_strcmp_dnd(filename, name) == 0)
 		{
             closedir(dir);
