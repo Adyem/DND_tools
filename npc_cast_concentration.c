@@ -32,7 +32,7 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 	t_char	*target;
 
 	if (ft_set_stats_check_name(input[2]))
-		return (ft_printf_fd(2, "Error target does not exist"), (void)0);
+		return (ft_printf_fd(2, "Error target does not exist\n"), (void)0);
 	ft_remove_concentration(info);
 	target = ft_get_info(input[2], info->struct_name);
 	if (!target)
