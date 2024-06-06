@@ -29,18 +29,22 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 	char	**temp;
 	int		i;
 	int		fd;
+	int		r_value;
 	t_char	*target;
 
-	if (ft_set_stats_check_name(input[2]))
-		return (ft_printf_fd(2, "Error target does not exist\n"), (void)0);
+	if ((r_value = ft_set_stats_check_name(input[2])))
+		return ;
 	ft_remove_concentration(info);
 	target = ft_get_info(input[2], info->struct_name);
 	if (!target)
 		return (ft_printf_fd(2, "295-Error getting info %s\n", input[2]), (void)0);
-	if (!target->debufs.hunters_mark.caster_name)
-		target->debufs.hunters_mark.caster_name = (char **)malloc(2 * sizeof(char *));
-	else
-		ft_cast_hm_second_appli(target, input);
+	if (target->version_number >= 2)
+	{
+		if (!target->debufs.hunters_mark.caster_name)
+			target->debufs.hunters_mark.caster_name = (char **)malloc(2 * sizeof(char *));
+		else
+			ft_cast_hm_second_appli(target, input);
+	}
 	temp = (char **)ft_calloc((1 + 1), sizeof(char *));
 	if (!temp)
 		return (ft_printf_fd(2, "299-Error allocating memory targets\n"), (void)0);
@@ -59,6 +63,9 @@ void	ft_cast_hunters_mark(t_char *info, char **input)
 	info->concentration.duration = 500;
 	fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR);
-	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
+	if (fd)
+		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
+	else
+		ft_printf_fd(2, "264-Error opening file %s\n", strerror(errno));
 	return ;
 }

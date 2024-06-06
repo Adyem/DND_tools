@@ -33,7 +33,7 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 	players->name = strdup(content);
 	if (!players->name)
 	{
-		ft_printf_fd(2, "254 Error allocating memory\n");
+		ft_printf_fd(2, "256 Error allocating memory\n");
 		return (ft_initiative_free_pc(head));
 	}
 	if (ft_check_value(temp))

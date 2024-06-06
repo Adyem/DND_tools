@@ -75,7 +75,7 @@ static t_pc	*ft_read_pc_file(int fd, char *filename, char *filepath)
 	content = ft_read_file_dnd(fd);
 	close (fd);
 	if (!content)
-		return (ft_initiative_pc_error("251 Error allocating memory"));
+		return (ft_initiative_pc_error("253 Error allocating memory"));
 	player = malloc(sizeof(t_pc));
 	if (!player)
 	{

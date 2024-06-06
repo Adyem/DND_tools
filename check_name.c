@@ -18,14 +18,19 @@ int ft_set_stats_check_name(char *name)
 	char filename[256];
 
 	if (!name)
+	{
+		ft_printf_fd(2, "259-Error name does not exist\n");
 		return (-1);
+	}
     if ((dir = opendir(DATA_FOLDER)) == NULL)
 	{
 		ft_printf_fd(2, "295-Error Opendir has failed: %s", strerror(errno));
-        return (-1);
+        return (-2);
     }
     while ((entry = readdir(dir)) != NULL)
 	{
+		if (DEBUG == 1)
+			ft_printf("checking %s\n", entry);
         if (ft_strncmp(entry->d_name, PREFIX_TO_SKIP, strlen(PREFIX_TO_SKIP)) == 0)
             continue;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
@@ -38,5 +43,6 @@ int ft_set_stats_check_name(char *name)
 		}
     }
     closedir(dir);
+	ft_printf_fd(2, "258-Error target does not exist\n");
     return (1);
 }
