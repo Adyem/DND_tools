@@ -42,6 +42,8 @@ int ft_set_stats_check_name(char *name)
         if (ft_strcmp_dnd(filename, name) == 0)
 		{
             closedir(dir);
+			if (DEBUG == 1)
+				ft_printf("found %s\n", name);
             return (0);
 		}
     }

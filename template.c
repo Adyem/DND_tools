@@ -74,16 +74,16 @@ t_char	*ft_template(int index, char **input, t_name *name, int exception)
 {
 	t_char	*info;
 
-	info = (t_char *)malloc(sizeof(t_char));
+	info = (t_char *)calloc(1, sizeof(t_char));
 	if (!info)
 		return (NULL);
 	*info = TEMPLATE_INFO;
 	info->struct_name = name;
-	if (exception)
-		return (info);
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
 		return (NULL);
+	if (exception)
+		return (info);
 	ft_npc_change_stats(info, index, input);
 	ft_free_info(info);
 	return (NULL);

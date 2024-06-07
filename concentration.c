@@ -2,6 +2,11 @@
 
 static void	ft_concentration_remove_buf(t_char *info, t_char *target)
 {
+	if (DEBUG == 1)
+	{
+	    ft_printf("Memory address of info struct: %p\n", (void *)info);
+		ft_printf("Memory address of target struct: %p\n", (void *)target);
+	}
 	if (info->concentration.spell_id == HUNTERS_MARK_ID)
 		ft_concentration_remove_hunters_mark(info, target);
 	return ;
@@ -32,6 +37,7 @@ int	ft_remove_concentration(t_char *info)
 			return (ft_printf_fd(2, "301-Error opening %s: %s\n",
 					info->save_file, strerror(errno)));
 		ft_npc_write_file(target, &target->stats, &info->c_resistance, fd);
+		ft_free_info(target);
 		close(fd);
 		break ;
 	}

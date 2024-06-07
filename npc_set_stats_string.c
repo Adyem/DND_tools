@@ -48,5 +48,6 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		}
 		data[i + 1] = NULL;
 	}
+	ft_printf("Memory address of data struct: %p\n", (void *)data);
 	return (data);
 }

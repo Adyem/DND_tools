@@ -40,7 +40,7 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
     if (target->version_number >= 2)
 	{
         if (!target->debufs.hunters_mark.caster_name)
-            target->debufs.hunters_mark.caster_name = (char **)malloc(2 * sizeof(char *));
+            target->debufs.hunters_mark.caster_name = (char **)ft_calloc(2, sizeof(char *));
         else
             ft_cast_hm_second_appli(target, input);
     }
@@ -68,10 +68,10 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
     info->concentration.dice_amount_mod = 1;
     info->concentration.duration = 500;
     fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    if (fd)
-        ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
-    else
-        ft_printf_fd(2, "264-Error opening file %s\n", strerror(errno));
+	if (fd)
+		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
+	else
+		ft_printf_fd(2, "264-Error opening file %s\n", strerror(errno));
+	ft_free_info(target);
     return;
 }
-
