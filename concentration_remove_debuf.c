@@ -29,7 +29,6 @@ void	ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
 		}
 		i++;
 	}
-
 	ft_printf_fd(2, "304-Error: %s Hunters mark debuff not found\n", target->name);
 	return ;
 }

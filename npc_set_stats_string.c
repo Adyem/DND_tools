@@ -12,13 +12,12 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		data = (char **)malloc(sizeof(char *) * 2);
 		if (!data)
 			return (ft_printf_fd(2, "293-Error allocating memory\n"), NULL);
-		data[0] = (char *)malloc((ft_strlen(content) + 1) * sizeof(char));
+		data[0] = ft_strdup(&content[ofset]);
 		if (!data[0])
 		{
 			ft_free_double_char(data);
 			return (ft_printf_fd(2, "294-Error allocating memory\n"), NULL);
 		}
-		data[0] = ft_strdup(&content[ofset]);
 		data[1] = NULL;
 	}
 	else if (data)

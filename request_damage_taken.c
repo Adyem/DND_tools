@@ -99,6 +99,9 @@ int	ft_request_damage(t_char *info)
 					info->name), 1);
 			ft_deal_damage(info, input[0], input[1], resistance, 0);
 		}
+		ft_free_request_damage(line, input);
+		line = NULL;
+		input = NULL;
 	}
 	ft_free_request_damage(line, input);
 	return (0);

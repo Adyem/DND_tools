@@ -1,7 +1,7 @@
 #include "dnd_tools.h"
 
 void	ft_deal_damage(t_char *info, char *input, char *d_type, int resistance,
-		int override)
+			int override)
 {
 	static int	total;
 	int			temp;
@@ -51,7 +51,9 @@ void	ft_deal_damage(t_char *info, char *input, char *d_type, int resistance,
 	}
 	if (override == 1 || override == 2)
 	{
-		if (info->version_number > 2 && info->concentration.concentration)
+		if (DEBUG == 1)
+			ft_printf("%s takes %i damage\n", info->name, total);
+		if (info->version_number >= 2 && info->concentration.concentration)
 			ft_check_concentration(info, total);
 		total = 0;
 	}

@@ -56,9 +56,15 @@ void	ft_check_concentration(t_char *info, int damage)
 	int	difficulty;
 	int	result;
 
+	if (DEBUG == 1)
+		ft_printf("Rolling con save for concentration %s\n", info->name);
 	if (info->version_number < 2 || !info->concentration.concentration)
+	{
+		if (info->version_number < 2)
+			ft_printf("%s doesn't support concentration\n", info->name);
 		return ;
-	result = ft_saving_throw(info, "constituion", info->stats.con, info->save_mod.con);
+	}
+	result = ft_saving_throw(info, "constitution", info->stats.con, info->save_mod.con);
 	difficulty = 10;
 	if (difficulty < damage / 2)
 		difficulty = damage / 2;
