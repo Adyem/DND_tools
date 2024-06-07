@@ -5,7 +5,7 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 	char	**temp;
 	int		i;
 
-	if (ft_set_stats_check_name(content))
+	if (ft_set_stats_check_name(&content[ofset]))
 			return (ft_printf_fd(2, "292-Error Target does not exist\n"), NULL);
 	if (!data)
 	{
