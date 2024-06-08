@@ -3,6 +3,7 @@
 #define DATA_FOLDER "data"
 #define PREFIX_TO_SKIP "data--"
 #define EXCLUDE_PREFIX "pc--"
+#define PC_PREFIX "pc--"
 
 static void remove_exclude_prefix(char* filename)
 {
@@ -50,4 +51,39 @@ int ft_set_stats_check_name(char *name)
     closedir(dir);
 	ft_printf_fd(2, "258-Error target does not exist\n");
     return (1);
+}
+
+int ft_check_player_character(char *name)
+{
+    DIR* dir;
+    struct dirent* entry;
+    char filename[256];
+
+    if ((dir = opendir(DATA_FOLDER)) == NULL)
+    {
+        ft_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
+        return -2;
+    }
+    while (1)
+    {
+        entry = readdir(dir);
+        if (!entry)
+            break;
+        if (strncmp(entry->d_name, PC_PREFIX, strlen(PC_PREFIX)) != 0)
+            continue;
+        strncpy(filename, entry->d_name, sizeof(filename) - 1);
+        filename[sizeof(filename) - 1] = '\0';
+        if (DEBUG == 1)
+            ft_printf("Checking %s against %s\n", filename, name);
+        if (ft_strcmp_dnd(filename, name) == 0)
+        {
+            closedir(dir);
+            if (DEBUG == 1)
+                ft_printf("Found %s\n", name);
+            return 0;
+        }
+    }
+    closedir(dir);
+    ft_printf_fd(2, "306-Error: target does not exist\n");
+    return 1;
 }

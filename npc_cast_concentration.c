@@ -26,12 +26,11 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
     char **temp;
     int i;
     int fd;
-    int r_value;
     t_char *target;
 
 	if (DEBUG == 1)
 		ft_printf("%s %s\n", input[0], input[3]);
-    if ((r_value = ft_set_stats_check_name(input[3])))
+    if ((ft_set_stats_check_name(input[3])))
         return;
     ft_remove_concentration(info);
     target = ft_get_info(input[3], info->struct_name);
