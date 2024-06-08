@@ -30,19 +30,27 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
 
 	if (DEBUG == 1)
 		ft_printf("%s %s\n", input[0], input[3]);
-    if ((ft_set_stats_check_name(input[3])))
-        return;
-    ft_remove_concentration(info);
-    target = ft_get_info(input[3], info->struct_name);
-	if (!target)
-		return (ft_printf_fd(2, "295-Error getting info %s\n", input[2]), (void)0);
+	if ((ft_set_stats_check_name(input[3])))
+	{
+		if ((ft_check_player_character(input[3])))
+			return;
+		else
+			target = NULL;
+	}
+	else
+	{
+		target = ft_get_info(input[3], info->struct_name);
+		if (!target)
+			return (ft_printf_fd(2, "295-Error getting info %s\n", input[2]), (void)0);
+	}
+	ft_remove_concentration(info);
 	if (ft_strcmp_dnd(target->name, info->name) == 0)
 	{
 		ft_printf_fd(2, "305-Error cant cast hunters mark on yourself\n");
 		ft_free_info(target);
 		return ;
 	}
-    if (target->version_number >= 2)
+    if (target && target->version_number >= 2)
 	{
         if (!target->debufs.hunters_mark.caster_name)
             target->debufs.hunters_mark.caster_name = (char **)ft_calloc(2, sizeof(char *));
