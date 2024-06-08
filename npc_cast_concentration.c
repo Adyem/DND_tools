@@ -35,8 +35,14 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
         return;
     ft_remove_concentration(info);
     target = ft_get_info(input[3], info->struct_name);
-    if (!target)
-        return (ft_printf_fd(2, "295-Error getting info %s\n", input[2]), (void)0);
+	if (!target)
+		return (ft_printf_fd(2, "295-Error getting info %s\n", input[2]), (void)0);
+	if (ft_strcmp_dnd(target->name, info->name) == 0)
+	{
+		ft_printf_fd(2, "305-Error cant cast hunters mark on yourself\n");
+		ft_free_info(target);
+		return ;
+	}
     if (target->version_number >= 2)
 	{
         if (!target->debufs.hunters_mark.caster_name)
@@ -47,7 +53,7 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
     temp = (char **)ft_calloc(1 + 1, sizeof(char *));
     if (!temp)
         return (ft_printf_fd(2, "299-Error allocating memory targets\n"), (void)0);
-    temp[0] = (char *)malloc((strlen(input[2]) + 1) * sizeof(char));
+    temp[0] = (char *)malloc((strlen(input[3]) + 1) * sizeof(char));
     if (!temp[0])
 	{
         free(temp);
@@ -67,7 +73,7 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
     info->concentration.dice_faces_mod = 6;
     info->concentration.dice_amount_mod = 1;
     info->concentration.duration = 500;
-    fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (fd)
 		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
 	else

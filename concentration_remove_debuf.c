@@ -13,6 +13,8 @@ void	ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
 	}
 	while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[i])
 	{
+		if (DEBUG == 1)
+			ft_printf("r-debuf checking %s %s\n", target->debufs.hunters_mark.caster_name[i], info->name);
 		if (ft_strcmp_dnd(target->debufs.hunters_mark.caster_name[i], info->name) == 0)
 		{
 			free(target->debufs.hunters_mark.caster_name[i]);
