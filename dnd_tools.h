@@ -76,6 +76,9 @@ void	ft_turn_next(t_name *name);
 void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name);
 void	ft_update_buff_status(t_char *info, int current_dur, int duration, char *buff_name);
 
+//damage buffs
+int		ft_check_buff_damage(t_char *info);
+
 //saving throws buffs
 int		ft_save_check_buff(t_char *info, int *roll, char *ability_score);
 

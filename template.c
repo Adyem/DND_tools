@@ -55,12 +55,14 @@ void	ft_template_attack(t_char *info)
 			result);
 	else if (result >= 20 - info->crit.attack)
 	{
+		ft_check_buff_damage(info);
 		ft_printf("a crit (%i)\n", result);
 		damage = ft_dice_roll(2, 6) + dex_mod;
 		ft_printf("Template deals %i piercing damage\n", damage);
 	}
 	else
 	{
+		ft_check_buff_damage(info);
 		ft_printf("%i+%i+%i+%i for a total of %i\n",
 			result, dex_mod, info->attack_bonus.attack_bonus, mod, result
 			+ dex_mod + mod + info->attack_bonus.attack_bonus);
