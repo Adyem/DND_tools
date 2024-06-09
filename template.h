@@ -126,11 +126,17 @@ static const	t_air_totem TEMPLATE_AIR_TOTEM =
 	.erea_of_effect = 0,
 };
 
+static const	t_chaos_armor TEMPLATE_CHAOS_ARMOR =
+{
+	.duration = 5,
+};
+
 static const	t_bufs TEMPLATE_BUFFS =
 {
 	.bless = TEMPLATE_BLESS,
 	.protective_winds = TEMPLATE_PROTECTIVE_WINDS,
 	.lightning_strike = TEMPLATE_LIGHTNING_STRIKE,
+	.chaos_armor = TEMPLATE_CHAOS_ARMOR,
 };
 
 static const	t_hunters_mark TEMPLATE_HUNTERS_MARK =

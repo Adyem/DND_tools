@@ -111,11 +111,17 @@ typedef struct	s_air_totem
 	int		erea_of_effect;
 } t_air_totem;
 
+typedef struct	s_chaos_armor
+{
+	int	duration;
+} t_chaos_armor;
+
 typedef struct	s_bufs
 {
 	t_bless				bless;
 	t_protective_winds	protective_winds;
 	t_lightning_strike	lightning_strike;
+	t_chaos_armor		chaos_armor;
 } t_bufs;
 
 typedef struct	s_hunters_mark
@@ -144,6 +150,8 @@ typedef struct s_crit_mod
 #define HUNTERS_MARK_NAME "hunters mark"
 #define BLESS_ID 2
 #define BLESS_NAME "bless"
+#define CHAOS_ARMOR_ID 3
+#define CHAOS_ARMOR_NAME "chaos_armor"
 
 typedef struct	s_concentration
 {
