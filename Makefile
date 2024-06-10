@@ -83,7 +83,8 @@ SRC			= name.c \
 			  free_info.c \
 			  get_character_info.c \
 			  resize_double_char.c \
-			  concentration_remove_debuf.c
+			  concentration_remove_debuf.c \
+			  check_buff_damage.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0
