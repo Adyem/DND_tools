@@ -1,3 +1,4 @@
+#include "character.h"
 #include "dnd_tools.h"
 
 static void	ft_cast_hm_second_appli(t_char *target, char **input)
@@ -87,4 +88,12 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
 		ft_printf_fd(2, "264-Error opening file %s\n", strerror(errno));
 	ft_free_info(target);
     return;
+}
+
+void	ft_cast_chaos_armor(t_char *info, char **input)
+{
+	ft_remove_concentration(info);
+	info->concentration.concentration = 1;
+	info->concentration.spell_id = CHAOS_ARMOR_ID;
+	info->concentration.duration = 5;
 }
