@@ -1,4 +1,3 @@
-#include "character.h"
 #include "dnd_tools.h"
 
 static void	ft_cast_hm_second_appli(t_char *target, char **input)
@@ -90,7 +89,7 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
     return;
 }
 
-void	ft_cast_chaos_armor(t_char *info, char **input)
+void	ft_cast_chaos_armor(t_char *info)
 {
 	ft_remove_concentration(info);
 	info->concentration.concentration = 1;

@@ -1,6 +1,4 @@
 #include "dnd_tools.h"
-#include "libft/printf/ft_printf.h"
-#include "libft/printf_fd/ft_printf_fd.h"
 
 static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 {

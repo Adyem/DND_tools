@@ -106,10 +106,11 @@ void	ft_npc_update_lightning_strike(t_char *info, char **input);
 int		ft_check_bless(t_char *info);
 
 //concentration
+void	ft_cast_hunters_mark(t_char *info, char **input);
 void	ft_check_concentration(t_char *info, int  damage);
 int		ft_remove_concentration(t_char *info);
 void	ft_concentration_remove_hunters_mark(t_char *info, t_char *target);
-void	ft_cast_chaos_armor(t_char *info, char **input);
+void	ft_cast_chaos_armor(t_char *info);
 
 //resistance
 int		ft_get_resistance(t_char *info, char *type);
@@ -160,9 +161,6 @@ void	ft_free_memory_name(t_name *name, int exit_failure);
 
 //attacking
 void	ft_npc_check_ac(t_char *info, char **input);
-
-//casting
-void	ft_cast_hunters_mark(t_char *info, char **input);
 
 //save file
 int		ft_npc_check_info(t_char *info);
