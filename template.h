@@ -128,7 +128,7 @@ static const	t_air_totem TEMPLATE_AIR_TOTEM =
 
 static const	t_chaos_armor TEMPLATE_CHAOS_ARMOR =
 {
-	.duration = 5,
+	.duration = 0,
 };
 
 static const	t_bufs TEMPLATE_BUFFS =

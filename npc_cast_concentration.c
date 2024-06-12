@@ -96,4 +96,5 @@ void	ft_cast_chaos_armor(t_char *info, char **input)
 	info->concentration.concentration = 1;
 	info->concentration.spell_id = CHAOS_ARMOR_ID;
 	info->concentration.duration = 5;
+	info->bufs.chaos_armor.duration = 5;
 }

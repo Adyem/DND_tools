@@ -9,6 +9,8 @@ static void	ft_concentration_remove_buf(t_char *info, t_char *target)
 	}
 	if (info->concentration.spell_id == HUNTERS_MARK_ID)
 		ft_concentration_remove_hunters_mark(info, target);
+	else if (info->concentration.spell_id == CHAOS_ARMOR_ID)
+		info->bufs.chaos_armor.duration = 0;
 	return ;
 }
 
