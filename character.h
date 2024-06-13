@@ -1,7 +1,6 @@
 #ifndef CHARACTER_H
 # define CHARACTER_H
 
-#include <stddef.h>
 #include "include.h"
 
 typedef struct	s_char t_char;

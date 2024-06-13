@@ -86,6 +86,8 @@ int	ft_npc_check_info(t_char *info)
 		error += ft_printf_fd(2, "%s hunters mark data is not correct\n", info->name);
 	if (info->bufs.protective_winds.duration < 0)
 		error += ft_printf_fd(2, "%s protective winds duration outside of bounds\n", info->name);
+	if (info->bufs.chaos_armor.duration < 0)
+		error += ft_printf_fd(2, "%s chaos armor duration outside of bounds\n", info->name);
 	error += ft_npc_check_info_2(info);
 	if (error)
 		ft_printf_fd(2, "2-%s Error with the save file, please reinitialize it with the "\
