@@ -27,5 +27,12 @@ void	ft_update_buf(t_char *info)
 	if (info->bufs.protective_winds.duration > 0)
 		ft_update_buf_duration(info, "protective winds",
 			&info->bufs.protective_winds.duration);
+	if (info->bufs.chaos_armor.duration > 0)
+	{
+		ft_update_buf_duration(info, "chaos armor", &info->bufs.chaos_armor.duration);
+		info->concentration.duration = info->bufs.chaos_armor.duration;
+		if (info->concentration.duration)
+			ft_remove_concentration(info);
+	}
 	return ;
 }
