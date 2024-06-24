@@ -3,6 +3,7 @@
 //the guards above only capital letters
 
 #include "character.h"
+#include "initialize.h"
 #include "include.h"
 #include "dnd_tools.h"
 #include <stddef.h>
@@ -95,61 +96,6 @@ static const	t_f_attack TEMPLATE_F_ATTACK =
 	.ranged_attack = ft_template_ranged_attack,
 };
 
-static const	t_bless TEMPLATE_BLESS =
-{
-	.duration = 0,
-	.dice_amount_mod = 1,
-	.dice_faces_mod = 4,
-	.base_mod = 0,
-	.target = NULL,
-};
-
-static const	t_protective_winds TEMPLATE_PROTECTIVE_WINDS =
-{
-	.duration = 0,
-};
-
-static const	t_lightning_strike TEMPLATE_LIGHTNING_STRIKE =
-{
-	.duration = 0,
-	.amount = 0,
-	.distance = 0,
-	.dice_amount = 0,
-	.dice_faces = 0,
-	.extra_damage = 0,
-};
-
-static const	t_air_totem TEMPLATE_AIR_TOTEM =
-{
-	.save_file = "data/air_totem",
-	.knock_back_distance = 0,
-	.erea_of_effect = 0,
-};
-
-static const	t_chaos_armor TEMPLATE_CHAOS_ARMOR =
-{
-	.duration = 0,
-};
-
-static const	t_bufs TEMPLATE_BUFFS =
-{
-	.bless = TEMPLATE_BLESS,
-	.protective_winds = TEMPLATE_PROTECTIVE_WINDS,
-	.lightning_strike = TEMPLATE_LIGHTNING_STRIKE,
-	.chaos_armor = TEMPLATE_CHAOS_ARMOR,
-};
-
-static const	t_hunters_mark TEMPLATE_HUNTERS_MARK =
-{
-	.amount = 0,
-	.caster_name = NULL,
-};
-
-static const	t_debufs TEMPLATE_DEBUFFS =
-{
-	.hunters_mark = TEMPLATE_HUNTERS_MARK,
-};
-
 static const	t_crit_mod TEMPLATE_CRIT =
 {
 	.attack = 0,
@@ -159,17 +105,6 @@ static const	t_crit_mod TEMPLATE_CRIT =
 	.attack_fail = 0,
 	.save_fail = 0,
 	.skill_fail = 0,
-};
-
-static const	t_concentration TEMPLATE_CONCENTRATION =
-{
-	.concentration = 0,
-	.spell_id = 0,
-	.dice_amount_mod = 0,
-	.dice_faces_mod = 0,
-	.base_mod = 0,
-	.duration = 0,
-	.targets = NULL,
 };
 
 static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
@@ -217,9 +152,9 @@ static const	t_char TEMPLATE_INFO =
 	.advantage = 0,
 	.turn = ft_template_turn,
 	.crit = TEMPLATE_CRIT,
-	.bufs = TEMPLATE_BUFFS,
-	.debufs = TEMPLATE_DEBUFFS,
-	.concentration = TEMPLATE_CONCENTRATION,
+	.bufs = INITIALIZE_BUFFS,
+	.debufs = INITIALIZE_DEBUFFS,
+	.concentration = INITIALIZE_CONCENTRATION,
 	.d_resistance = TEMPLATE_DEFAULT_RESISTANCE,
 	.c_resistance = TEMPLATE_CURRENT_RESISTANCE,
 	.attack_bonus = TEMPLATE_ATTACK,

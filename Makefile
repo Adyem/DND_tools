@@ -14,7 +14,8 @@ HEADER		= include.h \
 			  goblin_shaman.h \
 			  grizzletooth.h \
 			  template.h \
-			  player_character.h
+			  player_character.h \
+			  initialize.h
 
 SRC			= name.c \
 			  dnd_tools.c \
