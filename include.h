@@ -12,6 +12,7 @@
 
 //utility
 # include "character.h"
+# include "initialize.h"
 
 //libft
 # include "libft/libft/libft.h"

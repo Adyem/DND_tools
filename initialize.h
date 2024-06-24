@@ -6,12 +6,12 @@
 
 static const	t_concentration INITIALIZE_CONCENTRATION =
 {
-	.concentration = -1,
-	.spell_id = -1,
-	.dice_amount_mod = -1,
-	.dice_faces_mod = -1,
-	.base_mod = -1,
-	.duration = -1,
+	.concentration = 0,
+	.spell_id = 0,
+	.dice_amount_mod = 0,
+	.dice_faces_mod = 0,
+	.base_mod = 0,
+	.duration = 0,
 	.targets = NULL,
 };
 

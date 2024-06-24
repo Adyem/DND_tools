@@ -1,4 +1,3 @@
-#include "character.h"
 #include "dnd_tools.h"
 
 static t_name *ft_add_node(t_name **last_node, char *new_name, c_name new_function)
