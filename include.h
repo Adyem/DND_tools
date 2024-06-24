@@ -5,14 +5,7 @@
 # include "template.h"
 
 //npc's
-# include "maverick.h"
-# include "zephyr.h"
-# include "air_totem.h"
-# include "air_goblin.h"
-# include "air_goblin_shaman.h"
-# include "goblin.h"
-# include "goblin_shaman.h"
-# include "grizzletooth.h"
+
 
 //player character
 # include "player_character.h"

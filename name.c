@@ -70,7 +70,10 @@ t_name *ft_allocate_memory_name()
 	t_name *name;
 
 	last_node = NULL;
+	//template is always the first node anny node
+	//added beyond this uses the last_node
 	name = ft_add_node(&last_node, "template", ft_template);
+	ft_add_mob_series(&last_node, "template", ft_template, 10);
     return (name);
 }
 

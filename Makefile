@@ -5,30 +5,12 @@ NAME_DEBUG	= dnd_tools_debug
 HEADER		= include.h \
 			  dnd_tools.h \
 			  character.h \
-			  maverick.h \
-			  zephyr.h \
-			  air_totem.h \
-			  air_goblin.h \
-			  air_goblin_shaman.h \
-			  goblin.h \
-			  goblin_shaman.h \
-			  grizzletooth.h \
 			  template.h \
 			  player_character.h \
 			  initialize.h
 
 SRC			= name.c \
 			  dnd_tools.c \
-			  maverick.c \
-			  maverick_turn.c \
-			  zephyr.c \
-			  zephyr_turn.c \
-			  air_totem.c \
-			  air_goblin.c \
-			  goblin.c \
-			  goblin_shaman.c \
-			  grizzletooth.c \
-			  air_goblin_shaman.c \
 			  template.c \
 			  npc_stats.c \
 			  npc_set_stats.c \
