@@ -1,3 +1,4 @@
+#include "character.h"
 #include "dnd_tools.h"
 
 static t_name *ft_add_node(t_name **last_node, char *new_name, c_name new_function)
@@ -69,6 +70,7 @@ t_name *ft_allocate_memory_name()
     t_name *last_node;
 	t_name *name;
 
+	name = NULL;
 	last_node = NULL;
 	//template is always the first node anny node
 	//added beyond this uses the last_node
@@ -79,10 +81,13 @@ t_name *ft_allocate_memory_name()
 
 void ft_free_memory_name(t_name *name, int exit_failure)
 {
-    t_name *current = name;
+    t_name	*current;
+	t_name	*next_node;
+
+	current = name;
     while (current != NULL)
     {
-        t_name *next_node = current->next;
+        next_node = current->next;
         free(current->name);
         free(current);
         current = next_node;
