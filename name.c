@@ -1,156 +1,89 @@
 #include "dnd_tools.h"
 
-static t_name	*ft_add_node(char *new_name, c_name new_function)
+static t_name *ft_add_node(t_name **last_node, char *new_name, c_name new_function)
 {
-	t_name *new_node;
-
-	new_node = (t_name *)malloc(sizeof(t_name));
-	if (!new_node)
-		return (NULL);
-	new_node->name = ft_strdup(new_name);
-	if (!new_node->name)
-	{
-		free(new_node);
-		return (NULL);
-	}
-	new_node->function = new_function;
-	new_node->next = NULL;
-	return (new_node);
+    t_name *new_node = (t_name *)malloc(sizeof(t_name));
+    if (!new_node)
+    {
+        ft_free_memory_name(*last_node, 1);
+        return (NULL);
+    }
+    new_node->name = strdup(new_name);
+    if (!new_node->name)
+    {
+        free(new_node);
+        ft_free_memory_name(*last_node, 1);
+        return (NULL);
+    }
+    new_node->function = new_function;
+    new_node->next = NULL;
+    if (*last_node)
+    {
+        (*last_node)->next = new_node;
+    }
+    *last_node = new_node;
+    return (new_node);
 }
 
-static char	*ft_new_name(char *name, int index)
+static char *ft_new_name(char *name, int index)
 {
-	int		new_name_length ;
+	int		new_name_length;
 	char	*new_name;
-	int		i;
 
-
-	new_name_length = ft_strlen(name) + 1 + 2;
-	new_name = (char *)ft_calloc(new_name_length + 1, sizeof(char));
-	if (!new_name)
-		return (NULL);
-	i = 0;
-	while (name[i])
-	{
-		new_name[i] = name[i];
-		i++;
-	}
-	new_name[i] = '_';
-	i++;
-	if (index >= 10)
-	{
-		index = index - 10;
-		new_name[i] = '1';
-	}
-	else
-		new_name[i] = '0';
-	i++;
-	new_name[i] = index + '0';
-	return (new_name);
+    new_name_length = strlen(name) + 4;
+    new_name = (char *)calloc(new_name_length, sizeof(char));
+    if (!new_name)
+    {
+        ft_free_memory_name(NULL, 1);
+        return (NULL);
+    }
+    snprintf(new_name, new_name_length, "%s_%02d", name, index);
+    return (new_name);
 }
 
-t_name	*ft_allocate_memory_name()
+static void ft_add_mob_series(t_name **last_node, char *base_name, c_name function, int count)
 {
-	t_name	*name;
-	t_name	*temp;
+	int		i;
 	char	*new_name;
-	int		i;
 
-	name = ft_add_node("maverick", ft_maverick);
-	if (!name)
-		ft_free_memory_name(name, 1);
-	name->next = ft_add_node("zephyr", ft_zephyr);
-	if (!name->next)
-		ft_free_memory_name(name, 1);
-	temp = name->next;
-	temp->next = ft_add_node("air_totem", ft_air_totem);
-	if (!temp->next)
-		ft_free_memory_name(name, 1);
-	temp = temp->next;
-	temp->next = ft_add_node("grizzletooth", ft_grizzletooth);
-	if (!temp->next)
-		ft_free_memory_name(name, 1);
-	temp = temp->next;
-	temp->next = ft_add_node("template", ft_template);
-	if (!temp->next)
-		ft_free_memory_name(name, 1);
 	i = 1;
-	while (i <= 10)
-	{
-		temp = temp->next;
-		new_name = ft_new_name("air_goblin", i);
-		if (!new_name)
-			ft_free_memory_name(name, 1);
-		if (DEBUG == 1)
-			ft_printf("%s\n", new_name);
-		temp->next = ft_add_node(new_name, ft_air_goblin);
+	while (i <= count)
+    {
+        new_name = ft_new_name(base_name, i);
+        if (!new_name)
+        {
+            ft_free_memory_name(*last_node, 1);
+            return;
+        }
+        if (DEBUG == 1)
+            printf("%s\n", new_name);
 		free(new_name);
-		if (!temp->next)
-			ft_free_memory_name(name, 1);
+        if (!ft_add_node(last_node, new_name, function))
+            return ;
 		i++;
-	}
-	i = 1;
-	while (i <= 10)
-	{
-		temp = temp->next;
-		new_name = ft_new_name("air_goblin_shaman", i);
-		if (!new_name)
-			ft_free_memory_name(name, 1);
-		if (DEBUG == 1)
-			ft_printf("%s\n", new_name);
-		temp->next = ft_add_node(new_name, ft_air_goblin_shaman);
-		free(new_name);
-		if (!temp->next)
-			ft_free_memory_name(name, 1);
-		i++;
-	}
-	i = 1;
-	while (i <= 10)
-	{
-		temp = temp->next;
-		new_name = ft_new_name("goblin", i);
-		if (!new_name)
-			ft_free_memory_name(name, 1);
-		if (DEBUG == 1)
-			ft_printf("%s\n", new_name);
-		temp->next = ft_add_node(new_name, ft_goblin);
-		free(new_name);
-		if (!temp->next)
-			ft_free_memory_name(name, 1);
-		i++;
-	}
-	i = 1;
-	while (i <= 10)
-	{
-		temp = temp->next;
-		new_name = ft_new_name("goblin_shaman", i);
-		if (!new_name)
-			ft_free_memory_name(name, 1);
-		if (DEBUG == 1)
-			ft_printf("%s\n", new_name);
-		temp->next = ft_add_node(new_name, ft_goblin_shaman);
-		free(new_name);
-		if (!temp->next)
-			ft_free_memory_name(name, 1);
-		i++;
-	}
-	return (name);
+    }
 }
 
-void	ft_free_memory_name(t_name *name, int exit_failure)
+t_name *ft_allocate_memory_name()
 {
-	t_name	*current;
-	t_name	*next_node;
+    t_name *last_node;
+	t_name *name;
 
-	current = name;
-	while (current != NULL)
-	{
-		next_node = current->next;
-		free(current->name);
-		free(current);
-		current = next_node;
-	}
-	if (exit_failure)
-		exit(EXIT_FAILURE);
-	return ;
+	last_node = NULL;
+	name = ft_add_node(&last_node, "template", ft_template);
+    return (name);
+}
+
+void ft_free_memory_name(t_name *name, int exit_failure)
+{
+    t_name *current = name;
+    while (current != NULL)
+    {
+        t_name *next_node = current->next;
+        free(current->name);
+        free(current);
+        current = next_node;
+    }
+    if (exit_failure)
+        exit(EXIT_FAILURE);
 }
