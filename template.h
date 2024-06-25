@@ -4,8 +4,6 @@
 
 #include "character.h"
 #include "initialize.h"
-#include "include.h"
-#include "dnd_tools.h"
 #include <stddef.h>
 
 typedef struct	s_name t_name;
@@ -147,8 +145,8 @@ static const t_char TEMPLATE_INFO =
     .initiative = -1,
     .version_number = 2,
     .free_save = 1,
-    .save_file = "data/template",
-    .name = "template",
+    .save_file = NULL,
+    .name = NULL,
     .advantage = 0,
     .turn = ft_template_turn,
     .crit = TEMPLATE_CRIT,

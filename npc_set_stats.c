@@ -106,9 +106,9 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 	else if (ft_strncmp(content[i], "HUNTERS_MARK_AMOUNT=", 20) == 0 &&
             info->debufs.hunters_mark.amount == 0)
         info->debufs.hunters_mark.amount = ft_check_stat(info, content[i], 20);
-	else if (ft_strncmp(content[i], "CHAOS_ARMOR_DURATION", 20) == 0 &&
+	else if (ft_strncmp(content[i], "CHAOS_ARMOR_DURATION=", 21) == 0 &&
 			info->bufs.chaos_armor.duration == 0)
-		info->bufs.chaos_armor.duration = ft_check_stat(info, content[i], 20);
+		info->bufs.chaos_armor.duration = ft_check_stat(info, content[i], 21);
 	else
 		r_value = 1;
 	return(r_value);

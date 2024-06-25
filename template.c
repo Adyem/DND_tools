@@ -18,23 +18,23 @@ void	ft_template_ranged_attack(t_char *info)
 	dex_mod = (info->stats.dex - 10) / 2;
 	result = ft_dice_roll(1, 20);
 	mod = ft_attack_roll_check_buffs(info, &result);
-	ft_printf("Template attacks with his bow and ");
+	ft_printf("%s attacks with his bow and ", info->name);
 	if (result <= 1 + info->crit.attack_fail)
 		ft_printf("rolled a critical fail (%i) and missed on his attack\n",
 			result);
 	else if (result >= 20 - info->crit.attack)
 	{
-		ft_printf("rolled a crit (%i)\n", result);
+		ft_printf("rolled a crit (%i) and ", result);
 		damage = ft_dice_roll(2, 6) + dex_mod;
-		ft_printf("Template deals %i piercing damage\n", damage);
+		ft_printf("deals %i piercing damage\n", damage);
 	}
 	else
 	{
-		ft_printf("rolled %i+%i+%i+%i for a total of %i\n",
+		ft_printf("rolled %i+%i+%i+%i for a total of %i and ",
 			result, dex_mod, info->attack_bonus.attack_bonus, mod, result
 			+ dex_mod + mod + info->attack_bonus.attack_bonus);
 		damage = ft_dice_roll(1, 6) + dex_mod;
-		ft_printf("Template deals %i piercing damage\n", damage);
+		ft_printf("deals %i piercing damage\n", damage);
 	}
 	return ;
 }
@@ -49,25 +49,25 @@ void	ft_template_attack(t_char *info)
 	dex_mod = (info->stats.dex - 10) / 2;
 	result = ft_dice_roll(1, 20);
 	mod = ft_attack_roll_check_buffs(info, &result);
-	ft_printf("Template attacks with his sword and rolled ");
+	ft_printf("%s attacks with his sword and rolled ", info->name);
 	if (result <= 1 + info->crit.attack_fail)
 		ft_printf("a critical fail (%i) and missed on his attack\n",
 			result);
 	else if (result >= 20 - info->crit.attack)
 	{
 		ft_check_buff_damage(info);
-		ft_printf("a crit (%i)\n", result);
+		ft_printf("a crit (%i) and ", result);
 		damage = ft_dice_roll(2, 6) + dex_mod;
-		ft_printf("Template deals %i piercing damage\n", damage);
+		ft_printf("deals %i piercing damage\n", damage);
 	}
 	else
 	{
 		ft_check_buff_damage(info);
-		ft_printf("%i+%i+%i+%i for a total of %i\n",
+		ft_printf("%i+%i+%i+%i for a total of %i and ",
 			result, dex_mod, info->attack_bonus.attack_bonus, mod, result
 			+ dex_mod + mod + info->attack_bonus.attack_bonus);
 		damage = ft_dice_roll(1, 6) + dex_mod;
-		ft_printf("Template deals %i piercing damage\n", damage);
+		ft_printf("deals %i piercing damage\n", damage);
 	}
 	return ;
 }
@@ -80,6 +80,7 @@ t_char	*ft_template(int index, char **input, t_name *name, int exception)
 	if (!info)
 		return (NULL);
 	*info = TEMPLATE_INFO;
+	info->name = input[0];
 	info->struct_name = name;
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)

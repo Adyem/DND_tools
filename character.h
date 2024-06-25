@@ -1,8 +1,6 @@
 #ifndef CHARACTER_H
 # define CHARACTER_H
 
-#include "include.h"
-
 typedef struct	s_char t_char;
 typedef struct	s_name t_name;
 
