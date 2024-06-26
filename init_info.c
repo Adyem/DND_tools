@@ -22,6 +22,7 @@ int	ft_check_stat(t_char *info, char *stat, int index)
 		}
 		ft_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n",
 			info->name ,stat);
+		info->error = 1;
 		return (-99999);
 	}
 	result = ft_atoi(stat);

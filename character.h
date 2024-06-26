@@ -165,22 +165,37 @@ typedef struct	s_resistance
 	int	thunder;
 } t_resistance;
 
-typedef struct s_equipment_effect
+
+typedef struct s_equipment_id
 {
-}	t_equipment_effect;
+	int			equipment_id;
+	c_action	action_01;
+	c_action	action_02;
+	int			ac;
+	int			effect_type;
+	int			effect_dice_amount;
+	int			effect_dice_faces;
+}	t_equipment_id;
 
 typedef struct s_equipment
 {
-	int					weapon_id;
-	c_action			melee_attack;
-	t_equipment_effect	weapon_effect;
-	int					ranged_weapon_id;
-	c_action			ranged_attack;
-	t_equipment_effect	ranged_weapon_effect;
+	t_equipment_id	weapon;
+	t_equipment_id	ranged_weapon;
+	t_equipment_id	armor;
+	t_equipment_id	helmet;
+	t_equipment_id	shield;
+	t_equipment_id	boots;
+	t_equipment_id	gloves;
+	t_equipment_id	amulet;
+	t_equipment_id	ring_01;
+	t_equipment_id	ring_02;
+	t_equipment_id	belt;
 }	t_equipment;
+
 
 typedef struct	s_char
 {
+	int				error;
 	int				passive_perception;
 	int				initiative;
 	int				version_number;

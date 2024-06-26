@@ -29,6 +29,12 @@ void	ft_turn_next(t_name *name);
 void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name);
 void	ft_update_buff_status(t_char *info, int current_dur, int duration, char *buff_name);
 
+//melee attack
+void	ft_steel_sword_attack(t_char *info);
+
+//ranged attack
+void	ft_wooden_bow_attack(t_char *info);
+
 //damage buffs
 int		ft_check_buff_damage(t_char *info);
 
@@ -83,7 +89,7 @@ void	ft_print_character_status(t_char *info, int number, int temp);
 void	ft_skill_throw(t_char *info, char *skill, int ability_mod, int save_mod);
 int		ft_set_stats(t_char *info, char **content);
 int		ft_check_stat(t_char *info, char *stat, int index);
-char	**ft_set_stats_con_targets(char *content, int ofset, char **data);
+char	**ft_set_stats_con_targets(char *content, int ofset, char **data, t_char *info);
 t_char	*ft_get_info(char *tf_name, t_name *name);
 char	**ft_resize_double_char(char **double_string, char *string, int size);
 int		ft_double_char_length(char **double_char);

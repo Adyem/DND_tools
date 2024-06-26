@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-char **ft_set_stats_con_targets(char *content, int ofset, char **data)
+char **ft_set_stats_con_targets(char *content, int ofset, char **data, t_char *info)
 {
 	char	**temp;
 	int		i;
@@ -11,10 +11,14 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 	{
 		data = (char **)malloc(sizeof(char *) * 2);
 		if (!data)
+		{
+			info->error = 1;
 			return (ft_printf_fd(2, "293-Error allocating memory\n"), NULL);
+		}
 		data[0] = ft_strdup(&content[ofset]);
 		if (!data[0])
 		{
+			info->error = 1;
 			ft_free_double_char(data);
 			return (ft_printf_fd(2, "294-Error allocating memory\n"), NULL);
 		}
@@ -28,6 +32,7 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		temp = (char **)malloc((i + 2) * sizeof(char *));
 		if (!temp)
 		{
+			info->error = 1;
 			ft_free_double_char(data);
 			return (ft_printf_fd(2, "295-Error allocating memory\n"), NULL);
 		}
@@ -42,6 +47,7 @@ char **ft_set_stats_con_targets(char *content, int ofset, char **data)
 		data[i] = ft_strdup(&content[ofset]);
 		if (!data[i])
 		{
+			info->error = 1;
 			ft_free_double_char(data);
 			return (ft_printf_fd(2, "296-Error allocating memory\n"), NULL);
 		}

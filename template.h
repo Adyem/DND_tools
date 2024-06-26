@@ -2,6 +2,8 @@
 # define TEMPLATE_H
 //the guards above only capital letters
 
+#include "ranged_weapons.h"
+#include "melee_weapons.h"
 #include "identification.h"
 #include "character.h"
 #include "initialize.h"
@@ -15,22 +17,6 @@ typedef struct	s_char t_char;
 void	ft_template_turn(t_char *info);
 void	ft_template_attack(t_char *info);
 void	ft_template_ranged_attack(t_char *info);
-
-//don't change the values in this struct they need to be all at -1!!!
-static const	t_stats TEMPLATE_STATS =
-{
-	.phase = -1,
-	.turn = -1,
-	.health = -1,
-	.temp_hp = -1,
-	.ac = -1,
-	.str = -1,
-	.dex = -1,
-	.con = -1,
-	.inte = -1,
-	.wis = -1,
-	.cha = -1,
-};
 
 //these are the default stats u can change these
 static const	t_stats TEMPLATE_DEFAULT_STATS =
@@ -135,14 +121,25 @@ static const	t_resistance TEMPLATE_CURRENT_RESISTANCE =
 	.thunder = -501,
 };
 
-static const	t_equipment TEMPLATE_EQUIPMENT =
+
+static const	t_equipment INITIALIZE_EQUIPMENT =
 {
-	.weapon_id = STEEL_SWORD_ID,
-	.ranged_weapon_id = WOODEN_BOW_ID,
+	.weapon = STEEL_SWORD,
+	.ranged_weapon = WOODEN_BOW,
+	.armor = INITIALIZE_EQUIPMENT_ID,
+	.helmet = INITIALIZE_EQUIPMENT_ID,
+	.shield = INITIALIZE_EQUIPMENT_ID,
+	.boots = INITIALIZE_EQUIPMENT_ID,
+	.gloves = INITIALIZE_EQUIPMENT_ID,
+	.amulet = INITIALIZE_EQUIPMENT_ID,
+	.ring_01 = INITIALIZE_EQUIPMENT_ID,
+	.ring_02 = INITIALIZE_EQUIPMENT_ID,
+	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
 static const t_char TEMPLATE_INFO =
 {
+	.error = 1,
     .passive_perception = 15,
     .initiative = -1,
     .version_number = 2,
@@ -158,10 +155,10 @@ static const t_char TEMPLATE_INFO =
     .concentration = INITIALIZE_CONCENTRATION,
     .d_resistance = TEMPLATE_DEFAULT_RESISTANCE,
     .c_resistance = TEMPLATE_CURRENT_RESISTANCE,
-    .equipment = TEMPLATE_EQUIPMENT,
+    .equipment = INITIALIZE_EQUIPMENT,
     .skill_mod = TEMPLATE_SKILL_MODS,
     .save_mod = TEMPLATE_SAVE_MODS,
-    .stats = TEMPLATE_STATS,
+    .stats = INITIALIZE_STATS,
     .dstats = TEMPLATE_DEFAULT_STATS,
     .struct_name = NULL,
 };

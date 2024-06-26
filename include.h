@@ -14,6 +14,8 @@
 # include "identification.h"
 # include "character.h"
 # include "initialize.h"
+# include "ranged_weapons.h"
+# include "melee_weapons.h"
 
 //libft
 # include "libft/libft/libft.h"

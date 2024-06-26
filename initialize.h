@@ -4,6 +4,32 @@
 #include <stddef.h>
 #include "character.h"
 
+static const	t_equipment_id INITIALIZE_EQUIPMENT_ID =
+{
+	.equipment_id = 0,
+	.action_01 = NULL,
+	.action_02 = NULL,
+	.ac = 0,
+	.effect_type = 0,
+	.effect_dice_amount = 0,
+	.effect_dice_faces = 0,
+};
+
+static const	t_stats INITIALIZE_STATS =
+{
+	.phase = -1,
+	.turn = -1,
+	.health = -1,
+	.temp_hp = -1,
+	.ac = -1,
+	.str = -1,
+	.dex = -1,
+	.con = -1,
+	.inte = -1,
+	.wis = -1,
+	.cha = -1,
+};
+
 static const	t_concentration INITIALIZE_CONCENTRATION =
 {
 	.concentration = 0,
@@ -42,7 +68,7 @@ static const	t_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
 
 static const	t_air_totem INITIALIZE_AIR_TOTEM =
 {
-	.save_file = "data/air_totem",
+	.save_file = NULL,
 	.knock_back_distance = 0,
 	.erea_of_effect = 0,
 };
