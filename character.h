@@ -69,12 +69,6 @@ typedef struct	s_attack
 	int	ranged_bonus;
 } t_attack;
 
-typedef struct	s_f_attack
-{
-	c_action	attack;
-	c_action	ranged_attack;
-} t_f_attack;
-
 typedef struct	s_bless
 {
 	int		duration;
@@ -143,13 +137,6 @@ typedef struct s_crit_mod
 	int	skill_fail;
 } t_crit_mod;
 
-#define HUNTERS_MARK_ID 1
-#define HUNTERS_MARK_NAME "hunters mark"
-#define BLESS_ID 2
-#define BLESS_NAME "bless"
-#define CHAOS_ARMOR_ID 3
-#define CHAOS_ARMOR_NAME "chaos_armor"
-
 typedef struct	s_concentration
 {
 	int		concentration;
@@ -178,6 +165,20 @@ typedef struct	s_resistance
 	int	thunder;
 } t_resistance;
 
+typedef struct s_equipment_effect
+{
+}	t_equipment_effect;
+
+typedef struct s_equipment
+{
+	int					weapon_id;
+	c_action			melee_attack;
+	t_equipment_effect	weapon_effect;
+	int					ranged_weapon_id;
+	c_action			ranged_attack;
+	t_equipment_effect	ranged_weapon_effect;
+}	t_equipment;
+
 typedef struct	s_char
 {
 	int				passive_perception;
@@ -195,7 +196,7 @@ typedef struct	s_char
 	t_concentration	concentration;
 	t_resistance	d_resistance;
 	t_resistance	c_resistance;
-	t_f_attack		f_attack;
+	t_equipment		equipment;
 	t_skillsm		skill_mod;
 	t_savem			save_mod;
 	t_stats			stats;

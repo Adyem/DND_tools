@@ -2,6 +2,7 @@
 # define TEMPLATE_H
 //the guards above only capital letters
 
+#include "identification.h"
 #include "character.h"
 #include "initialize.h"
 #include <stddef.h>
@@ -88,11 +89,6 @@ static const	t_attack TEMPLATE_ATTACK =
 	.ranged_bonus = 0,
 };
 
-static const	t_f_attack TEMPLATE_F_ATTACK =
-{
-	.attack = ft_template_attack,
-	.ranged_attack = ft_template_ranged_attack,
-};
 
 static const	t_crit_mod TEMPLATE_CRIT =
 {
@@ -139,6 +135,12 @@ static const	t_resistance TEMPLATE_CURRENT_RESISTANCE =
 	.thunder = -501,
 };
 
+static const	t_equipment TEMPLATE_EQUIPMENT =
+{
+	.weapon_id = STEEL_SWORD_ID,
+	.ranged_weapon_id = WOODEN_BOW_ID,
+};
+
 static const t_char TEMPLATE_INFO =
 {
     .passive_perception = 15,
@@ -156,7 +158,7 @@ static const t_char TEMPLATE_INFO =
     .concentration = INITIALIZE_CONCENTRATION,
     .d_resistance = TEMPLATE_DEFAULT_RESISTANCE,
     .c_resistance = TEMPLATE_CURRENT_RESISTANCE,
-    .f_attack = TEMPLATE_F_ATTACK,
+    .equipment = TEMPLATE_EQUIPMENT,
     .skill_mod = TEMPLATE_SKILL_MODS,
     .save_mod = TEMPLATE_SAVE_MODS,
     .stats = TEMPLATE_STATS,
