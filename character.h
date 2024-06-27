@@ -171,6 +171,7 @@ typedef struct s_equipment_id
 	int			equipment_id;
 	c_action	action_01;
 	c_action	action_02;
+	c_action	attack;
 	int			ac;
 	int			effect_type;
 	int			effect_dice_amount;

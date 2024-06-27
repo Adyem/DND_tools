@@ -9,6 +9,7 @@ static const	t_equipment_id INITIALIZE_EQUIPMENT_ID =
 	.equipment_id = 0,
 	.action_01 = NULL,
 	.action_02 = NULL,
+	.attack = NULL,
 	.ac = 0,
 	.effect_type = 0,
 	.effect_dice_amount = 0,

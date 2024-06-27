@@ -4,15 +4,15 @@ void	ft_npc_sstuff(t_char *info, char **input)
 {
 	if (ft_strcmp_dnd(input[1], "attack") == 0)
 	{
-		if (info->equipment.weapon.action_01)
-			info->equipment.weapon.action_01(info);
+		if (info->equipment.weapon.attack)
+			info->equipment.weapon.attack(info);
 		else
 			ft_printf_fd(2, "No attack for %s set\n", info->name);
 	}
 	else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
 	{
-		if (info->equipment.ranged_weapon.action_01)
-			info->equipment.ranged_weapon.action_01(info);
+		if (info->equipment.ranged_weapon.attack)
+			info->equipment.ranged_weapon.attack(info);
 		else
 			ft_printf_fd(2, "No ranged attack for %s set\n", info->name);
 	}
