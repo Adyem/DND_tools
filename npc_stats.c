@@ -23,8 +23,8 @@ int	ft_npc_open_file(t_char *info)
 	error = ft_initialize_info(info, content);
 	if (DEBUG == 1)
 		ft_printf("the value of error is %i\n", error);
-	if (error)
-		return (error);
+	if (info->error || error)
+		return (1);
 	error = ft_npc_check_info(info);
 	ft_free_double_char(content);
 	if (error)
