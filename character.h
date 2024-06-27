@@ -176,6 +176,7 @@ typedef struct s_equipment_id
 	int			effect_type;
 	int			effect_dice_amount;
 	int			effect_dice_faces;
+	int			bonus_mod;
 }	t_equipment_id;
 
 typedef struct s_equipment
