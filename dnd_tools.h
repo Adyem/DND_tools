@@ -19,8 +19,10 @@ void	ft_npc_init_stats(t_char *info);
 //Template
 t_char	*ft_template(int index, char **input, t_name *name, int exception);
 void	ft_template_turn(t_char *info);
-void	ft_template_ranged_attack(t_char *info);
-void	ft_template_attack(t_char *info);
+
+//Goblin
+t_char	*ft_goblin(int index, char **input, t_name *name, int exception);
+void	ft_goblin_turn(t_char *info);
 
 //Turn
 void	ft_turn_next(t_name *name);

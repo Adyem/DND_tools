@@ -93,6 +93,7 @@ t_name *ft_allocate_memory_name()
     if (!first_node) // Change: Added a check for NULL after initial node allocation
         return NULL;
     ft_add_mob_series(first_node, &last_node, "template", ft_template, 10);
+	ft_add_mob_series(first_node, &last_node, "goblin", ft_goblin, 10);
     return first_node;
 }
 

@@ -7,9 +7,14 @@ HEADER		= include.h \
 			  character.h \
 			  template.h \
 			  player_character.h \
-			  initialize.h
+			  initialize.h \
+			  goblin.h \
+			  identification.h \
+			  melee_weapons.h \
+			  ranged_weapons.h
 
 SRC			= name.c \
+			  goblin.c \
 			  dnd_tools.c \
 			  template.c \
 			  npc_stats.c \

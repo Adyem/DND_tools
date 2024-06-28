@@ -1,5 +1,5 @@
-#ifndef TEMPLATE_H
-# define TEMPLATE_H
+#ifndef GOBLIN_H
+# define GOBLIN_H
 //the guards above only capital letters
 
 #include "ranged_weapons.h"
@@ -12,12 +12,11 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-//change Template, template, TEMPLATE to the name of the mob
 //functions that are used in the struct need to be defined here
-void	ft_template_turn(t_char *info);
+void	ft_goblin_turn(t_char *info);
 
 //these are the default stats u can change these
-static const	t_stats TEMPLATE_DEFAULT_STATS =
+static const	t_stats GOBLIN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
@@ -33,7 +32,7 @@ static const	t_stats TEMPLATE_DEFAULT_STATS =
 };
 
 //possible modifiers for saving throws u can change these
-static const	t_savem TEMPLATE_SAVE_MODS =
+static const	t_savem GOBLIN_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -44,7 +43,7 @@ static const	t_savem TEMPLATE_SAVE_MODS =
 };
 
 //possible modifiers for skills u can change these
-static const	t_skillsm TEMPLATE_SKILL_MODS =
+static const	t_skillsm GOBLIN_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,
@@ -67,14 +66,14 @@ static const	t_skillsm TEMPLATE_SKILL_MODS =
 };
 
 //possible attack modifiers change here
-static const	t_attack TEMPLATE_ATTACK =
+static const	t_attack GOBLIN_ATTACK =
 {
 	.attack_bonus = 0,
 	.ranged_bonus = 0,
 };
 
 
-static const	t_crit_mod TEMPLATE_CRIT =
+static const	t_crit_mod GOBLIN_CRIT =
 {
 	.attack = 0,
 	.attack_d = 0,
@@ -85,7 +84,7 @@ static const	t_crit_mod TEMPLATE_CRIT =
 	.skill_fail = 0,
 };
 
-static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
+static const	t_resistance GOBLIN_DEFAULT_RESISTANCE =
 {
 	.acid = 0,
 	.bludgeoning = 0,
@@ -102,7 +101,7 @@ static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
 	.thunder = 0,
 };
 
-static const	t_resistance TEMPLATE_CURRENT_RESISTANCE =
+static const	t_resistance GOBLIN_CURRENT_RESISTANCE =
 {
 	.acid = -501,
 	.bludgeoning = -501,
@@ -120,7 +119,7 @@ static const	t_resistance TEMPLATE_CURRENT_RESISTANCE =
 };
 
 
-static const	t_equipment TEMPLATE_EQUIPMENT =
+static const	t_equipment GOBLIN_EQUIPMENT =
 {
 	.weapon = STEEL_SWORD,
 	.ranged_weapon = WOODEN_BOW,
@@ -135,7 +134,7 @@ static const	t_equipment TEMPLATE_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
-static const t_char TEMPLATE_INFO =
+static const t_char GOBLIN_INFO =
 {
 	.error = 1,
     .passive_perception = 15,
@@ -145,19 +144,19 @@ static const t_char TEMPLATE_INFO =
     .save_file = NULL,
     .name = NULL,
     .advantage = 0,
-    .turn = ft_template_turn,
-    .crit = TEMPLATE_CRIT,
-    .attack_bonus = TEMPLATE_ATTACK,
+    .turn = ft_goblin_turn,
+    .crit = GOBLIN_CRIT,
+    .attack_bonus = GOBLIN_ATTACK,
     .bufs = INITIALIZE_BUFFS,
     .debufs = INITIALIZE_DEBUFFS,
     .concentration = INITIALIZE_CONCENTRATION,
-    .d_resistance = TEMPLATE_DEFAULT_RESISTANCE,
-    .c_resistance = TEMPLATE_CURRENT_RESISTANCE,
-    .equipment = TEMPLATE_EQUIPMENT,
-    .skill_mod = TEMPLATE_SKILL_MODS,
-    .save_mod = TEMPLATE_SAVE_MODS,
+    .d_resistance = GOBLIN_DEFAULT_RESISTANCE,
+    .c_resistance = GOBLIN_CURRENT_RESISTANCE,
+    .equipment = GOBLIN_EQUIPMENT,
+    .skill_mod = GOBLIN_SKILL_MODS,
+    .save_mod = GOBLIN_SAVE_MODS,
     .stats = INITIALIZE_STATS,
-    .dstats = TEMPLATE_DEFAULT_STATS,
+    .dstats = GOBLIN_DEFAULT_STATS,
     .struct_name = NULL,
 };
 

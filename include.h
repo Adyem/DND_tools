@@ -5,7 +5,7 @@
 # include "template.h"
 
 //npc's
-
+# include "goblin.h"
 
 //player character
 # include "player_character.h"

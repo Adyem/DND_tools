@@ -10,7 +10,7 @@ void	ft_wooden_bow_attack(t_char *info)
 	dex_mod = (info->stats.dex - 10) / 2;
 	result = ft_dice_roll(1, 20);
 	mod = ft_attack_roll_check_buffs(info, &result);
-	ft_printf("%s attacks with his bow and ", info->name);
+	ft_printf("%s attacks with his\\her wooden bow and ", info->name);
 	if (result <= 1 + info->crit.attack_fail)
 		ft_printf("rolled a critical fail (%i) and missed on his attack\n",
 			result);
