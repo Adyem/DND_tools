@@ -137,7 +137,7 @@ static const	t_equipment TEMPLATE_EQUIPMENT =
 
 static const t_char TEMPLATE_INFO =
 {
-	.error = 1,
+	.error = 0,
     .passive_perception = 15,
     .initiative = -1,
     .version_number = 2,
