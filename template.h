@@ -137,6 +137,7 @@ static const	t_equipment TEMPLATE_EQUIPMENT =
 
 static const t_char TEMPLATE_INFO =
 {
+	.alreaddy_saved = 0,
 	.error = 0,
     .passive_perception = 15,
     .initiative = -1,

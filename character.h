@@ -197,6 +197,7 @@ typedef struct s_equipment
 
 typedef struct	s_char
 {
+	int				alreaddy_saved;
 	int				error;
 	int				passive_perception;
 	int				initiative;

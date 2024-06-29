@@ -136,6 +136,7 @@ static const	t_equipment GOBLIN_EQUIPMENT =
 
 static const t_char GOBLIN_INFO =
 {
+	.alreaddy_saved = 0,
 	.error = 0,
     .passive_perception = 15,
     .initiative = -1,
