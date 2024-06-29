@@ -132,7 +132,6 @@ int main(int argc, char **argv)
 		return (1);
 	name = ft_allocate_memory_name();
 	ft_request_input(name);
-	ft_free_memory_name(name, 0);
 	clear_history();
-	return (0);
+	ft_free_memory_name(name, 0);
 }

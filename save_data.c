@@ -37,7 +37,6 @@ static void	ft_npc_write_file_double_char(char *msg, char **targets, int fd)
 
 static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 {
-	(void)info;
 	ft_printf_fd(fd, "ACID_RESISTANCE=%i\n", resistance->acid);
 	ft_printf_fd(fd, "BLUDGEONING_RESISTANCE=%i\n", resistance->bludgeoning);
 	ft_printf_fd(fd, "COLD_RESISTANCE=%i\n", resistance->cold);
@@ -61,7 +60,6 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_printf_fd(fd, "HUNTERS_MARK_AMOUNT=%i\n", info->debufs.hunters_mark.amount);
 	ft_npc_write_file_double_char("HUNTERS_MARK_CASTER=", info->debufs.hunters_mark.caster_name, fd);
 	ft_printf_fd(fd, "CHAOS_ARMOR_DURATION=%i\n", info->bufs.chaos_armor.duration);
-
 	return ;
 }
 
