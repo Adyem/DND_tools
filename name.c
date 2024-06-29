@@ -24,16 +24,12 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, char *new_nam
 
     new_node = (t_name *)malloc(sizeof(t_name));
     if (!new_node)
-    {
         ft_free_memory_name(first_node, 1);
-        return NULL;
-    }
     new_node->name = strdup(new_name);
     if (!new_node->name)
     {
         free(new_node);
         ft_free_memory_name(first_node, 1);
-        return NULL;
     }
     new_node->function = new_function;
     new_node->next = NULL;
@@ -53,7 +49,7 @@ static char *ft_new_name(char *name, int index)
     new_name_length = strlen(name) + 4;
     new_name = (char *)calloc(new_name_length, sizeof(char));
     if (!new_name)
-        return NULL;
+        return (NULL);
     snprintf(new_name, new_name_length, "%s_%02d", name, index);
     return new_name;
 }
@@ -71,11 +67,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, char *base
             ft_free_memory_name(first_node, 1);
         if (DEBUG == 1)
             printf("%s\n", new_name);
-        if (!ft_add_node(first_node, last_node, new_name, function))
-        {
-            free(new_name);
-            return;
-        }
+        ft_add_node(first_node, last_node, new_name, function);
         free(new_name);
 		i++;
     }
@@ -90,8 +82,6 @@ t_name *ft_allocate_memory_name()
     last_node = NULL;
     // template is always the first node
     first_node = ft_add_node(NULL, &last_node, "template", ft_template);
-    if (!first_node) // Change: Added a check for NULL after initial node allocation
-        return NULL;
     ft_add_mob_series(first_node, &last_node, "template", ft_template, 10);
 	ft_add_mob_series(first_node, &last_node, "goblin", ft_goblin, 10);
     return first_node;
