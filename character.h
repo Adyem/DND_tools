@@ -165,18 +165,27 @@ typedef struct	s_resistance
 	int	thunder;
 } t_resistance;
 
-
-typedef struct s_equipment_id
+typedef struct s_equipment_action
 {
-	int			equipment_id;
-	c_action	action_01;
-	c_action	action_02;
-	c_action	attack;
+	c_action	function;
 	int			ac;
 	int			effect_type;
 	int			effect_dice_amount;
 	int			effect_dice_faces;
 	int			bonus_mod;
+}	t_equipment_action;
+
+typedef struct s_equipment_id
+{
+	int					equipment_id;
+	t_equipment_action	action_01;
+	t_equipment_action	action_02;
+	t_equipment_action	attack;
+	int					ac;
+	int					effect_type;
+	int					effect_dice_amount;
+	int					effect_dice_faces;
+	int					bonus_mod;
 }	t_equipment_id;
 
 typedef struct s_equipment

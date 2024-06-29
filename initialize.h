@@ -4,12 +4,22 @@
 #include <stddef.h>
 #include "character.h"
 
-static const	t_equipment_id INITIALIZE_EQUIPMENT_ID =
+static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
+{
+	.function = NULL,
+	.ac = 0,
+	.effect_type = 0,
+	.effect_dice_amount = 0,
+	.effect_dice_faces = 0,
+	.bonus_mod = 0,
+};
+
+static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 {
 	.equipment_id = 0,
-	.action_01 = NULL,
-	.action_02 = NULL,
-	.attack = NULL,
+	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.attack = INITIALIZE_EQUIPMENT_ACTION,
 	.ac = 0,
 	.effect_type = 0,
 	.effect_dice_amount = 0,
