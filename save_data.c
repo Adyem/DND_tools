@@ -65,6 +65,8 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 
 void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, int fd)
 {
+	if (info->alreaddy_saved)
+		return ;
 	if (fd == -1)
 		fd = open(info->save_file, O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR);
@@ -77,5 +79,6 @@ void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, i
 	if (info->version_number >= 2)
 		ft_npc_write_file_2(info, resistance, fd);
 	close(fd);
+	info->alreaddy_saved = 1;
 	return ;
 }
