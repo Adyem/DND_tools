@@ -26,7 +26,7 @@ void	ft_weapon_attack(t_char *info, t_equipment_id *weapon)
 	int	result;
 	int	damage;
 
-	stat_mod = ft_weapon_find_stat(info, weapon);
+	stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;
 	result = ft_dice_roll(1, 20);
 	mod = ft_attack_roll_check_buffs(info, &result);
 	ft_printf("%s attacks with his\\her %s and rolled ", info->name,
