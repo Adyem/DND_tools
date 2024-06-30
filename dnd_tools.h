@@ -27,15 +27,12 @@ void	ft_goblin_turn(t_char *info);
 //Turn
 void	ft_turn_next(t_name *name);
 
+//attack
+void	ft_weapon_attack(t_char *info, t_equipment_id *weapon);
+
 //buff update
 void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name);
 void	ft_update_buff_status(t_char *info, int current_dur, int duration, char *buff_name);
-
-//melee attack
-void	ft_steel_sword_attack(t_char *info);
-
-//ranged attack
-void	ft_wooden_bow_attack(t_char *info);
 
 //damage buffs
 int		ft_check_buff_damage(t_char *info);
@@ -84,7 +81,7 @@ char	**ft_read_file_dnd(int fd);
 char	**ft_open_and_read(char *file);
 
 //utils
-int		ft_strcmp_dnd(char *string1, char *string2);
+int		ft_strcmp_dnd(const char *string1, const char *string2);
 int		ft_initialize_info(t_char *info, char **content);
 int		ft_check_value(char *input);
 void	ft_print_character_status(t_char *info, int number, int temp);

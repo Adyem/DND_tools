@@ -73,8 +73,7 @@ SRC			= name.c \
 			  resize_double_char.c \
 			  concentration_remove_debuf.c \
 			  check_buff_damage.c \
-			  melee_attack.c \
-			  ranged_attack.c
+			  attack.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0

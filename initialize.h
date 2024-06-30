@@ -7,6 +7,8 @@
 static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 {
 	.function = NULL,
+	.damage_type = NULL,
+	.stat = NULL,
 	.ac = 0,
 	.effect_type = 0,
 	.effect_dice_amount = 0,
@@ -16,6 +18,7 @@ static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 
 static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 {
+	.name = NULL,
 	.equipment_id = 0,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
@@ -108,6 +111,5 @@ static const	t_debufs INITIALIZE_DEBUFFS =
 {
 	.hunters_mark = INITIALIZE_HUNTERS_MARK,
 };
-
 
 #endif

@@ -30,7 +30,7 @@ int	ft_check_value(char *input)
 	return (0);
 }
 
-int	ft_strcmp_dnd(char *string1, char *string2)
+int	ft_strcmp_dnd(const char *string1, const char *string2)
 {
 	if (!string1 || !string2)
 		return (-1);

@@ -3,8 +3,9 @@
 
 typedef struct	s_char t_char;
 typedef struct	s_name t_name;
+typedef struct s_equipment_id t_equipment_id;
 
-typedef void	(*c_action)(t_char *);
+typedef void	(*c_action)(t_char *, t_equipment_id *);
 typedef void	(*c_turn)(t_char *);
 
 typedef t_char	*(*c_name)(int, char **, t_name *, int);
@@ -168,6 +169,8 @@ typedef struct	s_resistance
 typedef struct s_equipment_action
 {
 	c_action	function;
+	const char	*damage_type;
+	const char	*stat;
 	int			ac;
 	int			effect_type;
 	int			effect_dice_amount;
@@ -177,6 +180,7 @@ typedef struct s_equipment_action
 
 typedef struct s_equipment_id
 {
+	const char			*name;
 	int					equipment_id;
 	t_equipment_action	action_01;
 	t_equipment_action	action_02;

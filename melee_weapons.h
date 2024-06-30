@@ -6,8 +6,7 @@
 #include "identification.h"
 #include "initialize.h"
 
-void	ft_steel_sword_attack(t_char *info);
-
+void	ft_weapon_attack(t_char *info, t_equipment_id *weapon);
 
 static const t_equipment_id STEEL_SWORD =
 {
@@ -15,7 +14,9 @@ static const t_equipment_id STEEL_SWORD =
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
 	.attack = {
-		.function = ft_steel_sword_attack,
+		.function = ft_weapon_attack,
+		.damage_type = DAMAGE_TYPE_SLASHING,
+		.stat = STAT_DEX,
 		.ac = 0,
 		.effect_type = 0,
 		.effect_dice_amount = 0,
@@ -28,6 +29,5 @@ static const t_equipment_id STEEL_SWORD =
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
 };
-
 
 #endif
