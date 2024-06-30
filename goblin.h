@@ -19,11 +19,11 @@ void	ft_goblin_turn(t_char *info);
 static const	t_stats GOBLIN_DEFAULT_STATS =
 {
 	.phase = 0,
-	.turn = 1,
-	.health = 50,
+	.turn = 0,
+	.health = 25,
 	.temp_hp = 0,
 	.str = 12,
-	.dex = 18,
+	.dex = 16,
 	.con = 10,
 	.inte = 10,
 	.wis = 10,
@@ -34,7 +34,7 @@ static const	t_stats GOBLIN_DEFAULT_STATS =
 static const	t_savem GOBLIN_SAVE_MODS =
 {
     .str = 1,
-    .dex = 3,
+    .dex = 2,
 	.inte = 0,
 	.wis = 0, 
     .cha = 0,
@@ -102,19 +102,19 @@ static const	t_resistance GOBLIN_DEFAULT_RESISTANCE =
 
 static const	t_resistance GOBLIN_CURRENT_RESISTANCE =
 {
-	.acid = -501,
-	.bludgeoning = -501,
-	.cold = -501,
-	.fire = -501,
-	.force = -501,
-	.lightning = -501,
-	.necrotic = -501,
-	.piercing = -501,
-	.poison = -501,
-	.psychic = -501,
-	.radiant = -501,
-	.slashing = -501,
-	.thunder = -501,
+	.acid = 0,
+	.bludgeoning = 0,
+	.cold = 0,
+	.fire = 0,
+	.force = 0,
+	.lightning = 0,
+	.necrotic = 0,
+	.piercing = 0,
+	.poison = 0,
+	.psychic = 0,
+	.radiant = 0,
+	.slashing = 0,
+	.thunder = 0,
 };
 
 
@@ -162,6 +162,4 @@ static const t_char GOBLIN_INFO =
     .struct_name = NULL,
 };
 
-
-//Abilities
 #endif
