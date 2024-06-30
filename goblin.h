@@ -122,6 +122,7 @@ static const	t_resistance GOBLIN_CURRENT_RESISTANCE =
 static const	t_equipment GOBLIN_EQUIPMENT =
 {
 	.weapon = STEEL_SWORD,
+	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WOODEN_BOW,
 	.armor = INITIALIZE_EQUIPMENT_ID,
 	.helmet = INITIALIZE_EQUIPMENT_ID,

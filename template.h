@@ -123,6 +123,7 @@ static const	t_resistance TEMPLATE_CURRENT_RESISTANCE =
 static const	t_equipment TEMPLATE_EQUIPMENT =
 {
 	.weapon = STEEL_SWORD,
+	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WOODEN_BOW,
 	.armor = INITIALIZE_EQUIPMENT_ID,
 	.helmet = INITIALIZE_EQUIPMENT_ID,

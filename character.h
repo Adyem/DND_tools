@@ -191,6 +191,7 @@ typedef struct s_equipment_id
 typedef struct s_equipment
 {
 	t_equipment_id	weapon;
+	t_equipment_id	offhand_weapon;
 	t_equipment_id	ranged_weapon;
 	t_equipment_id	armor;
 	t_equipment_id	helmet;
