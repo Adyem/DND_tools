@@ -10,6 +10,7 @@ void	ft_weapon_attack(t_char *info, t_equipment_id *weapon);
 
 static const t_equipment_id STEEL_SWORD =
 {
+	.name = "steel sword",
 	.equipment_id = STEEL_SWORD_ID,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
