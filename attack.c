@@ -1,4 +1,5 @@
 #include "dnd_tools.h"
+#include "identification.h"
 
 static int	ft_weapon_find_stat(t_char *info, t_equipment_id *weapon)
 {
@@ -16,6 +17,13 @@ static int	ft_weapon_find_stat(t_char *info, t_equipment_id *weapon)
 		return (info->stats.wis);
 	else if (ft_strcmp_dnd(weapon->attack.stat, STAT_CHA) == 0)
 		return (info->stats.cha);
+	else if (ft_strcmp_dnd(weapon->attack.stat, FINESSE) == 0)
+	{
+		if (info->stats.str > info->stats.dex)
+			return (info->stats.str);
+		else
+			return (info->stats.dex);
+	}
 	return (0);
 }
 

@@ -140,6 +140,7 @@ static const t_char TEMPLATE_INFO =
 {
 	.alreaddy_saved = 0,
 	.error = 0,
+	.flanking = 0,
     .passive_perception = 15,
     .initiative = -1,
     .version_number = 2,

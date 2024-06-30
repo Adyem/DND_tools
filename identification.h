@@ -36,4 +36,7 @@
 # define STAT_WIS "wisdom"
 # define STAT_CHA "charisma"
 
+//Other
+# define FINESSE "finesse"
+
 #endif

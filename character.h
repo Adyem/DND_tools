@@ -213,6 +213,7 @@ typedef struct	s_char
 {
 	int				alreaddy_saved;
 	int				error;
+	int				flanking;
 	int				passive_perception;
 	int				initiative;
 	int				version_number;
