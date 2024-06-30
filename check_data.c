@@ -57,8 +57,6 @@ int	ft_npc_check_info(t_char *info)
 		error += ft_printf_fd(2, "%s health value not found\n", info->name);
 	if (info->stats.health <= -1 || info->stats.temp_hp > 5000)
 		error += ft_printf_fd(2, "%s temp health value not found\n", info->name);
-	if (info->stats.ac <= -1)
-		error += ft_printf_fd(2, "%s armor class value not found\n", info->name);
 	if (info->stats.str <= -1 || info->stats.str > 30)
 		error += ft_printf_fd(2, "%s strength value not found\n", info->name);
 	if (info->stats.dex <= -1 || info->stats.dex > 30)

@@ -4,7 +4,6 @@ static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 {
 	ft_printf_fd(fd, "HEALTH=%i\n", stats->health);
 	ft_printf_fd(fd, "TEMP_HP=%i\n", stats->temp_hp);
-	ft_printf_fd(fd, "AC=%i\n", stats->ac);
 	ft_printf_fd(fd, "STR=%i\n", stats->str);
 	ft_printf_fd(fd, "DEX=%i\n", stats->dex);
 	ft_printf_fd(fd, "CON=%i\n", stats->con);

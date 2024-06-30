@@ -36,7 +36,6 @@ static const	t_stats INITIALIZE_STATS =
 	.turn = -1,
 	.health = -1,
 	.temp_hp = -1,
-	.ac = -1,
 	.str = -1,
 	.dex = -1,
 	.con = -1,

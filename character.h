@@ -23,7 +23,6 @@ typedef struct	s_stats
 	int	turn;
 	int	health;
 	int	temp_hp;
-	int	ac;
 	int	str;
 	int	dex;
 	int	con;

@@ -9,8 +9,6 @@ int ft_set_stats_1(t_char *info, char **content, int i)
 		info->stats.health = ft_check_stat(info, content[i], 7);
 	else if (ft_strncmp(content[i], "TEMP_HP=", 8) == 0 && (info->stats.temp_hp == -1))
 		info->stats.temp_hp = ft_check_stat(info, content[i], 8);
-	else if (ft_strncmp(content[i], "AC=", 3) == 0 && (info->stats.ac == -1))
-		info->stats.ac = ft_check_stat(info, content[i], 3);
 	else if (ft_strncmp(content[i], "STR=", 4) == 0 && (info->stats.str == -1))
 		info->stats.str = ft_check_stat(info, content[i], 4);
 	else if (ft_strncmp(content[i], "DEX=", 4) == 0 && (info->stats.dex == -1))
