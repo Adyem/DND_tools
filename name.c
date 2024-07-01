@@ -61,6 +61,8 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, char *base
 	i = 1;
 	while (i <= count)
     {
+		if (i > 99)
+			break ;
         new_name = ft_new_name(base_name, i);
         if (!new_name)
             ft_free_memory_name(first_node, 1);
