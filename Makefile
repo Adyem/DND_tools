@@ -10,6 +10,7 @@ HEADER		= include.h \
 			  initialize.h \
 			  goblin.h \
 			  veraak.h \
+			  chaos_crystal.h \
 			  chaos_goblin.h \
 			  identification.h \
 			  melee_weapons.h \
@@ -19,6 +20,7 @@ SRC			= name.c \
 			  goblin.c \
 			  chaos_goblin.c \
 			  veraak.c \
+			  chaos_crystal.c \
 			  dnd_tools.c \
 			  template.c \
 			  npc_stats.c \

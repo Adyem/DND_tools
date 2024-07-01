@@ -6,6 +6,9 @@
 
 //npc's
 # include "goblin.h"
+# include "chaos_goblin.h"
+# include "chaos_crystal.h"
+# include "veraak.h"
 
 //player character
 # include "player_character.h"
