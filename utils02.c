@@ -75,13 +75,13 @@ void	ft_dual_save_file(t_char *info, t_char *target)
 
 	fd_target = ft_open_file(target->save_file);
 	fd_info = ft_open_file(info->save_file);
-    if (fd_target == -1 | fd_info == -1)
+    if (fd_target == -1 || fd_info == -1)
     {
         if (fd_target != -1)
             close(fd_target);
         if (fd_info != -1)
             close(fd_info);
-        info->alreaddy_saved = 1;
+        info->flags.alreaddy_saved = 1;
         ft_free_info(target);
         return;
     }

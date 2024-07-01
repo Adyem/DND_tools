@@ -22,8 +22,8 @@ int	ft_npc_open_file(t_char *info)
 	close(fd);
 	error = ft_initialize_info(info, content);
 	if (DEBUG == 1)
-		ft_printf("the value of error is %i %i\n", error, info->error);
-	if (info->error || error)
+		ft_printf("the value of error is %i %i\n", error, info->flags.error);
+	if (info->flags.error || error)
 		return (1);
 	error = ft_npc_check_info(info);
 	ft_free_double_char(content);

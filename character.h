@@ -207,12 +207,16 @@ typedef struct s_equipment
 	t_equipment_id	belt;
 }	t_equipment;
 
-
-typedef struct	s_char
+typedef struct s_flags
 {
 	int				alreaddy_saved;
 	int				error;
 	int				flanking;
+}	t_flags;
+
+typedef struct	s_char
+{
+
 	int				passive_perception;
 	int				initiative;
 	int				version_number;
@@ -221,6 +225,7 @@ typedef struct	s_char
 	char			*name;
 	int				advantage;
 	c_turn			turn;
+	t_flags			flags;
 	t_crit_mod		crit;
 	t_attack		attack_bonus;
 	t_bufs			bufs;

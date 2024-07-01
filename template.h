@@ -137,9 +137,6 @@ static const	t_equipment TEMPLATE_EQUIPMENT =
 
 static const t_char TEMPLATE_INFO =
 {
-	.alreaddy_saved = 0,
-	.error = 0,
-	.flanking = 0,
     .passive_perception = 15,
     .initiative = -1,
     .version_number = 2,
@@ -148,6 +145,7 @@ static const t_char TEMPLATE_INFO =
     .name = NULL,
     .advantage = 0,
     .turn = ft_template_turn,
+	.flags = INITIALIZE_FLAGS,
     .crit = TEMPLATE_CRIT,
     .attack_bonus = TEMPLATE_ATTACK,
     .bufs = INITIALIZE_BUFFS,

@@ -28,8 +28,6 @@ static void	ft_cast_hm_second_appli(t_char *target, char **input)
 void ft_cast_hunters_mark(t_char *info, char **input) {
     char **temp;
     int i;
-    int fd_target;
-	int	fd_info;
     t_char *target;
 
 	if (DEBUG == 1)

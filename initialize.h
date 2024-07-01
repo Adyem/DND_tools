@@ -111,4 +111,11 @@ static const	t_debufs INITIALIZE_DEBUFFS =
 	.hunters_mark = INITIALIZE_HUNTERS_MARK,
 };
 
+static const	t_flags INITIALIZE_FLAGS =
+{
+	.alreaddy_saved = 0,
+	.error = 0,
+	.flanking = 0,
+};
+
 #endif
