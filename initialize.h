@@ -116,6 +116,7 @@ static const	t_flags INITIALIZE_FLAGS =
 	.alreaddy_saved = 0,
 	.error = 0,
 	.flanking = 0,
+	.advantage = 0,
 };
 
 #endif

@@ -142,7 +142,6 @@ static const t_char GOBLIN_INFO =
     .free_save = 1,
     .save_file = NULL,
     .name = NULL,
-    .advantage = 0,
     .turn = ft_goblin_turn,
 	.flags = INITIALIZE_FLAGS,
     .crit = GOBLIN_CRIT,

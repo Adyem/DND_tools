@@ -212,6 +212,7 @@ typedef struct s_flags
 	int				alreaddy_saved;
 	int				error;
 	int				flanking;
+	int				advantage;
 }	t_flags;
 
 typedef struct	s_char
@@ -223,7 +224,6 @@ typedef struct	s_char
 	int				free_save;
 	char			*save_file;
 	char			*name;
-	int				advantage;
 	c_turn			turn;
 	t_flags			flags;
 	t_crit_mod		crit;

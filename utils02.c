@@ -31,13 +31,13 @@ int	ft_dice_roll(int number, int faces)
 void	ft_reroll(t_char *info, int *result)
 {
 	int second_roll;
-	if (info->advantage > 0)
+	if (info->flags.advantage > 0)
 	{
 		second_roll = ft_dice_roll(1, 20);
 		if (second_roll > *result)
 			*result = second_roll;
 	}
-	else if (info->advantage < 0)
+	else if (info->flags.advantage < 0)
 	{
 		second_roll = ft_dice_roll(1, 20);
 		if (second_roll < *result)

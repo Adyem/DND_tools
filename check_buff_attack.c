@@ -6,6 +6,8 @@ int	ft_attack_roll_check_buffs(t_char *info, int *roll)
 
 	return_value = 0;
 	return_value += ft_check_bless(info);
+	if (info->flags.flanking)
+		info->flags.advantage++;
 	ft_reroll(info, roll);
 	return (return_value);
 }

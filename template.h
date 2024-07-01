@@ -143,7 +143,6 @@ static const t_char TEMPLATE_INFO =
     .free_save = 1,
     .save_file = NULL,
     .name = NULL,
-    .advantage = 0,
     .turn = ft_template_turn,
 	.flags = INITIALIZE_FLAGS,
     .crit = TEMPLATE_CRIT,
