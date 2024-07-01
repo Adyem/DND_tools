@@ -83,6 +83,8 @@ t_name *ft_allocate_memory_name()
     first_node = ft_add_node(NULL, &last_node, "template", ft_template);
     ft_add_mob_series(first_node, &last_node, "template", ft_template, 10);
 	ft_add_mob_series(first_node, &last_node, "goblin", ft_goblin, 10);
+	ft_add_mob_series(first_node, &last_node, "chaos_goblin", ft_chaos_goblin, 10);
+	ft_add_node(first_node, &last_node, "veraak", ft_veraak);
     return first_node;
 }
 

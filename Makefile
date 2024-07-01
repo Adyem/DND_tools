@@ -9,12 +9,16 @@ HEADER		= include.h \
 			  player_character.h \
 			  initialize.h \
 			  goblin.h \
+			  veraak.h \
+			  chaos_goblin.h \
 			  identification.h \
 			  melee_weapons.h \
 			  ranged_weapons.h
 
 SRC			= name.c \
 			  goblin.c \
+			  chaos_goblin.c \
+			  veraak.c \
 			  dnd_tools.c \
 			  template.c \
 			  npc_stats.c \

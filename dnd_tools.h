@@ -24,6 +24,14 @@ void	ft_template_turn(t_char *info);
 t_char	*ft_goblin(int index, char **input, t_name *name, int exception);
 void	ft_goblin_turn(t_char *info);
 
+//Chaos Goblin
+t_char	*ft_chaos_goblin(int index, char **input, t_name *name, int exception);
+void	ft_chaos_goblin_turn(t_char *info);
+
+//Veraak
+t_char	*ft_veraak(int index, char **input, t_name *name, int exception);
+void	ft_veraak_turn(t_char *info);
+
 //Turn
 void	ft_turn_next(t_name *name);
 
