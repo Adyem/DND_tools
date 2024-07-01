@@ -139,7 +139,6 @@ static const t_char GOBLIN_INFO =
     .passive_perception = 15,
     .initiative = -1,
     .version_number = 2,
-    .free_save = 1,
     .save_file = NULL,
     .name = NULL,
     .turn = ft_goblin_turn,

@@ -221,7 +221,6 @@ typedef struct	s_char
 	int				passive_perception;
 	int				initiative;
 	int				version_number;
-	int				free_save;
 	char			*save_file;
 	char			*name;
 	c_turn			turn;
