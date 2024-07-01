@@ -39,7 +39,4 @@
 //Other
 # define FINESSE "finesse"
 
-//Abilities
-# define NIMBLE_ESCAPE "can use disengage as a bonus action"
-
 #endif

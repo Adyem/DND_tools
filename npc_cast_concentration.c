@@ -1,4 +1,7 @@
 #include "dnd_tools.h"
+#include <fcntl.h>
+
+
 
 static void	ft_cast_hm_second_appli(t_char *target, char **input)
 {
@@ -25,7 +28,8 @@ static void	ft_cast_hm_second_appli(t_char *target, char **input)
 void ft_cast_hunters_mark(t_char *info, char **input) {
     char **temp;
     int i;
-    int fd;
+    int fd_target;
+	int	fd_info;
     t_char *target;
 
 	if (DEBUG == 1)
@@ -80,12 +84,8 @@ void ft_cast_hunters_mark(t_char *info, char **input) {
     info->concentration.dice_faces_mod = 6;
     info->concentration.dice_amount_mod = 1;
     info->concentration.duration = 500;
-	fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-	if (fd)
-		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
-	else
-		ft_printf_fd(2, "264-Error opening file %s\n", strerror(errno));
-	ft_free_info(target);
+	ft_dual_save_file(info, target);
+    ft_free_info(target);
     return;
 }
 

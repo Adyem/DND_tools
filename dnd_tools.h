@@ -79,6 +79,7 @@ void	ft_reroll(t_char *info, int *result);
 //open and read
 char	**ft_read_file_dnd(int fd);
 char	**ft_open_and_read(char *file);
+int		ft_open_file(const char *filename);
 
 //utils
 int		ft_strcmp_dnd(const char *string1, const char *string2);
@@ -92,6 +93,7 @@ char	**ft_set_stats_con_targets(char *content, int ofset, char **data, t_char *i
 t_char	*ft_get_info(char *tf_name, t_name *name);
 char	**ft_resize_double_char(char **double_string, char *string, int size);
 int		ft_double_char_length(char **double_char);
+void	ft_dual_save_file(t_char *info, t_char *target);
 
 //check name
 int		ft_set_stats_check_name(char *name);
