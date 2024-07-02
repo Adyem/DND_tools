@@ -21,14 +21,14 @@ static const	t_stats VERAAK_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 50,
+	.health = 200,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 18,
-	.con = 10,
-	.inte = 10,
-	.wis = 10,
-	.cha = 8,
+	.con = 12,
+	.inte = 12,
+	.wis = 12,
+	.cha = 12,
 };
 
 //possible modifiers for saving throws u can change these
@@ -158,7 +158,6 @@ static const t_char VERAAK_INFO =
     .dstats = VERAAK_DEFAULT_STATS,
     .struct_name = NULL,
 };
-
 
 //Abilities
 #endif

@@ -21,14 +21,14 @@ static const	t_stats CHAOS_CRYSTAL_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 50,
+	.health = 5,
 	.temp_hp = 0,
-	.str = 12,
-	.dex = 18,
-	.con = 10,
-	.inte = 10,
-	.wis = 10,
-	.cha = 8,
+	.str = 20,
+	.dex = 20,
+	.con = 20,
+	.inte = 20,
+	.wis = 20,
+	.cha = 20,
 };
 
 //possible modifiers for saving throws u can change these
@@ -103,19 +103,19 @@ static const	t_resistance CHAOS_CRYSTAL_DEFAULT_RESISTANCE =
 
 static const	t_resistance CHAOS_CRYSTAL_CURRENT_RESISTANCE =
 {
-	.acid = 0,
-	.bludgeoning = 0,
-	.cold = 0,
-	.fire = 0,
-	.force = 0,
-	.lightning = 0,
-	.necrotic = 0,
-	.piercing = 0,
-	.poison = 0,
-	.psychic = 0,
-	.radiant = 0,
-	.slashing = 0,
-	.thunder = 0,
+	.acid = 99,
+	.bludgeoning = 99,
+	.cold = 99,
+	.fire = 99,
+	.force = 99,
+	.lightning = 99,
+	.necrotic = 99,
+	.piercing = 99,
+	.poison = 99,
+	.psychic = 99,
+	.radiant = 99,
+	.slashing = 99,
+	.thunder = 99,
 };
 
 
