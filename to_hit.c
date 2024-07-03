@@ -26,6 +26,7 @@ void	ft_npc_check_ac(t_char *info, char **input)
 	int	ac;
 
 	ac = ft_calculate_ac(info);
+	ft_to_hit_check_buff(info);
 	if (ft_strcmp_dnd(input[2], "crit") == 0)
 	{
 		if (info->bufs.protective_winds.duration > 0)
