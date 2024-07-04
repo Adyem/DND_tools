@@ -121,9 +121,9 @@ static const	t_resistance CHAOS_CRYSTAL_CURRENT_RESISTANCE =
 
 static const	t_equipment CHAOS_CRYSTAL_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = INITIALIZE_EQUIPMENT_ID,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
+	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
 	.armor = INITIALIZE_EQUIPMENT_ID,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
