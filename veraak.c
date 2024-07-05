@@ -8,7 +8,6 @@ void	ft_veraak_turn(t_char *info)
 			info->stats.health, info->dstats.health);
 }
 
-
 static void ft_veraak_initialize(t_char *info)
 {
     char *input[3];
@@ -44,7 +43,6 @@ static void ft_veraak_initialize(t_char *info)
         i++;
     }
 }
-
 
 t_char	*ft_veraak(int index, char **input, t_name *name, int exception)
 {
