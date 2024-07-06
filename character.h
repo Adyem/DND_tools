@@ -170,7 +170,6 @@ typedef struct s_equipment_action
 	c_action	function;
 	const char	*damage_type;
 	const char	*stat;
-	int			ac;
 	int			effect_type;
 	int			effect_dice_amount;
 	int			effect_dice_faces;
@@ -185,6 +184,12 @@ typedef struct s_equipment_id
 	t_equipment_action	action_02;
 	t_equipment_action	attack;
 	int					ac;
+	int					str;
+	int					dex;
+	int					con;
+	int					inte;
+	int					wis;
+	int					cha;
 	int					effect_type;
 	int					effect_dice_amount;
 	int					effect_dice_faces;
