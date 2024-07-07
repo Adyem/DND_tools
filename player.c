@@ -40,7 +40,6 @@ void ft_player(const char **input)
 				return ;
 			}
 			player->name = ft_strdup(input[2]);
-			if (!player->name)
 			{
 				ft_printf_fd(2, "249-Error allocating memory player name");
 				free(player);
@@ -51,7 +50,8 @@ void ft_player(const char **input)
 		}
 	}
 	else
-		ft_printf_fd(2, "Error with input: player");
+		ft_printf_fd(2, "243-Error with input: player");
+	free(player->name);
 	free(player);
 	return ;
 }
