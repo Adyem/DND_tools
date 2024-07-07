@@ -10,10 +10,10 @@ void	ft_veraak_turn(t_char *info)
 
 static void ft_veraak_initialize(t_char *info)
 {
-    char *input[3];
-    t_name *name;
-    int i;
-    char *crystals[5] = {
+    const char	*input[3];
+    t_name		*name;
+    int			i;
+	const  char	*crystals[5] = {
         "chaos_crystal_01",
         "chaos_crystal_02",
         "chaos_crystal_03",
@@ -44,7 +44,7 @@ static void ft_veraak_initialize(t_char *info)
     }
 }
 
-t_char	*ft_veraak(int index, char **input, t_name *name, int exception)
+t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)
 {
 	t_char	*info;
 

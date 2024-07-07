@@ -24,7 +24,7 @@ static void	ft_add_player(t_pc *player)
 	return ;
 }
 
-void ft_player(char **input)
+void ft_player(const char **input)
 {
 	t_pc *player;
 
@@ -36,10 +36,16 @@ void ft_player(char **input)
 			player = malloc(sizeof(t_pc));
 			if (!player)
 			{
-				ft_printf_fd(2, "Error allocating memory for player");
+				ft_printf_fd(2, "248-Error allocating memory for player");
 				return ;
 			}
-			player->name = input[2];
+			player->name = ft_strdup(input[2]);
+			if (!player->name)
+			{
+				ft_printf_fd(2, "249-Error allocating memory player name");
+				free(player);
+				return ;
+			}
 			player->initiative = 0;
 			ft_add_player(player);
 		}

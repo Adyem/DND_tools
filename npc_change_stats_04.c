@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-void	ft_change_stats_04(t_char *info, char **input)
+void	ft_change_stats_04(t_char *info, const char **input)
 {
 	int	resistance;
 

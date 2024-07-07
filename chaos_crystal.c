@@ -39,7 +39,7 @@ void	ft_chaos_crystal_turn(t_char *info)
 			info->stats.health, info->dstats.health);
 }
 
-t_char	*ft_chaos_crystal(int index, char **input, t_name *name, int exception)
+t_char	*ft_chaos_crystal(int index, const char **input, t_name *name, int exception)
 {
 	t_char	*info;
 

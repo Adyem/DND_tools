@@ -19,7 +19,7 @@ void	ft_veraak_turn(t_char *info);
 //these are the default stats u can change these
 static const	t_stats VERAAK_DEFAULT_STATS =
 {
-	.phase = 0,
+	.phase = 1,
 	.turn = 1,
 	.health = 200,
 	.temp_hp = 0,

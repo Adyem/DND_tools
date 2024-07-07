@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-void	ft_npc_update_lightning_strike(t_char *info, char **input)
+void	ft_npc_update_lightning_strike(t_char *info, const char **input)
 {
 	int	number;
 

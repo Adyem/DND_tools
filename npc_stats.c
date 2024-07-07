@@ -32,7 +32,7 @@ int	ft_npc_open_file(t_char *info)
 	return (error);
 }
 
-void	ft_npc_change_stats(t_char *info, int index, char **input)
+void	ft_npc_change_stats(t_char *info, int index, const char **input)
 {
 	int	error;
 	int	i;

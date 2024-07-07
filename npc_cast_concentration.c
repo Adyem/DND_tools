@@ -3,7 +3,7 @@
 
 
 
-static void	ft_cast_hm_second_appli(t_char *target, char **input)
+static void	ft_cast_hm_second_appli(t_char *target, const char **input)
 {
 	char	**temp;
 	int		i;
@@ -25,7 +25,8 @@ static void	ft_cast_hm_second_appli(t_char *target, char **input)
 	return ;
 }
 
-void ft_cast_hunters_mark(t_char *info, char **input) {
+void ft_cast_hunters_mark(t_char *info, const char **input)
+{
     char **temp;
     int i;
     t_char *target;

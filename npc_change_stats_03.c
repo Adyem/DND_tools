@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-static void	ft_npc_update_hp(t_char *info, char **input)
+static void	ft_npc_update_hp(t_char *info, const char **input)
 {
 	int	number;
 	int	temp;
@@ -21,7 +21,7 @@ static void	ft_npc_update_hp(t_char *info, char **input)
 	return ;
 }
 
-void	ft_npc_set_stat(t_char *info, char **input)
+void	ft_npc_set_stat(t_char *info, const char **input)
 {
 	if (ft_strcmp_dnd(input[1], "hp") == 0)
 		ft_npc_update_hp(info, input);

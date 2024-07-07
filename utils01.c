@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-int	ft_check_value(char *input)
+int	ft_check_value(const char *input)
 {
 	long	check;
 	int		i;

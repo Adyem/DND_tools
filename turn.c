@@ -88,11 +88,11 @@ static int	ft_turn_write(t_pc *players)
 
 static int	ft_turn_run(t_pc *players, t_name *name)
 {
-	t_pc	*pc_temp;
-	t_name	*n_temp;
-	char	*c_name;
-	char	*temp[2];
-	int		found;
+	t_pc		*pc_temp;
+	t_name		*n_temp;
+	char		*c_name;
+	const char	*temp[2];
+	int			found;
 
 	c_name = NULL;
 	pc_temp = players;

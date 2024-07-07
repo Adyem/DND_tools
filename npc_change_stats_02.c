@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-void	ft_npc_sstuff(t_char *info, char **input)
+void	ft_npc_sstuff(t_char *info, const char **input)
 {
 	if (ft_strcmp_dnd(input[1], "attack") == 0)
 	{

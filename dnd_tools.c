@@ -90,7 +90,7 @@ static void	ft_request_input(t_name *name)
 		}
 		else if (i == 3 && ft_strcmp_dnd(input[1], "player") == 0 && !found)
 		{
-			ft_player(input);
+			ft_player((const char **)input);
 			found = 1;
 		}
 		else
@@ -99,7 +99,7 @@ static void	ft_request_input(t_name *name)
 			{
 				if (i > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
 				{
-					temp->function(i, input, name, 0);
+					temp->function(i, (const char **)input, name, 0);
 					found = 1;
 				}
 				temp = temp->next;

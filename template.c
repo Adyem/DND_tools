@@ -8,7 +8,7 @@ void	ft_template_turn(t_char *info)
 			info->stats.health, info->dstats.health);
 }
 
-t_char	*ft_template(int index, char **input, t_name *name, int exception)
+t_char	*ft_template(int index, const char **input, t_name *name, int exception)
 {
 	t_char	*info;
 

@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-void	ft_deal_damage(t_char *info, char *input, char *d_type, int resistance,
+void	ft_deal_damage(t_char *info, const char *input, const char *d_type, int resistance,
 			int override)
 {
 	static int	total;

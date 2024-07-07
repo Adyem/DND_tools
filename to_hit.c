@@ -20,7 +20,7 @@ static int	ft_calculate_ac(t_char *info)
 	return (ac);
 }
 
-void	ft_npc_check_ac(t_char *info, char **input)
+void	ft_npc_check_ac(t_char *info, const char **input)
 {
 	int	number;
 	int	ac;

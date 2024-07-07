@@ -15,7 +15,7 @@ static int	ft_free_request_damage(char *line, char **input)
 	return (1);
 }
 
-int ft_get_resistance(t_char *info, char *type)
+int ft_get_resistance(t_char *info, const char *type)
 {
 	if (strcmp(type, "acid") == 0)
 		return info->c_resistance.acid;

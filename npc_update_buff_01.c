@@ -24,7 +24,7 @@ void ft_update_buff_status(t_char *info, int current_dur, int duration, char *bu
 	return ;
 }
 
-void	ft_npc_update_buff(t_char *info, char **input, int *buff, char *name)
+void	ft_npc_update_buff(t_char *info, const char **input, int *buff, char *name)
 {
 	int	number;
 

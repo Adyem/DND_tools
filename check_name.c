@@ -12,7 +12,7 @@ static void remove_exclude_prefix(char* filename)
 				- strlen(EXCLUDE_PREFIX) + 1);
 }
 
-int ft_set_stats_check_name(char *name)
+int ft_set_stats_check_name(const char *name)
 {
     DIR* dir;
     struct dirent* entry;
@@ -53,7 +53,7 @@ int ft_set_stats_check_name(char *name)
     return (1);
 }
 
-int ft_check_player_character(char *name)
+int ft_check_player_character(const char *name)
 {
     DIR* dir;
     struct dirent* entry;

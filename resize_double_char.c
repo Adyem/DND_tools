@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-char **ft_resize_double_char(char **double_string, char *string, int size) {
+char **ft_resize_double_char(char **double_string, const char *string, int size) {
     char **return_v;
     int i;
 	int	j;

@@ -10,7 +10,7 @@ void	ft_goblin_turn(t_char *info)
 		ft_printf("the goblin is on low health and can disengage as a bonus action\n");
 }
 
-t_char	*ft_goblin(int index, char **input, t_name *name, int exception)
+t_char	*ft_goblin(int index, const char **input, t_name *name, int exception)
 {
 	t_char	*info;
 

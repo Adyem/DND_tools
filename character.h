@@ -8,7 +8,7 @@ typedef struct s_equipment_id t_equipment_id;
 typedef void	(*c_action)(t_char *, t_equipment_id *);
 typedef void	(*c_turn)(t_char *);
 
-typedef t_char	*(*c_name)(int, char **, t_name *, int);
+typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 
 typedef struct s_name
 {
@@ -179,6 +179,7 @@ typedef struct s_equipment_action
 typedef struct s_equipment_id
 {
 	const char			*name;
+	const char			*projectile_name;
 	int					equipment_id;
 	t_equipment_action	action_01;
 	t_equipment_action	action_02;
@@ -227,7 +228,7 @@ typedef struct	s_char
 	int				initiative;
 	int				version_number;
 	char			*save_file;
-	char			*name;
+	const char		*name;
 	c_turn			turn;
 	t_flags			flags;
 	t_crit_mod		crit;

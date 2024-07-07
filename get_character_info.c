@@ -1,11 +1,11 @@
 #include "dnd_tools.h"
 
-t_char	*ft_get_info(char *tf_name, t_name *name)
+t_char	*ft_get_info(const char *tf_name, t_name *name)
 {
-	t_name	*temp;
-	t_char	*info;
-	int		found;
-	char	*input[2];
+	t_name		*temp;
+	t_char		*info;
+	int			found;
+	const char	*input[2];
 
 	info = NULL;
 	found = 0;
