@@ -1,11 +1,26 @@
 #include "dnd_tools.h"
 
-void	ft_veraak_turn(t_char *info)
+static void ft_veraak_kill_crystal(const char *crystal, t_char *info)
 {
-	ft_update_buf(info);
-	ft_printf("The veraak will try to make either a ranged or melee attack during his turn\n");
-	ft_printf("Veraak currently has %i/%i hp\n",
-			info->stats.health, info->dstats.health);
+    const char *input[5];
+    t_name *name;
+
+    if (DEBUG == 1)
+        ft_printf("checking crystal: %s\n", crystal);
+    name = info->struct_name;
+    while (name != NULL) {
+        if (ft_strcmp_dnd(name->name, crystal) == 0) {
+            input[0] = name->name;
+            input[1] = "hp";
+			input[2] = "-5";
+            input[3] = NULL;
+            if (DEBUG == 1)
+                ft_printf("initializing: %s\n", name->name);
+            name->function(2, input, name, 0);
+            break;
+        }
+        name = name->next;
+    }
 }
 
 static void ft_veraak_initialize(t_char *info)
@@ -42,6 +57,34 @@ static void ft_veraak_initialize(t_char *info)
         }
         i++;
     }
+}
+
+static void	ft_veraak_phase_transition(t_char *info)
+{
+	if (info->stats.health < 200 && info->stats.phase == 1)
+	{
+		ft_veraak_kill_crystal("chaos_crystal_01", info);
+	}
+	if (info->stats.health < 150 && info->stats.phase == 1)
+	{
+		ft_veraak_kill_crystal("chaos_crystal_02", info);
+	}
+	if (info->stats.health < 100 && info->stats.phase == 1)
+	{
+		ft_veraak_kill_crystal("chaos_crystal_03", info);
+	}
+	if (info->stats.health < 50 && info->stats.phase == 1)
+	{
+		ft_veraak_kill_crystal("chaos_crystal_04", info);
+	}
+}
+
+void	ft_veraak_turn(t_char *info)
+{
+	ft_update_buf(info);
+	ft_printf("The veraak will try to make either a ranged or melee attack during his turn\n");
+	ft_printf("Veraak currently has %i/%i hp\n",
+			info->stats.health, info->dstats.health);
 }
 
 t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)

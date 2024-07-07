@@ -1,6 +1,4 @@
 #include "dnd_tools.h"
-#include "libft/libft/libft.h"
-#include <fcntl.h>
 
 static void	ft_chaos_crystal_damage(t_char *info)
 {
@@ -26,7 +24,8 @@ static void	ft_chaos_crystal_damage(t_char *info)
 	result = -1;
 	while (result == -1 || ft_strncmp(content[result], "pc--", 4))
 		result = ft_dice_roll(1, length) - 1;
-	ft_printf("%s shoots a magic missle at %s and he/she takes 2 force damage\n",
+	ft_printf("%s shoots a magic missle at %s and he/she takes 1 force damage, " \
+			"the target does not need to make a concentration save for this damage\n",
 			info->name, &content[result][4]);
 	return ;
 }

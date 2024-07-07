@@ -10,6 +10,12 @@ void ft_initiative_remove(t_char *info)
 
 	if (DEBUG == 1)
 		ft_printf("removing initiative %s\n", info->name);
+	if (access("data/data--initiative", F_OK) == -1)
+	{
+		if (DEBUG == 1)
+			ft_printf("File does not exist: data/data--initiative\n");
+		return ;
+	}
 	content = ft_open_and_read("data/data--initiative");
 	if (!content)
 		return ;
