@@ -21,7 +21,7 @@ static const	t_stats VERAAK_DEFAULT_STATS =
 {
 	.phase = 1,
 	.turn = 1,
-	.health = 250,
+	.health = 300,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 18,

@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-static void ft_veraak_kill_crystal(const char *crystal, t_char *info)
+static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
 {
     const char *input[5];
     t_name *name;
@@ -21,6 +21,8 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info)
         }
         name = name->next;
     }
+	info->stats.phase = phase;
+	info->stats.turn = 1;
 }
 
 static void ft_veraak_initialize(t_char *info)
@@ -61,22 +63,14 @@ static void ft_veraak_initialize(t_char *info)
 
 static void	ft_veraak_phase_transition(t_char *info)
 {
+	if (info->stats.health < 250 && info->stats.phase == 1)
+		ft_veraak_kill_crystal("chaos_crystal_01", info, 1);
 	if (info->stats.health < 200 && info->stats.phase == 1)
-	{
-		ft_veraak_kill_crystal("chaos_crystal_01", info);
-	}
+		ft_veraak_kill_crystal("chaos_crystal_02", info, 2);
 	if (info->stats.health < 150 && info->stats.phase == 1)
-	{
-		ft_veraak_kill_crystal("chaos_crystal_02", info);
-	}
+		ft_veraak_kill_crystal("chaos_crystal_03", info, 3);
 	if (info->stats.health < 100 && info->stats.phase == 1)
-	{
-		ft_veraak_kill_crystal("chaos_crystal_03", info);
-	}
-	if (info->stats.health < 50 && info->stats.phase == 1)
-	{
-		ft_veraak_kill_crystal("chaos_crystal_04", info);
-	}
+		ft_veraak_kill_crystal("chaos_crystal_04", info, 4);
 }
 
 void	ft_veraak_turn(t_char *info)
