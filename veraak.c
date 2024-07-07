@@ -23,6 +23,8 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
     }
 	info->stats.phase = phase;
 	info->stats.turn = 1;
+	ft_printf("veraak transitions to the next phase dropping 2 green orbs at random " \
+			"locations in the arena");
 }
 
 static void ft_veraak_initialize(t_char *info)
@@ -76,6 +78,8 @@ static void	ft_veraak_phase_transition(t_char *info)
 void	ft_veraak_turn(t_char *info)
 {
 	ft_update_buf(info);
+	ft_veraak_phase_transition(info);
+	ft_veraak_check_phase(info);
 	ft_printf("The veraak will try to make either a ranged or melee attack during his turn\n");
 	ft_printf("Veraak currently has %i/%i hp\n",
 			info->stats.health, info->dstats.health);

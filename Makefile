@@ -20,6 +20,7 @@ SRC			= name.c \
 			  goblin.c \
 			  chaos_goblin.c \
 			  veraak.c \
+			  veraak_turn.c \
 			  chaos_crystal.c \
 			  dnd_tools.c \
 			  template.c \

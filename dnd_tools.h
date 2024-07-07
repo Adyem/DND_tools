@@ -34,6 +34,7 @@ void		ft_chaos_goblin_turn(t_char *info);
 
 //Veraak
 t_char		*ft_veraak(int index, const char **input, t_name *name, int exception);
+void		ft_veraak_check_phase(t_char *info);
 void		ft_veraak_turn(t_char *info);
 
 //Turn
