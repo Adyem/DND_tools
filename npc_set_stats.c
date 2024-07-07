@@ -163,8 +163,8 @@ int	ft_set_stats(t_char *info, char **content)
 		}
 		else
 		{
-			ft_printf_fd(2, "1-Something is wrong with the save file for Maverick at the "\
-				"line: %s, please reinitialize the save\n", content[i]);
+			ft_printf_fd(2, "1-Something is wrong with the save file for %s at the "\
+				"line: %s, please reinitialize the save\n", info->name, content[i]);
 			info->flags.error = 1;
 			ft_free_double_char(content);
 			return (1);

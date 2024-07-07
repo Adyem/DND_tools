@@ -4,6 +4,24 @@
 #include <stddef.h>
 #include "character.h"
 
+
+static const	t_resistance INITIALIZE_CURRENT_RESISTANCE =
+{
+	.acid = -501,
+	.bludgeoning = -501,
+	.cold = -501,
+	.fire = -501,
+	.force = -501,
+	.lightning = -501,
+	.necrotic = -501,
+	.piercing = -501,
+	.poison = -501,
+	.psychic = -501,
+	.radiant = -501,
+	.slashing = -501,
+	.thunder = -501,
+};
+
 static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 {
 	.function = NULL,

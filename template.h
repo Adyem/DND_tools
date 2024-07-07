@@ -101,23 +101,6 @@ static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
 	.thunder = 0,
 };
 
-static const	t_resistance TEMPLATE_CURRENT_RESISTANCE =
-{
-	.acid = 0,
-	.bludgeoning = 0,
-	.cold = 0,
-	.fire = 0,
-	.force = 0,
-	.lightning = 0,
-	.necrotic = 0,
-	.piercing = 0,
-	.poison = 0,
-	.psychic = 0,
-	.radiant = 0,
-	.slashing = 0,
-	.thunder = 0,
-};
-
 
 static const	t_equipment TEMPLATE_EQUIPMENT =
 {
@@ -150,7 +133,7 @@ static const t_char TEMPLATE_INFO =
     .debufs = INITIALIZE_DEBUFFS,
     .concentration = INITIALIZE_CONCENTRATION,
     .d_resistance = TEMPLATE_DEFAULT_RESISTANCE,
-    .c_resistance = TEMPLATE_CURRENT_RESISTANCE,
+    .c_resistance = INITIALIZE_CURRENT_RESISTANCE,
     .equipment = TEMPLATE_EQUIPMENT,
     .skill_mod = TEMPLATE_SKILL_MODS,
     .save_mod = TEMPLATE_SAVE_MODS,
