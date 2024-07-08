@@ -51,6 +51,6 @@ void	ft_veraak_check_phase(t_char *info)
 		ft_veraak_phase_four(info);
 	else if (info->stats.phase == 5)
 		ft_veraak_phase_five(info);
-	else
-		ft_printf_fd(2, "242-%s phase counter out of bounds", info->name);
+	else if (info->stats.phase != 1)
+		ft_printf_fd(2, "242-%s phase counter out of bounds\n", info->name);
 }
