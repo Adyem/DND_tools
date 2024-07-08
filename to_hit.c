@@ -4,7 +4,8 @@ static int	ft_calculate_ac(t_char *info)
 {
 	int	ac;
 
-	if ((10 + ((info->stats.dex - 10) / 2)) > info->equipment.armor.dex_ac_max_bonus)
+	ac = 10;
+	if (((info->stats.dex - 10) / 2) > info->equipment.armor.dex_ac_max_bonus)
 		ac += info->equipment.armor.dex_ac_max_bonus;
 	else
 		ac += (info->stats.dex - 10) / 2;
