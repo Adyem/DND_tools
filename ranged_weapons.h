@@ -1,10 +1,10 @@
 #ifndef RANGED_WEAPONS_H
 # define RANGED_WEAPONS_H
 
-#include <stddef.h>
-#include "character.h"
-#include "identification.h"
-#include "initialize.h"
+# include <stddef.h>
+# include "character.h"
+# include "identification.h"
+# include "initialize.h"
 
 void	ft_weapon_attack(t_char *info, t_equipment_id *weapon);
 
@@ -24,6 +24,7 @@ static const t_equipment_id WOODEN_BOW =
 		.effect_dice_faces = 8,
 		.bonus_mod = 0,
 	},
+	.dex_ac_max_bonus = 0,
 	.ac = 0,
 	.str = 0,
 	.dex = 0,

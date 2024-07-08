@@ -4,7 +4,10 @@ static int	ft_calculate_ac(t_char *info)
 {
 	int	ac;
 
-	ac = 10 + ((info->stats.dex - 10) / 2);
+	if ((10 + ((info->stats.dex - 10) / 2)) > info->equipment.armor.dex_ac_max_bonus)
+		ac += info->equipment.armor.dex_ac_max_bonus;
+	else
+		ac += (info->stats.dex - 10) / 2;
 	ac += info->equipment.weapon.ac;
 	ac += info->equipment.offhand_weapon.ac;
 	ac += info->equipment.ranged_weapon.ac;

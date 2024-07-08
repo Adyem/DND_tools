@@ -5,6 +5,9 @@
 # define STEEL_SWORD_ID 10001
 # define WOODEN_BOW_ID 10002
 
+//Armor ID
+# define LEATHER_ARMOR_ID 20001
+
 //Concentration ID
 # define HUNTERS_MARK_ID 1
 # define HUNTERS_MARK_NAME "hunters mark"

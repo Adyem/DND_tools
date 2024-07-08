@@ -2,12 +2,12 @@
 # define CHAOS_CRYSTAL_H
 //the guards above only capital letters
 
-#include "ranged_weapons.h"
-#include "melee_weapons.h"
-#include "identification.h"
-#include "character.h"
-#include "initialize.h"
-#include <stddef.h>
+# include "ranged_weapons.h"
+# include "melee_weapons.h"
+# include "identification.h"
+# include "character.h"
+# include "initialize.h"
+# include <stddef.h>
 
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;

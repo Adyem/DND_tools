@@ -14,7 +14,8 @@ HEADER		= include.h \
 			  chaos_goblin.h \
 			  identification.h \
 			  melee_weapons.h \
-			  ranged_weapons.h
+			  ranged_weapons.h \
+			  armor.h
 
 SRC			= name.c \
 			  goblin.c \

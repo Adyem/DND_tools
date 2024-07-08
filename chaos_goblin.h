@@ -2,12 +2,13 @@
 # define CHAOS_GOBLIN_H
 //the guards above only capital letters
 
-#include "ranged_weapons.h"
-#include "melee_weapons.h"
-#include "identification.h"
-#include "character.h"
-#include "initialize.h"
-#include <stddef.h>
+# include "armor.h"
+# include "ranged_weapons.h"
+# include "melee_weapons.h"
+# include "identification.h"
+# include "character.h"
+# include "initialize.h"
+# include <stddef.h>
 
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
@@ -107,7 +108,7 @@ static const	t_equipment CHAOS_GOBLIN_EQUIPMENT =
 	.weapon = STEEL_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WOODEN_BOW,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.armor = LEATHER_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,

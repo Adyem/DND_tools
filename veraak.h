@@ -2,6 +2,7 @@
 # define VERAAK_H
 //the guards above only capital letters
 
+#include "armor.h"
 #include "ranged_weapons.h"
 #include "melee_weapons.h"
 #include "identification.h"
@@ -21,7 +22,7 @@ static const	t_stats VERAAK_DEFAULT_STATS =
 {
 	.phase = 1,
 	.turn = 1,
-	.health = 300,
+	.health = 240,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 18,
@@ -107,7 +108,7 @@ static const	t_equipment VERAAK_EQUIPMENT =
 	.weapon = STEEL_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WOODEN_BOW,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.armor = LEATHER_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,
@@ -143,4 +144,16 @@ static const t_char VERAAK_INFO =
 };
 
 //Abilities
+#define CHAOS_SMASH "Veraak conjures a hammer made out of dark energy hitting his" \
+	" target with it dealing damage based on his armor class\n" \
+	"10-12 ac -> 15 force damage\n" \
+	"13-15 ac -> 10 force damage\n" \
+	"16-17 ac -> 8 force damage\n" \
+	"18-19 ac -> 6 force damage\n" \
+	"20-21 ac -> 4 force damage\n" \
+	"22->23 ac -> 2 force damage\n" \
+	"24 ac and higher -> 0 damage\n"
+#define CHAOS_BREATH "annyone in a 90 degree cone in front of veraak needs to make a" \
+	" dc 12 dex save, on a failed save takes 10 force damage and half on a succesfull one\n"
+
 #endif
