@@ -19,6 +19,7 @@ static void	ft_add_player(t_pc *player)
 		ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
 		return ;
 	}
+	ft_printf("adding player %s\n", player->name);
 	ft_save_pc(player, fd);
 	close (fd);
 	return ;
@@ -36,12 +37,13 @@ void ft_player(const char **input)
 			player = malloc(sizeof(t_pc));
 			if (!player)
 			{
-				ft_printf_fd(2, "248-Error allocating memory for player");
+				ft_printf_fd(2, "248-Error allocating memory for player\n");
 				return ;
 			}
 			player->name = ft_strdup(input[2]);
+			if (!player->name)
 			{
-				ft_printf_fd(2, "249-Error allocating memory player name");
+				ft_printf_fd(2, "249-Error allocating memory player name\n");
 				free(player);
 				return ;
 			}
@@ -50,7 +52,7 @@ void ft_player(const char **input)
 		}
 	}
 	else
-		ft_printf_fd(2, "243-Error with input: player");
+		ft_printf_fd(2, "243-Error with input: player\n");
 	free(player->name);
 	free(player);
 	return ;

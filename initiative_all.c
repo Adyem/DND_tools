@@ -2,9 +2,10 @@
 
 static t_char	*ft_check_name(t_name *name, char *file_name)
 {
-	int		found;
-	t_char	*info;
-	t_name	*temp;
+	const char	*input[2];
+	int			found;
+	t_char		*info;
+	t_name		*temp;
 
 	if (DEBUG == 1)
 		ft_printf("%s\n", file_name);
@@ -13,7 +14,9 @@ static t_char	*ft_check_name(t_name *name, char *file_name)
 	temp = name;
 	while (temp != NULL && !found)
 	{
-		info = temp->function(0, NULL, name, 1);
+		input[0] = name->name;
+		input[1] = NULL;
+		info = temp->function(0, input, name, 1);
 		found = 1;
 		temp = temp->next;
 	}
