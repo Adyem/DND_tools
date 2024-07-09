@@ -37,7 +37,11 @@ void	ft_weapon_attack(t_char *info, t_equipment_id *weapon)
 	stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;
 	result = ft_dice_roll(1, 20);
 	mod = ft_attack_roll_check_buffs(info, &result);
-	ft_printf("%s attacks with his\\her %s and rolled ", info->name,
+	if (weapon->projectile_name)
+		ft_printf("%s uses his/her %s to fire a %s and rolled ",
+			info->name, weapon->name, weapon->projectile_name);
+	else 
+		ft_printf("%s attacks with his\\her %s and rolled ", info->name,
 			weapon->name);
 	if (result <= 1 + info->crit.attack_fail)
 		ft_printf("a critical fail (%i) and missed on his attack\n",

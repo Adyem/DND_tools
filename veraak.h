@@ -27,9 +27,9 @@ static const	t_stats VERAAK_DEFAULT_STATS =
 	.str = 12,
 	.dex = 18,
 	.con = 12,
-	.inte = 12,
-	.wis = 12,
-	.cha = 12,
+	.inte = 16,
+	.wis = 8,
+	.cha = 8,
 };
 
 //possible modifiers for saving throws u can change these
@@ -107,7 +107,7 @@ static const	t_equipment VERAAK_EQUIPMENT =
 {
 	.weapon = STEEL_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
+	.ranged_weapon = CHAOS_WAND,
 	.armor = LEATHER_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
@@ -146,14 +146,14 @@ static const t_char VERAAK_INFO =
 //Abilities
 #define CHAOS_SMASH "Veraak conjures a hammer made out of dark energy hitting his" \
 	" target with it dealing damage based on his armor class\n" \
-	"10-12 ac -> 15 force damage\n" \
-	"13-15 ac -> 10 force damage\n" \
-	"16-17 ac -> 8 force damage\n" \
-	"18-19 ac -> 6 force damage\n" \
-	"20-21 ac -> 4 force damage\n" \
-	"22->23 ac -> 2 force damage\n" \
+	"10-12 ac -> 15 " DAMAGE_TYPE_FORCE " damage\n" \
+	"13-15 ac -> 10 " DAMAGE_TYPE_FORCE " damage\n" \
+	"16-17 ac -> 8 " DAMAGE_TYPE_FORCE " damage\n" \
+	"18-19 ac -> 6 " DAMAGE_TYPE_FORCE " damage\n" \
+	"20-21 ac -> 4 " DAMAGE_TYPE_FORCE " damage\n" \
+	"22->23 ac -> 2 " DAMAGE_TYPE_FORCE " damage\n" \
 	"24 ac and higher -> 0 damage\n"
 #define CHAOS_BREATH "annyone in a 90 degree cone in front of veraak needs to make a" \
-	" dc 12 dex save, on a failed save takes 10 force damage and half on a succesfull one\n"
+    " dc 12 dex save, on a failed save takes 10 " DAMAGE_TYPE_NECROTIC " damage and half on a succesfull one\n"
 
 #endif
