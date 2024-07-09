@@ -82,7 +82,8 @@ SRC			= name.c \
 			  concentration_remove_debuf.c \
 			  check_buff_damage.c \
 			  attack.c \
-			  to_hit_check_buffs.c
+			  to_hit_check_buffs.c \
+			  kill.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0

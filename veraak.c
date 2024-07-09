@@ -2,18 +2,17 @@
 
 static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
 {
-    const char *input[5];
+    const char *input[3];
     t_name *name;
 
     if (DEBUG == 1)
-        ft_printf("checking crystal: %s\n", crystal);
+        ft_printf("killing crystal: %s\n", crystal);
     name = info->struct_name;
     while (name != NULL) {
         if (ft_strcmp_dnd(name->name, crystal) == 0) {
             input[0] = name->name;
-            input[1] = "hp";
-			input[2] = "-5";
-            input[3] = NULL;
+            input[1] = "kill";
+            input[2] = NULL;
             if (DEBUG == 1)
                 ft_printf("initializing: %s\n", name->name);
             name->function(2, input, name, 0);
@@ -24,7 +23,7 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
 	info->stats.phase = phase;
 	info->stats.turn = 1;
 	ft_printf("veraak transitions to the next phase dropping 2 green orbs at random " \
-			"locations in the arena");
+			"locations in the arena\n");
 }
 
 static void ft_veraak_initialize(t_char *info)
@@ -65,14 +64,14 @@ static void ft_veraak_initialize(t_char *info)
 
 static void	ft_veraak_phase_transition(t_char *info)
 {
-	if (info->stats.health < 200 && info->stats.phase == 1)
-		ft_veraak_kill_crystal("chaos_crystal_01", info, 1);
-	if (info->stats.health < 160 && info->stats.phase == 1)
-		ft_veraak_kill_crystal("chaos_crystal_02", info, 2);
-	if (info->stats.health < 120 && info->stats.phase == 1)
-		ft_veraak_kill_crystal("chaos_crystal_03", info, 3);
-	if (info->stats.health < 80 && info->stats.phase == 1)
-		ft_veraak_kill_crystal("chaos_crystal_04", info, 4);
+	if (info->stats.health <= 200 && info->stats.phase == 1)
+		ft_veraak_kill_crystal("chaos_crystal_01", info, 2);
+	if (info->stats.health <= 160 && info->stats.phase == 2)
+		ft_veraak_kill_crystal("chaos_crystal_02", info, 3);
+	if (info->stats.health <= 120 && info->stats.phase == 3)
+		ft_veraak_kill_crystal("chaos_crystal_03", info, 4);
+	if (info->stats.health <= 80 && info->stats.phase == 4)
+		ft_veraak_kill_crystal("chaos_crystal_04", info, 5);
 }
 
 void	ft_veraak_turn(t_char *info)

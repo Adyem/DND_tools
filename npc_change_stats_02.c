@@ -16,6 +16,8 @@ void	ft_npc_sstuff(t_char *info, const char **input)
 		else
 			ft_printf_fd(2, "No ranged attack for %s set\n", info->name);
 	}
+	else if (ft_strcmp_dnd(input[1], "kill") == 0)
+		ft_kill(info);
 	else if (ft_strcmp_dnd(input[1], "damage") == 0)
 		ft_request_damage(info);
 	else if (ft_strcmp_dnd(input[1], "hp") == 0)
