@@ -42,7 +42,6 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 		ft_printf("Iniaitive file descriptor is %i\n", fd);
 	info->name = file_name + 5;
 	ft_roll_initiative(info);
-	info->name = file_name;
 	return (info);
 }
 
