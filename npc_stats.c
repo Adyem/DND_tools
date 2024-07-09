@@ -42,15 +42,6 @@ void	ft_npc_change_stats(t_char *info, int index, const char **input)
 		ft_printf("%s\n", input[i]);
 		i++;
 	}
-	if (index == 2)
-	{
-		if (ft_strcmp_dnd(input[1], "init") == 0)
-		{
-			ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-			ft_printf("Stats for %s written on a file\n", info->name);
-			return ;
-		}
-	}
 	i = 0;
 	if (DEBUG == 1)
 	{

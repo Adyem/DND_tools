@@ -24,6 +24,15 @@ t_char	*ft_goblin(int index, const char **input, t_name *name, int exception)
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
 		return (NULL);
+	if (index == 2)
+	{
+		if (ft_strcmp_dnd(input[1], "init") == 0)
+		{
+			ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
+			ft_printf("Stats for %s written on a file\n", info->name);
+			return (NULL);
+		}
+	}
 	error = ft_npc_open_file(info);
 	if (error)
 		return (NULL);

@@ -101,16 +101,18 @@ t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)
 	if (!info->save_file)
 		return (NULL);
 	if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
-		ft_veraak_initialize(info);
-	else
 	{
-		error = ft_npc_open_file(info);
-		if (error)
-			return (NULL);
-		error = ft_npc_check_info(info);
-		if (error)
-			return (NULL);
+		ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
+		ft_printf("Stats for %s written on a file\n", info->name);
+		ft_veraak_initialize(info);
+		return (NULL);
 	}
+	error = ft_npc_open_file(info);
+	if (error)
+		return (NULL);
+	error = ft_npc_check_info(info);
+	if (error)
+		return (NULL);
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);
