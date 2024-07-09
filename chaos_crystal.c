@@ -40,6 +40,7 @@ void	ft_chaos_crystal_turn(t_char *info)
 
 t_char	*ft_chaos_crystal(int index, const char **input, t_name *name, int exception)
 {
+	int		error;
 	t_char	*info;
 
 	info = (t_char *)calloc(1, sizeof(t_char));
@@ -50,6 +51,12 @@ t_char	*ft_chaos_crystal(int index, const char **input, t_name *name, int except
 	info->struct_name = name;
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
+		return (NULL);
+	error = ft_npc_open_file(info);
+	if (error)
+		return (NULL);
+	error = ft_npc_check_info(info);
+	if (error)
 		return (NULL);
 	if (exception)
 		return (info);

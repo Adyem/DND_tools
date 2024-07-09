@@ -34,7 +34,6 @@ int	ft_npc_open_file(t_char *info)
 
 void	ft_npc_change_stats(t_char *info, int index, const char **input)
 {
-	int	error;
 	int	i;
 
 	i = 0;
@@ -52,12 +51,6 @@ void	ft_npc_change_stats(t_char *info, int index, const char **input)
 			return ;
 		}
 	}
-	error = ft_npc_open_file(info);
-	if (error)
-		return ;
-	error = ft_npc_check_info(info);
-	if (error)
-		return ;
 	i = 0;
 	if (DEBUG == 1)
 	{

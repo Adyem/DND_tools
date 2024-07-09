@@ -86,6 +86,7 @@ void	ft_veraak_turn(t_char *info)
 
 t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)
 {
+	int		error;
 	t_char	*info;
 
 	if (DEBUG == 1) 
@@ -99,10 +100,19 @@ t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
 		return (NULL);
-	if (exception)
-		return (info);
 	if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
 		ft_veraak_initialize(info);
+	else
+	{
+		error = ft_npc_open_file(info);
+		if (error)
+			return (NULL);
+		error = ft_npc_check_info(info);
+		if (error)
+			return (NULL);
+	}
+	if (exception)
+		return (info);
 	ft_npc_change_stats(info, index, input);
 	ft_free_info(info);
 	return (NULL);
