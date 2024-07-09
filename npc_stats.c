@@ -5,7 +5,9 @@ int	ft_npc_open_file(t_char *info)
 	int		error;
 	int		fd;
 	char	**content;
-	
+
+	if (DEBUG == 1)
+		ft_printf("opening file %s\n", info->save_file);
 	fd = open(info->save_file, O_RDONLY);
 	if (fd == -1)
 	{
@@ -16,7 +18,7 @@ int	ft_npc_open_file(t_char *info)
 	content = ft_read_file_dnd(fd);
 	if (!content)
 	{
-		ft_printf_fd(2, "Malloc in read file failed");
+		ft_printf_fd(2, "Malloc in read file failed\n");
 		return (1);
 	}
 	close(fd);

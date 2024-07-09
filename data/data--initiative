@@ -1,7 +1,9 @@
---turn--chaos_crystal_02=21
-chaos_crystal_03=20
-veraak=18
-chaos_crystal_04=16
-goblin_01=15
+--turn--chaos_crystal_04=25
+chaos_crystal_01=19
+chaos_crystal_02=19
+chaos_crystal_03=16
+veraak=15
+template=12
+goblin_01=7
 PC--geri=5
 PC--adyem=5

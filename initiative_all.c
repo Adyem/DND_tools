@@ -3,36 +3,36 @@
 static t_char	*ft_check_name(t_name *name, char *file_name)
 {
 	const char	*input[2];
-	int			found;
 	t_char		*info;
-	t_name		*temp;
 
 	if (DEBUG == 1)
-		ft_printf("%s\n", file_name);
+		ft_printf("printing file name again %s\n", file_name);
 	info = NULL;
-	found = 0;
-	temp = name;
-	while (temp != NULL && !found)
+    while (name != NULL)
 	{
-		input[0] = name->name;
-		input[1] = NULL;
-		info = temp->function(0, input, name, 1);
-		found = 1;
-		temp = temp->next;
-	}
+		if (ft_strcmp_dnd(name->name, file_name) == 0)
+		{
+			input[0] = name->name;
+			input[1] = NULL;
+            if (DEBUG == 1)
+                ft_printf("initializing: %s\n", name->name);
+            info = name->function(1, input, name, 1);
+            break;
+        }
+        name = name->next;
+    }
 	if (DEBUG == 1)
-		ft_printf("%p\n", info);
+		ft_printf("printing memory location of info %p\n", info);
 	return (info);
 }
 
 static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 {
 	t_char	*info;
-	char	**content;
 
 	if (DEBUG == 1)
 		ft_printf("printing file_name: %s\n", file_name);
-	info = ft_check_name(name, file_name);
+	info = ft_check_name(name, file_name + 5);
 	if (!info)
 	{
 		ft_printf_fd(2, "255 Error allocating memory\n");
@@ -40,26 +40,9 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	}
 	if (DEBUG == 1)
 		ft_printf("Iniaitive file descriptor is %i\n", fd);
-	content = ft_read_file_dnd(fd);
-	if (!content)
-	{
-		free(info);
-		return (NULL);
-	}
-	info->save_file = ft_strdup(file_name);
-	if (!info->save_file)
-	{
-		ft_printf_fd(2, "254 Error allocating memory\n");
-		return (NULL);
-	}
-	if (DEBUG == 1)
-		ft_printf("name of the safe file is %s\n", file_name);
-	ft_initialize_info(info, content);
 	info->name = file_name + 5;
 	ft_roll_initiative(info);
 	info->name = file_name;
-	free(info->save_file);
-	ft_free_double_char(content);
 	return (info);
 }
 
@@ -185,14 +168,14 @@ void	ft_open_all_files(t_name *name)
 			if (fd == -1)
 			{
 				ft_printf_fd(2, "unable to open file: %s\n", strerror(errno));
-				free(info);
+				ft_free_info(info);
 				continue ;
 			}
 			ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
 			close(fd);
 			if (error == 0)
 				ft_initiative_write(info->initiative, entry->d_name);
-			free(info);
+			ft_free_info(info);
 		}
 	}
 	closedir(dir);

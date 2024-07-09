@@ -8,8 +8,10 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
     if (DEBUG == 1)
         ft_printf("killing crystal: %s\n", crystal);
     name = info->struct_name;
-    while (name != NULL) {
-        if (ft_strcmp_dnd(name->name, crystal) == 0) {
+    while (name != NULL)
+	{
+        if (ft_strcmp_dnd(name->name, crystal) == 0)
+		{
             input[0] = name->name;
             input[1] = "kill";
             input[2] = NULL;
@@ -88,7 +90,8 @@ t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)
 {
 	int		error;
 	t_char	*info;
-
+	
+	error = 0;
 	if (DEBUG == 1) 
 		ft_printf("index = %i\n", index);
 	info = (t_char *)calloc(1, sizeof(t_char));
@@ -99,20 +102,30 @@ t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)
 	info->struct_name = name;
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
+	{
+		ft_free_info(info);
 		return (NULL);
+	}
 	if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
 	{
 		ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
 		ft_printf("Stats for %s written on a file\n", info->name);
 		ft_veraak_initialize(info);
+		ft_free_info(info);
 		return (NULL);
 	}
 	error = ft_npc_open_file(info);
 	if (error)
+	{
+		ft_free_info(info);
 		return (NULL);
+	}
 	error = ft_npc_check_info(info);
 	if (error)
+	{
+		ft_free_info(info);
 		return (NULL);
+	}
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);
