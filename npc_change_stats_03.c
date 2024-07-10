@@ -23,7 +23,27 @@ static void	ft_npc_update_hp(t_char *info, const char **input)
 
 void	ft_npc_set_stat(t_char *info, const char **input)
 {
-	if (ft_strcmp_dnd(input[1], "hp") == 0)
+	if (ft_strcmp_dnd(input[2], "flank") == 0 || ft_strcmp_dnd(input[2], "flanking"))
+	{
+		info->flags.flanking = 1;
+		if (ft_strcmp_dnd(input[1], "attack") == 0)
+		{
+			if (info->equipment.weapon.attack.function)
+				info->equipment.weapon.attack.function(info, &info->equipment.weapon);
+			else
+				ft_printf_fd(2, "No attack for %s set\n", info->name);
+		}
+		else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
+		{
+			if (info->equipment.ranged_weapon.attack.function)
+				info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon);
+			else
+				ft_printf_fd(2, "No ranged attack for %s set\n", info->name);
+		}
+		else
+			ft_printf_fd(2, "6-Error invalid argument given\n");
+	}
+	else if (ft_strcmp_dnd(input[1], "hp") == 0)
 		ft_npc_update_hp(info, input);
 	else if (ft_strcmp_dnd(input[1], "bless") == 0)
 		ft_npc_update_buff(info, input, &info->bufs.bless.duration, "bless");
