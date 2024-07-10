@@ -37,17 +37,17 @@ void	ft_npc_set_stat(t_char *info, const char **input)
 	else if (ft_strcmp_dnd(input[2], "save") == 0)
 	{
 		if (ft_strcmp_dnd(input[1], "str") == 0)
-			ft_saving_throw(info, "strength", info->stats.str, info->save_mod.str);
+			ft_saving_throw(info, "strength", ft_calculate_str(info), info->save_mod.str);
 		else if (ft_strcmp_dnd(input[1], "dex") == 0)
-			ft_saving_throw(info, "dexterity", info->stats.dex, info->save_mod.dex);
+			ft_saving_throw(info, "dexterity", ft_calculate_dex(info), info->save_mod.dex);
 		else if (ft_strcmp_dnd(input[1], "con") == 0)
-			ft_saving_throw(info, "constituion", info->stats.con, info->save_mod.con);
+			ft_saving_throw(info, "constituion", ft_calculate_con(info), info->save_mod.con);
 		else if (ft_strcmp_dnd(input[1], "int") == 0)
-			ft_saving_throw(info, "intelligence", info->stats.inte, info->save_mod.inte);
+			ft_saving_throw(info, "intelligence", ft_calculate_inte(info), info->save_mod.inte);
 		else if (ft_strcmp_dnd(input[1], "wis") == 0)
-			ft_saving_throw(info, "wisdom", info->stats.wis, info->save_mod.wis);
+			ft_saving_throw(info, "wisdom", ft_calculate_wis(info), info->save_mod.wis);
 		else if (ft_strcmp_dnd(input[1], "cha") == 0)
-			ft_saving_throw(info, "charisma", info->stats.cha, info->save_mod.cha);
+			ft_saving_throw(info, "charisma", ft_calculate_cha(info), info->save_mod.cha);
 		else
 		{
 			ft_printf_fd(2, "4-Maverick Invalid argument given\n");

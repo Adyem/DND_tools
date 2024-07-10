@@ -59,6 +59,14 @@ int			ft_attack_roll_check_buffs(t_char *info, int *roll);
 //to_hit check buffs
 void		ft_to_hit_check_buff(t_char *info);
 
+//calculate stats
+int			ft_calculate_str(t_char *info);
+int			ft_calculate_dex(t_char *info);
+int			ft_calculate_con(t_char *info);
+int			ft_calculate_inte(t_char *info);
+int			ft_calculate_wis(t_char *info);
+int			ft_calculate_cha(t_char *info);
+
 //damage
 void		ft_deal_damage(t_char *info, const char *input, const char *d_type, int resistance,
 				int concentration);

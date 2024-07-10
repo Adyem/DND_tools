@@ -6,17 +6,17 @@ static int	ft_weapon_find_stat(t_char *info, t_equipment_id *weapon)
 	if (!weapon->attack.stat)
 		return (0);
 	else if (ft_strcmp_dnd(weapon->attack.stat, STAT_STR) == 0)
-		return (info->stats.str);
+		return (ft_calculate_str(info));
 	else if (ft_strcmp_dnd(weapon->attack.stat, STAT_DEX) == 0)
-		return (info->stats.dex);
+		return (ft_calculate_dex(info));
 	else if (ft_strcmp_dnd(weapon->attack.stat, STAT_CON) == 0)
-		return (info->stats.con);
+		return (ft_calculate_con(info));
 	else if (ft_strcmp_dnd(weapon->attack.stat, STAT_INT) == 0)
-		return (info->stats.inte);
+		return (ft_calculate_inte(info));
 	else if (ft_strcmp_dnd(weapon->attack.stat, STAT_WIS) == 0)
-		return (info->stats.wis);
+		return (ft_calculate_wis(info));
 	else if (ft_strcmp_dnd(weapon->attack.stat, STAT_CHA) == 0)
-		return (info->stats.cha);
+		return (ft_calculate_cha(info));
 	else if (ft_strcmp_dnd(weapon->attack.stat, FINESSE) == 0)
 	{
 		if (info->stats.str > info->stats.dex)

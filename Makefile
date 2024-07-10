@@ -83,7 +83,8 @@ SRC			= name.c \
 			  check_buff_damage.c \
 			  attack.c \
 			  to_hit_check_buffs.c \
-			  kill.c
+			  kill.c \
+			  calculate_stats.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0
