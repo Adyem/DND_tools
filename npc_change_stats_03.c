@@ -50,7 +50,7 @@ void	ft_npc_set_stat(t_char *info, const char **input)
 			ft_saving_throw(info, "charisma", ft_calculate_cha(info), info->save_mod.cha);
 		else
 		{
-			ft_printf_fd(2, "4-Maverick Invalid argument given\n");
+			ft_printf_fd(2, "4-%s Invalid argument given\n", info->name);
 			return ;
 		}
 	}
@@ -66,7 +66,7 @@ void	ft_npc_set_stat(t_char *info, const char **input)
 	}
 	else
 	{
-		ft_printf_fd(2, "4-%s Invalid argument given\n", info->name);
+		ft_printf_fd(2, "5-%s Invalid argument given\n", info->name);
 		return ;
 	}
 	return ;
