@@ -31,15 +31,21 @@ int	ft_dice_roll(int number, int faces)
 void	ft_reroll(t_char *info, int *result)
 {
 	int second_roll;
+
+	if (DEBUG == 1)
+		ft_printf("%p %p\n", info, result);
+	if (!info->flags.advantage)
+		return ;
+	second_roll = ft_dice_roll(1, 20);
 	if (info->flags.advantage > 0)
 	{
-		second_roll = ft_dice_roll(1, 20);
+		ft_printf("%s rolled %i on his/her advantage\n", info->name, second_roll);
 		if (second_roll > *result)
 			*result = second_roll;
 	}
 	else if (info->flags.advantage < 0)
 	{
-		second_roll = ft_dice_roll(1, 20);
+		ft_printf("%s rolled %i on his/her disadvantage\n", info->name, second_roll);
 		if (second_roll < *result)
 			*result = second_roll;
 	}
@@ -74,6 +80,11 @@ void	ft_dual_save_file(t_char *info, t_char *target)
 	int	fd_info;
 
 	fd_target = ft_open_file(target->save_file);
+	if (fd_target == -1)
+	{
+		info->flags.alreaddy_saved = 1;
+		return ;
+	}
 	fd_info = ft_open_file(info->save_file);
     if (fd_target == -1 || fd_info == -1)
     {
@@ -83,8 +94,9 @@ void	ft_dual_save_file(t_char *info, t_char *target)
             close(fd_info);
         info->flags.alreaddy_saved = 1;
         ft_free_info(target);
-        return;
+        return ;
     }
 	ft_npc_write_file(target, &target->stats, &target->c_resistance, fd_target);
     ft_npc_write_file(info, &info->stats, &info->c_resistance, fd_info);
+	return ;
 }
