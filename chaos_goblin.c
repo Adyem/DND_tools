@@ -3,6 +3,8 @@
 void	ft_chaos_goblin_turn(t_char *info)
 {
 	ft_update_buf(info);
+	if (!info->concentration.concentration && ft_dice_roll(1, 6) > 3)
+		ft_cast_chaos_armor(info);
 	ft_printf("The chaos_goblin will try to make either a ranged or melee attack during his turn\n");
 	ft_printf("Chaos_goblin currently has %i/%i hp\n",
 			info->stats.health, info->dstats.health);
