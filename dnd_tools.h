@@ -80,6 +80,9 @@ void		ft_npc_sstuff(t_char *info, const char **input);
 void		ft_change_stats_04(t_char *info, const char **input);
 void		ft_kill(t_char *info);
 
+//initialize gear
+void		ft_initialize_gear(t_char *info);
+
 //update buff
 void		ft_update_buf(t_char *info);
 void		ft_update_lightning_strike(t_char *info);

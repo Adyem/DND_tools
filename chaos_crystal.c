@@ -77,6 +77,7 @@ t_char	*ft_chaos_crystal(int index, const char **input, t_name *name, int except
 		ft_free_info(info);
 		return (NULL);
 	}
+	ft_initialize_gear(info);
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);

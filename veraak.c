@@ -126,6 +126,7 @@ t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)
 		ft_free_info(info);
 		return (NULL);
 	}
+	ft_initialize_gear(info);
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);
