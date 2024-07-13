@@ -9,8 +9,6 @@ static void	ft_concentration_remove_buf(t_char *info, t_char *target)
 	}
 	if (info->concentration.spell_id == HUNTERS_MARK_ID)
 		ft_concentration_remove_hunters_mark(info, target);
-	else if (info->concentration.spell_id == CHAOS_ARMOR_ID)
-		info->bufs.chaos_armor.duration = 0;
 	return ;
 }
 
@@ -20,6 +18,8 @@ int ft_remove_concentration(t_char *info)
     t_char *target;
     int fd;
 
+	if (DEBUG == 1)
+		ft_printf("removing concentration\n");
     i = 0;
     while (info->concentration.targets && info->concentration.targets[i])
 	{
@@ -62,6 +62,7 @@ int ft_remove_concentration(t_char *info)
     info->concentration.base_mod = 0;
     ft_free_double_char(info->concentration.targets);
     info->concentration.targets = NULL;
+	info->bufs.chaos_armor.duration = 0;
     return 0;
 }
 
@@ -72,12 +73,8 @@ void	ft_check_concentration(t_char *info, int damage)
 
 	if (DEBUG == 1)
 		ft_printf("Rolling con save for concentration %s\n", info->name);
-	if (info->version_number < 2 || !info->concentration.concentration)
-	{
-		if (info->version_number < 2)
-			ft_printf("%s doesn't support concentration\n", info->name);
+	if (!info->concentration.concentration)
 		return ;
-	}
 	result = ft_saving_throw(info, "constitution", info->stats.con, info->save_mod.con);
 	difficulty = 10;
 	if (difficulty < damage / 2)
