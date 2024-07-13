@@ -220,6 +220,7 @@ typedef struct s_flags
 	int				error;
 	int				flanking;
 	int				advantage;
+	int				prone;
 }	t_flags;
 
 typedef struct	s_char

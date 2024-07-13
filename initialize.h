@@ -142,6 +142,7 @@ static const	t_flags INITIALIZE_FLAGS =
 	.error = 0,
 	.flanking = 0,
 	.advantage = 0,
+	.prone = 0,
 };
 
 #endif
