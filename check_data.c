@@ -45,6 +45,8 @@ int	ft_npc_check_info_2(t_char *info)
 		error += ft_printf_fd(2, "%s duration value is negative\n", info->name);
 	if (info->c_resistance.acid < -500 || info->c_resistance.acid > 500)
 		error += ft_printf_fd(2, "%s acid resistance value not found\n", info->name);
+	if (info->flags.prone != 0 && info->flags.prone != 1)
+		error+= ft_printf_fd(2, "%s prone flag out of bounds\n", info->name);
 	return (error);
 }
 
