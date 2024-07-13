@@ -30,7 +30,7 @@ static int	ft_turn_move_marker(t_pc *players)
 	{
 		if (ft_strncmp("--turn--", temp->name, 8) == 0)
 		{
-			name = ft_strtrim(temp->name, "--turn--");
+			name = ft_strtrim_prefix(temp->name, "--turn--");
 			if (!name)
 				ft_printf_fd(2, "244-Error allocating memory turn\n");
 			free(temp->name);
@@ -102,7 +102,7 @@ static int	ft_turn_run(t_pc *players, t_name *name)
 		if (ft_strncmp("--turn--", pc_temp->name, 8) == 0)
 		{
 			found = 1;
-			c_name = ft_strtrim(pc_temp->name, "--turn--");
+			c_name = ft_strtrim_prefix(pc_temp->name, "--turn--");
 			if (!c_name)
 			{
 				ft_printf_fd(2, "247-Error allocating memory strtrim\n");

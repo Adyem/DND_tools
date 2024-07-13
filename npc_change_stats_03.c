@@ -23,7 +23,7 @@ static void	ft_npc_update_hp(t_char *info, const char **input)
 
 void	ft_npc_set_stat(t_char *info, const char **input)
 {
-	if (ft_strcmp_dnd(input[2], "flank") == 0 || ft_strcmp_dnd(input[2], "flanking"))
+	if (ft_strcmp_dnd(input[2], "flank") == 0 || ft_strcmp_dnd(input[2], "flanking") == 0)
 	{
 		info->flags.flanking = 1;
 		if (ft_strcmp_dnd(input[1], "attack") == 0)
@@ -73,6 +73,13 @@ void	ft_npc_set_stat(t_char *info, const char **input)
 			ft_printf_fd(2, "4-%s Invalid argument given\n", info->name);
 			return ;
 		}
+	}
+	else if (ft_strcmp_dnd(input[1], "cast") == 0)
+	{
+		if (ft_strcmp_dnd(input[2], "chaos_armor") == 0)
+			ft_cast_chaos_armor(info);
+		else
+			ft_printf("7-%s invalid command", info->name);
 	}
 	else if (ft_strcmp_dnd(input[1], "initiative") == 0)
 	{

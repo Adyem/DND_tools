@@ -22,7 +22,7 @@ static const	t_stats CHAOS_GOBLIN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 25,
+	.health = 40,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 16,

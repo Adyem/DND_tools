@@ -1,7 +1,10 @@
 #include "dnd_tools.h"
+#include "libft/libft/libft.h"
+#include <readline/readline.h>
 
 static void	ft_chaos_crystal_damage(t_char *info)
 {
+	char	*temp;
 	char	**content;
 	int		fd;
 	int		length;
@@ -22,11 +25,20 @@ static void	ft_chaos_crystal_damage(t_char *info)
 	}
 	length = ft_double_char_length(content);
 	result = -1;
-	while (result == -1 || ft_strncmp(content[result], "pc--", 4))
+	while (result == -1 || (ft_strncmp(content[result], "PC--", 4) != 0
+				&& ft_strncmp(content[result], "--turn--PC--", 12) != 0))
+	{
 		result = ft_dice_roll(1, length) - 1;
+		if (DEBUG == 1)
+			ft_printf("result = %i\n", result);
+	}
+	temp = ft_strchr(content[result], '=');
+	if (temp)
+		*temp = '\0';
 	ft_printf("%s shoots a magic missle at %s and he/she takes 1 force damage, " \
 			"the target does not need to make a concentration save for this damage\n",
 			info->name, &content[result][4]);
+	ft_free_double_char(content);
 	return ;
 }
 
