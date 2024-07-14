@@ -109,6 +109,8 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 		info->bufs.chaos_armor.duration = ft_check_stat(info, content[i], 21);
 	else if (ft_strncmp(content[i], "PRONE=", 6) == 0)
 		info->flags.prone = ft_check_stat(info, content[i], 6);
+	else if (ft_strncmp(content[i], "BLINDED=", 8) == 0)
+		info->debufs.blinded.duration = ft_check_stat(info, content[i], 8);
 	else
 		r_value = 1;
 	return(r_value);

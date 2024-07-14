@@ -131,9 +131,15 @@ static const	t_hunters_mark INITIALIZE_HUNTERS_MARK =
 	.caster_name = NULL,
 };
 
+static const	t_blinded INITIALIZE_BLINDED =
+{
+	.duration = 0,
+};
+
 static const	t_debufs INITIALIZE_DEBUFFS =
 {
 	.hunters_mark = INITIALIZE_HUNTERS_MARK,
+	.blinded = INITIALIZE_BLINDED,
 };
 
 static const	t_flags INITIALIZE_FLAGS =

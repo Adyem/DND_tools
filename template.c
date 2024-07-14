@@ -3,7 +3,13 @@
 void	ft_template_turn(t_char *info)
 {
 	ft_update_buf(info);
-	ft_printf("The template will try to make either a ranged or melee attack during his turn\n");
+	if (info->flags.prone)
+	{
+		ft_printf("%s will use his/her action to stand up\n", info->name);
+		info->flags.prone = 0;
+	}
+	else
+		ft_printf("The template will try to make either a ranged or melee attack during his turn\n");
 	ft_printf("Template currently has %i/%i hp\n",
 			info->stats.health, info->dstats.health);
 }

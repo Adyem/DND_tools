@@ -15,7 +15,7 @@ typedef struct s_name
 	char	*name;
 	c_name	function;
 	t_name	*next;
-} t_name;
+}	t_name;
 
 typedef struct	s_stats
 {
@@ -29,7 +29,7 @@ typedef struct	s_stats
 	int inte;
 	int	wis;
 	int cha;
-} t_stats;
+}	t_stats;
 
 typedef struct	s_skillsm
 {
@@ -51,7 +51,7 @@ typedef struct	s_skillsm
 	int	intimidation;
 	int	performance;
 	int	persuasion;
-} t_skillsm;
+}	t_skillsm;
 
 typedef struct	s_savem
 {
@@ -61,13 +61,13 @@ typedef struct	s_savem
 	int	wis;
 	int	cha;
 	int	con;
-} t_savem;
+}	t_savem;
 
 typedef struct	s_attack
 {
 	int	attack_bonus;
 	int	ranged_bonus;
-} t_attack;
+}	t_attack;
 
 typedef struct	s_bless
 {
@@ -76,12 +76,12 @@ typedef struct	s_bless
 	int		dice_faces_mod;
 	int		base_mod;
 	char	**target;
-} t_bless;
+}	t_bless;
 
 typedef struct	s_protective_winds
 {
 	int	duration;
-} t_protective_winds;
+}	t_protective_winds;
 
 typedef struct	s_lightning_strike
 {
@@ -91,7 +91,7 @@ typedef struct	s_lightning_strike
 	int	dice_amount;
 	int	dice_faces;
 	int	extra_damage;
-} t_lightning_strike;
+}	t_lightning_strike;
 
 typedef struct	s_air_totem
 {
@@ -100,12 +100,12 @@ typedef struct	s_air_totem
 	int		ac;
 	int		knock_back_distance;
 	int		erea_of_effect;
-} t_air_totem;
+}	t_air_totem;
 
 typedef struct	s_chaos_armor
 {
 	int	duration;
-} t_chaos_armor;
+}	t_chaos_armor;
 
 typedef struct	s_bufs
 {
@@ -113,18 +113,24 @@ typedef struct	s_bufs
 	t_protective_winds	protective_winds;
 	t_lightning_strike	lightning_strike;
 	t_chaos_armor		chaos_armor;
-} t_bufs;
+}	t_bufs;
 
 typedef struct	s_hunters_mark
 {
 	int		amount;
 	char	**caster_name;
-} t_hunters_mark;
+}	t_hunters_mark;
+
+typedef struct	s_blinded
+{
+	int	duration;
+}	t_blinded;
 
 typedef struct s_debufs
 {
-	t_hunters_mark hunters_mark;
-} t_debufs;
+	t_hunters_mark	hunters_mark;
+	t_blinded		blinded;
+}	t_debufs;
 
 typedef struct s_crit_mod
 {
@@ -135,7 +141,7 @@ typedef struct s_crit_mod
 	int	attack_fail;
 	int	save_fail;
 	int	skill_fail;
-} t_crit_mod;
+}	t_crit_mod;
 
 typedef struct	s_concentration
 {
@@ -146,7 +152,7 @@ typedef struct	s_concentration
 	int		base_mod;
 	int		duration;
 	char	**targets;
-} t_concentration;
+}	t_concentration;
 
 typedef struct	s_resistance
 {
@@ -163,7 +169,7 @@ typedef struct	s_resistance
 	int	radiant;
 	int	slashing;
 	int	thunder;
-} t_resistance;
+}	t_resistance;
 
 typedef struct s_equipment_action
 {

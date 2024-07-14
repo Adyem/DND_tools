@@ -1,4 +1,5 @@
 #include "dnd_tools.h"
+#include "libft/printf_fd/ft_printf_fd.h"
 
 static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 {
@@ -60,6 +61,7 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_npc_write_file_double_char("HUNTERS_MARK_CASTER=", info->debufs.hunters_mark.caster_name, fd);
 	ft_printf_fd(fd, "CHAOS_ARMOR_DURATION=%i\n", info->bufs.chaos_armor.duration);
 	ft_printf_fd(fd, "PRONE=%i\n", info->flags.prone);
+	ft_printf_fd(fd, "BLINDED=%i\n", info->debufs.blinded);
 	return ;
 }
 

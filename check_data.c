@@ -47,6 +47,8 @@ int	ft_npc_check_info_2(t_char *info)
 		error += ft_printf_fd(2, "%s acid resistance value not found\n", info->name);
 	if (info->flags.prone != 0 && info->flags.prone != 1)
 		error+= ft_printf_fd(2, "%s prone flag out of bounds\n", info->name);
+	if (info->debufs.blinded.duration < 0 || info->debufs.blinded.duration > 50)
+		error += ft_printf_fd(2, "%s blinded debuf out of bounds\n", info->name);
 	return (error);
 }
 
