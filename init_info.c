@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-int	ft_check_stat(t_char *info, char *stat, int index)
+int	ft_check_stat(t_char *info, const char *stat, int index)
 {
 	int	temp;
 	int	result;

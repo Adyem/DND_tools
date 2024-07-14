@@ -8,6 +8,8 @@ int	ft_attack_roll_check_buffs(t_char *info, int *roll)
 	return_value += ft_check_bless(info);
 	if (info->flags.flanking)
 		info->flags.advantage++;
+	if (info->debufs.blinded.duration)
+		info->flags.advantage--;
 	ft_reroll(info, roll);
 	return (return_value);
 }

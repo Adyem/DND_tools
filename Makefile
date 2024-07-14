@@ -86,7 +86,8 @@ SRC			= name.c \
 			  kill.c \
 			  calculate_stats.c \
 			  initialize_gear.c \
-			  trim_start.c
+			  trim_start.c \
+			  set_debuf.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0

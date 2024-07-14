@@ -1,4 +1,5 @@
 #include "dnd_tools.h"
+#include "libft/libft/libft.h"
 
 static void	ft_npc_update_hp(t_char *info, const char **input)
 {
@@ -43,6 +44,8 @@ void	ft_npc_set_stat(t_char *info, const char **input)
 		else
 			ft_printf_fd(2, "6-Error invalid argument given\n");
 	}
+	else if (ft_strcmp_dnd(input[1], "blinded") == 0)
+		ft_set_debuf_blinded(info, input);
 	else if (ft_strcmp_dnd(input[1], "hp") == 0)
 		ft_npc_update_hp(info, input);
 	else if (ft_strcmp_dnd(input[1], "bless") == 0)

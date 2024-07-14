@@ -83,6 +83,9 @@ void		ft_kill(t_char *info);
 //initialize gear
 void		ft_initialize_gear(t_char *info);
 
+//update debuf
+void		ft_set_debuf_blinded(t_char *info, const char **input);
+
 //update buff
 void		ft_update_buf(t_char *info);
 void		ft_update_lightning_strike(t_char *info);
@@ -116,7 +119,7 @@ int			ft_check_value(const char *input);
 void		ft_print_character_status(t_char *info, int number, int temp);
 void		ft_skill_throw(t_char *info, char *skill, int ability_mod, int save_mod);
 int			ft_set_stats(t_char *info, char **content);
-int			ft_check_stat(t_char *info, char *stat, int index);
+int			ft_check_stat(t_char *info, const char *stat, int index);
 char		**ft_set_stats_con_targets(char *content, int ofset, char **data, t_char *info);
 t_char		*ft_get_info(const char *tf_name, t_name *name);
 char		**ft_resize_double_char(char **double_string, const char *string, int size);
