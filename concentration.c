@@ -38,7 +38,7 @@ int ft_remove_concentration(t_char *info)
 		{
 			target = ft_get_info(info->concentration.targets[i], info->struct_name);
 			if (!target)
-                return ft_printf_fd(2, "300-Error getting info %s\n", info->concentration.targets[i]);
+                return (ft_printf_fd(2, "300-Error getting info %s\n", info->concentration.targets[i]), 1);
         }
         if (target)
 		{
@@ -47,7 +47,7 @@ int ft_remove_concentration(t_char *info)
             if (fd == -1)
 			{
                 ft_free_info(target);
-                return ft_printf_fd(2, "301-Error opening %s: %s\n", info->save_file, strerror(errno));
+                return (ft_printf_fd(2, "301-Error opening %s: %s\n", info->save_file, strerror(errno)), 1);
             }
             ft_npc_write_file(target, &target->stats, &info->c_resistance, fd);
             ft_free_info(target);
@@ -63,7 +63,7 @@ int ft_remove_concentration(t_char *info)
     ft_free_double_char(info->concentration.targets);
     info->concentration.targets = NULL;
 	info->bufs.chaos_armor.duration = 0;
-    return 0;
+    return (0);
 }
 
 void	ft_check_concentration(t_char *info, int damage)

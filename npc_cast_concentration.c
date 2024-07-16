@@ -1,3 +1,4 @@
+#include "chaos_crystal.h"
 #include "dnd_tools.h"
 #include <fcntl.h>
 
@@ -25,11 +26,23 @@ static void	ft_cast_hm_second_appli(t_char *target, const char **input)
 	return ;
 }
 
+static void	ft_cast_hunters_mark_cleanup(t_char *info, t_char *target, int fd[2])
+{
+	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[-2]);
+	ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[-1]);
+	ft_free_info(target);
+	close(fd[-2]);
+	close(fd[-1]);
+	ft_free_info(target);
+	return ;
+}
+
 void ft_cast_hunters_mark(t_char *info, const char **input)
 {
-    char **temp;
-    int i;
-    t_char *target;
+    char	**temp;
+    int		i;
+    t_char	*target;
+	int		fd[2];
 
 	if (DEBUG == 1)
 		ft_printf("%s %s\n", input[0], input[3]);
@@ -46,11 +59,25 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 		if (!target)
 			return (ft_printf_fd(2, "295-Error getting info %s\n", input[2]), (void)0);
 	}
+	fd[0] = ft_open_file(info->name);
+	if (fd[0] == -1)
+	{
+		info->flags.alreaddy_saved = 1;
+		ft_printf_fd(2, "320-Error opening file: %s", strerror(errno));
+		return ;
+	}
+	fd[1] = ft_open_file(target->name);
+	if (fd[1] == -1)
+	{
+		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[0]);
+		ft_printf_fd(2, "321-Error opening file: %s", strerror(errno));
+		return ;
+	}
 	ft_remove_concentration(info);
 	if (ft_strcmp_dnd(target->name, info->name) == 0)
 	{
-		ft_printf_fd(2, "305-Error cant cast hunters mark on yourself\n");
-		ft_free_info(target);
+		ft_printf_fd(0, "305-Error cant cast hunters mark on yourself\n");
+		ft_cast_hunters_mark_cleanup(info, target, fd);
 		return ;
 	}
     if (target && target->version_number >= 2)
@@ -62,14 +89,23 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     }
     temp = (char **)ft_calloc(1 + 1, sizeof(char *));
     if (!temp)
-        return (ft_printf_fd(2, "299-Error allocating memory targets\n"), (void)0);
+	{
+        ft_printf_fd(2, "299-Error allocating memory targets\n");
+		ft_cast_hunters_mark_cleanup(info, target, fd);
+		return ;
+	}
     temp[0] = (char *)malloc((strlen(input[3]) + 1) * sizeof(char));
     if (!temp[0])
 	{
+		ft_cast_hunters_mark_cleanup(info, target, fd);
         free(temp);
         return (ft_printf_fd(2, "299-Error allocating memory targets[0]\n"), (void)0);
     }
-    ft_remove_concentration(info);
+    if (ft_remove_concentration(info))
+	{
+		ft_cast_hunters_mark_cleanup(info, target, fd);
+		return ;
+	}
     info->concentration.targets = temp;
     i = 0;
     while (input[3][i])
@@ -83,8 +119,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     info->concentration.dice_faces_mod = 6;
     info->concentration.dice_amount_mod = 1;
     info->concentration.duration = 500;
-	ft_dual_save_file(info, target);
-    ft_free_info(target);
+	ft_cast_hunters_mark_cleanup(info, target, fd);
     return;
 }
 
