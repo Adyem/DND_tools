@@ -28,12 +28,18 @@ static void	ft_cast_hm_second_appli(t_char *target, const char **input)
 
 static void	ft_cast_hunters_mark_cleanup(t_char *info, t_char *target, int fd[2], int error)
 {
-	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[-2]);
-	ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[-1]);
-	ft_free_info(target);
-	close(fd[-2]);
-	close(fd[-1]);
-	ft_free_info(target);
+	if (info)
+	{
+		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[0]);
+		ft_free_info(info);
+	}
+	if (target)
+	{
+		ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[1]);
+		ft_free_info(target);
+	}
+	close(fd[0]);
+	close(fd[1]);
 	if (error == 1)
 		ft_printf_fd(0, "305-Error cant cast hunters mark on yourself\n");
 	else if (error == 2)
@@ -50,6 +56,8 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     t_char	*target;
 	int		fd[2];
 
+	fd[0] = -1;
+	fd[1] = -1;
 	if (DEBUG == 1)
 		ft_printf("%s %s\n", input[0], input[3]);
 	if ((ft_set_stats_check_name(input[3])))
@@ -94,10 +102,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     }
     temp = (char **)ft_calloc(1 + 1, sizeof(char *));
     if (!temp)
-	{
-		ft_cast_hunters_mark_cleanup(info, target, fd, 2);
-		return ;
-	}
+		return (ft_cast_hunters_mark_cleanup(info, target, fd, 2), (void)0);
     temp[0] = (char *)malloc((strlen(input[3]) + 1) * sizeof(char));
     if (!temp[0])
 	{
@@ -106,10 +111,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
         return ( (void)0);
     }
     if (ft_remove_concentration(info))
-	{
-		ft_cast_hunters_mark_cleanup(info, target, fd, 0);
-		return ;
-	}
+		return (ft_cast_hunters_mark_cleanup(info, target, fd, 0), (void)0);
     info->concentration.targets = temp;
     i = 0;
     while (input[3][i])
