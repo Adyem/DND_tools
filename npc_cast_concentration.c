@@ -26,7 +26,7 @@ static void	ft_cast_hm_second_appli(t_char *target, const char **input)
 	return ;
 }
 
-static void	ft_cast_hunters_mark_cleanup(t_char *info, t_char *target, int fd[2])
+static void	ft_cast_hunters_mark_cleanup(t_char *info, t_char *target, int fd[2], int error)
 {
 	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[-2]);
 	ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[-1]);
@@ -34,6 +34,12 @@ static void	ft_cast_hunters_mark_cleanup(t_char *info, t_char *target, int fd[2]
 	close(fd[-2]);
 	close(fd[-1]);
 	ft_free_info(target);
+	if (error == 1)
+		ft_printf_fd(0, "305-Error cant cast hunters mark on yourself\n");
+	else if (error == 2)
+        ft_printf_fd(2, "299-Error allocating memory targets\n");
+	else if (error == 3)
+		ft_printf_fd(2, "299-Error allocating memory targets[0]\n");
 	return ;
 }
 
@@ -76,8 +82,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 	ft_remove_concentration(info);
 	if (ft_strcmp_dnd(target->name, info->name) == 0)
 	{
-		ft_printf_fd(0, "305-Error cant cast hunters mark on yourself\n");
-		ft_cast_hunters_mark_cleanup(info, target, fd);
+		ft_cast_hunters_mark_cleanup(info, target, fd, 1);
 		return ;
 	}
     if (target && target->version_number >= 2)
@@ -90,20 +95,19 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     temp = (char **)ft_calloc(1 + 1, sizeof(char *));
     if (!temp)
 	{
-        ft_printf_fd(2, "299-Error allocating memory targets\n");
-		ft_cast_hunters_mark_cleanup(info, target, fd);
+		ft_cast_hunters_mark_cleanup(info, target, fd, 2);
 		return ;
 	}
     temp[0] = (char *)malloc((strlen(input[3]) + 1) * sizeof(char));
     if (!temp[0])
 	{
-		ft_cast_hunters_mark_cleanup(info, target, fd);
+		ft_cast_hunters_mark_cleanup(info, target, fd, 3);
         free(temp);
-        return (ft_printf_fd(2, "299-Error allocating memory targets[0]\n"), (void)0);
+        return ( (void)0);
     }
     if (ft_remove_concentration(info))
 	{
-		ft_cast_hunters_mark_cleanup(info, target, fd);
+		ft_cast_hunters_mark_cleanup(info, target, fd, 0);
 		return ;
 	}
     info->concentration.targets = temp;
@@ -119,7 +123,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     info->concentration.dice_faces_mod = 6;
     info->concentration.dice_amount_mod = 1;
     info->concentration.duration = 500;
-	ft_cast_hunters_mark_cleanup(info, target, fd);
+	ft_cast_hunters_mark_cleanup(info, target, fd, 0);
     return;
 }
 
