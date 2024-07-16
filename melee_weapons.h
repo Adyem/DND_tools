@@ -32,6 +32,7 @@ static const t_equipment_id STEEL_SWORD =
 	.inte = 0,
 	.wis = 0,
 	.cha = 0,
+	.initiative = 0,
 	.effect_type = 0,
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,

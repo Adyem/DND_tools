@@ -198,6 +198,7 @@ typedef struct s_equipment_id
 	int					inte;
 	int					wis;
 	int					cha;
+	int					initiative;
 	int					effect_type;
 	int					effect_dice_amount;
 	int					effect_dice_faces;
