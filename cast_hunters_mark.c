@@ -67,7 +67,6 @@ void ft_apply_hunters_mark(t_char *info, char **temp, const char **input)
 void ft_cast_hunters_mark(t_char *info, const char **input)
 {
     char	**temp;
-    int		i;
     t_char	*target;
 	int		fd[2];
 
