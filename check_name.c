@@ -7,9 +7,9 @@
 
 static void remove_exclude_prefix(char* filename)
 {
-    if (strncmp(filename, EXCLUDE_PREFIX, strlen(EXCLUDE_PREFIX)) == 0)
-        memmove(filename, filename + strlen(EXCLUDE_PREFIX), strlen(filename)
-				- strlen(EXCLUDE_PREFIX) + 1);
+    if (ft_strncmp(filename, EXCLUDE_PREFIX, ft_strlen(EXCLUDE_PREFIX)) == 0)
+        ft_memmove(filename, filename + ft_strlen(EXCLUDE_PREFIX), ft_strlen(filename)
+				- ft_strlen(EXCLUDE_PREFIX) + 1);
 }
 
 int ft_set_stats_check_name(const char *name)
@@ -69,7 +69,7 @@ int ft_check_player_character(const char *name)
         entry = readdir(dir);
         if (!entry)
             break;
-        if (strncmp(entry->d_name, PC_PREFIX, strlen(PC_PREFIX)) != 0)
+        if (ft_strncmp(entry->d_name, PC_PREFIX, ft_strlen(PC_PREFIX)) != 0)
             continue;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
