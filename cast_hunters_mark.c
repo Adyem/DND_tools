@@ -34,14 +34,20 @@ static void	ft_cast_hunters_mark_cleanup(t_char *info, t_char *target, int fd[2]
 		ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[1]);
 		ft_free_info(target);
 	}
-	close(fd[0]);
-	close(fd[1]);
+	if (fd[0] != -1)
+		close(fd[0]);
+	if (fd[1] != -1)
+		close(fd[1]);
 	if (error == 1)
 		ft_printf_fd(0, "305-Error cant cast hunters mark on yourself\n");
 	else if (error == 2)
         ft_printf_fd(2, "299-Error allocating memory targets\n");
 	else if (error == 3)
 		ft_printf_fd(2, "299-Error allocating memory targets[0]\n");
+	else if (error == 4)
+		ft_printf_fd(2, "320-Error opening file: %s", strerror(errno));
+	else if (error == 5)
+		ft_printf_fd(2, "321-Error opening file: %s", strerror(errno));
 	return ;
 }
 
@@ -64,7 +70,7 @@ void ft_apply_hunters_mark(t_char *info, char **temp, const char **input)
     info->concentration.duration = 500;
 }
 
-void ft_cast_hunters_mark(t_char *info, const char **input)
+void	ft_cast_hunters_mark(t_char *info, const char **input)
 {
     char	**temp;
     t_char	*target;
@@ -72,6 +78,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 
 	fd[0] = -1;
 	fd[1] = -1;
+	target = NULL;
 	if (DEBUG == 1)
 		ft_printf("%s %s\n", input[0], input[3]);
 	if ((ft_set_stats_check_name(input[3])))
@@ -91,14 +98,13 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 	if (fd[0] == -1)
 	{
 		info->flags.alreaddy_saved = 1;
-		ft_printf_fd(2, "320-Error opening file: %s", strerror(errno));
+		ft_cast_hunters_mark_cleanup(info, target, fd, 4);
 		return ;
 	}
 	fd[1] = ft_open_file(target->name);
 	if (fd[1] == -1)
 	{
-		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[0]);
-		ft_printf_fd(2, "321-Error opening file: %s", strerror(errno));
+		ft_cast_hunters_mark_cleanup(info, target, fd, 5);
 		return ;
 	}
 	ft_remove_concentration(info);
