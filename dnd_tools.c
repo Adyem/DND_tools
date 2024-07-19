@@ -43,4 +43,5 @@ int main(int argc, char **argv)
 	ft_request_input(name);
 	clear_history();
 	ft_free_memory_name(name, 0);
+	return (0);
 }
