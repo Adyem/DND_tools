@@ -16,7 +16,7 @@ void	ft_chaos_goblin_turn(t_char *info)
 			info->stats.health, info->dstats.health);
 }
 
-t_char	*ft_chaos_goblin(int index, const char **input, t_name *name, int exception)
+t_char	*ft_chaos_goblin(const int index, const char **input, t_name *name, int exception)
 {
 	int		error;
 	t_char	*info;

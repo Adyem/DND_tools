@@ -190,6 +190,8 @@ typedef struct s_equipment_id
 	t_equipment_action	action_01;
 	t_equipment_action	action_02;
 	t_equipment_action	attack;
+	t_skillsm			skill_mod;
+	t_resistance		resistance;
 	int					dex_ac_max_bonus;
 	int					ac;
 	int					str;

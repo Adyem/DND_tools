@@ -17,23 +17,23 @@ int			ft_npc_open_file(t_char *info);
 void		ft_npc_init_stats(t_char *info);
 
 //Template
-t_char		*ft_template(int index, const char **input, t_name *name, int exception);
+t_char		*ft_template(const int index, const char **input, t_name *name, int exception);
 void		ft_template_turn(t_char *info);
 
 //Goblin
-t_char		*ft_goblin(int index, const char **input, t_name *name, int exception);
+t_char		*ft_goblin(const int index, const char **input, t_name *name, int exception);
 void		ft_goblin_turn(t_char *info);
 
 //Chaos Goblin
-t_char		*ft_chaos_crystal(int index, const char **input, t_name *name, int exception);
+t_char		*ft_chaos_crystal(const int index, const char **input, t_name *name, int exception);
 void		ft_chaos_crystal_turn(t_char *info);
 
 //Chaos Crystal
-t_char		*ft_chaos_goblin(int index, const char **input, t_name *name, int exception);
+t_char		*ft_chaos_goblin(const int index, const char **input, t_name *name, int exception);
 void		ft_chaos_goblin_turn(t_char *info);
 
 //Veraak
-t_char		*ft_veraak(int index, const char **input, t_name *name, int exception);
+t_char		*ft_veraak(const int index, const char **input, t_name *name, int exception);
 void		ft_veraak_check_phase(t_char *info);
 void		ft_veraak_turn(t_char *info);
 
@@ -119,7 +119,7 @@ int			ft_check_value(const char *input);
 void		ft_print_character_status(t_char *info, int number, int temp);
 void		ft_skill_throw(t_char *info, char *skill, int ability_mod, int save_mod);
 int			ft_set_stats(t_char *info, char **content);
-int			ft_check_stat(t_char *info, const char *stat, int index);
+int			ft_check_stat(t_char *info, const char *stat, const int index);
 char		**ft_set_stats_con_targets(char *content, int ofset, char **data, t_char *info);
 t_char		*ft_get_info(const char *tf_name, t_name *name);
 char		**ft_resize_double_char(char **double_string, const char *string, int size);

@@ -92,7 +92,7 @@ void	ft_veraak_turn(t_char *info)
 			info->stats.health, info->dstats.health);
 }
 
-t_char	*ft_veraak(int index, const char **input, t_name *name, int exception)
+t_char	*ft_veraak(const int index, const char **input, t_name *name, int exception)
 {
 	int		error;
 	t_char	*info;
