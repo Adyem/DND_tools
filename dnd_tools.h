@@ -37,6 +37,9 @@ t_char		*ft_veraak(int index, const char **input, t_name *name, int exception);
 void		ft_veraak_check_phase(t_char *info);
 void		ft_veraak_turn(t_char *info);
 
+//Commands
+void		ft_request_input(t_name *name);
+
 //Turn
 void		ft_turn_next(t_name *name);
 
@@ -143,6 +146,7 @@ void		ft_free_double_char(char **content);
 void		ft_free_pc(t_pc *player);
 int			ft_free_players(t_pc *players);
 void		ft_free_info(t_char *info);
+void		ft_free_input(char **input, char *input_string);
 
 //debug
 void		ft_print_content(char **content);

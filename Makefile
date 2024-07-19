@@ -88,7 +88,8 @@ SRC			= name.c \
 			  initialize_gear.c \
 			  trim_start.c \
 			  set_debuf.c \
-			  cast_hunters_mark.c
+			  cast_hunters_mark.c \
+			  read_line.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0

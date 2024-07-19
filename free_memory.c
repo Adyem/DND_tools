@@ -1,5 +1,19 @@
 #include "dnd_tools.h"
 
+void	ft_free_input(char **input, char *input_string)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		free(input[i]);
+		i++;
+	}
+	free(input);
+	free(input_string);
+}
+
 int ft_free_players(t_pc *players)
 {
 	t_pc	*temp;
