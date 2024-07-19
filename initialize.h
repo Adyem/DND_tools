@@ -4,6 +4,44 @@
 #include <stddef.h>
 #include "character.h"
 
+static const	t_skillsm INITIALIZE_SKILLSM =
+{
+	.athletics = 0,
+	.acrobatics = 0,
+	.sleight_of_hand = 0,
+	.stealth = 0,
+	.arcana = 0,
+	.history = 0,
+	.investigation = 0,
+	.nature = 0,
+	.religion = 0,
+	.animal_handling = 0,
+	.insight = 0,
+	.medicine = 0,
+	.perception = 0,
+	.survival = 0,
+	.deception = 0,
+	.intimidation = 0,
+	.performance = 0,
+	.persuasion = 0,
+};
+
+static const	t_resistance INITIALIZE_RESISTANCE =
+{
+	.acid = 0,
+	.bludgeoning = 0,
+	.cold = 0,
+	.fire = 0,
+	.force = 0,
+	.lightning = 0,
+	.necrotic = 0,
+	.piercing = 0,
+	.poison = 0,
+	.psychic = 0,
+	.radiant = 0,
+	.slashing = 0,
+	.thunder = 0,
+};
 
 static const	t_resistance INITIALIZE_CURRENT_RESISTANCE =
 {

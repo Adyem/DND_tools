@@ -24,6 +24,8 @@ static const t_equipment_id STEEL_SWORD =
 		.effect_dice_faces = 0,
 		.bonus_mod = 0,
 	},
+	.skill_mod = INITIALIZE_SKILLSM,
+	.resistance = INITIALIZE_RESISTANCE,
 	.dex_ac_max_bonus = 0,
 	.ac = 0,
 	.str = 0,
