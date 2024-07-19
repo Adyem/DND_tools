@@ -38,7 +38,7 @@ static int ft_handle_builtins(char **input, int i, t_name *name, char *input_str
 	if (ft_strcmp_dnd(input[0], "roll") == 0 && !found)
 	{
 		ft_command_roll(input);
-		found = -1;
+		found = 1;
 	}
 	else if (i == 1 && ft_strcmp_dnd(input[0], "exit") == 0 && !found)
 	{
