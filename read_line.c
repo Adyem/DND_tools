@@ -32,45 +32,23 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
 
 static int ft_handle_builtins(char **input, int i, t_name *name, char *input_string)
 {
-	int	found;
-
-	found = 0;
-	if (ft_strcmp_dnd(input[0], "roll") == 0 && !found)
-	{
+	if (ft_strcmp_dnd(input[0], "roll") == 0)
 		ft_command_roll(input);
-		found = 1;
-	}
-	else if (i == 1 && ft_strcmp_dnd(input[0], "exit") == 0 && !found)
-	{
+	else if (i == 1 && ft_strcmp_dnd(input[0], "exit") == 0)
 		ft_free_input(input, input_string);
-		found = -1;
-	}
-	else if (i == 1 && ft_strcmp_dnd(input[0], "fclean") == 0 && !found)
-	{
+	else if (i == 1 && ft_strcmp_dnd(input[0], "fclean") == 0)
 		ft_fclean();
-		found = 1;
-	}
-	else if (i == 1 && ft_strcmp_dnd(input[0], "clean") == 0 && !found)
-	{
+	else if (i == 1 && ft_strcmp_dnd(input[0], "clean") == 0)
 		ft_clean();
-		found = 1;
-	}
-	else if (i == 1 && ft_strcmp_dnd(input[0], "initiative") == 0 && !found)
-	{
+	else if (i == 1 && ft_strcmp_dnd(input[0], "initiative") == 0)
 		ft_open_all_files(name);
-		found = 1;
-	}
-	else if (i == 1 && ft_strcmp_dnd(input[0], "turn") == 0 && !found)
-	{
+	else if (i == 1 && ft_strcmp_dnd(input[0], "turn") == 0)
 		ft_turn_next(name);
-		found = 1;
-	}
-	else if (i == 3 && ft_strcmp_dnd(input[1], "player") == 0 && !found)
-	{
+	else if (i == 3 && ft_strcmp_dnd(input[1], "player") == 0)
 		ft_player((const char **)input);
-		found = 1;
-	}
-	return (found);
+	else
+		return (0);
+	return (1);
 }
 
 void	ft_request_input(t_name *name)
