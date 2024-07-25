@@ -25,7 +25,8 @@ int main(int argc, char **argv)
 	t_name	*name;
 
 	(void)argv;
-	printf("size of t_char struct is %zu\n", sizeof(t_char));
+	if (DEBUG == 1)
+		printf("size of t_char struct is %zu\n", sizeof(t_char));
 	if (argc > 1)
 	{
 		ft_printf_fd(2, "Error: expecting no arguments\n");
