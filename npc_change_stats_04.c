@@ -19,7 +19,7 @@ void	ft_change_stats_04(t_char *info, const char **input)
 		{
 			resistance = ft_get_resistance(info, input[2]);
 			if (resistance == -9999)
-				return (ft_printf_fd(2, "158-Error getting Resistance %s\n",
+				return (ft_printf_fd(2, "158-Error invalid Damage type %s\n",
 						info->name), (void)0);
 			ft_deal_damage(info, input[1], input[2], resistance, 1);
 		}

@@ -19,29 +19,29 @@ int ft_get_resistance(t_char *info, const char *type)
 {
 	if (strcmp(type, "acid") == 0)
 		return info->c_resistance.acid;
-	if (strcmp(type, "bludgeoning") == 0)
+	else if (strcmp(type, "bludgeoning") == 0)
 		return info->c_resistance.bludgeoning;
-	if (strcmp(type, "cold") == 0)
+	else if (strcmp(type, "cold") == 0)
 		return info->c_resistance.cold;
-	if (strcmp(type, "fire") == 0)
+	else if (strcmp(type, "fire") == 0)
 		return info->c_resistance.fire;
-	if (strcmp(type, "force") == 0)
+	else if (strcmp(type, "force") == 0)
 		return info->c_resistance.force;
-	if (strcmp(type, "lightning") == 0)
+	else if (strcmp(type, "lightning") == 0)
 		return info->c_resistance.lightning;
-	if (strcmp(type, "necrotic") == 0)
+	else if (strcmp(type, "necrotic") == 0)
 		return info->c_resistance.necrotic;
-	if (strcmp(type, "piercing") == 0)
+	else if (strcmp(type, "piercing") == 0)
 		return info->c_resistance.piercing;
-	if (strcmp(type, "poison") == 0)
+	else if (strcmp(type, "poison") == 0)
 		return info->c_resistance.poison;
-	if (strcmp(type, "psychic") == 0)
+	else if (strcmp(type, "psychic") == 0)
 		return info->c_resistance.psychic;
-	if (strcmp(type, "radiant") == 0)
+	else if (strcmp(type, "radiant") == 0)
 		return info->c_resistance.radiant;
-	if (strcmp(type, "slashing") == 0)
+	else if (strcmp(type, "slashing") == 0)
 		return info->c_resistance.slashing;
-	if (strcmp(type, "thunder") == 0)
+	else if (strcmp(type, "thunder") == 0)
 		return info->c_resistance.thunder;
 	return (-9999);
 }
@@ -81,7 +81,7 @@ int	ft_request_damage(t_char *info)
 		if (ft_check_value(input[0]))
 		{
 			ft_free_request_damage(line, input);
-			ft_printf_fd(2, "1-Requesting a number between 1 and 5000\n");
+			ft_printf_fd(2, "159-Requesting a number between 1 and 5000\n");
 			continue ;
 		}
 		if (!input[0] || !input[1])
