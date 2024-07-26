@@ -52,6 +52,11 @@ void	ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
 		if (damage_reduction == ERROR_RESISTANCE)
 			return (ft_printf_fd(2, "161-Error finding damage reduction\n"), (void)0);
 		damage = ft_atoi(input) - damage_reduction;
+		if (damage_reduction > 0)
+			ft_printf("The %s damage was reduced by %d.\n", d_type, damage_reduction);
+		else if (damage_reduction < 0)
+			ft_printf("The %s damage was increased by %d.\n", d_type, -damage_reduction);
+		ft_printf("The %s damage was not changed.\n", d_type);
 		if (damage < 0)
 		{
 			ft_printf_fd(2, "2-Damage: expecting a number higher then or equal to 0\n");
