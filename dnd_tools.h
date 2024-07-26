@@ -70,6 +70,26 @@ int			ft_calculate_inte(t_char *info);
 int			ft_calculate_wis(t_char *info);
 int			ft_calculate_cha(t_char *info);
 
+//calculate skill mods
+int			ft_calculate_athletics(t_char *info);
+int			ft_calculate_acrobatics(t_char *info);
+int			ft_calculate_sleight_of_hand(t_char *info);
+int			ft_calculate_stealth(t_char *info);
+int			ft_calculate_arcana(t_char *info);
+int			ft_calculate_history(t_char *info);
+int			ft_calculate_investigation(t_char *info);
+int			ft_calculate_nature(t_char *info);
+int			ft_calculate_religion(t_char *info);
+int			ft_calculate_animal_handling(t_char *info);
+int			ft_calculate_insight(t_char *info);
+int			ft_calculate_medicine(t_char *info);
+int			ft_calculate_perception(t_char *info);
+int			ft_calculate_survival(t_char *info);
+int			ft_calculate_deception(t_char *info);
+int			ft_calculate_intimidation(t_char *info);
+int			ft_calculate_performance(t_char *info);
+int			ft_calculate_persuasion(t_char *info);
+
 //damage
 void		ft_deal_damage(t_char *info, const char *input, const char *d_type, int resistance,
 				int concentration);
