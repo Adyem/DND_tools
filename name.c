@@ -24,7 +24,7 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, char *new_nam
     new_node = (t_name *)malloc(sizeof(t_name));
     if (!new_node)
         ft_free_memory_name(first_node, 1);
-    new_node->name = strdup(new_name);
+    new_node->name = ft_strdup(new_name);
     if (!new_node->name)
     {
         free(new_node);
@@ -45,8 +45,8 @@ static char *ft_new_name(char *name, int index)
     int		new_name_length;
     char	*new_name;
 
-    new_name_length = strlen(name) + 4;
-    new_name = (char *)calloc(new_name_length, sizeof(char));
+    new_name_length = ft_strlen(name) + 4;
+    new_name = (char *)ft_calloc(new_name_length, sizeof(char));
     if (!new_name)
         return (NULL);
     snprintf(new_name, new_name_length, "%s_%02d", name, index);
@@ -67,7 +67,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, char *base
         if (!new_name)
             ft_free_memory_name(first_node, 1);
         if (DEBUG == 1)
-            printf("%s\n", new_name);
+            ft_printf("%s\n", new_name);
         ft_add_node(first_node, last_node, new_name, function);
         free(new_name);
 		i++;
