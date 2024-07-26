@@ -1,6 +1,8 @@
 #ifndef CHARACTER_H
 # define CHARACTER_H
 
+# define ERROR_RESISTANCE 9999
+
 typedef struct	s_char t_char;
 typedef struct	s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
@@ -192,6 +194,7 @@ typedef struct s_equipment_id
 	t_equipment_action	attack;
 	t_skillsm			skill_mod;
 	t_resistance		resistance;
+	t_resistance		flat_dr;
 	int					dex_ac_max_bonus;
 	int					ac;
 	int					str;

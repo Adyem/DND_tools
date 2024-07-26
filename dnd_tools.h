@@ -105,6 +105,21 @@ int			ft_calculate_radiant_resistance(t_char *info);
 int			ft_calculate_slashing_resistance(t_char *info);
 int			ft_calculate_thunder_resistance(t_char *info);
 
+//calculate damage reduction
+int			ft_calculate_acid_dr(t_char *info);
+int			ft_calculate_bludgeoning_dr(t_char *info);
+int			ft_calculate_cold_dr(t_char *info);
+int			ft_calculate_fire_dr(t_char *info);
+int			ft_calculate_force_dr(t_char *info);
+int			ft_calculate_lightning_dr(t_char *info);
+int			ft_calculate_necrotic_dr(t_char *info);
+int			ft_calculate_piercing_dr(t_char *info);
+int			ft_calculate_poison_dr(t_char *info);
+int			ft_calculate_psychic_dr(t_char *info);
+int			ft_calculate_radiant_dr(t_char *info);
+int			ft_calculate_slashing_dr(t_char *info);
+int			ft_calculate_thunder_dr(t_char *info);
+
 //damage
 void		ft_deal_damage(t_char *info, const char *input, const char *d_type, int resistance,
 				int concentration);

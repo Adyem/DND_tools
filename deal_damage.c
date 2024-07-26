@@ -1,4 +1,36 @@
+#include "character.h"
 #include "dnd_tools.h"
+
+static int	ft_get_damage_reduction(t_char *info, const char *type)
+{
+	if (ft_strcmp_dnd(type, "acid") == 0)
+		return (ft_calculate_acid_dr(info));
+	else if (ft_strcmp_dnd(type, "bludgeoning") == 0)
+		return (ft_calculate_bludgeoning_dr(info));
+	else if (ft_strcmp_dnd(type, "cold") == 0)
+		return (ft_calculate_cold_dr(info));
+	else if (ft_strcmp_dnd(type, "fire") == 0)
+		return (ft_calculate_fire_dr(info));
+	else if (ft_strcmp_dnd(type, "force") == 0)
+		return (ft_calculate_force_dr(info));
+	else if (ft_strcmp_dnd(type, "lightning") == 0)
+		return (ft_calculate_lightning_dr(info));
+	else if (ft_strcmp_dnd(type, "necrotic") == 0)
+		return (ft_calculate_necrotic_dr(info));
+	else if (ft_strcmp_dnd(type, "piercing") == 0)
+		return (ft_calculate_piercing_dr(info));
+	else if (ft_strcmp_dnd(type, "poison") == 0)
+		return (ft_calculate_poison_dr(info));
+	else if (ft_strcmp_dnd(type, "psychic") == 0)
+		return (ft_calculate_psychic_dr(info));
+	else if (ft_strcmp_dnd(type, "radiant") == 0)
+		return (ft_calculate_radiant_dr(info));
+	else if (ft_strcmp_dnd(type, "slashing") == 0)
+		return (ft_calculate_slashing_dr(info));
+	else if (ft_strcmp_dnd(type, "thunder") == 0)
+		return (ft_calculate_thunder_dr(info));
+	return (ERROR_RESISTANCE);
+}
 
 void	ft_deal_damage(t_char *info, const char *input, const char *d_type, int resistance,
 			int override)
@@ -7,6 +39,7 @@ void	ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
 	int			temp;
 	int			damage;
 	int			extra;
+	int			damage_reduction;
 
 	if (override == 1 || override == 0)
 	{
@@ -15,7 +48,10 @@ void	ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
 			ft_printf_fd(2, "1-Damage: expecting a number higher then or equal to 0\n");
 			return ;
 		}
-		damage = ft_atoi(input);
+		damage_reduction = ft_get_damage_reduction(info, d_type);
+		if (damage_reduction == ERROR_RESISTANCE)
+			return (ft_printf_fd(2, "161-Error finding damage reduction\n"), (void)0);
+		damage = ft_atoi(input) - damage_reduction;
 		if (damage < 0)
 		{
 			ft_printf_fd(2, "2-Damage: expecting a number higher then or equal to 0\n");
