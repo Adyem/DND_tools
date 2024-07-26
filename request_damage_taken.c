@@ -1,4 +1,5 @@
 #include "dnd_tools.h"
+#include "libft/libft/libft.h"
 
 static int	ft_free_request_damage(char *line, char **input)
 {
@@ -17,32 +18,32 @@ static int	ft_free_request_damage(char *line, char **input)
 
 int ft_get_resistance(t_char *info, const char *type)
 {
-	if (strcmp(type, "acid") == 0)
-		return info->c_resistance.acid;
-	else if (strcmp(type, "bludgeoning") == 0)
-		return info->c_resistance.bludgeoning;
-	else if (strcmp(type, "cold") == 0)
-		return info->c_resistance.cold;
-	else if (strcmp(type, "fire") == 0)
-		return info->c_resistance.fire;
-	else if (strcmp(type, "force") == 0)
-		return info->c_resistance.force;
-	else if (strcmp(type, "lightning") == 0)
-		return info->c_resistance.lightning;
-	else if (strcmp(type, "necrotic") == 0)
-		return info->c_resistance.necrotic;
-	else if (strcmp(type, "piercing") == 0)
-		return info->c_resistance.piercing;
-	else if (strcmp(type, "poison") == 0)
-		return info->c_resistance.poison;
-	else if (strcmp(type, "psychic") == 0)
-		return info->c_resistance.psychic;
-	else if (strcmp(type, "radiant") == 0)
-		return info->c_resistance.radiant;
-	else if (strcmp(type, "slashing") == 0)
-		return info->c_resistance.slashing;
-	else if (strcmp(type, "thunder") == 0)
-		return info->c_resistance.thunder;
+	if (ft_strcmp_dnd(type, "acid") == 0)
+		return (ft_calculate_acid_resistance(info));
+	else if (ft_strcmp_dnd(type, "bludgeoning") == 0)
+		return (ft_calculate_bludgeoning_resistance(info));
+	else if (ft_strcmp_dnd(type, "cold") == 0)
+		return (ft_calculate_cold_resistance(info));
+	else if (ft_strcmp_dnd(type, "fire") == 0)
+		return (ft_calculate_fire_resistance(info));
+	else if (ft_strcmp_dnd(type, "force") == 0)
+		return (ft_calculate_force_resistance(info));
+	else if (ft_strcmp_dnd(type, "lightning") == 0)
+		return (ft_calculate_lightning_resistance(info));
+	else if (ft_strcmp_dnd(type, "necrotic") == 0)
+		return (ft_calculate_necrotic_resistance(info));
+	else if (ft_strcmp_dnd(type, "piercing") == 0)
+		return (ft_calculate_piercing_resistance(info));
+	else if (ft_strcmp_dnd(type, "poison") == 0)
+		return (ft_calculate_poison_resistance(info));
+	else if (ft_strcmp_dnd(type, "psychic") == 0)
+		return (ft_calculate_psychic_resistance(info));
+	else if (ft_strcmp_dnd(type, "radiant") == 0)
+		return (ft_calculate_radiant_resistance(info));
+	else if (ft_strcmp_dnd(type, "slashing") == 0)
+		return (ft_calculate_slashing_resistance(info));
+	else if (ft_strcmp_dnd(type, "thunder") == 0)
+		return (ft_calculate_thunder_resistance(info));
 	return (-9999);
 }
 
@@ -89,8 +90,6 @@ int	ft_request_damage(t_char *info)
 			ft_free_request_damage(line, input);
 			continue ;
 		}
-		if (info->version_number < 2)
-			ft_deal_damage(info, input[0], NULL, 0, 0);
 		else
 		{
 			resistance = ft_get_resistance(info, input[1]);

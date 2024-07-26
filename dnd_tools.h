@@ -90,6 +90,21 @@ int			ft_calculate_intimidation(t_char *info);
 int			ft_calculate_performance(t_char *info);
 int			ft_calculate_persuasion(t_char *info);
 
+//calculate resistance
+int			ft_calculate_acid_resistance(t_char *info);
+int			ft_calculate_bludgeoning_resistance(t_char *info);
+int			ft_calculate_cold_resistance(t_char *info);
+int			ft_calculate_fire_resistance(t_char *info);
+int			ft_calculate_force_resistance(t_char *info);
+int			ft_calculate_lightning_resistance(t_char *info);
+int			ft_calculate_necrotic_resistance(t_char *info);
+int			ft_calculate_piercing_resistance(t_char *info);
+int			ft_calculate_poison_resistance(t_char *info);
+int			ft_calculate_psychic_resistance(t_char *info);
+int			ft_calculate_radiant_resistance(t_char *info);
+int			ft_calculate_slashing_resistance(t_char *info);
+int			ft_calculate_thunder_resistance(t_char *info);
+
 //damage
 void		ft_deal_damage(t_char *info, const char *input, const char *d_type, int resistance,
 				int concentration);
