@@ -1,30 +1,8 @@
 #include "dnd_tools.h"
 
-void	ft_npc_sstuff(t_char *info, const char **input)
+static int	ft_skill_roll(t_char *info, const char **input)
 {
-	if (ft_strcmp_dnd(input[1], "attack") == 0)
-	{
-		if (info->equipment.weapon.attack.function)
-			info->equipment.weapon.attack.function(info, &info->equipment.weapon);
-		else
-			ft_printf_fd(2, "No attack for %s set\n", info->name);
-	}
-	else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
-	{
-		if (info->equipment.ranged_weapon.attack.function)
-			info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon);
-		else
-			ft_printf_fd(2, "No ranged attack for %s set\n", info->name);
-	}
-	else if (ft_strcmp_dnd(input[1], "prone") == 0)
-		info->flags.prone = 1;
-	else if (ft_strcmp_dnd(input[1], "kill") == 0)
-		ft_kill(info);
-	else if (ft_strcmp_dnd(input[1], "damage") == 0)
-		ft_request_damage(info);
-	else if (ft_strcmp_dnd(input[1], "hp") == 0)
-		ft_print_character_status(info, 0, info->stats.health);
-	else if (ft_strcmp_dnd(input[1], "athletics") == 0)
+	if (ft_strcmp_dnd(input[1], "athletics") == 0)
 		ft_skill_throw(info, "athletics", ft_calculate_str(info), ft_calculate_athletics(info));
 	else if (ft_strcmp_dnd(input[1], "acrobatics") == 0)
 		ft_skill_throw(info, "acrobatics", ft_calculate_dex(info), ft_calculate_acrobatics(info));
@@ -63,8 +41,39 @@ void	ft_npc_sstuff(t_char *info, const char **input)
 		ft_skill_throw(info, "performance", ft_calculate_cha(info), ft_calculate_performance(info));
 	else if (ft_strcmp_dnd(input[1], "persuasion") == 0)
 		ft_skill_throw(info, "persuasion", ft_calculate_cha(info), ft_calculate_persuasion(info));
+	else
+		return (1);
+	return (0);
+}	
+
+void	ft_npc_sstuff(t_char *info, const char **input)
+{
+	if (ft_strcmp_dnd(input[1], "attack") == 0)
+	{
+		if (info->equipment.weapon.attack.function)
+			info->equipment.weapon.attack.function(info, &info->equipment.weapon);
+		else
+			ft_printf_fd(2, "No attack for %s set\n", info->name);
+	}
+	else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
+	{
+		if (info->equipment.ranged_weapon.attack.function)
+			info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon);
+		else
+			ft_printf_fd(2, "No ranged attack for %s set\n", info->name);
+	}
+	else if (ft_strcmp_dnd(input[1], "prone") == 0)
+		info->flags.prone = 1;
+	else if (ft_strcmp_dnd(input[1], "kill") == 0)
+		ft_kill(info);
+	else if (ft_strcmp_dnd(input[1], "damage") == 0)
+		ft_request_damage(info);
+	else if (ft_strcmp_dnd(input[1], "hp") == 0)
+		ft_print_character_status(info, 0, info->stats.health);
 	else if (ft_strcmp_dnd(input[1], "initiative") == 0)
 		ft_check_initiative(info);
+	else if (ft_skill_roll(info, input) == 0)
+		return ;
 	else 
 		ft_printf("4-Invalid command given\n");
 	return ;
