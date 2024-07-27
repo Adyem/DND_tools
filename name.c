@@ -72,6 +72,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, char *base
         free(new_name);
 		i++;
     }
+	return ;
 }
 
 t_name *ft_allocate_memory_name()

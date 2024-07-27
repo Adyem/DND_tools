@@ -56,6 +56,8 @@ void	ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
 			ft_printf("The %s damage was reduced by %d.\n", d_type, damage_reduction);
 		else if (damage_reduction < 0)
 			ft_printf("The %s damage was increased by %d.\n", d_type, -damage_reduction);
+		if (damage > 0)
+			damage = 0;
 		ft_printf("The %s damage was not changed.\n", d_type);
 		if (damage < 0)
 		{
