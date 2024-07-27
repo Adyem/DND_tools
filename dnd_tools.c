@@ -1,23 +1,47 @@
 #include "dnd_tools.h"
 
-static int	ft_create_dir()
+static int ft_create_dir()
 {
-	struct	stat st = {0};
+    struct stat st = {0};
 
-	if (stat("data", &st) == -1)
-	{
-		if (mkdir("data", 0700) == -1)
-		{
-			ft_printf_fd(2, "Failed to create directory: %s\n", strerror(errno));
-			return (1);
-		}
-		else
-			if (DEBUG == 1)
-				ft_printf("Data folder created succesfully\n");
-	}
-	else if (DEBUG == 1)
-		ft_printf("Data folder alreaddy exists\n");
-	return (0);
+    if (stat("data", &st) == -1)
+    {
+        if (errno == ENOENT)
+        {
+            if (mkdir("data", 0700) == -1)
+            {
+                ft_printf_fd(2, "Failed to create directory: %s\n", strerror(errno));
+                return (1);
+            }
+            else
+            {
+                if (DEBUG == 1)
+                    ft_printf("Data folder created successfully\n");
+            }
+        }
+        else
+        {
+            ft_printf_fd(2, "Failed to stat directory: %s\n", strerror(errno));
+            return (1);
+        }
+    }
+    else if (S_ISDIR(st.st_mode))
+    {
+        if (access("data", R_OK | W_OK) == -1)
+        {
+            ft_printf_fd(2, "No read/write access to 'data' directory: %s\n", strerror(errno));
+            return (1);
+        }
+        if (DEBUG == 1)
+            ft_printf("Data folder already exists with proper access rights\n");
+    }
+    else
+    {
+        ft_printf_fd(2, "Path exists but is not a directory\n");
+        return (1);
+    }
+
+    return (0);
 }
 
 int main(int argc, char **argv)

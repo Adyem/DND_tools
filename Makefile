@@ -1,4 +1,4 @@
-NAME		= dnd_tools
+AME		= dnd_tools
 
 NAME_DEBUG	= dnd_tools_debug
 
