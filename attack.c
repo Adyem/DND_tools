@@ -1,5 +1,13 @@
 #include "dnd_tools.h"
 
+typedef struct s_damage_info
+{
+    int mod;
+    int result;
+    int damage;
+	int	stat_mod;
+} t_damage_info;
+
 static int	ft_weapon_find_stat(t_char *info, t_equipment_id *weapon)
 {
 	if (!weapon->attack.stat)
