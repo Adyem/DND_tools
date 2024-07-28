@@ -12,6 +12,14 @@ typedef void	(*c_turn)(t_char *);
 
 typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 
+typedef struct s_damage_info
+{
+    int mod;
+    int result;
+    int damage;
+	int	stat_mod;
+} t_damage_info;
+
 typedef struct s_name
 {
 	char	*name;
