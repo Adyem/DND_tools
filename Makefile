@@ -92,7 +92,8 @@ SRC			= name.c \
 			  read_line.c \
 			  calculate_skills.c \
 			  calculate_resistance.c \
-			  calculate_damage_reduction.c
+			  calculate_damage_reduction.c \
+			  cast_chaos_armor.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0

@@ -12,6 +12,17 @@ typedef void	(*c_turn)(t_char *);
 
 typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 
+typedef struct s_buff {
+    char	*target;
+    int		spell_id;
+    int		dice_faces_mod;
+    int		dice_amount_mod;
+    int		duration;
+	int		buff;
+	int		error;
+}	t_buff;
+
+
 typedef struct s_name
 {
 	char	*name;
