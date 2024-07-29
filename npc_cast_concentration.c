@@ -1,27 +1,4 @@
-#include "chaos_crystal.h"
 #include "dnd_tools.h"
-
-static void	ft_cast_concentration_second_appli(t_char *target, const char **input)
-{
-	char	**temp;
-	int		i;
-
-	temp = ft_resize_double_char(target->debufs.hunters_mark.caster_name, input[2], 1);
-	if (temp)
-	{
-		i = 0;
-		while (target->debufs.hunters_mark.caster_name[i])
-		{
-			free(target->debufs.hunters_mark.caster_name[i]);
-			i++;
-		}
-		free(target->debufs.hunters_mark.caster_name);
-		target->debufs.hunters_mark.caster_name = temp;
-	}
-	else
-		ft_printf_fd(2, "297-Error allocating memory target\n");
-	return ;
-}
 
 static void	ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2], int error)
 {
