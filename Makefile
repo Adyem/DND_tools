@@ -75,7 +75,7 @@ SRC			= name.c \
 			  update_intiative_file.c \
 			  npc_set_stats_string.c \
 			  check_name.c \
-			  npc_cast_concentration.c \
+			  cast_concentration.c \
 			  free_info.c \
 			  get_character_info.c \
 			  resize_double_char.c \
@@ -93,7 +93,8 @@ SRC			= name.c \
 			  calculate_skills.c \
 			  calculate_resistance.c \
 			  calculate_damage_reduction.c \
-			  cast_chaos_armor.c
+			  cast_chaos_armor.c \
+			  cast_concentration_utils.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0

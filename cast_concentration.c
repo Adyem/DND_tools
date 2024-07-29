@@ -26,7 +26,7 @@ static void	ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 	return ;
 }
 
-int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const char **input, t_buff buff)
+int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const char **input, t_buff *buff)
 {
 	char	**temp;
 	int		i;
@@ -53,10 +53,10 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
     }
     info->concentration.targets[0][i] = '\0';
     info->concentration.concentration = 1;
-    info->concentration.spell_id = buff.spell_id;
-    info->concentration.dice_faces_mod = buff.dice_faces_mod;
-    info->concentration.dice_amount_mod = buff.dice_amount_mod;
-    info->concentration.duration = buff.duration;
+    info->concentration.spell_id = buff->spell_id;
+    info->concentration.dice_faces_mod = buff->dice_faces_mod;
+    info->concentration.dice_amount_mod = buff->dice_amount_mod;
+    info->concentration.duration = buff->duration;
 	return (0);
 }
 
@@ -78,7 +78,7 @@ static int	ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *targ
 	return (0);
 }
 
-void	ft_cast_concentration(t_char *info, const char **input, t_buff buff)
+void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 {
 	t_char	*target;
 	int		fd[2];
@@ -109,16 +109,48 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff buff)
 		return ;
 	}
     if (target && target->version_number >= 2)
-	{
-        if (!target->debufs.hunters_mark.caster_name)
-            target->debufs.hunters_mark.caster_name = (char **)ft_calloc(2, sizeof(char *));
-        else
-            ft_cast_concentration_second_appli(target, input);
-    }
+		ft_detect_buff_debuff(target, input, buff);
     if (ft_remove_concentration(info))
 		return (ft_cast_concentration_cleanup(info, target, fd, 0), (void)0);
 	if (ft_apply_concentration_buff(info, target, fd, input, buff))
 		return ;
 	ft_cast_concentration_cleanup(info, target, fd, 0);
     return;
+}
+
+int ft_update_caster_name(char ***caster_name, const char *input_name)
+{
+    char	**temp;
+    int		i;
+
+    if (!(*caster_name))
+    {
+        *caster_name = (char **)ft_calloc(2, sizeof(char *));
+        if (!(*caster_name))
+        {
+            ft_printf_fd(2, "165-Error allocating memory for caster name\n");
+            return 1;
+        }
+    }
+    else
+    {
+        temp = ft_resize_double_char(*caster_name, input_name, 1);
+        if (temp)
+        {
+            i = 0;
+            while ((*caster_name)[i])
+            {
+                free((*caster_name)[i]);
+                i++;
+            }
+            free(*caster_name);
+            *caster_name = temp;
+        }
+        else
+        {
+            ft_printf_fd(2, "297-Error allocating memory for caster name\n");
+            return 1;
+        }
+    }
+    return (0);
 }
