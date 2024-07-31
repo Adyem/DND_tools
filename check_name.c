@@ -62,7 +62,7 @@ int ft_check_player_character(const char *name)
     if ((dir = opendir(DATA_FOLDER)) == NULL)
     {
         ft_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
-        return -2;
+        return (-2);
     }
     while (1)
     {
@@ -84,6 +84,5 @@ int ft_check_player_character(const char *name)
         }
     }
     closedir(dir);
-    ft_printf_fd(2, "306-Error: target does not exist\n");
     return 1;
 }
