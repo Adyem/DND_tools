@@ -121,7 +121,6 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 int ft_update_caster_name(char ***caster_name, const char *input_name)
 {
     char	**temp;
-    int		i;
 
 	if (DEBUG == 1)
 		ft_printf("adding the new caster name to the target struct\n");
@@ -145,13 +144,7 @@ int ft_update_caster_name(char ***caster_name, const char *input_name)
         temp = ft_resize_double_char(*caster_name, input_name, 1);
         if (temp)
         {
-            i = 0;
-            while ((*caster_name)[i])
-            {
-                free((*caster_name)[i]);
-                i++;
-            }
-            free(*caster_name);
+			ft_free_double_char(*caster_name);
             *caster_name = temp;
         }
         else
