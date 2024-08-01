@@ -16,9 +16,20 @@ void	ft_cast_hunters_mark(t_char *info, const char **input)
 
 void	ft_cast_hunters_mark_second_appli(t_char *target, const char **input)
 {
-	if (target && target->version_number >= 2)
+	int	i;
+
+	if (DEBUG == 1)
+		ft_printf("setting the caster name in the target %s %p\n", input[0], (void *)target);
+	if (target)
 		ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0]);
-	else
-		ft_printf_fd(2, "297-Error allocating memory target\n");
+	if (DEBUG == 1 && target)
+	{
+		i = 0;
+		while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[i])
+		{
+			ft_printf("%s has cast hunters mark\n", target->debufs.hunters_mark.caster_name[i]);
+			i++;
+		}
+	}
 	return ;
 }
