@@ -31,5 +31,6 @@ void	ft_cast_hunters_mark_second_appli(t_char *target, const char **input)
 			i++;
 		}
 	}
+	target->debufs.hunters_mark.amount++;
 	return ;
 }

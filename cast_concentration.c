@@ -62,14 +62,14 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
 
 static int	ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *target)
 {
-	fd[0] = ft_open_file(info->name);
+	fd[0] = ft_open_file(info->save_file);
 	if (fd[0] == -1)
 	{
 		info->flags.alreaddy_saved = 1;
 		ft_cast_concentration_cleanup(info, target, fd, 4);
 		return (1);
 	}
-	fd[1] = ft_open_file(target->name);
+	fd[1] = ft_open_file(target->save_file);
 	if (fd[1] == -1)
 	{
 		ft_cast_concentration_cleanup(info, target, fd, 5);
@@ -157,7 +157,7 @@ int ft_update_caster_name(char ***caster_name, const char *input_name)
         else
         {
             ft_printf_fd(2, "297-Error allocating memory for caster name\n");
-            return 1;
+            return (1);
         }
     }
     return (0);
