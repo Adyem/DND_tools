@@ -6,11 +6,6 @@ void	ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
 	int	j;
 
 	i = 0;
-	if (target->version_number < 2)
-	{
-		ft_printf_fd(2, "260-Error Hunters_mark not supported for target %s\n", target->name);
-		return ;
-	}
 	while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[i])
 	{
 		if (DEBUG == 1)
@@ -27,6 +22,8 @@ void	ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
 			target->debufs.hunters_mark.amount--;
 			if (j > 0)
 				target->debufs.hunters_mark.caster_name[j - 1] = NULL;
+			if (DEBUG == 1)
+				ft_printf("found target with debuff and removed it %s", target->name);
 			return ;
 		}
 		i++;

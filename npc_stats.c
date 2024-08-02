@@ -6,9 +6,9 @@ int	ft_npc_open_file(t_char *info)
 	int		fd;
 	char	**content;
 
-	if (DEBUG == 1)
-		ft_printf("opening file %s\n", info->save_file);
 	fd = open(info->save_file, O_RDONLY);
+	if (DEBUG == 1)
+		ft_printf("opening file %s on fd %i\n", info->save_file, fd);
 	if (fd == -1)
 	{
 		ft_printf_fd(2, "1-Error opening file %s: %s\n",
@@ -16,11 +16,10 @@ int	ft_npc_open_file(t_char *info)
 		return (1);
 	}
 	content = ft_read_file_dnd(fd);
+	if (DEBUG == 1)
+		ft_printf("content is at adress %p\n", content);
 	if (!content)
-	{
-		ft_printf_fd(2, "Malloc in read file failed\n");
 		return (1);
-	}
 	close(fd);
 	error = ft_initialize_info(info, content);
 	if (DEBUG == 1)

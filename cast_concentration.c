@@ -110,6 +110,8 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 	t_char	*target;
 	int		fd[2];
 
+	if (ft_remove_concentration(info))
+		return ;
 	fd[0] = -1;
 	fd[1] = -1;
 	if (DEBUG == 1)
@@ -129,7 +131,6 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 	}
 	if (ft_cast_concentration_open_file(fd, info, target))
 		return ;
-	ft_remove_concentration(info);
 	if (ft_strcmp_dnd(target->name, info->name) == 0)
 	{
 		ft_cast_concentration_cleanup(info, target, fd, 1);

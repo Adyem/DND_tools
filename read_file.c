@@ -13,7 +13,7 @@ static void	ft_malloc_fail_gnl_dnd(char **return_v, int fd)
 			free(return_v[i]);
 			i++;
 		}
-		free(return_v[i]);
+		free(return_v);
 	}
 	return ;
 }
@@ -27,6 +27,7 @@ static char	**ft_realloc_dnd(char **return_v, int index, int fd)
 	temp = ft_calloc(index + 1, sizeof(char *));
 	if (!temp)
 	{
+		ft_printf_fd(2, "165-Error: Malloc in read file failed\n");
 		ft_malloc_fail_gnl_dnd(return_v, fd);
 		return (NULL);
 	}
@@ -53,7 +54,9 @@ char	**ft_read_file_dnd(int fd)
 	i = 0;
 	while (1)
 	{
+		ft_printf("HELLO %i\n", fd);
 		line = get_next_line(fd);
+		ft_printf("%p %s\n", line, strerror(errno));
 		if (!line)
 			break ;
 		i++;
@@ -73,12 +76,10 @@ char		**ft_open_and_read(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("Error opening file :%s\n", strerror(errno));
+		ft_printf("166-Error opening file :%s\n", strerror(errno));
 		return (NULL);
 	}
 	content = ft_read_file_dnd(fd);
 	close(fd);
-	if (!content)
-		return (NULL);
 	return (content);
 }

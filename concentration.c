@@ -40,6 +40,8 @@ int ft_remove_concentration(t_char *info)
 			if (!target)
                 return (ft_printf_fd(2, "300-Error getting info %s\n", info->concentration.targets[i]), 1);
         }
+		if (target && DEBUG == 1)
+			ft_printf("target found: %s\n", target->name);
         if (target)
 		{
             ft_concentration_remove_buf(info, target);
