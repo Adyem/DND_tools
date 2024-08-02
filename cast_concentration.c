@@ -127,7 +127,7 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 	{
 		target = ft_get_info(input[3], info->struct_name);
 		if (!target)
-			return (ft_printf_fd(2, "295-Error getting info %s\n", input[2]), (void)0);
+			return (ft_printf_fd(2, "297-Error getting info %s\n", input[2]), (void)0);
 	}
 	if (ft_cast_concentration_open_file(fd, info, target))
 		return ;
