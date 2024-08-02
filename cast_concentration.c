@@ -1,5 +1,32 @@
 #include "dnd_tools.h"
 
+int ft_update_caster_name(char ***caster_name, const char *input_name)
+{
+    size_t length = 0;
+
+    if (DEBUG == 1)
+        ft_printf("adding the new caster name to the target struct\n");
+    if (*caster_name)
+        while ((*caster_name)[length] != NULL)
+            length++;
+    char **new_caster_name = (char **)realloc(*caster_name, (length + 2) * sizeof(char *));
+    if (!new_caster_name)
+	{
+        ft_printf_fd(2, "Error allocating memory for caster name\n");
+        return 1;
+    }
+    *caster_name = new_caster_name;
+    (*caster_name)[length] = ft_strdup(input_name);
+    if (!(*caster_name)[length])
+	{
+        ft_printf_fd(2, "Error allocating memory for caster name string\n");
+        return 1;
+    }
+    (*caster_name)[length + 1] = NULL;
+    return 0;
+}
+
+
 static void	ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2], int error)
 {
 	if (info)
@@ -86,7 +113,7 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 	fd[0] = -1;
 	fd[1] = -1;
 	if (DEBUG == 1)
-		ft_printf("%s %s\n", input[0], input[3]);
+		ft_printf("casting hunters mark %s %s\n", input[0], input[3]);
 	if ((ft_set_stats_check_name(input[3])))
 	{
 		if ((ft_check_player_character(input[3])))
@@ -116,42 +143,4 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 		return ;
 	ft_cast_concentration_cleanup(info, target, fd, 0);
     return;
-}
-
-int ft_update_caster_name(char ***caster_name, const char *input_name)
-{
-    char	**temp;
-
-	if (DEBUG == 1)
-		ft_printf("adding the new caster name to the target struct\n");
-    if (!(*caster_name))
-    {
-        *caster_name = (char **)ft_calloc(2, sizeof(char *));
-        if (!(*caster_name))
-        {
-            ft_printf_fd(2, "165-Error allocating memory for caster name\n");
-            return (1);
-        }
-		**caster_name = ft_strdup(input_name);
-		if (!(**caster_name))
-		{
-			ft_printf_fd(2, "162-Error allocating memory for caster name\n");
-			return (1);
-		}
-    }
-    else
-    {
-        temp = ft_resize_double_char(*caster_name, input_name, 1);
-        if (temp)
-        {
-			ft_free_double_char(*caster_name);
-            *caster_name = temp;
-        }
-        else
-        {
-            ft_printf_fd(2, "297-Error allocating memory for caster name\n");
-            return (1);
-        }
-    }
-    return (0);
 }
