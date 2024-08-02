@@ -8,6 +8,7 @@ void	ft_cast_hunters_mark(t_char *info, const char **input)
 	buff.duration = 50;
 	buff.dice_faces_mod = 6;
 	buff.dice_amount_mod = 1;
+	buff.target_numbers = 1;
 	buff.spell_id = HUNTERS_MARK_ID;
 	buff.buff = 0;
 	ft_cast_concentration(info, input, &buff);
