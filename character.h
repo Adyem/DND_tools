@@ -3,23 +3,26 @@
 
 # define ERROR_RESISTANCE 9999
 
+typedef struct	s_buff t_buff;
 typedef struct	s_char t_char;
 typedef struct	s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 
+typedef void	(*cast_buff_debuff)(t_char *, const char **, t_buff *);
 typedef void	(*c_action)(t_char *, t_equipment_id *);
 typedef void	(*c_turn)(t_char *);
 
 typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 
 typedef struct s_buff {
-    char	*target;
-    int		spell_id;
-    int		dice_faces_mod;
-    int		dice_amount_mod;
-    int		duration;
-	int		buff;
-	int		error;
+    char				*target;
+    int					spell_id;
+    int					dice_faces_mod;
+    int					dice_amount_mod;
+    int					duration;
+	int					buff;
+	int					error;
+	cast_buff_debuff	cast_spell;
 }	t_buff;
 
 
