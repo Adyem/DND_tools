@@ -1,115 +1,84 @@
 #include "dnd_tools.h"
 
-int file_exists(const char *path, const char *prefix)
+int file_exists(const char *filename)
 {
-    struct dirent *entry;
-    DIR *dp = opendir(path);
-
-    if (dp == NULL)
-        return (0);
-    while ((entry = readdir(dp)))
-    {
-        if (strncmp(entry->d_name, prefix, strlen(prefix)) == 0)
-        {
-            if (strcmp(entry->d_name + strlen(prefix), input_name) == 0)
-            {
-                closedir(dp);
-                return (1);
-            }
-        }
-    }
-
-    closedir(dp);
-    return (0);
+    return (access(filename, F_OK) != -1);
 }
 
-int is_duplicate(char **caster_name, const char *name)
+char *build_file_path(const char *folder, const char *prefix, const char *name)
 {
-    for (int i = 0; caster_name[i] != NULL; i++)
-    {
-        if (strcmp(caster_name[i], name) == 0)
-            return (1);
+    size_t len = strlen(folder) + strlen(prefix) + strlen(name) + 2;
+    char *filepath = (char *)malloc(len);
+    if (!filepath) return NULL;
+    snprintf(filepath, len, "%s/%s%s", folder, prefix, name);
+    return filepath;
+}
+
+int add_name_if_unique(char ***caster_name, const char *name, int *count)
+{
+    for (int i = 0; i < *count; i++)
+        if (strcmp((*caster_name)[i], name) == 0)
+            return (0);
+    char **temp = ft_resize_double_char(*caster_name, name, 1);
+    if (!temp)
+	{
+        ft_printf_fd(2, "Error allocating memory for caster name\n");
+        return (1);
     }
+    *caster_name = temp;
+    (*count)++;
     return (0);
 }
 
 int ft_update_caster_name(char ***caster_name, const char *input_name, t_buff *buff)
 {
-    char **temp;
-    char *user_input;
-
+    char *name_input;
+    int count = 0;
+    
     if (DEBUG == 1)
-        ft_printf("adding the new caster name to the target struct\n");
-
+        ft_printf("Adding the new caster name to the target struct\n");
     if (!(*caster_name))
-    {
+	{
         *caster_name = (char **)ft_calloc(2, sizeof(char *));
         if (!(*caster_name))
-        {
-            ft_printf_fd(2, "165-Error allocating memory for caster name\n");
-            return (1);
+		{
+            ft_printf_fd(2, "Error allocating memory for caster name\n");
+            return 1;
         }
         **caster_name = ft_strdup(input_name);
         if (!(**caster_name))
-        {
-            ft_printf_fd(2, "162-Error allocating memory for caster name\n");
-            return (1);
+		{
+            ft_printf_fd(2, "Error allocating memory for caster name\n");
+            return 1;
         }
+        count = 1;
     }
-    else
-    {
-        temp = ft_resize_double_char(*caster_name, input_name, 1);
-        if (temp)
-        {
-            ft_free_double_char(*caster_name);
-            *caster_name = temp;
+    while (count < buff->target_amount)
+	{
+        name_input = readline("Enter caster name (or type 'exit' to quit): ");
+        if (!name_input || strcmp(name_input, "exit") == 0)
+		{
+            free(name_input);
+            break;
         }
-        else
-        {
-            ft_printf_fd(2, "297-Error allocating memory for caster name\n");
-            return (1);
-        }
-    }
-    if (buff->target_amount > 1)
-    {
-        int count = 0;
-        while (count < buff->target_amount)
-        {
-            user_input = readline("Enter caster name (or 'exit' to finish): ");
-            if (strcmp(user_input, "exit") == 0)
-            {
-                free(user_input);
-                break ;
-            }
-            if (is_duplicate(*caster_name, user_input))
-            {
-                ft_printf("Name '%s' is a duplicate, try another.\n", user_input);
-                free(user_input);
-                continue ;
-            }
-            if (file_exists("./data", "pc--", user_input) || file_exists("./data", "mob--", user_input))
-            {
-                temp = ft_resize_double_char(*caster_name, user_input, 1);
-                if (temp)
-                {
-                    ft_free_double_char(*caster_name);
-                    *caster_name = temp;
-                    count++;
-                }
-                else
-                {
-                    ft_printf_fd(2, "297-Error allocating memory for caster name\n");
-                    free(user_input);
-                    return (1);
-                }
-            }
-            else
-            {
-                ft_printf("No valid file found for '%s'.\n", user_input);
-            }
-
-            free(user_input);
-        }
-    }
-    return (0);
+        char *pc_filepath = build_file_path("data", "pc--", name_input);
+        char *mob_filepath = build_file_path("data", "", name_input);
+		if ((pc_filepath && file_exists(pc_filepath)) || 
+			(mob_filepath && file_exists(mob_filepath) && !strstr(mob_filepath, "data--")))
+		{
+			if (add_name_if_unique(caster_name, name_input, &count) != 0)
+			{
+				free(name_input);
+				free(pc_filepath);
+				free(mob_filepath);
+				return (1);
+			}
+		}
+		else
+			printf("No valid file found for '%s'\n", name_input);
+		free(name_input);
+		free(pc_filepath);
+		free(mob_filepath);
+	}
+	return (0);
 }

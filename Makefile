@@ -143,4 +143,6 @@ re: fclean all
 
 both: all debug
 
-.PHONY: all clean fclean re debug both
+re_both: re both
+
+.PHONY: all clean fclean re debug both re_both
