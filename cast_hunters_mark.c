@@ -4,6 +4,7 @@ void	ft_cast_hunters_mark(t_char *info, const char **input)
 {
 	t_buff	buff;
 
+	buff.target_amount = 1;
 	buff.error = 1;
 	buff.duration = 50;
 	buff.dice_faces_mod = 6;

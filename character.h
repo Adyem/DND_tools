@@ -14,7 +14,9 @@ typedef void	(*c_turn)(t_char *);
 
 typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 
-typedef struct s_buff {
+typedef struct s_buff
+{
+	int					target_amount;
     char				*target;
     int					spell_id;
     int					dice_faces_mod;
