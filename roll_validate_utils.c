@@ -21,6 +21,8 @@ int	ft_roll_check_number_previous(char *string, int i)
 
 int	ft_roll_check_character(char c)
 {
+	if (c == 0)
+		return (0);
 	if (c == '-' || c == '+' || c == '/' || c == '*')
 		return (0);
 	return (1);
