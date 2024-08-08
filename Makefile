@@ -94,7 +94,7 @@ SRC			= name.c \
 			  calculate_resistance.c \
 			  calculate_damage_reduction.c \
 			  cast_chaos_armor.c \
-			  cast_concentration_utils.c
+			  cast_concentration_caster.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0
@@ -143,4 +143,6 @@ re: fclean all
 
 both: all debug
 
-.PHONY: all clean fclean re debug both
+re_both: re both
+
+.PHONY: all clean fclean re debug both re_both

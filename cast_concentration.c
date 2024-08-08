@@ -137,7 +137,7 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 		return ;
 	}
     if (target && target->version_number >= 2)
-		ft_detect_buff_debuff(target, input, buff);
+		buff->cast_spell(target, input, buff);
     if (ft_remove_concentration(info))
 		return (ft_cast_concentration_cleanup(info, target, fd, 0), (void)0);
 	if (ft_apply_concentration_buff(info, target, fd, input, buff))

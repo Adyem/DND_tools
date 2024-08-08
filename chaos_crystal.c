@@ -1,6 +1,4 @@
 #include "dnd_tools.h"
-#include "libft/libft/libft.h"
-#include <readline/readline.h>
 
 static void	ft_chaos_crystal_damage(t_char *info)
 {

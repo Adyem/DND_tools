@@ -153,12 +153,11 @@ void		ft_cast_concentration(t_char *info, const char **input, t_buff *buff);
 void		ft_check_concentration(t_char *info, int  damage);
 int			ft_remove_concentration(t_char *info);
 void		ft_cast_chaos_armor(t_char *info);
-void		ft_detect_buff_debuff(t_char *target, const char **input, t_buff *buff);
-int			ft_update_caster_name(char ***caster_name, const char *input_name);
+int			ft_update_caster_name(char ***caster_name, const char *input_name, t_buff *buff);
 
 //hunters mark
 void		ft_concentration_remove_hunters_mark(t_char *info, t_char *target);
-void		ft_cast_hunters_mark_second_appli(t_char *target, const char **input);
+void		ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff *buff);
 
 //resistance
 int			ft_get_resistance(t_char *info, const char *type);

@@ -11,7 +11,7 @@ static int ft_create_dir()
         {
             if (mkdir("data", 0700) == -1)
             {
-                ft_printf_fd(2, "Failed to create directory: %s\n", strerror(errno));
+                ft_printf_fd(2, "001-Error failed to create directory: %s\n", strerror(errno));
                 return (1);
             }
             else
@@ -22,7 +22,7 @@ static int ft_create_dir()
         }
         else
         {
-            ft_printf_fd(2, "Failed to stat directory: %s\n", strerror(errno));
+            ft_printf_fd(2, "002-Error failed to stat directory: %s\n", strerror(errno));
             return (1);
         }
     }
@@ -30,7 +30,7 @@ static int ft_create_dir()
     {
         if (access("data", R_OK | W_OK) == -1)
         {
-            ft_printf_fd(2, "No read/write access to 'data' directory: %s\n", strerror(errno));
+            ft_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n", strerror(errno));
             return (1);
         }
         if (DEBUG == 1)
@@ -38,7 +38,7 @@ static int ft_create_dir()
     }
     else
     {
-        ft_printf_fd(2, "Path exists but is not a directory\n");
+        ft_printf_fd(2, "004-Error path exists but is not a directory\n");
         return (1);
     }
 
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 		printf("size of t_char struct is %zu\n", sizeof(t_char));
 	if (argc > 1)
 	{
-		ft_printf_fd(2, "Error: expecting no arguments\n");
+		ft_printf_fd(2, "005-Error expecting no arguments\n");
 		return (1);
 	}
 	srand((unsigned)time(NULL));
