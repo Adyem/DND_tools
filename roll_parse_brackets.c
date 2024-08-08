@@ -4,6 +4,8 @@ int	ft_roll_parse_brackets(char *string, int *i, int j)
 {
 	int	x;
 
+	if (DEBUG == 1)
+		ft_printf("parsing brackets %s i=%i j=%i\n", string, *i, j);
 	while (*i < j)
 	{
 		x = *i;
