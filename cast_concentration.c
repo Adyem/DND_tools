@@ -1,32 +1,5 @@
 #include "dnd_tools.h"
 
-int ft_update_caster_name(char ***caster_name, const char *input_name)
-{
-    size_t length = 0;
-
-    if (DEBUG == 1)
-        ft_printf("adding the new caster name to the target struct\n");
-    if (*caster_name)
-        while ((*caster_name)[length] != NULL)
-            length++;
-    char **new_caster_name = (char **)realloc(*caster_name, (length + 2) * sizeof(char *));
-    if (!new_caster_name)
-	{
-        ft_printf_fd(2, "Error allocating memory for caster name\n");
-        return 1;
-    }
-    *caster_name = new_caster_name;
-    (*caster_name)[length] = ft_strdup(input_name);
-    if (!(*caster_name)[length])
-	{
-        ft_printf_fd(2, "Error allocating memory for caster name string\n");
-        return 1;
-    }
-    (*caster_name)[length + 1] = NULL;
-    return 0;
-}
-
-
 static void	ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2], int error)
 {
 	if (info)

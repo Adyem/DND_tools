@@ -16,16 +16,6 @@ typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 
 typedef struct s_buff
 {
-<<<<<<< HEAD
-    char	*target;
-    int		spell_id;
-	int		target_numbers;
-    int		dice_faces_mod;
-    int		dice_amount_mod;
-    int		duration;
-	int		buff;
-	int		error;
-=======
 	int					target_amount;
     char				*target;
     int					spell_id;
@@ -35,7 +25,6 @@ typedef struct s_buff
 	int					buff;
 	int					error;
 	cast_buff_debuff	cast_spell;
->>>>>>> 7d37f6fffd9f49d42db0ab67a7e5a500ee28bd58
 }	t_buff;
 
 
