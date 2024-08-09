@@ -11,15 +11,16 @@ int	ft_roll_parse_brackets(char *string, int *i, int j)
 		x = *i;
 		if (string && string[*i] == '(')
 			(*i)++;
-		while (string && (string[*i] >= '0' && string[*i] <= '9'))
-			(*i)++;
-		if (string && string[*i] == ')')
+		if (string)
 		{
 			while (string && string[*i] != ')')
-				string[x] = string[x + 1];
-			if (string && string[x + 1] == ')')
 			{
-				while (string && string[x + 2])
+				string[x] = string[x + 1];
+				x++;
+			}
+			if (string[x + 1] && string[x + 1] == ')')
+			{
+				while (string[x + 2] && string[x + 2])
 				{
 					string[x] = string[x + 2];
 					x++;
