@@ -49,13 +49,10 @@ static void	ft_command_roll_parse(char *string, int nested)
 		i++;
 	}
 	i = 0;
-	while (i < j)
-	{
-		error = ft_roll_parse_brackets(string - nested, &i, j);
-		if (error)
-			return ;
-		i++;
-	}
+	error = ft_roll_parse_brackets(string - nested);
+	if (error)
+		return ;
+	i++;
 	if (DEBUG == 1)
 		ft_printf("%s\n", string);
 	return ;

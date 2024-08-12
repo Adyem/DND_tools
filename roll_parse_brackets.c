@@ -1,33 +1,25 @@
 #include "dnd_tools.h"
 
-int	ft_roll_parse_brackets(char *string, int *i, int j)
+int ft_roll_parse_brackets(char *string) 
 {
-	int	x;
+	int x = 0;
+	int y = 0;
+	int bracket_found = 0;
 
 	if (DEBUG == 1)
-		ft_printf("parsing brackets %s i=%i j=%i\n", string, *i, j);
-	while (*i < j)
+		ft_printf("parsing brackets %s\n", string);
+	while (string[x])
 	{
-		x = *i;
-		if (string && string[*i] == '(')
-			(*i)++;
-		if (string)
-		{
-			while (string && string[*i] != ')')
-			{
-				string[x] = string[x + 1];
-				x++;
-			}
-			if (string[x + 1] && string[x + 1] == ')')
-			{
-				while (string[x + 2] && string[x + 2])
-				{
-					string[x] = string[x + 2];
-					x++;
-				}
-			}
-		}
-		(*i)++;
+		if (string[x] == '(' && !bracket_found)
+			bracket_found = 1;
+		else if (string[x] == ')' && bracket_found)
+			bracket_found = 0;
+		else
+			string[y++] = string[x];
+		x++;
 	}
-	return (0);
+	string[y] = '\0';
+	if (DEBUG == 1)
+		ft_printf("Modified string: %s\n", string);
+    return (0);
 }
