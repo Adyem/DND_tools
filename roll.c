@@ -10,7 +10,7 @@ void	ft_calculate_j(char *string, int *j)
 	return ;
 }
 
-int execute_roll_function(char *string, RollExecuteFunc func, const char *debug_tag, int nested)
+int execute_roll_function(char *string, RollExecuteFunc func)
 {
 	int i;
 	int	j;
@@ -43,11 +43,11 @@ int ft_command_roll_parse(char *string, int nested)
 		if (error)
 			return 1;
 	}
-	if (execute_roll_function(string, ft_roll_excecute_droll, "DICE", nested))
+	if (execute_roll_function(string, ft_roll_excecute_droll))
 		return (3);
-	if (execute_roll_function(string, ft_roll_excecute_md, "MD", nested))
+	if (execute_roll_function(string, ft_roll_excecute_md))
 		return (4);
-	if (execute_roll_function(string, ft_roll_excecute_pm, "PM", nested))
+	if (execute_roll_function(string, ft_roll_excecute_pm))
 		return (5);
 	if (DEBUG == 1)
 		printf("nested is %i\n", nested);
@@ -91,7 +91,7 @@ void	ft_command_roll(char **argv)
 		return ;
 	if (ft_command_roll_validate(result))
 	{
-		ft_printf_fd(2, "Roll error with the string: %s\n", result);
+		ft_printf_fd(2, "169-Command Roll Error with the string: %s\n", result);
 		return ;
 	}
 	ft_command_roll_parse(result, 0);
