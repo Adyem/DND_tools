@@ -9,7 +9,7 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 
 	while(*i < j)
 	{
-		if (!(string[*i]))
+		if (!string[*i] || string[*i] == ')')
 			break ;
 		if (string[*i] == 'd')
 		{
@@ -46,6 +46,8 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 				x++;
 			}
 			string[*i] = '\0';
+			*i = 0;
+			ft_calculate_j(string, &j);
 		}
 		(*i)++;
 	}

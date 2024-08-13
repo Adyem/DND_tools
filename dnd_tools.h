@@ -246,6 +246,7 @@ int			ft_roll_itoa(int result, int *i, char *string);
 int			ft_roll_check_character(char c);
 int			ft_roll_check_number_next(char *string, int i);
 int			ft_roll_check_number_previous(char *string, int i);
+void		ft_calculate_j(char *string, int *j);
 
 //roll parser
 int			ft_roll_excecute_droll(char *string, int *i, int j);

@@ -1,6 +1,14 @@
 #include "dnd_tools.h"
 
-static void	ft_command_roll_parse(char *string, int nested)
+void	ft_calculate_j(char *string, int *j)
+{
+	*j = 0;
+	while (string[*j] && string[*j] != ')')
+		(*j)++;
+	return ;
+}
+
+static int	ft_command_roll_parse(char *string, int nested)
 {
 	int error;
 	int	i;
@@ -8,54 +16,65 @@ static void	ft_command_roll_parse(char *string, int nested)
 
 	if (DEBUG == 1)
 		ft_printf("running ft_command_roll_parse\n");
-	j = 0;
 	i = 0 + nested;
 	while (string[i] != '(' && string[i])
 		i++;
 	if (string[i] == '(')
-		ft_command_roll_parse(&string[i], 1);
-	else if (string[i] == ')' && nested == 0)
-		return ;
-	else if (!string[i] && nested == 1)
-		return ;
-	else if (string[i] == ')' && nested == 1)
-		j = i;
-	while (string[j] && string[j] != ')')
-		j++;
+	{
+		error = ft_command_roll_parse(&string[i], 1);
+		if (DEBUG == 1)
+			ft_printf("The value of error is %i\n", error);
+		if (error)
+			return (1);
+	}
+	ft_calculate_j(string, &j);
 	i = 0;
-	if (DEBUG == 1)
-		ft_printf("j = %i\n", j);
 	while (i < j)
 	{
 		error = ft_roll_excecute_droll(string, &i, j);
+		if (DEBUG == 1)
+			ft_printf("DICE nested=%i i=%i j=%i\n", nested, i,  j);
 		if (error)
-			return ;
+			return (3);
 		i++;
 	}
+	ft_calculate_j(string, &j);
 	i = 0;
 	while (i < j)
 	{
 		error = ft_roll_excecute_md(string, &i, j);
+		if (DEBUG == 1)
+			ft_printf("MD nested=%i i=%i j=%i\n", nested, i,  j);
 		if (error)
-			return ;
+			return (4);
 		i++;
 	}
+	ft_calculate_j(string, &j);
 	i = 0;
 	while (i < j)
 	{
 		error = ft_roll_excecute_pm(string, &i, j);
+		if (DEBUG == 1)
+			ft_printf("PM nested=%i i=%i j=%i\n", nested, i,  j);
 		if (error)
-			return ;
+			return (5);
 		i++;
 	}
 	i = 0;
-	error = ft_roll_parse_brackets(string - nested);
-	if (error)
-		return ;
-	i++;
+	if (DEBUG == 1)
+		ft_printf("nested is %i\n", nested);
+	if (nested)
+	{
+		if (DEBUG == 1)
+			ft_printf("the string before parsing brackets is %s\n", string);
+		error = ft_roll_parse_brackets(string);
+		if (error)
+			return (6);
+		i++;
+	}
 	if (DEBUG == 1)
 		ft_printf("%s\n", string);
-	return ;
+	return (0);
 }
 
 void	ft_command_roll(char **argv)
