@@ -27,7 +27,7 @@ static char	**ft_realloc_dnd(char **return_v, int index, int fd)
 	temp = ft_calloc(index + 1, sizeof(char *));
 	if (!temp)
 	{
-		ft_printf_fd(2, "165-Error: Malloc in read file failed\n");
+		ft_printf_fd(2, "167-Error: Malloc in read file failed\n");
 		ft_malloc_fail_gnl_dnd(return_v, fd);
 		return (NULL);
 	}

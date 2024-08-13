@@ -22,10 +22,8 @@ int execute_roll_function(char *string, RollExecuteFunc func, const char *debug_
 	while (i < j)
 	{
 		error = func(string, &i, j);
-		if (DEBUG == 1)
-			printf("%s nested=%i i=%i j=%i\n", debug_tag, nested, i, j);
 		if (error)
-			return error;
+			return (error);
 		i++;
 	}
 	return (0);
@@ -36,40 +34,29 @@ int ft_command_roll_parse(char *string, int nested)
 	int error;
 	int i;
 
-	if (DEBUG == 1)
-		printf("running ft_command_roll_parse\n");
 	i = 0 + nested;
 	while (string[i] != '(' && string[i])
 		i++;
 	if (string[i] == '(')
 	{
 		error = ft_command_roll_parse(&string[i], 1);
-		if (DEBUG == 1)
-			printf("The value of error is %i\n", error);
 		if (error)
 			return 1;
 	}
-	error = execute_roll_function(string, ft_roll_excecute_droll, "DICE", nested);
-	if (error)
+	if (execute_roll_function(string, ft_roll_excecute_droll, "DICE", nested))
 		return (3);
-	error = execute_roll_function(string, ft_roll_excecute_md, "MD", nested);
-	if (error)
+	if (execute_roll_function(string, ft_roll_excecute_md, "MD", nested))
 		return (4);
-	error = execute_roll_function(string, ft_roll_excecute_pm, "PM", nested);
-	if (error)
+	if (execute_roll_function(string, ft_roll_excecute_pm, "PM", nested))
 		return (5);
 	if (DEBUG == 1)
 		printf("nested is %i\n", nested);
 	if (nested)
 	{
-		if (DEBUG == 1)
-			printf("the string before parsing brackets is %s\n", string);
 		error = ft_roll_parse_brackets(string);
 		if (error)
 			return 6;
 	}
-	if (DEBUG == 1)
-		printf("%s\n", string);
 	return (0);
 }
 
@@ -92,7 +79,10 @@ void	ft_command_roll(char **argv)
 	{
 		result = ft_strjoin_gnl(result, argv[i]);
 		if (!result)
+		{
+			ft_printf_fd(2, "168-Error: Malloc failed ft_strjoin_gnl\n");
 			return ;
+		}
 		i++;
 	}
 	if (DEBUG == 1)
