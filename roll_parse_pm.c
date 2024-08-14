@@ -7,7 +7,9 @@ int	ft_roll_excecute_pm(char *string, int *i, int j)
 	int		first_number;
 	int		second_number;
 	int		x;
+	int		error;
 
+	error = 0;
 	while(*i < j)
 	{
 		if (DEBUG == 1)
@@ -21,8 +23,10 @@ int	ft_roll_excecute_pm(char *string, int *i, int j)
 			if (*i > 0)
 				(*i)--;
 			x++;
-			first_number = ft_roll_convert_previous(string, i);
-			second_number = ft_roll_convert_next(string, x);
+			first_number = ft_roll_convert_previous(string, i, &error);
+			second_number = ft_roll_convert_next(string, x, &error);
+			if (error)
+				return (1);
 			if (sign == '+')
 				result = first_number + second_number;
 			else if (sign == '-')

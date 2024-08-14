@@ -1,5 +1,34 @@
 #include "dnd_tools.h"
 
+int ft_check_value_roll(const char *str)
+{
+    int					sign;
+    unsigned long long	result;
+    unsigned long long	limit;
+
+	sign = 1;
+	result = 0;
+	limit = (unsigned long long)INT_MAX + 1;
+    while (*str == ' ' || (*str >= 9 && *str <= 13))
+        str++;
+    if (*str == '-' || *str == '+')
+    {
+        if (*str == '-')
+            sign = -1;
+        str++;
+    }
+    while (*str && isdigit(*str))
+    {
+        result = result * 10 + (*str - '0');
+        str++;
+        if ((sign == 1 && result > INT_MAX) || (sign == -1 && result > limit))
+            return (1);
+    }
+    if (sign == -1 && result > limit)
+        return (1);
+    return (0);
+}
+
 int	ft_check_string_number(char *string)
 {
 	int	i;
@@ -31,26 +60,40 @@ void	ft_free_parse(char **to_parse)
 	}
 }
 
-int ft_roll_convert_previous(char *string, int *i)
+int ft_roll_convert_previous(char *string, int *i, int *error)
 {
-    int result;
+	int result;
+	int	check;
 
-    while (*i > 0 && (string[*i] >= '0' && string[*i] <= '9'))
-        (*i)--;
-    if (*i > 0 && (string[*i - 1] == '+' || string[*i - 1] == '-'))
-        (*i)--;
-    if (string[*i] < '0' || string[*i] > '9')
-        (*i)++;
+	while (*i > 0 && (string[*i] >= '0' && string[*i] <= '9'))
+		(*i)--;
+	if (*i > 0 && (string[*i - 1] == '+' || string[*i - 1] == '-'))
+		(*i)--;
+	if (string[*i] < '0' || string[*i] > '9')
+		(*i)++;
+	check = ft_check_value_roll(string);
+	if (check != 0)
+	{
+		*error = 1;
+		return (0);
+	}
     result = ft_atoi(&string[*i]);
     if (DEBUG == 1)
         ft_printf("the first number is %i and i=%i\n", result, *i);
-    return result;
+    return (result);
 }
 
-int	ft_roll_convert_next(char *string, int i)
+int	ft_roll_convert_next(char *string, int i, int *error)
 {
 	int	result;
+	int	check;
 
+	check = ft_check_value_roll(string);
+	if (check != 0)
+	{
+		*error = 1;
+		return (0);
+	}
 	result = ft_atoi(&string[i]);
 	if (DEBUG == 1)
 		ft_printf("the second number is %i\n", result);

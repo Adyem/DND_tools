@@ -6,7 +6,9 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 	int		first_number;
 	int		second_number;
 	int 	x;
+	int		error;
 
+	error = 0;
 	while(*i < j)
 	{
 		if (!string[*i] || string[*i] == ')')
@@ -20,10 +22,12 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
 			if (DEBUG == 1)
 				ft_printf("the value of x = %i\n", x);
 			if (string[*i] >= '0' && string[*i] <= '9')
-				first_number = ft_roll_convert_previous(string, i);
+				first_number = ft_roll_convert_previous(string, i, &error);
 			else
 				first_number = 1;
-			second_number = ft_roll_convert_next(string, x);
+			second_number = ft_roll_convert_next(string, x, &error);
+			if (error)
+				return (1);
 			if (first_number <= 0 || second_number <= 0)
 				return (1);
 			result = ft_dice_roll(first_number, second_number);

@@ -21,11 +21,11 @@ int	ft_check_value(const char *input)
 		{
 			check = (check * 10) + input[i] - '0';
 			if (sign * check < -2147483648 || sign * check > 2147483647)
-				return (1);
+				return (2);
 			i++;
 		}
 		else
-			return (1);
+			return (3);
 	}
 	return (0);
 }

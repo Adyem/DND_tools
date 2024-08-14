@@ -255,8 +255,8 @@ int			ft_roll_excecute_pm(char *string, int *i, int j);
 int			ft_roll_parse_brackets(char *string);
 
 //roll convert numbers
-int			ft_roll_convert_previous(char *string, int *i);
-int			ft_roll_convert_next(char *string, int i);
+int			ft_roll_convert_previous(char *string, int *i, int *error);
+int			ft_roll_convert_next(char *string, int i, int *error);
 
 //player
 void		ft_player(const char **input);
