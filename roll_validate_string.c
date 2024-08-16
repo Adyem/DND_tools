@@ -1,5 +1,28 @@
 #include "dnd_tools.h"
 
+static int	ft_roll_check_arg(char *string)
+{
+	int	i;
+
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == '+' || string[i] == '-')
+			i++;
+		else if (string[i] == '/' || string[i] == '*')
+			i++;
+		else if (string[i] >= '0' || string[i] <= '9')
+			i++;
+		else if (string[i] == '(' || string[i] ==  ')')
+			i++;
+		else if (string[i] == 'd')
+			i++;
+		else
+			return (1);
+	}
+	return (0);
+}
+
 static int	ft_check_open_braces(char *string, int i, int *open_braces)
 {
 	if (i > 0)
@@ -24,29 +47,6 @@ static int	ft_check_close_braces(char *string, int i,
 	return (0);
 }
 
-static int	ft_roll_check_arg(char *string)
-{
-	int	i;
-
-	i = 0;
-	while (string[i])
-	{
-		if (string[i] == '+' || string[i] == '-')
-			i++;
-		else if (string[i] == '/' || string[i] == '*')
-			i++;
-		else if (string[i] >= '0' || string[i] <= '9')
-			i++;
-		else if (string[i] == '(' || string[i] ==  ')')
-			i++;
-		else if (string[i] == 'd')
-			i++;
-		else
-			return (1);
-	}
-	return (0);
-}
-
 int	ft_check_plus_minus(char *string, int i)
 {
 	int sign_seen;
@@ -64,7 +64,8 @@ int	ft_check_plus_minus(char *string, int i)
 		return (1);
 	if (!((string[i + 1] == '+' && !sign_seen) ||
 			(string[i + 1] == '-' && !sign_seen) ||
-			(string[i + 1] >= '0' && string[i + 1] <= '9')))
+			(string[i + 1] >= '0' && string[i + 1] <= '9') ||
+			(string[i + 1] == '(')))
 		return (1);
 	return (0);
 }
@@ -73,7 +74,7 @@ static int	ft_check_divide_multiply(char *string, int i)
 {
 	if (i == 0)
 		return (1);
-	if (ft_roll_check_number_next(string, i))
+	if (ft_roll_check_number_next(string, i) || string[i + 1] != '(')
 		return (1);
 	if (ft_roll_check_number_previous(string, i))
 		return (1);
