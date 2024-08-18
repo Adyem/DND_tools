@@ -23,6 +23,8 @@ int ft_check_value_roll(const char *str)
         str++;
         if ((sign == 1 && result > INT_MAX) || (sign == -1 && result > limit))
             return (1);
+		if (DEBUG == 1)
+			ft_printf("FT_CHECK_VALUE_ROLL the string is %s\n", str);
     }
     if (sign == -1 && result > limit)
         return (1);
@@ -71,10 +73,12 @@ int ft_roll_convert_previous(char *string, int *i, int *error)
 		(*i)--;
 	if (string[*i] < '0' || string[*i] > '9')
 		(*i)++;
-	check = ft_check_value_roll(string);
+	check = ft_check_value_roll(&string[*i]);
 	if (check != 0)
 	{
 		*error = 1;
+		ft_printf_fd(2, "171-Error: numbers cant be higher then %i or lower then %i\n",
+				INT_MAX, INT_MIN);
 		return (0);
 	}
     result = ft_atoi(&string[*i]);
@@ -88,10 +92,12 @@ int	ft_roll_convert_next(char *string, int i, int *error)
 	int	result;
 	int	check;
 
-	check = ft_check_value_roll(string);
+	check = ft_check_value_roll(&string[i]);
 	if (check != 0)
 	{
 		*error = 1;
+		ft_printf_fd(2, "170-Error: numbers cant be higher then %i or lower then %i\n",
+				INT_MAX, INT_MIN);
 		return (0);
 	}
 	result = ft_atoi(&string[i]);
