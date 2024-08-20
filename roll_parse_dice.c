@@ -1,8 +1,5 @@
 #include "dnd_tools.h"
 
-#define MAX_DICE 50000
-#define MAX_FACES 50000
-
 int	ft_roll_excecute_droll(char *string, int *i, int j)
 {
     int result;
@@ -38,17 +35,12 @@ int	ft_roll_excecute_droll(char *string, int *i, int j)
             }
             if (second_number <= 0)
             {
-                ft_printf("179-Error: The number of faces on a die must be greater than 0. Current value: %i\n", second_number);
-                return (1);
-            }
-            if (first_number > MAX_DICE || second_number > MAX_FACES)
-            {
-                ft_printf("177-Error: The number of dice can't be higher than %i or the amount of faces can't be higher than %i\n",
-                        MAX_DICE, MAX_FACES);
+                ft_printf("179-Error: The number of faces on a die must be greater than 0. " \
+						"Current value: %i, the result cant be higher then %i as well\n", second_number, INT_MAX);
                 return (1);
             }
             result = ft_dice_roll(first_number, second_number);
-            if (!result)
+            if (result == -1)
                 return (1);
             if (ft_roll_itoa(result, i, string))
                 return (1);

@@ -9,16 +9,13 @@ int	ft_dice_roll(int number, int faces)
 	if (faces == 1)
 		return (number);
 	if (faces < 1 || number < 1)
-		return (0);
+		return (-1);
 	result = 0;
 	i = 0;
 	roll = 0;
 	while (i < number)
 	{
-		do
-			roll = rand();
-		while
-			(roll > (RAND_MAX - (RAND_MAX % faces)) + 1);
+		roll = rand();
 		if (result > INT_MAX - ((roll % faces) + 1))
 			return (-1);
 		result += (roll % faces) + 1;
