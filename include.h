@@ -43,5 +43,6 @@
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <assert.h>
 
 #endif

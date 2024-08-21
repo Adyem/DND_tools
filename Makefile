@@ -94,7 +94,8 @@ SRC			= name.c \
 			  calculate_resistance.c \
 			  calculate_damage_reduction.c \
 			  cast_chaos_armor.c \
-			  cast_concentration_caster.c
+			  cast_concentration_caster.c \
+			  roll_parse_utils.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0
@@ -121,6 +122,7 @@ $(OBJ_DIR)/%.o: %.c $(HEADER)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+all: CFLAGS += -DNDEBUG
 all: $(TARGET)
 
 debug:

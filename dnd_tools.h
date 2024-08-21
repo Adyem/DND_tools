@@ -253,6 +253,7 @@ int			ft_roll_excecute_droll(char *string, int *i, int j);
 int			ft_roll_excecute_md(char *string, int *i, int j);
 int			ft_roll_excecute_pm(char *string, int *i, int j);
 int			ft_roll_parse_brackets(char *string);
+int			ft_process_sign(char *string, int *i, int j, int *error);
 
 //roll convert numbers
 int			ft_roll_convert_previous(char *string, int *i, int *error);
