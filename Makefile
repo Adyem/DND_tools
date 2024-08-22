@@ -122,7 +122,6 @@ $(OBJ_DIR)/%.o: %.c $(HEADER)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: CFLAGS += -DNDEBUG
 all: $(TARGET)
 
 debug:
