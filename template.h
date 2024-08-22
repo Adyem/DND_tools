@@ -140,6 +140,7 @@ static const t_char TEMPLATE_INFO =
 	.save_mod = TEMPLATE_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
 	.dstats = TEMPLATE_DEFAULT_STATS,
+	.feats = INITIALIZE_FEATS,
 	.struct_name = NULL,
 };
 

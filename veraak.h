@@ -141,6 +141,7 @@ static const t_char VERAAK_INFO =
 	.save_mod = VERAAK_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
 	.dstats = VERAAK_DEFAULT_STATS,
+	.feats = INITIALIZE_FEATS,
 	.struct_name = NULL,
 };
 

@@ -140,6 +140,7 @@ static const t_char CHAOS_CRYSTAL_INFO =
 	.save_mod = CHAOS_CRYSTAL_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
 	.dstats = CHAOS_CRYSTAL_DEFAULT_STATS,
+	.feats = INITIALIZE_FEATS,
 	.struct_name = NULL,
 };
 

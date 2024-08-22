@@ -17,6 +17,7 @@ static const t_equipment_id LEATHER_ARMOR =
 	.skill_mod = INITIALIZE_SKILLSM,
 	.resistance = INITIALIZE_RESISTANCE,
 	.flat_dr = INITIALIZE_RESISTANCE,
+	.type = ATYPE_LEATHER,
 	.dex_ac_max_bonus = 2,
 	.ac = 2,
 	.str = 0,

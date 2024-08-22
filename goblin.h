@@ -140,6 +140,7 @@ static const t_char GOBLIN_INFO =
 	.save_mod = GOBLIN_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
 	.dstats = GOBLIN_DEFAULT_STATS,
+	.feats = INITIALIZE_FEATS,
 	.struct_name = NULL,
 };
 

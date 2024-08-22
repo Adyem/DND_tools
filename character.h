@@ -189,6 +189,10 @@ typedef struct	s_resistance
 	int	thunder;
 }	t_resistance;
 
+typedef struct s_feats
+{
+}	t_feats;
+
 typedef struct s_equipment_action
 {
 	c_action	function;
@@ -199,6 +203,7 @@ typedef struct s_equipment_action
 	int			effect_dice_faces;
 	int			bonus_mod;
 }	t_equipment_action;
+
 
 typedef struct s_equipment_id
 {
@@ -211,6 +216,7 @@ typedef struct s_equipment_id
 	t_skillsm			skill_mod;
 	t_resistance		resistance;
 	t_resistance		flat_dr;
+	int					type;
 	int					dex_ac_max_bonus;
 	int					ac;
 	int					str;
@@ -273,6 +279,7 @@ typedef struct	s_char
 	t_savem			save_mod;
 	t_stats			stats;
 	t_stats			dstats;
+	t_feats			feats;
 	t_name			*struct_name;
 } t_char;
 

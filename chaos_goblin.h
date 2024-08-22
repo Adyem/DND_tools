@@ -141,6 +141,7 @@ static const t_char CHAOS_GOBLIN_INFO =
 	.save_mod = CHAOS_GOBLIN_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
 	.dstats = CHAOS_GOBLIN_DEFAULT_STATS,
+	.feats = INITIALIZE_FEATS,
 	.struct_name = NULL,
 };
 

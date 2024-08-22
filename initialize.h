@@ -82,6 +82,7 @@ static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 	.skill_mod = INITIALIZE_SKILLSM,
 	.resistance = INITIALIZE_RESISTANCE,
 	.flat_dr = INITIALIZE_RESISTANCE,
+	.type = 0,
 	.dex_ac_max_bonus = 0,
 	.ac = 0,
 	.str = 0,
@@ -191,6 +192,10 @@ static const	t_flags INITIALIZE_FLAGS =
 	.flanking = 0,
 	.advantage = 0,
 	.prone = 0,
+};
+
+static const	t_feats INITIALIZE_FEATS =
+{
 };
 
 #endif
