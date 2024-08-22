@@ -47,7 +47,7 @@ static int ft_check_div_overflow(int first_number, int second_number)
 {
     if (second_number == 0)
 	{
-        ft_printf_fd(2, "175-Error: Division by zero is undefined\n");
+        ft_printf_fd(2, "176-Error: Division by zero is undefined\n");
         return (1);
     }
     if (first_number == INT_MIN && second_number == -1)
@@ -61,7 +61,6 @@ static int ft_check_div_overflow(int first_number, int second_number)
 static int ft_check_overflow(int first_number, int second_number, char sign)
 {
     assert(sign == '+' || sign == '-' || sign == '*' || sign == '/');
-
     if (sign == '+')
         return ft_check_add_sub_overflow(first_number, second_number, 172, 1);
     else if (sign == '-')
@@ -77,7 +76,6 @@ static int ft_check_overflow(int first_number, int second_number, char sign)
 static int ft_calculate_result(int first_number, int second_number, char sign)
 {
 	assert(sign == '+' || sign == '-' || sign == '*' || sign == '/');
-
 	if (sign == '+')
 		return (first_number + second_number);
 	else if (sign == '-')
