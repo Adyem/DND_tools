@@ -61,6 +61,7 @@ static int ft_check_div_overflow(int first_number, int second_number)
 static int ft_check_overflow(int first_number, int second_number, char sign)
 {
     assert(sign == '+' || sign == '-' || sign == '*' || sign == '/');
+
     if (sign == '+')
         return ft_check_add_sub_overflow(first_number, second_number, 172, 1);
     else if (sign == '-')
@@ -76,6 +77,7 @@ static int ft_check_overflow(int first_number, int second_number, char sign)
 static int ft_calculate_result(int first_number, int second_number, char sign)
 {
 	assert(sign == '+' || sign == '-' || sign == '*' || sign == '/');
+
 	if (sign == '+')
 		return (first_number + second_number);
 	else if (sign == '-')
