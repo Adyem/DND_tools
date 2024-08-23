@@ -64,19 +64,23 @@ int ft_roll_excecute_droll(char *string, int *i, int j)
 	{
         if (!string[*i] || string[*i] == ')')
             break;
-        if (string[*i] == 'd') {
-            x = *i;
-            if (*i > 0)
-                (*i)--;
-            x++;
-            result = ft_handle_dice_roll(string, i, &x, &error);
-            if (result == -1 || error)
-                return (1);
-            if (ft_handle_result_replacement(string, i, x, result))
-                return (1);
-            ft_calculate_j(string, &j);
-        }
-        (*i)++;
+		if (string[*i] == 'd')
+		{
+			x = *i;
+			if (*i > 0)
+				(*i)--;
+			x++;
+			result = ft_handle_dice_roll(string, i, &x, &error);
+			if (result == -1 || error)
+				return (1);
+			if (ft_handle_result_replacement(string, i, x, result))
+				return (1);
+			ft_calculate_j(string, &j);
+			(*i) = 0;
+		}
+		else
+			(*i)++;
+		ft_calculate_j(string, &j);
     }
     if (DEBUG == 1)
         ft_printf("after dicerolling result is %s\n", string);

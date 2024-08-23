@@ -7,6 +7,8 @@ void	ft_calculate_j(char *string, int *j)
 	*j = 0;
 	while (string[*j] && string[*j] != ')')
 		(*j)++;
+	if (DEBUG == 1)
+		ft_printf("the new value of J is %i\n", j);
 	return ;
 }
 

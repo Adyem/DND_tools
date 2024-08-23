@@ -91,17 +91,19 @@ static int ft_calculate_result(int first_number, int second_number, char sign)
 
 static void ft_update_string(char *string, int *i, int x)
 {
-    if (string[x] == '-' || string[x] == '+')
-        x++;
-    while (string[x] >= '0' && string[x] <= '9')
-        x++;
-    while (string[x])
+	if (string[x] == '-' || string[x] == '+')
+		x++;
+	while (string[x] >= '0' && string[x] <= '9')
+		x++;
+	if (DEBUG == 1)
+		ft_printf("string = %s and x = %i\n", string, x);
+	while (string[x])
     {
-        string[*i] = string[x];
-        (*i)++;
-        x++;
-    }
-    string[*i] = '\0';
+		string[*i] = string[x];
+		(*i)++;
+		x++;
+	}
+	string[*i] = '\0';
 }
 
 int ft_process_sign(char *string, int *i, int j, int *error)
