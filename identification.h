@@ -42,7 +42,7 @@ typedef enum {
     WTYPE_WAND,
     
     // Armor Types
-    ATYPE_PADDED,
+    ATYPE_PADDED = 10001,
     ATYPE_LEATHER,
     ATYPE_STUDDED_LEATHER,
     ATYPE_HIDE,
@@ -57,12 +57,12 @@ typedef enum {
     ATYPE_SHIELD,
 
     // Weapon IDs
-    STEEL_SWORD_ID = 10001,
+    STEEL_SWORD_ID = 20001,
     WOODEN_BOW_ID,
     CHAOS_WAND_ID,
 
     // Armor IDs
-    LEATHER_ARMOR_ID = 20001
+    LEATHER_ARMOR_ID = 30001
 } ItemID;
 
 
