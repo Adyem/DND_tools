@@ -2,8 +2,10 @@
 
 static int	ft_roll_check_arg(char *string)
 {
+	int	check;
 	int	i;
 
+	check = 0;
 	i = 0;
 	while (string[i])
 	{
@@ -12,7 +14,10 @@ static int	ft_roll_check_arg(char *string)
 		else if (string[i] == '/' || string[i] == '*')
 			i++;
 		else if (string[i] >= '0' || string[i] <= '9')
+		{
+			check++;
 			i++;
+		}
 		else if (string[i] == '(' || string[i] ==  ')')
 			i++;
 		else if (string[i] == 'd')
@@ -20,16 +25,22 @@ static int	ft_roll_check_arg(char *string)
 		else
 			return (1);
 	}
+	if (!check)
+		return (1);
 	return (0);
 }
 
 static int	ft_check_open_braces(char *string, int i, int *open_braces)
 {
+	if (DEBUG == 0)
+		ft_printf("open braces string=%s\n", &string[i]);
 	if (i > 0)
 		if (ft_roll_check_character(string[i - 1]))
-			return (1);
+			if (string[i - 1] != ')' || string[i - 1] != '(')
+				return (1);
 	if (ft_roll_check_number_next(string, i))
-		return (1);
+		if (string[i + 1] != '(')
+			return (1);
 	(*open_braces)++;
 	return (0);
 }
@@ -38,12 +49,16 @@ static int	ft_check_close_braces(char *string, int i,
 				int open_braces, int *close_braces)
 {
 	(*close_braces)++;
+	if (DEBUG == 1)
+		ft_printf("close braces string=%s\n", &string[i]);
 	if (i == 0 || open_braces < *close_braces)
 		return (1);
 	if (ft_roll_check_character(string[i + 1]))
-		return (1);
+		if (string[i + 1] != ')')
+			return (1);
 	if (ft_roll_check_number_previous(string, i))
-		return (1);
+		if (string[i + 1] != '(' || string[i + 1] != ')')
+			return (1);
 	return (0);
 }
 

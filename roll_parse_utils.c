@@ -103,7 +103,11 @@ static void ft_update_string(char *string, int *i, int x)
 		(*i)++;
 		x++;
 	}
-	string[*i] = '\0';
+	while (string[*i])
+	{
+		string[*i] = '\0';
+		(*i)++;
+	}
 }
 
 int ft_process_sign(char *string, int *i, int j, int *error)
