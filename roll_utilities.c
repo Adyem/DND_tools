@@ -124,7 +124,5 @@ int	ft_roll_itoa(int result, int *i, char *string)
 		y++;
 	}
 	free(temp);
-	if (DEBUG == 1)
-		ft_printf("the string after roll itoa is %s\n", string);
 	return(0);
 }

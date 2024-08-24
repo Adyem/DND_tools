@@ -80,8 +80,8 @@ int ft_roll_excecute_droll(char *string, int *i, int j)
 		}
 		else
 			(*i)++;
-		ft_calculate_j(string, &j);
     }
+	ft_calculate_j(string, &j);
     if (DEBUG == 1)
         ft_printf("after dicerolling result is %s\n", string);
 

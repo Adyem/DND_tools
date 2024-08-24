@@ -59,6 +59,8 @@ int ft_command_roll_parse(char *string, int nested)
 		if (error)
 			return 6;
 	}
+	if (DEBUG == 1 && nested)
+		ft_printf("leaving nested braces\n");
 	return (0);
 }
 
