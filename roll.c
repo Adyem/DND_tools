@@ -94,6 +94,7 @@ void	ft_command_roll(char **argv)
 	if (ft_command_roll_validate(result))
 	{
 		ft_printf_fd(2, "169-Command Roll Error with the string: %s\n", result);
+		free(result);
 		return ;
 	}
 	ft_command_roll_parse(result, 0);
