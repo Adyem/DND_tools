@@ -4,6 +4,8 @@ int ft_roll_excecute_pm(char *string, int *i, int j)
 {
     int error;
 
+	if (DEBUG == 1)
+		ft_printf("CHECKING PM\n");
 	error = 0;
     while (*i < j)
     {

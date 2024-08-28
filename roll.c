@@ -26,6 +26,7 @@ int execute_roll_function(char *string, RollExecuteFunc func)
 		error = func(string, &i, j);
 		if (error)
 			return (error);
+		ft_calculate_j(string, &j);
 		i++;
 	}
 	return (0);
