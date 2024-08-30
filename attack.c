@@ -67,6 +67,11 @@ void	ft_weapon_attack(t_char *info, t_equipment_id *weapon)
 	}
 	d_info.stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;
 	d_info.result = ft_dice_roll(1, 20);
+	if (d_info.result == -1)
+	{
+		ft_printf_fd(2, "101-Error: dice rolling error in attack");
+		return ;
+	}
 	d_info.mod = ft_attack_roll_check_buffs(info, &d_info.result);
 	if (weapon->projectile_name)
 		ft_printf("%s uses his/her %s to fire a %s and rolled ",

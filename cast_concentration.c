@@ -31,15 +31,21 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
 	char	**temp;
 	int		i;
 
-	temp = (char **)ft_calloc(1 + 1, sizeof(char *));
+	temp = NULL;//(char **)ft_calloc(1 + 1, sizeof(char *));
     if (!temp)
 	{
+		target->debufs.hunters_mark.amount--;
+		free(target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1]);
+		target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1] = NULL;
 		ft_cast_concentration_cleanup(info, target, fd, 2);
 		return (1);
 	}
     temp[0] = (char *)malloc((ft_strlen(input[3]) + 1) * sizeof(char));
     if (!temp[0])
 	{
+		target->debufs.hunters_mark.amount--;
+		free(target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1]);
+		target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1] = NULL;
 		ft_cast_concentration_cleanup(info, target, fd, 3);
         free(temp);
         return (1);
