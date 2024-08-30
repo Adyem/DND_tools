@@ -20,9 +20,9 @@ static void	ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 	else if (error == 3)
 		ft_printf_fd(2, "299-Error allocating memory targets[0]\n");
 	else if (error == 4)
-		ft_printf_fd(2, "320-Error opening file: %s", strerror(errno));
+		ft_printf_fd(2, "320-Error opening file: %s\n", strerror(errno));
 	else if (error == 5)
-		ft_printf_fd(2, "321-Error opening file: %s", strerror(errno));
+		ft_printf_fd(2, "321-Error opening file: %s\n", strerror(errno));
 	return ;
 }
 
@@ -31,7 +31,7 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
 	char	**temp;
 	int		i;
 
-	temp = NULL;//(char **)ft_calloc(1 + 1, sizeof(char *));
+	temp = (char **)ft_calloc(1 + 1, sizeof(char *));
     if (!temp)
 	{
 		target->debufs.hunters_mark.amount--;
@@ -116,7 +116,13 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 		return ;
 	}
     if (target && target->version_number >= 2)
-		buff->cast_spell(target, input, buff);
+	{
+		if (buff->cast_spell(target, input, buff))
+		{
+			ft_cast_concentration_cleanup(info, target, fd, 0);
+			return ;
+		}
+	}
     if (ft_remove_concentration(info))
 		return (ft_cast_concentration_cleanup(info, target, fd, 0), (void)0);
 	if (ft_apply_concentration_buff(info, target, fd, input, buff))

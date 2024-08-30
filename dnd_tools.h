@@ -157,7 +157,7 @@ int			ft_update_caster_name(char ***caster_name, const char *input_name, t_buff 
 
 //hunters mark
 void		ft_concentration_remove_hunters_mark(t_char *info, t_char *target);
-void		ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff *buff);
+int			ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff *buff);
 
 //resistance
 int			ft_get_resistance(t_char *info, const char *type);

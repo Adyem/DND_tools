@@ -54,9 +54,7 @@ char	**ft_read_file_dnd(int fd)
 	i = 0;
 	while (1)
 	{
-		ft_printf("HELLO %i\n", fd);
 		line = get_next_line(fd);
-		ft_printf("%p %s\n", line, strerror(errno));
 		if (!line)
 			break ;
 		i++;

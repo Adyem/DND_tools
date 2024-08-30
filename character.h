@@ -8,7 +8,7 @@ typedef struct	s_char t_char;
 typedef struct	s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 
-typedef void	(*cast_buff_debuff)(t_char *, const char **, t_buff *);
+typedef int		(*cast_buff_debuff)(t_char *, const char **, t_buff *);
 typedef void	(*c_action)(t_char *, t_equipment_id *);
 typedef void	(*c_turn)(t_char *);
 

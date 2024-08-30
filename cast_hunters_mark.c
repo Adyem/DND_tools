@@ -17,14 +17,20 @@ void	ft_cast_hunters_mark(t_char *info, const char **input)
 	return ;
 }
 
-void	ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff *buff)
+int	ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff *buff)
 {
 	int	i;
 
 	if (DEBUG == 1)
 		ft_printf("setting the caster name in the target %s %p\n", input[0], (void *)target);
 	if (target)
-		ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0], buff);
+	{
+		if (ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0], buff))
+		{
+			target->debufs.hunters_mark.amount--;
+			return (2);
+		}
+	}
 	if (DEBUG == 1 && target)
 	{
 		i = 0;
@@ -35,5 +41,5 @@ void	ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buf
 		}
 	}
 	target->debufs.hunters_mark.amount++;
-	return ;
+	return (0);
 }
