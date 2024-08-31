@@ -85,7 +85,6 @@ SRC			= name.c \
 			  to_hit_check_buffs.c \
 			  kill.c \
 			  calculate_stats.c \
-			  initialize_gear.c \
 			  trim_start.c \
 			  set_debuf.c \
 			  cast_hunters_mark.c \

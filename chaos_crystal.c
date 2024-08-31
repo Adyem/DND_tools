@@ -48,6 +48,12 @@ void	ft_chaos_crystal_turn(t_char *info)
 			info->stats.health, info->dstats.health);
 }
 
+static void	ft_initialize_gear(t_char *info)
+{
+	(void)info;
+	return ;
+}
+
 t_char	*ft_chaos_crystal(const int index, const char **input, t_name *name, int exception)
 {
 	int		error;
@@ -55,13 +61,17 @@ t_char	*ft_chaos_crystal(const int index, const char **input, t_name *name, int 
 
 	info = (t_char *)calloc(1, sizeof(t_char));
 	if (!info)
+	{
+		ft_printf_fd(2, "103-Error: Failed to allocate memory info %s\n", input[0]);
 		return (NULL);
+	}
 	*info = CHAOS_CRYSTAL_INFO;
 	info->name = input[0];
 	info->struct_name = name;
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
 	{
+		ft_printf_fd(2, "104-Error: Failed to allocate memory save_file name %s\n", info->name);
 		ft_free_info(info);
 		return (NULL);
 	}

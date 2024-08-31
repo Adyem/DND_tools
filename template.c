@@ -14,6 +14,12 @@ void	ft_template_turn(t_char *info)
 			info->stats.health, info->dstats.health);
 }
 
+static void	ft_initialize_gear(t_char *info)
+{
+	(void)info;
+	return ;
+}
+
 t_char	*ft_template(const int index, const char **input, t_name *name, int exception)
 {
 	int		error;

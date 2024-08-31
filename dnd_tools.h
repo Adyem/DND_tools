@@ -133,9 +133,6 @@ void		ft_npc_sstuff(t_char *info, const char **input);
 void		ft_change_stats_04(t_char *info, const char **input);
 void		ft_kill(t_char *info);
 
-//initialize gear
-void		ft_initialize_gear(t_char *info);
-
 //update debuf
 void		ft_set_debuf_blinded(t_char *info, const char **input);
 

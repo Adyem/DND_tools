@@ -150,12 +150,13 @@ int	ft_set_stats(t_char *info, char **content)
 			i++;
 			continue ;
 		}
-		if (info->version_number >= 2 && ft_set_stats_2(info, content, i) == 0)
+		if (ft_set_stats_2(info, content, i) == 0)
 		{
 			i++;
 			continue ;
 		}
-		if  (info->version_number >= 2 && (error = ft_set_stats_string(info, content, i)) <= 0)
+		error = ft_set_stats_string(info, content, i);
+		if  (error <= 0)
 		{
 			if (error == 0)
 			{

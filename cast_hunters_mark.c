@@ -43,7 +43,7 @@ int	ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff
 	{
 		if (ft_is_caster_name_present(target->debufs.hunters_mark.caster_name, input[0]))
 		{
-			ft_printf_fd(2, "102-Error: Caster name alreaddy present");
+			ft_printf_fd(2, "102-Error: Caster name alreaddy present\n");
 			return (1);
 		}
 		if (ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0], buff))
