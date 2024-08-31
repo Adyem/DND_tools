@@ -17,6 +17,22 @@ void	ft_cast_hunters_mark(t_char *info, const char **input)
 	return ;
 }
 
+static int	ft_is_caster_name_present(char **caster_name_list, const char *name)
+{
+	int	i;
+
+	if (!caster_name_list || !name)
+		return (0);
+	i = 0;
+	while (caster_name_list[i])
+	{
+		if (ft_strcmp_dnd(caster_name_list[i], name) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff *buff)
 {
 	int	i;
@@ -25,11 +41,13 @@ int	ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff
 		ft_printf("setting the caster name in the target %s %p\n", input[0], (void *)target);
 	if (target)
 	{
-		if (ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0], buff))
+		if (ft_is_caster_name_present(target->debufs.hunters_mark.caster_name, input[0]))
 		{
-			target->debufs.hunters_mark.amount--;
-			return (2);
+			ft_printf_fd(2, "102-Error: Caster name alreaddy present");
+			return (1);
 		}
+		if (ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0], buff))
+			return (2);
 	}
 	if (DEBUG == 1 && target)
 	{

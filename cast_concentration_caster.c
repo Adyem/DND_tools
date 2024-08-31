@@ -24,17 +24,14 @@ int ft_update_caster_name(char ***caster_name, const char *input_name, t_buff *b
     }
     else
     {
-        temp = ft_resize_double_char(*caster_name, input_name, 1);
-        if (temp)
-        {
-			ft_free_double_char(*caster_name);
-            *caster_name = temp;
-        }
-        else
+        temp = NULL;//ft_resize_double_char(*caster_name, input_name, 1);
+        if (!temp)
         {
             ft_printf_fd(2, "297-Error allocating memory for caster name\n");
             return (1);
         }
+		ft_free_double_char(*caster_name);
+        *caster_name = temp;
     }
     return (0);
 }
