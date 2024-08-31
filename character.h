@@ -204,6 +204,15 @@ typedef struct s_equipment_action
 	int			bonus_mod;
 }	t_equipment_action;
 
+typedef struct	s_saves
+{
+	int	str;
+	int	dex;
+	int	con;
+	int inte;
+	int	wis;
+	int cha;
+}	t_saves;
 
 typedef struct s_equipment_id
 {
@@ -216,6 +225,9 @@ typedef struct s_equipment_id
 	t_skillsm			skill_mod;
 	t_resistance		resistance;
 	t_resistance		flat_dr;
+	t_skillsm			skill_advantage;
+	t_saves				save;
+	t_saves				save_advantage;
 	int					type;
 	int					dex_ac_max_bonus;
 	int					ac;

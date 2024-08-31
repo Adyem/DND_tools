@@ -4,6 +4,16 @@
 #include <stddef.h>
 #include "character.h"
 
+static const	t_saves INITIALIZE_SAVES =
+{
+	.str = 0,
+	.dex = 0,
+	.con = 0,
+	.inte = 0,
+	.wis = 0,
+	.cha = 0,
+};
+
 static const	t_skillsm INITIALIZE_SKILLSM =
 {
 	.athletics = 0,
@@ -82,6 +92,9 @@ static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 	.skill_mod = INITIALIZE_SKILLSM,
 	.resistance = INITIALIZE_RESISTANCE,
 	.flat_dr = INITIALIZE_RESISTANCE,
+	.skill_advantage = INITIALIZE_SKILLSM,
+	.save = INITIALIZE_SAVES,
+	.save_advantage = INITIALIZE_SAVES,
 	.type = 0,
 	.dex_ac_max_bonus = 0,
 	.ac = 0,
