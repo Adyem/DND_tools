@@ -42,7 +42,7 @@ static char	**ft_realloc_dnd(char **return_v, int index, int fd)
 	return (temp);
 }
 
-static char	**ft_read_file_dnd(int fd)
+char	**ft_read_file_dnd(int fd)
 {
 	char	**return_v;
 	char	*line;

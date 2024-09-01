@@ -168,6 +168,7 @@ char		**ft_open_and_read(char *file);
 int			ft_open_file_write_only(const char *filename);
 
 //utils
+int			ft_create_data_dir();
 int			ft_strcmp_dnd(const char *string1, const char *string2);
 int			ft_initialize_info(t_char *info, char **content);
 int			ft_check_value(const char *input);

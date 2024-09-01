@@ -23,7 +23,7 @@ SRC			= name.c \
 			  veraak.c \
 			  veraak_turn.c \
 			  chaos_crystal.c \
-			  dnd_tools.c \
+			  main.c \
 			  template.c \
 			  npc_stats.c \
 			  npc_set_stats.c \
@@ -95,7 +95,8 @@ SRC			= name.c \
 			  cast_chaos_armor.c \
 			  cast_concentration_caster.c \
 			  roll_parse_utils.c \
-			  roll_dice.c
+			  roll_dice.c \
+			  create_data_folder.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0
