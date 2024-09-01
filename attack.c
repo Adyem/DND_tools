@@ -26,10 +26,10 @@ static int	ft_weapon_find_stat(t_char *info, t_equipment_id *weapon)
 		return (ft_calculate_cha(info));
 	else if (ft_strcmp_dnd(weapon->attack.stat, FINESSE) == 0)
 	{
-		if (info->stats.str > info->stats.dex)
-			return (info->stats.str);
+		if (ft_calculate_str(info) > ft_calculate_dex(info))
+			return (ft_calculate_str(info));
 		else
-			return (info->stats.dex);
+			return (ft_calculate_dex(info));
 	}
 	return (0);
 }

@@ -65,7 +65,6 @@ typedef enum {
     LEATHER_ARMOR_ID = 30001
 } ItemID;
 
-
 //Concentration ID
 # define HUNTERS_MARK_ID 1
 # define HUNTERS_MARK_NAME "hunters mark"
