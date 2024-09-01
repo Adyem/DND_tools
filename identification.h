@@ -100,4 +100,10 @@ typedef enum {
 //Other
 # define FINESSE "finesse"
 
+//Data
+#define DATA_FOLDER "data"
+#define PREFIX_TO_SKIP "data--"
+#define EXCLUDE_PREFIX "pc--"
+#define PC_PREFIX "pc--"
+
 #endif

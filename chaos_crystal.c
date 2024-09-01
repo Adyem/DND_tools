@@ -48,7 +48,7 @@ void	ft_chaos_crystal_turn(t_char *info)
 			info->stats.health, info->dstats.health);
 }
 
-static void	ft_initialize_gear(t_char *info)
+static void	ft_initialize_gear_and_feats(t_char *info)
 {
 	(void)info;
 	return ;
@@ -97,7 +97,7 @@ t_char	*ft_chaos_crystal(const int index, const char **input, t_name *name, int 
 		ft_free_info(info);
 		return (NULL);
 	}
-	ft_initialize_gear(info);
+	ft_initialize_gear_and_feats(info);
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);

@@ -1,9 +1,5 @@
 #include "dnd_tools.h"
-
-#define DATA_FOLDER "data"
-#define PREFIX_TO_SKIP "data--"
-#define EXCLUDE_PREFIX "pc--"
-#define PC_PREFIX "pc--"
+#include "identification.h"
 
 static void remove_exclude_prefix(char* filename)
 {
