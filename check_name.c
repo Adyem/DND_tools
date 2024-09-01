@@ -14,16 +14,17 @@ static void remove_exclude_prefix(char* filename)
 
 int ft_set_stats_check_name(const char *name)
 {
-    DIR* dir;
-    struct dirent* entry;
-	char filename[256];
+    DIR				*dir;
+    struct dirent	*entry;
+	char			filename[256];
 
 	if (!name)
 	{
 		ft_printf_fd(2, "259-Error name does not exist\n");
 		return (-1);
 	}
-    if ((dir = opendir(DATA_FOLDER)) == NULL)
+	dir = opendir(DATA_FOLDER);
+    if (dir == NULL)
 	{
 		ft_printf_fd(2, "295-Error Opendir has failed: %s", strerror(errno));
         return (-2);
@@ -34,7 +35,7 @@ int ft_set_stats_check_name(const char *name)
 		if (!entry)
 			break ;
         if (ft_strncmp(entry->d_name, PREFIX_TO_SKIP, strlen(PREFIX_TO_SKIP)) == 0)
-            continue;
+            continue ;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         remove_exclude_prefix(filename);
@@ -59,7 +60,8 @@ int ft_check_player_character(const char *name)
     struct dirent* entry;
     char filename[256];
 
-    if ((dir = opendir(DATA_FOLDER)) == NULL)
+	dir = opendir(DATA_FOLDER);
+    if (dir == NULL)
     {
         ft_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
         return (-2);
@@ -68,9 +70,9 @@ int ft_check_player_character(const char *name)
     {
         entry = readdir(dir);
         if (!entry)
-            break;
+            break ;
         if (ft_strncmp(entry->d_name, PC_PREFIX, ft_strlen(PC_PREFIX)) != 0)
-            continue;
+            continue ;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         if (DEBUG == 1)
@@ -80,9 +82,9 @@ int ft_check_player_character(const char *name)
             closedir(dir);
             if (DEBUG == 1)
                 ft_printf("Found %s\n", name);
-            return 0;
+            return (0);
         }
     }
     closedir(dir);
-    return 1;
+    return (1);
 }

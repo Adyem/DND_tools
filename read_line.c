@@ -53,27 +53,37 @@ static int ft_handle_builtins(char **input, int i, t_name *name, char *input_str
 
 void	ft_request_input(t_name *name)
 {
-	char	*input_string;
-	char	**input;
-	int		found;
-	int		i;
-	
-	while ((input_string = readline("dndtools: ")) != NULL)
-	{
-		if (*input_string)
-			add_history(input_string);
-		input = ft_parse_input(input_string);
-		if (!input)
-			continue ;
-		i = ft_double_char_length(input);
-		found = ft_handle_builtins(input, i, name, input_string);
-		if (found == -1)
-			return ;
-		else if (!found)
-			found = ft_handle_custom_commands(input, i, name);
-		if (!found)
-			ft_printf_fd(2, "007-Error unknown command: %s\n", input_string);
-		ft_free_input(input, input_string);
-	}
-	return ;
+    char	*input_string;
+    char	**input;
+    int		found;
+    int		i;
+    struct timespec start, end;
+
+    while ((input_string = readline("dndtools: ")) != NULL)
+    {
+        if (*input_string)
+            add_history(input_string);
+        clock_gettime(CLOCK_MONOTONIC, &start);
+        input = ft_parse_input(input_string);
+        if (!input)
+            continue ;
+        i = ft_double_char_length(input);
+        found = ft_handle_builtins(input, i, name, input_string);
+        if (found == -1)
+            return ;
+        else if (!found)
+            found = ft_handle_custom_commands(input, i, name);
+        if (!found)
+            ft_printf_fd(2, "007-Error unknown command: %s\n", input_string);
+		if (DEBUG == 1)
+		{
+			clock_gettime(CLOCK_MONOTONIC, &end);
+			long seconds = end.tv_sec - start.tv_sec;
+			long nanoseconds = end.tv_nsec - start.tv_nsec;
+			long microseconds = seconds * 1000000 + nanoseconds / 1000;
+			printf("Command executed in %ld microseconds\n", microseconds);
+		}
+        ft_free_input(input, input_string);
+    }
+    return ;
 }

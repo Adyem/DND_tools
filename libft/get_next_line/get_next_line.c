@@ -108,7 +108,15 @@ char	*get_next_line(int fd)
 {
 	char		*string;
 	static char	*readed_string[4096];
+	int			i;
 
+	i = 0;
+	while (fd == -1 && i < 4096)
+	{
+		free(readed_string[i]);
+		readed_string[i] = NULL;
+		i++;
+	}
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	readed_string[fd] = read_fd(fd, readed_string[fd]);
