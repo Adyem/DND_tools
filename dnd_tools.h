@@ -165,7 +165,7 @@ void		ft_reroll(t_char *info, int *result);
 //open and read
 char		**ft_read_file_dnd(int fd);
 char		**ft_open_and_read(char *file);
-int			ft_open_file(const char *filename);
+int			ft_open_file_write_only(const char *filename);
 
 //utils
 int			ft_strcmp_dnd(const char *string1, const char *string2);

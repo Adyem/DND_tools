@@ -68,14 +68,14 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
 
 static int	ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *target)
 {
-	fd[0] = ft_open_file(info->save_file);
+	fd[0] = ft_open_file_write_only(info->save_file);
 	if (fd[0] == -1)
 	{
 		info->flags.alreaddy_saved = 1;
 		ft_cast_concentration_cleanup(info, target, fd, 4);
 		return (1);
 	}
-	fd[1] = ft_open_file(target->save_file);
+	fd[1] = ft_open_file_write_only(target->save_file);
 	if (fd[1] == -1)
 	{
 		ft_cast_concentration_cleanup(info, target, fd, 5);

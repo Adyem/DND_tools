@@ -1,56 +1,5 @@
 #include "dnd_tools.h"
 
-int	ft_dice_roll(int number, int faces)
-{
-	int	roll;
-	int	result;
-	int	i;
-
-	if (faces == 1)
-		return (number);
-	if (faces < 1 || number < 1)
-		return (-1);
-	result = 0;
-	i = 0;
-	roll = 0;
-	while (i < number)
-	{
-		roll = rand();
-		if (result > INT_MAX - ((roll % faces) + 1))
-			return (-1);
-		result += (roll % faces) + 1;
-		i++;
-	}
-	if (DEBUG == 1)
-		ft_printf("The dice rolled %i on %i faces with %i amount of dice\n",
-				result, faces, number);
-	return (result);
-}
-
-void	ft_reroll(t_char *info, int *result)
-{
-	int second_roll;
-
-	if (DEBUG == 1)
-		ft_printf("%p %p\n", info, result);
-	if (!info->flags.advantage)
-		return ;
-	second_roll = ft_dice_roll(1, 20);
-	if (info->flags.advantage > 0)
-	{
-		ft_printf("%s rolled %i on his/her advantage\n", info->name, second_roll);
-		if (second_roll > *result)
-			*result = second_roll;
-	}
-	else if (info->flags.advantage < 0)
-	{
-		ft_printf("%s rolled %i on his/her disadvantage\n", info->name, second_roll);
-		if (second_roll < *result)
-			*result = second_roll;
-	}
-	return ;
-}
-
 int	ft_double_char_length(char **double_char)
 {
 	int	i;
@@ -63,7 +12,7 @@ int	ft_double_char_length(char **double_char)
 	return (i);
 }
 
-int ft_open_file(const char *filename)
+int ft_open_file_write_only(const char *filename)
 {
 	int	fd;
 
@@ -78,13 +27,13 @@ void	ft_dual_save_file(t_char *info, t_char *target)
 	int	fd_target;
 	int	fd_info;
 
-	fd_target = ft_open_file(target->save_file);
+	fd_target = ft_open_file_write_only(target->save_file);
 	if (fd_target == -1)
 	{
 		info->flags.alreaddy_saved = 1;
 		return ;
 	}
-	fd_info = ft_open_file(info->save_file);
+	fd_info = ft_open_file_write_only(info->save_file);
     if (fd_target == -1 || fd_info == -1)
     {
         if (fd_target != -1)

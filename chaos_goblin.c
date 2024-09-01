@@ -29,13 +29,17 @@ t_char	*ft_chaos_goblin(const int index, const char **input, t_name *name, int e
 
 	info = (t_char *)calloc(1, sizeof(t_char));
 	if (!info)
+	{
+		ft_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
 		return (NULL);
+	}
 	*info = CHAOS_GOBLIN_INFO;
 	info->name = input[0];
 	info->struct_name = name;
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
 	{
+		ft_printf_fd(2, "104-Error: Failed to allocate memory save_file name%s\n", info->name);
 		ft_free_info(info);
 		return (NULL);
 	}

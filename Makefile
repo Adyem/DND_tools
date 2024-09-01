@@ -94,7 +94,8 @@ SRC			= name.c \
 			  calculate_damage_reduction.c \
 			  cast_chaos_armor.c \
 			  cast_concentration_caster.c \
-			  roll_parse_utils.c
+			  roll_parse_utils.c \
+			  roll_dice.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0
