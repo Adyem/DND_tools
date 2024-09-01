@@ -14,7 +14,9 @@ void ft_free_memory_name(t_name *name, int exit_failure)
         free(current);
         current = next_node;
     }
-    exit(exit_failure);
+	if (exit_failure)
+		exit(exit_failure);
+	return ;
 }
 
 static t_name *ft_add_node(t_name *first_node, t_name **last_node, char *new_name, c_name new_function)
