@@ -71,7 +71,7 @@ t_char	*ft_chaos_crystal(const int index, const char **input, t_name *name, int 
 	info->save_file = ft_strjoin("data/", input[0]);
 	if (!info->save_file)
 	{
-		ft_printf_fd(2, "104-Error: Failed to allocate memory save_file name %s\n", info->name);
+		ft_printf_fd(2, "106-Error: Failed to allocate memory save_file name %s\n", info->name);
 		ft_free_info(info);
 		return (NULL);
 	}
