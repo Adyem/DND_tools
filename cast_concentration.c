@@ -99,10 +99,10 @@ void	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 	fd[1] = -1;
 	if (DEBUG == 1)
 		ft_printf("casting hunters mark %s %s\n", input[0], input[3]);
-	if ((ft_set_stats_check_name(input[3])))
+	if (ft_set_stats_check_name(input[3]))
 	{
-		if ((ft_check_player_character(input[3])))
-			return;
+		if (ft_check_player_character(input[3]))
+			return ;
 		else
 			target = NULL;
 	}

@@ -97,7 +97,8 @@ SRC			= name.c \
 			  roll_parse_utils.c \
 			  roll_dice.c \
 			  create_data_folder.c \
-			  cast_concentration_multi_target.c
+			  cast_concentration_multi_target.c \
+			  ordinal_suffix.c
 
 CC          = gcc
 CFLAGS      = -Wall -Werror -Wextra -g -O0
