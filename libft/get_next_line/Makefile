@@ -6,7 +6,7 @@ SRC			= get_next_line.c \
 			  get_next_line_utils.c
 
 CC = g++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++11
 
 OBJS = $(SRC:.c=.o)
 
