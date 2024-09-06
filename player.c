@@ -34,7 +34,7 @@ void ft_player(const char **input)
 	{
 		if (ft_strcmp_dnd(input[0], "add") == 0)
 		{
-			player = malloc(sizeof(t_pc));
+			player = (t_pc *)malloc(sizeof(t_pc));
 			if (!player)
 			{
 				ft_printf_fd(2, "248-Error allocating memory for player\n");

@@ -5,7 +5,7 @@ library		= get_next_line
 SRC			= get_next_line.c \
 			  get_next_line_utils.c
 
-CC = gcc
+CC = g++
 CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRC:.c=.o)

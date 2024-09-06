@@ -6,7 +6,7 @@ SRC			= ft_printf_fd.c \
 			  write_char_fd.c \
 			  write_number_fd.c\
 
-CC = gcc
+CC = g++
 CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRC:.c=.o)

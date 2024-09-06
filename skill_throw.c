@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-void	ft_skill_throw(t_char *info, char *skill, int ability_mod, int skill_mod)
+void	ft_skill_throw(t_char *info, const char *skill, int ability_mod, int skill_mod)
 {
 	int mod;
 	int	result;

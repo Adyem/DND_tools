@@ -74,6 +74,7 @@ static const t_equipment_id CHAOS_WAND =
 	.str = 0,
 	.dex = 0,
 	.con = 0,
+	.inte = 0,
 	.wis = 0,
 	.cha = 0,
 	.initiative = 0,

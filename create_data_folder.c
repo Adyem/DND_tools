@@ -2,8 +2,9 @@
 
 int ft_create_data_dir()
 {
-    struct stat st = {0};
-
+    struct stat st;
+    
+	memset(&st, 0, sizeof(st));
     if (stat("data", &st) == -1)
     {
         if (errno == ENOENT)
@@ -40,6 +41,6 @@ int ft_create_data_dir()
         ft_printf_fd(2, "004-Error path exists but is not a directory\n");
         return (1);
     }
-
     return (0);
 }
+

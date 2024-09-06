@@ -45,46 +45,46 @@ static t_char	*ft_read_all_files(int fd, t_name *name, char *file_name)
 	return (info);
 }
 
-static void	*ft_initiative_pc_error(char *message)
+static void	*ft_initiative_pc_error(const char *message)
 {
 	ft_printf_fd(2, "%s", message);
 	return (NULL);
 }
 
-static t_pc	*ft_read_pc_file(int fd, char *filename, char *filepath)
+static t_pc *ft_read_pc_file(int fd, char *filename, char *filepath)
 {
-	char	**content;
-	t_pc	*player;
-	int		error;
+    char **content;
+    t_pc *player;
+    int error;
 
-	content = ft_read_file_dnd(fd);
-	close (fd);
-	if (!content)
-		return (ft_initiative_pc_error("253 Error allocating memory"));
-	player = malloc(sizeof(t_pc));
-	if (!player)
-	{
-		free(content);
-		return (ft_initiative_pc_error("252 Error allocating memory"));
-	}
-	error = ft_check_stat_pc(player, content, filename);
-	ft_free_double_char(content);
-	if (error)
-	{
-		ft_free_pc(player);
-		return (NULL);
-	}
-	error = ft_request_initiative(player);
-	if (!error)
-	{
-		fd = open(filepath, O_WRONLY | O_CREAT | O_TRUNC,
-				S_IRUSR | S_IWUSR);
-		if (fd != -1)
-			ft_save_pc(player, fd);
-	}
-	close(fd);
-	return (player);
+    content = ft_read_file_dnd(fd);
+    close(fd);
+    if (!content)
+        return (t_pc *)ft_initiative_pc_error("253 Error allocating memory"); // Cast the result to t_pc*
+    player = (t_pc *)malloc(sizeof(t_pc));  // Cast malloc to t_pc*
+    if (!player)
+    {
+        free(content);
+        return (t_pc *)ft_initiative_pc_error("252 Error allocating memory");  // Cast the result to t_pc*
+    }
+    error = ft_check_stat_pc(player, content, filename);
+    ft_free_double_char(content);
+    if (error)
+    {
+        ft_free_pc(player);
+        return (NULL);
+    }
+    error = ft_request_initiative(player);
+    if (!error)
+    {
+        fd = open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        if (fd != -1)
+            ft_save_pc(player, fd);
+    }
+    close(fd);
+    return player;
 }
+
 
 void	ft_initiative_write(int	initiative, char *name)
 {

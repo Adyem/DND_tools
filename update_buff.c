@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-static void	ft_update_buff_duration(t_char *info, char *buff_name, int duration)
+static void	ft_update_buff_duration(t_char *info, const char *buff_name, int duration)
 {
 	if (duration == 0)
 		ft_printf("%s just lost his %s buf\n", info->name, buff_name);
@@ -12,7 +12,7 @@ static void	ft_update_buff_duration(t_char *info, char *buff_name, int duration)
 	return ;
 }
 
-static void	ft_update_buf_duration(t_char *info, char *buf_name, int *duration)
+static void	ft_update_buf_duration(t_char *info, const char *buf_name, int *duration)
 {
 	(*duration)--;
 	ft_update_buff_duration(info, buf_name, *duration);

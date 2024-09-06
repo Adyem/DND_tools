@@ -44,5 +44,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <assert.h>
+# include <signal.h>
+# include <exception>
+# include <iostream>
 
 #endif

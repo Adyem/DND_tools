@@ -19,7 +19,7 @@ void ft_free_memory_name(t_name *name, int exit_failure)
 	return ;
 }
 
-static t_name *ft_add_node(t_name *first_node, t_name **last_node, char *new_name, c_name new_function)
+static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *new_name, c_name new_function)
 {
     t_name *new_node;
 
@@ -42,7 +42,7 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, char *new_nam
     return new_node;
 }
 
-static char *ft_new_name(char *name, int index)
+static char *ft_new_name(const char *name, int index)
 {
     int		new_name_length;
     char	*new_name;
@@ -55,7 +55,7 @@ static char *ft_new_name(char *name, int index)
     return new_name;
 }
 
-static void ft_add_mob_series(t_name *first_node, t_name **last_node, char *base_name, c_name function, int count)
+static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char *base_name, c_name function, int count)
 {
     int		i;
     char	*new_name;
@@ -85,8 +85,8 @@ t_name *ft_allocate_memory_name()
     first_node = NULL;
     last_node = NULL;
     // template is always the first node
-    first_node = ft_add_node(NULL, &last_node, "template", ft_template);
-    ft_add_mob_series(first_node, &last_node, "template", ft_template, 10);
+	first_node = ft_add_node(NULL, &last_node, "template", ft_template);
+	ft_add_mob_series(first_node, &last_node, "template", ft_template, 10);
 	ft_add_mob_series(first_node, &last_node, "goblin", ft_goblin, 10);
 	ft_add_mob_series(first_node, &last_node, "chaos_goblin", ft_chaos_goblin, 10);
 	ft_add_node(first_node, &last_node, "veraak", ft_veraak);

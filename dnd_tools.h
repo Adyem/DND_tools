@@ -47,14 +47,14 @@ void		ft_turn_next(t_name *name);
 void		ft_weapon_attack(t_char *info, t_equipment_id *weapon);
 
 //buff update
-void		ft_npc_update_buff(t_char *info, const char **input, int *buff, char *name);
-void		ft_update_buff_status(t_char *info, int current_dur, int duration, char *buff_name);
+void		ft_npc_update_buff(t_char *info, const char **input, int *buff, const char *name);
+void		ft_update_buff_status(t_char *info, int current_dur, int duration, const char *buff_name);
 
 //damage buffs
 int			ft_check_buff_damage(t_char *info);
 
 //saving throws buffs
-int			ft_save_check_buff(t_char *info, int *roll, char *ability_score);
+int			ft_save_check_buff(t_char *info, int *roll, const char *ability_score);
 
 //attack rolls buffs
 int			ft_attack_roll_check_buffs(t_char *info, int *roll);
@@ -126,7 +126,7 @@ void		ft_deal_damage(t_char *info, const char *input, const char *d_type, int re
 int			ft_request_damage(t_char *info);
 
 //skill roll buffs
-int			ft_skill_check_buff(t_char *info, int *roll, char *skill);
+int			ft_skill_check_buff(t_char *info, int *roll, const char *skill);
 
 //change stats
 void		ft_npc_sstuff(t_char *info, const char **input);
@@ -165,7 +165,7 @@ void		ft_reroll(t_char *info, int *result);
 
 //open and read
 char		**ft_read_file_dnd(int fd);
-char		**ft_open_and_read(char *file);
+char		**ft_open_and_read(const char *file);
 int			ft_open_file_write_only(const char *filename);
 
 //utils
@@ -174,7 +174,7 @@ int			ft_strcmp_dnd(const char *string1, const char *string2);
 int			ft_initialize_info(t_char *info, char **content);
 int			ft_check_value(const char *input);
 void		ft_print_character_status(t_char *info, int number, int temp);
-void		ft_skill_throw(t_char *info, char *skill, int ability_mod, int save_mod);
+void		ft_skill_throw(t_char *info, const char *skill, int ability_mod, int save_mod);
 int			ft_set_stats(t_char *info, char **content);
 int			ft_check_stat(t_char *info, const char *stat, const int index);
 char		**ft_set_stats_con_targets(char *content, int ofset, char **data, t_char *info);
@@ -190,10 +190,10 @@ int			ft_set_stats_check_name(const char *name);
 int			ft_check_player_character(const char *name);
 
 //readline checks
-int			ft_read_line_confirm(char *mesage);
+int			ft_read_line_confirm(const char *mesage);
 
 //dice rolling
-int			ft_saving_throw(t_char *info, char *ability_score, int ability_mod, int save_mod);
+int			ft_saving_throw(t_char *info, const char *ability_score, int ability_mod, int save_mod);
 int			ft_dice_roll(int number, int faces);
 
 //free memory

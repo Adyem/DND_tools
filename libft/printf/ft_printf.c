@@ -42,7 +42,7 @@ int	ft_printf(const char *format, ...)
 	t_format	*f_info;
 
 	va_start(args, format);
-	f_info = malloc(sizeof(t_format));
+	f_info = (t_format *)malloc(sizeof(t_format));
 	if (!f_info)
 		return (-1);
 	f_info->return_value = 0;

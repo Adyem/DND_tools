@@ -24,7 +24,7 @@ static char	**ft_realloc_dnd(char **return_v, int index, int fd)
 	char	**temp;
 
 	i = 0;
-	temp = ft_calloc(index + 1, sizeof(char *));
+	temp = (char **)ft_calloc(index + 1, sizeof(char *));
 	if (!temp)
 	{
 		ft_malloc_fail_gnl_dnd(return_v, fd);
@@ -84,7 +84,7 @@ static void	ft_print_file(char **content)
 	}
 }
 
-char	**ft_open_and_read(char *file)
+char	**ft_open_and_read(const char *file)
 {
 	int		fd;
 	char	**content;

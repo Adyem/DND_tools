@@ -21,7 +21,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		*(char *)(dst + i) = *(char *)(src + i);
+		*(char *)((char *)dst + i) = *(char *)((const char *)src + i); // Explicit cast to char*
 		i++;
 	}
 	return (dst);

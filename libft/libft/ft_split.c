@@ -46,7 +46,7 @@ static char	**ft_malloc_strs(char **strs, const char *s, char c)
 		if ((s[i] == c && i > 0 && s[i - 1] != c)
 			|| (s[i] != c && s[i + 1] == '\0'))
 		{
-			strs[x] = malloc(sizeof(char) * (count + 1));
+			strs[x] = (char *)malloc(sizeof(char) * (count + 1));
 			if (!strs[x])
 				return (NULL);
 			count = 0;
@@ -105,14 +105,14 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 	{
-		strs = malloc(sizeof(char) * 1);
+		strs = (char **)malloc(sizeof(char) * 1);
 		if (!strs)
 			return (NULL);
 		*strs = NULL;
 		return (strs);
 	}
 	wordcount = ft_count_words(s, c);
-	strs = malloc(sizeof(*strs) * (wordcount + 1));
+	strs = (char **)malloc(sizeof(*strs) * (wordcount + 1));
 	if (!strs)
 		return (NULL);
 	if (ft_malloc_strs(strs, s, c))

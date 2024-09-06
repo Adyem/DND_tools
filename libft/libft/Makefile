@@ -55,7 +55,7 @@ SRC 	   = ft_strlen.c \
 			 ft_lstadd_front.c\
 			 ft_atol.c
 
-CC = gcc
+CC = g++
 CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRC:.c=.o)

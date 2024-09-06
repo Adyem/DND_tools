@@ -50,7 +50,7 @@ int	ft_printf_fd(int fd, const char *format, ...)
 	t_format_fd	*f_info;
 
 	va_start(args, format);
-	f_info = malloc(sizeof(t_format_fd));
+	f_info = (t_format_fd *)malloc(sizeof(t_format_fd));
 	if (!f_info || fd < 0)
 		return (-1);
 	ft_init_struct(f_info, fd);

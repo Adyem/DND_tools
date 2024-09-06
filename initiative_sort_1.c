@@ -46,7 +46,7 @@ t_pc	*ft_initiative_players_am(char **content)
 	t_pc	*temp;
 	int		i;
 
-	players = malloc(sizeof(t_pc));
+	players = (t_pc *)malloc(sizeof(t_pc));
 	if (!players)
 	{
 		ft_printf_fd(2, "Error allocating memory: players\n");
@@ -60,7 +60,7 @@ t_pc	*ft_initiative_players_am(char **content)
 	i = 1;
 	while (content[i])
 	{
-		temp->next = malloc(sizeof(t_pc));
+		temp->next = (t_pc *)malloc(sizeof(t_pc));
 		if (!temp->next)
 		{
 			ft_printf_fd(2, "Error allocating memory: players->next\n");

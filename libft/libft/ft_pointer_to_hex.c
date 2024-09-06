@@ -31,7 +31,7 @@ char	*ft_pointer_to_hex(size_t value)
 	int		i;
 
 	buffer_size = sizeof(size_t) * 2 + 1;
-	hexstr = malloc(buffer_size + 3);
+	hexstr = (char *)malloc(buffer_size + 3);
 	i = 0;
 	while (value)
 	{

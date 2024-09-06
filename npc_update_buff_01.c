@@ -1,6 +1,6 @@
 #include "dnd_tools.h"
 
-void ft_update_buff_status(t_char *info, int current_dur, int duration, char *buff_name)
+void ft_update_buff_status(t_char *info, int current_dur, int duration, const char *buff_name)
 {
 	if (duration == 0 && current_dur == 0)
 		ft_printf("%s never had %s and still doesn't have it\n", info->name, buff_name);
@@ -24,7 +24,7 @@ void ft_update_buff_status(t_char *info, int current_dur, int duration, char *bu
 	return ;
 }
 
-void	ft_npc_update_buff(t_char *info, const char **input, int *buff, char *name)
+void	ft_npc_update_buff(t_char *info, const char **input, int *buff, const char *name)
 {
 	int	number;
 

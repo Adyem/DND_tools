@@ -164,6 +164,8 @@ static const	t_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
 static const	t_air_totem INITIALIZE_AIR_TOTEM =
 {
 	.save_file = NULL,
+	.health = 0,
+	.ac = 0,
 	.knock_back_distance = 0,
 	.erea_of_effect = 0,
 };
