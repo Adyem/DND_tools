@@ -117,7 +117,7 @@ else
     TARGET = $(NAME)
 endif
 
-LDFLAGS     = -L$(LIBFT_DIR) -lftprintf -lreadline
+LDFLAGS     = -L$(LIBFT_DIR) -lftprintf -lreadline -pthread
 
 OBJS = $(SRC:%.c=$(OBJ_DIR)/%.o)
 

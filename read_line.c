@@ -1,5 +1,9 @@
 #include "dnd_tools.h"
 
+// Global variables for signal handling
+jmp_buf jump_buffer;
+const char *g_program_name = NULL;
+
 static char	**ft_parse_input(char *input_string)
 {
 	char **input;
@@ -51,41 +55,28 @@ static int ft_handle_builtins(char **input, int i, t_name *name, char *input_str
 	return (1);
 }
 
-void	ft_request_input(t_name *name)
+void ft_request_input(t_name *name)
 {
-    char	*input_string;
-    char	**input;
-    int		found;
-    int		i;
+    char *input_string;
+    char **input;
+    int found;
+    int i;
 
     while ((input_string = readline("dndtools: ")) != NULL)
     {
         if (*input_string)
             add_history(input_string);
-        try
-		{
-            input = ft_parse_input(input_string);
-            if (!input)
-                continue ;
-            i = ft_double_char_length(input);
-            found = ft_handle_builtins(input, i, name, input_string);
-            if (found == -1)
-                return ;
-            else if (!found)
-                found = ft_handle_custom_commands(input, i, name);
-            if (!found)
-                ft_printf_fd(2, "007-Error unknown command: %s\n", input_string);
-        }
-        catch (const std::exception &e)
-		{
-            std::cerr << "Exception caught: " << e.what() << std::endl;
-        }
-        catch (...)
-		{
-            std::cerr << "Unknown error occurred while processing command." << std::endl;
-        }
+        input = ft_parse_input(input_string);
+        if (!input)
+            continue;
+        i = ft_double_char_length(input);
+        found = ft_handle_builtins(input, i, name, input_string);
+        if (found == -1)
+            return;
+        else if (!found)
+            found = ft_handle_custom_commands(input, i, name);
+        if (!found)
+            ft_printf_fd(2, "007-Error unknown command: %s\n", input_string);
         ft_free_input(input, input_string);
     }
-    return ;
 }
-

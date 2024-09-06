@@ -47,5 +47,9 @@
 # include <signal.h>
 # include <exception>
 # include <iostream>
+# include <setjmp.h>
+# include <csignal>
+# include <execinfo.h>
+# include <fstream>
 
 #endif
