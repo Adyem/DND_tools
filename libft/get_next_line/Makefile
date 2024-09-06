@@ -2,20 +2,20 @@ NAME		= get_next_line.a
 
 library		= get_next_line
 
-SRC			= get_next_line.c \
-			  get_next_line_utils.c
+SRC			= get_next_line.cpp \
+			  get_next_line_utils.cpp
 
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++11
 
-OBJS = $(SRC:.c=.o)
+OBJS = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

@@ -1,0 +1,10 @@
+-std=c++11
+-I/usr/include/c++/11
+-I/usr/include/x86_64-linux-gnu/c++/11
+-I/usr/include/c++/4.4/i686-linux-gnu
+-I/usr/include/c++/4.4/i486-linux-gnu
+-I./
+-I./libft/libft
+-I./libft/printf
+-I./libft/printf_fd
+-I./libft/get_next_line

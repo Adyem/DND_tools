@@ -1,0 +1,21 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-g",
+      "-O0",
+      "-std=c++11",
+      "-I/usr/include/c++/11",
+      "-c",
+      "-o",
+      "objs/read_line.o",
+      "read_line.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools",
+    "file": "/home/adyem/DND_tools/read_line.cpp",
+    "output": "/home/adyem/DND_tools/objs/read_line.o"
+  }
+]

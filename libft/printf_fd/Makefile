@@ -2,21 +2,21 @@ NAME		= printf_fd.a
 
 library		= printf_fd
 
-SRC			= ft_printf_fd.c \
-			  write_char_fd.c \
-			  write_number_fd.c\
+SRC			= ft_printf_fd.cpp \
+			  write_char_fd.cpp \
+			  write_number_fd.cpp
 
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++11
 
-OBJS = $(SRC:.c=.o)
+OBJS = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

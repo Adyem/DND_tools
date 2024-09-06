@@ -2,106 +2,105 @@ NAME		= dnd_tools
 
 NAME_DEBUG	= dnd_tools_debug
 
-HEADER		= include.h \
-			  dnd_tools.h \
-			  character.h \
-			  template.h \
-			  player_character.h \
-			  initialize.h \
-			  goblin.h \
-			  veraak.h \
-			  chaos_crystal.h \
-			  chaos_goblin.h \
-			  identification.h \
-			  melee_weapons.h \
-			  ranged_weapons.h \
-			  armor.h
+HEADER		= 	  dnd_tools.hpp \
+			  character.hpp \
+			  template.hpp \
+			  player_character.hpp \
+			  initialize.hpp \
+			  goblin.hpp \
+			  veraak.hpp \
+			  chaos_crystal.hpp \
+			  chaos_goblin.hpp \
+			  identification.hpp \
+			  melee_weapons.hpp \
+			  ranged_weapons.hpp \
+			  armor.hpp
 
-SRC			= name.c \
-			  goblin.c \
-			  chaos_goblin.c \
-			  veraak.c \
-			  veraak_turn.c \
-			  chaos_crystal.c \
-			  main.c \
-			  template.c \
-			  npc_stats.c \
-			  npc_set_stats.c \
-			  npc_change_stats_02.c \
-			  npc_change_stats_03.c \
-			  npc_change_stats_04.c \
-			  npc_update_buff_01.c \
-			  utils01.c \
-			  utils02.c \
-			  debug.c \
-			  initiative_all.c \
-			  initiative_pc.c \
-			  initiative_request.c \
-			  initiative_sort_1.c \
-			  initiative_sort_2.c \
-			  initiative.c \
-			  free_memory.c \
-			  read_file.c \
-			  init_info.c \
-			  save_data.c \
-			  save_player.c \
-			  check_data.c \
-			  check_buff_attack.c \
-			  check_buff_save.c \
-			  check_buff_skill.c \
-			  check_buff_general.c \
-			  update_buff.c \
-			  update_buff_special.c \
-			  update_lightning_strike.c \
-			  to_hit.c \
-			  read_line_check.c \
-			  roll.c \
-			  roll_utilities.c \
-			  roll_parse_dice.c \
-			  roll_validate_string.c \
-			  roll_validate_utils.c \
-			  roll_parse_md.c \
-			  roll_parse_pm.c \
-			  roll_parse_brackets.c \
-			  fclean.c \
-			  player.c \
-			  concentration.c \
-			  request_damage_taken.c \
-			  saving_throw.c \
-			  skill_throw.c \
-			  deal_damage.c \
-			  print_hp_status.c \
-			  turn.c \
-			  update_intiative_file.c \
-			  npc_set_stats_string.c \
-			  check_name.c \
-			  cast_concentration.c \
-			  free_info.c \
-			  get_character_info.c \
-			  resize_double_char.c \
-			  concentration_remove_debuf.c \
-			  check_buff_damage.c \
-			  attack.c \
-			  to_hit_check_buffs.c \
-			  kill.c \
-			  calculate_stats.c \
-			  trim_start.c \
-			  set_debuf.c \
-			  cast_hunters_mark.c \
-			  read_line.c \
-			  calculate_skills.c \
-			  calculate_resistance.c \
-			  calculate_damage_reduction.c \
-			  cast_chaos_armor.c \
-			  cast_concentration_caster.c \
-			  roll_parse_utils.c \
-			  roll_dice.c \
-			  create_data_folder.c \
-			  cast_concentration_multi_target_01.c \
-			  ordinal_suffix.c
+SRC			= name.cpp \
+			  goblin.cpp \
+			  chaos_goblin.cpp \
+			  veraak.cpp \
+			  veraak_turn.cpp \
+			  chaos_crystal.cpp \
+			  main.cpp \
+			  template.cpp \
+			  npc_stats.cpp \
+			  npc_set_stats.cpp \
+			  npc_change_stats_02.cpp \
+			  npc_change_stats_03.cpp \
+			  npc_change_stats_04.cpp \
+			  npc_update_buff_01.cpp \
+			  utils01.cpp \
+			  utils02.cpp \
+			  debug.cpp \
+			  initiative_all.cpp \
+			  initiative_pc.cpp \
+			  initiative_request.cpp \
+			  initiative_sort_1.cpp \
+			  initiative_sort_2.cpp \
+			  initiative.cpp \
+			  free_memory.cpp \
+			  read_file.cpp \
+			  init_info.cpp \
+			  save_data.cpp \
+			  save_player.cpp \
+			  check_data.cpp \
+			  check_buff_attack.cpp \
+			  check_buff_save.cpp \
+			  check_buff_skill.cpp \
+			  check_buff_general.cpp \
+			  update_buff.cpp \
+			  update_buff_special.cpp \
+			  update_lightning_strike.cpp \
+			  to_hit.cpp \
+			  read_line_check.cpp \
+			  roll.cpp \
+			  roll_utilities.cpp \
+			  roll_parse_dice.cpp \
+			  roll_validate_string.cpp \
+			  roll_validate_utils.cpp \
+			  roll_parse_md.cpp \
+			  roll_parse_pm.cpp \
+			  roll_parse_brackets.cpp \
+			  fclean.cpp \
+			  player.cpp \
+			  concentration.cpp \
+			  request_damage_taken.cpp \
+			  saving_throw.cpp \
+			  skill_throw.cpp \
+			  deal_damage.cpp \
+			  print_hp_status.cpp \
+			  turn.cpp \
+			  update_intiative_file.cpp \
+			  npc_set_stats_string.cpp \
+			  check_name.cpp \
+			  cast_concentration.cpp \
+			  free_info.cpp \
+			  get_character_info.cpp \
+			  resize_double_char.cpp \
+			  concentration_remove_debuf.cpp \
+			  check_buff_damage.cpp \
+			  attack.cpp \
+			  to_hit_check_buffs.cpp \
+			  kill.cpp \
+			  calculate_stats.cpp \
+			  trim_start.cpp \
+			  set_debuf.cpp \
+			  cast_hunters_mark.cpp \
+			  read_line.cpp \
+			  calculate_skills.cpp \
+			  calculate_resistance.cpp \
+			  calculate_damage_reduction.cpp \
+			  cast_chaos_armor.cpp \
+			  cast_concentration_caster.cpp \
+			  roll_parse_utils.cpp \
+			  roll_dice.cpp \
+			  create_data_folder.cpp \
+			  cast_concentration_multi_target_01.cpp \
+			  ordinal_suffix.cpp
 
 CC          = g++
-CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++11
+CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++11 -I/usr/include/c++/11
 
 LIBFT_DIR   = ./libft
 LIBFT       = $(LIBFT_DIR)/libftprintf.a
@@ -119,9 +118,9 @@ endif
 
 LDFLAGS     = -L$(LIBFT_DIR) -lftprintf -lreadline -pthread
 
-OBJS = $(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJS = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
-$(OBJ_DIR)/%.o: %.c $(HEADER)
+$(OBJ_DIR)/%.o: %.cpp $(HEADER)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 

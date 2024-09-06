@@ -1,13 +1,17 @@
-#include "dnd_tools.h"
+#include "dnd_tools.hpp"
+#include "libft/printf_fd/ft_printf_fd.hpp"
+#include <readline/readline.h>
+#include <cstdlib>
+#include <readline/readline.h>
 
 static void ft_initialize_variables(int *fd, char **string, t_char **target)
 {
 	int i = 0;
 	while (i < 20)
 	{
-		string[i] = NULL;
+		string[i] = nullptr;
 		fd[i] = -1;
-		target[i] = NULL;
+		target[i] = nullptr;
 		i++;
 	}
 }
