@@ -2,12 +2,14 @@
 
 void	ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff *buff)
 {
+	int		j;
 	int		fd[20];
 	int		i;
 	char	*string;
 	char	message[55];
 	t_char	*target[20];
 
+	(void)fd;
 	if (buff->target_amount > 20)
 	{
 		ft_printf_fd(2, "110-Error too manny targets\n");
@@ -34,7 +36,16 @@ void	ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff
 		{
 			target[i] = ft_get_info(string, info->struct_name);
 			if (!target[i])
+			{
+				j = 0;
+				while (target[j])
+				{
+					ft_free_info(target[j]);
+					target[j] = NULL;
+					j++;
+				}
 				return (ft_printf_fd(2, "109-Error getting info %s\n", input[2]), (void)0);
+			}
 		}
 		i++;
 	}
