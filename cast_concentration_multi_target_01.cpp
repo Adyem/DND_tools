@@ -1,7 +1,10 @@
 #include "dnd_tools.hpp"
-#include <cstdlib>
-#include <readline/readline.h>
 #include "libft/printf_fd/ft_printf_fd.hpp"
+#include <cstddef>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <readline/readline.h>
 
 static void ft_initialize_variables(int *fd, char **string, t_char **target)
 {

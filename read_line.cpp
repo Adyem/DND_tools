@@ -1,5 +1,4 @@
 #include "dnd_tools.hpp"
-#include "libft/libft/libft.hpp"
 #include "libft/printf_fd/ft_printf_fd.hpp"
 #include <readline/readline.h>
 #include <readline/history.h>

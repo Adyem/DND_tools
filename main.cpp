@@ -2,8 +2,6 @@
 #include "libft/printf/ft_printf.hpp"
 #include "libft/printf_fd/ft_printf_fd.hpp"
 #include <ctime>
-#include <readline/readline.h>
-#include <readline/history.h>
 
 int main(int argc, char **argv)
 {
@@ -27,7 +25,6 @@ int main(int argc, char **argv)
 		return (1);
 	name = ft_allocate_memory_name();
 	ft_request_input(name);
-	clear_history();
 	ft_free_memory_name(name, 0);
 	return (0);
 }

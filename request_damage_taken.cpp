@@ -1,6 +1,8 @@
 #include "dnd_tools.hpp"
 #include "libft/libft/libft.hpp"
 #include "libft/printf_fd/ft_printf_fd.hpp"
+#include <cstdlib>
+#include <cstring>
 #include <readline/readline.h>
 
 static int	ft_free_request_damage(char *line, char **input)
