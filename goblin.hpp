@@ -119,6 +119,7 @@ static const	t_equipment GOBLIN_EQUIPMENT =
 
 static const t_char GOBLIN_INFO =
 {
+	.level = 2,
 	.mechanical = 0,
 	.passive_perception = 12,
 	.initiative = -1,

@@ -117,6 +117,7 @@ static const	t_equipment CHAOS_CRYSTAL_EQUIPMENT =
 
 static const t_char CHAOS_CRYSTAL_INFO =
 {
+	.level = 2,
 	.mechanical = 1,
 	.passive_perception = 15,
 	.initiative = -1,

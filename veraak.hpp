@@ -121,6 +121,7 @@ static const	t_equipment VERAAK_EQUIPMENT =
 
 static const t_char VERAAK_INFO =
 {
+	.level = 2,
 	.mechanical = 0,
 	.passive_perception = 15,
 	.initiative = -1,

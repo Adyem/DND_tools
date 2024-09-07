@@ -120,6 +120,7 @@ static const	t_equipment CHAOS_GOBLIN_EQUIPMENT =
 
 static const t_char CHAOS_GOBLIN_INFO =
 {
+	.level = 2,
 	.mechanical = 0,
 	.passive_perception = 15,
 	.initiative = -1,

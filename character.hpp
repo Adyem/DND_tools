@@ -271,6 +271,7 @@ typedef struct s_flags
 
 typedef struct	s_char
 {
+	int				level;
 	int				mechanical;
 	int				passive_perception;
 	int				initiative;
