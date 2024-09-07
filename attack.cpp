@@ -1,7 +1,6 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include "libft/printf/ft_printf.hpp"
-#include "libft/printf_fd/ft_printf_fd.hpp"
+#include <iostream>
 
 typedef struct s_damage_info
 {
@@ -41,53 +40,56 @@ static void	ft_weapon_attack_crit(t_char *info, t_equipment_id *weapon,
 				t_damage_info *d_info)
 {
 	ft_check_buff_damage(info);
-	ft_printf("a crit (%i) and ", d_info->result);
+	std::cout << "a crit (" << d_info->result <<  ") and ";
 	d_info->damage = ft_dice_roll(weapon->attack.effect_dice_amount * 2,
 			weapon->attack.effect_dice_faces) + d_info->stat_mod;
-	ft_printf("deals %i %s damage\n", d_info->damage, weapon->attack.damage_type);
+	std::cout << "deals " << d_info->damage << weapon->attack.damage_type << " damage" << std::endl;
 }
 
-static void	ft_weapon_attack_non_crit(t_char *info, t_equipment_id *weapon,
-				t_damage_info *d_info)
+static void ft_weapon_attack_non_crit(t_char *info, t_equipment_id *weapon,
+	t_damage_info *d_info)
 {
-	ft_check_buff_damage(info);
-	ft_printf("%i+%i+%i+%i for a total of %i and ",
-		d_info->result, d_info->stat_mod, info->attack_bonus.attack_bonus, d_info->mod, d_info->result
-		+ d_info->stat_mod + d_info->mod + info->attack_bonus.attack_bonus);
-	d_info->damage = ft_dice_roll(weapon->attack.effect_dice_amount,
+    ft_check_buff_damage(info);
+    std::cout << d_info->result << "+" << d_info->stat_mod << "+"
+		<< info->attack_bonus.attack_bonus << "+" << d_info->mod
+        << " for a total of " << (d_info->result + d_info->stat_mod
+		+ d_info->mod + info->attack_bonus.attack_bonus) << " and ";
+    d_info->damage = ft_dice_roll(weapon->attack.effect_dice_amount,
 			weapon->attack.effect_dice_faces) + d_info->stat_mod;
-	ft_printf("deals %i %s damage\n", d_info->damage, weapon->attack.damage_type);
+    std::cout << "deals " << d_info->damage << " " << weapon->attack.damage_type
+		<< " damage" << std::endl;
+	return ;
 }
 
-void	ft_weapon_attack(t_char *info, t_equipment_id *weapon)
+void ft_weapon_attack(t_char *info, t_equipment_id *weapon)
 {
-	t_damage_info d_info;
+    t_damage_info d_info;
 
-	if (!weapon->attack.function)
-	{
-		ft_printf_fd(2, "162-Error no attack set for %s", weapon->name);
-		return ;
-	}
-	d_info.stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;
-	d_info.result = ft_dice_roll(1, 20);
-	if (d_info.result == -1)
-	{
-		ft_printf_fd(2, "101-Error: dice rolling error in attack");
-		return ;
-	}
-	d_info.mod = ft_attack_roll_check_buffs(info, &d_info.result);
-	if (weapon->projectile_name)
-		ft_printf("%s uses his/her %s to fire a %s and rolled ",
-			info->name, weapon->name, weapon->projectile_name);
-	else 
-		ft_printf("%s attacks with his\\her %s and rolled ", info->name,
-			weapon->name);
-	if (d_info.result <= 1 + info->crit.attack_fail)
-		ft_printf("a critical fail (%i) and missed on his attack\n",
-			d_info.result);
-	else if (d_info.result >= 20 - info->crit.attack)
-		ft_weapon_attack_crit(info, weapon, &d_info);
-	else
-		ft_weapon_attack_non_crit(info, weapon, &d_info);
-	return ;
+    if (!weapon->attack.function)
+    {
+        std::cerr << "162-Error no attack set for " << weapon->name << std::endl;
+        return;
+    }
+    d_info.stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;
+    d_info.result = ft_dice_roll(1, 20);
+    if (d_info.result == -1)
+    {
+        std::cerr << "101-Error: dice rolling error in attack" << std::endl;
+        return;
+    }
+    d_info.mod = ft_attack_roll_check_buffs(info, &d_info.result);
+    if (weapon->projectile_name)
+        std::cout << info->name << " uses his/her " << weapon->name << " to fire a "
+			<< weapon->projectile_name << " and rolled ";
+    else
+        std::cout << info->name << " attacks with his/her " << weapon->name << " and rolled ";
+
+    if (d_info.result <= 1 + info->crit.attack_fail)
+        std::cout << "a critical fail (" << d_info.result << ") and missed on his attack"
+			<< std::endl;
+    else if (d_info.result >= 20 - info->crit.attack)
+        ft_weapon_attack_crit(info, weapon, &d_info);
+    else
+        ft_weapon_attack_non_crit(info, weapon, &d_info);
+    return ;
 }
