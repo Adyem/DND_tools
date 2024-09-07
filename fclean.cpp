@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <cerrno>
 #include <cstring>
-#include "libft/printf_fd/ft_printf_fd.hpp"
+#include <iostream>
 
 void ft_fclean(void)
 {
@@ -17,23 +17,30 @@ void ft_fclean(void)
     command[1] = "-c";
     command[2] = "rm -rf ./data/*";
     command[3] = NULL;
-    
-    if (ft_read_line_confirm("type yes for confirm or no to abort: "))
+    if (ft_read_line_confirm("type yes to confirm or no to abort: "))
         return;
-
     pid = fork();
     if (pid == -1)
     {
-        ft_printf_fd(2, "Fork failed: %s\n", strerror(errno));
+        std::cerr << "Fork failed: " << strerror(errno) << std::endl;
         return;
     }
     else if (pid == 0)
     {
         execvp(command[0], (char* const*)command);
+        std::cerr << "Execvp failed: " << strerror(errno) << std::endl;
         exit(EXIT_FAILURE);
     }
     else
+    {
         waitpid(pid, &status, 0);
+        if (WIFEXITED(status))
+        {
+            int exit_status = WEXITSTATUS(status);
+            if (exit_status != 0)
+                std::cerr << "Command failed with exit status " << exit_status << std::endl;
+        }
+    }
 }
 
 void ft_clean(void)
@@ -44,24 +51,30 @@ void ft_clean(void)
 
     command[0] = "/bin/sh";
     command[1] = "-c";
-    command[2] = "find ./data/ -type f ! -name 'data--*' ! -name 'PC--*' -exec rm -rf {} +";
+    command[2] = "rm -rf ./logs/*";
     command[3] = NULL;
-    
-    if (ft_read_line_confirm("type yes for confirm or no to abort: "))
+    if (ft_read_line_confirm("type yes to confirm or no to abort: "))
         return;
-
     pid = fork();
     if (pid == -1)
     {
-        ft_printf_fd(2, "Fork failed: %s\n", strerror(errno));
+        std::cerr << "Fork failed: " << strerror(errno) << std::endl;
         return;
     }
     else if (pid == 0)
     {
         execvp(command[0], (char* const*)command);
+        std::cerr << "Execvp failed: " << strerror(errno) << std::endl;
         exit(EXIT_FAILURE);
     }
     else
+    {
         waitpid(pid, &status, 0);
+        if (WIFEXITED(status))
+        {
+            int exit_status = WEXITSTATUS(status);
+            if (exit_status != 0)
+                std::cerr << "Command failed with exit status " << exit_status << std::endl;
+        }
+    }
 }
-

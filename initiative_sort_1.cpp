@@ -1,106 +1,106 @@
 #include "dnd_tools.hpp"
 #include "libft/libft/libft.hpp"
-#include "libft/printf/ft_printf.hpp"
-#include "libft/printf_fd/ft_printf_fd.hpp"
-#include <errno.h>
-#include <string.h>
+#include <iostream>
+#include <cstring>
+#include <cerrno>
 
 static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 {
-	char *temp;
+    char *temp;
 
-	temp = ft_strchr(content, '\n');
-	if (temp)
-		*temp = '\0';
-	temp = ft_strchr(content, '=');
-	if (!temp)
-	{
-		ft_printf_fd(2, "Error did not find = sign\n");
-		return (ft_free_players(head));
-	}
-	*temp = '\0';
-	temp++;
-	players->name = ft_strdup(content);
-	if (!players->name)
-	{
-		ft_printf_fd(2, "257 Error allocating memory\n");
-		return (ft_free_players(head));
-	}
-	if (ft_check_value(temp))
-	{
-		ft_printf_fd(2, "There is an error on the line: %s\n", temp);
-		return (ft_free_players(head));
-	}
-	players->initiative = ft_atoi(temp);
-	if (DEBUG == 1)
-		ft_printf("the initiative from %s = %i\n",
-				players->name, players->initiative);
-	return (0);
+    temp = ft_strchr(content, '\n');
+    if (temp)
+        *temp = '\0';
+    temp = ft_strchr(content, '=');
+    if (!temp)
+    {
+        std::cerr << "Error did not find = sign" << std::endl;
+        return (ft_free_players(head));
+    }
+    *temp = '\0';
+    temp++;
+    players->name = ft_strdup(content);
+    if (!players->name)
+    {
+        std::cerr << "257 Error allocating memory" << std::endl;
+        return (ft_free_players(head));
+    }
+    if (ft_check_value(temp))
+    {
+        std::cerr << "There is an error on the line: " << temp << std::endl;
+        return (ft_free_players(head));
+    }
+    players->initiative = ft_atoi(temp);
+    if (DEBUG == 1)
+        std::cout << "The initiative from " << players->name << " = " << players->initiative << std::endl;
+    return (0);
 }
 
-static void	ft_initiative_players_init(t_pc *players)
+static void ft_initiative_players_init(t_pc *players)
 {
-	players->next = NULL;
-	players->name = NULL;
-	players->initiative = -2;
+    players->next = NULL;
+    players->name = NULL;
+    players->initiative = -2;
+	return ;
 }
 
-t_pc	*ft_initiative_players_am(char **content)
+t_pc *ft_initiative_players_am(char **content)
 {
-	t_pc	*players;
-	t_pc	*temp;
-	int		i;
+    t_pc *players;
+    t_pc *temp;
+    int i;
 
-	players = (t_pc *)malloc(sizeof(t_pc));
-	if (!players)
-	{
-		ft_printf_fd(2, "Error allocating memory: players\n");
-		return (NULL);
-	}
-	ft_initiative_players_init(players);
-	players->initiative = -2;
-	if (ft_initiative_copy_v(players, players, content[0]))
-		return (NULL);
-	temp = players;
-	i = 1;
-	while (content[i])
-	{
-		temp->next = (t_pc *)malloc(sizeof(t_pc));
-		if (!temp->next)
-		{
-			ft_printf_fd(2, "Error allocating memory: players->next\n");
-			ft_free_players(players);
-			return (NULL);
-		}
-		ft_initiative_players_init(temp->next);
-		if (ft_initiative_copy_v(players, temp->next, content[i]))
-			return (NULL);
-		temp = temp->next;
-		i++;
-	}
-	return (players);
+    players = (t_pc *)malloc(sizeof(t_pc));
+    if (!players)
+    {
+        std::cerr << "Error allocating memory: players" << std::endl;
+        return (NULL);
+    }
+    ft_initiative_players_init(players);
+    players->initiative = -2;
+    if (ft_initiative_copy_v(players, players, content[0]))
+        return (NULL);
+    temp = players;
+    i = 1;
+    while (content[i])
+    {
+        temp->next = (t_pc *)malloc(sizeof(t_pc));
+        if (!temp->next)
+        {
+            std::cerr << "Error allocating memory: players->next" << std::endl;
+            ft_free_players(players);
+            return (NULL);
+        }
+        ft_initiative_players_init(temp->next);
+        if (ft_initiative_copy_v(players, temp->next, content[i]))
+            return (NULL);
+        temp = temp->next;
+        i++;
+    }
+    return (players);
 }
 
-void	ft_initiative_sort(int fd)
+void ft_initiative_sort(int fd)
 {
-	t_pc	*players;
-	char	**content;
+    t_pc *players;
+    char **content;
 
-	if (fd == -1)
-	{
-		ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
-		return ;
-	}
-	content = ft_read_file_dnd(fd);
-	close(fd);
-	if (!content)
-		return ;
-	players = ft_initiative_players_am(content);
-	ft_free_double_char(content);
-	if (!players)
-		return ;
-	ft_initiative_sort_2(players);
-	ft_free_players(players);
-	ft_initiative_print();
+    if (fd == -1)
+    {
+        std::cerr << "Error opening file: " << strerror(errno) << std::endl;
+        return ;
+    }
+    content = ft_read_file_dnd(fd);
+    close(fd);
+
+    if (!content)
+        return ;
+    players = ft_initiative_players_am(content);
+    ft_free_double_char(content);
+    if (!players)
+        return ;
+    ft_initiative_sort_2(players);
+    ft_free_players(players);
+    ft_initiative_print();
 	return ;
 }
