@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
-#include "libft/printf/ft_printf.hpp"
 #include "identification.hpp"
+#include <iostream>
 
 void	ft_cast_chaos_armor(t_char *info)
 {
@@ -10,5 +10,5 @@ void	ft_cast_chaos_armor(t_char *info)
 	info->concentration.duration = 3;
 	info->concentration.base_mod = 13;
 	info->bufs.chaos_armor.duration = 3;
-	ft_printf("%s cast chaos armor\n", info->name);
+	std::cout << info->name << " cast chaos armor" << std::endl;
 }
