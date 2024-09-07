@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/printf_fd/ft_printf_fd.hpp"
+#include <iostream>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -11,7 +11,7 @@ static char	**ft_parse_input(char *input_string)
 	if (!input)
 	{
 		free(input_string);
-		ft_printf_fd(2, "006-Error splitting input\n");
+		std::cerr << "006-Error splitting input" << std::endl;
 	}
 	return (input);
 }
@@ -75,7 +75,7 @@ void ft_request_input(t_name *name)
         else if (!found)
             found = ft_handle_custom_commands(input, i, name);
         if (!found)
-            ft_printf_fd(2, "007-Error unknown command: %s\n", input_string);
+			std::cerr << "007-Error unknown command: " << input_string << std::endl;
         ft_free_input(input, input_string);
     }
 }
