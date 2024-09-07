@@ -152,7 +152,7 @@ void		ft_cast_concentration(t_char *info, const char **input, t_buff *buff);
 void		ft_check_concentration(t_char *info, int  damage);
 int			ft_remove_concentration(t_char *info);
 void		ft_cast_chaos_armor(t_char *info);
-int			ft_update_caster_name(char ***caster_name, const char *input_name, t_buff *buff);
+int			ft_update_caster_name(char ***caster_name, const char *input_name);
 void		ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff *buff);
 
 //hunters mark

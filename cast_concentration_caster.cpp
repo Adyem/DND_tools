@@ -2,11 +2,10 @@
 #include "libft/printf/ft_printf.hpp"
 #include "libft/printf_fd/ft_printf_fd.hpp"
 
-int ft_update_caster_name(char ***caster_name, const char *input_name, t_buff *buff)
+int ft_update_caster_name(char ***caster_name, const char *input_name)
 {
     char	**temp;
 
-	(void)buff;
 	if (DEBUG == 1)
 		ft_printf("adding the new caster name to the target struct\n");
     if (!(*caster_name))
