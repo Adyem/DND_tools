@@ -2,8 +2,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
-#include <cerrno>
 #include <iostream>
+#include <fstream>
+#include <cerrno>
+
 
 void ft_initiative_print(void)
 {
@@ -50,15 +52,14 @@ void ft_initiative_print_pc(t_pc *players)
 void ft_initiative_sort_2(t_pc *players)
 {
     int turn = 0;
-    int fd;
     t_pc *temp;
     t_pc *highest;
 
-    fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    if (fd == -1)
+    std::ofstream outFile("data/data--initiative", std::ofstream::out | std::ofstream::trunc);
+    if (!outFile.is_open())
     {
         std::cerr << "262-Error opening file: " << strerror(errno) << std::endl;
-        return;
+        return ;
     }
     while (1)
     {
@@ -72,14 +73,16 @@ void ft_initiative_sort_2(t_pc *players)
         }
         if (highest == NULL)
             break;
+
         if (turn == 0)
         {
-            dprintf(fd, "--turn--%s=%i\n", highest->name, highest->initiative);
+            outFile << "--turn--" << highest->name << "=" << highest->initiative << "\n";
             turn = 1;
         }
         else
-            dprintf(fd, "%s=%i\n", highest->name, highest->initiative);
+            outFile << highest->name << "=" << highest->initiative << "\n";
+
         highest->initiative = -1;
     }
-    close(fd);
+    outFile.close();
 }

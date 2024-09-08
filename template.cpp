@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "template.hpp"
 #include <iostream>
+#include "libft/libft/libft.hpp"
 
 void ft_template_turn(t_char *info)
 {
