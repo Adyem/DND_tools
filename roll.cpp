@@ -7,10 +7,10 @@ typedef int (*RollExecuteFunc)(char *, int *, int);
 void ft_calculate_j(char *string, int *j)
 {
     *j = 0;
-    while (string[*j] && string[*j] != ')')
-        (*j)++;
-    if (DEBUG == 1)
-        std::cout << "The new value of J is " << *j << std::endl;
+	while (string[*j] && string[*j] != ')')
+		(*j)++;
+	if (DEBUG == 1)
+		std::cout << "The new value of J is " << *j << std::endl;
 	return ;
 }
 

@@ -1,11 +1,10 @@
 #include "dnd_tools.hpp"
 #include "libft/libft/libft.hpp"
-#include "libft/printf/ft_printf.hpp"
-#include "libft/printf_fd/ft_printf_fd.hpp"
+#include <iostream>
 
-static int	ft_calculate_ac(t_char *info)
+static int ft_calculate_ac(t_char *info)
 {
-	int	ac;
+	int ac;
 
 	ac = 10;
 	if (((info->stats.dex - 10) / 2) > info->equipment.armor.dex_ac_max_bonus)
@@ -27,39 +26,40 @@ static int	ft_calculate_ac(t_char *info)
 	return (ac);
 }
 
-void	ft_npc_check_ac(t_char *info, const char **input)
+void ft_npc_check_ac(t_char *info, const char **input)
 {
-	int	number;
-	int	ac;
+	int number;
+	int ac;
 
 	ac = ft_calculate_ac(info);
 	ft_to_hit_check_buff(info);
 	if (ft_strcmp_dnd(input[2], "crit") == 0)
 	{
 		if (info->bufs.protective_winds.duration > 0)
-			ft_printf("%s has protective winds running anny projectiles are thrown " \
-					"back at the attacker\n", info->name);
-		ft_printf("%s was hit by a critical strike\n", info->name);
+			std::cout << info->name 
+			          << " has protective winds running, any projectiles are thrown "
+			             "back at the attacker" << std::endl;
+		std::cout << info->name << " was hit by a critical strike" << std::endl;
 		return ;
 	}
 	else if (ft_check_value(input[2]))
 	{
-		ft_printf_fd(2, "1-to hitexpecting a number between 1 and 99 or " \
-				"the word \'crit\'\n");
+		std::cerr << "1-to hit expecting a number between 1 and 99 or the word 'crit'" << std::endl;
 		return ;
 	}
 	number = ft_atoi(input[2]);
 	if (number >= 0 && number <= 99)
 	{
 		if (info->bufs.protective_winds.duration > 0)
-			ft_printf("%s has protective winds running anny projectiles are thrown " \
-					"back at the attacker\n", info->name);
+			std::cout << info->name 
+			          << " has protective winds running, any projectiles are thrown "
+			             "back at the attacker" << std::endl;
 		if (ac <= number)
-			ft_printf("%s was hit by the attack\n", info->name);
+			std::cout << info->name << " was hit by the attack" << std::endl;
 		else
-			ft_printf("the attack missed %s\n", info->name);
+			std::cout << "the attack missed " << info->name << std::endl;
 	}
 	else
-		ft_printf_fd(2, "2-to hit expecting a number between 1 and 99 or " \
-				"the word \'crit\'\n");
+		std::cerr << "2-to hit expecting a number between 1 and 99 or the word 'crit'" << std::endl;
+	return ;
 }

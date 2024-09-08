@@ -1,34 +1,35 @@
 #include "dnd_tools.hpp"
 #include "template.hpp"
-#include "libft/printf/ft_printf.hpp"
+#include <iostream>
 
-void	ft_template_turn(t_char *info)
+void ft_template_turn(t_char *info)
 {
 	ft_update_buf(info);
 	if (info->flags.prone)
 	{
-		ft_printf("%s will use his/her action to stand up\n", info->name);
+		std::cout << info->name << " will use his/her action to stand up\n";
 		info->flags.prone = 0;
 	}
 	else
-		ft_printf("The template will try to make either a ranged or melee attack during his turn\n");
-	ft_printf("Template currently has %i/%i hp\n",
-			info->stats.health, info->dstats.health);
+		std::cout << "The template will try to make either a ranged or melee attack during his turn\n";
+	std::cout << "Template currently has " << info->stats.health << "/" << info->dstats.health 
+	          << " hp\n";
+	return ;
 }
 
-static void	ft_initialize_gear_and_feats(t_char *info)
+static void ft_initialize_gear_and_feats(t_char *info)
 {
 	(void)info;
 	return ;
 }
 
-t_char	*ft_template(const int index, const char **input, t_name *name, int exception)
+t_char *ft_template(const int index, const char **input, t_name *name, int exception)
 {
-	int		error;
-	t_char	*info;
+	int error;
+	t_char *info;
 
 	if (DEBUG == 1)
-		ft_printf("exception = %i\n", exception);
+		std::cout << "exception = " << exception << "\n";
 	info = (t_char *)calloc(1, sizeof(t_char));
 	if (!info)
 		return (NULL);
@@ -46,7 +47,7 @@ t_char	*ft_template(const int index, const char **input, t_name *name, int excep
 		if (ft_strcmp_dnd(input[1], "init") == 0)
 		{
 			ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-			ft_printf("Stats for %s written on a file\n", info->name);
+			std::cout << "Stats for " << info->name << " written on a file\n";
 			ft_free_info(info);
 			return (NULL);
 		}

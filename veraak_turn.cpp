@@ -1,7 +1,6 @@
 #include "dnd_tools.hpp"
-#include "libft/printf/ft_printf.hpp"
-#include "libft/printf_fd/ft_printf_fd.hpp"
 #include "veraak.hpp"
+#include <iostream>
 
 static void	ft_veraak_phase_second(t_char *info)
 {
@@ -10,24 +9,27 @@ static void	ft_veraak_phase_second(t_char *info)
 	else if (info->stats.turn == 5)
 		info->stats.turn = 0;
 	info->stats.turn++;
+	return ;
 }
 
 static void	ft_veraak_phase_third(t_char *info)
 {
 	if (info->stats.turn == 1)
-		ft_printf("%s", CHAOS_SMASH);
+		std::cout << CHAOS_SMASH;
 	else if (info->stats.turn == 5)
 		info->stats.turn = 0;
 	info->stats.turn++;
+	return ;
 }
 
 static void	ft_veraak_phase_four(t_char *info)
 {
 	if (info->stats.turn == 1)
-		ft_printf("%s", CHAOS_BREATH);
+		std::cout << CHAOS_BREATH;
 	else if (info->stats.turn == 5)
 		info->stats.turn = 0;
 	info->stats.turn++;
+	return ;
 }
 
 static void	ft_veraak_phase_five(t_char *info)
@@ -35,12 +37,13 @@ static void	ft_veraak_phase_five(t_char *info)
 	if (info->stats.turn == 1)
 		ft_cast_chaos_armor(info);
 	else if (info->stats.turn == 2)
-		ft_printf("%s", CHAOS_SMASH);
+		std::cout << CHAOS_SMASH;
 	else if (info->stats.turn == 3)
-		ft_printf("%s", CHAOS_BREATH);
+		std::cout << CHAOS_BREATH;
 	else if (info->stats.turn == 5)
 		info->stats.turn = 0;
 	info->stats.turn++;
+	return ;
 }
 
 void	ft_veraak_check_phase(t_char *info)
@@ -54,5 +57,6 @@ void	ft_veraak_check_phase(t_char *info)
 	else if (info->stats.phase == 5)
 		ft_veraak_phase_five(info);
 	else if (info->stats.phase != 1)
-		ft_printf_fd(2, "242-%s phase counter out of bounds\n", info->name);
+		std::cerr << "242-" << info->name << " phase counter out of bounds\n";
+	return ;
 }

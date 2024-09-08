@@ -1,15 +1,15 @@
 #include "dnd_tools.hpp"
-#include "libft/printf/ft_printf.hpp"
+#include <iostream>
 
 static void	ft_update_buff_duration(t_char *info, const char *buff_name, int duration)
 {
 	if (duration == 0)
-		ft_printf("%s just lost his %s buf\n", info->name, buff_name);
+		std::cout << info->name << " just lost his " << buff_name << " buff\n";
 	else if (duration == 1)
-		ft_printf("%s has a single turn of %s left\n", info->name, buff_name);
+		std::cout << info->name << " has a single turn of " << buff_name << " left\n";
 	else
-		ft_printf("%s has %i turns left on his %s buf\n",
-				info->name, duration, buff_name);
+		std::cout << info->name << " has " << duration << " turns left on his "
+			<< buff_name << " buff\n";
 	return ;
 }
 

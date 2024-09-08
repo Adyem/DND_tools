@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/printf/ft_printf.hpp"
+#include <iostream>
 
 static int	ft_roll_check_arg(char *string)
 {
@@ -19,7 +19,7 @@ static int	ft_roll_check_arg(char *string)
 			check++;
 			i++;
 		}
-		else if (string[i] == '(' || string[i] ==  ')')
+		else if (string[i] == '(' || string[i] == ')')
 			i++;
 		else if (string[i] == 'd')
 			i++;
@@ -34,7 +34,7 @@ static int	ft_roll_check_arg(char *string)
 static int	ft_check_open_braces(char *string, int i, int *open_braces)
 {
 	if (DEBUG == 1)
-		ft_printf("open braces string=%s\n", &string[i]);
+		std::cout << "open braces string=" << &string[i] << "\n";
 	if (i > 0)
 		if (ft_roll_check_character(string[i - 1]))
 			if (string[i - 1] != ')' && string[i - 1] != '(')
@@ -51,7 +51,7 @@ static int	ft_check_close_braces(char *string, int i,
 {
 	(*close_braces)++;
 	if (DEBUG == 1)
-		ft_printf("close braces string=%s\n", &string[i]);
+		std::cout << "close braces string=" << &string[i] << "\n";
 	if (i == 0 || open_braces < *close_braces)
 		return (1);
 	if (ft_roll_check_character(string[i + 1]))
@@ -116,7 +116,8 @@ static int	ft_check_dice(char *string, int i)
 	return (0);
 }
 
-int ft_command_roll_validate(char *string) {
+int ft_command_roll_validate(char *string)
+{
     int open_braces;
     int close_braces;
     int i;
@@ -133,7 +134,7 @@ int ft_command_roll_validate(char *string) {
 		if (string[i] == '(')
 		{
 			if (ft_check_open_braces(string, i, &open_braces))
-				return(1);
+				return (1);
 		}
 		else if (string[i] == ')')
 		{
@@ -144,7 +145,7 @@ int ft_command_roll_validate(char *string) {
 		{
 			if (ft_check_plus_minus(string, i))
 				return (1);
-		} 
+		}
 		else if (string[i] == '/' || string[i] == '*')
 		{
 			if (ft_check_divide_multiply(string, i))
@@ -153,10 +154,10 @@ int ft_command_roll_validate(char *string) {
 		else if (string[i] == 'd')
 		{
 			if (ft_check_dice(string, i))
-				return(1);
+				return (1);
 		}
 		if (string[i])
 			i++;
-	} 
+	}
 	return (0);
 }
