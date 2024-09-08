@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/printf/ft_printf.hpp"
+#include <iostream>
 
 static int	ft_skill_roll(t_char *info, const char **input)
 {
@@ -62,7 +62,7 @@ void	ft_npc_sstuff(t_char *info, const char **input)
 		ft_check_initiative(info);
 	else if (ft_skill_roll(info, input) == 0)
 		return ;
-	else 
-		ft_printf("4-Invalid command given\n");
+	else
+		std::cerr << "4-Invalid command given" << std::endl;
 	return ;
 }
