@@ -34,12 +34,12 @@ int ft_remove_concentration(t_char *info)
         {
             if (ft_check_player_character(info->concentration.targets[i]) == 0)
             {
-                target = NULL;
+                target = nullptr;
                 i++;
                 continue ;
             } 
             else
-                target = NULL;
+                target = nullptr;
         }
         else
         {
@@ -70,7 +70,7 @@ int ft_remove_concentration(t_char *info)
     info->concentration.dice_faces_mod = 0;
     info->concentration.base_mod = 0;
     ft_free_double_char(info->concentration.targets);
-    info->concentration.targets = NULL;
+    info->concentration.targets = nullptr;
     info->bufs.chaos_armor.duration = 0;
     return (0);
 }

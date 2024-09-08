@@ -16,8 +16,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
 
-	if (dst == NULL && src == NULL)
-		return (NULL);
+	if (dst == nullptr && src == nullptr)
+		return (nullptr);
 	i = 0;
 	while (i < n)
 	{

@@ -36,7 +36,7 @@ char	*ft_uitoa(unsigned int value)
 	len = uitoa_len(value);
 	number_as_char = (char *)malloc(len + 1);
 	if (!number_as_char)
-		return (NULL);
+		return (nullptr);
 	i = 0;
 	while (value)
 	{

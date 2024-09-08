@@ -126,8 +126,8 @@ static const t_char VERAAK_INFO =
 	.passive_perception = 15,
 	.initiative = -1,
 	.version_number = 2,
-	.save_file = NULL,
-	.name = NULL,
+	.save_file = nullptr,
+	.name = nullptr,
 	.turn = ft_veraak_turn,
 	.flags = INITIALIZE_FLAGS,
 	.crit = VERAAK_CRIT,
@@ -143,7 +143,7 @@ static const t_char VERAAK_INFO =
 	.stats = INITIALIZE_STATS,
 	.dstats = VERAAK_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
-	.struct_name = NULL,
+	.struct_name = nullptr,
 };
 
 //Abilities

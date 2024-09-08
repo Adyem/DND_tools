@@ -38,7 +38,7 @@ static char *ft_read_target_name(int i)
 	if (!target_name)
 	{
 		ft_printf_fd(2, "108-Error: Failed to allocate memory for readline target\n");
-		return (NULL);
+		return (nullptr);
 	}
 	return (target_name);
 }
@@ -50,9 +50,9 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
 		if (ft_check_player_character(target_name))
 		{
 			ft_printf_fd(2, "111-Error: target does not exist\n");
-			return (NULL);
+			return (nullptr);
 		}
-		return (NULL);
+		return (nullptr);
 	}
 	else
 	{
@@ -60,7 +60,7 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
 		if (!target_info)
 		{
 			ft_printf_fd(2, "109-Error getting info for %s\n", target_name);
-			return (NULL);
+			return (nullptr);
 		}
 		return (target_info);
 	}
@@ -75,8 +75,8 @@ static void ft_free_memory_on_error(t_char **target, char **string, int amount)
 			ft_free_info(target[j]);
 		if (string[j])
 			free(string[j]);
-		target[j] = NULL;
-		string[j] = NULL;
+		target[j] = nullptr;
+		string[j] = nullptr;
 		j++;
 	}
 }

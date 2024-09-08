@@ -72,9 +72,9 @@ static const	t_resistance INITIALIZE_CURRENT_RESISTANCE =
 
 static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 {
-	.function = NULL,
-	.damage_type = NULL,
-	.stat = NULL,
+	.function = nullptr,
+	.damage_type = nullptr,
+	.stat = nullptr,
 	.effect_type = 0,
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
@@ -83,8 +83,8 @@ static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 
 static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 {
-	.name = NULL,
-	.projectile_name = NULL,
+	.name = nullptr,
+	.projectile_name = nullptr,
 	.equipment_id = 0,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
@@ -133,7 +133,7 @@ static const	t_concentration INITIALIZE_CONCENTRATION =
 	.dice_faces_mod = 0,
 	.base_mod = 0,
 	.duration = 0,
-	.targets = NULL,
+	.targets = nullptr,
 };
 
 
@@ -143,7 +143,7 @@ static const	t_bless INITIALIZE_BLESS =
 	.dice_amount_mod = 1,
 	.dice_faces_mod = 4,
 	.base_mod = 0,
-	.target = NULL,
+	.target = nullptr,
 };
 
 static const	t_protective_winds INITIALIZE_PROTECTIVE_WINDS =
@@ -163,7 +163,7 @@ static const	t_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
 
 static const	t_air_totem INITIALIZE_AIR_TOTEM =
 {
-	.save_file = NULL,
+	.save_file = nullptr,
 	.health = 0,
 	.ac = 0,
 	.knock_back_distance = 0,
@@ -186,7 +186,7 @@ static const	t_bufs INITIALIZE_BUFFS =
 static const	t_hunters_mark INITIALIZE_HUNTERS_MARK =
 {
 	.amount = 0,
-	.caster_name = NULL,
+	.caster_name = nullptr,
 };
 
 static const	t_blinded INITIALIZE_BLINDED =

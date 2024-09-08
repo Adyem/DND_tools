@@ -46,9 +46,9 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
     int i;
     int j;
 
-    player->name = NULL;
+    player->name = nullptr;
     player->initiative = -1;
-    player->next = NULL;
+    player->next = nullptr;
     i = 0;
     while (content[i])
     {
@@ -61,7 +61,7 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
         }
         if (ft_strncmp(content[i], "INITIATIVE=", 11) == 0 && (player->initiative == -1))
             player->initiative = ft_check_int(content[i], 11, filename);
-        else if (ft_strncmp(content[i], "NAME=", 5) == 0 && (player->name == NULL))
+        else if (ft_strncmp(content[i], "NAME=", 5) == 0 && (player->name == nullptr))
         {
             player->name = ft_check_string(content[i], 5);
             if (!player->name)

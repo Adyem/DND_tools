@@ -40,7 +40,7 @@ void	read_string_fd(va_list args, t_format_fd *f_info)
 	char	*c;
 
 	c = va_arg(args, char *);
-	if (c == NULL)
+	if (c == nullptr)
 	{
 		write (f_info->fd, "(null)", 6);
 		f_info->return_value = f_info->return_value + 6;

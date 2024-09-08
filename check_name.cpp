@@ -27,7 +27,7 @@ int ft_set_stats_check_name(const char *name)
         return (-1) ;
     }
     dir = opendir(DATA_FOLDER);
-    if (dir == NULL)
+    if (dir == nullptr)
     {
         std::cerr << "295-Error: Opendir has failed: " << strerror(errno) << std::endl;
         return (-2) ;
@@ -64,7 +64,7 @@ int ft_check_player_character(const char *name)
     char filename[256];
 
     dir = opendir(DATA_FOLDER);
-    if (dir == NULL)
+    if (dir == nullptr)
     {
         std::cerr << "307-Error: Opendir has failed: " << strerror(errno) << std::endl;
         return (-2) ;

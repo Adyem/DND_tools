@@ -125,8 +125,8 @@ static const t_char CHAOS_GOBLIN_INFO =
 	.passive_perception = 15,
 	.initiative = -1,
 	.version_number = 2,
-	.save_file = NULL,
-	.name = NULL,
+	.save_file = nullptr,
+	.name = nullptr,
 	.turn = ft_chaos_goblin_turn,
 	.flags = INITIALIZE_FLAGS,
 	.crit = CHAOS_GOBLIN_CRIT,
@@ -142,7 +142,7 @@ static const t_char CHAOS_GOBLIN_INFO =
 	.stats = INITIALIZE_STATS,
 	.dstats = CHAOS_GOBLIN_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
-	.struct_name = NULL,
+	.struct_name = nullptr,
 };
 
 

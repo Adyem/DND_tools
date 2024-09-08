@@ -44,7 +44,7 @@ static char	*str_new(size_t n)
 
 	str = (char *)malloc(sizeof(char) * (n + 1));
 	if (!str)
-		return (NULL);
+		return (nullptr);
 	return (str);
 }
 
@@ -56,7 +56,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	i;
 
 	if (!s1 || !set)
-		return (NULL);
+		return (nullptr);
 	start = 0;
 	while (*(s1 + start) && char_check(set, *(s1 + start)))
 		start++;
@@ -65,7 +65,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		end--;
 	trim = str_new(end - start);
 	if (!trim)
-		return (NULL);
+		return (nullptr);
 	i = 0;
 	while ((start + i) < end)
 	{

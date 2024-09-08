@@ -64,7 +64,7 @@ char	*ft_ltoa(long value)
 	len = ltoa_len(value);
 	number_as_char = (char *)malloc(len + sign + 1);
 	if (!number_as_char)
-		return (NULL);
+		return (nullptr);
 	if (sign == 1)
 		number_as_char[0] = '-';
 	number_as_char[len + sign] = '\0';

@@ -47,7 +47,7 @@ char	*convert_int(int n, int is_negative)
 	i = itoa_len(n);
 	c = (char *)malloc(i + 1 + is_negative);
 	if (!c)
-		return (NULL);
+		return (nullptr);
 	if (n < 0)
 		num = -n;
 	else

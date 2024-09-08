@@ -33,7 +33,7 @@ t_char *ft_template(const int index, const char **input, t_name *name, int excep
 		std::cout << "exception = " << exception << "\n";
 	info = (t_char *)calloc(1, sizeof(t_char));
 	if (!info)
-		return (NULL);
+		return (nullptr);
 	*info = TEMPLATE_INFO;
 	info->name = input[0];
 	info->struct_name = name;
@@ -41,7 +41,7 @@ t_char *ft_template(const int index, const char **input, t_name *name, int excep
 	if (!info->save_file)
 	{
 		ft_free_info(info);
-		return (NULL);
+		return (nullptr);
 	}
 	if (index == 2)
 	{
@@ -50,25 +50,25 @@ t_char *ft_template(const int index, const char **input, t_name *name, int excep
 			ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
 			std::cout << "Stats for " << info->name << " written on a file\n";
 			ft_free_info(info);
-			return (NULL);
+			return (nullptr);
 		}
 	}
 	error = ft_npc_open_file(info);
 	if (error)
 	{
 		ft_free_info(info);
-		return (NULL);
+		return (nullptr);
 	}
 	error = ft_npc_check_info(info);
 	if (error)
 	{
 		ft_free_info(info);
-		return (NULL);
+		return (nullptr);
 	}
 	ft_initialize_gear_and_feats(info);
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);
 	ft_free_info(info);
-	return (NULL);
+	return (nullptr);
 }

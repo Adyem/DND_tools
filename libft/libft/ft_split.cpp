@@ -48,7 +48,7 @@ static char	**ft_malloc_strs(char **strs, const char *s, char c)
 		{
 			strs[x] = (char *)malloc(sizeof(char) * (count + 1));
 			if (!strs[x])
-				return (NULL);
+				return (nullptr);
 			count = 0;
 			x++;
 		}
@@ -91,11 +91,11 @@ static char	**ft_merror(char **strs)
 	while (strs[i])
 	{
 		free(strs[i]);
-		strs[i] = NULL;
+		strs[i] = nullptr;
 		i++;
 	}
 	free(strs);
-	return (NULL);
+	return (nullptr);
 }
 
 char	**ft_split(char const *s, char c)
@@ -107,18 +107,18 @@ char	**ft_split(char const *s, char c)
 	{
 		strs = (char **)malloc(sizeof(char) * 1);
 		if (!strs)
-			return (NULL);
-		*strs = NULL;
+			return (nullptr);
+		*strs = nullptr;
 		return (strs);
 	}
 	wordcount = ft_count_words(s, c);
 	strs = (char **)malloc(sizeof(*strs) * (wordcount + 1));
 	if (!strs)
-		return (NULL);
+		return (nullptr);
 	if (ft_malloc_strs(strs, s, c))
 	{
 		ft_cpy_strs(strs, s, c);
-		strs[wordcount] = NULL;
+		strs[wordcount] = nullptr;
 	}
 	else
 		strs = ft_merror(strs);

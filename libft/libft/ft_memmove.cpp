@@ -21,7 +21,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	s = (const unsigned char *)src; // Explicit cast to const unsigned char*
 
 	if (!dst && !src)
-		return (NULL);
+		return (nullptr);
 	if (d < s)
 	{
 		while (len--)

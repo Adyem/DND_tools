@@ -38,8 +38,8 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 
 static void ft_initiative_players_init(t_pc *players)
 {
-    players->next = NULL;
-    players->name = NULL;
+    players->next = nullptr;
+    players->name = nullptr;
     players->initiative = -2;
 	return ;
 }
@@ -54,12 +54,12 @@ t_pc *ft_initiative_players_am(char **content)
     if (!players)
     {
         std::cerr << "Error allocating memory: players" << std::endl;
-        return (NULL);
+        return (nullptr);
     }
     ft_initiative_players_init(players);
     players->initiative = -2;
     if (ft_initiative_copy_v(players, players, content[0]))
-        return (NULL);
+        return (nullptr);
     temp = players;
     i = 1;
     while (content[i])
@@ -69,11 +69,11 @@ t_pc *ft_initiative_players_am(char **content)
         {
             std::cerr << "Error allocating memory: players->next" << std::endl;
             ft_free_players(players);
-            return (NULL);
+            return (nullptr);
         }
         ft_initiative_players_init(temp->next);
         if (ft_initiative_copy_v(players, temp->next, content[i]))
-            return (NULL);
+            return (nullptr);
         temp = temp->next;
         i++;
     }

@@ -8,13 +8,13 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
 	int	j;
 
     if (!double_string)
-        return (NULL);
+        return (nullptr);
     i = 0;
 	while (double_string[i])
 		i++;
 	return_v = (char **)ft_calloc(i + size + 1, sizeof(char *));
 	if (!return_v)
-		return (NULL);
+		return (nullptr);
 	j = 0;
     while (j < i)
 	{
@@ -25,12 +25,12 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
     if (!return_v[i])
 	{
         free(return_v);
-        return (NULL);
+        return (nullptr);
     }
 	j = i + 1;
     while (j < i + size + 1)
 	{
-        return_v[j] = NULL;
+        return_v[j] = nullptr;
 		j++;
 	}
 	return (return_v);

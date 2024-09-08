@@ -15,7 +15,7 @@ int main(int argc, char **argv)
         std::cerr << "005-Error: expecting no arguments" << std::endl;
         return (1);
     }
-    srand((unsigned)time(NULL));
+    srand((unsigned)time(nullptr));
 
     if (DEBUG == 1)
     {

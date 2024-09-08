@@ -22,7 +22,7 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
 	t_name *temp;
 
 	temp = name;
-	while (temp != NULL)
+	while (temp != nullptr)
 	{
 		if (argc > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
 		{
@@ -62,7 +62,7 @@ void ft_request_input(t_name *name)
     int found;
     int i;
 
-    while ((input_string = readline("dndtools: ")) != NULL)
+    while ((input_string = readline("dndtools: ")) != nullptr)
     {
         if (*input_string)
             add_history(input_string);

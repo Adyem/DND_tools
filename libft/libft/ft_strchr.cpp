@@ -17,7 +17,7 @@ char	*ft_strchr(const char *s, int i)
 	char	c;
 
 	if (!s)
-		return (NULL);
+		return (nullptr);
 	c = (char)i;
 	while (*s)
 	{
@@ -27,5 +27,5 @@ char	*ft_strchr(const char *s, int i)
 	}
 	if (c == '\0')
 		return ((char *)s);
-	return (NULL);
+	return (nullptr);
 }

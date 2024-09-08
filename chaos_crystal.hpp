@@ -122,8 +122,8 @@ static const t_char CHAOS_CRYSTAL_INFO =
 	.passive_perception = 15,
 	.initiative = -1,
 	.version_number = 2,
-	.save_file = NULL,
-	.name = NULL,
+	.save_file = nullptr,
+	.name = nullptr,
 	.turn = ft_chaos_crystal_turn,
 	.flags = INITIALIZE_FLAGS,
 	.crit = CHAOS_CRYSTAL_CRIT,
@@ -139,7 +139,7 @@ static const t_char CHAOS_CRYSTAL_INFO =
 	.stats = INITIALIZE_STATS,
 	.dstats = CHAOS_CRYSTAL_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
-	.struct_name = NULL,
+	.struct_name = nullptr,
 };
 
 

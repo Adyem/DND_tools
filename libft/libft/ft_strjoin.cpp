@@ -24,7 +24,7 @@ static char	*allocate_new_string(const char *string_1, const char *string_2)
 		total_len += ft_strlen(string_2);
 	new_str = (char *)malloc(total_len + 1);
 	if (!new_str)
-		return (NULL);
+		return (nullptr);
 	return (new_str);
 }
 
@@ -34,10 +34,10 @@ char	*ft_strjoin(char const *string_1, char const *string_2)
 	int		i;
 
 	if (!string_1 && !string_2)
-		return (NULL);
+		return (nullptr);
 	result = allocate_new_string(string_1, string_2);
 	if (!result)
-		return (NULL);
+		return (nullptr);
 	i = 0;
 	if (string_1)
 		while (string_1[0])

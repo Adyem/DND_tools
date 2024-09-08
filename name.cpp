@@ -9,15 +9,16 @@ void ft_free_memory_name(t_name *name, int exit_failure)
     t_name *next_node;
 
     current = name;
-    while (current != NULL)
+    while (current != nullptr)
     {
         next_node = current->next;
         free(current->name);
         free(current);
         current = next_node;
     }
-    if (exit_failure)
-        exit(exit_failure);
+	if (exit_failure)
+		exit(exit_failure);
+	return ;
 }
 
 static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *new_name, c_name new_function)
@@ -38,13 +39,13 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *n
         ft_free_memory_name(first_node, 1);
     }
     new_node->function = new_function;
-    new_node->next = NULL;
+    new_node->next = nullptr;
     if (*last_node)
         (*last_node)->next = new_node;
     else
         first_node = new_node;
     *last_node = new_node;
-    return new_node;
+    return (new_node);
 }
 
 static char *ft_new_name(const char *name, int index)
@@ -57,10 +58,10 @@ static char *ft_new_name(const char *name, int index)
     if (!new_name)
     {
         std::cerr << "114-Error: Malloc failure in Name Struct" << std::endl;
-        return NULL;
+        return (nullptr);
     }
     snprintf(new_name, new_name_length, "%s_%02d", name, index);
-    return new_name;
+    return (new_name);
 }
 
 static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char *base_name, c_name function, int count)
@@ -72,7 +73,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char
     while (i <= count)
     {
         if (i > 99)
-            break;
+            break ;
         new_name = ft_new_name(base_name, i);
         if (!new_name)
 		{
@@ -92,10 +93,10 @@ t_name *ft_allocate_memory_name()
     t_name *last_node;
     t_name *first_node;
 
-    first_node = NULL;
-    last_node = NULL;
+    first_node = nullptr;
+    last_node = nullptr;
     // Template is always the first node
-    first_node = ft_add_node(NULL, &last_node, "template", ft_template);
+    first_node = ft_add_node(nullptr, &last_node, "template", ft_template);
     ft_add_mob_series(first_node, &last_node, "template", ft_template, 10);
     ft_add_mob_series(first_node, &last_node, "goblin", ft_goblin, 10);
     ft_add_mob_series(first_node, &last_node, "chaos_goblin", ft_chaos_goblin, 10);

@@ -33,7 +33,7 @@ char	*ft_size_t_to_hex(size_t value)
 	buffer_size = sizeof(size_t) * 2 + 1;
 	hexstr = (char *)malloc(buffer_size);
 	if (!hexstr)
-		return (NULL);
+		return (nullptr);
 	i = 0;
 	while (value)
 	{

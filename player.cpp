@@ -33,7 +33,7 @@ static void ft_add_player(t_pc *player)
 
 void ft_player(const char **input)
 {
-    t_pc *player = NULL;
+    t_pc *player = nullptr;
 
 	if (input[1] && input[2])
 	{

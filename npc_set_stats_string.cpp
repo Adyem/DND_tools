@@ -17,7 +17,7 @@ static char **ft_handle_memory_error(t_char *info, char **data, int error_code)
     info->flags.error = 1;
     ft_free_double_char(data);
     std::cerr << error_code << "-Error: Allocating memory" << std::endl;
-    return (NULL);
+    return (nullptr);
 }
 
 static char **ft_allocate_initial_data(char *content, int ofset, t_char *info)
@@ -26,11 +26,11 @@ static char **ft_allocate_initial_data(char *content, int ofset, t_char *info)
 
     data = (char **)malloc(sizeof(char *) * 2);
     if (!data)
-        return (ft_handle_memory_error(info, NULL, 293));
+        return (ft_handle_memory_error(info, nullptr, 293));
     data[0] = ft_strdup(&content[ofset]);
     if (!data[0])
         return (ft_handle_memory_error(info, data, 294));
-    data[1] = NULL;
+    data[1] = nullptr;
     return (data);
 }
 
@@ -60,18 +60,18 @@ static char **ft_append_target_to_data(char **data, char *content, int ofset, t_
         i++;
     data = ft_reallocate_data_array(data, i + 2, info);
     if (!data)
-        return (NULL);
+        return (nullptr);
     data[i] = ft_strdup(&content[ofset]);
     if (!data[i])
         return ft_handle_memory_error(info, data, 296);
-    data[i + 1] = NULL;
+    data[i + 1] = nullptr;
     return (data);
 }
 
 char **ft_set_stats_con_targets(char *content, int ofset, char **data, t_char *info)
 {
     if (ft_check_target_exists(&content[ofset]))
-        return (NULL);
+        return (nullptr);
     if (!data)
         return (ft_allocate_initial_data(content, ofset, info));
     else

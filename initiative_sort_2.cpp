@@ -64,14 +64,14 @@ void ft_initiative_sort_2(t_pc *players)
     while (1)
     {
         temp = players;
-        highest = NULL;
+        highest = nullptr;
         while (temp)
         {
-            if ((highest == NULL || temp->initiative > highest->initiative) && temp->initiative != -1)
+            if ((highest == nullptr || temp->initiative > highest->initiative) && temp->initiative != -1)
                 highest = temp;
             temp = temp->next;
         }
-        if (highest == NULL)
+        if (highest == nullptr)
             break;
 
         if (turn == 0)

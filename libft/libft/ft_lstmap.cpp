@@ -15,12 +15,12 @@
 static void	*error_cleanup(t_list **lst, void (*del)(void *))
 {
 	ft_lstclear(lst, del);
-	return (NULL);
+	return (nullptr);
 }
 
 static void	add_to_end(t_list **head, t_list **tail, t_list *new_node)
 {
-	if (*head == NULL)
+	if (*head == nullptr)
 	{
 		*head = new_node;
 		*tail = new_node;
@@ -39,10 +39,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*new_node;
 	void	*mapped_content;
 
-	first = NULL;
-	tmp_tail = NULL;
+	first = nullptr;
+	tmp_tail = nullptr;
 	if (!f || !del)
-		return (NULL);
+		return (nullptr);
 	while (lst)
 	{
 		mapped_content = (*f)(lst->content);
@@ -51,7 +51,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		{
 			del(mapped_content);
 			error_cleanup(&first, del);
-			return (NULL);
+			return (nullptr);
 		}
 		add_to_end(&first, &tmp_tail, new_node);
 		lst = lst->next;

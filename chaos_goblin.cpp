@@ -35,7 +35,7 @@ t_char *ft_chaos_goblin(const int index, const char **input, t_name *name, int e
     if (!info)
     {
         std::cerr << "105-Error: Failed to allocate memory info " << input[0] << std::endl;
-        return (NULL) ;
+        return (nullptr) ;
     }
     *info = CHAOS_GOBLIN_INFO;
     info->name = input[0];
@@ -45,7 +45,7 @@ t_char *ft_chaos_goblin(const int index, const char **input, t_name *name, int e
     {
         std::cerr << "104-Error: Failed to allocate memory save_file name " << info->name << std::endl;
         ft_free_info(info);
-        return (NULL) ;
+        return (nullptr) ;
     }
     if (index == 2)
     {
@@ -54,25 +54,25 @@ t_char *ft_chaos_goblin(const int index, const char **input, t_name *name, int e
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
             std::cout << "Stats for " << info->name << " written on a file" << std::endl;
             ft_free_info(info);
-            return (NULL) ;
+            return (nullptr) ;
         }
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (NULL) ;
+        return (nullptr) ;
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (NULL) ;
+        return (nullptr) ;
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
         return (info) ;
     ft_npc_change_stats(info, index, input);
     ft_free_info(info);
-    return (NULL) ;
+    return (nullptr) ;
 }

@@ -14,13 +14,13 @@ static t_char *ft_check_name(t_name *name, char *file_name)
 
     if (DEBUG == 1)
         std::cout << "Printing file name again: " << file_name << std::endl;
-    info = NULL;
-    while (name != NULL)
+    info = nullptr;
+    while (name != nullptr)
     {
         if (ft_strcmp_dnd(name->name, file_name) == 0)
         {
             input[0] = name->name;
-            input[1] = NULL;
+            input[1] = nullptr;
             if (DEBUG == 1)
                 std::cout << "Initializing: " << name->name << std::endl;
             info = name->function(1, input, name, 1);
@@ -43,7 +43,7 @@ static t_char *ft_read_all_files(int fd, t_name *name, char *file_name)
     if (!info)
     {
         std::cerr << "255 Error allocating memory" << std::endl;
-        return (NULL);
+        return (nullptr);
     }
     if (DEBUG == 1)
         std::cout << "Initiative file descriptor is " << fd << std::endl;
@@ -55,7 +55,7 @@ static t_char *ft_read_all_files(int fd, t_name *name, char *file_name)
 static void *ft_initiative_pc_error(const char *message)
 {
     std::cerr << message << std::endl;
-    return (NULL);
+    return (nullptr);
 }
 
 static t_pc *ft_read_pc_file(int fd, char *filename, char *filepath)
@@ -79,7 +79,7 @@ static t_pc *ft_read_pc_file(int fd, char *filename, char *filepath)
     if (error)
     {
         ft_free_pc(player);
-        return (NULL);
+        return (nullptr);
     }
     error = ft_request_initiative(player);
     if (!error)
@@ -127,12 +127,12 @@ void ft_open_all_files(t_name *name)
     else
         close(fd);
     dir = opendir("data");
-    if (dir == NULL)
+    if (dir == nullptr)
     {
         std::cerr << "Unable to open directory: " << strerror(errno) << std::endl;
         return ;
     }
-    while ((entry = readdir(dir)) != NULL)
+    while ((entry = readdir(dir)) != nullptr)
     {
         if (ft_strcmp_dnd(entry->d_name, ".") == 0 || ft_strcmp_dnd(entry->d_name, "..") == 0)
             continue ;

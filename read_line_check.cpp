@@ -8,7 +8,7 @@ int	ft_read_line_confirm(const char *message)
 {
 	char	*input;
 
-	while ((input = readline(message)) != NULL)
+	while ((input = readline(message)) != nullptr)
 	{
 		if (*input)
 			add_history(input);

@@ -43,7 +43,7 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
     {
         target->debufs.hunters_mark.amount--;
         free(target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1]);
-        target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1] = NULL;
+        target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1] = nullptr;
         ft_cast_concentration_cleanup(info, target, fd, 2);
         return (1) ;
     }
@@ -52,7 +52,7 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
     {
         target->debufs.hunters_mark.amount--;
         free(target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1]);
-        target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1] = NULL;
+        target->debufs.hunters_mark.caster_name[ft_double_char_length(target->debufs.hunters_mark.caster_name) - 1] = nullptr;
         ft_cast_concentration_cleanup(info, target, fd, 3);
         free(temp) ;
         return (1) ;
@@ -107,7 +107,7 @@ void ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
         if (ft_check_player_character(input[3]))
             return ;
         else
-            target = NULL;
+            target = nullptr;
     }
     else
     {

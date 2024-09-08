@@ -24,11 +24,11 @@ char	*leftovers(char *readed_string)
 	if (!readed_string[i])
 	{
 		free(readed_string);
-		return (NULL);
+		return (nullptr);
 	}
 	string = (char *)malloc(ft_strlen(readed_string) - i + 1);
 	if (!string)
-		return (NULL);
+		return (nullptr);
 	i++;
 	j = 0;
 	while (readed_string[i])
@@ -47,7 +47,7 @@ char	*malloc_gnl(char *readed_string, size_t i)
 	else
 		string = (char *)malloc(i + 1);
 	if (!string)
-		return (NULL);
+		return (nullptr);
 	return (string);
 }
 
@@ -58,12 +58,12 @@ char	*fetch_line(char *readed_string)
 
 	i = 0;
 	if (!readed_string[i])
-		return (NULL);
+		return (nullptr);
 	while (readed_string[i] && readed_string[i] != '\n')
 		i++;
 	string = malloc_gnl(readed_string, i);
 	if (!string)
-		return (NULL);
+		return (nullptr);
 	i = 0;
 	while (readed_string[i] && readed_string[i] != '\n')
 	{
@@ -86,7 +86,7 @@ char	*read_fd(int fd, char *readed_string)
 
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
+		return (nullptr);
 	readed_bytes = 1;
 	while (!ft_strchr(readed_string, '\n') && readed_bytes != 0)
 	{
@@ -95,7 +95,7 @@ char	*read_fd(int fd, char *readed_string)
 		{
 			free(buffer);
 			free(readed_string);
-			return (NULL);
+			return (nullptr);
 		}
 		buffer[readed_bytes] = '\0';
 		readed_string = ft_strjoin_gnl(readed_string, buffer);
@@ -114,14 +114,14 @@ char	*get_next_line(int fd)
 	while (fd == -1 && i < 4096)
 	{
 		free(readed_string[i]);
-		readed_string[i] = NULL;
+		readed_string[i] = nullptr;
 		i++;
 	}
 	if (BUFFER_SIZE <= 0 || fd < 0)
-		return (NULL);
+		return (nullptr);
 	readed_string[fd] = read_fd(fd, readed_string[fd]);
 	if (!readed_string[fd])
-		return (NULL);
+		return (nullptr);
 	string = fetch_line(readed_string[fd]);
 	readed_string[fd] = leftovers(readed_string[fd]);
 	return (string);

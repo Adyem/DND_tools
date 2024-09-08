@@ -4,7 +4,6 @@
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
-#include "identification.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
 #include <stddef.h>
@@ -125,8 +124,8 @@ static const t_char TEMPLATE_INFO =
 	.passive_perception = 15,
 	.initiative = -1,
 	.version_number = 2,
-	.save_file = NULL,
-	.name = NULL,
+	.save_file = nullptr,
+	.name = nullptr,
 	.turn = ft_template_turn,
 	.flags = INITIALIZE_FLAGS,
 	.crit = TEMPLATE_CRIT,
@@ -142,7 +141,7 @@ static const t_char TEMPLATE_INFO =
 	.stats = INITIALIZE_STATS,
 	.dstats = TEMPLATE_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
-	.struct_name = NULL,
+	.struct_name = nullptr,
 };
 
 
