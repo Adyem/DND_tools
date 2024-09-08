@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
 #include "libft/libft/libft.hpp"
-#include "libft/printf_fd/ft_printf_fd.hpp"
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 #include <readline/readline.h>
 
 static int	ft_free_request_damage(char *line, char **input)
@@ -51,61 +51,59 @@ int ft_get_resistance(t_char *info, const char *type)
 	return (-9999);
 }
 
-int	ft_request_damage(t_char *info)
+int ft_request_damage(t_char *info)
 {
-	char	**input;
-	char	*line;
-	int		fail;
-	int		resistance;
-	
-	fail = 0;
-	input = NULL;
-	while ((line = readline("How much damage was dealt: ")))
-	{
-		if (ft_strcmp_dnd(line, "exit") == 0)
-		{
-			ft_deal_damage(info, NULL, NULL, 0, 2);
-			free(line);
-			return (0);
-		}
-		input = ft_split(line, ' ');
-		if (!input)
-		{
-			if (!fail)
-			{
-				free(line);
-				fail = 1;
-				continue ;
-			}
-			else
-			{
-				free(line);
-				return (1);
-			}
-		}
-		if (ft_check_value(input[0]))
-		{
-			ft_free_request_damage(line, input);
-			ft_printf_fd(2, "159-Requesting a number between 1 and 5000\n");
-			continue ;
-		}
-		if (!input[0] || !input[1])
-		{
-			ft_free_request_damage(line, input);
-			continue ;
-		}
-		else
-		{
-			resistance = ft_get_resistance(info, input[1]);
-			if (resistance == -9999)
-				return (ft_printf_fd(2, "158-Error getting Resistance %s\n",
-					info->name), 1);
-			ft_deal_damage(info, input[0], input[1], resistance, 0);
-		}
-		ft_free_request_damage(line, input);
-		line = NULL;
-		input = NULL;
-	}
-	ft_free_request_damage(line, input);
-	return (0);
+    char	**input = nullptr;
+    char	*line = nullptr;
+    int		fail = 0;
+    int		resistance;
+
+    while ((line = readline("How much damage was dealt: ")))
+    {
+        if (ft_strcmp_dnd(line, "exit") == 0)
+        {
+            ft_deal_damage(info, nullptr, nullptr, 0, 2);
+            free(line);
+            return (0);
+        }
+        input = ft_split(line, ' ');
+        if (!input)
+        {
+            if (!fail)
+            {
+                free(line);
+                fail = 1;
+                continue ;
+            }
+            else
+            {
+                free(line);
+                return (1);
+            }
+        }
+        if (ft_check_value(input[0]))
+        {
+            ft_free_request_damage(line, input);
+            std::cerr << "159-Requesting a number between 1 and 5000" << std::endl;
+            continue ;
+        }
+        if (!input[0] || !input[1])
+        {
+            ft_free_request_damage(line, input);
+            continue ;
+        }
+        resistance = ft_get_resistance(info, input[1]);
+        if (resistance == -9999)
+        {
+            std::cerr << "158-Error getting Resistance for " << info->name << std::endl;
+            ft_free_request_damage(line, input);
+            return (1);
+        }
+        ft_deal_damage(info, input[0], input[1], resistance, 0);
+        ft_free_request_damage(line, input);
+        line = nullptr;
+        input = nullptr;
+    }
+    ft_free_request_damage(line, input);
+    return (0);
 }

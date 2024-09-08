@@ -1,54 +1,56 @@
 #include "dnd_tools.hpp"
-#include "libft/printf/ft_printf.hpp"
 #include <climits>
+#include <iostream>
 
-int	ft_dice_roll(int number, int faces)
+int ft_dice_roll(int number, int faces)
 {
-	int	roll;
-	int	result;
-	int	i;
+    int roll;
+    int result;
+    int i;
 
-	if (faces == 1)
-		return (number);
 	if (faces < 1 || number < 1)
 		return (-1);
-	result = 0;
-	i = 0;
-	roll = 0;
-	while (i < number)
-	{
-		roll = rand();
-		if (result > INT_MAX - ((roll % faces) + 1))
-			return (-1);
-		result += (roll % faces) + 1;
-		i++;
-	}
-	if (DEBUG == 1)
-		ft_printf("The dice rolled %i on %i faces with %i amount of dice\n",
-				result, faces, number);
-	return (result);
+	if (faces == 1)
+		return (number);
+    result = 0;
+    i = 0;
+    roll = 0;
+    while (i < number)
+    {
+        roll = rand();
+        if (result > INT_MAX - ((roll % faces) + 1))
+            return -1;
+        result += (roll % faces) + 1;
+        i++;
+    }
+    if (DEBUG == 1)
+        std::cerr << "The dice rolled " << result << " on " << faces 
+                  << " faces with " << number << " amount of dice" << std::endl;
+    return (result);
 }
 
-void	ft_reroll(t_char *info, int *result)
+void ft_reroll(t_char *info, int *result)
 {
-	int second_roll;
+    int second_roll;
 
-	if (DEBUG == 1)
-		ft_printf("%p %p\n", info, result);
-	if (!info->flags.advantage)
-		return ;
-	second_roll = ft_dice_roll(1, 20);
-	if (info->flags.advantage > 0)
-	{
-		ft_printf("%s rolled %i on his/her advantage\n", info->name, second_roll);
-		if (second_roll > *result)
-			*result = second_roll;
-	}
-	else if (info->flags.advantage < 0)
-	{
-		ft_printf("%s rolled %i on his/her disadvantage\n", info->name, second_roll);
-		if (second_roll < *result)
-			*result = second_roll;
-	}
-	return ;
+    if (DEBUG == 1)
+        std::cerr << info << " " << result << std::endl;
+    if (!info->flags.advantage)
+        return ;
+    second_roll = ft_dice_roll(1, 20);
+    if (info->flags.advantage > 0)
+    {
+        std::cout << info->name << " rolled " << second_roll << " on his/her advantage" 
+                  << std::endl;
+        if (second_roll > *result)
+            *result = second_roll;
+    }
+    else if (info->flags.advantage < 0)
+    {
+        std::cout << info->name << " rolled " << second_roll 
+                  << " on his/her disadvantage" << std::endl;
+        if (second_roll < *result)
+            *result = second_roll;
+    }
+    return ;
 }

@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include <iostream>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <cstdlib>
@@ -24,5 +25,6 @@ int	ft_read_line_confirm(const char *message)
 			return (1);
 		}
 	}
+	std::cerr << "116-Error: read line memory allocation failed" << std::endl;
 	return (-1);
 }
