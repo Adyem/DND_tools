@@ -1069,6 +1069,25 @@
       "-I/usr/include/c++/11",
       "-c",
       "-o",
+      "objs/gundren_rockseeker.o",
+      "gundren_rockseeker.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools",
+    "file": "/home/adyem/DND_tools/gundren_rockseeker.cpp",
+    "output": "/home/adyem/DND_tools/objs/gundren_rockseeker.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-g",
+      "-O0",
+      "-std=c++11",
+      "-I/usr/include/c++/11",
+      "-c",
+      "-o",
       "objs/main.o",
       "main.cpp"
     ],
