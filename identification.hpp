@@ -58,6 +58,7 @@ typedef enum {
 
     // Weapon IDs
     STEEL_SWORD_ID = 20001,
+	STEEL_BATTLE_AXE_ID,
     WOODEN_BOW_ID,
     CHAOS_WAND_ID,
 

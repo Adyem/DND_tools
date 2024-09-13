@@ -94,7 +94,7 @@ static const    t_resistance GUNDREN_ROCKSEEKER_DEFAULT_RESISTANCE =
 
 static const    t_equipment GUNDREN_ROCKSEEKER_EQUIPMENT =
 {
-    .weapon = STEEL_SWORD,
+    .weapon = STEEL_BATTLE_AXE,
     .offhand_weapon = INITIALIZE_EQUIPMENT_ID,
     .ranged_weapon = WOODEN_BOW,
     .armor = INITIALIZE_EQUIPMENT_ID,
