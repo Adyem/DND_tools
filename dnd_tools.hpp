@@ -22,6 +22,10 @@ void		ft_npc_init_stats(t_char *info);
 t_char		*ft_template(const int index, const char **input, t_name *name, int exception);
 void		ft_template_turn(t_char *info);
 
+//Gundren Rockseeker
+t_char		*ft_gundren_rockseeker(const int index, const char **input, t_name *name, int exception);
+void		ft_gundren_rockseeker_turn(t_char *info);
+
 //Goblin
 t_char		*ft_goblin(const int index, const char **input, t_name *name, int exception);
 void		ft_goblin_turn(t_char *info);
