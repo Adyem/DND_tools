@@ -15,8 +15,8 @@ void    ft_gundren_rockseeker_turn(t_char *info);
 static const    t_stats GUNDREN_ROCKSEEKER_DEFAULT_STATS =
 {
     .phase = 0,
-    .turn = 1,
-    .health = 60,
+    .turn = 0,
+    .health = 40,
     .temp_hp = 0,
     .str = 14,
     .dex = 10,
