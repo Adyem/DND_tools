@@ -117,6 +117,14 @@ static const	t_equipment GOBLIN_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
+static const t_physical GOBLIN_PHYSICAL =
+{
+	.height = 48,
+	.weight = 40,
+	.age = 15,
+	.speed = 30,
+};
+
 static const t_char GOBLIN_INFO =
 {
 	.level = 2,
@@ -142,6 +150,7 @@ static const t_char GOBLIN_INFO =
 	.dstats = GOBLIN_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
 	.struct_name = nullptr,
+	.physical = GOBLIN_PHYSICAL,
 };
 
 #endif

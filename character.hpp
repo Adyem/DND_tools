@@ -269,6 +269,14 @@ typedef struct s_flags
 	int				prone;
 }	t_flags;
 
+typedef struct s_physical
+{
+    int height;
+    int weight;
+    int age;
+    int speed;
+} t_physical;
+
 typedef struct	s_char
 {
 	int				level;
@@ -294,6 +302,7 @@ typedef struct	s_char
 	t_stats			dstats;
 	t_feats			feats;
 	t_name			*struct_name;
+    t_physical      physical;
 } t_char;
 
 #endif

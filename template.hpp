@@ -117,6 +117,14 @@ static const	t_equipment TEMPLATE_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
+static const t_physical TEMPLATE_PHYSICAL =
+{
+    .height = 0,
+    .weight = 0,
+    .age = 0,
+    .speed = 0,
+};
+
 static const t_char TEMPLATE_INFO =
 {
 	.level = 0,
@@ -142,6 +150,7 @@ static const t_char TEMPLATE_INFO =
 	.dstats = TEMPLATE_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
 	.struct_name = nullptr,
+	.physical = TEMPLATE_PHYSICAL,
 };
 
 

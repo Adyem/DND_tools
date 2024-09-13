@@ -118,33 +118,40 @@ static const	t_equipment CHAOS_GOBLIN_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
-static const t_char CHAOS_GOBLIN_INFO =
+static const t_physical CHAOS_GOBLIN_PHYSICAL =
 {
-	.level = 2,
-	.mechanical = 0,
-	.passive_perception = 15,
-	.initiative = -1,
-	.version_number = 2,
-	.save_file = nullptr,
-	.name = nullptr,
-	.turn = ft_chaos_goblin_turn,
-	.flags = INITIALIZE_FLAGS,
-	.crit = CHAOS_GOBLIN_CRIT,
-	.attack_bonus = CHAOS_GOBLIN_ATTACK,
-	.bufs = INITIALIZE_BUFFS,
-	.debufs = INITIALIZE_DEBUFFS,
-	.concentration = INITIALIZE_CONCENTRATION,
-	.d_resistance = CHAOS_GOBLIN_DEFAULT_RESISTANCE,
-	.c_resistance = INITIALIZE_CURRENT_RESISTANCE,
-	.equipment = CHAOS_GOBLIN_EQUIPMENT,
-	.skill_mod = CHAOS_GOBLIN_SKILL_MODS,
-	.save_mod = CHAOS_GOBLIN_SAVE_MODS,
-	.stats = INITIALIZE_STATS,
-	.dstats = CHAOS_GOBLIN_DEFAULT_STATS,
-	.feats = INITIALIZE_FEATS,
-	.struct_name = nullptr,
+    .height = 48,
+    .weight = 40,
+    .age = 70,
+    .speed = 30,
 };
 
+static const t_char CHAOS_GOBLIN_INFO =
+{
+    .level = 2,
+    .mechanical = 0,
+    .passive_perception = 15,
+    .initiative = -1,
+    .version_number = 2,
+    .save_file = nullptr,
+    .name = nullptr,
+    .turn = ft_chaos_goblin_turn,
+    .flags = INITIALIZE_FLAGS,
+    .crit = CHAOS_GOBLIN_CRIT,
+    .attack_bonus = CHAOS_GOBLIN_ATTACK,
+    .bufs = INITIALIZE_BUFFS,
+    .debufs = INITIALIZE_DEBUFFS,
+    .concentration = INITIALIZE_CONCENTRATION,
+    .d_resistance = CHAOS_GOBLIN_DEFAULT_RESISTANCE,
+    .c_resistance = INITIALIZE_CURRENT_RESISTANCE,
+    .equipment = CHAOS_GOBLIN_EQUIPMENT,
+    .skill_mod = CHAOS_GOBLIN_SKILL_MODS,
+    .save_mod = CHAOS_GOBLIN_SAVE_MODS,
+    .stats = INITIALIZE_STATS,
+    .dstats = CHAOS_GOBLIN_DEFAULT_STATS,
+    .feats = INITIALIZE_FEATS,
+    .struct_name = nullptr,
+    .physical = CHAOS_GOBLIN_PHYSICAL,
+};
 
-//Abilities
 #endif

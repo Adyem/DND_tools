@@ -119,6 +119,14 @@ static const	t_equipment VERAAK_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
+static const t_physical VERAAK_PHYSICAL =
+{
+    .height = 50,
+    .weight = 45,
+    .age = 200,
+    .speed = 30,
+};
+
 static const t_char VERAAK_INFO =
 {
 	.level = 2,
@@ -144,6 +152,7 @@ static const t_char VERAAK_INFO =
 	.dstats = VERAAK_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
 	.struct_name = nullptr,
+	.physical = VERAAK_PHYSICAL,
 };
 
 //Abilities

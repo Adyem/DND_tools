@@ -115,33 +115,39 @@ static const	t_equipment CHAOS_CRYSTAL_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
-static const t_char CHAOS_CRYSTAL_INFO =
+static const t_physical CHAOS_CRYSTAL_PHYSICAL =
 {
-	.level = 2,
-	.mechanical = 1,
-	.passive_perception = 15,
-	.initiative = -1,
-	.version_number = 2,
-	.save_file = nullptr,
-	.name = nullptr,
-	.turn = ft_chaos_crystal_turn,
-	.flags = INITIALIZE_FLAGS,
-	.crit = CHAOS_CRYSTAL_CRIT,
-	.attack_bonus = CHAOS_CRYSTAL_ATTACK,
-	.bufs = INITIALIZE_BUFFS,
-	.debufs = INITIALIZE_DEBUFFS,
-	.concentration = INITIALIZE_CONCENTRATION,
-	.d_resistance = CHAOS_CRYSTAL_DEFAULT_RESISTANCE,
-	.c_resistance = INITIALIZE_CURRENT_RESISTANCE,
-	.equipment = CHAOS_CRYSTAL_EQUIPMENT,
-	.skill_mod = CHAOS_CRYSTAL_SKILL_MODS,
-	.save_mod = CHAOS_CRYSTAL_SAVE_MODS,
-	.stats = INITIALIZE_STATS,
-	.dstats = CHAOS_CRYSTAL_DEFAULT_STATS,
-	.feats = INITIALIZE_FEATS,
-	.struct_name = nullptr,
+    .height = 60,
+    .weight = 500,
+    .age = 200,
+    .speed = 0,
 };
 
-
-//Abilities
+static const t_char CHAOS_CRYSTAL_INFO =
+{
+    .level = 2,
+    .mechanical = 1,
+    .passive_perception = 15,
+    .initiative = -1,
+    .version_number = 2,
+    .save_file = nullptr,
+    .name = nullptr,
+    .turn = ft_chaos_crystal_turn,
+    .flags = INITIALIZE_FLAGS,
+    .crit = CHAOS_CRYSTAL_CRIT,
+    .attack_bonus = CHAOS_CRYSTAL_ATTACK,
+    .bufs = INITIALIZE_BUFFS,
+    .debufs = INITIALIZE_DEBUFFS,
+    .concentration = INITIALIZE_CONCENTRATION,
+    .d_resistance = CHAOS_CRYSTAL_DEFAULT_RESISTANCE,
+    .c_resistance = INITIALIZE_CURRENT_RESISTANCE,
+    .equipment = CHAOS_CRYSTAL_EQUIPMENT,
+    .skill_mod = CHAOS_CRYSTAL_SKILL_MODS,
+    .save_mod = CHAOS_CRYSTAL_SAVE_MODS,
+    .stats = INITIALIZE_STATS,
+    .dstats = CHAOS_CRYSTAL_DEFAULT_STATS,
+    .feats = INITIALIZE_FEATS,
+    .struct_name = nullptr,
+    .physical = CHAOS_CRYSTAL_PHYSICAL,
+};
 #endif
