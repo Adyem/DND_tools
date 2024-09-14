@@ -105,7 +105,7 @@ SRC			= name.cpp \
 			  check_equipment.cpp
 
 CC          = g++
-CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++11 -I/usr/include/c++/11
+CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17
 
 LIBFT_DIR   = ./libft
 LIBFT       = $(LIBFT_DIR)/libftprintf.a

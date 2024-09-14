@@ -1,71 +1,62 @@
-#include <iostream>
 #include "character.hpp"
-#include "identification.hpp"
 #include "dnd_tools.hpp"
+#include "character.h"
+#include <iostream>
+#include "identification.hpp"
 
-int	ft_check_equipment_slots(t_char *info)
+#include "dnd_tools.hpp"
+#include "character.h"
+#include <iostream>
+#include "identification.hpp"
+
+static void	ft_check_mainhand(t_char *info, int *error)
 {
-	int error = 0;
+	bool	is_two_handed_weapon;
 
 	if (info->equipment.weapon.slot != SLOT_NONE && !(info->equipment.weapon.slot & SLOT_WEAPON))
 	{
 		std::cerr << "Error: Weapon is not in the correct slot.\n";
-		error += 1;
+		*error += 1;
 	}
-	if (info->equipment.offhand_weapon.slot != SLOT_NONE && !(info->equipment.offhand_weapon.slot & SLOT_OFFHAND_WEAPON))
+	is_two_handed_weapon = !(info->equipment.weapon.slot & SLOT_OFFHAND_WEAPON);
+	if (info->equipment.offhand_weapon.slot != SLOT_NONE)
 	{
-		std::cerr << "Error: Offhand weapon is not in the correct slot.\n";
-		error += 2;
+		if (!(info->equipment.offhand_weapon.slot & SLOT_OFFHAND_WEAPON))
+		{
+			std::cerr << "Error: Offhand weapon is not in the correct slot.\n";
+			*error += 2;
+		}
+		else if (is_two_handed_weapon)
+		{
+			std::cerr << "Error: Cannot equip offhand weapon with a two-handed weapon in the main hand.\n";
+			*error += 13;
+		}
 	}
-	if (info->equipment.ranged_weapon.slot != SLOT_NONE && !(info->equipment.ranged_weapon.slot & SLOT_RANGED_WEAPON))
+}
+
+static void	ft_check_slot(t_equipment_id equipment_slot, int slot_type, const char *error_message, int *error, int error_code)
+{
+	if (equipment_slot.slot != SLOT_NONE && !(equipment_slot.slot & slot_type))
 	{
-		std::cerr << "Error: Ranged weapon is not in the correct slot.\n";
-		error += 3;
+		std::cerr << error_message << '\n';
+		*error += error_code;
 	}
-	if (info->equipment.armor.slot != SLOT_NONE && !(info->equipment.armor.slot & SLOT_ARMOR))
-	{
-		std::cerr << "Error: Armor is not in the correct slot.\n";
-		error += 4;
-	}
-	if (info->equipment.helmet.slot != SLOT_NONE && !(info->equipment.helmet.slot & SLOT_HELMET))
-	{
-		std::cerr << "Error: Helmet is not in the correct slot.\n";
-		error += 5;
-	}
-	if (info->equipment.shield.slot != SLOT_NONE && !(info->equipment.shield.slot & SLOT_SHIELD))
-	{
-		std::cerr << "Error: Shield is not in the correct slot.\n";
-		error += 6;
-	}
-	if (info->equipment.boots.slot != SLOT_NONE && !(info->equipment.boots.slot & SLOT_BOOTS))
-	{
-		std::cerr << "Error: Boots are not in the correct slot.\n";
-		error += 7;
-	}
-	if (info->equipment.gloves.slot != SLOT_NONE && !(info->equipment.gloves.slot & SLOT_GLOVES))
-	{
-		std::cerr << "Error: Gloves are not in the correct slot.\n";
-		error += 8;
-	}
-	if (info->equipment.amulet.slot != SLOT_NONE && !(info->equipment.amulet.slot & SLOT_AMULET))
-	{
-		std::cerr << "Error: Amulet is not in the correct slot.\n";
-		error += 9;
-	}
-	if (info->equipment.ring_01.slot != SLOT_NONE && !(info->equipment.ring_01.slot & SLOT_RING_01))
-	{
-		std::cerr << "Error: First ring is not in the correct slot.\n";
-		error += 10;
-	}
-	if (info->equipment.ring_02.slot != SLOT_NONE && !(info->equipment.ring_02.slot & SLOT_RING_02))
-	{
-		std::cerr << "Error: Second ring is not in the correct slot.\n";
-		error += 11;
-	}
-	if (info->equipment.belt.slot != SLOT_NONE && !(info->equipment.belt.slot & SLOT_BELT))
-	{
-		std::cerr << "Error: Belt is not in the correct slot.\n";
-		error += 12;
-	}
+}
+
+int	ft_check_equipment_slots(t_char *info)
+{
+	int	error = 0;
+
+	ft_check_mainhand(info, &error);
+	ft_check_slot(info->equipment.ranged_weapon, SLOT_RANGED_WEAPON, "Error: Ranged weapon is not in the correct slot.", &error, 3);
+	ft_check_slot(info->equipment.armor, SLOT_ARMOR, "Error: Armor is not in the correct slot.", &error, 4);
+	ft_check_slot(info->equipment.helmet, SLOT_HELMET, "Error: Helmet is not in the correct slot.", &error, 5);
+	ft_check_slot(info->equipment.shield, SLOT_SHIELD, "Error: Shield is not in the correct slot.", &error, 6);
+	ft_check_slot(info->equipment.boots, SLOT_BOOTS, "Error: Boots are not in the correct slot.", &error, 7);
+	ft_check_slot(info->equipment.gloves, SLOT_GLOVES, "Error: Gloves are not in the correct slot.", &error, 8);
+	ft_check_slot(info->equipment.amulet, SLOT_AMULET, "Error: Amulet is not in the correct slot.", &error, 9);
+	ft_check_slot(info->equipment.ring_01, SLOT_RING_01, "Error: First ring is not in the correct slot.", &error, 10);
+	ft_check_slot(info->equipment.ring_02, SLOT_RING_02, "Error: Second ring is not in the correct slot.", &error, 11);
+	ft_check_slot(info->equipment.belt, SLOT_BELT, "Error: Belt is not in the correct slot.", &error, 12);
 	return (error);
 }

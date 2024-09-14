@@ -43,7 +43,7 @@ static void	ft_weapon_attack_crit(t_char *info, t_equipment_id *weapon,
 	std::cout << "a crit (" << d_info->result <<  ") and ";
 	d_info->damage = ft_dice_roll(weapon->attack.effect_dice_amount * 2,
 			weapon->attack.effect_dice_faces) + d_info->stat_mod;
-	std::cout << "deals " << d_info->damage << weapon->attack.damage_type << " damage" << std::endl;
+	std::cout << "deals " << d_info->damage << " " << weapon->attack.damage_type << " damage" << std::endl;
 }
 
 static void ft_weapon_attack_non_crit(t_char *info, t_equipment_id *weapon,
@@ -61,35 +61,71 @@ static void ft_weapon_attack_non_crit(t_char *info, t_equipment_id *weapon,
 	return ;
 }
 
+static void	ft_weapon_offhand_attack(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit)
+{
+    if (is_crit)
+    {
+        std::cout << "(Offhand attack) a crit (" << d_info->result << ") and ";
+        d_info->damage = ft_dice_roll(weapon->attack.effect_secund_dice_amount * 2,
+                                      weapon->attack.effect_secund_dice_faces) + d_info->stat_mod;
+        std::cout << "deals " << d_info->damage << " " << weapon->attack.damage_type
+                  << " damage" << std::endl;
+    }
+    else
+    {
+        std::cout << "(Offhand attack) ";
+        d_info->damage = ft_dice_roll(weapon->attack.effect_secund_dice_amount,
+                                      weapon->attack.effect_secund_dice_faces) + d_info->stat_mod;
+        std::cout << "deals " << d_info->damage << " " << weapon->attack.damage_type
+                  << " damage" << std::endl;
+    }
+}
+
 void ft_weapon_attack(t_char *info, t_equipment_id *weapon)
 {
-    t_damage_info d_info;
-
+    t_damage_info	d_info;
+	bool			is_crit = false;
+    bool			is_offhand = false;
+    bool			is_one_handed_weapon = weapon->slot & SLOT_WEAPON
+						&& weapon->slot & SLOT_OFFHAND_WEAPON;
+    
+    if (info->equipment.offhand_weapon.slot != SLOT_NONE && 
+        info->equipment.offhand_weapon.equipment_id != 0 &&
+        is_one_handed_weapon)
+    {
+        is_offhand = true;
+    }
     if (!weapon->attack.function)
     {
-        std::cerr << "162-Error no attack set for " << weapon->name << std::endl;
+        std::cerr << "Error: No attack set for " << weapon->name << std::endl;
         return;
     }
     d_info.stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;
     d_info.result = ft_dice_roll(1, 20);
     if (d_info.result == -1)
     {
-        std::cerr << "101-Error: dice rolling error in attack" << std::endl;
+        std::cerr << "Error: Dice rolling error in attack" << std::endl;
         return;
     }
     d_info.mod = ft_attack_roll_check_buffs(info, &d_info.result);
     if (weapon->projectile_name)
-        std::cout << info->name << " uses his/her " << weapon->name << " to fire a "
-			<< weapon->projectile_name << " and rolled ";
+        std::cout << info->name << " uses their " << weapon->name << " to fire a " 
+                  << weapon->projectile_name << " and rolled ";
     else
-        std::cout << info->name << " attacks with his/her " << weapon->name << " and rolled ";
-
+        std::cout << info->name << " attacks with their " << weapon->name << " and rolled ";
     if (d_info.result <= 1 + info->crit.attack_fail)
-        std::cout << "a critical fail (" << d_info.result << ") and missed on his attack"
-			<< std::endl;
-    else if (d_info.result >= 20 - info->crit.attack)
-        ft_weapon_attack_crit(info, weapon, &d_info);
+    {
+        std::cout << "a critical fail (" << d_info.result << ") and missed the attack" << std::endl;
+        return;
+    }
+    is_crit = d_info.result >= 20 - info->crit.attack;
+    if (is_offhand)
+        ft_weapon_offhand_attack(weapon, &d_info, is_crit);
     else
-        ft_weapon_attack_non_crit(info, weapon, &d_info);
-    return ;
+    {
+        if (is_crit)
+            ft_weapon_attack_crit(info, weapon, &d_info);
+        else
+            ft_weapon_attack_non_crit(info, weapon, &d_info);
+    }
 }
