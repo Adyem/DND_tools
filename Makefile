@@ -15,7 +15,8 @@ HEADER		= 	  dnd_tools.hpp \
 			  melee_weapons.hpp \
 			  ranged_weapons.hpp \
 			  armor.hpp \
-			  gundren_rockseeker.hpp
+			  gundren_rockseeker.hpp \
+			  goblin_warmaster.hpp
 
 SRC			= name.cpp \
 			  goblin.cpp \
@@ -24,6 +25,7 @@ SRC			= name.cpp \
 			  veraak_turn.cpp \
 			  chaos_crystal.cpp \
 			  gundren_rockseeker.cpp \
+			  goblin_warmaster.cpp \
 			  main.cpp \
 			  template.cpp \
 			  npc_stats.cpp \

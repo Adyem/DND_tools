@@ -1088,6 +1088,25 @@
       "-I/usr/include/c++/11",
       "-c",
       "-o",
+      "objs/goblin_warmaster.o",
+      "goblin_warmaster.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools",
+    "file": "/home/adyem/DND_tools/goblin_warmaster.cpp",
+    "output": "/home/adyem/DND_tools/objs/goblin_warmaster.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-g",
+      "-O0",
+      "-std=c++11",
+      "-I/usr/include/c++/11",
+      "-c",
+      "-o",
       "objs/main.o",
       "main.cpp"
     ],
