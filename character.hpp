@@ -201,6 +201,8 @@ typedef struct s_equipment_action
 	int			effect_type;
 	int			effect_dice_amount;
 	int			effect_dice_faces;
+	int			effect_secund_dice_amount;
+	int			effect_suncd_dice_faces;
 	int			bonus_mod;
 }	t_equipment_action;
 

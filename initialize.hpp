@@ -78,6 +78,8 @@ static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 	.effect_type = 0,
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
+	.effect_secund_dice_amount = 0,
+	.effect_suncd_dice_faces = 0,
 	.bonus_mod = 0,
 };
 
