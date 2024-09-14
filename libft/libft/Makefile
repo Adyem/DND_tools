@@ -56,7 +56,7 @@ SRC 	   = ft_strlen.cpp \
 			 ft_atol.cpp
 
 CC = g++
-CFLAGS = -Wall -Wextra -Werror -std=c++11
+CFLAGS = -Wall -Wextra -Werror -std=c++17
 
 OBJS = $(SRC:.cpp=.o)
 BOBJS = $(BSRC:.cpp=.o)

@@ -7,7 +7,7 @@ SRC			= ft_printf_fd.cpp \
 			  write_number_fd.cpp
 
 CC = g++
-CFLAGS = -Wall -Wextra -Werror -std=c++11
+CFLAGS = -Wall -Wextra -Werror -std=c++17
 
 OBJS = $(SRC:.cpp=.o)
 
