@@ -101,7 +101,8 @@ SRC			= name.cpp \
 			  roll_dice.cpp \
 			  create_data_folder.cpp \
 			  cast_concentration_multi_target_01.cpp \
-			  ordinal_suffix.cpp
+			  ordinal_suffix.cpp \
+			  check_equipment.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++11 -I/usr/include/c++/11

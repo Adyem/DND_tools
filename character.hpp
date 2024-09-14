@@ -242,6 +242,7 @@ typedef struct s_equipment_id
 	int					effect_dice_amount;
 	int					effect_dice_faces;
 	int					bonus_mod;
+	int					slot;
 }	t_equipment_id;
 
 typedef struct s_equipment

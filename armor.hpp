@@ -34,6 +34,7 @@ static const t_equipment_id LEATHER_ARMOR =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
+	.slot = SLOT_ARMOR,
 };
 
 #endif

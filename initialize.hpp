@@ -109,6 +109,7 @@ static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
+	.slot = 0,
 };
 
 static const	t_stats INITIALIZE_STATS =

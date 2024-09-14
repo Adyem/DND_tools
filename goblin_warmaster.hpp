@@ -95,7 +95,7 @@ static const	t_resistance WARM_DEFAULT_RESISTANCE =
 
 static const	t_equipment WARM_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = WOODEN_CLUB,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WOODEN_BOW,
 	.armor = LEATHER_ARMOR,

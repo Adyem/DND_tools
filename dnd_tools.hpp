@@ -194,6 +194,7 @@ int			ft_double_char_length(char **double_char);
 void		ft_dual_save_file(t_char *info, t_char *target);
 char		*ft_strtrim_prefix(const char *s1, const char *prefix);
 const char	*ft_ordinal_suffix(int number);
+int			ft_check_equipment_slots(t_char *character);
 
 //check name
 int			ft_set_stats_check_name(const char *name);

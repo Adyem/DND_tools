@@ -44,6 +44,7 @@ static const t_equipment_id WOODEN_BOW =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
+	.slot = SLOT_RANGED_WEAPON,
 };
 
 static const t_equipment_id CHAOS_WAND =
@@ -82,6 +83,7 @@ static const t_equipment_id CHAOS_WAND =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
+	.slot = SLOT_RANGED_WEAPON,
 };
 
 #endif
