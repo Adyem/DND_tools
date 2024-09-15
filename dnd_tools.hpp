@@ -54,7 +54,7 @@ void		ft_request_input(t_name *name);
 void		ft_turn_next(t_name *name);
 
 //attack
-void		ft_weapon_attack(t_char *info, t_equipment_id *weapon);
+void		ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand);
 
 //buff update
 void		ft_npc_update_buff(t_char *info, const char **input, int *buff, const char *name);

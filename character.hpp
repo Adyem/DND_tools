@@ -10,7 +10,7 @@ typedef struct s_equipment_id t_equipment_id;
 
 typedef void	(*cast_buff_debuff_cleanup)(t_char *info, t_char *target, t_buff *buff);
 typedef int		(*cast_buff_debuff)(t_char *, const char **, t_buff *);
-typedef void	(*c_action)(t_char *, t_equipment_id *);
+typedef void	(*c_action)(t_char *, t_equipment_id *, int);
 typedef void	(*c_turn)(t_char *);
 
 typedef t_char	*(*c_name)(int, const char **, t_name *, int);

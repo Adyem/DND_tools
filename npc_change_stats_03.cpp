@@ -30,14 +30,14 @@ void ft_npc_set_stat(t_char *info, const char **input)
         if (ft_strcmp_dnd(input[1], "attack") == 0)
         {
             if (info->equipment.weapon.attack.function)
-                info->equipment.weapon.attack.function(info, &info->equipment.weapon);
+                info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
             else
                 std::cerr << "No attack for " << info->name << " set" << std::endl;
         }
         else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
         {
             if (info->equipment.ranged_weapon.attack.function)
-                info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon);
+                info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon, 0);
             else
                 std::cerr << "No ranged attack for " << info->name << " set" << std::endl;
         }

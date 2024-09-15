@@ -47,9 +47,9 @@ static int	ft_skill_roll(t_char *info, const char **input)
 void	ft_npc_sstuff(t_char *info, const char **input)
 {
 	if (ft_strcmp_dnd(input[1], "attack") == 0)
-		info->equipment.weapon.attack.function(info, &info->equipment.weapon);
+		info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
 	else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
-		info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon);
+		info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon, 0);
 	else if (ft_strcmp_dnd(input[1], "prone") == 0)
 		info->flags.prone = 1;
 	else if (ft_strcmp_dnd(input[1], "kill") == 0)
