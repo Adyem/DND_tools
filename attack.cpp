@@ -92,11 +92,6 @@ void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
 {
     t_damage_info d_info;
 
-    if (!weapon->attack.function)
-    {
-        std::cerr << "162-Error no attack set for " << weapon->name << std::endl;
-        return;
-    }
     d_info.stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;
     d_info.result = ft_dice_roll(1, 20);
     if (d_info.result == -1)
