@@ -1,6 +1,64 @@
 #include "dnd_tools.hpp"
 #include <iostream>
 #include <readline/readline.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <cstdlib>
+#include <iostream>
+
+static int ft_open_target_files(t_char *info, t_char **target, int *fd, char **string, int amount)
+{
+    int i;
+	int j;
+
+	i = 0;
+    while (i < amount)
+    {
+        if (!target[i] || !target[i]->save_file)
+        {
+            std::cerr << "112-Error: invalid target or missing save file\n";
+            break;
+        }
+        fd[i] = open(target[i]->save_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        if (fd[i] == -1)
+        {
+            std::cerr << "113-Error: opening file " << target[i]->save_file << '\n';
+            break;
+        }
+		i++;
+    }
+
+    if (i < amount)
+    {
+		j = 0;
+        while (j < i)
+		{
+            ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[j]);
+            close(fd[j]);
+            fd[j] = -1;
+			j++;
+        }
+		j = 0;
+        while(j < amount)
+        {
+            if (target[j])
+            {
+                ft_free_info(target[j]);
+                target[j] = nullptr;
+            }
+            if (string[j])
+            {
+                free(string[j]);
+                string[j] = nullptr;
+            }
+			j++;
+        }
+        return 0;
+    }
+    else
+        return 1;
+}
+
 
 static void ft_initialize_variables(int *fd, char **string, t_char **target)
 {
@@ -100,9 +158,14 @@ void ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff
             return ;
         }
         target[i] = ft_validate_and_fetch_target(string[i], info);
-        if (!target[i])
-            continue ;
+        while (!target[i])
+        {
+            free(string[i]);
+            string[i] = nullptr;
+            i++;
+        }
         i++;
     }
-    return ;
+    if (!ft_open_target_files(info, target, fd, string, buff->target_amount))
+        return;
 }

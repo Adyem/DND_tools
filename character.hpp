@@ -8,6 +8,7 @@ typedef struct	s_char t_char;
 typedef struct	s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 
+typedef void	(*cast_buff_debuff_cleanup)(t_char *info, t_char *target, t_buff *buff);
 typedef int		(*cast_buff_debuff)(t_char *, const char **, t_buff *);
 typedef void	(*c_action)(t_char *, t_equipment_id *);
 typedef void	(*c_turn)(t_char *);
@@ -17,14 +18,15 @@ typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 typedef struct s_buff
 {
 	int	target_amount;
-    char				*target;
-    int					spell_id;
-    int					dice_faces_mod;
-    int					dice_amount_mod;
-    int					duration;
-	int					buff;
-	int					error;
-	cast_buff_debuff	cast_spell;
+    char						*target;
+    int							spell_id;
+    int							dice_faces_mod;
+    int							dice_amount_mod;
+    int							duration;
+	int							buff;
+	int							error;
+	cast_buff_debuff			cast_spell;
+	cast_buff_debuff_cleanup	cleanup_f;
 }	t_buff;
 
 

@@ -1,3 +1,4 @@
+#include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include <iostream>
@@ -15,6 +16,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     buff.spell_id = HUNTERS_MARK_ID;
     buff.buff = 0;
     buff.cast_spell = ft_cast_hunters_mark_second_appli;
+	buff.cleanup_f = ft_cleanup_hunters_mark;
     ft_cast_concentration(info, input, &buff);
     return ;
 }
@@ -67,3 +69,20 @@ int ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff
     return (0) ;
 }
 
+void ft_cleanup_hunters_mark(t_char *info, t_char *target, t_buff *buff)
+{
+	int len;
+
+	(void)info;
+	(void)buff;
+    if (target)
+    {
+        target->debufs.hunters_mark.amount--;
+		len = ft_double_char_length(target->debufs.hunters_mark.caster_name);
+        if (len > 0)
+        {
+            free(target->debufs.hunters_mark.caster_name[len - 1]);
+            target->debufs.hunters_mark.caster_name[len - 1] = nullptr;
+        }
+    }
+}
