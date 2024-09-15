@@ -6,7 +6,7 @@
 # include "identification.hpp"
 # include "initialize.hpp"
 
-void	ft_weapon_attack(t_char *info, t_equipment_id *weapon);
+void	ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand);
 
 static const t_equipment_id WOODEN_BOW =
 {

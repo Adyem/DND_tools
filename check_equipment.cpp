@@ -1,11 +1,5 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
-#include "character.h"
-#include <iostream>
-#include "identification.hpp"
-
-#include "dnd_tools.hpp"
-#include "character.h"
 #include <iostream>
 #include "identification.hpp"
 
