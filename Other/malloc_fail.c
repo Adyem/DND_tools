@@ -13,7 +13,7 @@
 #include <sys/types.h>  // For fork
 #include <sys/stat.h>
 
-#define FAILURE_RATE 1  // Failure rate in percentage (0-100)
+#define FAILURE_RATE 20  // Failure rate in percentage (0-100)
 
 /*
 
