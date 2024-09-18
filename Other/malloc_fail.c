@@ -16,11 +16,9 @@
 #define FAILURE_RATE 20  // Failure rate in percentage (0-100)
 
 /*
-
 add the -rdynamic and -g flags to the makefile of the evaluated project
 gcc -shared -fPIC -o malloc_fail.so malloc_fail.c -ldl -rdynamic -g
 LD_PRELOAD=./malloc_fail.so ./cub3D maps/map3.cub
-
 */
 
 static pthread_once_t init_once = PTHREAD_ONCE_INIT;
@@ -47,18 +45,27 @@ void print_failure_message(const char *function_name) {
     write(STDERR_FILENO, function_name, strlen(function_name));
     write(STDERR_FILENO, "\n", 1);
 
-    // Capture the backtrace
-    void *buffer[100];
-    int nptrs = backtrace(buffer, 100);
-
-    // Use backtrace_symbols_fd to avoid malloc
-    write(STDERR_FILENO, "Backtrace (most recent call last):\n", 36);
-    backtrace_symbols_fd(buffer, nptrs, STDERR_FILENO);
+    if (strcmp(function_name, "malloc") != 0) {  // Avoid backtrace in malloc
+        void *buffer[100];
+        int nptrs = backtrace(buffer, 100);
+        write(STDERR_FILENO, "Backtrace (most recent call last):\n", 36);
+        backtrace_symbols_fd(buffer, nptrs, STDERR_FILENO);
+    }
 }
 
 // Override malloc function
+static __thread int in_malloc = 0;  // Thread-local recursion guard
+
 void *malloc(size_t size) {
     static void *(*real_malloc)(size_t) = NULL;
+
+    // Prevent recursive malloc calls
+    if (in_malloc) {
+        return NULL;
+    }
+    
+    in_malloc = 1;
+
     if (!real_malloc) {
         real_malloc = dlsym(RTLD_NEXT, "malloc");
         if (!real_malloc) {
@@ -68,12 +75,22 @@ void *malloc(size_t size) {
         }
     }
 
+    // Log malloc size
+    const char *log_prefix = "malloc called with size: ";
+    char log_message[50];
+    snprintf(log_message, sizeof(log_message), "%s%zu\n", log_prefix, size);
+    write(STDERR_FILENO, log_message, strlen(log_message));
+
+    // Simulate failure
     if (should_fail()) {
         print_failure_message("malloc");
+        in_malloc = 0;
         return NULL;
     }
 
-    return real_malloc(size);
+    void *result = real_malloc(size);
+    in_malloc = 0;
+    return result;
 }
 
 // Override open function
@@ -232,5 +249,5 @@ int pipe(int pipefd[2]) {
         return -1;
     }
 
-    return real_pipe(pipefd);
+    return real_pipe(pipefd); 
 }
