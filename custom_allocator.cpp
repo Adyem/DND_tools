@@ -7,8 +7,6 @@
 #include <iostream>
 #include "dnd_tools.hpp"
 
-#define ALLOC_PAGE(size) malloc(size)
-#define FREE_PAGE(ptr) free(ptr)
 #define PAGE_SIZE 65536
 
 #ifndef BYPASS_ALLOC
@@ -48,7 +46,7 @@ void* ft_malloc(size_t size, bool critical)
     size = align8(size);
 
 	if (BYPASS_ALLOC == 1)
-		return (malloc(size));
+		return (::operator new(size)); // Replacing malloc with new
     Page* page = page_list;
     while (page)
 	{
@@ -85,7 +83,7 @@ void* ft_malloc(size_t size, bool critical)
     size_t alloc_size = PAGE_SIZE;
     if (size + sizeof(Block) + sizeof(Page) > PAGE_SIZE)
         alloc_size = size + sizeof(Block) + sizeof(Page);
-    void* page_memory = ALLOC_PAGE(alloc_size);
+    void* page_memory = ::operator new(alloc_size); // Replacing malloc with new
 	if (!page_memory)
         return (nullptr);
 	memset(page_memory, 0, alloc_size);
@@ -111,7 +109,7 @@ void* ft_malloc(size_t size, bool critical)
 void ft_free(void* ptr)
 {
 	if (BYPASS_ALLOC == 1)
-		return (free(ptr));
+		return (::operator delete(ptr)); // Replacing free with delete
     if (!ptr)
         return ;
     Block* block = (Block*)((char*)ptr - sizeof(Block));
@@ -172,7 +170,7 @@ void ft_free(void* ptr)
             page_list = page->next;
         if (page->next)
             page->next->prev = page->prev;
-        FREE_PAGE(page->start);
+        ::operator delete(page->start); // Replacing free with delete
     }
 	return ;
 }
@@ -205,7 +203,7 @@ void ft_cleanup_non_critical_memory()
                     page_list = page->next;
                 if (page->next)
                     page->next->prev = page->prev;
-                FREE_PAGE(page->start);
+                delete[] reinterpret_cast<char*>(page->start);
             }
         }
         page = next_page;
@@ -242,7 +240,7 @@ bool ft_ensure_memory_available(const size_t* sizes, size_t count, bool critical
 	{
         size_t alloc_size = PAGE_SIZE;
         while (total_free < total_needed) {
-            void* page_memory = ALLOC_PAGE(alloc_size);
+            void* page_memory = new(std::nothrow) char[alloc_size];
             if (!page_memory)
                 return (false);
             Page* new_page = (Page*)page_memory;
@@ -275,7 +273,7 @@ void ft_cleanup_all_memory()
     while (page)
 	{
         Page* next_page = page->next;
-        FREE_PAGE(page->start);
+        delete[] reinterpret_cast<char*>(page->start);
         page = next_page;
     }
     page_list = nullptr;
@@ -287,7 +285,7 @@ bool ft_add_page(bool critical)
 	if (BYPASS_ALLOC)
 		return (true);
     size_t alloc_size = PAGE_SIZE;
-    void* page_memory = ALLOC_PAGE(alloc_size);
+    void* page_memory = new(std::nothrow) char[alloc_size];
     if (!page_memory)
         return (false);
     Page* new_page = (Page*)page_memory;
