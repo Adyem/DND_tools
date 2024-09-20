@@ -203,7 +203,7 @@ void ft_cleanup_non_critical_memory()
                     page_list = page->next;
                 if (page->next)
                     page->next->prev = page->prev;
-                delete[] reinterpret_cast<char*>(page->start);
+                delete reinterpret_cast<char*>(page->start);
             }
         }
         page = next_page;
@@ -273,7 +273,7 @@ void ft_cleanup_all_memory()
     while (page)
 	{
         Page* next_page = page->next;
-        delete[] reinterpret_cast<char*>(page->start);
+        delete reinterpret_cast<char*>(page->start);
         page = next_page;
     }
     page_list = nullptr;
