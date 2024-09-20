@@ -46,7 +46,7 @@ void* ft_malloc(size_t size, bool critical)
     size = align8(size);
 
 	if (BYPASS_ALLOC == 1)
-		return (::operator new(size)); // Replacing malloc with new
+		return (::operator new(size));
     Page* page = page_list;
     while (page)
 	{
@@ -83,7 +83,7 @@ void* ft_malloc(size_t size, bool critical)
     size_t alloc_size = PAGE_SIZE;
     if (size + sizeof(Block) + sizeof(Page) > PAGE_SIZE)
         alloc_size = size + sizeof(Block) + sizeof(Page);
-    void* page_memory = ::operator new(alloc_size); // Replacing malloc with new
+    void* page_memory = ::operator new(alloc_size);
 	if (!page_memory)
         return (nullptr);
 	memset(page_memory, 0, alloc_size);
@@ -109,7 +109,7 @@ void* ft_malloc(size_t size, bool critical)
 void ft_free(void* ptr)
 {
 	if (BYPASS_ALLOC == 1)
-		return (::operator delete(ptr)); // Replacing free with delete
+		return (::operator delete(ptr));
     if (!ptr)
         return ;
     Block* block = (Block*)((char*)ptr - sizeof(Block));
@@ -170,7 +170,7 @@ void ft_free(void* ptr)
             page_list = page->next;
         if (page->next)
             page->next->prev = page->prev;
-        ::operator delete(page->start); // Replacing free with delete
+        ::operator delete(page->start);
     }
 	return ;
 }
