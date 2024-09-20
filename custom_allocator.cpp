@@ -20,9 +20,116 @@ struct Block
     uint32_t magic;
     size_t size;
     bool free;
+    bool critical;
     Block* next;
     Block* prev;
 };
+
+#if BYPASS_ALLOC == 1
+
+Block* block_list = nullptr;
+
+inline size_t align8(size_t size)
+{
+    return ((size + 7) & ~7);
+}
+
+void* cma_malloc(size_t size, bool critical)
+{
+    size = align8(size);
+
+    // Allocate memory for Block and data together
+    size_t total_size = sizeof(Block) + size;
+    Block* block = (Block*)::operator new(total_size);
+    if (!block)
+        return nullptr;
+    block->magic = MAGIC_NUMBER;
+    block->size = size;
+    block->free = false;
+    block->critical = critical;
+    block->prev = nullptr;
+    block->next = block_list;
+    if (block_list)
+        block_list->prev = block;
+    block_list = block;
+    return (void*)((char*)block + sizeof(Block));
+}
+
+void cma_free(void* ptr)
+{
+    if (!ptr)
+        return;
+    Block* block = (Block*)((char*)ptr - sizeof(Block));
+    if (block->magic != MAGIC_NUMBER)
+    {
+        std::cerr << "Invalid free detected at " << ptr << std::endl;
+        abort();
+    }
+    if (block->free)
+    {
+        std::cerr << "Double free detected at " << ptr << std::endl;
+        abort();
+    }
+    block->free = true;
+    // Blocks are cleaned up in cma_cleanup_non_critical_memory or cma_cleanup_all_memory
+}
+
+void cma_cleanup_non_critical_memory()
+{
+    Block* block = block_list;
+    while (block)
+    {
+        Block* next_block = block->next;
+        if (!block->critical && block->free)
+        {
+            // Remove block from block_list
+            if (block->prev)
+                block->prev->next = block->next;
+            else
+                block_list = block->next;
+            if (block->next)
+                block->next->prev = block->prev;
+
+            // Free the block
+            ::operator delete(block);
+        }
+        block = next_block;
+    }
+}
+
+bool cma_ensure_memory_available(const size_t* sizes, size_t count, bool critical)
+{
+    for (size_t i = 0; i < count; ++i)
+    {
+        size_t size = align8(sizes[i]);
+        size_t total_size = sizeof(Block) + size;
+        Block* block = (Block*)::operator new(total_size, std::nothrow);
+        if (!block)
+            return false;
+        ::operator delete(block);
+    }
+    return true;
+}
+
+void cma_cleanup_all_memory()
+{
+    Block* block = block_list;
+    while (block)
+    {
+        Block* next_block = block->next;
+        ::operator delete(block);
+        block = next_block;
+    }
+    block_list = nullptr;
+}
+
+bool cma_add_page(bool critical)
+{
+    // Not applicable when BYPASS_ALLOC is set
+    return true;
+}
+
+#else
 
 struct Page
 {
@@ -41,31 +148,30 @@ inline size_t align8(size_t size)
     return ((size + 7) & ~7);
 }
 
-void* ft_malloc(size_t size, bool critical)
+void* cma_malloc(size_t size, bool critical)
 {
     size = align8(size);
 
-	if (BYPASS_ALLOC == 1)
-		return (::operator new(size));
     Page* page = page_list;
     while (page)
-	{
+    {
         if (page->critical != critical)
-		{
+        {
             page = page->next;
             continue;
         }
         Block* block = page->blocks;
         while (block)
-		{
+        {
             if (block->free && block->size >= size)
-			{
+            {
                 if (block->size >= size + sizeof(Block) + 8)
-				{
+                {
                     Block* new_block = (Block*)((char*)block + sizeof(Block) + size);
                     new_block->magic = MAGIC_NUMBER;
                     new_block->size = block->size - size - sizeof(Block);
                     new_block->free = true;
+                    new_block->critical = page->critical;
                     new_block->next = block->next;
                     new_block->prev = block;
                     if (block->next)
@@ -74,6 +180,7 @@ void* ft_malloc(size_t size, bool critical)
                     block->size = size;
                 }
                 block->free = false;
+                block->critical = page->critical;
                 return (void*)((char*)block + sizeof(Block));
             }
             block = block->next;
@@ -84,9 +191,9 @@ void* ft_malloc(size_t size, bool critical)
     if (size + sizeof(Block) + sizeof(Page) > PAGE_SIZE)
         alloc_size = size + sizeof(Block) + sizeof(Page);
     void* page_memory = ::operator new(alloc_size);
-	if (!page_memory)
-        return (nullptr);
-	memset(page_memory, 0, alloc_size);
+    if (!page_memory)
+        return nullptr;
+    memset(page_memory, 0, alloc_size);
     Page* new_page = (Page*)page_memory;
     new_page->start = page_memory;
     new_page->size = alloc_size;
@@ -100,32 +207,31 @@ void* ft_malloc(size_t size, bool critical)
     first_block->magic = MAGIC_NUMBER;
     first_block->size = alloc_size - sizeof(Page) - sizeof(Block);
     first_block->free = false;
+    first_block->critical = critical;
     first_block->next = nullptr;
     first_block->prev = nullptr;
     new_page->blocks = first_block;
-    return ((void*)((char*)first_block + sizeof(Block)));
+    return (void*)((char*)first_block + sizeof(Block));
 }
 
-void ft_free(void* ptr)
+void cma_free(void* ptr)
 {
-	if (BYPASS_ALLOC == 1)
-		return (::operator delete(ptr));
     if (!ptr)
-        return ;
+        return;
     Block* block = (Block*)((char*)ptr - sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
-	{
-		std::cerr << "1-Invalid free detected at " << ptr << std::endl;
+    {
+        std::cerr << "Invalid free detected at " << ptr << std::endl;
         abort();
     }
-	if (block->free == true)
-	{
-		std::cerr << "2-Double free detected at " << ptr << std::endl;
-		abort();
-	}
+    if (block->free)
+    {
+        std::cerr << "Double free detected at " << ptr << std::endl;
+        abort();
+    }
     block->free = true;
     if (block->prev && block->prev->free)
-	{
+    {
         block->prev->size += sizeof(Block) + block->size;
         block->prev->next = block->next;
         if (block->next)
@@ -133,7 +239,7 @@ void ft_free(void* ptr)
         block = block->prev;
     }
     if (block->next && block->next->free)
-	{
+    {
         block->size += sizeof(Block) + block->next->size;
         block->next = block->next->next;
         if (block->next)
@@ -141,29 +247,29 @@ void ft_free(void* ptr)
     }
     Page* page = page_list;
     while (page)
-	{
+    {
         if ((char*)block >= (char*)page->start && (char*)block < (char*)page->start + page->size)
-            break ;
+            break;
         page = page->next;
     }
     if (!page)
-	{
-		std::cerr << "3-Invalid free detected at " << ptr << std::endl;
+    {
+        std::cerr << "Invalid free detected at " << ptr << std::endl;
         abort();
     }
     Block* blk = page->blocks;
     bool all_free = true;
     while (blk)
-	{
+    {
         if (!blk->free)
-		{
+        {
             all_free = false;
-            break ;
+            break;
         }
         blk = blk->next;
     }
     if (all_free)
-	{
+    {
         if (page->prev)
             page->prev->next = page->next;
         else
@@ -172,61 +278,56 @@ void ft_free(void* ptr)
             page->next->prev = page->prev;
         ::operator delete(page->start);
     }
-	return ;
 }
 
-void ft_cleanup_non_critical_memory()
+void cma_cleanup_non_critical_memory()
 {
-	if (BYPASS_ALLOC == 1)
-		return ;
     Page* page = page_list;
     while (page)
-	{
+    {
         Page* next_page = page->next;
         if (!page->critical)
-		{
+        {
             Block* blk = page->blocks;
             bool all_free = true;
-            while (blk) {
+            while (blk)
+            {
                 if (!blk->free)
-				{
+                {
                     all_free = false;
-                    break ;
+                    break;
                 }
                 blk = blk->next;
             }
             if (all_free)
-			{
+            {
                 if (page->prev)
                     page->prev->next = page->next;
                 else
                     page_list = page->next;
                 if (page->next)
                     page->next->prev = page->prev;
-                delete reinterpret_cast<char*>(page->start);
+                ::operator delete(page->start);
             }
         }
         page = next_page;
     }
-	return ;
 }
 
-bool ft_ensure_memory_available(const size_t* sizes, size_t count, bool critical)
+bool cma_ensure_memory_available(const size_t* sizes, size_t count, bool critical)
 {
-	if (BYPASS_ALLOC == 1)
-		return (true);
     size_t total_needed = 0;
     for (size_t i = 0; i < count; ++i)
         total_needed += align8(sizes[i]) + sizeof(Block);
     size_t total_free = 0;
     Page* page = page_list;
     while (page)
-	{
+    {
         if (page->critical == critical)
-		{
+        {
             Block* block = page->blocks;
             while (block)
-			{
+            {
                 if (block->free)
                     total_free += block->size + sizeof(Block);
                 block = block->next;
@@ -234,15 +335,16 @@ bool ft_ensure_memory_available(const size_t* sizes, size_t count, bool critical
         }
         page = page->next;
     }
-	if (total_free >= total_needed)
-        return (true);
-	else
-	{
+    if (total_free >= total_needed)
+        return true;
+    else
+    {
         size_t alloc_size = PAGE_SIZE;
-        while (total_free < total_needed) {
+        while (total_free < total_needed)
+        {
             void* page_memory = new(std::nothrow) char[alloc_size];
             if (!page_memory)
-                return (false);
+                return false;
             Page* new_page = (Page*)page_memory;
             new_page->start = page_memory;
             new_page->size = alloc_size;
@@ -256,38 +358,34 @@ bool ft_ensure_memory_available(const size_t* sizes, size_t count, bool critical
             first_block->magic = MAGIC_NUMBER;
             first_block->size = alloc_size - sizeof(Page) - sizeof(Block);
             first_block->free = true;
+            first_block->critical = critical;
             first_block->next = nullptr;
             first_block->prev = nullptr;
             new_page->blocks = first_block;
             total_free += first_block->size + sizeof(Block);
         }
-        return (true);
+        return true;
     }
 }
 
-void ft_cleanup_all_memory()
+void cma_cleanup_all_memory()
 {
-	if (BYPASS_ALLOC == 1)
-		return ;
     Page* page = page_list;
     while (page)
-	{
+    {
         Page* next_page = page->next;
-        delete reinterpret_cast<char*>(page->start);
+        ::operator delete(page->start);
         page = next_page;
     }
     page_list = nullptr;
-	return ;
 }
 
-bool ft_add_page(bool critical)
+bool cma_add_page(bool critical)
 {
-	if (BYPASS_ALLOC)
-		return (true);
     size_t alloc_size = PAGE_SIZE;
     void* page_memory = new(std::nothrow) char[alloc_size];
     if (!page_memory)
-        return (false);
+        return false;
     Page* new_page = (Page*)page_memory;
     new_page->start = page_memory;
     new_page->size = alloc_size;
@@ -301,8 +399,11 @@ bool ft_add_page(bool critical)
     first_block->magic = MAGIC_NUMBER;
     first_block->size = alloc_size - sizeof(Page) - sizeof(Block);
     first_block->free = true;
+    first_block->critical = critical;
     first_block->next = nullptr;
     first_block->prev = nullptr;
     new_page->blocks = first_block;
-    return (true);
+    return true;
 }
+
+#endif
