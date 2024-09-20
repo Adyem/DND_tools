@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <cassert>
 #include <iostream>
+#include "dnd_tools.hpp"
 
 #define ALLOC_PAGE(size) malloc(size)
 #define FREE_PAGE(ptr) free(ptr)
@@ -13,40 +14,6 @@
 #ifndef BYPASS_ALLOC
 #define BYPASS_ALLOC DEBUG
 #endif
-
-#if BYPASS_ALLOC == 1
-
-void* ft_malloc(size_t size, bool critical)
-{
-    (void)critical;
-    return malloc(size);
-}
-
-void ft_free(void* ptr)
-{
-    free(ptr);
-	return ;
-}
-
-void ft_cleanup_non_critical_memory()
-{
-	return ;
-}
-
-bool ft_ensure_memory_available(const size_t* sizes, size_t count, bool critical)
-{
-    (void)sizes;
-    (void)count;
-    (void)critical;
-    return (true);
-}
-
-void ft_cleanup_all_memory()
-{
-	return ;
-}
-
-#else
 
 #define MAGIC_NUMBER 0xDEADBEEF
 
@@ -80,6 +47,8 @@ void* ft_malloc(size_t size, bool critical)
 {
     size = align8(size);
 
+	if (BYPASS_ALLOC == 1)
+		return (malloc(size));
     Page* page = page_list;
     while (page)
 	{
@@ -141,6 +110,8 @@ void* ft_malloc(size_t size, bool critical)
 
 void ft_free(void* ptr)
 {
+	if (BYPASS_ALLOC == 1)
+		return (free(ptr));
     if (!ptr)
         return ;
     Block* block = (Block*)((char*)ptr - sizeof(Block));
@@ -208,6 +179,8 @@ void ft_free(void* ptr)
 
 void ft_cleanup_non_critical_memory()
 {
+	if (BYPASS_ALLOC == 1)
+		return ;
     Page* page = page_list;
     while (page)
 	{
@@ -242,6 +215,8 @@ void ft_cleanup_non_critical_memory()
 
 bool ft_ensure_memory_available(const size_t* sizes, size_t count, bool critical)
 {
+	if (BYPASS_ALLOC == 1)
+		return (true);
     size_t total_needed = 0;
     for (size_t i = 0; i < count; ++i)
         total_needed += align8(sizes[i]) + sizeof(Block);
@@ -294,6 +269,8 @@ bool ft_ensure_memory_available(const size_t* sizes, size_t count, bool critical
 
 void ft_cleanup_all_memory()
 {
+	if (BYPASS_ALLOC == 1)
+		return ;
     Page* page = page_list;
     while (page)
 	{
@@ -307,6 +284,8 @@ void ft_cleanup_all_memory()
 
 bool ft_add_page(bool critical)
 {
+	if (BYPASS_ALLOC)
+		return (true);
     size_t alloc_size = PAGE_SIZE;
     void* page_memory = ALLOC_PAGE(alloc_size);
     if (!page_memory)
@@ -329,5 +308,3 @@ bool ft_add_page(bool critical)
     new_page->blocks = first_block;
     return (true);
 }
-
-#endif
