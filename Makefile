@@ -103,7 +103,6 @@ SRC			= name.cpp \
 			  cast_concentration_multi_target_01.cpp \
 			  ordinal_suffix.cpp \
 			  check_equipment.cpp \
-			  custom_allocator.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17

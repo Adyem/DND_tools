@@ -274,11 +274,4 @@ int			ft_roll_convert_next(char *string, int i, int *error);
 //player
 void		ft_player(const char **input);
 
-//custom memory allocator
-void		*cma_malloc(size_t size, bool critical);
-void		cma_free(void *ptr);
-void		cma_cleanup_non_critical_memory();
-void		cma_cleanup_all_memory();
-bool		cma_add_page(bool critical);
-
 #endif

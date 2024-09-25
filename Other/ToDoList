@@ -1,0 +1,15 @@
+ft_strjoin_multiple: A function that joins multiple strings together, taking a variable number of arguments. This can reduce repetitive string concatenation calls.
+
+ft_memdup: A memory duplicator similar to strdup, but for any memory block. It allocates and duplicates a given block of memory, useful when handling non-string data.
+
+ft_hashmap: A simple and lightweight hash map implementation to manage key-value pairs efficiently.
+
+ft_array_resize: A dynamic array resize function, similar to realloc, but with added safety and custom logic. You could integrate it with your custom allocator for optimized memory management.
+
+ft_vector: A dynamic array implementation similar to the C++ std::vector for automatic resizing and management of elements.
+
+ft_logger: A lightweight logger function to log messages at different levels (info, warning, error) to help with debugging.
+
+ft_random: A random number generator that can handle a variety of cases, from simple integer ranges to floats or seeded random number generation.
+
+ft_time: A utility for time formatting, including functions like getting the current time in different formats or measuring time deltas for performance metrics.

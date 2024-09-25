@@ -9,8 +9,6 @@
 #include <valgrind/memcheck.h>
 #include <csignal>
 
-typedef unsigned int uint32_t;
-
 #ifndef PAGE_SIZE
 # define PAGE_SIZE 65536
 #endif
@@ -58,12 +56,12 @@ struct Page
 
 Page* page_list = nullptr;
 
-inline size_t align8(size_t size)
+static inline size_t align8(size_t size)
 {
     return ((size + 7) & ~7);
 }
 
-void* cma_malloc(size_t size, bool critical)
+void	*cma_malloc(size_t size, bool critical)
 {
     size = align8(size);
 
@@ -171,45 +169,49 @@ void cma_free(void* ptr)
         raise(SIGSEGV);
     }
     block->free = true;
-    if (block->prev)
-    {
+	if (block->prev)
+	{
         UNPROTECT_METADATA(block->prev, sizeof(Block));
-        if (block->prev->free)
-        {
-            block->prev->size += sizeof(Block) + block->size;
-            block->prev->next = block->next;
-            if (block->next)
-            {
+		if (block->prev->free)
+		{
+			block->prev->size += sizeof(Block) + block->size;
+			block->prev->next = block->next;
+			if (block->next)
+			{
                 UNPROTECT_METADATA(block->next, sizeof(Block));
                 block->next->prev = block->prev;
                 PROTECT_METADATA(block->next, sizeof(Block));
-            }
-            PROTECT_METADATA(block, sizeof(Block));
-            block = block->prev;
-        }
-        else
-            PROTECT_METADATA(block->prev, sizeof(Block));
-    }
-    if (block->next)
-    {
+			}
+			PROTECT_METADATA(block, sizeof(Block));
+			block = block->prev;
+		}
+		else
+		{
+			PROTECT_METADATA(block->prev, sizeof(Block));
+		}
+	}
+	if (block->next)
+	{
         UNPROTECT_METADATA(block->next, sizeof(Block));
-        if (block->next->free)
+		if (block->next->free)
         {
-            block->size += sizeof(Block) + block->next->size;
-            block->next = block->next->next;
-            if (block->next)
-            {
+			block->size += sizeof(Block) + block->next->size;
+			block->next = block->next->next;
+			if (block->next)
+			{
                 UNPROTECT_METADATA(block->next, sizeof(Block));
                 block->next->prev = block;
                 PROTECT_METADATA(block->next, sizeof(Block));
-            }
-        }
-        else
-            PROTECT_METADATA(block->next, sizeof(Block));
-    }
-    PROTECT_METADATA(block, sizeof(Block));
-    Page* page = page_list;
-    while (page)
+			}
+		}
+		else
+		{
+			PROTECT_METADATA(block->next, sizeof(Block));
+		}
+	}
+	PROTECT_METADATA(block, sizeof(Block));
+	Page* page = page_list;
+	while (page)
     {
         UNPROTECT_METADATA(page, sizeof(Page));
         if ((char*)block >= (char*)page->start && (char*)block < (char*)page->start + page->size)
@@ -237,9 +239,9 @@ void cma_free(void* ptr)
         Block* next_blk = blk->next;
         PROTECT_METADATA(blk, sizeof(Block));
         blk = next_blk;
-    }
-    if (all_free)
-    {
+	}
+	if (all_free)
+	{
         if (page->prev)
         {
             UNPROTECT_METADATA(page->prev, sizeof(Page));
@@ -257,8 +259,10 @@ void cma_free(void* ptr)
         UNPROTECT_METADATA(page->start, page->size);
         ::operator delete(page->start);
     }
-    else
+	else
+	{
         PROTECT_METADATA(page, sizeof(Page));
+	}
 	return ;
 }
 
@@ -295,7 +299,9 @@ void cma_cleanup_non_critical_memory()
                     PROTECT_METADATA(page->prev, sizeof(Page));
                 }
                 else
+				{
                     page_list = page->next;
+				}
                 if (page->next)
                 {
                     UNPROTECT_METADATA(page->next, sizeof(Page));
@@ -306,10 +312,14 @@ void cma_cleanup_non_critical_memory()
                 ::operator delete(page->start);
             }
             else
+			{
                 PROTECT_METADATA(page, sizeof(Page));
+			}
         }
         else
+		{
             PROTECT_METADATA(page, sizeof(Page));
+		}
         page = next_page;
     }
 	return ;
