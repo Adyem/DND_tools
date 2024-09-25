@@ -9,6 +9,10 @@
 # define PAGE_SIZE 65536
 #endif
 
+#ifndef DEBUG
+# define DEBUG 0
+#endif
+
 #ifndef BYPASS_ALLOC
 # define BYPASS_ALLOC DEBUG
 #endif
@@ -17,9 +21,17 @@
 # define MAGIC_NUMBER 0xDEADBEEF
 #endif
 
+#define DEBUG_MODE DEBUG
+
+void* cma_malloc(size_t size, bool critical);
+void cma_free(void* ptr);
+void cma_cleanup_non_critical_memory();
+bool cma_ensure_memory_available(const size_t* sizes, size_t count, bool critical);
+void cma_cleanup_all_memory();
+bool cma_add_page(bool critical);
+
 // Include your custom memory allocator functions
 // Assuming the allocator code is saved in "irc.hpp" as per your initial code
-#include "irc.hpp" // Replace with the actual path if different
 
 // Helper macros for test output
 #define TEST_START(test_name) std::cout << "Starting Test: " << test_name << std::endl;
@@ -377,6 +389,13 @@ void test_comprehensive_allocation() {
         allocations[i].is_freed = false;
         allocations[i].is_int = is_int;
 
+#if DEBUG_MODE
+        std::cout << "[DEBUG] Allocation " << i << ": "
+                  << (is_int ? "int*" : "char*")
+                  << ", Size: " << size
+                  << ", Address: " << ptr << std::endl;
+#endif
+
         // Initialize the memory
         if (is_int) {
             int* int_ptr = (int*)ptr;
@@ -397,6 +416,10 @@ void test_comprehensive_allocation() {
         if (!allocations[i].is_freed) {
             cma_free(allocations[i].ptr);
             allocations[i].is_freed = true;
+
+#if DEBUG_MODE
+            std::cout << "[DEBUG] Freed Allocation " << i << ", Address: " << allocations[i].ptr << std::endl;
+#endif
         }
     }
 
@@ -420,6 +443,13 @@ void test_comprehensive_allocation() {
         new_allocations[i].is_freed = false;
         new_allocations[i].is_int = is_int;
 
+#if DEBUG_MODE
+        std::cout << "[DEBUG] New Allocation " << i << ": "
+                  << (is_int ? "int*" : "char*")
+                  << ", Size: " << size
+                  << ", Address: " << ptr << std::endl;
+#endif
+
         // Initialize the memory
         if (is_int) {
             int* int_ptr = (int*)ptr;
@@ -438,14 +468,23 @@ void test_comprehensive_allocation() {
     bool data_corrupted = false;
 
     // Check initial allocations
-    for (int i = 0; i < NUM_ALLOCATIONS; ++i) {
+    for (int i = 0; i < NUM_ALLOCATIONS && !data_corrupted; ++i) {
         if (!allocations[i].is_freed) {
             void* ptr = allocations[i].ptr;
             size_t size = allocations[i].size;
             if (allocations[i].is_int) {
                 int* int_ptr = (int*)ptr;
                 for (size_t j = 0; j < size; ++j) {
-                    if (int_ptr[j] != MAGIC_NUMBER + j + i) {
+                    int expected = MAGIC_NUMBER + j + i;
+                    if (int_ptr[j] != expected) {
+#if DEBUG_MODE
+                        std::cerr << "[DEBUG] Corruption Detected in Initial Allocations (int*): "
+                                  << "Allocation Index: " << i
+                                  << ", Element Index: " << j
+                                  << ", Expected: " << expected
+                                  << ", Actual: " << int_ptr[j]
+                                  << ", Address: " << ptr << std::endl;
+#endif
                         data_corrupted = true;
                         TEST_FAIL(test_name, "Data corrupted in initial allocations (int*)");
                         break;
@@ -454,7 +493,16 @@ void test_comprehensive_allocation() {
             } else {
                 char* char_ptr = (char*)ptr;
                 for (size_t j = 0; j < size; ++j) {
-                    if (char_ptr[j] != 'A' + ((j + i) % 26)) {
+                    char expected = 'A' + ((j + i) % 26);
+                    if (char_ptr[j] != expected) {
+#if DEBUG_MODE
+                        std::cerr << "[DEBUG] Corruption Detected in Initial Allocations (char*): "
+                                  << "Allocation Index: " << i
+                                  << ", Element Index: " << j
+                                  << ", Expected: '" << expected << "'"
+                                  << ", Actual: '" << char_ptr[j] << "'"
+                                  << ", Address: " << ptr << std::endl;
+#endif
                         data_corrupted = true;
                         TEST_FAIL(test_name, "Data corrupted in initial allocations (char*)");
                         break;
@@ -462,20 +510,27 @@ void test_comprehensive_allocation() {
                 }
             }
         }
-        if (data_corrupted)
-            break;
     }
 
     // Check new allocations
     if (!data_corrupted) {
-        for (int i = 0; i < NEW_ALLOCATIONS; ++i) {
+        for (int i = 0; i < NEW_ALLOCATIONS && !data_corrupted; ++i) {
             if (!new_allocations[i].is_freed) {
                 void* ptr = new_allocations[i].ptr;
                 size_t size = new_allocations[i].size;
                 if (new_allocations[i].is_int) {
                     int* int_ptr = (int*)ptr;
                     for (size_t j = 0; j < size; ++j) {
-                        if (int_ptr[j] != MAGIC_NUMBER + j + 100 + i) {
+                        int expected = MAGIC_NUMBER + j + 100 + i;
+                        if (int_ptr[j] != expected) {
+#if DEBUG_MODE
+                            std::cerr << "[DEBUG] Corruption Detected in New Allocations (int*): "
+                                      << "New Allocation Index: " << i
+                                      << ", Element Index: " << j
+                                      << ", Expected: " << expected
+                                      << ", Actual: " << int_ptr[j]
+                                      << ", Address: " << ptr << std::endl;
+#endif
                             data_corrupted = true;
                             TEST_FAIL(test_name, "Data corrupted in new allocations (int*)");
                             break;
@@ -484,7 +539,16 @@ void test_comprehensive_allocation() {
                 } else {
                     char* char_ptr = (char*)ptr;
                     for (size_t j = 0; j < size; ++j) {
-                        if (char_ptr[j] != 'a' + ((j + i) % 26)) {
+                        char expected = 'a' + ((j + i) % 26);
+                        if (char_ptr[j] != expected) {
+#if DEBUG_MODE
+                            std::cerr << "[DEBUG] Corruption Detected in New Allocations (char*): "
+                                      << "New Allocation Index: " << i
+                                      << ", Element Index: " << j
+                                      << ", Expected: '" << expected << "'"
+                                      << ", Actual: '" << char_ptr[j] << "'"
+                                      << ", Address: " << ptr << std::endl;
+#endif
                             data_corrupted = true;
                             TEST_FAIL(test_name, "Data corrupted in new allocations (char*)");
                             break;
@@ -492,8 +556,6 @@ void test_comprehensive_allocation() {
                     }
                 }
             }
-            if (data_corrupted)
-                break;
         }
     }
 
@@ -506,12 +568,20 @@ void test_comprehensive_allocation() {
         if (!allocations[i].is_freed) {
             cma_free(allocations[i].ptr);
             allocations[i].is_freed = true;
+
+#if DEBUG_MODE
+            std::cout << "[DEBUG] Freed Allocation " << i << ", Address: " << allocations[i].ptr << std::endl;
+#endif
         }
     }
     for (int i = 0; i < NEW_ALLOCATIONS; ++i) {
         if (!new_allocations[i].is_freed) {
             cma_free(new_allocations[i].ptr);
             new_allocations[i].is_freed = true;
+
+#if DEBUG_MODE
+            std::cout << "[DEBUG] Freed New Allocation " << i << ", Address: " << new_allocations[i].ptr << std::endl;
+#endif
         }
     }
 
