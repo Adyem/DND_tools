@@ -8,6 +8,7 @@
 #include <sys/mman.h>
 #include <valgrind/memcheck.h>
 #include <csignal>
+#include "CMA.hpp"
 
 #ifndef PAGE_SIZE
 # define PAGE_SIZE 65536
@@ -81,8 +82,8 @@ void	*cma_malloc(int size, bool critical)
         while (block)
         {
             UNPROTECT_METADATA(block, sizeof(Block));
-            if (block->free && block->size >= size)
-            {
+            if (block->free && block->size >= static_cast<size_t>(size))
+			{
                 if (block->size >= size + sizeof(Block) + 8)
                 {
                     Block* new_block = (Block*)((char*)block + sizeof(Block) + size);

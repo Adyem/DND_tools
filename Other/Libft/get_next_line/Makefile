@@ -1,28 +1,36 @@
-NAME		= get_next_line.a
+CXX := g++
+AR := ar
+ARFLAGS := rcs
 
-library		= get_next_line
+OBJDIR := objs
 
-SRC			= get_next_line.cpp \
-			  get_next_line_utils.cpp
+TARGET := GetNextLine.a
 
-CC = g++
-CFLAGS = -Wall -Wextra -Werror -std=c++17
+SRCS := get_next_line.cpp \
+	get_next_line_utils.cpp
 
-OBJS = $(SRC:.cpp=.o)
+HEADERS := get_next_line.hpp
 
-all: $(NAME)
+OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(AR) $(ARFLAGS) $@ $^
+
+$(OBJDIR)/%.o: %.cpp $(HEADERS) | $(OBJDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(TARGET)
 
 re: fclean all
 

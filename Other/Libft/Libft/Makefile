@@ -4,24 +4,22 @@ ARFLAGS := rcs
 
 OBJDIR := objs
 
-TARGET := libft.a
-
-SRC_EXT := cpp
-HEADER_EXT := hpp
+TARGET := LibFT.a
 
 SRCS := ft_strlen.cpp
+
 HEADERS := libft.hpp
 
-OBJS := $(patsubst %.$(SRC_EXT),$(OBJDIR)/%.o,$(SRCS))
+OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 
-CXXFLAGS := -Wall -Wextra -Werror -I.
+CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
-$(OBJDIR)/%.o: %.$(SRC_EXT) %.$(HEADER_EXT) | $(OBJDIR)
+$(OBJDIR)/%.o: %.cpp $(HEADERS) | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(OBJDIR):

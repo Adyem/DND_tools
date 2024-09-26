@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <stdbool.h>
+#include "CMA.hpp"
 
 char	*cma_strdup(char *string, bool criticality)
 {

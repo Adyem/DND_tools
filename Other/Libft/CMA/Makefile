@@ -6,24 +6,22 @@ OBJDIR := objs
 
 TARGET := CustomMemoryAllocator.a
 
-SRC_EXT := cpp
-HEADER_EXT := hpp
-
 SRCS := cma_calloc.cpp \
-	cma_strdup.cpp \
-	custom_allocator.cpp
+        cma_strdup.cpp \
+        custom_allocator.cpp
+
 HEADERS := CMA.hpp
 
-OBJS := $(patsubst %.$(SRC_EXT),$(OBJDIR)/%.o,$(SRCS))
+OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 
-CXXFLAGS := -Wall -Wextra -Werror -I.
+CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
-$(OBJDIR)/%.o: %.$(SRC_EXT) %.$(HEADER_EXT) | $(OBJDIR)
+$(OBJDIR)/%.o: %.cpp $(HEADERS) | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(OBJDIR):

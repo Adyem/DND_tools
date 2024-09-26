@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <stdbool.h>
+#include "CMA.hpp"
 
 void	*cma_calloc(int count, int size, bool criticality)
 {
