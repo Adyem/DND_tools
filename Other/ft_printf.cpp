@@ -13,14 +13,14 @@ static size_t ft_strlen_printf(const char *s)
     return (len);
 }
 
-static void ft_putchar_fd(char c, int fd, size_t *count)
+static void ft_putchar_fd(const char c, int fd, size_t *count)
 {
     write(fd, &c, 1);
     (*count)++;
     return ;
 }
 
-static void ft_putstr_fd(char *s, int fd, size_t *count)
+static void ft_putstr_fd(const char *s, int fd, size_t *count)
 {
     if (!s) {
         write(fd, "(null)", 6);
