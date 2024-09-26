@@ -4,10 +4,13 @@ ARFLAGS := rcs
 
 TARGET := Full_Libft.a
 
-SUBDIRS := CMA get_next_line Libft Printf ReadLine
+SUBDIRS := CMA \
+	   GetNextLine \
+	   Libft Printf \
+	   ReadLine
 
 LIBS := CMA/CustomMemoryAllocator.a \
-        get_next_line/GetNextLine.a \
+        GetNextLine/GetNextLine.a \
         Libft/LibFT.a \
         Printf/Printf.a \
         ReadLine/ReadLine.a

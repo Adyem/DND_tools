@@ -1,0 +1,38 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/get_next_line.o",
+      "get_next_line.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/GetNextLine",
+    "file": "/home/adyem/DND_tools/Other/Libft/GetNextLine/get_next_line.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/GetNextLine/objs/get_next_line.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/get_next_line_utils.o",
+      "get_next_line_utils.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/GetNextLine",
+    "file": "/home/adyem/DND_tools/Other/Libft/GetNextLine/get_next_line_utils.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/GetNextLine/objs/get_next_line_utils.o"
+  }
+]

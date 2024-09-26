@@ -37,7 +37,7 @@ Implementing these can provide more control and safety over memory operations.
     ft_memmove: Similar to memcpy but handles overlapping memory regions.
     ft_memcmp: Compares two blocks of memory.
     ft_bzero: Sets a block of memory to zero.
-    ft_calloc: Allocates memory and initializes it to zero. (done)
+    cma_calloc: Allocates memory and initializes it to zero. (done)
 
 3. Character Checking and Conversion
 
@@ -51,17 +51,8 @@ These functions are essential for parsing and validating data.
 Facilitate the conversion between different data types.
 
     ft_atoi: Converts a string to an integer.
-    ft_itoa: Converts an integer to a string.
     ft_strtol, ft_strtoul: Convert strings to long and unsigned long integers, respectively.
-
-5. Linked List Utilities
-
-Implementing linked lists can provide flexible data structures for various applications.
-
-    ft_lstnew: Creates a new list node.
-    ft_lstadd_front, ft_lstadd_back: Adds a node to the front or back of the list.
-    ft_lstdelone, ft_lstclear: Deletes nodes and clears the list.
-    ft_lstiter, ft_lstmap: Iterates over the list or maps it to a new list.
+    ft_itoa: Converts an integer to a string.
 
 6. File I/O Functions
 

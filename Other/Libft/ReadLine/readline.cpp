@@ -6,12 +6,7 @@
 #include "../CMA/CMA.hpp"
 #include "../Libft/libft.hpp"
 #include "../Printf/ft_printf.hpp"
-
-#define MAX_HISTORY 100
-#define INITIAL_BUFFER_SIZE 1024
-
-static char *history[MAX_HISTORY];
-static int history_count = 0;
+#include "readline.hpp"
 
 struct termios orig_termios;
 

@@ -1,0 +1,56 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/cma_calloc.o",
+      "cma_calloc.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/CMA",
+    "file": "/home/adyem/DND_tools/Other/Libft/CMA/cma_calloc.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/CMA/objs/cma_calloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/cma_strdup.o",
+      "cma_strdup.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/CMA",
+    "file": "/home/adyem/DND_tools/Other/Libft/CMA/cma_strdup.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/CMA/objs/cma_strdup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/custom_allocator.o",
+      "custom_allocator.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/CMA",
+    "file": "/home/adyem/DND_tools/Other/Libft/CMA/custom_allocator.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/CMA/objs/custom_allocator.o"
+  }
+]

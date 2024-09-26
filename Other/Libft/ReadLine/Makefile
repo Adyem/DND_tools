@@ -6,7 +6,8 @@ OBJDIR := objs
 
 TARGET := ReadLine.a
 
-SRCS := readline.cpp
+SRCS := readline.cpp \
+	clear_history.cpp
 
 HEADERS := readline.hpp
 

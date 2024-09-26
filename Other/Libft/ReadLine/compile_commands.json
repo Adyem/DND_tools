@@ -1,0 +1,38 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/readline.o",
+      "readline.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/ReadLine",
+    "file": "/home/adyem/DND_tools/Other/Libft/ReadLine/readline.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/ReadLine/objs/readline.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/clear_history.o",
+      "clear_history.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/ReadLine",
+    "file": "/home/adyem/DND_tools/Other/Libft/ReadLine/clear_history.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/ReadLine/objs/clear_history.o"
+  }
+]

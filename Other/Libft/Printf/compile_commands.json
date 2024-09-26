@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_printf.o",
+      "ft_printf.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/Printf",
+    "file": "/home/adyem/DND_tools/Other/Libft/Printf/ft_printf.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/Printf/objs/ft_printf.o"
+  }
+]
