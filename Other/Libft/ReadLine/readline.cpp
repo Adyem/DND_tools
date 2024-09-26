@@ -76,8 +76,10 @@ char *ft_readline(const char *prompt)
             }
         } else if (c == 27) {
             char seq[2];
-            if (read(STDIN_FILENO, &seq[0], 1) != 1) continue;
-            if (read(STDIN_FILENO, &seq[1], 1) != 1) continue;
+            if (read(STDIN_FILENO, &seq[0], 1) != 1)
+            	continue;
+            if (read(STDIN_FILENO, &seq[1], 1) != 1)
+            	continue;
 
             if (seq[0] == '[') {
                 if (seq[1] == 'A') {
@@ -137,5 +139,5 @@ char *ft_readline(const char *prompt)
     }
 
     disable_raw_mode();
-    return buffer;
+    return (buffer);
 }
