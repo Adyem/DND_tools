@@ -15,48 +15,50 @@ static int history_count = 0;
 
 struct termios orig_termios;
 
-void disable_raw_mode() {
+void disable_raw_mode()
+{
     tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);
 }
 
-void enable_raw_mode() {
+void enable_raw_mode()
+{
     struct termios raw;
 
     tcgetattr(STDIN_FILENO, &orig_termios);
     atexit(disable_raw_mode);
-
     raw = orig_termios;
-    raw.c_lflag &= ~(ECHO | ICANON); // Turn off echo and canonical mode
+    raw.c_lflag &= ~(ECHO | ICANON);
     tcsetattr(STDIN_FILENO, TCSANOW, &raw);
 }
 
-int read_key() {
+int read_key()
+{
     int nread;
     char c;
     while ((nread = read(STDIN_FILENO, &c, 1)) != 1);
     return c;
 }
 
-// Custom function to manually handle buffer resizing
-char *resize_buffer(char *old_buffer, int current_size, int new_size) {
+char *resize_buffer(char *old_buffer, int current_size, int new_size)
+{
     char *new_buffer = (char *)cma_malloc(new_size, true);
     if (!new_buffer) {
-        fprintf(stderr, "Allocation error\n");
+        ft_printf_fd(2, "Allocation error\n");
         exit(EXIT_FAILURE);
     }
-    // Copy old data to the new buffer
     memcpy(new_buffer, old_buffer, current_size);
-    cma_free(old_buffer);  // Free the old buffer
+    cma_free(old_buffer);
     return new_buffer;
 }
 
-char *ft_readline(const char *prompt) {
+char *ft_readline(const char *prompt)
+{
     enable_raw_mode();
 
     int bufsize = INITIAL_BUFFER_SIZE;
     char *buffer = (char *)cma_malloc(bufsize, true);
     if (!buffer) {
-        fprintf(stderr, "Allocation error\n");
+        ft_printf_fd(2, "Allocation error\n");
         exit(EXIT_FAILURE);
     }
     int pos = 0;
@@ -71,21 +73,20 @@ char *ft_readline(const char *prompt) {
         if (c == '\r' || c == '\n') {
             ft_printf("\n");
             break;
-        } else if (c == 127 || c == '\b') { // Backspace
+        } else if (c == 127 || c == '\b') {
             if (pos > 0) {
                 pos--;
                 ft_printf("\b \b");
                 fflush(stdout);
             }
-        } else if (c == 27) { // Escape sequence
+        } else if (c == 27) {
             char seq[2];
             if (read(STDIN_FILENO, &seq[0], 1) != 1) continue;
             if (read(STDIN_FILENO, &seq[1], 1) != 1) continue;
 
             if (seq[0] == '[') {
-                if (seq[1] == 'A') { // Up arrow
+                if (seq[1] == 'A') {
                     if (history_index > 0) {
-                        // Clear current line
                         while (pos > 0) {
                             printf("\b \b");
                             pos--;
@@ -96,20 +97,18 @@ char *ft_readline(const char *prompt) {
                         pos = ft_strlen(buffer);
                         fflush(stdout);
                     }
-                } else if (seq[1] == 'B') { // Down arrow
+                } else if (seq[1] == 'B') {
                     if (history_index < history_count - 1) {
-                        // Clear current line
                         while (pos > 0) {
-                            printf("\b \b");
+                            ft_printf("\b \b");
                             pos--;
                         }
                         history_index++;
                         strcpy(buffer, history[history_index]);
-                        printf("%s", buffer);
+                        ft_printf("%s", buffer);
                         pos = ft_strlen(buffer);
                         fflush(stdout);
                     } else if (history_index == history_count - 1) {
-                        // Clear current line
                         while (pos > 0) {
                             ft_printf("\b \b");
                             pos--;
@@ -120,9 +119,8 @@ char *ft_readline(const char *prompt) {
                     }
                 }
             }
-        } else if (c >= 32 && c <= 126) { // Printable characters
+        } else if (c >= 32 && c <= 126) {
             if (pos >= bufsize - 1) {
-                // Manually handle buffer resizing
                 int new_bufsize = bufsize * 2;
                 buffer = resize_buffer(buffer, bufsize, new_bufsize);
                 bufsize = new_bufsize;
@@ -135,7 +133,6 @@ char *ft_readline(const char *prompt) {
 
     buffer[pos] = '\0';
 
-    // Add to history
     if (history_count < MAX_HISTORY) {
         history[history_count++] = cma_strdup(buffer, true);
     } else {
