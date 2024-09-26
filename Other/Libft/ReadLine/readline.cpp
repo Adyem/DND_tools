@@ -3,6 +3,9 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include "../CMA/CMA.hpp"
+#include "../Libft/libft.hpp"
+#include "../Printf/ft_printf.hpp"
 
 #define MAX_HISTORY 100
 #define INITIAL_BUFFER_SIZE 1024
@@ -34,11 +37,24 @@ int read_key() {
     return c;
 }
 
+// Custom function to manually handle buffer resizing
+char *resize_buffer(char *old_buffer, int current_size, int new_size) {
+    char *new_buffer = (char *)cma_malloc(new_size, true);
+    if (!new_buffer) {
+        fprintf(stderr, "Allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+    // Copy old data to the new buffer
+    memcpy(new_buffer, old_buffer, current_size);
+    cma_free(old_buffer);  // Free the old buffer
+    return new_buffer;
+}
+
 char *ft_readline(const char *prompt) {
     enable_raw_mode();
 
     int bufsize = INITIAL_BUFFER_SIZE;
-    char *buffer = malloc(bufsize);
+    char *buffer = (char *)cma_malloc(bufsize, true);
     if (!buffer) {
         fprintf(stderr, "Allocation error\n");
         exit(EXIT_FAILURE);
@@ -46,19 +62,19 @@ char *ft_readline(const char *prompt) {
     int pos = 0;
     int history_index = history_count;
 
-    printf("%s", prompt);
+    ft_printf("%s", prompt);
     fflush(stdout);
 
     while (1) {
         int c = read_key();
 
         if (c == '\r' || c == '\n') {
-            printf("\n");
+            ft_printf("\n");
             break;
         } else if (c == 127 || c == '\b') { // Backspace
             if (pos > 0) {
                 pos--;
-                printf("\b \b");
+                ft_printf("\b \b");
                 fflush(stdout);
             }
         } else if (c == 27) { // Escape sequence
@@ -76,8 +92,8 @@ char *ft_readline(const char *prompt) {
                         }
                         history_index--;
                         strcpy(buffer, history[history_index]);
-                        printf("%s", buffer);
-                        pos = strlen(buffer);
+                        ft_printf("%s", buffer);
+                        pos = ft_strlen(buffer);
                         fflush(stdout);
                     }
                 } else if (seq[1] == 'B') { // Down arrow
@@ -90,12 +106,12 @@ char *ft_readline(const char *prompt) {
                         history_index++;
                         strcpy(buffer, history[history_index]);
                         printf("%s", buffer);
-                        pos = strlen(buffer);
+                        pos = ft_strlen(buffer);
                         fflush(stdout);
                     } else if (history_index == history_count - 1) {
                         // Clear current line
                         while (pos > 0) {
-                            printf("\b \b");
+                            ft_printf("\b \b");
                             pos--;
                         }
                         history_index++;
@@ -106,18 +122,13 @@ char *ft_readline(const char *prompt) {
             }
         } else if (c >= 32 && c <= 126) { // Printable characters
             if (pos >= bufsize - 1) {
-                // Need to resize buffer
-                bufsize *= 2;
-                char *new_buffer = realloc(buffer, bufsize);
-                if (!new_buffer) {
-                    free(buffer);
-                    fprintf(stderr, "Allocation error\n");
-                    exit(EXIT_FAILURE);
-                }
-                buffer = new_buffer;
+                // Manually handle buffer resizing
+                int new_bufsize = bufsize * 2;
+                buffer = resize_buffer(buffer, bufsize, new_bufsize);
+                bufsize = new_bufsize;
             }
             buffer[pos++] = c;
-            printf("%c", c);
+            ft_printf("%c", c);
             fflush(stdout);
         }
     }
@@ -126,11 +137,11 @@ char *ft_readline(const char *prompt) {
 
     // Add to history
     if (history_count < MAX_HISTORY) {
-        history[history_count++] = strdup(buffer);
+        history[history_count++] = cma_strdup(buffer, true);
     } else {
-        free(history[0]);
+        cma_free(history[0]);
         memmove(&history[0], &history[1], sizeof(char*) * (MAX_HISTORY - 1));
-        history[MAX_HISTORY - 1] = strdup(buffer);
+        history[MAX_HISTORY - 1] = cma_strdup(buffer, true);
     }
 
     disable_raw_mode();

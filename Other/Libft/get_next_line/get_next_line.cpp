@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../Libft/libft.hpp"
 #include "get_next_line.hpp"
 
 char	*leftovers(char *readed_string)

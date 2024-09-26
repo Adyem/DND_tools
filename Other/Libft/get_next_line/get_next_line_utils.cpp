@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../Libft/libft.hpp"
 #include "get_next_line.hpp"
 
 static char	*allocate_new_string(char *string_1, char *string_2)

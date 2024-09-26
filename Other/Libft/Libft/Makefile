@@ -6,7 +6,8 @@ OBJDIR := objs
 
 TARGET := LibFT.a
 
-SRCS := ft_strlen.cpp
+SRCS := ft_strlen.cpp \
+	ft_strchr.cpp
 
 HEADERS := libft.hpp
 

@@ -2,7 +2,7 @@ CXX := g++
 AR := ar
 ARFLAGS := rcs
 
-TARGET := AllLibraries.a
+TARGET := Full_Libft.a
 
 SUBDIRS := CMA get_next_line Libft Printf ReadLine
 
