@@ -61,7 +61,7 @@ static inline size_t align8(size_t size)
     return ((size + 7) & ~7);
 }
 
-void	*cma_malloc(size_t size, bool critical)
+void	*cma_malloc(int size, bool critical)
 {
     size = align8(size);
 

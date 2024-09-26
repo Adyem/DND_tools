@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-size_t ft_strlen(char *string)
+int ft_strlen(char *string)
 {
 	int	i;
 

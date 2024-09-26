@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-void	*ft_calloc(int count, int size, bool criticality)
+void	*cma_calloc(int count, int size, bool criticality)
 {
 	void	*ptr;
 	size_t	total_size;

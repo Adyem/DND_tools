@@ -20,7 +20,7 @@ ft_time: A utility for time formatting, including functions like getting the cur
 
 Enhancing string handling can greatly simplify many programming tasks.
 
-	ft_strlen: measure the length of a string (done)
+    ft_strlen: measure the length of a string (done)
     ft_strsplit: Splits a string into an array of strings based on a delimiter.
     ft_strtrim: Removes leading and trailing whitespace or specified characters from a string.
     ft_strjoin: Joins two strings into a new string.

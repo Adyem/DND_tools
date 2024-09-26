@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-char	*ft_strdup(char *string, bool criticality)
+char	*cma_strdup(char *string, bool criticality)
 {
 	size_t	len;
 	char	*new_string;
