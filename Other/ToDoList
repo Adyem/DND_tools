@@ -13,3 +13,130 @@ ft_logger: A lightweight logger function to log messages at different levels (in
 ft_random: A random number generator that can handle a variety of cases, from simple integer ranges to floats or seeded random number generation.
 
 ft_time: A utility for time formatting, including functions like getting the current time in different formats or measuring time deltas for performance metrics.
+
+
+
+1. String Manipulation Functions
+
+Enhancing string handling can greatly simplify many programming tasks.
+
+	ft_strlen: measure the length of a string (done)
+    ft_strsplit: Splits a string into an array of strings based on a delimiter.
+    ft_strtrim: Removes leading and trailing whitespace or specified characters from a string.
+    ft_strjoin: Joins two strings into a new string.
+    ft_substr: Extracts a substring from a given string.
+    ft_strmapi: Applies a function to each character of a string, creating a new string.
+    ft_striteri: Applies a function to each character of a string in place.
+
+2. Memory Management Functions
+
+Implementing these can provide more control and safety over memory operations.
+
+    ft_memset: Fills a block of memory with a specific value.
+    ft_memcpy: Copies a block of memory from one location to another.
+    ft_memmove: Similar to memcpy but handles overlapping memory regions.
+    ft_memcmp: Compares two blocks of memory.
+    ft_bzero: Sets a block of memory to zero.
+    ft_calloc: Allocates memory and initializes it to zero. (done)
+
+3. Character Checking and Conversion
+
+These functions are essential for parsing and validating data.
+
+    ft_isalpha, ft_isdigit, ft_isalnum, ft_isascii, ft_isprint: Check character types.
+    ft_toupper, ft_tolower: Convert characters to upper or lower case.
+
+4. Conversion Functions
+
+Facilitate the conversion between different data types.
+
+    ft_atoi: Converts a string to an integer.
+    ft_itoa: Converts an integer to a string.
+    ft_strtol, ft_strtoul: Convert strings to long and unsigned long integers, respectively.
+
+5. Linked List Utilities
+
+Implementing linked lists can provide flexible data structures for various applications.
+
+    ft_lstnew: Creates a new list node.
+    ft_lstadd_front, ft_lstadd_back: Adds a node to the front or back of the list.
+    ft_lstdelone, ft_lstclear: Deletes nodes and clears the list.
+    ft_lstiter, ft_lstmap: Iterates over the list or maps it to a new list.
+
+6. File I/O Functions
+
+Enhance file handling capabilities with custom functions.
+
+    ft_fopen, ft_fclose, ft_fread, ft_fwrite: Basic file operations.
+    ft_fseek, ft_ftell: Navigate through files.
+    ft_fprintf: Formatted output to a file, similar to fprintf.
+
+7. Utility Functions
+
+General-purpose functions that can be widely useful.
+
+    ft_min, ft_max: Determine the minimum or maximum of two values.
+    ft_abs: Calculate the absolute value.
+    ft_swap: Swap two variables.
+    ft_clamp: Restrict a value to a specified range.
+
+8. Mathematical Functions
+
+Basic math operations can be very useful in various applications.
+
+    ft_sqrt: Calculate the square root.
+    ft_pow: Raise a number to a power.
+    ft_exp: Calculate the exponential function.
+
+9. Advanced Data Structures
+
+Implementing these can provide more flexibility and efficiency.
+
+    ft_queue: A queue data structure for FIFO operations.
+    ft_stack: A stack data structure for LIFO operations.
+    ft_deque: A double-ended queue for more versatile operations.
+
+10. Bit Manipulation Functions
+
+Useful for low-level programming and optimization.
+
+    ft_bitset, ft_bitclear: Set or clear specific bits.
+    ft_bittoggle: Toggle specific bits.
+    ft_bitcheck: Check the status of specific bits.
+
+11. Error Handling Utilities
+
+Improving error reporting can make debugging easier.
+
+    ft_perror: Custom error printing similar to perror.
+    ft_exit: Gracefully exit the program with an error message.
+
+12. Additional Features
+
+Consider adding these to make your library even more robust.
+
+    ft_printf_fd Enhancements: Support more format specifiers or output to multiple file descriptors.
+    ft_readline Enhancements: Add history support or auto-completion. (history support is done)
+    ft_json_parser: Basic JSON parsing capabilities for handling structured data.
+    ft_xml_parser: Basic XML parsing capabilities.
+    ft_regex: Simple regular expression matching.
+
+13. Threading and Concurrency
+
+If your projects require parallel processing, these can be beneficial.
+
+    ft_mutex, ft_thread: Basic threading and synchronization primitives.
+
+14. Networking Utilities
+
+For network-related projects, consider implementing:
+
+    ft_socket: Simplified socket creation and management.
+    ft_bind, ft_listen, ft_accept: Basic networking operations.
+
+15. Configuration and Environment Utilities
+
+Handling configurations and environment variables can make your applications more flexible.
+
+    ft_getenv, ft_setenv: Manage environment variables.
+    ft_config_parse: Parse configuration files.
