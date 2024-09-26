@@ -34,7 +34,7 @@ int read_key() {
     return c;
 }
 
-char *my_readline(const char *prompt) {
+char *ft_readline(const char *prompt) {
     enable_raw_mode();
 
     int bufsize = INITIAL_BUFFER_SIZE;
@@ -136,24 +136,3 @@ char *my_readline(const char *prompt) {
     disable_raw_mode();
     return buffer;
 }
-
-/*
-int main() {
-    while (1) {
-        char *line = my_readline("my_shell> ");
-        if (strcmp(line, "exit") == 0) {
-            free(line);
-            break;
-        }
-        printf("You entered: %s\n", line);
-        free(line);
-    }
-
-    // Free history
-    for (int i = 0; i < history_count; i++) {
-        free(history[i]);
-    }
-
-    return 0;
-}
-*/
