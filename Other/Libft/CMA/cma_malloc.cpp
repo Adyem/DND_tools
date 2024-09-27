@@ -11,7 +11,7 @@
 
 Page *page_list = nullptr;
 
-inline size_t align8(size_t size)
+size_t align8(size_t size)
 {
     return ((size + 7) & ~7);
 }

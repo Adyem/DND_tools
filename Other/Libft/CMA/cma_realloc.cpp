@@ -8,11 +8,6 @@
 #include <csignal>
 #include "CMA.hpp"
 
-inline size_t align8(size_t size)
-{
-    return ((size + 7) & ~7);
-}
-
 void* cma_realloc(void* ptr, size_t new_size, bool critical)
 {
     if (ptr == nullptr)

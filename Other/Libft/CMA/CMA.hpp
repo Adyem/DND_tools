@@ -61,6 +61,6 @@ void	*cma_calloc(int count, int size, bool criticality);
 void	*cma_realloc(void* ptr, size_t new_size, bool critical);
 
 //utils
-inline size_t	align8(size_t size);
+size_t	align8(size_t size);
 
 #endif
