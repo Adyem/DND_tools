@@ -21,11 +21,7 @@
 # include <unistd.h>
 # include <stddef.h>
 
-char	*ft_strjoin_gnl(char *string_1, char *string_2);
-char	*leftovers(char *readed_string);
-char	*malloc_gnl(char *readed_string, size_t i);
-char	*fetch_line(char *readed_string);
-char	*get_next_line(int fd);
-char	**read_file(int fd);
+char	*ft_strjoin_gnl(char *string_1, char *string_2, bool critical);
+char	*get_next_line(int fd, bool crticail);
 
 #endif
