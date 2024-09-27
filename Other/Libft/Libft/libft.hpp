@@ -3,5 +3,6 @@
 
 int	ft_strlen(char *string);
 char	*ft_strchr(const char *s, int i);
+int	ft_atoi(const char *str);
 
 #endif

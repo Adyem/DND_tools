@@ -87,14 +87,6 @@ Implementing these can provide more flexibility and efficiency.
     ft_stack: A stack data structure for LIFO operations.
     ft_deque: A double-ended queue for more versatile operations.
 
-10. Bit Manipulation Functions
-
-Useful for low-level programming and optimization.
-
-    ft_bitset, ft_bitclear: Set or clear specific bits.
-    ft_bittoggle: Toggle specific bits.
-    ft_bitcheck: Check the status of specific bits.
-
 11. Error Handling Utilities
 
 Improving error reporting can make debugging easier.
