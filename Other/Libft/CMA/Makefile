@@ -8,7 +8,12 @@ TARGET := CustomMemoryAllocator.a
 
 SRCS := cma_calloc.cpp \
         cma_strdup.cpp \
-        custom_allocator.cpp
+		cma_malloc.cpp \
+		cma_free.cpp \
+		cma_cleanup_all_memory.cpp \
+		cma_cleanup_non_critical_memory.cpp \
+		cma_add_page.cpp \
+		cma_realloc.cpp
 
 HEADERS := CMA.hpp
 
