@@ -14,7 +14,7 @@
 #include "../CMA/CMA.hpp"
 #include "get_next_line.hpp"
 
-char	*leftovers(char *readed_string, bool critical)
+static char	*leftovers(char *readed_string, bool critical)
 {
 	int		i;
 	int		j;
@@ -40,7 +40,7 @@ char	*leftovers(char *readed_string, bool critical)
 	return (string);
 }
 
-char	*malloc_gnl(char *readed_string, size_t i, bool critical)
+static char	*malloc_gnl(char *readed_string, size_t i, bool critical)
 {
 	char	*string;
 
@@ -53,7 +53,7 @@ char	*malloc_gnl(char *readed_string, size_t i, bool critical)
 	return (string);
 }
 
-char	*fetch_line(char *readed_string, bool critical)
+static char	*fetch_line(char *readed_string, bool critical)
 {
 	size_t	i;
 	char	*string;
@@ -81,7 +81,7 @@ char	*fetch_line(char *readed_string, bool critical)
 	return (string);
 }
 
-char	*read_fd(int fd, char *readed_string, bool critical)
+static char	*read_fd(int fd, char *readed_string, bool critical)
 {
 	char	*buffer;
 	int		readed_bytes;
@@ -115,7 +115,7 @@ char	*get_next_line(int fd, bool critical)
 	i = 0;
 	while (fd == -1 && i < 4096)
 	{
-		free(readed_string[i]);
+		cma_free(readed_string[i]);
 		readed_string[i] = nullptr;
 		i++;
 	}
