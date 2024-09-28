@@ -1,0 +1,56 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/lock_mutex.o",
+      "lock_mutex.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/PThread",
+    "file": "/home/adyem/DND_tools/Other/Libft/PThread/lock_mutex.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/PThread/objs/lock_mutex.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/unlock_mutex.o",
+      "unlock_mutex.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/PThread",
+    "file": "/home/adyem/DND_tools/Other/Libft/PThread/unlock_mutex.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/PThread/objs/unlock_mutex.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/try_lock_mutex.o",
+      "try_lock_mutex.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/Other/Libft/PThread",
+    "file": "/home/adyem/DND_tools/Other/Libft/PThread/try_lock_mutex.cpp",
+    "output": "/home/adyem/DND_tools/Other/Libft/PThread/objs/try_lock_mutex.o"
+  }
+]

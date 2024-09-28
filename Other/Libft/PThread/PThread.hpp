@@ -8,9 +8,9 @@
 
 typedef struct t_mutex
 {
-    std::atomic<bool>	lock = {false};
-    std::atomic<int>	thread_id = {-1};
-    std::queue<int>		wait_queue;
+	std::atomic<bool>	lock = {false};
+	std::atomic<int>	thread_id = {-1};
+	std::queue<int>		wait_queue;
 	std::atomic<bool>	lock_released = {false};
 } s_mutex;
 

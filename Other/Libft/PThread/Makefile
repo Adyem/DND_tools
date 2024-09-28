@@ -7,7 +7,8 @@ OBJDIR := objs
 TARGET := PThread.a
 
 SRCS := lock_mutex.cpp \
-		unlock_mutex.cpp
+	unlock_mutex.cpp \
+	try_lock_mutex.cpp
 
 HEADERS := PThread.hpp
 
