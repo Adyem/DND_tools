@@ -8,13 +8,15 @@ TARGET := PThread.a
 
 SRCS := lock_mutex.cpp \
 	unlock_mutex.cpp \
-	try_lock_mutex.cpp
+	try_lock_mutex.cpp \
+	thread_join.cpp \
+	thread_create.cpp
 
 HEADERS := PThread.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 
-CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
+CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17 -pthread
 
 all: $(TARGET)
 
