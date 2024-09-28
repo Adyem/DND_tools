@@ -108,7 +108,8 @@ Consider adding these to make your library even more robust.
 
 If your projects require parallel processing, these can be beneficial.
 
-    ft_mutex, ft_thread: Basic threading and synchronization primitives.
+    ft_mutex
+    ft_thread: Basic threading and synchronization primitives.
 
 14. Networking Utilities
 

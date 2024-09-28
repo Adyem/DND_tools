@@ -7,13 +7,15 @@ TARGET := Full_Libft.a
 SUBDIRS := CMA \
 	   GetNextLine \
 	   Libft Printf \
-	   ReadLine
+	   ReadLine \
+	   PThread
 
 LIBS := CMA/CustomMemoryAllocator.a \
         GetNextLine/GetNextLine.a \
         Libft/LibFT.a \
         Printf/Printf.a \
-        ReadLine/ReadLine.a
+        ReadLine/ReadLine.a \
+		PThread/PThread.a
 
 all: $(TARGET)
 
