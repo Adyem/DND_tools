@@ -16,7 +16,7 @@ HEADERS := PThread.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 
-CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17 -pthread
+CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
 
 all: $(TARGET)
 
