@@ -13,7 +13,10 @@ SRCS := cma_calloc.cpp \
 		cma_cleanup_all_memory.cpp \
 		cma_cleanup_non_critical_memory.cpp \
 		cma_add_page.cpp \
-		cma_realloc.cpp
+		cma_realloc.cpp \
+		cma_itoa.cpp \
+		cma_split.cpp \
+		cma_strjoin.cpp
 
 HEADERS := CMA.hpp
 
