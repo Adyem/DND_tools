@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include <iostream>
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 
 void ft_update_buff_status(t_char *info, int current_dur, int duration, const char *buff_name)
 {

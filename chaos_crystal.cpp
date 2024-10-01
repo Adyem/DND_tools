@@ -1,7 +1,7 @@
 #include <cerrno>
 #include "dnd_tools.hpp"
 #include "chaos_crystal.hpp"
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>

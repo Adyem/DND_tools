@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "character.hpp"
-#include "libft/libft/libft.hpp"
+#include "libft/CMA/CMA.hpp"
+#include "libft/Libft/libft.hpp"
 #include <iostream>
 
 void ft_free_memory_name(t_name *name, int exit_failure)
@@ -12,8 +13,8 @@ void ft_free_memory_name(t_name *name, int exit_failure)
     while (current != nullptr)
     {
         next_node = current->next;
-        free(current->name);
-        free(current);
+        cma_free(current->name);
+        cma_free(current);
         current = next_node;
     }
 	if (exit_failure)
@@ -25,16 +26,16 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *n
 {
     t_name *new_node;
 
-    new_node = (t_name *)malloc(sizeof(t_name));
+    new_node = (t_name *)cma_malloc(sizeof(t_name), true);
     if (!new_node)
     {
         std::cerr << "112-Error: Malloc failure in Name Struct" << std::endl;
         ft_free_memory_name(first_node, 1);
     }
-    new_node->name = ft_strdup(new_name);
+    new_node->name = cma_strdup(new_name, true);
     if (!new_node->name)
     {
-        free(new_node);
+        cma_free(new_node);
         std::cerr << "113-Error: Malloc failure in Name Struct" << std::endl;
         ft_free_memory_name(first_node, 1);
     }
@@ -54,7 +55,7 @@ static char *ft_new_name(const char *name, int index)
     char *new_name;
 
     new_name_length = ft_strlen(name) + 4;
-    new_name = (char *)ft_calloc(new_name_length, sizeof(char));
+    new_name = (char *)cma_calloc(new_name_length, sizeof(char), true);
     if (!new_name)
     {
         std::cerr << "114-Error: Malloc failure in Name Struct" << std::endl;
@@ -83,7 +84,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char
         if (DEBUG == 1)
             std::cout << new_name << std::endl;
         ft_add_node(first_node, last_node, new_name, function);
-        free(new_name);
+        cma_free(new_name);
         i++;
     }
 }

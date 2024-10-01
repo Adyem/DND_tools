@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "chaos_goblin.hpp"
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 #include <iostream>
 
 void ft_chaos_goblin_turn(t_char *info)

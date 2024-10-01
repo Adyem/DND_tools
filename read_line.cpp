@@ -2,7 +2,7 @@
 #include <iostream>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 
 static char	**ft_parse_input(char *input_string)
 {

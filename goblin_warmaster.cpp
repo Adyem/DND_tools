@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "goblin_warmaster.hpp"
 #include <iostream>
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 
 void ft_goblin_warmaster_turn(t_char *info)
 {

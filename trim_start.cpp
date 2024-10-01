@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include <cstdlib>
 #include <cstring>
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 
 static size_t str_len(const char *str)
 {

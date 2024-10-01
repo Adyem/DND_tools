@@ -2,7 +2,7 @@
 #include <climits>
 #include <cstdlib>
 #include <iostream>
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 
 int ft_check_value_roll(const char *str)
 {

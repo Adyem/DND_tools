@@ -80,7 +80,7 @@ void ft_command_roll(char **argv)
     i = 1;
     while (argv[i])
     {
-        result = ft_strjoin_gnl(result, argv[i]);
+        result = ft_strjoin_gnl_old(result, argv[i]);
         if (!result)
         {
             std::cerr << "168-Error: Malloc failed in ft_strjoin_gnl" << std::endl;

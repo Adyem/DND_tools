@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include <iostream>
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 
 int ft_update_caster_name(char ***caster_name, const char *input_name)
 {

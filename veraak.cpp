@@ -1,4 +1,4 @@
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 #include "veraak.hpp"
 #include <iostream>

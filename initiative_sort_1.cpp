@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 #include <iostream>
 #include <cstring>
 #include <cerrno>

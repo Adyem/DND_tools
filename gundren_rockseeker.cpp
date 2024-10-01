@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "gundren_rockseeker.hpp"
 #include <iostream>
-#include "libft/libft/libft.hpp"
+#include "libft/Libft/libft.hpp"
 
 void ft_gundren_rockseeker_turn(t_char *info)
 {
