@@ -100,6 +100,22 @@ void	*cma_malloc(int size, bool critical)
     first_block->critical = critical;
     first_block->next = nullptr;
     first_block->prev = nullptr;
+    size_t remaining_size = alloc_size - sizeof(Page) - sizeof(Block) - size;
+    if (remaining_size >= sizeof(Block) + 8)
+    {
+        Block* free_block = (Block*)((char*)first_block + sizeof(Block) + size);
+        UNPROTECT_METADATA(free_block, sizeof(Block));
+        free_block->magic = MAGIC_NUMBER;
+        free_block->size = remaining_size;
+        free_block->free = true;
+        free_block->critical = critical;
+        free_block->next = nullptr;
+        free_block->prev = first_block;
+        first_block->next = free_block;
+        PROTECT_METADATA(free_block, sizeof(Block));
+    }
+    else
+        first_block->size += remaining_size;
     new_page->blocks = first_block;
     PROTECT_METADATA(first_block, sizeof(Block));
     PROTECT_METADATA(new_page, sizeof(Page));
