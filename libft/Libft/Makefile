@@ -23,7 +23,10 @@ SRCS := ft_atoi.cpp \
 	ft_strlen.cpp \
 	ft_strncmp.cpp \
 	ft_strnstr.cpp \
-	ft_strrchr.cpp
+	ft_strrchr.cpp \
+	ft_atoi.cpp \
+	ft_isdigit.cpp \
+	ft_itoa.cpp
 
 HEADERS := libft.hpp
 

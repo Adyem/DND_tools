@@ -108,7 +108,7 @@ CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17
 
 LIBFT_DIR   = ./libft
-LIBFT       = $(LIBFT_DIR)/libftprintf.a
+LIBFT       = $(LIBFT_DIR)/Full_Libft.a
 
 OBJ_DIR     = ./objs
 OBJ_DIR_DEBUG = ./objs_debug
@@ -121,7 +121,7 @@ else
     TARGET = $(NAME)
 endif
 
-LDFLAGS     = -L$(LIBFT_DIR) -lftprintf -lreadline 
+LDFLAGS     = $(LIBFT) -lreadline 
 
 OBJS = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 

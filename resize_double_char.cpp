@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
+#include <cstdlib>
 
 char **ft_resize_double_char(char **double_string, const char *string, int size)
 {
