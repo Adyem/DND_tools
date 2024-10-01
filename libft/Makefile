@@ -1,47 +1,53 @@
-NAME			= libftprintf.a
+CXX := g++
+AR := ar
+ARFLAGS := rcs
 
-library			= libftprintf
+TARGET := Full_Libft.a
 
-LIBFT_DIR			= libft
-PRINTF_DIR			= printf
-GET_NEXT_LINE_DIR	= get_next_line
-PRINTF_FD_DIR		= printf_fd
+SUBDIRS := CMA \
+	   GetNextLine \
+	   Libft \
+	   Printf \
+	   ReadLine \
+	   PThread \
+	   get_next_line
 
-LIBFT				= $(LIBFT_DIR)/libft.a
-PRINTF				= $(PRINTF_DIR)/printf.a
-GET_NEXT_LINE		= $(GET_NEXT_LINE_DIR)/get_next_line.a
-PRINTF_FD			= $(PRINTF_FD_DIR)/printf_fd.a
+LIBS := CMA/CustomMemoryAllocator.a \
+        GetNextLine/GetNextLine.a \
+        Libft/LibFT.a \
+        Printf/Printf.a \
+        ReadLine/ReadLine.a \
+	PThread/PThread.a \
+	get_next_line/get_next_line.a
 
-all: $(NAME)
+all: $(TARGET)
 
-$(NAME): $(LIBFT) $(PRINTF) $(GET_NEXT_LINE) $(PRINTF_FD)
-	cp $(LIBFT) $(NAME)
-	ar -x $(PRINTF)
-	ar -x $(GET_NEXT_LINE)
-	ar -x $(PRINTF_FD)
-	ar -rs $(NAME) *.o
+$(TARGET): $(LIBS)
+	rm -f $(TARGET)
+	mkdir -p temp_objs
+	for lib in $(LIBS); do \
+		cd temp_objs && $(AR) x ../$$lib; \
+		cd ..; \
+	done
+	$(AR) $(ARFLAGS) $(TARGET) temp_objs/*.o
+	rm -rf temp_objs
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
-
-$(PRINTF):
-	$(MAKE) -C $(PRINTF_DIR)
-
-$(PRINTF_FD):
-	$(MAKE) -C $(PRINTF_FD_DIR)
-
-$(GET_NEXT_LINE):
-	$(MAKE) -C $(GET_NEXT_LINE_DIR)
+$(LIBS):
+	@for dir in $(SUBDIRS); do \
+		$(MAKE) -C $$dir; \
+	done
 
 clean:
-	$(MAKE) -C $(LIBFT_DIR)  fclean
-	$(MAKE) -C $(PRINTF_DIR) fclean
-	$(MAKE) -C $(GET_NEXT_LINE_DIR) fclean
-	$(MAKE) -C $(PRINTF_FD_DIR) fclean
-	rm -f *.o
+	@for dir in $(SUBDIRS); do \
+		$(MAKE) -C $$dir clean; \
+	done
+	rm -f $(TARGET)
 
 fclean: clean
-	rm -f $(NAME)
+	@for dir in $(SUBDIRS); do \
+		$(MAKE) -C $$dir fclean; \
+	done
+	rm -f $(TARGET)
 
 re: fclean all
 

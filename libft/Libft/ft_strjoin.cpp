@@ -1,7 +1,7 @@
-#include "get_next_line.hpp"
-#include "../Libft/libft.hpp"
+#include "libft.hpp"
+#include <cstdlib>
 
-static char	*allocate_new_string_old(char *string_1, char *string_2)
+static char	*allocate_new_string(const char *string_1, const char *string_2)
 {
 	int		total_len;
 	char	*new_str;
@@ -17,26 +17,23 @@ static char	*allocate_new_string_old(char *string_1, char *string_2)
 	return (new_str);
 }
 
-char	*ft_strjoin_gnl_old(char *string_1, char *string_2)
+char	*ft_strjoin(char const *string_1, char const *string_2)
 {
 	char	*result;
-	char	*original_string;
 	int		i;
 
 	if (!string_1 && !string_2)
 		return (nullptr);
-	original_string = string_1;
-	result = allocate_new_string_old(string_1, string_2);
+	result = allocate_new_string(string_1, string_2);
 	if (!result)
 		return (nullptr);
 	i = 0;
 	if (string_1)
-		while (*string_1)
+		while (string_1[0])
 			result[i++] = *string_1++;
 	if (string_2)
-		while (*string_2)
+		while (string_2[0])
 			result[i++] = *string_2++;
 	result[i] = '\0';
-	free (original_string);
 	return (result);
 }

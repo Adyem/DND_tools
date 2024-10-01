@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstring>
 #include <cerrno>
+#include <unistd.h>
 
 static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
 {

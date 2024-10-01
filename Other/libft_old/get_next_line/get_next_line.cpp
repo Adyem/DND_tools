@@ -1,7 +1,18 @@
-#include "get_next_line.hpp"
-#include "../Libft/libft.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bvangene <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/05 11:27:29 by bvangene          #+#    #+#             */
+/*   Updated: 2023/12/09 15:14:21 by adyem            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char	*leftovers_old(char *readed_string)
+#include "get_next_line.hpp"
+
+char	*leftovers(char *readed_string)
 {
 	int		i;
 	int		j;
@@ -27,7 +38,7 @@ char	*leftovers_old(char *readed_string)
 	return (string);
 }
 
-char	*malloc_gnl_old(char *readed_string, size_t i)
+char	*malloc_gnl(char *readed_string, size_t i)
 {
 	char	*string;
 
@@ -40,7 +51,7 @@ char	*malloc_gnl_old(char *readed_string, size_t i)
 	return (string);
 }
 
-char	*fetch_line_old(char *readed_string)
+char	*fetch_line(char *readed_string)
 {
 	size_t	i;
 	char	*string;
@@ -50,7 +61,7 @@ char	*fetch_line_old(char *readed_string)
 		return (nullptr);
 	while (readed_string[i] && readed_string[i] != '\n')
 		i++;
-	string = malloc_gnl_old(readed_string, i);
+	string = malloc_gnl(readed_string, i);
 	if (!string)
 		return (nullptr);
 	i = 0;
@@ -68,7 +79,7 @@ char	*fetch_line_old(char *readed_string)
 	return (string);
 }
 
-char	*read_fd_old(int fd, char *readed_string)
+char	*read_fd(int fd, char *readed_string)
 {
 	char	*buffer;
 	int		readed_bytes;
@@ -87,13 +98,13 @@ char	*read_fd_old(int fd, char *readed_string)
 			return (nullptr);
 		}
 		buffer[readed_bytes] = '\0';
-		readed_string = ft_strjoin_gnl_old(readed_string, buffer);
+		readed_string = ft_strjoin_gnl(readed_string, buffer);
 	}
 	free(buffer);
 	return (readed_string);
 }
 
-char	*get_next_line_old(int fd)
+char	*get_next_line(int fd)
 {
 	char		*string;
 	static char	*readed_string[4096];
@@ -108,10 +119,10 @@ char	*get_next_line_old(int fd)
 	}
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (nullptr);
-	readed_string[fd] = read_fd_old(fd, readed_string[fd]);
+	readed_string[fd] = read_fd(fd, readed_string[fd]);
 	if (!readed_string[fd])
 		return (nullptr);
-	string = fetch_line_old(readed_string[fd]);
-	readed_string[fd] = leftovers_old(readed_string[fd]);
+	string = fetch_line(readed_string[fd]);
+	readed_string[fd] = leftovers(readed_string[fd]);
 	return (string);
 }

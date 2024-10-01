@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/get_next_line/get_next_line.hpp"
+#include "libft/GetNextLine/get_next_line.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
@@ -56,7 +56,7 @@ char **ft_read_file_dnd(int fd)
 
     while (1)
     {
-        line = get_next_line(fd);
+        line = get_next_line(fd, false);
         if (!line)
             break;
         i++;
@@ -104,7 +104,7 @@ char **ft_open_and_read(const char *file)
     ft_print_file(content);
     if (!content)
     {
-        get_next_line(-1);
+        get_next_line(-1, false);
         std::cerr << "Error allocating memory for content inside file" << std::endl;
     }
     return (content);
