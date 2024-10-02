@@ -6,6 +6,7 @@
 static size_t str_len(const char *str)
 {
     size_t i = 0;
+
     while (str[i])
         i++;
     return (i);
@@ -14,6 +15,7 @@ static size_t str_len(const char *str)
 static char *str_new(size_t n)
 {
     char *str = (char *)malloc(sizeof(char) * (n + 1));
+
     if (!str)
         return (nullptr);
     for (size_t i = 0; i <= n; i++)
@@ -29,7 +31,6 @@ char *ft_strtrim_prefix(const char *s1, const char *prefix)
 
     if (!s1 || !prefix)
         return (nullptr);
-
     prefix_len = str_len(prefix);
     s1_len = str_len(s1);
 
@@ -47,6 +48,5 @@ char *ft_strtrim_prefix(const char *s1, const char *prefix)
             return (nullptr);
         strcpy(trimmed_str, s1);
     }
-
     return (trimmed_str);
 }

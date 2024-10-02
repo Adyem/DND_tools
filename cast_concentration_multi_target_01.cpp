@@ -17,13 +17,13 @@ static int ft_open_target_files(t_char *info, t_char **target, int *fd, char **s
         if (!target[i] || !target[i]->save_file)
         {
             std::cerr << "112-Error: invalid target or missing save file\n";
-            break;
+            break ;
         }
         fd[i] = open(target[i]->save_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
         if (fd[i] == -1)
         {
             std::cerr << "113-Error: opening file " << target[i]->save_file << '\n';
-            break;
+            break ;
         }
 		i++;
     }
@@ -55,8 +55,7 @@ static int ft_open_target_files(t_char *info, t_char **target, int *fd, char **s
         }
         return 0;
     }
-    else
-        return 1;
+	return 1;
 }
 
 
@@ -167,5 +166,6 @@ void ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff
         i++;
     }
     if (!ft_open_target_files(info, target, fd, string, buff->target_amount))
-        return;
+		return ;
+	return ;
 }

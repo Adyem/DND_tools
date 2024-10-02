@@ -5,15 +5,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_strlen.o",
-      "ft_strlen.cpp"
+      "objs/cma_calloc.o",
+      "cma_calloc.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strlen.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strlen.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_calloc.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_calloc.o"
   },
   {
     "arguments": [
@@ -21,15 +23,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_memmove.o",
-      "ft_memmove.cpp"
+      "objs/cma_strdup.o",
+      "cma_strdup.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_memmove.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_memmove.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_strdup.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_strdup.o"
   },
   {
     "arguments": [
@@ -37,15 +41,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_memcpy.o",
-      "ft_memcpy.cpp"
+      "objs/cma_malloc.o",
+      "cma_malloc.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_memcpy.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_memcpy.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_malloc.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_malloc.o"
   },
   {
     "arguments": [
@@ -53,15 +59,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_strlcpy.o",
-      "ft_strlcpy.cpp"
+      "objs/cma_free.o",
+      "cma_free.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strlcpy.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strlcpy.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_free.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_free.o"
   },
   {
     "arguments": [
@@ -69,15 +77,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_strlcat.o",
-      "ft_strlcat.cpp"
+      "objs/cma_cleanup_all_memory.o",
+      "cma_cleanup_all_memory.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strlcat.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strlcat.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_cleanup_all_memory.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_cleanup_all_memory.o"
   },
   {
     "arguments": [
@@ -85,15 +95,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_isalpha.o",
-      "ft_isalpha.cpp"
+      "objs/cma_cleanup_non_critical_memory.o",
+      "cma_cleanup_non_critical_memory.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_isalpha.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_isalpha.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_cleanup_non_critical_memory.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_cleanup_non_critical_memory.o"
   },
   {
     "arguments": [
@@ -101,15 +113,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_isdigit.o",
-      "ft_isdigit.cpp"
+      "objs/cma_add_page.o",
+      "cma_add_page.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_isdigit.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_isdigit.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_add_page.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_add_page.o"
   },
   {
     "arguments": [
@@ -117,15 +131,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_isalnum.o",
-      "ft_isalnum.cpp"
+      "objs/cma_realloc.o",
+      "cma_realloc.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_isalnum.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_isalnum.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_realloc.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_realloc.o"
   },
   {
     "arguments": [
@@ -133,15 +149,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_isascii.o",
-      "ft_isascii.cpp"
+      "objs/cma_itoa.o",
+      "cma_itoa.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_isascii.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_isascii.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_itoa.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_itoa.o"
   },
   {
     "arguments": [
@@ -149,15 +167,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_isprint.o",
-      "ft_isprint.cpp"
+      "objs/cma_split.o",
+      "cma_split.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_isprint.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_isprint.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_split.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_split.o"
   },
   {
     "arguments": [
@@ -165,15 +185,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_memset.o",
-      "ft_memset.cpp"
+      "objs/cma_strjoin.o",
+      "cma_strjoin.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_memset.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_memset.o"
+    "directory": "/home/adyem/DND_tools/libft/CMA",
+    "file": "/home/adyem/DND_tools/libft/CMA/cma_strjoin.cpp",
+    "output": "/home/adyem/DND_tools/libft/CMA/objs/cma_strjoin.o"
   },
   {
     "arguments": [
@@ -181,15 +203,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_bzero.o",
-      "ft_bzero.cpp"
+      "objs/get_next_line.o",
+      "get_next_line.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_bzero.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_bzero.o"
+    "directory": "/home/adyem/DND_tools/libft/GetNextLine",
+    "file": "/home/adyem/DND_tools/libft/GetNextLine/get_next_line.cpp",
+    "output": "/home/adyem/DND_tools/libft/GetNextLine/objs/get_next_line.o"
   },
   {
     "arguments": [
@@ -197,15 +221,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_toupper.o",
-      "ft_toupper.cpp"
+      "objs/get_next_line_utils.o",
+      "get_next_line_utils.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_toupper.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_toupper.o"
+    "directory": "/home/adyem/DND_tools/libft/GetNextLine",
+    "file": "/home/adyem/DND_tools/libft/GetNextLine/get_next_line_utils.cpp",
+    "output": "/home/adyem/DND_tools/libft/GetNextLine/objs/get_next_line_utils.o"
   },
   {
     "arguments": [
@@ -213,127 +239,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_tolower.o",
-      "ft_tolower.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_tolower.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_tolower.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_strchr.o",
-      "ft_strchr.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strchr.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strchr.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_strrchr.o",
-      "ft_strrchr.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strrchr.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strrchr.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_strncmp.o",
-      "ft_strncmp.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strncmp.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strncmp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_memchr.o",
-      "ft_memchr.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_memchr.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_memchr.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_memcmp.o",
-      "ft_memcmp.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_memcmp.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_memcmp.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_strnstr.o",
-      "ft_strnstr.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strnstr.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strnstr.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_atoi.o",
+      "objs/ft_atoi.o",
       "ft_atoi.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_atoi.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_atoi.o"
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_atoi.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_atoi.o"
   },
   {
     "arguments": [
@@ -341,15 +257,35 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_calloc.o",
+      "objs/ft_bzero.o",
+      "ft_bzero.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_bzero.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_bzero.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_calloc.o",
       "ft_calloc.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_calloc.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_calloc.o"
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_calloc.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_calloc.o"
   },
   {
     "arguments": [
@@ -357,15 +293,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_strdup.o",
-      "ft_strdup.cpp"
+      "objs/ft_memchr.o",
+      "ft_memchr.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strdup.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strdup.o"
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_memchr.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_memchr.o"
   },
   {
     "arguments": [
@@ -373,15 +311,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_substr.o",
-      "ft_substr.cpp"
+      "objs/ft_memcmp.o",
+      "ft_memcmp.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_substr.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_substr.o"
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_memcmp.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_memcmp.o"
   },
   {
     "arguments": [
@@ -389,15 +329,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_strjoin.o",
-      "ft_strjoin.cpp"
+      "objs/ft_memcpy.o",
+      "ft_memcpy.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strjoin.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strjoin.o"
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_memcpy.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_memcpy.o"
   },
   {
     "arguments": [
@@ -405,15 +347,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_strtrim.o",
-      "ft_strtrim.cpp"
+      "objs/ft_memmove.o",
+      "ft_memmove.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strtrim.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strtrim.o"
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_memmove.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_memmove.o"
   },
   {
     "arguments": [
@@ -421,15 +365,35 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_split.o",
+      "objs/ft_memset.o",
+      "ft_memset.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_memset.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_memset.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_split.o",
       "ft_split.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_split.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_split.o"
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_split.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_split.o"
   },
   {
     "arguments": [
@@ -437,15 +401,197 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_itoa.o",
+      "objs/ft_strchr.o",
+      "ft_strchr.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strchr.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_strdup.o",
+      "ft_strdup.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strdup.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strdup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_strjoin.o",
+      "ft_strjoin.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strjoin.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strjoin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_strlcat.o",
+      "ft_strlcat.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strlcat.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strlcat.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_strlcpy.o",
+      "ft_strlcpy.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strlcpy.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strlcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_strlen.o",
+      "ft_strlen.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strlen.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strlen.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_strncmp.o",
+      "ft_strncmp.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strncmp.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strncmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_strnstr.o",
+      "ft_strnstr.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strnstr.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strnstr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_strrchr.o",
+      "ft_strrchr.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_strrchr.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_strrchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_isdigit.o",
+      "ft_isdigit.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_isdigit.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_isdigit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/ft_itoa.o",
       "ft_itoa.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_itoa.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_itoa.o"
+    "directory": "/home/adyem/DND_tools/libft/Libft",
+    "file": "/home/adyem/DND_tools/libft/Libft/ft_itoa.cpp",
+    "output": "/home/adyem/DND_tools/libft/Libft/objs/ft_itoa.o"
   },
   {
     "arguments": [
@@ -453,383 +599,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "ft_strmapi.o",
-      "ft_strmapi.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_strmapi.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_strmapi.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_striteri.o",
-      "ft_striteri.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_striteri.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_striteri.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_putchar_fd.o",
-      "ft_putchar_fd.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_putchar_fd.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_putchar_fd.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_putstr_fd.o",
-      "ft_putstr_fd.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_putstr_fd.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_putstr_fd.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_putendl_fd.o",
-      "ft_putendl_fd.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_putendl_fd.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_putendl_fd.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_putnbr_fd.o",
-      "ft_putnbr_fd.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_putnbr_fd.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_putnbr_fd.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_reverse_string.o",
-      "ft_reverse_string.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_reverse_string.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_reverse_string.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_size_t_to_hex.o",
-      "ft_size_t_to_hex.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_size_t_to_hex.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_size_t_to_hex.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_pointer_to_hex.o",
-      "ft_pointer_to_hex.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_pointer_to_hex.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_pointer_to_hex.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_long_to_hex.o",
-      "ft_long_to_hex.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_long_to_hex.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_long_to_hex.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_uitoa.o",
-      "ft_uitoa.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_uitoa.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_uitoa.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_ltoa.o",
-      "ft_ltoa.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_ltoa.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_ltoa.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_string_to_upper.o",
-      "ft_string_to_upper.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_string_to_upper.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_string_to_upper.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstlast.o",
-      "ft_lstlast.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstlast.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstlast.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstmap.o",
-      "ft_lstmap.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstmap.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstmap.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstnew.o",
-      "ft_lstnew.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstnew.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstnew.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstsize.o",
-      "ft_lstsize.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstsize.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstsize.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstclear.o",
-      "ft_lstclear.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstclear.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstclear.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstdelone.o",
-      "ft_lstdelone.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstdelone.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstdelone.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstadd_back.o",
-      "ft_lstadd_back.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstadd_back.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstadd_back.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstiter.o",
-      "ft_lstiter.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstiter.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstiter.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_lstadd_front.o",
-      "ft_lstadd_front.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_lstadd_front.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_lstadd_front.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_atol.o",
-      "ft_atol.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/libft",
-    "file": "/home/adyem/DND_tools/libft/libft/ft_atol.cpp",
-    "output": "/home/adyem/DND_tools/libft/libft/ft_atol.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_printf.o",
+      "objs/ft_printf.o",
       "ft_printf.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/printf",
-    "file": "/home/adyem/DND_tools/libft/printf/ft_printf.cpp",
-    "output": "/home/adyem/DND_tools/libft/printf/ft_printf.o"
+    "directory": "/home/adyem/DND_tools/libft/Printf",
+    "file": "/home/adyem/DND_tools/libft/Printf/ft_printf.cpp",
+    "output": "/home/adyem/DND_tools/libft/Printf/objs/ft_printf.o"
   },
   {
     "arguments": [
@@ -837,15 +617,17 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "write_char.o",
-      "write_char.cpp"
+      "objs/readline.o",
+      "readline.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/printf",
-    "file": "/home/adyem/DND_tools/libft/printf/write_char.cpp",
-    "output": "/home/adyem/DND_tools/libft/printf/write_char.o"
+    "directory": "/home/adyem/DND_tools/libft/ReadLine",
+    "file": "/home/adyem/DND_tools/libft/ReadLine/readline.cpp",
+    "output": "/home/adyem/DND_tools/libft/ReadLine/objs/readline.o"
   },
   {
     "arguments": [
@@ -853,15 +635,107 @@
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-g",
+      "-O0",
       "-std=c++17",
       "-c",
       "-o",
-      "write_number.o",
-      "write_number.cpp"
+      "objs/clear_history.o",
+      "clear_history.cpp"
     ],
-    "directory": "/home/adyem/DND_tools/libft/printf",
-    "file": "/home/adyem/DND_tools/libft/printf/write_number.cpp",
-    "output": "/home/adyem/DND_tools/libft/printf/write_number.o"
+    "directory": "/home/adyem/DND_tools/libft/ReadLine",
+    "file": "/home/adyem/DND_tools/libft/ReadLine/clear_history.cpp",
+    "output": "/home/adyem/DND_tools/libft/ReadLine/objs/clear_history.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/lock_mutex.o",
+      "lock_mutex.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/PThread",
+    "file": "/home/adyem/DND_tools/libft/PThread/lock_mutex.cpp",
+    "output": "/home/adyem/DND_tools/libft/PThread/objs/lock_mutex.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/unlock_mutex.o",
+      "unlock_mutex.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/PThread",
+    "file": "/home/adyem/DND_tools/libft/PThread/unlock_mutex.cpp",
+    "output": "/home/adyem/DND_tools/libft/PThread/objs/unlock_mutex.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/try_lock_mutex.o",
+      "try_lock_mutex.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/PThread",
+    "file": "/home/adyem/DND_tools/libft/PThread/try_lock_mutex.cpp",
+    "output": "/home/adyem/DND_tools/libft/PThread/objs/try_lock_mutex.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/thread_join.o",
+      "thread_join.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/PThread",
+    "file": "/home/adyem/DND_tools/libft/PThread/thread_join.cpp",
+    "output": "/home/adyem/DND_tools/libft/PThread/objs/thread_join.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/thread_create.o",
+      "thread_create.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/PThread",
+    "file": "/home/adyem/DND_tools/libft/PThread/thread_create.cpp",
+    "output": "/home/adyem/DND_tools/libft/PThread/objs/thread_create.o"
   },
   {
     "arguments": [
@@ -894,54 +768,6 @@
     "directory": "/home/adyem/DND_tools/libft/get_next_line",
     "file": "/home/adyem/DND_tools/libft/get_next_line/get_next_line_utils.cpp",
     "output": "/home/adyem/DND_tools/libft/get_next_line/get_next_line_utils.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "ft_printf_fd.o",
-      "ft_printf_fd.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/printf_fd",
-    "file": "/home/adyem/DND_tools/libft/printf_fd/ft_printf_fd.cpp",
-    "output": "/home/adyem/DND_tools/libft/printf_fd/ft_printf_fd.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "write_char_fd.o",
-      "write_char_fd.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/printf_fd",
-    "file": "/home/adyem/DND_tools/libft/printf_fd/write_char_fd.cpp",
-    "output": "/home/adyem/DND_tools/libft/printf_fd/write_char_fd.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-std=c++17",
-      "-c",
-      "-o",
-      "write_number_fd.o",
-      "write_number_fd.cpp"
-    ],
-    "directory": "/home/adyem/DND_tools/libft/printf_fd",
-    "file": "/home/adyem/DND_tools/libft/printf_fd/write_number_fd.cpp",
-    "output": "/home/adyem/DND_tools/libft/printf_fd/write_number_fd.o"
   },
   {
     "arguments": [
