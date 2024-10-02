@@ -76,7 +76,7 @@ void	*cma_malloc(int size, bool critical)
     size_t alloc_size = PAGE_SIZE;
     if (size + sizeof(Block) + sizeof(Page) > PAGE_SIZE)
         alloc_size = size + sizeof(Block) + sizeof(Page);
-    void* page_memory = ::operator new(alloc_size);
+    void* page_memory = ::operator new(alloc_size, std::nothrow);
     if (!page_memory)
         return (nullptr);
     memset(page_memory, 0, alloc_size);

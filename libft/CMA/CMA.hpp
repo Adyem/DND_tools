@@ -61,7 +61,7 @@ void	*cma_calloc(int count, int size, bool criticality);
 void	*cma_realloc(void* ptr, size_t new_size, bool critical);
 char	**cma_split(char const *s, char c, bool critical);
 char	*cma_itoa(int n, bool critical);
-char	*ft_strjoin(char const *string_1, char const *string_2, bool critical);
+char	*cma_strjoin(char const *string_1, char const *string_2, bool critical);
 
 //utils
 size_t	align8(size_t size);

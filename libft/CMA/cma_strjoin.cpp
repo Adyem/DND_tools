@@ -17,7 +17,7 @@ static char	*allocate_new_string(const char *string_1, const char *string_2, boo
 	return (new_str);
 }
 
-char	*ft_strjoin(char const *string_1, char const *string_2, bool critical)
+char	*cma_strjoin(char const *string_1, char const *string_2, bool critical)
 {
 	char	*result;
 	int		i;
