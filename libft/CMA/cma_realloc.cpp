@@ -3,10 +3,10 @@
 #include <cstring>
 #include <cstdio>
 #include <cassert>
-#include <iostream>
 #include <sys/mman.h>
 #include <csignal>
 #include "CMA.hpp"
+#include "../Printf/ft_printf.hpp"
 
 void* cma_realloc(void* ptr, size_t new_size, bool critical)
 {
@@ -22,7 +22,7 @@ void* cma_realloc(void* ptr, size_t new_size, bool critical)
     UNPROTECT_METADATA(block, sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
     {
-        std::cerr << "Invalid realloc detected at " << ptr << std::endl;
+		ft_printf_fd(2, "Invalid realloc detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     if (aligned_new_size <= block->size)

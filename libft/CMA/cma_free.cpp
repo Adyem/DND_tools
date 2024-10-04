@@ -2,12 +2,12 @@
 #include <cstring>
 #include <cstdio>
 #include <cassert>
-#include <iostream>
 #include <new>
 #include <sys/mman.h>
 #include <valgrind/memcheck.h>
 #include <csignal>
 #include "CMA.hpp"
+#include "../Printf/ft_printf.hpp"
 
 void cma_free(void* ptr)
 {
@@ -17,12 +17,12 @@ void cma_free(void* ptr)
     UNPROTECT_METADATA(block, sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
     {
-        std::cerr << "Invalid free detected at " << ptr << std::endl;
+		ft_printf_fd(2, "Invalid free detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     if (block->free)
     {
-        std::cerr << "Double free detected at " << ptr << std::endl;
+		ft_printf_fd(2, "Double free detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     block->free = true;
@@ -79,7 +79,7 @@ void cma_free(void* ptr)
     }
     if (!page)
     {
-        std::cerr << "Invalid free detected at " << ptr << std::endl;
+		ft_printf_fd(2, "Invalid free detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     Block* blk = page->blocks;
