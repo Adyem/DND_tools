@@ -49,25 +49,23 @@ char *resize_buffer(char *old_buffer, int current_size, int new_size)
 char *ft_readline(const char *prompt)
 {
     enable_raw_mode();
-
     int bufsize = INITIAL_BUFFER_SIZE;
     char *buffer = (char *)cma_malloc(bufsize, true);
     if (!buffer) {
         ft_printf_fd(2, "Allocation error\n");
-        exit(EXIT_FAILURE);
+		disable_raw_mode();
+        return (NULL);
     }
     int pos = 0;
     int history_index = history_count;
-
     ft_printf("%s", prompt);
     fflush(stdout);
-
     while (1) {
         int c = read_key();
 
         if (c == '\r' || c == '\n') {
             ft_printf("\n");
-            break;
+            break ;
         } else if (c == 127 || c == '\b') {
             if (pos > 0) {
                 pos--;
@@ -77,10 +75,9 @@ char *ft_readline(const char *prompt)
         } else if (c == 27) {
             char seq[2];
             if (read(STDIN_FILENO, &seq[0], 1) != 1)
-            	continue;
+            	continue ;
             if (read(STDIN_FILENO, &seq[1], 1) != 1)
-            	continue;
-
+            	continue ;
             if (seq[0] == '[') {
                 if (seq[1] == 'A') {
                     if (history_index > 0) {
@@ -127,9 +124,7 @@ char *ft_readline(const char *prompt)
             fflush(stdout);
         }
     }
-
     buffer[pos] = '\0';
-
     if (history_count < MAX_HISTORY) {
         history[history_count++] = cma_strdup(buffer, true);
     } else {
@@ -137,7 +132,6 @@ char *ft_readline(const char *prompt)
         memmove(&history[0], &history[1], sizeof(char*) * (MAX_HISTORY - 1));
         history[MAX_HISTORY - 1] = cma_strdup(buffer, true);
     }
-
     disable_raw_mode();
     return (buffer);
 }
