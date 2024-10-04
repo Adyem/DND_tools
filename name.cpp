@@ -95,9 +95,7 @@ t_name *ft_allocate_memory_name()
     t_name *last_node;
     t_name *first_node;
 
-    first_node = nullptr;
-    last_node = nullptr;
-    // Template is always the first node
+	last_node = nullptr;
     first_node = ft_add_node(nullptr, &last_node, "template", ft_template);
     ft_add_mob_series(first_node, &last_node, "template", ft_template, 10);
     ft_add_mob_series(first_node, &last_node, "goblin", ft_goblin, 10);

@@ -4,16 +4,20 @@ This is a beta version of the Custom Memory Allocator (CMA). To use the CMA, sim
 
 Features
 
-    Custom Memory Allocation: Allocate memory blocks with control over their criticality.
-    Memory Cleanup: Clean up non-critical or all allocated memory blocks.
-    Memory Availability Assurance: Ensure that sufficient memory is available for future allocations.
-    Optional Bypass Mode: Bypass the custom allocator for debugging or development purposes.
-    Block Coalescing: Automatically merge adjacent free blocks to reduce fragmentation.
-    Page Management: Allocate and manage memory pages for efficient memory usage.
-    Valgrind Support (Optional): If using Valgrind for memory checking, include the Valgrind headers 
-    and make the necessary calls. The CMA code includes optional Valgrind support.
+Custom Memory Allocation: Allocate memory blocks with control over their criticality.
+
+Memory Cleanup: Clean up non-critical or all allocated memory blocks.
+
+Memory Availability Assurance: Ensure that sufficient memory is available for future allocations.
+
+Block Coalescing: Automatically merge adjacent free blocks to reduce fragmentation.
+
+Page Management: Allocate and manage memory pages for efficient memory usage.
+
+Valgrind Support (Optional): If using Valgrind for memory checking, set the DEBUG macro to 1. In debug mode, Valgrind will protect blocks that include the metadata of memory allocations, enhancing memory safety.
 
 Function Overview
+
 cma_malloc
 
 void* cma_malloc(size_t size, bool critical);
@@ -22,11 +26,13 @@ Description
 
 Allocates a memory block of the specified size. The critical flag indicates whether the memory is critical to the application's operation.
 
-    Parameters:
-        size: The size of the memory block to allocate (in bytes).
-        critical: A boolean flag indicating whether the memory is critical (true) or non-critical (false).
+Parameters:
 
-    Returns: A pointer to the allocated memory block, or nullptr if the allocation fails.
+size: The size of the memory block to allocate (in bytes).
+
+critical: A boolean flag indicating whether the memory is critical (true) or non-critical (false).
+
+Returns: A pointer to the allocated memory block, or nullptr if the allocation fails.
 
 Usage
 
@@ -40,12 +46,15 @@ Description
 
 Frees a previously allocated memory block.
 
-    Parameters:
-        ptr: A pointer to the memory block to free.
+Parameters:
 
-    Notes:
-        If ptr is nullptr, the function does nothing.
-        The function checks for invalid or double frees and segfaults the program if detected.
+ptr: A pointer to the memory block to free.
+
+Notes:
+
+If ptr is nullptr, the function does nothing.
+
+The function checks for invalid or double frees. It is the user's responsibility to ensure that no invalid or double frees occur, similar to how free in C and delete in C++ must be used correctly. The program will segfault upon any invalid or double frees occurring. This can happen due to memory corruption affecting the magic key that the cma_free function relies on due to buffer overflows or underflows, freeing a pointer that doesn't lie within any of the pages that have been allocated, or freeing a pointer that is not pointing to the start of a memory block.
 
 Usage
 
@@ -58,6 +67,7 @@ void cma_cleanup_non_critical_memory();
 Description
 
 Cleans up all non-critical memory blocks that have been freed. This function is useful for releasing memory that is no longer needed but was marked as non-critical.
+
 Usage
 
 cma_cleanup_non_critical_memory(); // Clean up non-critical memory
@@ -69,6 +79,7 @@ void cma_cleanup_all_memory();
 Description
 
 Cleans up all allocated memory blocks, both critical and non-critical. This function should be called when the application is terminating or when all allocated memory is no longer needed.
+
 Usage
 
 cma_cleanup_all_memory(); // Clean up all memory
@@ -81,12 +92,15 @@ Description
 
 Ensures that sufficient memory is available for future allocations. This function pre-allocates memory to satisfy the requested sizes.
 
-    Parameters:
-        sizes: An array of sizes representing future memory allocation requests.
-        count: The number of elements in the sizes array.
-        critical: A boolean flag indicating whether the memory to be ensured is critical.
+Parameters:
 
-    Returns: true if memory was successfully ensured, or false if the allocation failed.
+sizes: An array of sizes representing future memory allocation requests.
+
+count: The number of elements in the sizes array.
+
+critical: A boolean flag indicating whether the memory to be ensured is critical.
+
+Returns: true if memory was successfully ensured, or false if the allocation failed.
 
 Usage
 
@@ -101,16 +115,18 @@ Description
 
 Adds a new memory page to the allocator. This can be useful when you anticipate needing more memory and want to preemptively allocate it.
 
-    Parameters:
-        critical: A boolean flag indicating whether the new page should be marked as critical.
+Parameters:
 
-    Returns: true if the page was successfully added, or false if the allocation failed.
+critical: A boolean flag indicating whether the new page should be marked as critical.
+
+Returns: true if the page was successfully added, or false if the allocation failed.
 
 Usage
 
 bool success = cma_add_page(true); // Add a critical memory page
 
 Usage Examples
+
 Example 1: Basic Allocation and Deallocation
 
 #include "cma.hpp"
@@ -136,8 +152,6 @@ int main() {
 }
 
 Example 2: Ensuring Memory Availability
-
-cpp
 
 #include "cma.hpp"
 
@@ -170,32 +184,34 @@ int main() {
 }
 
 Configuration Options
-BYPASS_ALLOC Macro
 
-The BYPASS_ALLOC macro controls whether the CMA uses the custom allocation strategy or a simplified version that bypasses some features.
+DEBUG Macro
 
-    Usage: Define BYPASS_ALLOC to 1 to enable bypass mode.
+The DEBUG macro controls whether the CMA enables Valgrind support for enhanced memory safety.
 
-#define BYPASS_ALLOC 1
+Usage: Define DEBUG to 1 to enable debug mode.
+
+#define DEBUG 1
 #include "cma.hpp"
 
-    Effects:
-        In bypass mode, the CMA uses a simpler allocation strategy, mainly for debugging or development purposes.
-        Functions related to page management are not applicable in bypass mode.
+Effects: In debug mode, Valgrind will protect blocks that include the metadata of memory allocations. This helps detect memory issues during development.
 
 Limitations and Considerations
 
-    Thread Safety: The CMA is not thread-safe. If used in a multi-threaded application, you must provide your own synchronization mechanisms (e.g., mutexes) to protect shared data structures.
-    Memory Fragmentation: While the CMA attempts to reduce fragmentation by coalescing adjacent free blocks, fragmentation can still occur over time.
-    Error Handling: The CMA uses abort() when detecting critical errors such as invalid or double frees. Ensure that your application handles such scenarios appropriately.
-    Alignment: Memory blocks are aligned to 8-byte boundaries by default.
-    Valgrind Support: If you are using Valgrind, the CMA includes calls to Valgrind macros to help detect memory issues.
+Thread Safety: The CMA is not thread-safe. If used in a multi-threaded application, you must provide your own synchronization mechanisms (e.g., mutexes) to protect shared data structures.
+
+Memory Fragmentation: While the CMA attempts to reduce fragmentation by coalescing adjacent free blocks, fragmentation can still occur over time.
+
+Error Handling: It is the user's responsibility to ensure no invalid or double frees occur, similar to how free in C and delete in C++ must be used correctly.
+
+Alignment: Memory blocks are aligned to 8-byte boundaries by default.
+
+Valgrind Support: If you are using Valgrind, the CMA includes calls to Valgrind macros to help detect memory issues. Set DEBUG to 1 to enable this feature.
 
 License
 
 The CMA code is provided "as is" without warranty of any kind. Use it at your own risk.
+
 Conclusion
 
 The Custom Memory Allocator provides a flexible way to manage memory in C++ applications, giving you control over allocation strategies and memory cleanup. By understanding and utilizing the functions provided by the CMA, you can optimize memory usage and improve the performance of your application.
-
-If you have any questions or need further assistance, please reach out to the maintainer.
