@@ -1,9 +1,9 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
-#include <iostream>
 
 int ft_double_char_length(char **double_char)
 {
@@ -23,7 +23,7 @@ int ft_open_file_write_only(const char *filename)
 
     fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if (fd == -1)
-        std::cerr << "Error opening file " << filename << ": " << strerror(errno) << '\n';
+        ft_printf_fd(2, "Error opening file %s: %s\n", filename, strerror(errno));
     return (fd);
 }
 

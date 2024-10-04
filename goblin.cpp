@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "goblin.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
 
 void ft_goblin_turn(t_char *info)
@@ -8,17 +8,17 @@ void ft_goblin_turn(t_char *info)
     ft_update_buf(info);
     if (info->flags.prone)
     {
-        std::cout << info->name << " will use his/her action to stand up" << std::endl;
+        ft_printf("%s will use his/her action to stand up\n", info->name);
         info->flags.prone = 0;
     }
     else
     {
-        std::cout << "The goblin will try to make either a ranged or melee attack during his turn" << std::endl;
+        ft_printf("The goblin will try to make either a ranged or melee attack during his turn\n");
     }
-    std::cout << "Goblin currently has " << info->stats.health << "/" << info->dstats.health << " hp" << std::endl;
+    ft_printf("Goblin currently has %d/%d hp\n", info->stats.health, info->dstats.health);
     if (info->stats.health < info->dstats.health / 2)
     {
-        std::cout << "The goblin is on low health and can disengage as a bonus action" << std::endl;
+        ft_printf("The goblin is on low health and can disengage as a bonus action\n");
     }
 }
 
@@ -33,7 +33,7 @@ t_char *ft_goblin(const int index, const char **input, t_name *name, int excepti
     int error;
     t_char *info;
 
-    info = (t_char *)calloc(1, sizeof(t_char));
+    info = (t_char *)ft_calloc(1, sizeof(t_char));
     if (!info)
         return (nullptr);
     *info = GOBLIN_INFO;
@@ -50,7 +50,7 @@ t_char *ft_goblin(const int index, const char **input, t_name *name, int excepti
         if (ft_strcmp_dnd(input[1], "init") == 0)
         {
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-            std::cout << "Stats for " << info->name << " written on a file" << std::endl;
+            ft_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
             return (nullptr);
         }
@@ -74,4 +74,3 @@ t_char *ft_goblin(const int index, const char **input, t_name *name, int excepti
     ft_free_info(info);
     return (nullptr);
 }
-

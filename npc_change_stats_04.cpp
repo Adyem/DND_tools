@@ -1,5 +1,5 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 
 void ft_change_stats_04(t_char *info, const char **input)
 {
@@ -21,12 +21,12 @@ void ft_change_stats_04(t_char *info, const char **input)
             resistance = ft_get_resistance(info, input[2]);
             if (resistance == -9999)
             {
-                std::cerr << "158-Error: invalid Damage type for " << info->name << std::endl;
+                ft_printf_fd(2, "158-Error: invalid Damage type for %s\n", info->name);
                 return;
             }
             ft_deal_damage(info, input[1], input[2], resistance, 1);
         }
     }
     else
-        std::cerr << "241-Error: command not found" << std::endl;
+        ft_printf_fd(2, "241-Error: command not found\n");
 }

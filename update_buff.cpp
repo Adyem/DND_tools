@@ -1,15 +1,14 @@
 #include "dnd_tools.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 
 static void	ft_update_buff_duration(t_char *info, const char *buff_name, int duration)
 {
 	if (duration == 0)
-		std::cout << info->name << " just lost his " << buff_name << " buff\n";
+		ft_printf("%s just lost his %s buff\n", info->name, buff_name);
 	else if (duration == 1)
-		std::cout << info->name << " has a single turn of " << buff_name << " left\n";
+		ft_printf("%s has a single turn of %s left\n", info->name, buff_name);
 	else
-		std::cout << info->name << " has " << duration << " turns left on his "
-			<< buff_name << " buff\n";
+		ft_printf("%s has %d turns left on his %s buff\n", info->name, duration, buff_name);
 	return ;
 }
 
@@ -26,8 +25,7 @@ void	ft_update_buf(t_char *info)
 	if (info->bufs.lightning_strike.duration > 0)
 		ft_update_lightning_strike(info);
 	if (info->bufs.protective_winds.duration > 0)
-		ft_update_buf_duration(info, "protective winds",
-			&info->bufs.protective_winds.duration);
+		ft_update_buf_duration(info, "protective winds", &info->bufs.protective_winds.duration);
 	if (info->bufs.chaos_armor.duration > 0)
 	{
 		ft_update_buf_duration(info, "chaos armor", &info->bufs.chaos_armor.duration);

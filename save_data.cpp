@@ -1,111 +1,93 @@
 #include "dnd_tools.hpp"
-#include <fstream>
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
-#include <cstring>
+#include <string.h>
 
-static void	ft_npc_write_file_1(t_char *info, t_stats *stats, std::ofstream &ofs)
+static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 {
-	ofs << "HEALTH=" << stats->health << std::endl;
-	ofs << "TEMP_HP=" << stats->temp_hp << std::endl;
-	ofs << "STR=" << stats->str << std::endl;
-	ofs << "DEX=" << stats->dex << std::endl;
-	ofs << "CON=" << stats->con << std::endl;
-	ofs << "INT=" << stats->inte << std::endl;
-	ofs << "WIS=" << stats->wis << std::endl;
-	ofs << "CHA=" << stats->cha << std::endl;
-	ofs << "TURN=" << stats->turn << std::endl;
-	ofs << "PHASE=" << stats->phase << std::endl;
-	ofs << "INITIATIVE=" << info->initiative << std::endl;
-	ofs << "BLESS_DUR=" << info->bufs.bless.duration << std::endl;
-	ofs << "LIGHTNING_STRIKE_DUR=" << info->bufs.lightning_strike.duration << std::endl;
-	ofs << "PROTECTIVE_WINDS_DUR=" << info->bufs.protective_winds.duration << std::endl;
+	ft_printf_fd(fd, "HEALTH=%i\n", stats->health);
+	ft_printf_fd(fd, "TEMP_HP=%i\n", stats->temp_hp);
+	ft_printf_fd(fd, "STR=%i\n", stats->str);
+	ft_printf_fd(fd, "DEX=%i\n", stats->dex);
+	ft_printf_fd(fd, "CON=%i\n", stats->con);
+	ft_printf_fd(fd, "INT=%i\n", stats->inte);
+	ft_printf_fd(fd, "WIS=%i\n", stats->wis);
+	ft_printf_fd(fd, "CHA=%i\n", stats->cha);
+	ft_printf_fd(fd, "TURN=%i\n", stats->turn);
+	ft_printf_fd(fd, "PHASE=%i\n", stats->phase);
+	ft_printf_fd(fd, "INITIATIVE=%i\n", info->initiative);
+	ft_printf_fd(fd, "BLESS_DUR=%i\n", info->bufs.bless.duration);
+	ft_printf_fd(fd, "LIGHTNING_STRIKE_DUR=%i\n", info->bufs.lightning_strike.duration);
+	ft_printf_fd(fd, "PROTECTIVE_WINDS_DUR=%i\n", info->bufs.protective_winds.duration);
 	return ;
 }
 
-static void	ft_npc_write_file_double_char(const char *msg, char **targets, std::ofstream &ofs, t_char *info)
+static void	ft_npc_write_file_double_char(const char *msg, char **targets, int fd, t_char *info)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	if (targets)
 	{
 		while (targets[i])
 		{
 			if (DEBUG == 1)
-				std::cout << "saving array " << info->name << " " << msg << targets[i] << std::endl;
-			ofs << msg << targets[i] << std::endl;
+				ft_printf_fd(1, "saving array %s %s%s\n", info->name, msg, targets[i]);
+			ft_printf_fd(fd, "%s%s\n", msg, targets[i]);
 			i++;
 		}
 	}
 }
 
-static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, std::ofstream &ofs)
+static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 {
-	ofs << "ACID_RESISTANCE=" << resistance->acid << std::endl;
-	ofs << "BLUDGEONING_RESISTANCE=" << resistance->bludgeoning << std::endl;
-	ofs << "COLD_RESISTANCE=" << resistance->cold << std::endl;
-	ofs << "FIRE_RESISTANCE=" << resistance->fire << std::endl;
-	ofs << "FORCE_RESISTANCE=" << resistance->force << std::endl;
-	ofs << "LIGHTNING_RESISTANCE=" << resistance->lightning << std::endl;
-	ofs << "NECROTIC_RESISTANCE=" << resistance->necrotic << std::endl;
-	ofs << "PIERCING_RESISTANCE=" << resistance->piercing << std::endl;
-	ofs << "POISON_RESISTANCE=" << resistance->poison << std::endl;
-	ofs << "PSYCHIC_RESISTANCE=" << resistance->psychic << std::endl;
-	ofs << "RADIANT_RESISTANCE=" << resistance->radiant << std::endl;
-	ofs << "SLASHING_RESISTANCE=" << resistance->slashing << std::endl;
-	ofs << "THUNDER_RESISTANCE=" << resistance->thunder << std::endl;
-	ofs << "CONCENTRATION=" << info->concentration.concentration << std::endl;
-	ofs << "CONC_SPELL_ID=" << info->concentration.spell_id << std::endl;
-	ofs << "CONC_DICE_AMOUNT=" << info->concentration.dice_amount_mod << std::endl;
-	ofs << "CONC_DICE_FACES=" << info->concentration.dice_faces_mod << std::endl;
-	ofs << "CONC_BASE_MOD=" << info->concentration.base_mod << std::endl;
-	ofs << "CONC_DURATION=" << info->concentration.duration << std::endl;
-	ft_npc_write_file_double_char("CONC_TARGETS=", info->concentration.targets, ofs, info);
-	ofs << "HUNTERS_MARK_AMOUNT=" << info->debufs.hunters_mark.amount << std::endl;
-	ft_npc_write_file_double_char("HUNTERS_MARK_CASTER=", info->debufs.hunters_mark.caster_name, ofs, info);
-	ofs << "CHAOS_ARMOR_DURATION=" << info->bufs.chaos_armor.duration << std::endl;
-	ofs << "PRONE=" << info->flags.prone << std::endl;
-	ofs << "BLINDED=" << info->debufs.blinded.duration << std::endl;
+	ft_printf_fd(fd, "ACID_RESISTANCE=%i\n", resistance->acid);
+	ft_printf_fd(fd, "BLUDGEONING_RESISTANCE=%i\n", resistance->bludgeoning);
+	ft_printf_fd(fd, "COLD_RESISTANCE=%i\n", resistance->cold);
+	ft_printf_fd(fd, "FIRE_RESISTANCE=%i\n", resistance->fire);
+	ft_printf_fd(fd, "FORCE_RESISTANCE=%i\n", resistance->force);
+	ft_printf_fd(fd, "LIGHTNING_RESISTANCE=%i\n", resistance->lightning);
+	ft_printf_fd(fd, "NECROTIC_RESISTANCE=%i\n", resistance->necrotic);
+	ft_printf_fd(fd, "PIERCING_RESISTANCE=%i\n", resistance->piercing);
+	ft_printf_fd(fd, "POISON_RESISTANCE=%i\n", resistance->poison);
+	ft_printf_fd(fd, "PSYCHIC_RESISTANCE=%i\n", resistance->psychic);
+	ft_printf_fd(fd, "RADIANT_RESISTANCE=%i\n", resistance->radiant);
+	ft_printf_fd(fd, "SLASHING_RESISTANCE=%i\n", resistance->slashing);
+	ft_printf_fd(fd, "THUNDER_RESISTANCE=%i\n", resistance->thunder);
+	ft_printf_fd(fd, "CONCENTRATION=%i\n", info->concentration.concentration);
+	ft_printf_fd(fd, "CONC_SPELL_ID=%i\n", info->concentration.spell_id);
+	ft_printf_fd(fd, "CONC_DICE_AMOUNT=%i\n", info->concentration.dice_amount_mod);
+	ft_printf_fd(fd, "CONC_DICE_FACES=%i\n", info->concentration.dice_faces_mod);
+	ft_printf_fd(fd, "CONC_BASE_MOD=%i\n", info->concentration.base_mod);
+	ft_printf_fd(fd, "CONC_DURATION=%i\n", info->concentration.duration);
+	ft_npc_write_file_double_char("CONC_TARGETS=", info->concentration.targets, fd, info);
+	ft_printf_fd(fd, "HUNTERS_MARK_AMOUNT=%i\n", info->debufs.hunters_mark.amount);
+	ft_npc_write_file_double_char("HUNTERS_MARK_CASTER=", info->debufs.hunters_mark.caster_name, fd, info);
+	ft_printf_fd(fd, "CHAOS_ARMOR_DURATION=%i\n", info->bufs.chaos_armor.duration);
+	ft_printf_fd(fd, "PRONE=%i\n", info->flags.prone);
+	ft_printf_fd(fd, "BLINDED=%i\n", info->debufs.blinded);
 	return ;
 }
 
-#include "dnd_tools.hpp"
-#include <fstream>
-#include <iostream>
-#include <fcntl.h>
-#include <unistd.h>
-#include <cerrno>
-#include <cstring>
-
 void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, int fd)
 {
-	std::ofstream ofs;
-
 	if (DEBUG == 1)
-		std::cout << "fd = " << fd << std::endl;
+		ft_printf("fd = %i\n", fd);
 	if (info->flags.alreaddy_saved)
 		return ;
 	if (fd == -1)
+		fd = open(info->save_file, O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR);
+	if (fd == -1)
 	{
-		fd = open(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-		if (fd == -1)
-		{
-			std::cerr << "Error opening file " << info->save_file 
-                      << ": " << strerror(errno) << std::endl;
-			return ;
-		}
-	}
-	ofs.open("/proc/self/fd/" + std::to_string(fd));
-	if (!ofs.is_open())
-	{
-		std::cerr << "Error: failed to open file stream for descriptor " << fd << std::endl;
+		ft_printf_fd(2, "2-Error opening file %s: %s\n", info->save_file, strerror(errno));
 		return ;
 	}
-	ft_npc_write_file_1(info, stats, ofs);
-	ft_npc_write_file_2(info, resistance, ofs);
-	ofs.close();
+	ft_npc_write_file_1(info, stats, fd);
+	ft_npc_write_file_2(info, resistance, fd);
+	close(fd);
 	info->flags.alreaddy_saved = 1;
 	return ;
 }

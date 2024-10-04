@@ -1,12 +1,11 @@
 #include "libft/Libft/libft.hpp"
+#include "libft/Printf/ft_printf.hpp" // Including the ft_printf header
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstdlib>
 #include <cerrno>
 #include <cstring>
-#include <iostream>
-#include <fstream>
 
 void ft_initiative_remove(t_char *info)
 {
@@ -14,26 +13,26 @@ void ft_initiative_remove(t_char *info)
     char    **content;
     int     turn_marker;
     int     i;
-    std::ofstream file;
+    int     fd;
 
     if (DEBUG == 1)
-        std::cout << "removing initiative " << info->name << "\n";
+        ft_printf("removing initiative %s\n", info->name);
     if (access("data/data--initiative", F_OK) == -1)
     {
         if (DEBUG == 1)
-            std::cout << "File does not exist: data/data--initiative\n";
-        return ;
+            ft_printf("File does not exist: data/data--initiative\n");
+        return;
     }
     content = ft_open_and_read("data/data--initiative");
     if (!content)
-        return ;
+        return;
     i = 0;
-    file.open("data/data--initiative", std::ofstream::out | std::ofstream::trunc);
-    if (!file.is_open())
+    fd = open("data/data--initiative", O_WRONLY | O_TRUNC);
+    if (fd == -1)
     {
-        std::cerr << "Error opening file: " << strerror(errno) << "\n";
+        ft_printf("Error opening file: %s\n", strerror(errno));
         ft_free_double_char(content);
-        return ;
+        return;
     }
     i = 0;
     turn_marker = 0;
@@ -52,19 +51,19 @@ void ft_initiative_remove(t_char *info)
                 && (ft_check_value(&temp[ft_strlen(info->name) + 1])))
         {
             if (DEBUG == 1)
-                std::cout << "found one " << content[i] << " and " << content[i][ft_strlen(info->name)] << "\n";
+                ft_printf("found one %s and %c\n", content[i], content[i][ft_strlen(info->name)]);
             i++;
             if (turn_marker)
-                file << "--turn--";
-            continue ;
+                ft_printf_fd(fd, "--turn--");
+            continue;
         }
-        file << content[i];
+        ft_printf_fd(fd, "%s", content[i]);
         turn_marker = 0;
         i++;
     }
-    file.close();
+    close(fd);
     ft_free_double_char(content);
-    return ;
+    return;
 }
 
 static int ft_initiative_check(t_char *info, char **content, int i)
@@ -104,27 +103,27 @@ void ft_initiative_add(t_char *info)
     int     i;
     int     added;
     int     error;
-    std::ofstream file;
+    int     fd;
 
     if (DEBUG == 1)
-        std::cout << "readding initiative " << info->name << " " << info->initiative << "\n";
+        ft_printf("readding initiative %s %d\n", info->name, info->initiative);
     if (info->initiative <= 0)
-        return ;
+        return;
     content = ft_open_and_read("data/data--initiative");
     if (!content)
-        return ;
+        return;
     if (ft_initiative_check_content(info, content))
     {
         ft_free_double_char(content);
-        std::cout << info->name << " is already in initiative\n";
-        return ;
+        ft_printf("%s is already in initiative\n", info->name);
+        return;
     }
-    file.open("data/data--initiative", std::ofstream::out | std::ofstream::trunc);
-    if (!file.is_open())
+    fd = open("data/data--initiative", O_WRONLY | O_TRUNC);
+    if (fd == -1)
     {
-        std::cerr << "Error opening file: " << strerror(errno) << "\n";
+        ft_printf("Error opening file: %s\n", strerror(errno));
         ft_free_double_char(content);
-        return ;
+        return;
     }
     added = 0;
     i = 0;
@@ -133,40 +132,40 @@ void ft_initiative_add(t_char *info)
         n_line = ft_strchr(content[i], '\n');
         if (!n_line)
         {
-            file.close();
+            close(fd);
             ft_free_double_char(content);
-            std::cerr << "Error: data--initiative file is corrupted\n";
-            return ;
+            ft_printf("Error: data--initiative file is corrupted\n");
+            return;
         }
         *n_line = '\0';
         if (DEBUG == 1)
-            std::cout << content[i] << "\n";
+            ft_printf("%s\n", content[i]);
         error = ft_initiative_check(info, content, i);
         if (DEBUG == 1)
-            std::cout << "Error = " << error << "\n";
+            ft_printf("Error = %d\n", error);
         if (!added && error == 0)
         {
-            file << info->name << "=" << info->initiative << "\n";
+            ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
             added = 1;
         }
         if (error != 1 && error != 0)
         {
-            file.close();
+            close(fd);
             ft_free_double_char(content);
-            std::cerr << "Error: data--initiative file is corrupted\n";
-            return ;
+            ft_printf("Error: data--initiative file is corrupted\n");
+            return;
         }
-        file << content[i] << "\n";
+        ft_printf_fd(fd, "%s\n", content[i]);
         i++;
     }
     if (!content && !added)
     {
-        file << info->name << "=" << info->initiative << "\n";
+        ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
         added = 1;
     }
-    file.close();
+    close(fd);
     ft_free_double_char(content);
     if (DEBUG == 1)
-        std::cout << "added = " << added << "\n";
-    return ;
+        ft_printf("added = %d\n", added);
+    return;
 }

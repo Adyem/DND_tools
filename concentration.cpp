@@ -1,17 +1,17 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
 #include <cstring>
-#include <iostream>
 
 static void ft_concentration_remove_buf(t_char *info, t_char *target)
 {
     if (DEBUG == 1)
     {
-        std::cout << "Memory address of info struct: " << (void *)info << std::endl;
-        std::cout << "Memory address of target struct: " << (void *)target << std::endl;
+        ft_printf("Memory address of info struct: %p\n", (void *)info);
+        ft_printf("Memory address of target struct: %p\n", (void *)target);
     }
     if (info->concentration.spell_id == HUNTERS_MARK_ID)
         ft_concentration_remove_hunters_mark(info, target);
@@ -25,7 +25,7 @@ int ft_remove_concentration(t_char *info)
     int fd;
 
     if (DEBUG == 1)
-        std::cout << "Removing concentration" << std::endl;
+        ft_printf("Removing concentration\n");
 
     i = 0;
     while (info->concentration.targets && info->concentration.targets[i])
@@ -45,10 +45,10 @@ int ft_remove_concentration(t_char *info)
         {
             target = ft_get_info(info->concentration.targets[i], info->struct_name);
             if (!target)
-                return (std::cerr << "300-Error getting info " << info->concentration.targets[i] << std::endl, 1);
+                return (ft_printf_fd(2, "300-Error getting info %s\n", info->concentration.targets[i]), 1);
         }
         if (target && DEBUG == 1)
-            std::cout << "Target found: " << target->name << std::endl;
+            ft_printf("Target found: %s\n", target->name);
         if (target)
         {
             ft_concentration_remove_buf(info, target);
@@ -56,7 +56,7 @@ int ft_remove_concentration(t_char *info)
             if (fd == -1)
             {
                 ft_free_info(target);
-                return (std::cerr << "301-Error opening " << info->save_file << ": " << strerror(errno) << std::endl, 1);
+                return (ft_printf_fd(2, "301-Error opening %s: %s\n", info->save_file, strerror(errno)), 1);
             }
             ft_npc_write_file(target, &target->stats, &info->c_resistance, fd);
             ft_free_info(target);
@@ -81,7 +81,7 @@ void ft_check_concentration(t_char *info, int damage)
     int result;
 
     if (DEBUG == 1)
-        std::cout << "Rolling con save for concentration " << info->name << std::endl;
+        ft_printf("Rolling con save for concentration %s\n", info->name);
 
     if (!info->concentration.concentration)
         return ;
@@ -91,10 +91,10 @@ void ft_check_concentration(t_char *info, int damage)
         difficulty = damage / 2;
     if (result < difficulty)
     {
-        std::cout << info->name << " failed his/her concentration save" << std::endl;
+        ft_printf("%s failed his/her concentration save\n", info->name);
         ft_remove_concentration(info);
     }
     else
-        std::cout << info->name << " made his/her concentration save" << std::endl;
+        ft_printf("%s made his/her concentration save\n", info->name);
     return ;
 }

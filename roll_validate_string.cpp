@@ -1,5 +1,5 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 
 static int	ft_roll_check_arg(char *string)
 {
@@ -34,7 +34,7 @@ static int	ft_roll_check_arg(char *string)
 static int	ft_check_open_braces(char *string, int i, int *open_braces)
 {
 	if (DEBUG == 1)
-		std::cout << "open braces string=" << &string[i] << "\n";
+		ft_printf("open braces string=%s\n", &string[i]);
 	if (i > 0)
 		if (ft_roll_check_character(string[i - 1]))
 			if (string[i - 1] != ')' && string[i - 1] != '(')
@@ -51,7 +51,7 @@ static int	ft_check_close_braces(char *string, int i,
 {
 	(*close_braces)++;
 	if (DEBUG == 1)
-		std::cout << "close braces string=" << &string[i] << "\n";
+		ft_printf("close braces string=%s\n", &string[i]);
 	if (i == 0 || open_braces < *close_braces)
 		return (1);
 	if (ft_roll_check_character(string[i + 1]))

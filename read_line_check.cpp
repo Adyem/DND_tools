@@ -1,5 +1,5 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <cstdlib>
@@ -25,6 +25,6 @@ int	ft_read_line_confirm(const char *message)
 			return (1);
 		}
 	}
-	std::cerr << "116-Error: read line memory allocation failed" << std::endl;
+	ft_printf_fd(2, "116-Error: read line memory allocation failed\n");
 	return (-1);
 }

@@ -1,6 +1,7 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include <climits>
-#include <iostream>
+#include <cstdlib>
 
 int ft_dice_roll(int number, int faces)
 {
@@ -8,10 +9,10 @@ int ft_dice_roll(int number, int faces)
     int result;
     int i;
 
-	if (faces < 1 || number < 1)
-		return (-1);
-	if (faces == 1)
-		return (number);
+    if (faces < 1 || number < 1)
+        return (-1);
+    if (faces == 1)
+        return (number);
     result = 0;
     i = 0;
     roll = 0;
@@ -24,8 +25,7 @@ int ft_dice_roll(int number, int faces)
         i++;
     }
     if (DEBUG == 1)
-        std::cerr << "The dice rolled " << result << " on " << faces 
-                  << " faces with " << number << " amount of dice" << std::endl;
+        ft_printf_fd(2, "The dice rolled %d on %d faces with %d amount of dice\n", result, faces, number);
     return (result);
 }
 
@@ -34,21 +34,19 @@ void ft_reroll(t_char *info, int *result)
     int second_roll;
 
     if (DEBUG == 1)
-        std::cerr << info << " " << result << std::endl;
+        ft_printf_fd(2, "%s %d\n", info->name, *result);
     if (!info->flags.advantage)
-        return ;
+        return;
     second_roll = ft_dice_roll(1, 20);
     if (info->flags.advantage > 0)
     {
-        std::cout << info->name << " rolled " << second_roll << " on his/her advantage" 
-                  << std::endl;
+        ft_printf("%s rolled %d on his/her advantage\n", info->name, second_roll);
         if (second_roll > *result)
             *result = second_roll;
     }
     else if (info->flags.advantage < 0)
     {
-        std::cout << info->name << " rolled " << second_roll 
-                  << " on his/her disadvantage" << std::endl;
+        ft_printf("%s rolled %d on his/her disadvantage\n", info->name, second_roll);
         if (second_roll < *result)
             *result = second_roll;
     }

@@ -1,7 +1,7 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 #include "veraak.hpp"
-#include <iostream>
 
 static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
 {
@@ -9,7 +9,7 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
     t_name *name;
 
     if (DEBUG == 1)
-        std::cout << "killing crystal: " << crystal << "\n";
+        ft_printf("killing crystal: %s\n", crystal);
     name = info->struct_name;
     while (name != nullptr)
     {
@@ -19,16 +19,15 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
             input[1] = "kill";
             input[2] = nullptr;
             if (DEBUG == 1)
-                std::cout << "initializing: " << name->name << "\n";
+                ft_printf("initializing: %s\n", name->name);
             name->function(2, input, name, 0);
-            break ;
+            break;
         }
         name = name->next;
     }
     info->stats.phase = phase;
     info->stats.turn = 1;
-    std::cout << "veraak transitions to the next phase dropping 2 green orbs at random locations "
-                 "in the arena\n";
+    ft_printf("veraak transitions to the next phase dropping 2 green orbs at random locations in the arena\n");
 }
 
 static void ft_veraak_initialize(t_char *info)
@@ -40,12 +39,12 @@ static void ft_veraak_initialize(t_char *info)
         "chaos_crystal_01", "chaos_crystal_02", "chaos_crystal_03", "chaos_crystal_04", nullptr};
 
     if (DEBUG == 1)
-        std::cout << "initializing chaos crystals\n";
+        ft_printf("initializing chaos crystals\n");
     i = 0;
     while (crystals[i] != nullptr)
     {
         if (DEBUG == 1)
-            std::cout << "checking crystal: " << crystals[i] << "\n";
+            ft_printf("checking crystal: %s\n", crystals[i]);
         name = info->struct_name;
         while (name != nullptr)
         {
@@ -55,9 +54,9 @@ static void ft_veraak_initialize(t_char *info)
                 input[1] = "init";
                 input[2] = nullptr;
                 if (DEBUG == 1)
-                    std::cout << "initializing: " << name->name << "\n";
+                    ft_printf("initializing: %s\n", name->name);
                 name->function(2, input, name, 0);
-                break ;
+                break;
             }
             name = name->next;
         }
@@ -84,19 +83,18 @@ void ft_veraak_turn(t_char *info)
     ft_veraak_check_phase(info);
     if (info->flags.prone)
     {
-        std::cout << info->name << " will use his/her action to stand up\n";
+        ft_printf("%s will use his/her action to stand up\n", info->name);
         info->flags.prone = 0;
     }
     else
-        std::cout << "The veraak will try to make either a ranged or melee attack during his turn\n";
-    std::cout << "Veraak currently has " << info->stats.health << "/" << info->dstats.health
-              << " hp\n";
+        ft_printf("The veraak will try to make either a ranged or melee attack during his turn\n");
+    ft_printf("Veraak currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
 {
     (void)info;
-    return ;
+    return;
 }
 
 t_char *ft_veraak(const int index, const char **input, t_name *name, int exception)
@@ -106,8 +104,8 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
 
     error = 0;
     if (DEBUG == 1)
-        std::cout << "index = " << index << "\n";
-    info = (t_char *)calloc(1, sizeof(t_char));
+        ft_printf("index = %d\n", index);
+    info = (t_char *)ft_calloc(1, sizeof(t_char));
     if (!info)
         return (nullptr);
     *info = VERAAK_INFO;
@@ -122,7 +120,7 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
     if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
     {
         ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-        std::cout << "Stats for " << info->name << " written on a file\n";
+        ft_printf("Stats for %s written on a file\n", info->name);
         ft_veraak_initialize(info);
         ft_free_info(info);
         return (nullptr);

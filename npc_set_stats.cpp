@@ -1,6 +1,6 @@
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 
 int ft_set_stats_1(t_char *info, char **content, int i)
 {
@@ -22,7 +22,7 @@ int ft_set_stats_1(t_char *info, char **content, int i)
 	else if (ft_strncmp(content[i], "WIS=", 4) == 0 && (info->stats.wis == -1))
 		info->stats.wis = ft_check_stat(info, content[i], 4);
 	else if (ft_strncmp(content[i], "CHA=", 4) == 0 && (info->stats.cha == -1))
-		info->stats.cha = ft_check_stat(info,content[i], 4);
+		info->stats.cha = ft_check_stat(info, content[i], 4);
 	else if (ft_strncmp(content[i], "TURN=", 5) == 0 && (info->stats.turn == -1))
 		info->stats.turn = ft_check_stat(info, content[i], 5);
 	else if (ft_strncmp(content[i], "INITIATIVE=", 11) == 0 && (info->initiative == -1))
@@ -167,8 +167,7 @@ int ft_set_stats(t_char *info, char **content)
         }
         else
         {
-            std::cerr << "1-Something is wrong with the save file for " << info->name
-                      << " at the line: " << content[i] << ", please reinitialize the save" << std::endl;
+            ft_printf_fd(2, "1-Something is wrong with the save file for %s at the line: %s, please reinitialize the save\n", info->name, content[i]);
             info->flags.error = 1;
             ft_free_double_char(content);
             return 1;

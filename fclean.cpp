@@ -1,17 +1,17 @@
 #include "dnd_tools.hpp"
+#include "libft/Printf/ft_printf.hpp"
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include <cstdlib>
 #include <cerrno>
 #include <cstring>
-#include <iostream>
 
 void ft_fclean(void)
 {
-    int			status; 
-    const char	*command[4];
-    pid_t		pid;
+    int         status; 
+    const char  *command[4];
+    pid_t       pid;
 
     command[0] = "/bin/sh";
     command[1] = "-c";
@@ -22,13 +22,13 @@ void ft_fclean(void)
     pid = fork();
     if (pid == -1)
     {
-        std::cerr << "Fork failed: " << strerror(errno) << std::endl;
+        ft_printf_fd(2, "Fork failed: %s\n", strerror(errno));
         return;
     }
     else if (pid == 0)
     {
         execvp(command[0], (char* const*)command);
-        std::cerr << "Execvp failed: " << strerror(errno) << std::endl;
+        ft_printf_fd(2, "Execvp failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
     else
@@ -38,16 +38,16 @@ void ft_fclean(void)
         {
             int exit_status = WEXITSTATUS(status);
             if (exit_status != 0)
-                std::cerr << "Command failed with exit status " << exit_status << std::endl;
+                ft_printf_fd(2, "Command failed with exit status %d\n", exit_status);
         }
     }
 }
 
 void ft_clean(void)
 {
-    int			status;
-    const char	*command[4];
-    pid_t		pid;
+    int         status;
+    const char  *command[4];
+    pid_t       pid;
 
     command[0] = "/bin/sh";
     command[1] = "-c";
@@ -58,13 +58,13 @@ void ft_clean(void)
     pid = fork();
     if (pid == -1)
     {
-        std::cerr << "Fork failed: " << strerror(errno) << std::endl;
+        ft_printf_fd(2, "Fork failed: %s\n", strerror(errno));
         return;
     }
     else if (pid == 0)
     {
         execvp(command[0], (char* const*)command);
-        std::cerr << "Execvp failed: " << strerror(errno) << std::endl;
+        ft_printf_fd(2, "Execvp failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
     else
@@ -74,7 +74,7 @@ void ft_clean(void)
         {
             int exit_status = WEXITSTATUS(status);
             if (exit_status != 0)
-                std::cerr << "Command failed with exit status " << exit_status << std::endl;
+                ft_printf_fd(2, "Command failed with exit status %d\n", exit_status);
         }
     }
 }

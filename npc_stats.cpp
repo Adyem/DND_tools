@@ -1,6 +1,6 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
-#include <iostream>
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
@@ -13,22 +13,22 @@ int ft_npc_open_file(t_char *info)
 
     fd = open(info->save_file, O_RDONLY);
     if (DEBUG == 1)
-        std::cout << "Opening file " << info->save_file << " on fd " << fd << std::endl;
+        ft_printf("Opening file %s on fd %d\n", info->save_file, fd);
     if (fd == -1)
     {
-        std::cerr << "1-Error opening file " << info->save_file << ": " << strerror(errno) << std::endl;
+        ft_printf_fd(2, "1-Error opening file %s: %s\n", info->save_file, strerror(errno));
         return (1);
     }
     content = ft_read_file_dnd(fd);
     if (DEBUG == 1)
-        std::cout << "Content is at address " << content << std::endl;
+        ft_printf("Content is at address %p\n", content);
 
     if (!content)
         return (1);
     close(fd);
     error = ft_initialize_info(info, content);
     if (DEBUG == 1)
-        std::cout << "The value of error is " << error << " " << info->flags.error << std::endl;
+        ft_printf("The value of error is %d %d\n", error, info->flags.error);
 
     if (info->flags.error || error)
         return (1);
@@ -45,7 +45,7 @@ void ft_npc_change_stats(t_char *info, const int index, const char **input)
 
     while (DEBUG == 1 && input[i])
     {
-        std::cout << input[i] << std::endl;
+        ft_printf("%s\n", input[i]);
         i++;
     }
     i = 0;
@@ -53,7 +53,7 @@ void ft_npc_change_stats(t_char *info, const int index, const char **input)
     {
         while (input[i])
         {
-            std::cout << input[i] << std::endl;
+            ft_printf("%s\n", input[i]);
             i++;
         }
     }
@@ -62,7 +62,7 @@ void ft_npc_change_stats(t_char *info, const int index, const char **input)
         if (info->turn)
             info->turn(info);
         else
-            std::cout << info->name << " doesn't take any actions on his/her turn" << std::endl;
+            ft_printf("%s doesn't take any actions on his/her turn\n", info->name);
     }
     else if (index == 2)
         ft_npc_sstuff(info, input);
@@ -71,7 +71,7 @@ void ft_npc_change_stats(t_char *info, const int index, const char **input)
     else if (index == 4)
         ft_change_stats_04(info, input);
     else
-        std::cerr << "Error: Too many arguments given" << std::endl;
+        ft_printf_fd(2, "Error: Too many arguments given\n");
     ft_npc_write_file(info, &info->stats, &info->c_resistance, -1);
-	return ;
+    return ;
 }

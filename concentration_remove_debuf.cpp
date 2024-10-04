@@ -1,5 +1,6 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
+#include <cstdlib>
 
 void ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
 {
@@ -10,8 +11,8 @@ void ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
     while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[i])
     {
         if (DEBUG == 1)
-            std::cout << "r-debuff checking " << target->debufs.hunters_mark.caster_name[i] 
-                      << " " << info->name << std::endl;
+            ft_printf("%s%s%s", "r-debuff checking ", target->debufs.hunters_mark.caster_name[i], info->name);
+
         if (ft_strcmp_dnd(target->debufs.hunters_mark.caster_name[i], info->name) == 0)
         {
             free(target->debufs.hunters_mark.caster_name[i]);
@@ -26,11 +27,11 @@ void ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
                 target->debufs.hunters_mark.caster_name[j - 1] = nullptr;
 
             if (DEBUG == 1)
-                std::cout << "Found target with debuff and removed it: " << target->name << std::endl;
+                ft_printf("%s%s", "Found target with debuff and removed it: ", target->name);
             return ;
         }
         i++;
     }
-    std::cerr << "304-Error: " << target->name << " Hunters mark debuff not found" << std::endl;
+    ft_printf_fd(2, "304-Error: %s Hunters mark debuff not found", target->name);
     return ;
 }

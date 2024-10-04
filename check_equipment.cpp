@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 #include "identification.hpp"
+#include "libft/Printf/ft_printf.hpp"
 
 static void	ft_check_mainhand(t_char *info, int *error)
 {
@@ -9,7 +9,7 @@ static void	ft_check_mainhand(t_char *info, int *error)
 
 	if (info->equipment.weapon.slot != SLOT_NONE && !(info->equipment.weapon.slot & SLOT_WEAPON))
 	{
-		std::cerr << "Error: Weapon is not in the correct slot.\n";
+		ft_printf_fd(2, "Error: Weapon is not in the correct slot.\n");
 		*error += 1;
 	}
 	is_two_handed_weapon = !(info->equipment.weapon.slot & SLOT_OFFHAND_WEAPON);
@@ -17,12 +17,12 @@ static void	ft_check_mainhand(t_char *info, int *error)
 	{
 		if (!(info->equipment.offhand_weapon.slot & SLOT_OFFHAND_WEAPON))
 		{
-			std::cerr << "Error: Offhand weapon is not in the correct slot.\n";
+			ft_printf_fd(2, "Error: Offhand weapon is not in the correct slot.\n");
 			*error += 2;
 		}
 		else if (is_two_handed_weapon)
 		{
-			std::cerr << "Error: Cannot equip offhand weapon with a two-handed weapon in the main hand.\n";
+			ft_printf_fd(2, "Error: Cannot equip offhand weapon with a two-handed weapon in the main hand.\n");
 			*error += 13;
 		}
 	}
@@ -32,7 +32,7 @@ static void	ft_check_slot(t_equipment_id equipment_slot, int slot_type, const ch
 {
 	if (equipment_slot.slot != SLOT_NONE && !(equipment_slot.slot & slot_type))
 	{
-		std::cerr << error_message << '\n';
+		ft_printf_fd(2, "%s\n", error_message);
 		*error += error_code;
 	}
 }

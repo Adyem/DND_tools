@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
+#include <algorithm>
 
 typedef struct s_damage_info
 {
@@ -52,13 +53,12 @@ static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info
 static void ft_print_attack_roll(t_char *info, t_equipment_id *weapon, t_damage_info *d_info)
 {
     if (weapon->projectile_name)
-        std::cout << info->name << " uses his/her " << weapon->name << " to fire a " 
-                  << weapon->projectile_name << " and rolled ";
+        ft_printf("%s uses his/her %s to fire a %s and rolled ", info->name, weapon->name, weapon->projectile_name);
     else
-        std::cout << info->name << " attacks with his/her " << weapon->name << " and rolled ";
+        ft_printf("%s attacks with his/her %s and rolled ", info->name, weapon->name);
     if (d_info->result <= 1 + info->crit.attack_fail)
     {
-        std::cout << "a critical fail (" << d_info->result << ") and missed on his attack" << std::endl;
+        ft_printf("a critical fail (%d) and missed on his attack\n", d_info->result);
         return;
     }
 }
@@ -67,7 +67,7 @@ static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, b
 {
     int multiplier = is_crit ? 2 : 1;
     d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces) + d_info->stat_mod;
-    std::cout << "deals " << d_info->damage << " " << weapon->attack.damage_type << " damage" << std::endl;
+    ft_printf("deals %d %s damage\n", d_info->damage, weapon->attack.damage_type);
 }
 
 static void ft_handle_attack_result(t_char *info, t_equipment_id *weapon, t_damage_info *d_info)
@@ -75,15 +75,13 @@ static void ft_handle_attack_result(t_char *info, t_equipment_id *weapon, t_dama
     if (d_info->result >= 20 - info->crit.attack)
     {
         ft_check_buff_damage(info);
-        std::cout << "a crit (" << d_info->result << ") and ";
+        ft_printf("a crit (%d) and ", d_info->result);
         ft_calculate_damage(weapon, d_info, true);
     }
     else
     {
         ft_check_buff_damage(info);
-        std::cout << d_info->result << "+" << d_info->stat_mod << "+" << info->attack_bonus.attack_bonus << "+" << d_info->mod
-                  << " for a total of " << (d_info->result + d_info->stat_mod + d_info->mod + info->attack_bonus.attack_bonus)
-                  << " and ";
+        ft_printf("%d+%d+%d+%d for a total of %d and ", d_info->result, d_info->stat_mod, info->attack_bonus.attack_bonus, d_info->mod, (d_info->result + d_info->stat_mod + d_info->mod + info->attack_bonus.attack_bonus));
         ft_calculate_damage(weapon, d_info, false);
     }
 }
@@ -96,7 +94,7 @@ void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
     d_info.result = ft_dice_roll(1, 20);
     if (d_info.result == -1)
     {
-        std::cerr << "101-Error: dice rolling error in attack" << std::endl;
+        ft_printf_fd(2, "101-Error: dice rolling error in attack\n");
         return;
     }
     d_info.mod = ft_attack_roll_check_buffs(info, &d_info.result);

@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 
 int ft_check_bless(t_char *info)
 {
@@ -10,7 +10,7 @@ int ft_check_bless(t_char *info)
         result += ft_dice_roll(1, 4);
     else
         return (0);
-    std::cout << info->name << " rolled a " << result << " as an additional modifier for his/her bless buff" 
-              << std::endl;
+    ft_printf("%s rolled a %d as an additional modifier for his/her bless buff\n", info->name, result);
     return (result);
 }
+

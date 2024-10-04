@@ -1,5 +1,5 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 
 int ft_roll_parse_brackets(char *string)
 {
@@ -8,7 +8,7 @@ int ft_roll_parse_brackets(char *string)
     int bracket_found = 0;
 
     if (DEBUG == 1)
-        std::cout << "Parsing brackets: " << string << std::endl;
+        ft_printf("Parsing brackets: %s\n", string);
     while (string[x])
     {
         if (string[x] == '(' && !bracket_found)
@@ -21,6 +21,6 @@ int ft_roll_parse_brackets(char *string)
     }
     string[y] = '\0';
     if (DEBUG == 1)
-        std::cout << "Modified string: " << string << std::endl;
+        ft_printf("Modified string: %s\n", string);
     return (0);
 }

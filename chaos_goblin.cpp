@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "chaos_goblin.hpp"
 #include "libft/Libft/libft.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 
 void ft_chaos_goblin_turn(t_char *info)
 {
@@ -10,14 +10,14 @@ void ft_chaos_goblin_turn(t_char *info)
         ft_cast_chaos_armor(info);
     if (info->flags.prone)
     {
-        std::cout << info->name << " will use his/her action to stand up" << std::endl;
+        ft_printf("%s will use his/her action to stand up\n", info->name);
         info->flags.prone = 0;
     }
     else
     {
-        std::cout << "The chaos_goblin will try to make either a ranged or melee attack during his turn" << std::endl;
+        ft_printf("The chaos_goblin will try to make either a ranged or melee attack during his turn\n");
     }
-    std::cout << "Chaos_goblin currently has " << info->stats.health << "/" << info->dstats.health << " hp" << std::endl;
+    ft_printf("Chaos_goblin currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
@@ -31,11 +31,11 @@ t_char *ft_chaos_goblin(const int index, const char **input, t_name *name, int e
     int error;
     t_char *info;
 
-    info = (t_char *)calloc(1, sizeof(t_char));
+    info = (t_char *)ft_calloc(1, sizeof(t_char));
     if (!info)
     {
-        std::cerr << "105-Error: Failed to allocate memory info " << input[0] << std::endl;
-        return (nullptr) ;
+        ft_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
+        return (nullptr);
     }
     *info = CHAOS_GOBLIN_INFO;
     info->name = input[0];
@@ -43,36 +43,36 @@ t_char *ft_chaos_goblin(const int index, const char **input, t_name *name, int e
     info->save_file = ft_strjoin("data/", input[0]);
     if (!info->save_file)
     {
-        std::cerr << "104-Error: Failed to allocate memory save_file name " << info->name << std::endl;
+        ft_printf_fd(2, "104-Error: Failed to allocate memory save_file name %s\n", info->name);
         ft_free_info(info);
-        return (nullptr) ;
+        return (nullptr);
     }
     if (index == 2)
     {
         if (ft_strcmp_dnd(input[1], "init") == 0)
         {
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-            std::cout << "Stats for " << info->name << " written on a file" << std::endl;
+            ft_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
-            return (nullptr) ;
+            return (nullptr);
         }
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (nullptr) ;
+        return (nullptr);
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (nullptr) ;
+        return (nullptr);
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
-        return (info) ;
+        return (info);
     ft_npc_change_stats(info, index, input);
     ft_free_info(info);
-    return (nullptr) ;
+    return (nullptr);
 }

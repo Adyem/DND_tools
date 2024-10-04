@@ -1,24 +1,24 @@
 #include "dnd_tools.hpp"
 #include "goblin_warmaster.hpp"
-#include <iostream>
 #include "libft/Libft/libft.hpp"
+#include "libft/Printf/ft_printf.hpp"
 
 void ft_goblin_warmaster_turn(t_char *info)
 {
     ft_update_buf(info);
     if (info->flags.prone)
     {
-        std::cout << info->name << " will use his/her action to stand up" << std::endl;
+        ft_printf("%s will use his/her action to stand up\n", info->name);
         info->flags.prone = 0;
     }
     else
     {
-        std::cout << "The warmaster will attempt a strategic melee or ranged attack during his turn" << std::endl;
+        ft_printf("The warmaster will attempt a strategic melee or ranged attack during his turn\n");
     }
-    std::cout << "Warmaster currently has " << info->stats.health << "/" << info->dstats.health << " hp" << std::endl;
+    ft_printf("Warmaster currently has %d/%d hp\n", info->stats.health, info->dstats.health);
     if (info->stats.health < info->dstats.health / 2)
     {
-        std::cout << "The warmaster is on low health and may use the command ability as a bonus action" << std::endl;
+        ft_printf("The warmaster is on low health and may use the command ability as a bonus action\n");
     }
 }
 
@@ -33,7 +33,7 @@ t_char *ft_goblin_warmaster(const int index, const char **input, t_name *name, i
     int error;
     t_char *info;
 
-    info = (t_char *)calloc(1, sizeof(t_char));
+    info = (t_char *)ft_calloc(1, sizeof(t_char));
     if (!info)
         return (nullptr);
     *info = WARM_INFO;
@@ -50,7 +50,7 @@ t_char *ft_goblin_warmaster(const int index, const char **input, t_name *name, i
         if (ft_strcmp_dnd(input[1], "init") == 0)
         {
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-            std::cout << "Stats for " << info->name << " written on a file" << std::endl;
+            ft_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
             return (nullptr);
         }

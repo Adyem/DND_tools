@@ -2,13 +2,13 @@
 #include "dnd_tools.hpp"
 #include "chaos_crystal.hpp"
 #include "libft/Libft/libft.hpp"
+#include "libft/Printf/ft_printf.hpp"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-#include <iostream>
 
 static void ft_chaos_crystal_damage(t_char *info)
 {
@@ -21,14 +21,14 @@ static void ft_chaos_crystal_damage(t_char *info)
     fd = open("data/data--initiative", O_RDONLY);
     if (fd == -1)
     {
-        std::cerr << "280-Error opening file: " << strerror(errno) << std::endl;
+        ft_printf("280-Error opening file: %s\n", strerror(errno));
         return ;
     }
     content = ft_read_file_dnd(fd);
     close(fd);
     if (!content)
     {
-        std::cerr << "281-Error opening file: " << strerror(errno) << std::endl;
+        ft_printf("281-Error opening file: %s\n", strerror(errno));
         return ;
     }
     length = ft_double_char_length(content);
@@ -38,15 +38,12 @@ static void ft_chaos_crystal_damage(t_char *info)
     {
         result = ft_dice_roll(1, length) - 1;
         if (DEBUG == 1)
-            std::cout << "result = " << result << std::endl;
+            ft_printf("result = %d\n", result);
     }
     temp = ft_strchr(content[result], '=');
     if (temp)
         *temp = '\0';
-    std::cout << info->name << " shoots a magic missile at " << &content[result][4]
-              << " and he/she takes 1 force damage, the target " \
-			  "does not need to make a concentration save for this damage"
-              << std::endl;
+    ft_printf("%s shoots a magic missile at %s and he/she takes 1 force damage, the target does not need to make a concentration save for this damage\n", info->name, &content[result][4]);
     ft_free_double_char(content);
     return ;
 }
@@ -55,8 +52,7 @@ void ft_chaos_crystal_turn(t_char *info)
 {
     ft_update_buf(info);
     ft_chaos_crystal_damage(info);
-    std::cout << "Chaos_crystal currently has " << info->stats.health << "/"
-              << info->dstats.health << " hp" << std::endl;
+    ft_printf("Chaos_crystal currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
@@ -70,10 +66,10 @@ t_char *ft_chaos_crystal(const int index, const char **input, t_name *name, int 
     int error;
     t_char *info;
 
-    info = (t_char *)calloc(1, sizeof(t_char));
+    info = (t_char *)ft_calloc(1, sizeof(t_char));
     if (!info)
     {
-        std::cerr << "103-Error: Failed to allocate memory info " << input[0] << std::endl;
+        ft_printf("103-Error: Failed to allocate memory info %s\n", input[0]);
         return (nullptr);
     }
     *info = CHAOS_CRYSTAL_INFO;
@@ -82,8 +78,7 @@ t_char *ft_chaos_crystal(const int index, const char **input, t_name *name, int 
     info->save_file = ft_strjoin("data/", input[0]);
     if (!info->save_file)
     {
-        std::cerr << "106-Error: Failed to allocate memory save_file name "
-			<< info->name << std::endl;
+        ft_printf("106-Error: Failed to allocate memory save_file name %s\n", info->name);
         ft_free_info(info);
         return (nullptr);
     }
@@ -92,7 +87,7 @@ t_char *ft_chaos_crystal(const int index, const char **input, t_name *name, int 
         if (ft_strcmp_dnd(input[1], "init") == 0)
         {
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-            std::cout << "Stats for " << info->name << " written on a file" << std::endl;
+            ft_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
             return (nullptr);
         }
@@ -111,9 +106,8 @@ t_char *ft_chaos_crystal(const int index, const char **input, t_name *name, int 
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
-        return (info) ;
+        return (info);
     ft_npc_change_stats(info, index, input);
     ft_free_info(info);
     return (nullptr);
 }
-

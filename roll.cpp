@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
+#include "libft/Printf/ft_printf.hpp"
 #include "libft/get_next_line/get_next_line.hpp"
-#include <iostream>
 
 typedef int (*RollExecuteFunc)(char *, int *, int);
 
@@ -10,7 +10,7 @@ void ft_calculate_j(char *string, int *j)
 	while (string[*j] && string[*j] != ')')
 		(*j)++;
 	if (DEBUG == 1)
-		std::cout << "The new value of J is " << *j << std::endl;
+		ft_printf("The new value of J is %d\n", *j);
 	return ;
 }
 
@@ -53,7 +53,7 @@ int ft_command_roll_parse(char *string, int nested)
     if (execute_roll_function(string, ft_roll_excecute_pm))
         return 5;
     if (DEBUG == 1)
-        std::cout << "Nested is " << nested << std::endl;
+        ft_printf("Nested is %d\n", nested);
     if (nested)
     {
         error = ft_roll_parse_brackets(string);
@@ -61,7 +61,7 @@ int ft_command_roll_parse(char *string, int nested)
             return (6);
     }
     if (DEBUG == 1 && nested)
-        std::cout << "Leaving nested braces" << std::endl;
+        ft_printf("Leaving nested braces\n");
     return (0);
 }
 
@@ -72,7 +72,7 @@ void ft_command_roll(char **argv)
 
     while (argv[i] && DEBUG == 1)
     {
-        std::cout << argv[i] << std::endl;
+        ft_printf("%s\n", argv[i]);
         i++;
     }
     if (!argv[1])
@@ -83,23 +83,23 @@ void ft_command_roll(char **argv)
         result = ft_strjoin_gnl_old(result, argv[i]);
         if (!result)
         {
-            std::cerr << "168-Error: Malloc failed in ft_strjoin_gnl" << std::endl;
+            ft_printf_fd(2, "168-Error: Malloc failed in ft_strjoin_gnl\n");
             return ;
         }
         i++;
     }
     if (DEBUG == 1)
-        std::cout << result << std::endl;
+        ft_printf("%s\n", result);
     if (!result)
         return ;
     if (ft_command_roll_validate(result))
     {
-        std::cerr << "169-Command Roll Error with the string: " << result << std::endl;
+        ft_printf_fd(2, "169-Command Roll Error with the string: %s\n", result);
         free(result);
         return ;
     }
     ft_command_roll_parse(result, 0);
-    std::cout << result << std::endl;
+    ft_printf("%s\n", result);
     free(result);
 	return ;
 }

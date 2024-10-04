@@ -1,14 +1,13 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include <iostream>
 
 static void ft_check_buff_damage_hunters_mark(t_char *info)
 {
     int result;
 
     result = ft_dice_roll(1, 6);
-    std::cout << info->name << " deals " << result << " extra damage if the target is " 
-              << info->concentration.targets[0] << std::endl;
+    ft_printf("%s deals %d extra damage if the target is %s\n", info->name, result, info->concentration.targets[0]);
     return ;
 }
 

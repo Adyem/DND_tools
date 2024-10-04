@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
+#include "libft/Printf/ft_printf.hpp"
 #include <cstdlib>
 #include <cstring>
-#include <iostream>
 #include <readline/readline.h>
 
 static int	ft_free_request_damage(char *line, char **input)
@@ -84,7 +84,7 @@ int ft_request_damage(t_char *info)
         if (ft_check_value(input[0]))
         {
             ft_free_request_damage(line, input);
-            std::cerr << "159-Requesting a number between 1 and 5000" << std::endl;
+            ft_printf_fd(2, "159-Requesting a number between 1 and 5000\n");
             continue ;
         }
         if (!input[0] || !input[1])
@@ -95,7 +95,7 @@ int ft_request_damage(t_char *info)
         resistance = ft_get_resistance(info, input[1]);
         if (resistance == -9999)
         {
-            std::cerr << "158-Error getting Resistance for " << info->name << std::endl;
+            ft_printf_fd(2, "158-Error getting Resistance for %s\n", info->name);
             ft_free_request_damage(line, input);
             return (1);
         }

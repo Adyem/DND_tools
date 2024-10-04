@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "gundren_rockseeker.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
 
 void ft_gundren_rockseeker_turn(t_char *info)
@@ -8,12 +8,12 @@ void ft_gundren_rockseeker_turn(t_char *info)
     ft_update_buf(info);
     if (info->flags.prone)
     {
-        std::cout << info->name << " will use his action to stand up\n";
+        ft_printf("%s will use his action to stand up\n", info->name);
         info->flags.prone = 0;
     }
     else
-        std::cout << "Gundren Rockseeker will try to make either a ranged or melee attack during his turn\n";
-    std::cout << info->name << " currently has " << info->stats.health << "/" << info->dstats.health << " hp\n";
+        ft_printf("Gundren Rockseeker will try to make either a ranged or melee attack during his turn\n");
+    ft_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
     return;
 }
 
@@ -29,8 +29,8 @@ t_char *ft_gundren_rockseeker(const int index, const char **input, t_name *name,
     t_char *info;
 
     if (DEBUG == 1)
-        std::cout << "exception = " << exception << "\n";
-    info = (t_char *)calloc(1, sizeof(t_char));
+        ft_printf("exception = %d\n", exception);
+    info = (t_char *)ft_calloc(1, sizeof(t_char));
     if (!info)
         return (nullptr);
     *info = GUNDREN_ROCKSEEKER_INFO;
@@ -47,7 +47,7 @@ t_char *ft_gundren_rockseeker(const int index, const char **input, t_name *name,
         if (ft_strcmp_dnd(input[1], "init") == 0)
         {
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-            std::cout << "Stats for " << info->name << " written to a file\n";
+            ft_printf("Stats for %s written to a file\n", info->name);
             ft_free_info(info);
             return (nullptr);
         }

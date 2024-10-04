@@ -1,12 +1,12 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 
 void ft_check_initiative(t_char *info)
 {
     if (info->initiative == -1)
-        std::cout << "No initiative set for " << info->name << std::endl;
+        ft_printf("No initiative set for %s\n", info->name);
     else
-        std::cout << info->name << " has an initiative roll of " << info->initiative << std::endl;
+        ft_printf("%s has an initiative roll of %d\n", info->name, info->initiative);
     return ;
 }
 
@@ -18,8 +18,7 @@ void ft_roll_initiative(t_char *info)
     dex_mod = (info->stats.dex - 10) / 2;
     result = ft_dice_roll(1, 20);
     info->initiative = result + dex_mod;
-
-    std::cout << info->name << " rolled " << result << "+" << dex_mod << "=" << info->initiative
-              << " on his/her initiative" << std::endl;
+    ft_printf("%s rolled %d+%d=%d on his/her initiative\n",
+			info->name, result, dex_mod, info->initiative);
     return ;
 }

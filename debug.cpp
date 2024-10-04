@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 
 void ft_print_content(char **content)
 {
@@ -13,10 +13,10 @@ void ft_print_content(char **content)
     {
         while (content[i])
         {
-            std::cout << content[i];
+            ft_printf("%s", content[i]);
             i++;
         }
     }
-    std::cout << std::endl;
+    ft_printf("\n");
     return;
 }

@@ -1,10 +1,10 @@
 #include "dnd_tools.hpp"
 #include "libft/get_next_line/get_next_line.hpp"
+#include "libft/Printf/ft_printf.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
 #include <cstring>
-#include <iostream>
 
 static void ft_malloc_fail_gnl_dnd(char **return_v, int fd)
 {
@@ -80,10 +80,10 @@ static void ft_print_file(char **content)
         i = 0;
         while (content[i])
         {
-            std::cout << content[i];
+            ft_printf("%s", content[i]);
             i++;
         }
-        std::cout << std::endl;
+        ft_printf("\n");
     }
 	return ;
 }
@@ -96,7 +96,7 @@ char **ft_open_and_read(const char *file)
     fd = open(file, O_RDONLY);
     if (fd == -1)
     {
-        std::cerr << "Error opening file: " << strerror(errno) << std::endl;
+        ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
         return (nullptr);
     }
     content = ft_read_file_dnd(fd);
@@ -105,7 +105,7 @@ char **ft_open_and_read(const char *file)
     if (!content)
     {
         get_next_line_old(-1);
-        std::cerr << "Error allocating memory for content inside file" << std::endl;
+        ft_printf_fd(2, "Error allocating memory for content inside file\n");
     }
     return (content);
 }

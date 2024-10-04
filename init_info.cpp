@@ -1,6 +1,6 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 
 int ft_check_stat(t_char *info, const char *stat, int index)
 {
@@ -9,7 +9,7 @@ int ft_check_stat(t_char *info, const char *stat, int index)
 
     temp = index;
     if (DEBUG == 1)
-        std::cout << stat << std::endl;
+        ft_printf("%s\n", stat);
     while (index)
     {
         stat++;
@@ -22,8 +22,7 @@ int ft_check_stat(t_char *info, const char *stat, int index)
             stat--;
             temp--;
         }
-        std::cerr << "2-Something is wrong with the save file from " << info->name
-                  << " at the line: " << stat << std::endl;
+        ft_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n", info->name, stat);
         return (-99999);
     }
     result = ft_atoi(stat);
@@ -34,8 +33,8 @@ void ft_print_info(t_char *info)
 {
     if (DEBUG != 1)
         return;
-    std::cout << "info->stats.health=" << info->stats.health << std::endl;
-	return ;
+    ft_printf("info->stats.health=%d\n", info->stats.health);
+    return;
 }
 
 int ft_initialize_info(t_char *info, char **content)

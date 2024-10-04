@@ -1,12 +1,12 @@
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
+#include "libft/Printf/ft_printf.hpp"
 #include "identification.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
 #include <cerrno>
 #include <dirent.h>
-#include <iostream>
 
 static void remove_exclude_prefix(char* filename)
 {
@@ -23,38 +23,38 @@ int ft_set_stats_check_name(const char *name)
 
     if (!name)
     {
-        std::cerr << "259-Error: Name does not exist" << std::endl;
-        return (-1) ;
+        ft_printf_fd(2, "259-Error: Name does not exist\n");
+        return (-1);
     }
     dir = opendir(DATA_FOLDER);
     if (dir == nullptr)
     {
-        std::cerr << "295-Error: Opendir has failed: " << strerror(errno) << std::endl;
-        return (-2) ;
+        ft_printf_fd(2, "295-Error: Opendir has failed: %s\n", strerror(errno));
+        return (-2);
     }
     while (1)
     {
         entry = readdir(dir);
         if (!entry)
-            break ;
+            break;
         if (ft_strncmp(entry->d_name, PREFIX_TO_SKIP, ft_strlen(PREFIX_TO_SKIP)) == 0)
-            continue ;
+            continue;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         remove_exclude_prefix(filename);
         if (DEBUG == 1)
-            std::cout << "Checking " << filename << " " << name << std::endl;
+            ft_printf("Checking %s %s\n", filename, name);
         if (ft_strcmp_dnd(filename, name) == 0)
         {
             closedir(dir);
             if (DEBUG == 1)
-                std::cout << "Found " << name << std::endl;
-            return (0) ;
+                ft_printf("Found %s\n", name);
+            return (0);
         }
     }
     closedir(dir);
-    std::cerr << "258-Error: Target does not exist" << std::endl;
-    return (1) ;
+    ft_printf_fd(2, "258-Error: Target does not exist\n");
+    return (1);
 }
 
 int ft_check_player_character(const char *name)
@@ -66,28 +66,28 @@ int ft_check_player_character(const char *name)
     dir = opendir(DATA_FOLDER);
     if (dir == nullptr)
     {
-        std::cerr << "307-Error: Opendir has failed: " << strerror(errno) << std::endl;
-        return (-2) ;
+        ft_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
+        return (-2);
     }
     while (1)
     {
         entry = readdir(dir);
         if (!entry)
-            break ;
+            break;
         if (ft_strncmp(entry->d_name, PC_PREFIX, ft_strlen(PC_PREFIX)) != 0)
-            continue ;
+            continue;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         if (DEBUG == 1)
-            std::cout << "Checking " << filename << " against " << name << std::endl;
+            ft_printf("Checking %s against %s\n", filename, name);
         if (ft_strcmp_dnd(filename, name) == 0)
         {
             closedir(dir);
             if (DEBUG == 1)
-                std::cout << "Found " << name << std::endl;
-            return (0) ;
+                ft_printf("Found %s\n", name);
+            return (0);
         }
     }
     closedir(dir);
-    return (1) ;
+    return (1);
 }

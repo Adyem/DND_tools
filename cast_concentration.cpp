@@ -1,3 +1,4 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
@@ -5,7 +6,6 @@
 #include <cstdlib>
 #include <cerrno>
 #include <cstring>
-#include <iostream>
 
 static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2], t_buff *buff, int error)
 {
@@ -23,16 +23,15 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 	if (error > -1 && target && buff && buff->cleanup_f)
 		buff->cleanup_f(info, target, buff);
 	if (error == 1)
-        std::cerr << "305-Error: can't cast hunter's mark on yourself" << std::endl;
+        ft_printf("305-Error: can't cast hunter's mark on yourself\n");
 	else if (error == 2)
-        std::cerr << "299-Error allocating memory for targets" << std::endl;
+        ft_printf("299-Error allocating memory for targets\n");
 	else if (error == 3)
-        std::cerr << "299-Error allocating memory for targets[0]" << std::endl;
+        ft_printf("299-Error allocating memory for targets[0]\n");
 	else if (error == 4)
-        std::cerr << "320-Error opening file: " << strerror(errno) << std::endl;
+        ft_printf("320-Error opening file: %s\n", strerror(errno));
 	else if (error == 5)
-        std::cerr << "321-Error opening file: " << strerror(errno) << std::endl;
-
+        ft_printf("321-Error opening file: %s\n", strerror(errno));
 }
 
 
@@ -97,7 +96,7 @@ void ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
     fd[0] = -1;
     fd[1] = -1;
     if (DEBUG == 1)
-        std::cout << "casting hunter's mark " << input[0] << " " << input[3] << std::endl;
+        ft_printf("casting hunter's mark %s %s\n", input[0], input[3]);
     if (ft_set_stats_check_name(input[3]))
     {
         if (ft_check_player_character(input[3]))
@@ -109,7 +108,7 @@ void ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
     {
         target = ft_get_info(input[3], info->struct_name);
         if (!target)
-            return (std::cerr << "297-Error getting info " << input[2] << std::endl, (void)0) ;
+            return (ft_printf("297-Error getting info %s\n", input[2]), (void)0);
     }
     if (ft_cast_concentration_open_file(fd, info, target))
         return ;
@@ -127,7 +126,7 @@ void ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
         }
     }
     if (ft_remove_concentration(info))
-        return (ft_cast_concentration_cleanup(info, target, fd, buff, 0), (void)0) ;
+        return (ft_cast_concentration_cleanup(info, target, fd, buff, 0), (void)0);
     if (ft_apply_concentration_buff(info, target, fd, input, buff))
         return ;
     ft_cast_concentration_cleanup(info, target, fd, buff, -1);

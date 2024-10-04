@@ -1,10 +1,11 @@
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
+#include "libft/Printf/ft_printf.hpp"
+#include <cstdlib>
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
 #include <cstring>
-#include <iostream>
 
 static int ft_turn_check_marker(t_pc *players)
 {
@@ -20,9 +21,9 @@ static int ft_turn_check_marker(t_pc *players)
 		temp = temp->next;
 	}
 	if (marker == 0)
-		std::cerr << "File is corrupted no turn marker found\n";
+		ft_printf("File is corrupted no turn marker found\n");
 	else if (marker > 1)
-		std::cerr << "File is corrupted multiple turn markers found\n";
+		ft_printf("File is corrupted multiple turn markers found\n");
 	return (marker);
 }
 
@@ -38,7 +39,7 @@ static int ft_turn_move_marker(t_pc *players)
 		{
 			name = ft_strtrim_prefix(temp->name, "--turn--");
 			if (!name)
-				std::cerr << "244-Error allocating memory turn\n";
+				ft_printf("244-Error allocating memory turn\n");
 			free(temp->name);
 			temp->name = name;
 			if (temp->next)
@@ -46,7 +47,7 @@ static int ft_turn_move_marker(t_pc *players)
 				name = ft_strjoin("--turn--", temp->next->name);
 				if (!name)
 				{
-					std::cerr << "245-Error allocating memory turn strjoin\n";
+					ft_printf("245-Error allocating memory turn strjoin\n");
 					return (1);
 				}
 				free(temp->next->name);
@@ -57,7 +58,7 @@ static int ft_turn_move_marker(t_pc *players)
 				name = ft_strjoin("--turn--", players->name);
 				if (!name)
 				{
-					std::cerr << "246-Error allocating memory turn strjoin\n";
+					ft_printf("246-Error allocating memory turn strjoin\n");
 					return (1);
 				}
 				free(players->name);
@@ -78,13 +79,13 @@ static int ft_turn_write(t_pc *players)
 	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (fd == -1)
 	{
-		std::cerr << "263-Error opening file " << strerror(errno) << "\n";
+		ft_printf("263-Error opening file %s\n", strerror(errno));
 		return (1);
 	}
 	temp = players;
 	while (temp)
 	{
-		std::cout << temp->name << "=" << temp->initiative << "\n";
+		ft_printf_fd(fd, "%s=%d\n", temp->name, temp->initiative);
 		temp = temp->next;
 	}
 	close(fd);
@@ -110,7 +111,7 @@ static int ft_turn_run(t_pc *players, t_name *name)
 			c_name = ft_strtrim_prefix(pc_temp->name, "--turn--");
 			if (!c_name)
 			{
-				std::cerr << "247-Error allocating memory strtrim\n";
+				ft_printf("247-Error allocating memory strtrim\n");
 				return (1);
 			}
 			n_temp = name;
@@ -127,7 +128,7 @@ static int ft_turn_run(t_pc *players, t_name *name)
 			}
 		}
 		if (ft_strncmp("--turn--PC--", pc_temp->name, 12) == 0)
-			std::cout << "the current turn is for " << &pc_temp->name[12] << "\n";
+			ft_printf("the current turn is for %s\n", &pc_temp->name[12]);
 		pc_temp = pc_temp->next;
 	}
 	free(c_name);
@@ -143,7 +144,7 @@ void ft_turn_next(t_name *name)
 	fd = open("data/data--initiative", O_RDONLY);
 	if (fd == -1)
 	{
-		std::cerr << "Error opening data initiative file " << strerror(errno) << "\n";
+		ft_printf("Error opening data initiative file %s\n", strerror(errno));
 		return ;
 	}
 	content = ft_read_file_dnd(fd);

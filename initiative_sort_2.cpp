@@ -1,9 +1,8 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
-#include <iostream>
-#include <fstream>
 #include <cerrno>
 
 
@@ -16,7 +15,7 @@ void ft_initiative_print(void)
     fd = open("data/data--initiative", O_RDONLY);
     if (fd == -1)
     {
-        std::cerr << "Error opening file: " << strerror(errno) << std::endl;
+        ft_printf("Error opening file: %s\n", strerror(errno));
         return;
     }
     content = ft_read_file_dnd(fd);
@@ -24,14 +23,14 @@ void ft_initiative_print(void)
 
     if (!content)
     {
-        std::cerr << "261-Error allocating memory" << std::endl;
+        ft_printf("261-Error allocating memory\n");
         return;
     }
-    std::cout << "\n\nInitiative rolls are:\n";
+    ft_printf("\n\nInitiative rolls are:\n");
     i = 0;
     while (content[i])
     {
-        std::cout << content[i] << std::endl;
+        ft_printf("%s\n", content[i]);
         i++;
     }
 
@@ -40,11 +39,12 @@ void ft_initiative_print(void)
 
 void ft_initiative_print_pc(t_pc *players)
 {
-    t_pc *temp = players;
+    t_pc *temp;
 
+	temp = players;
     while (temp)
     {
-        std::cout << temp->name << "=" << temp->initiative << std::endl;
+        ft_printf("%s=%d\n", temp->name, temp->initiative);
         temp = temp->next;
     }
 }
@@ -54,11 +54,12 @@ void ft_initiative_sort_2(t_pc *players)
     int turn = 0;
     t_pc *temp;
     t_pc *highest;
+    int fd;
 
-    std::ofstream outFile("data/data--initiative", std::ofstream::out | std::ofstream::trunc);
-    if (!outFile.is_open())
+	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd == -1)
     {
-        std::cerr << "262-Error opening file: " << strerror(errno) << std::endl;
+        ft_printf("262-Error opening file: %s\n", strerror(errno));
         return ;
     }
     while (1)
@@ -76,13 +77,13 @@ void ft_initiative_sort_2(t_pc *players)
 
         if (turn == 0)
         {
-            outFile << "--turn--" << highest->name << "=" << highest->initiative << "\n";
+            ft_printf_fd(fd, "--turn--%s=%d\n", highest->name, highest->initiative);
             turn = 1;
         }
         else
-            outFile << highest->name << "=" << highest->initiative << "\n";
+            ft_printf_fd(fd, "%s=%d\n", highest->name, highest->initiative);
 
         highest->initiative = -1;
     }
-    outFile.close();
+    close(fd);
 }

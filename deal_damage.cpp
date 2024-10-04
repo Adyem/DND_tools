@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
 
 static int ft_get_damage_reduction(t_char *info, const char *type)
 {
@@ -45,43 +45,43 @@ void ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
     {
         if (ft_check_value(input))
         {
-            std::cerr << "1-Damage: expecting a number higher than or equal to 0" << std::endl;
+            ft_printf_fd(2, "1-Damage: expecting a number higher than or equal to 0\n");
             return;
         }
-        std::cout << "The " << d_type << " damage was not changed." << std::endl;
+        ft_printf("The %s damage was not changed.\n", d_type);
         damage = ft_atoi(input);
         if (damage < 0)
         {
-            std::cerr << "2-Damage: expecting a number higher than or equal to 0" << std::endl;
+            ft_printf_fd(2, "2-Damage: expecting a number higher than or equal to 0\n");
             return;
         }
         damage_reduction = ft_get_damage_reduction(info, d_type);
         if (damage_reduction == ERROR_RESISTANCE)
-            return (std::cerr << "161-Error finding damage reduction" << std::endl, (void)0);
+            return (ft_printf_fd(2, "161-Error finding damage reduction\n"), (void)0);
         damage = damage - damage_reduction;
         if (damage_reduction > 0)
-            std::cout << "The " << d_type << " damage was reduced by " << damage_reduction << "." << std::endl;
+            ft_printf("The %s damage was reduced by %d.\n", d_type, damage_reduction);
         else if (damage_reduction < 0)
-            std::cout << "The " << d_type << " damage was increased by " << -damage_reduction << "." << std::endl;
+            ft_printf("The %s damage was increased by %d.\n", d_type, -damage_reduction);
         if (damage > 0)
             damage = 0;
         if (d_type && resistance > 0)
         {
             extra = damage * (resistance / 100);
-            std::cout << info->name << " is resistant to " << d_type << " damage and takes " << resistance
-                      << "% less damage for a total of " << extra << " less damage" << std::endl;
+            ft_printf("%s is resistant to %s damage and takes %d%% less damage for a total of %d less damage.\n",
+                      info->name, d_type, resistance, extra);
             damage = damage - extra;
         }
         else if (d_type && resistance < 0)
         {
             extra = damage * ((resistance * -1) / 100);
-            std::cout << info->name << " is vulnerable to " << d_type << " damage and takes " << -resistance
-                      << "% more damage for a total of " << extra << " more damage" << std::endl;
+            ft_printf("%s is vulnerable to %s damage and takes %d%% more damage for a total of %d more damage.\n",
+                      info->name, d_type, -resistance, extra);
             damage = damage + extra;
         }
         else if (d_type && resistance == 100)
         {
-            std::cout << info->name << " is immune to " << d_type << " damage" << std::endl;
+            ft_printf("%s is immune to %s damage.\n", info->name, d_type);
             damage = 0;
         }
         temp = info->stats.health;
@@ -94,10 +94,10 @@ void ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
     if (override == 1 || override == 2)
     {
         if (DEBUG == 1)
-            std::cout << info->name << " takes " << total << " damage" << std::endl;
+            ft_printf("%s takes %d damage.\n", info->name, total);
         if (info->version_number >= 2 && info->concentration.concentration)
             ft_check_concentration(info, total);
         total = 0;
     }
-    return ;
+    return;
 }

@@ -1,66 +1,53 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 
 void ft_print_character_status(t_char *info, int number, int temp)
 {
     if (number == 0 && temp == 0)
-        std::cout << info->name << " remains unchanged and is dead" << std::endl;
+        ft_printf("%s remains unchanged and is dead\n", info->name);
     else if (temp == info->dstats.health && info->stats.health == info->dstats.health)
-        std::cout << info->name << " remains at their current state and is at maximum hp ("
-                  << info->dstats.health << ")" << std::endl;
+        ft_printf("%s remains at their current state and is at maximum hp (%d)\n", info->name, info->dstats.health);
     else if (number == 0)
-        std::cout << info->name << " remains at their current state, with health at "
-                  << info->stats.health << std::endl;
+        ft_printf("%s remains at their current state, with health at %d\n", info->name, info->stats.health);
     else if (temp == 0)
     {
         if (number == info->dstats.health)
         {
-            std::cout << info->name << " has been restored to their full health ("
-                      << info->stats.health << ")" << std::endl;
+            ft_printf("%s has been restored to their full health (%d)\n", info->name, info->stats.health);
             ft_initiative_add(info);
         }
         else if (info->stats.health == info->dstats.health)
         {
-            std::cout << info->name << " has been fully revived from 0 to full "
-                      << info->stats.health << " health with " << number - info->dstats.health
-                      << " surplus recovery" << std::endl;
+            ft_printf("%s has been fully revived from 0 to full %d health with %d surplus recovery\n", info->name, info->stats.health, number - info->dstats.health);
             ft_initiative_add(info);
         }
         else if (info->stats.health > 0)
         {
-            std::cout << info->name << " has been revived with " << info->stats.health
-                      << " health" << std::endl;
+            ft_printf("%s has been revived with %d health\n", info->name, info->stats.health);
             ft_initiative_add(info);
         }
         else
         {
-            std::cout << "Efforts on " << info->name << " were redundant, "
-                      << -number << " damage was unnecessary" << std::endl;
+            ft_printf("Efforts on %s were redundant, %d damage was unnecessary\n", info->name, -number);
         }
     }
     else if (temp == info->dstats.health && info->stats.health == info->dstats.health)
-        std::cout << info->name << " is already at peak condition " << info->stats.health
-                  << ", with " << number << " surplus recovery" << std::endl;
+        ft_printf("%s is already at peak condition %d, with %d surplus recovery\n", info->name, info->stats.health, number);
     else if (info->stats.health + number > info->dstats.health)
-        std::cout << info->name << " has been fully healed to peak condition "
-                  << info->stats.health << " with " << temp + number - info->dstats.health
-                  << " surplus recovery" << std::endl;
+        ft_printf("%s has been fully healed to peak condition %d with %d surplus recovery\n", info->name, info->stats.health, temp + number - info->dstats.health);
     else
     {
         if (info->stats.health == 0)
         {
             if (-number == temp)
-                std::cout << info->name << " encountered a precise setback" << std::endl;
+                ft_printf("%s encountered a precise setback\n", info->name);
             else
-                std::cout << info->name << " encountered a setback with "
-                          << (-number - temp) << " excess damage" << std::endl;
+                ft_printf("%s encountered a setback with %d excess damage\n", info->name, (-number - temp));
             ft_initiative_remove(info);
         }
         else if (number < 0)
-            std::cout << info->name << " has received " << -number << " damage and now has "
-                      << info->stats.health << " health remaining" << std::endl;
+            ft_printf("%s has received %d damage and now has %d health remaining\n", info->name, -number, info->stats.health);
         else if (number > 0)
-            std::cout << info->name << "'s health was enhanced by " << number
-                      << ", reaching " << info->stats.health << std::endl;
+            ft_printf("%s's health was enhanced by %d, reaching %d\n", info->name, number, info->stats.health);
     }
 }

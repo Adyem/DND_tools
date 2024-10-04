@@ -1,6 +1,6 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 
 static void ft_npc_update_hp(t_char *info, const char **input)
 {
@@ -9,7 +9,7 @@ static void ft_npc_update_hp(t_char *info, const char **input)
 
     if (ft_check_value(input[2]))
     {
-        std::cerr << "Expecting a positive or negative integer" << std::endl;
+        ft_printf("Expecting a positive or negative integer\n");
         return;
     }
     number = ft_atoi(input[2]);
@@ -32,18 +32,18 @@ void ft_npc_set_stat(t_char *info, const char **input)
             if (info->equipment.weapon.attack.function)
                 info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
             else
-                std::cerr << "No attack for " << info->name << " set" << std::endl;
+                ft_printf("%s No attack set\n", info->name);
         }
         else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
         {
             if (info->equipment.ranged_weapon.attack.function)
                 info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon, 0);
             else
-                std::cerr << "No ranged attack for " << info->name << " set" << std::endl;
+                ft_printf("%s No ranged attack set\n", info->name);
         }
         else
         {
-            std::cerr << "6-Error: Invalid argument given" << std::endl;
+            ft_printf("6-Error: Invalid argument given\n");
         }
     }
     else if (ft_strcmp_dnd(input[1], "blinded") == 0)
@@ -74,7 +74,7 @@ void ft_npc_set_stat(t_char *info, const char **input)
             ft_saving_throw(info, "charisma", ft_calculate_cha(info), info->save_mod.cha);
         else
         {
-            std::cerr << "4-" << info->name << " Invalid argument given" << std::endl;
+            ft_printf("4-%s Invalid argument given\n", info->name);
             return;
         }
     }
@@ -83,7 +83,7 @@ void ft_npc_set_stat(t_char *info, const char **input)
         if (ft_strcmp_dnd(input[2], "chaos_armor") == 0)
             ft_cast_chaos_armor(info);
         else
-            std::cerr << "7-" << info->name << " invalid command" << std::endl;
+            ft_printf("7-%s invalid command\n", info->name);
     }
     else if (ft_strcmp_dnd(input[1], "initiative") == 0)
     {
@@ -91,13 +91,13 @@ void ft_npc_set_stat(t_char *info, const char **input)
             ft_roll_initiative(info);
         else
         {
-            std::cerr << "3-" << info->name << " invalid command" << std::endl;
+            ft_printf("3-%s invalid command\n", info->name);
             return;
         }
     }
     else
     {
-        std::cerr << "5-" << info->name << " Invalid argument given" << std::endl;
+        ft_printf("5-%s Invalid argument given\n", info->name);
         return;
     }
 }

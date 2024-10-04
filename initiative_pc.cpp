@@ -1,6 +1,6 @@
+#include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
-#include <iostream>
 #include <cstdlib>
 #include <cstring>
 
@@ -11,7 +11,7 @@ static int ft_check_int(char *content, int index, char *filename)
 
     temp = index;
     if (DEBUG == 1)
-        std::cout << content << std::endl;
+        ft_printf("%s\n", content);
     while (index)
     {
         content++;
@@ -24,8 +24,7 @@ static int ft_check_int(char *content, int index, char *filename)
             content--;
             temp--;
         }
-        std::cerr << "2-Something is wrong with the save file from " << filename
-                  << " at the line: " << content << std::endl;
+        ft_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n", filename, content);
         return (-99999);
     }
     result = ft_atoi(content);
@@ -69,19 +68,19 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
         }
         else
         {
-            std::cerr << "3-There is an error with the line: " << content[i] << std::endl;
+            ft_printf_fd(2, "3-There is an error with the line: %s\n", content[i]);
             return (1);
         }
         i++;
     }
     if (!(player->initiative >= 0 && player->initiative <= 50))
     {
-        std::cerr << "Initiative value not found: " << player->initiative << std::endl;
+        ft_printf_fd(2, "Initiative value not found: %d\n", player->initiative);
         return (1);
     }
     if (!player->name)
     {
-        std::cerr << "Player name not found" << std::endl;
+        ft_printf_fd(2, "Player name not found\n");
         return (1);
     }
     return (0);

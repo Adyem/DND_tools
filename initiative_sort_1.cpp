@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
-#include <iostream>
+#include "libft/Printf/ft_printf.hpp"
+#include <cstdlib>
 #include <cstring>
 #include <cerrno>
 #include <unistd.h>
@@ -15,7 +16,7 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
     temp = ft_strchr(content, '=');
     if (!temp)
     {
-        std::cerr << "Error did not find = sign" << std::endl;
+        ft_printf("Error did not find = sign\n");
         return (ft_free_players(head));
     }
     *temp = '\0';
@@ -23,17 +24,17 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
     players->name = ft_strdup(content);
     if (!players->name)
     {
-        std::cerr << "257 Error allocating memory" << std::endl;
+        ft_printf("257 Error allocating memory\n");
         return (ft_free_players(head));
     }
     if (ft_check_value(temp))
     {
-        std::cerr << "There is an error on the line: " << temp << std::endl;
+        ft_printf("There is an error on the line: %s\n", temp);
         return (ft_free_players(head));
     }
     players->initiative = ft_atoi(temp);
     if (DEBUG == 1)
-        std::cout << "The initiative from " << players->name << " = " << players->initiative << std::endl;
+        ft_printf("The initiative from %s = %d\n", players->name, players->initiative);
     return (0);
 }
 
@@ -54,7 +55,7 @@ t_pc *ft_initiative_players_am(char **content)
     players = (t_pc *)malloc(sizeof(t_pc));
     if (!players)
     {
-        std::cerr << "Error allocating memory: players" << std::endl;
+        ft_printf("Error allocating memory: players\n");
         return (nullptr);
     }
     ft_initiative_players_init(players);
@@ -68,7 +69,7 @@ t_pc *ft_initiative_players_am(char **content)
         temp->next = (t_pc *)malloc(sizeof(t_pc));
         if (!temp->next)
         {
-            std::cerr << "Error allocating memory: players->next" << std::endl;
+            ft_printf("Error allocating memory: players->next\n");
             ft_free_players(players);
             return (nullptr);
         }
@@ -88,7 +89,7 @@ void ft_initiative_sort(int fd)
 
     if (fd == -1)
     {
-        std::cerr << "Error opening file: " << strerror(errno) << std::endl;
+        ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
         return ;
     }
     content = ft_read_file_dnd(fd);
