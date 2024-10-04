@@ -18,12 +18,12 @@ void ft_fclean(void)
     command[2] = "rm -rf ./data/*";
     command[3] = nullptr;
     if (ft_read_line_confirm("type yes to confirm or no to abort: "))
-        return;
+        return ;
     pid = fork();
     if (pid == -1)
     {
         ft_printf_fd(2, "Fork failed: %s\n", strerror(errno));
-        return;
+        return ;
     }
     else if (pid == 0)
     {
@@ -54,12 +54,12 @@ void ft_clean(void)
     command[2] = "rm -rf ./logs/*";
     command[3] = nullptr;
     if (ft_read_line_confirm("type yes to confirm or no to abort: "))
-        return;
+        return ;
     pid = fork();
     if (pid == -1)
     {
         ft_printf_fd(2, "Fork failed: %s\n", strerror(errno));
-        return;
+        return ;
     }
     else if (pid == 0)
     {
@@ -77,4 +77,5 @@ void ft_clean(void)
                 ft_printf_fd(2, "Command failed with exit status %d\n", exit_status);
         }
     }
+	return ;
 }

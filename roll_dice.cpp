@@ -36,7 +36,7 @@ void ft_reroll(t_char *info, int *result)
     if (DEBUG == 1)
         ft_printf_fd(2, "%s %d\n", info->name, *result);
     if (!info->flags.advantage)
-        return;
+        return ;
     second_roll = ft_dice_roll(1, 20);
     if (info->flags.advantage > 0)
     {

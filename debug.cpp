@@ -6,7 +6,7 @@ void ft_print_content(char **content)
     int i;
 
     if (DEBUG != 1)
-        return;
+        return ;
     
     i = 0;
     if (content)
@@ -18,5 +18,5 @@ void ft_print_content(char **content)
         }
     }
     ft_printf("\n");
-    return;
+    return ;
 }

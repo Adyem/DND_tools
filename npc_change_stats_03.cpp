@@ -10,7 +10,7 @@ static void ft_npc_update_hp(t_char *info, const char **input)
     if (ft_check_value(input[2]))
     {
         ft_printf("Expecting a positive or negative integer\n");
-        return;
+        return ;
     }
     number = ft_atoi(input[2]);
     temp = info->stats.health;
@@ -20,6 +20,7 @@ static void ft_npc_update_hp(t_char *info, const char **input)
     else if (info->stats.health < 0)
         info->stats.health = 0;
     ft_print_character_status(info, number, temp);
+	return ;
 }
 
 void ft_npc_set_stat(t_char *info, const char **input)
@@ -75,7 +76,7 @@ void ft_npc_set_stat(t_char *info, const char **input)
         else
         {
             ft_printf("4-%s Invalid argument given\n", info->name);
-            return;
+            return ;
         }
     }
     else if (ft_strcmp_dnd(input[1], "cast") == 0)
@@ -92,12 +93,13 @@ void ft_npc_set_stat(t_char *info, const char **input)
         else
         {
             ft_printf("3-%s invalid command\n", info->name);
-            return;
+            return ;
         }
     }
     else
     {
         ft_printf("5-%s Invalid argument given\n", info->name);
-        return;
+        return ;
     }
+	return ;
 }

@@ -16,7 +16,7 @@ void ft_initiative_print(void)
     if (fd == -1)
     {
         ft_printf("Error opening file: %s\n", strerror(errno));
-        return;
+        return ;
     }
     content = ft_read_file_dnd(fd);
     close(fd);
@@ -24,7 +24,7 @@ void ft_initiative_print(void)
     if (!content)
     {
         ft_printf("261-Error allocating memory\n");
-        return;
+        return ;
     }
     ft_printf("\n\nInitiative rolls are:\n");
     i = 0;

@@ -21,18 +21,18 @@ void ft_initiative_remove(t_char *info)
     {
         if (DEBUG == 1)
             ft_printf("File does not exist: data/data--initiative\n");
-        return;
+        return ;
     }
     content = ft_open_and_read("data/data--initiative");
     if (!content)
-        return;
+        return ;
     i = 0;
     fd = open("data/data--initiative", O_WRONLY | O_TRUNC);
     if (fd == -1)
     {
         ft_printf("Error opening file: %s\n", strerror(errno));
         ft_free_double_char(content);
-        return;
+        return ;
     }
     i = 0;
     turn_marker = 0;
@@ -55,7 +55,7 @@ void ft_initiative_remove(t_char *info)
             i++;
             if (turn_marker)
                 ft_printf_fd(fd, "--turn--");
-            continue;
+            continue ;
         }
         ft_printf_fd(fd, "%s", content[i]);
         turn_marker = 0;
@@ -63,7 +63,7 @@ void ft_initiative_remove(t_char *info)
     }
     close(fd);
     ft_free_double_char(content);
-    return;
+    return ;
 }
 
 static int ft_initiative_check(t_char *info, char **content, int i)
@@ -108,22 +108,22 @@ void ft_initiative_add(t_char *info)
     if (DEBUG == 1)
         ft_printf("readding initiative %s %d\n", info->name, info->initiative);
     if (info->initiative <= 0)
-        return;
+        return ;
     content = ft_open_and_read("data/data--initiative");
     if (!content)
-        return;
+        return ;
     if (ft_initiative_check_content(info, content))
     {
         ft_free_double_char(content);
         ft_printf("%s is already in initiative\n", info->name);
-        return;
+        return ;
     }
     fd = open("data/data--initiative", O_WRONLY | O_TRUNC);
     if (fd == -1)
     {
         ft_printf("Error opening file: %s\n", strerror(errno));
         ft_free_double_char(content);
-        return;
+        return ;
     }
     added = 0;
     i = 0;
@@ -135,7 +135,7 @@ void ft_initiative_add(t_char *info)
             close(fd);
             ft_free_double_char(content);
             ft_printf("Error: data--initiative file is corrupted\n");
-            return;
+            return ;
         }
         *n_line = '\0';
         if (DEBUG == 1)
@@ -153,7 +153,7 @@ void ft_initiative_add(t_char *info)
             close(fd);
             ft_free_double_char(content);
             ft_printf("Error: data--initiative file is corrupted\n");
-            return;
+            return ;
         }
         ft_printf_fd(fd, "%s\n", content[i]);
         i++;
@@ -167,5 +167,5 @@ void ft_initiative_add(t_char *info)
     ft_free_double_char(content);
     if (DEBUG == 1)
         ft_printf("added = %d\n", added);
-    return;
+    return ;
 }

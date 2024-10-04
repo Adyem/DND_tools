@@ -30,7 +30,7 @@ void ft_npc_update_buff(t_char *info, const char **input, int *buff, const char 
     if (ft_check_value(input[2]))
     {
         ft_printf_fd(2, "1-Buff Error: Expecting a number between 0 and 50\n");
-        return;
+        return ;
     }
     number = ft_atoi(input[2]);
     if (number >= 0 && number <= 50)

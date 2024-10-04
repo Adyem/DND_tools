@@ -12,7 +12,7 @@
 void cma_free(void* ptr)
 {
     if (!ptr)
-        return;
+        return ;
     Block* block = (Block*)((char*)ptr - sizeof(Block));
     UNPROTECT_METADATA(block, sizeof(Block));
     if (block->magic != MAGIC_NUMBER)

@@ -32,9 +32,9 @@ int ft_check_stat(t_char *info, const char *stat, int index)
 void ft_print_info(t_char *info)
 {
     if (DEBUG != 1)
-        return;
+        return ;
     ft_printf("info->stats.health=%d\n", info->stats.health);
-    return;
+    return ;
 }
 
 int ft_initialize_info(t_char *info, char **content)

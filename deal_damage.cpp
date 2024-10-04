@@ -46,14 +46,14 @@ void ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
         if (ft_check_value(input))
         {
             ft_printf_fd(2, "1-Damage: expecting a number higher than or equal to 0\n");
-            return;
+            return ;
         }
         ft_printf("The %s damage was not changed.\n", d_type);
         damage = ft_atoi(input);
         if (damage < 0)
         {
             ft_printf_fd(2, "2-Damage: expecting a number higher than or equal to 0\n");
-            return;
+            return ;
         }
         damage_reduction = ft_get_damage_reduction(info, d_type);
         if (damage_reduction == ERROR_RESISTANCE)
@@ -99,5 +99,5 @@ void ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
             ft_check_concentration(info, total);
         total = 0;
     }
-    return;
+    return ;
 }

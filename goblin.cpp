@@ -6,26 +6,23 @@
 void ft_goblin_turn(t_char *info)
 {
     ft_update_buf(info);
-    if (info->flags.prone)
-    {
+	if (info->flags.prone)
+	{
         ft_printf("%s will use his/her action to stand up\n", info->name);
         info->flags.prone = 0;
-    }
-    else
-    {
-        ft_printf("The goblin will try to make either a ranged or melee attack during his turn\n");
-    }
-    ft_printf("Goblin currently has %d/%d hp\n", info->stats.health, info->dstats.health);
-    if (info->stats.health < info->dstats.health / 2)
-    {
-        ft_printf("The goblin is on low health and can disengage as a bonus action\n");
-    }
+	}
+	else
+		ft_printf("The goblin will try to make either a ranged or melee attack during his turn\n");
+	ft_printf("Goblin currently has %d/%d hp\n", info->stats.health, info->dstats.health);
+	if (info->stats.health < info->dstats.health / 2)
+		ft_printf("The goblin is on low health and can disengage as a bonus action\n");
+	return ;
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
 {
     (void)info;
-    return;
+    return ;
 }
 
 t_char *ft_goblin(const int index, const char **input, t_name *name, int exception)

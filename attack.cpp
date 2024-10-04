@@ -48,6 +48,7 @@ static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info
         d_info->dice_amount = weapon->attack.effect_dice_amount;
         d_info->dice_faces = weapon->attack.effect_dice_faces;
     }
+	return ;
 }
 
 static void ft_print_attack_roll(t_char *info, t_equipment_id *weapon, t_damage_info *d_info)
@@ -59,8 +60,9 @@ static void ft_print_attack_roll(t_char *info, t_equipment_id *weapon, t_damage_
     if (d_info->result <= 1 + info->crit.attack_fail)
     {
         ft_printf("a critical fail (%d) and missed on his attack\n", d_info->result);
-        return;
+        return ;
     }
+	return ;
 }
 
 static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit)
@@ -68,6 +70,7 @@ static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, b
     int multiplier = is_crit ? 2 : 1;
     d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces) + d_info->stat_mod;
     ft_printf("deals %d %s damage\n", d_info->damage, weapon->attack.damage_type);
+	return ;
 }
 
 static void ft_handle_attack_result(t_char *info, t_equipment_id *weapon, t_damage_info *d_info)
@@ -84,6 +87,7 @@ static void ft_handle_attack_result(t_char *info, t_equipment_id *weapon, t_dama
         ft_printf("%d+%d+%d+%d for a total of %d and ", d_info->result, d_info->stat_mod, info->attack_bonus.attack_bonus, d_info->mod, (d_info->result + d_info->stat_mod + d_info->mod + info->attack_bonus.attack_bonus));
         ft_calculate_damage(weapon, d_info, false);
     }
+	return ;
 }
 
 void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
@@ -95,10 +99,11 @@ void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
     if (d_info.result == -1)
     {
         ft_printf_fd(2, "101-Error: dice rolling error in attack\n");
-        return;
+        return ;
     }
     d_info.mod = ft_attack_roll_check_buffs(info, &d_info.result);
     ft_print_attack_roll(info, weapon, &d_info);
     ft_check_dice_amount_and_faces(weapon, &d_info, offhand, info);
     ft_handle_attack_result(info, weapon, &d_info);
+	return ;
 }

@@ -69,15 +69,16 @@ void ft_request_input(t_name *name)
             add_history(input_string);
         input = ft_parse_input(input_string);
         if (!input)
-            continue;
+            continue ;
         i = ft_double_char_length(input);
         found = ft_handle_builtins(input, i, name, input_string);
         if (found == -1)
-            return;
+            return ;
         else if (!found)
             found = ft_handle_custom_commands(input, i, name);
         if (!found)
 			ft_printf_fd(2, "007-Error unknown command: %s\n", input_string);
         ft_free_input(input, input_string);
     }
+	return ;
 }

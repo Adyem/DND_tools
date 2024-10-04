@@ -12,20 +12,16 @@ void ft_goblin_warmaster_turn(t_char *info)
         info->flags.prone = 0;
     }
     else
-    {
         ft_printf("The warmaster will attempt a strategic melee or ranged attack during his turn\n");
-    }
     ft_printf("Warmaster currently has %d/%d hp\n", info->stats.health, info->dstats.health);
     if (info->stats.health < info->dstats.health / 2)
-    {
         ft_printf("The warmaster is on low health and may use the command ability as a bonus action\n");
-    }
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
 {
     (void)info;
-    return;
+    return ;
 }
 
 t_char *ft_goblin_warmaster(const int index, const char **input, t_name *name, int exception)
