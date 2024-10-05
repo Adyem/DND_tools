@@ -3,6 +3,14 @@
 #include "libft/Printf/ft_printf.hpp"
 #include <cstdlib>
 
+static char **ft_handle_memory_error(t_char *info, char **data, int error_code)
+{
+    info->flags.error = 1;
+    ft_free_double_char(data);
+    ft_printf_fd(2, "%d-Error: Allocating memory\n", error_code);
+    return (nullptr);
+}
+
 static int ft_check_target_exists(char *target)
 {
     if (ft_set_stats_check_name(target))
@@ -11,14 +19,6 @@ static int ft_check_target_exists(char *target)
         return (1);
     }
     return (0);
-}
-
-static char **ft_handle_memory_error(t_char *info, char **data, int error_code)
-{
-    info->flags.error = 1;
-    ft_free_double_char(data);
-    ft_printf_fd(2, "%d-Error: Allocating memory\n", error_code);
-    return (nullptr);
 }
 
 static char **ft_allocate_initial_data(char *content, int ofset, t_char *info)
