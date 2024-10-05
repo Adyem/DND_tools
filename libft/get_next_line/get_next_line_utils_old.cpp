@@ -1,4 +1,4 @@
-#include "get_next_line.hpp"
+#include "get_next_line_old.hpp"
 #include "../Libft/libft.hpp"
 
 static char	*allocate_new_string_old(char *string_1, char *string_2)

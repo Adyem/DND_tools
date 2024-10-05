@@ -1,4 +1,5 @@
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
 #include <fcntl.h>
@@ -22,18 +23,19 @@ int ft_npc_open_file(t_char *info)
     content = ft_read_file_dnd(fd);
     if (DEBUG == 1)
         ft_printf("Content is at address %p\n", content);
-
     if (!content)
         return (1);
     close(fd);
     error = ft_initialize_info(info, content);
     if (DEBUG == 1)
         ft_printf("The value of error is %d %d\n", error, info->flags.error);
-
     if (info->flags.error || error)
+	{
+		cma_free_double(reinterpret_cast<void**>(content));
         return (1);
+	}
     error = ft_npc_check_info(info);
-    ft_free_double_char(content);
+	cma_free_double(reinterpret_cast<void**>(content));
     if (error)
         return (1);
     return (0);

@@ -10,6 +10,6 @@
 # include <stddef.h>
 
 char	*ft_strjoin_gnl(char *string_1, char *string_2, bool critical);
-char	*get_next_line(int fd, bool crticail);
+char	*get_next_line(int fd, bool critical);
 
 #endif

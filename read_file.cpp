@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
-#include "libft/get_next_line/get_next_line.hpp"
+#include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CMA/CMA.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
@@ -16,10 +17,10 @@ static void ft_malloc_fail_gnl_dnd(char **return_v, int fd)
     {
         while (return_v[i])
         {
-            free(return_v[i]);
+            cma_free(return_v[i]);
             i++;
         }
-        free(return_v);
+        cma_free(return_v);
     }
 	return ;
 }
@@ -30,7 +31,7 @@ static char **ft_realloc_dnd(char **return_v, int index, int fd)
     char	**temp;
 
     i = 0;
-    temp = (char **)calloc(index + 1, sizeof(char *));
+    temp = (char **)cma_calloc(index + 1, sizeof(char *), false);
     if (!temp)
     {
         ft_malloc_fail_gnl_dnd(return_v, fd);
@@ -44,7 +45,7 @@ static char **ft_realloc_dnd(char **return_v, int index, int fd)
             i++;
         }
     }
-    free(return_v);
+    cma_free(return_v);
     return (temp);
 }
 
@@ -56,14 +57,14 @@ char **ft_read_file_dnd(int fd)
 
     while (1)
     {
-        line = get_next_line_old(fd);
+        line = get_next_line(fd, false);
         if (!line)
             break;
         i++;
         return_v = ft_realloc_dnd(return_v, i, fd);
         if (!return_v)
         {
-            free(line);
+            cma_free(line);
             return (nullptr);
         }
         return_v[i - 1] = line;
@@ -104,7 +105,7 @@ char **ft_open_and_read(const char *file)
     ft_print_file(content);
     if (!content)
     {
-        get_next_line_old(-1);
+        get_next_line(-1, false);
         ft_printf_fd(2, "Error allocating memory for content inside file\n");
     }
     return (content);

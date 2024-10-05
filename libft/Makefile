@@ -18,7 +18,7 @@ LIBS := CMA/CustomMemoryAllocator.a \
         Printf/Printf.a \
         ReadLine/ReadLine.a \
 	PThread/PThread.a \
-	get_next_line/get_next_line.a
+	get_next_line/get_next_line_old.a
 
 all: $(TARGET)
 

@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/ft_printf.hpp"
-#include "libft/get_next_line/get_next_line.hpp"
+#include "libft/get_next_line/get_next_line_old.hpp"
 
 typedef int (*RollExecuteFunc)(char *, int *, int);
 

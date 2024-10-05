@@ -1,9 +1,9 @@
-NAME		= get_next_line.a
+NAME		= get_next_line_old.a
 
-library		= get_next_line
+library		= get_next_line_old
 
-SRC			= get_next_line.cpp \
-			  get_next_line_utils.cpp
+SRC			= get_next_line_old.cpp \
+			  get_next_line_utils_old.cpp
 
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++17
