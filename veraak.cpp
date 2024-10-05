@@ -1,5 +1,6 @@
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "dnd_tools.hpp"
 #include "veraak.hpp"
 
@@ -109,7 +110,7 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
     error = 0;
     if (DEBUG == 1)
         ft_printf("index = %d\n", index);
-    info = (t_char *)ft_calloc(1, sizeof(t_char));
+    info = (t_char *)cma_calloc(1, sizeof(t_char), false);
     if (!info)
         return (nullptr);
     *info = VERAAK_INFO;

@@ -3,6 +3,7 @@
 #include "chaos_crystal.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CMA/CMA.hpp"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -66,7 +67,7 @@ t_char *ft_chaos_crystal(const int index, const char **input, t_name *name, int 
     int error;
     t_char *info;
 
-    info = (t_char *)ft_calloc(1, sizeof(t_char));
+    info = (t_char *)cma_calloc(1, sizeof(t_char), false);
     if (!info)
     {
         ft_printf("103-Error: Failed to allocate memory info %s\n", input[0]);

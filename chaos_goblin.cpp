@@ -2,6 +2,7 @@
 #include "chaos_goblin.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CMA/CMA.hpp"
 
 void ft_chaos_goblin_turn(t_char *info)
 {
@@ -31,7 +32,7 @@ t_char *ft_chaos_goblin(const int index, const char **input, t_name *name, int e
     int error;
     t_char *info;
 
-    info = (t_char *)ft_calloc(1, sizeof(t_char));
+    info = (t_char *)cma_calloc(1, sizeof(t_char), false);
     if (!info)
     {
         ft_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);

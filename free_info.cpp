@@ -1,4 +1,5 @@
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
 
@@ -12,6 +13,6 @@ void	ft_free_info(t_char *info)
 		ft_free_double_char(info->concentration.targets);
 		free(info->save_file);
 	}
-	free(info);
+	cma_free(info);
 	return ;
 }

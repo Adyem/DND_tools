@@ -2,6 +2,7 @@
 #include "goblin_warmaster.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CMA/CMA.hpp"
 
 void ft_goblin_warmaster_turn(t_char *info)
 {
@@ -29,7 +30,7 @@ t_char *ft_goblin_warmaster(const int index, const char **input, t_name *name, i
     int error;
     t_char *info;
 
-    info = (t_char *)ft_calloc(1, sizeof(t_char));
+    info = (t_char *)cma_calloc(1, sizeof(t_char), false);
     if (!info)
         return (nullptr);
     *info = WARM_INFO;
