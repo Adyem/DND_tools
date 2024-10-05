@@ -1,18 +1,17 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "libft/Libft/libft.hpp"
+#include "libft/ReadLine/readline.hpp"
 #include <cstdlib>
 
 static char	**ft_parse_input(char *input_string)
 {
 	char **input;
 
-	input = ft_split(input_string, ' ');
+	input = cma_split(input_string, ' ', false);
 	if (!input)
 	{
-		free(input_string);
+		cma_free(input_string);
 		ft_printf_fd(2, "006-Error splitting input\n");
 	}
 	return (input);
@@ -63,17 +62,18 @@ void ft_request_input(t_name *name)
     int found;
     int i;
 
-    while ((input_string = readline("dndtools: ")) != nullptr)
+    while ((input_string = rl_readline("dndtools: ")) != nullptr)
     {
-        if (*input_string)
-            add_history(input_string);
         input = ft_parse_input(input_string);
         if (!input)
             continue ;
         i = ft_double_char_length(input);
         found = ft_handle_builtins(input, i, name, input_string);
         if (found == -1)
+		{
+			rl_clear_history();
             return ;
+		}
         else if (!found)
             found = ft_handle_custom_commands(input, i, name);
         if (!found)

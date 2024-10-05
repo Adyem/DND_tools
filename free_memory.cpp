@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include <cstdlib>
 
 void	ft_free_input(char **input, char *input_string)
@@ -8,11 +9,11 @@ void	ft_free_input(char **input, char *input_string)
 	i = 0;
 	while (input[i])
 	{
-		free(input[i]);
+		cma_free(input[i]);
 		i++;
 	}
-	free(input);
-	free(input_string);
+	cma_free(input);
+	cma_free(input_string);
 }
 
 int ft_free_players(t_pc *players)

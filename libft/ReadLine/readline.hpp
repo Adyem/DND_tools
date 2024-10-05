@@ -4,10 +4,10 @@
 #define MAX_HISTORY 100
 #define INITIAL_BUFFER_SIZE 1024
 
-static char *history[MAX_HISTORY];
-static int history_count = 0;
+extern char	*history[MAX_HISTORY];
+extern int	history_count;
 
-void	clear_history();
-char	*ft_readline(const char *prompt);
+void	rl_clear_history();
+char	*rl_readline(const char *prompt);
 
 #endif

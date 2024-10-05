@@ -86,7 +86,7 @@ static char	**ft_merror(char **strs)
 	return (nullptr);
 }
 
-char	**ft_split(char const *s, char c, bool critical)
+char	**cma_split(char const *s, char c, bool critical)
 {
 	char	**strs;
 	int		wordcount;

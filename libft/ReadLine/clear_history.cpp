@@ -1,7 +1,7 @@
 #include "readline.hpp"
 #include "../CMA/CMA.hpp"
 
-void clear_history()
+void rl_clear_history()
 {
 	int	i;
 
