@@ -7,9 +7,9 @@
 #include "../Printf/ft_printf.hpp"
 #include "readline.hpp"
 
-struct termios	orig_termios;
-char			*history[MAX_HISTORY];
-int				history_count = 0;
+termios	orig_termios;
+char	*history[MAX_HISTORY];
+int		history_count = 0;
 
 static void rl_disable_raw_mode()
 {
@@ -29,8 +29,8 @@ static void rl_enable_raw_mode()
 
 static int rl_read_key()
 {
-	int nread;
-	char c;
+	int		nread;
+	char	c;
 
 	while ((nread = read(STDIN_FILENO, &c, 1)) != 1)
 		;
@@ -62,11 +62,11 @@ static void rl_clear_line(int pos)
 
 char *rl_readline(const char *prompt)
 {
-	int	bufsize = INITIAL_BUFFER_SIZE;
-	char *buffer = (char *)cma_malloc(bufsize, true);
-	int	pos = 0;
-	int	history_index;
-	int	c;
+	int		bufsize = INITIAL_BUFFER_SIZE;
+	char	*buffer = (char *)cma_malloc(bufsize, true);
+	int		pos = 0;
+	int		history_index;
+	int		c;
 
 	if (!buffer)
 	{
@@ -78,7 +78,6 @@ char *rl_readline(const char *prompt)
 	history_index = history_count;
 	ft_printf("%s", prompt);
 	fflush(stdout);
-
 	while (1)
 	{
 		c = rl_read_key();
@@ -104,7 +103,6 @@ char *rl_readline(const char *prompt)
 				continue;
 			if (read(STDIN_FILENO, &seq[1], 1) != 1)
 				continue;
-
 			if (seq[0] == '[')
 			{
 				if (seq[1] == 'A')
@@ -167,7 +165,6 @@ char *rl_readline(const char *prompt)
 		memmove(&history[0], &history[1], sizeof(char*) * (MAX_HISTORY - 1));
 		history[MAX_HISTORY - 1] = cma_strdup(buffer, true);
 	}
-
 	rl_disable_raw_mode();
 	return buffer;
 }
