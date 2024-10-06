@@ -10,7 +10,6 @@ SUBDIRS := CMA \
 	   Printf \
 	   ReadLine \
 	   PThread \
-	   get_next_line
 
 LIBS := CMA/CustomMemoryAllocator.a \
         GetNextLine/GetNextLine.a \
@@ -18,7 +17,6 @@ LIBS := CMA/CustomMemoryAllocator.a \
         Printf/Printf.a \
         ReadLine/ReadLine.a \
 	PThread/PThread.a \
-	get_next_line/get_next_line_old.a
 
 all: $(TARGET)
 

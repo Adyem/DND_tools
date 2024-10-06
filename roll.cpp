@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
-#include "libft/get_next_line/get_next_line_old.hpp"
+#include "libft/GetNextLine/get_next_line.hpp"
 
 typedef int (*RollExecuteFunc)(char *, int *, int);
 
@@ -80,7 +81,7 @@ void ft_command_roll(char **argv)
     i = 1;
     while (argv[i])
     {
-        result = ft_strjoin_gnl_old(result, argv[i]);
+        result = ft_strjoin_gnl(result, argv[i], false);
         if (!result)
         {
             ft_printf_fd(2, "168-Error: Malloc failed in ft_strjoin_gnl\n");
@@ -95,11 +96,11 @@ void ft_command_roll(char **argv)
     if (ft_command_roll_validate(result))
     {
         ft_printf_fd(2, "169-Command Roll Error with the string: %s\n", result);
-        free(result);
+        cma_free(result);
         return ;
     }
     ft_command_roll_parse(result, 0);
     ft_printf("%s\n", result);
-    free(result);
+    cma_free(result);
 	return ;
 }
