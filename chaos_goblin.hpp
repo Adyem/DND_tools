@@ -1,6 +1,5 @@
 #ifndef CHAOS_GOBLIN_H
 # define CHAOS_GOBLIN_H
-//the guards above only capital letters
 
 # include "armor.hpp"
 # include "ranged_weapons.hpp"
@@ -12,11 +11,8 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-//change Chaos_goblin, chaos_goblin, CHAOS_GOBLIN to the name of the mob
-//functions that are used in the struct need to be defined here
 void	ft_chaos_goblin_turn(t_char *info);
 
-//these are the default stats u can change these
 static const	t_stats CHAOS_GOBLIN_DEFAULT_STATS =
 {
 	.phase = 0,
@@ -31,7 +27,6 @@ static const	t_stats CHAOS_GOBLIN_DEFAULT_STATS =
 	.cha = 8,
 };
 
-//possible modifiers for saving throws u can change these
 static const	t_savem CHAOS_GOBLIN_SAVE_MODS =
 {
     .str = 1,
@@ -42,7 +37,6 @@ static const	t_savem CHAOS_GOBLIN_SAVE_MODS =
 	.con = 0,
 };
 
-//possible modifiers for skills u can change these
 static const	t_skillsm CHAOS_GOBLIN_SKILL_MODS =
 {
     .athletics = 2,
@@ -65,7 +59,6 @@ static const	t_skillsm CHAOS_GOBLIN_SKILL_MODS =
     .persuasion = 0,
 };
 
-//possible attack modifiers change here
 static const	t_attack CHAOS_GOBLIN_ATTACK =
 {
 	.attack_bonus = 0,

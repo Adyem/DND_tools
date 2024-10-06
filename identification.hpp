@@ -2,7 +2,6 @@
 # define IDENTIFICATION_H
 
 typedef enum {
-    // Weapon Types
     WTYPE_CLUB = 1,
     WTYPE_DAGGER,
     WTYPE_GREATCLUB,
@@ -41,7 +40,6 @@ typedef enum {
     WTYPE_NET,
     WTYPE_WAND,
     
-    // Armor Types
     ATYPE_PADDED = 10001,
     ATYPE_LEATHER,
     ATYPE_STUDDED_LEATHER,
@@ -56,35 +54,32 @@ typedef enum {
     ATYPE_PLATE,
     ATYPE_SHIELD,
 
-    // Weapon IDs
     STEEL_SWORD_ID = 20001,
 	STEEL_BATTLE_AXE_ID,
     WOODEN_BOW_ID,
 	WOODEN_CLUB_ID,
     CHAOS_WAND_ID,
 
-    // Armor IDs
-    LEATHER_ARMOR_ID = 30001
+    LEATHER_ARMOR_ID = 30001,
 } ItemID;
 
 typedef enum e_equipment_slot
 {
-	SLOT_NONE            = 0,        // No slot
-	SLOT_WEAPON          = 1 << 0,   // 1 (0001)
-	SLOT_OFFHAND_WEAPON  = 1 << 1,   // 2 (0010)
-	SLOT_RANGED_WEAPON   = 1 << 2,   // 4 (0100)
-	SLOT_ARMOR           = 1 << 3,   // 8 (1000)
-	SLOT_HELMET          = 1 << 4,   // 16
-	SLOT_SHIELD          = 1 << 5,   // 32
-	SLOT_BOOTS           = 1 << 6,   // 64
-	SLOT_GLOVES          = 1 << 7,   // 128
-	SLOT_AMULET          = 1 << 8,   // 256
-	SLOT_RING_01         = 1 << 9,   // 512
-	SLOT_RING_02         = 1 << 10,  // 1024
-	SLOT_BELT            = 1 << 11   // 2048
+	SLOT_NONE            = 0,
+	SLOT_WEAPON          = 1 << 0,
+	SLOT_OFFHAND_WEAPON  = 1 << 1,
+	SLOT_RANGED_WEAPON   = 1 << 2,
+	SLOT_ARMOR           = 1 << 3,
+	SLOT_HELMET          = 1 << 4,
+	SLOT_SHIELD          = 1 << 5,
+	SLOT_BOOTS           = 1 << 6,
+	SLOT_GLOVES          = 1 << 7,
+	SLOT_AMULET          = 1 << 8,
+	SLOT_RING_01         = 1 << 9,
+	SLOT_RING_02         = 1 << 10,
+	SLOT_BELT            = 1 << 11,
 }	t_equipment_slot;
 
-//Concentration ID
 # define HUNTERS_MARK_ID 1
 # define HUNTERS_MARK_NAME "hunters mark"
 # define BLESS_ID 2
@@ -92,7 +87,6 @@ typedef enum e_equipment_slot
 # define CHAOS_ARMOR_ID 3
 # define CHAOS_ARMOR_NAME "chaos_armor"
 
-//Damage types
 # define DAMAGE_TYPE_BLUDGEONING	"bludgeoning"
 # define DAMAGE_TYPE_PIERCING		"piercing"
 # define DAMAGE_TYPE_SLASHING		"slashing"
@@ -107,7 +101,6 @@ typedef enum e_equipment_slot
 # define DAMAGE_TYPE_THUNDER		"thunder"
 # define DAMAGE_TYPE_PSYCHIC		"psychic"
 
-//Stats
 # define STAT_STR "strength"
 # define STAT_DEX "dexterity"
 # define STAT_CON "constitution"
@@ -115,10 +108,8 @@ typedef enum e_equipment_slot
 # define STAT_WIS "wisdom"
 # define STAT_CHA "charisma"
 
-//Other
 # define FINESSE "finesse"
 
-//Data
 #define DATA_FOLDER "data"
 #define PREFIX_TO_SKIP "data--"
 #define EXCLUDE_PREFIX "pc--"

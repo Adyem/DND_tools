@@ -1,6 +1,5 @@
 #ifndef CHAOS_CRYSTAL_H
 # define CHAOS_CRYSTAL_H
-//the guards above only capital letters
 
 # include "character.hpp"
 # include "initialize.hpp"
@@ -9,11 +8,8 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-//change Chaos_crystal, chaos_crystal, CHAOS_CRYSTAL to the name of the mob
-//functions that are used in the struct need to be defined here
 void	ft_chaos_crystal_turn(t_char *info);
 
-//these are the default stats u can change these
 static const	t_stats CHAOS_CRYSTAL_DEFAULT_STATS =
 {
 	.phase = 0,
@@ -28,7 +24,6 @@ static const	t_stats CHAOS_CRYSTAL_DEFAULT_STATS =
 	.cha = 20,
 };
 
-//possible modifiers for saving throws u can change these
 static const	t_savem CHAOS_CRYSTAL_SAVE_MODS =
 {
     .str = 1,
@@ -39,7 +34,6 @@ static const	t_savem CHAOS_CRYSTAL_SAVE_MODS =
 	.con = 0,
 };
 
-//possible modifiers for skills u can change these
 static const	t_skillsm CHAOS_CRYSTAL_SKILL_MODS =
 {
     .athletics = 2,
@@ -62,7 +56,6 @@ static const	t_skillsm CHAOS_CRYSTAL_SKILL_MODS =
     .persuasion = 0,
 };
 
-//possible attack modifiers change here
 static const	t_attack CHAOS_CRYSTAL_ATTACK =
 {
 	.attack_bonus = 0,
@@ -150,4 +143,5 @@ static const t_char CHAOS_CRYSTAL_INFO =
     .struct_name = nullptr,
     .physical = CHAOS_CRYSTAL_PHYSICAL,
 };
+
 #endif

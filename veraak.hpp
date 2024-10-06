@@ -1,6 +1,5 @@
 #ifndef VERAAK_H
 # define VERAAK_H
-//the guards above only capital letters
 
 #include "armor.hpp"
 #include "ranged_weapons.hpp"
@@ -13,11 +12,8 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-//change Veraak, veraak, VERAAK to the name of the mob
-//functions that are used in the struct need to be defined here
 void	ft_veraak_turn(t_char *info);
 
-//these are the default stats u can change these
 static const	t_stats VERAAK_DEFAULT_STATS =
 {
 	.phase = 1,
@@ -32,7 +28,6 @@ static const	t_stats VERAAK_DEFAULT_STATS =
 	.cha = 8,
 };
 
-//possible modifiers for saving throws u can change these
 static const	t_savem VERAAK_SAVE_MODS =
 {
     .str = 1,
@@ -43,7 +38,6 @@ static const	t_savem VERAAK_SAVE_MODS =
 	.con = 0,
 };
 
-//possible modifiers for skills u can change these
 static const	t_skillsm VERAAK_SKILL_MODS =
 {
     .athletics = 2,
@@ -66,7 +60,6 @@ static const	t_skillsm VERAAK_SKILL_MODS =
     .persuasion = 0,
 };
 
-//possible attack modifiers change here
 static const	t_attack VERAAK_ATTACK =
 {
 	.attack_bonus = 0,
@@ -155,7 +148,6 @@ static const t_char VERAAK_INFO =
 	.physical = VERAAK_PHYSICAL,
 };
 
-//Abilities
 #define CHAOS_SMASH "Veraak conjures a hammer made out of dark energy hitting his" \
 	" target with it dealing damage based on his armor class\n" \
 	"10-12 ac -> 15 " DAMAGE_TYPE_FORCE " damage\n" \
