@@ -23,7 +23,7 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 	if (error > -1 && target && buff && buff->cleanup_f)
 		buff->cleanup_f(info, target, buff);
 	if (error == 1)
-        ft_printf("305-Error: can't cast hunter's mark on yourself\n");
+        ft_printf("305-Error: can't cast %s on yourself\n", buff->spell_name);
 	else if (error == 2)
         ft_printf("299-Error allocating memory for targets\n");
 	else if (error == 3)

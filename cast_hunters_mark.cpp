@@ -8,6 +8,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 {
     t_buff buff;
 
+	buff.spell_name = "hunters mark";
     buff.target_amount = 1;
     buff.error = 1;
     buff.duration = 50;

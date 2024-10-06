@@ -19,6 +19,7 @@ typedef struct s_buff
 {
 	int	target_amount;
     char						*target;
+	const char					*spell_name;
     int							spell_id;
     int							dice_faces_mod;
     int							dice_amount_mod;
