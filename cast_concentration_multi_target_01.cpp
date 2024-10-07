@@ -1,6 +1,7 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/ReadLine/readline.hpp"
 #include "dnd_tools.hpp"
-#include <readline/readline.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstdlib>
@@ -47,7 +48,7 @@ static int ft_open_target_files(t_char *info, t_char **target, int *fd, char **s
             }
             if (string[j])
             {
-                free(string[j]);
+                cma_free(string[j]);
                 string[j] = nullptr;
             }
 			j++;
@@ -86,7 +87,7 @@ static char *ft_read_target_name(int i)
     char *target_name;
 
     sprintf(message, "Requesting the name of the %s target", ft_ordinal_suffix(i + 1));
-    target_name = readline(message);
+    target_name = rl_readline(message);
     if (!target_name)
     {
         ft_printf("108-Error: Failed to allocate memory for readline target\n");
@@ -126,7 +127,7 @@ static void ft_free_memory_on_error(t_char **target, char **string, int amount)
         if (target[j])
             ft_free_info(target[j]);
         if (string[j])
-            free(string[j]);
+            cma_free(string[j]);
         target[j] = nullptr;
         string[j] = nullptr;
         j++;
@@ -157,7 +158,7 @@ void ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff
         target[i] = ft_validate_and_fetch_target(string[i], info);
         while (!target[i])
         {
-            free(string[i]);
+            cma_free(string[i]);
             string[i] = nullptr;
             i++;
         }
