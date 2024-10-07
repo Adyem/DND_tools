@@ -19,7 +19,9 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     buff.buff = 0;
     buff.cast_spell = ft_cast_hunters_mark_second_appli;
 	buff.cleanup_f = ft_cleanup_hunters_mark;
-    ft_cast_concentration(info, input, &buff);
+    if (ft_cast_concentration(info, input, &buff))
+		return ;
+	ft_printf("%s cast hunters mark on %s\n", info->name, input[3]);
     return ;
 }
 

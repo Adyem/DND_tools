@@ -86,13 +86,13 @@ static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *targ
     return (0) ;
 }
 
-void ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
+int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 {
     t_char *target;
     int fd[2];
 
     if (ft_remove_concentration(info))
-        return ;
+        return(1);
     fd[0] = -1;
     fd[1] = -1;
     if (DEBUG == 1)
@@ -100,7 +100,7 @@ void ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
     if (ft_set_stats_check_name(input[3]))
     {
         if (ft_check_player_character(input[3]))
-            return ;
+            return(1);
         else
             target = nullptr;
     }
@@ -108,27 +108,27 @@ void ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
     {
         target = ft_get_info(input[3], info->struct_name);
         if (!target)
-            return (ft_printf("297-Error getting info %s\n", input[2]), (void)0);
+			return (ft_printf("297-Error getting info %s\n", input[2]), 1);
     }
     if (ft_cast_concentration_open_file(fd, info, target))
-        return ;
+        return(1);
     if (ft_strcmp_dnd(target->name, info->name) == 0)
     {
 		ft_cast_concentration_cleanup(info, target, fd, buff, 1);
-        return ;
+        return (1);
     }
     if (target && target->version_number >= 2)
     {
         if (buff->cast_spell(target, input, buff))
         {
 			ft_cast_concentration_cleanup(info, target, fd, buff, 0);
-            return ;
+            return (1);
         }
     }
     if (ft_remove_concentration(info))
-        return (ft_cast_concentration_cleanup(info, target, fd, buff, 0), (void)0);
+        return (ft_cast_concentration_cleanup(info, target, fd, buff, 0), 1);
     if (ft_apply_concentration_buff(info, target, fd, input, buff))
-        return ;
+        return (1);
     ft_cast_concentration_cleanup(info, target, fd, buff, -1);
-    return ;
+    return (0);
 }

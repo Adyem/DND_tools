@@ -167,7 +167,7 @@ int			ft_check_bless(t_char *info);
 
 //concentration
 void		ft_cast_hunters_mark(t_char *info, const char **input);
-void		ft_cast_concentration(t_char *info, const char **input, t_buff *buff);
+int			ft_cast_concentration(t_char *info, const char **input, t_buff *buff);
 void		ft_check_concentration(t_char *info, int  damage);
 int			ft_remove_concentration(t_char *info);
 void		ft_cast_chaos_armor(t_char *info);
