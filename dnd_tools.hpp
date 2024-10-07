@@ -50,6 +50,17 @@ void		ft_veraak_turn(t_char *info);
 //Commands
 void		ft_request_input(t_name *name);
 
+//Tester
+void		ft_test(t_name *name);
+int			ft_test_excecute(const char **input, int argc, t_name *name);
+
+//Tester Make input strings
+void		ft_excecute_test(const char *string1, t_name *name);
+void		ft_excecute_test(const char *string1, const char *string2, t_name *name);
+void		ft_excecute_test(const char *string1, const char *string2, const char *string3, t_name *name);
+void		ft_excecute_test(const char *string1, const char *string2, const char *string3, const char *string4, t_name *name);
+void		ft_excecute_test(const char *string1, const char *string2, const char *string3, const char *string4, const char *string5, t_name *name);
+
 //Turn
 void		ft_turn_next(t_name *name);
 

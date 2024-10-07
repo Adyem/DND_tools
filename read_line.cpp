@@ -48,6 +48,8 @@ static int ft_handle_builtins(char **input, int i, t_name *name, char *input_str
 		ft_open_all_files(name);
 	else if (i == 1 && ft_strcmp_dnd(input[0], "turn") == 0)
 		ft_turn_next(name);
+	else if (i == 1 && ft_strcmp_dnd(input[0], "test") == 0)
+		ft_test(name);
 	else if (i == 3 && ft_strcmp_dnd(input[1], "player") == 0)
 		ft_player((const char **)input);
 	else

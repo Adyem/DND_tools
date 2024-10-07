@@ -103,6 +103,8 @@ SRC			= name.cpp \
 			  cast_concentration_multi_target_01.cpp \
 			  ordinal_suffix.cpp \
 			  check_equipment.cpp \
+			  test.cpp \
+			  test_make_input.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17
