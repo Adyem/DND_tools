@@ -1,9 +1,10 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/ReadLine/readline.hpp"
 #include <cstdlib>
 #include <cstring>
-#include <readline/readline.h>
 
 static int	ft_free_request_damage(char *line, char **input)
 {
@@ -12,11 +13,11 @@ static int	ft_free_request_damage(char *line, char **input)
 	i = 0;
 	while (input && input[i])
 	{
-		free(input[i]);
+		cma_free(input[i]);
 		i++;
 	}
-	free(input);
-	free(line);
+	cma_free(input);
+	cma_free(line);
 	return (1);
 }
 
@@ -58,26 +59,26 @@ int ft_request_damage(t_char *info)
     int		fail = 0;
     int		resistance;
 
-    while ((line = readline("How much damage was dealt: ")))
+    while ((line = rl_readline("How much damage was dealt: ")))
     {
         if (ft_strcmp_dnd(line, "exit") == 0)
         {
             ft_deal_damage(info, nullptr, nullptr, 0, 2);
-            free(line);
+            cma_free(line);
             return (0);
         }
-        input = ft_split(line, ' ');
+        input = cma_split(line, ' ', false);
         if (!input)
         {
             if (!fail)
             {
-                free(line);
+                cma_free(line);
                 fail = 1;
                 continue ;
             }
             else
             {
-                free(line);
+                cma_free(line);
                 return (1);
             }
         }
