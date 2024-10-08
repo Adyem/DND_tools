@@ -17,7 +17,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     buff.target_amount = 1;
     buff.spell_id = HUNTERS_MARK_ID;
     buff.buff = 0;
-    buff.cast_spell = ft_cast_hunters_mark_second_appli;
+    buff.cast_spell = ft_cast_hunters_mark_apply_debuf;
 	buff.cleanup_f = ft_cleanup_hunters_mark;
     if (ft_cast_concentration(info, input, &buff))
 		return ;
@@ -41,7 +41,7 @@ static int ft_is_caster_name_present(char **caster_name_list, const char *name)
     return (0);
 }
 
-int ft_cast_hunters_mark_second_appli(t_char *target, const char **input, t_buff *buff)
+int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff *buff)
 {
     int i;
 
@@ -87,4 +87,5 @@ void ft_cleanup_hunters_mark(t_char *info, t_char *target, t_buff *buff)
             target->debufs.hunters_mark.caster_name[len - 1] = nullptr;
         }
     }
+	return ;
 }
