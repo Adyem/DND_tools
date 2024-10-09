@@ -119,9 +119,10 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
     }
 }
 
-static void ft_free_memory_on_error(t_char **target, char **string, int amount)
+static void ft_free_memory_cmt(t_char **target, char **string, int amount)
 {
     int j = 0;
+
     while (j < amount)
     {
         if (target[j])
@@ -152,7 +153,7 @@ void ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff
         string[i] = ft_read_target_name(i);
         if (!string[i])
         {
-            ft_free_memory_on_error(target, string, i);
+            ft_free_memory_cmt(target, string, i);
             return ;
         }
         target[i] = ft_validate_and_fetch_target(string[i], info);
@@ -166,5 +167,6 @@ void ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff
     }
     if (!ft_open_target_files(info, target, fd, string, buff->target_amount))
 		return ;
+	ft_free_memory_cmt(target, string, i);
 	return ;
 }
