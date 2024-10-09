@@ -59,15 +59,12 @@ static char *rl_resize_buffer(char *old_buffer, int current_size, int new_size)
 
 static void rl_clear_line(const char *prompt, int buffer_length)
 {
-    // Move cursor to the beginning of the line
     ft_printf("\r");
-    // Clear the line by overwriting with spaces
     int line_length = buffer_length + ft_strlen(prompt);
     for (int i = 0; i < line_length; i++)
     {
         ft_printf(" ");
     }
-    // Move cursor back to the beginning
     ft_printf("\r");
     return;
 }
@@ -101,8 +98,6 @@ char *rl_readline(const char *prompt)
     int pos = 0;
     int history_index;
     int c;
-
-    // Variables for completion mode
     char *current_matches[MAX_SUGGESTIONS];
     int current_match_count = 0;
     int current_match_index = 0;
@@ -123,15 +118,12 @@ char *rl_readline(const char *prompt)
     while (1)
     {
         c = rl_read_key();
-
-        // Reset completion mode if any key other than Tab is pressed
         if (c != '\t' && in_completion_mode)
         {
             in_completion_mode = 0;
             current_match_count = 0;
             current_match_index = 0;
         }
-
         if (c == '\r' || c == '\n')
         {
             ft_printf("\n");
@@ -142,9 +134,7 @@ char *rl_readline(const char *prompt)
             if (pos > 0)
             {
                 pos--;
-                // Shift buffer left
                 memmove(&buffer[pos], &buffer[pos + 1], ft_strlen(buffer) - pos + 1);
-                // Clear line and redraw
                 rl_clear_line(prompt, prev_buffer_length);
                 ft_printf("%s%s", prompt, buffer);
                 prev_buffer_length = ft_strlen(buffer);
@@ -153,7 +143,6 @@ char *rl_readline(const char *prompt)
         }
         else if (c == 27)
         {
-            // Handle arrow keys and reset completion mode
             if (in_completion_mode)
             {
                 in_completion_mode = 0;
@@ -214,12 +203,9 @@ char *rl_readline(const char *prompt)
         {
             if (!in_completion_mode)
             {
-                // First Tab press, find matches
                 word_start = pos - 1;
                 while (word_start >= 0 && buffer[word_start] != ' ')
-                {
                     word_start--;
-                }
                 word_start++;
                 int prefix_len = pos - word_start;
                 if (prefix_len == 0)
@@ -231,9 +217,7 @@ char *rl_readline(const char *prompt)
                 for (int i = 0; i < suggestion_count; i++)
                 {
                     if (ft_strncmp(suggestions[i], prefix, prefix_len) == 0)
-                    {
                         current_matches[current_match_count++] = suggestions[i];
-                    }
                 }
                 if (current_match_count == 0)
                 {
@@ -249,10 +233,8 @@ char *rl_readline(const char *prompt)
 
             if (in_completion_mode && current_match_count > 0)
             {
-                // Replace current word with current match
                 const char *completion = current_matches[current_match_index];
                 int completion_len = ft_strlen(completion);
-                // Remove the current word from buffer
                 pos = word_start;
                 buffer[pos] = '\0';
 
@@ -272,8 +254,6 @@ char *rl_readline(const char *prompt)
                 ft_printf("%s%s", prompt, buffer);
                 prev_buffer_length = ft_strlen(buffer);
                 fflush(stdout);
-
-                // Move to next match for the next Tab press
                 current_match_index = (current_match_index + 1) % current_match_count;
             }
         }
