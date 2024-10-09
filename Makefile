@@ -104,7 +104,8 @@ SRC			= name.cpp \
 			  ordinal_suffix.cpp \
 			  check_equipment.cpp \
 			  test.cpp \
-			  test_make_input.cpp
+			  test_make_input.cpp \
+			  initialize_suggestions_readline.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17
