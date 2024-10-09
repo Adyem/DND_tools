@@ -7,11 +7,10 @@
 #include <cerrno>
 #include <cstring>
 
-static void ft_malloc_fail_gnl_dnd(char **return_v, int fd)
+static void ft_malloc_fail_gnl_dnd(char **return_v)
 {
     int	i;
 
-    close(fd);
     i = 0;
     if (return_v)
     {
@@ -25,7 +24,7 @@ static void ft_malloc_fail_gnl_dnd(char **return_v, int fd)
 	return ;
 }
 
-static char **ft_realloc_dnd(char **return_v, int index, int fd)
+static char **ft_realloc_dnd(char **return_v, int index)
 {
     int		i;
     char	**temp;
@@ -34,8 +33,8 @@ static char **ft_realloc_dnd(char **return_v, int index, int fd)
     temp = (char **)cma_calloc(index + 1, sizeof(char *), false);
     if (!temp)
     {
-        ft_malloc_fail_gnl_dnd(return_v, fd);
-        return nullptr;
+        ft_malloc_fail_gnl_dnd(return_v);
+        return (nullptr);
     }
     if (return_v)
     {
@@ -61,7 +60,7 @@ char **ft_read_file_dnd(int fd)
         if (!line)
             break;
         i++;
-        return_v = ft_realloc_dnd(return_v, i, fd);
+        return_v = ft_realloc_dnd(return_v, i);
         if (!return_v)
         {
             cma_free(line);

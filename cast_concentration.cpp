@@ -11,7 +11,8 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 {
 	if (info)
         ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[0]);
-
+	if (target)
+		ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[1]);
 	if (fd[0] != -1)
         close(fd[0]);
 	if (fd[1] != -1)
@@ -29,10 +30,7 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 	else if (error == 5)
         ft_printf("321-Error opening file: %s\n", strerror(errno));
 	if (target)
-    {
-        ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[1]);
-        ft_free_info(target);
-    }
+		ft_free_info(target);
 	return ;
 }
 
