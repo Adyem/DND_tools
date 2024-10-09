@@ -3,6 +3,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/ReadLine/readline.hpp"
 #include <cstdlib>
 
 void ft_free_memory_name(t_name *name, int exit_failure)
@@ -19,7 +20,10 @@ void ft_free_memory_name(t_name *name, int exit_failure)
         current = next_node;
     }
     if (exit_failure)
+	{
+		rl_clear_suggestions();
         exit(exit_failure);
+	}
     return ;
 }
 
@@ -47,6 +51,7 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *n
     else
         first_node = new_node;
     *last_node = new_node;
+	rl_add_suggestion(new_node->name);
     return (new_node);
 }
 

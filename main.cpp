@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/ReadLine/readline.hpp"
 #include <ctime>
 #include <cstdlib>
 
@@ -28,5 +29,6 @@ int main(int argc, char **argv)
     name = ft_allocate_memory_name();
     ft_request_input(name);
     ft_free_memory_name(name, 0);
+	rl_clear_suggestions();
     return (0);
 }
