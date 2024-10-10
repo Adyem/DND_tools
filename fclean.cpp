@@ -17,7 +17,7 @@ void ft_fclean(void)
     command[1] = "-c";
     command[2] = "rm -rf ./data/*";
     command[3] = nullptr;
-    if (ft_read_line_confirm("type yes to confirm or no to abort: "))
+    if (dnd_test == false && ft_read_line_confirm("type yes to confirm or no to abort: "))
         return ;
     pid = fork();
     if (pid == -1)
@@ -53,7 +53,7 @@ void ft_clean(void)
     command[1] = "-c";
     command[2] = "rm -rf ./logs/*";
     command[3] = nullptr;
-    if (ft_read_line_confirm("type yes to confirm or no to abort: "))
+    if (dnd_test == 0 && ft_read_line_confirm("type yes to confirm or no to abort: "))
         return ;
     pid = fork();
     if (pid == -1)

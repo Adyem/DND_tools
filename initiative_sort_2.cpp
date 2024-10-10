@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
@@ -20,7 +21,6 @@ void ft_initiative_print(void)
     }
     content = ft_read_file_dnd(fd);
     close(fd);
-
     if (!content)
     {
         ft_printf("261-Error allocating memory\n");
@@ -33,8 +33,7 @@ void ft_initiative_print(void)
         ft_printf("%s\n", content[i]);
         i++;
     }
-
-    ft_free_double_char(content);
+    cma_free_double(content);
 }
 
 void ft_initiative_print_pc(t_pc *players)

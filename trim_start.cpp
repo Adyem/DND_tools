@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include <cstdlib>
 #include <cstring>
+#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 
 static size_t str_len(const char *str)
@@ -14,7 +15,7 @@ static size_t str_len(const char *str)
 
 static char *str_new(size_t n)
 {
-    char *str = (char *)malloc(sizeof(char) * (n + 1));
+    char *str = (char *)cma_malloc(sizeof(char) * (n + 1), false);
 
     if (!str)
         return (nullptr);

@@ -20,6 +20,8 @@ int ft_test_excecute(const char **input, int argc, t_name *name)
 
 void	ft_test(t_name *name)
 {
+	dnd_test = true;
+	ft_fclean();
 	ft_excecute_test("veraak", "init", name);
 	ft_excecute_test("veraak", "attack", name);
 	ft_excecute_test("veraak", "20", "poison", "damage", name);
@@ -29,5 +31,6 @@ void	ft_test(t_name *name)
 	ft_excecute_test("goblin_02", "init", name);
 	ft_excecute_test("veraak", "cast", "hunters_mark", "goblin_01", name);
 	ft_excecute_test("goblin_02", "cast", "hunters_mark", "goblin_01", name);
+	dnd_test = false;
 	return ;
 }

@@ -12,6 +12,8 @@
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
 
+extern bool dnd_test;
+
 //NPC
 void		ft_npc_change_stats(t_char *info, int index, const char **input);
 void		ft_npc_set_stat(t_char *info, const char **input);
@@ -221,7 +223,6 @@ int			ft_saving_throw(t_char *info, const char *ability_score, int ability_mod, 
 int			ft_dice_roll(int number, int faces);
 
 //free memory
-void		ft_free_double_char(char **content);
 void		ft_free_pc(t_pc *player);
 int			ft_free_players(t_pc *players);
 void		ft_free_info(t_char *info);

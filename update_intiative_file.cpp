@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp" // Including the ft_printf header
 #include "dnd_tools.hpp"
@@ -31,7 +32,7 @@ void ft_initiative_remove(t_char *info)
     if (fd == -1)
     {
         ft_printf("Error opening file: %s\n", strerror(errno));
-        ft_free_double_char(content);
+        cma_free_double(content);
         return ;
     }
     i = 0;
@@ -62,7 +63,7 @@ void ft_initiative_remove(t_char *info)
         i++;
     }
     close(fd);
-    ft_free_double_char(content);
+    cma_free_double(content);
     return ;
 }
 
@@ -114,7 +115,7 @@ void ft_initiative_add(t_char *info)
         return ;
     if (ft_initiative_check_content(info, content))
     {
-        ft_free_double_char(content);
+        cma_free_double(content);
         ft_printf("%s is already in initiative\n", info->name);
         return ;
     }
@@ -122,7 +123,7 @@ void ft_initiative_add(t_char *info)
     if (fd == -1)
     {
         ft_printf("Error opening file: %s\n", strerror(errno));
-        ft_free_double_char(content);
+        cma_free_double(content);
         return ;
     }
     added = 0;
@@ -133,7 +134,7 @@ void ft_initiative_add(t_char *info)
         if (!n_line)
         {
             close(fd);
-            ft_free_double_char(content);
+            cma_free_double(content);
             ft_printf("Error: data--initiative file is corrupted\n");
             return ;
         }
@@ -151,7 +152,7 @@ void ft_initiative_add(t_char *info)
         if (error != 1 && error != 0)
         {
             close(fd);
-            ft_free_double_char(content);
+            cma_free_double(content);
             ft_printf("Error: data--initiative file is corrupted\n");
             return ;
         }
@@ -164,7 +165,7 @@ void ft_initiative_add(t_char *info)
         added = 1;
     }
     close(fd);
-    ft_free_double_char(content);
+    cma_free_double(content);
     if (DEBUG == 1)
         ft_printf("added = %d\n", added);
     return ;

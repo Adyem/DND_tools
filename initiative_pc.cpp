@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
@@ -36,7 +37,7 @@ static char *ft_check_string(char *content, int index)
     char *result;
 
     content = content + index;
-    result = ft_strdup(content);
+    result = cma_strdup(content, false);
     return (result);
 }
 

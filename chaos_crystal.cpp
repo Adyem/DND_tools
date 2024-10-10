@@ -45,7 +45,7 @@ static void ft_chaos_crystal_damage(t_char *info)
     if (temp)
         *temp = '\0';
     ft_printf("%s shoots a magic missile at %s and he/she takes 1 force damage, the target does not need to make a concentration save for this damage\n", info->name, &content[result][4]);
-    ft_free_double_char(content);
+    cma_free_double(content);
     return ;
 }
 

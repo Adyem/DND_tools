@@ -8,25 +8,20 @@ TARGET := LibFT.a
 
 SRCS := ft_atoi.cpp \
 	ft_bzero.cpp \
-	ft_calloc.cpp \
 	ft_memchr.cpp \
 	ft_memcmp.cpp \
 	ft_memcpy.cpp \
 	ft_memmove.cpp \
 	ft_memset.cpp \
-	ft_split.cpp \
 	ft_strchr.cpp \
-	ft_strdup.cpp \
-	ft_strjoin.cpp \
 	ft_strlcat.cpp \
 	ft_strlcpy.cpp \
 	ft_strlen.cpp \
 	ft_strncmp.cpp \
 	ft_strnstr.cpp \
 	ft_strrchr.cpp \
-	ft_atoi.cpp \
-	ft_isdigit.cpp \
-	ft_itoa.cpp
+	ft_atol.cpp \
+	ft_isdigit.cpp
 
 HEADERS := libft.hpp
 

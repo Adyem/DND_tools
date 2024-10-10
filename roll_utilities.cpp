@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include <climits>
 #include <cstdlib>
+#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 
@@ -59,10 +60,10 @@ void	ft_free_parse(char **to_parse)
 	{
 		while (to_parse[i])
 		{
-			free(to_parse[1]);
+			cma_free(to_parse[1]);
 			i++;
 		}
-		free(to_parse);
+		cma_free(to_parse);
 	}
 	return ;
 }
@@ -116,7 +117,7 @@ int	ft_roll_itoa(int result, int *i, char *string)
 
 	if (DEBUG == 1)
 		ft_printf("roll itoa: the value of i=%d\n", *i);
-	temp = ft_itoa(result);
+	temp = cma_itoa(result, false);
 	if (!temp)
 		return (1);
 	y = 0;
@@ -126,6 +127,6 @@ int	ft_roll_itoa(int result, int *i, char *string)
 		(*i)++;
 		y++;
 	}
-	free(temp);
+	cma_free(temp);
 	return (0);
 }

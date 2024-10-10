@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include <cstdlib>
@@ -40,28 +41,28 @@ static int ft_turn_move_marker(t_pc *players)
 			name = ft_strtrim_prefix(temp->name, "--turn--");
 			if (!name)
 				ft_printf("244-Error allocating memory turn\n");
-			free(temp->name);
+			cma_free(temp->name);
 			temp->name = name;
 			if (temp->next)
 			{
-				name = ft_strjoin("--turn--", temp->next->name);
+				name = cma_strjoin("--turn--", temp->next->name, false);
 				if (!name)
 				{
 					ft_printf("245-Error allocating memory turn strjoin\n");
 					return (1);
 				}
-				free(temp->next->name);
+				cma_free(temp->next->name);
 				temp->next->name = name;
 			}
 			else
 			{
-				name = ft_strjoin("--turn--", players->name);
+				name = cma_strjoin("--turn--", players->name, false);
 				if (!name)
 				{
 					ft_printf("246-Error allocating memory turn strjoin\n");
 					return (1);
 				}
-				free(players->name);
+				cma_free(players->name);
 				players->name = name;
 			}
 			break ;
@@ -131,7 +132,7 @@ static int ft_turn_run(t_pc *players, t_name *name)
 			ft_printf("the current turn is for %s\n", &pc_temp->name[12]);
 		pc_temp = pc_temp->next;
 	}
-	free(c_name);
+	cma_free(c_name);
 	return (0);
 }
 
@@ -152,7 +153,7 @@ void ft_turn_next(t_name *name)
 	if (!content)
 		return ;
 	players = ft_initiative_players_am(content);
-	ft_free_double_char(content);
+	cma_free_double(content);
 	if (!players)
 		return ;
 	if (ft_turn_check_marker(players) != 1)

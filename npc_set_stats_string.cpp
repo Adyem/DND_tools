@@ -50,7 +50,7 @@ static char **ft_reallocate_data_array(char **data, int new_size, t_char *info)
         temp[i] = data[i];
         i++;
     }
-    free(data);
+    cma_free(data);
     return (temp);
 }
 

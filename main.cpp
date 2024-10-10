@@ -4,6 +4,8 @@
 #include <ctime>
 #include <cstdlib>
 
+bool dnd_test = 0;
+
 int main(int argc, char **argv)
 {
     t_name *name;

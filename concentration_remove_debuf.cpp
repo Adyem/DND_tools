@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
@@ -15,7 +16,7 @@ void ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
 
         if (ft_strcmp_dnd(target->debufs.hunters_mark.caster_name[i], info->name) == 0)
         {
-            free(target->debufs.hunters_mark.caster_name[i]);
+            cma_free(target->debufs.hunters_mark.caster_name[i]);
             j = i;
             while (target->debufs.hunters_mark.caster_name[j])
             {

@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include <cstdlib>
@@ -21,7 +22,7 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
     }
     *temp = '\0';
     temp++;
-    players->name = ft_strdup(content);
+    players->name = cma_strdup(content, false);
     if (!players->name)
     {
         ft_printf("257 Error allocating memory\n");
@@ -52,7 +53,7 @@ t_pc *ft_initiative_players_am(char **content)
     t_pc *temp;
     int i;
 
-    players = (t_pc *)malloc(sizeof(t_pc));
+    players = (t_pc *)cma_malloc(sizeof(t_pc), false);
     if (!players)
     {
         ft_printf("Error allocating memory: players\n");
@@ -66,7 +67,7 @@ t_pc *ft_initiative_players_am(char **content)
     i = 1;
     while (content[i])
     {
-        temp->next = (t_pc *)malloc(sizeof(t_pc));
+        temp->next = (t_pc *)cma_malloc(sizeof(t_pc), false);
         if (!temp->next)
         {
             ft_printf("Error allocating memory: players->next\n");
@@ -98,7 +99,7 @@ void ft_initiative_sort(int fd)
     if (!content)
         return ;
     players = ft_initiative_players_am(content);
-    ft_free_double_char(content);
+    cma_free_double(content);
     if (!players)
         return ;
     ft_initiative_sort_2(players);

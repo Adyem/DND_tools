@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
@@ -69,14 +70,14 @@ static t_pc *ft_read_pc_file(int fd, char *filename, char *filepath)
     close(fd);
     if (!content)
         return (t_pc *)ft_initiative_pc_error("253 Error allocating memory");
-    player = (t_pc *)malloc(sizeof(t_pc));
+    player = (t_pc *)cma_malloc(sizeof(t_pc), false);
     if (!player)
     {
-        free(content);
+        cma_free(content);
         return (t_pc *)ft_initiative_pc_error("252 Error allocating memory");
     }
     error = ft_check_stat_pc(player, content, filename);
-    ft_free_double_char(content);
+    cma_free_double(content);
     if (error)
     {
         ft_free_pc(player);

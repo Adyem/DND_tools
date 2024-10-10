@@ -24,8 +24,8 @@ int ft_free_players(t_pc *players)
 	{
 		temp = players->next;
 		if (players->name)
-			free(players->name);
-		free(players);
+			cma_free(players->name);
+		cma_free(players);
 		players = temp;
 	}
 	return (1);
@@ -33,23 +33,6 @@ int ft_free_players(t_pc *players)
 
 void	ft_free_pc(t_pc *player)
 {
-	free(player->name);
-	free(player);
-}
-
-void	ft_free_double_char(char **content)
-{
-	int	i;
-
-	i = 0;
-	if (content)
-	{
-		while (content[i])
-		{
-			free(content[i]);
-			i++;
-		}
-		free(content);
-	}
-	return ;
+	cma_free(player->name);
+	cma_free(player);
 }

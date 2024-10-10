@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
@@ -69,7 +70,7 @@ int ft_remove_concentration(t_char *info)
     info->concentration.dice_amount_mod = 0;
     info->concentration.dice_faces_mod = 0;
     info->concentration.base_mod = 0;
-    ft_free_double_char(info->concentration.targets);
+	cma_free_double(info->concentration.targets);
     info->concentration.targets = nullptr;
     info->bufs.chaos_armor.duration = 0;
     return (0);
