@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
@@ -83,7 +84,7 @@ void ft_cleanup_hunters_mark(t_char *info, t_char *target, t_buff *buff)
 		len = ft_double_char_length(target->debufs.hunters_mark.caster_name);
         if (len > 0)
         {
-            free(target->debufs.hunters_mark.caster_name[len - 1]);
+            cma_free(target->debufs.hunters_mark.caster_name[len - 1]);
             target->debufs.hunters_mark.caster_name[len - 1] = nullptr;
         }
     }

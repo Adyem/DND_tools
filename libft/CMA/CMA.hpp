@@ -62,7 +62,7 @@ void	*cma_realloc(void* ptr, size_t new_size, bool critical);
 char	**cma_split(char const *s, char c, bool critical);
 char	*cma_itoa(int n, bool critical);
 char	*cma_strjoin(char const *string_1, char const *string_2, bool critical);
-void	cma_free_double(void **content);
+void	cma_free_double(char **content);
 
 //utils
 size_t	align8(size_t size);

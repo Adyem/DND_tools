@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/Libft/libft.hpp"
+#include "libft/CMA/CMA.hpp"
 #include <cstdlib>
 
 char **ft_resize_double_char(char **double_string, const char *string, int size)
@@ -9,36 +9,36 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
     int i = 0;
     while (double_string[i])
         i++;
-    char **return_v = (char **)ft_calloc(i + size + 1, sizeof(char *));
+    char **return_v = (char **)cma_calloc(i + size + 1, sizeof(char *), false);
     if (!return_v)
         return (nullptr);
     int j = 0;
     while (j < i)
     {
-        return_v[j] = ft_strdup(double_string[j]);
+        return_v[j] = cma_strdup(double_string[j], false);
         if (!return_v[j])
         {
             j--;
             while (j >= 0)
             {
-                free(return_v[j]);
+                cma_free(return_v[j]);
                 j--;
             }
-            free(return_v);
+            cma_free(return_v);
             return (nullptr);
         }
         j++;
     }
-    return_v[i] = ft_strdup(string);
+    return_v[i] = cma_strdup(string, false);
     if (!return_v[i])
     {
         j = 0;
         while (j < i)
         {
-            free(return_v[j]);
+            cma_free(return_v[j]);
             j++;
         }
-        free(return_v);
+        cma_free(return_v);
         return (nullptr);
     }
     j = i + 1;

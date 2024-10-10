@@ -1,6 +1,6 @@
 #include "CMA.hpp"
 
-void	cma_free_double(void **content)
+void	cma_free_double(char **content)
 {
 	int	i;
 

@@ -31,11 +31,11 @@ int ft_npc_open_file(t_char *info)
         ft_printf("The value of error is %d %d\n", error, info->flags.error);
     if (info->flags.error || error)
 	{
-		cma_free_double(reinterpret_cast<void**>(content));
+		cma_free_double(content);
         return (1);
 	}
     error = ft_npc_check_info(info);
-	cma_free_double(reinterpret_cast<void**>(content));
+	cma_free_double(content);
     if (error)
         return (1);
     return (0);

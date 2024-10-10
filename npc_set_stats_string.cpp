@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include <cstdlib>
@@ -6,7 +7,7 @@
 static char **ft_handle_memory_error(t_char *info, char **data, int error_code)
 {
     info->flags.error = 1;
-    ft_free_double_char(data);
+    cma_free_double(data);
     ft_printf_fd(2, "%d-Error: Allocating memory\n", error_code);
     return (nullptr);
 }
@@ -25,10 +26,10 @@ static char **ft_allocate_initial_data(char *content, int ofset, t_char *info)
 {
     char **data;
 
-    data = (char **)malloc(sizeof(char *) * 2);
+    data = (char **)cma_malloc(sizeof(char *) * 2, false);
     if (!data)
         return (ft_handle_memory_error(info, nullptr, 293));
-    data[0] = ft_strdup(&content[ofset]);
+    data[0] = cma_strdup(&content[ofset], false);
     if (!data[0])
         return (ft_handle_memory_error(info, data, 294));
     data[1] = nullptr;
@@ -40,7 +41,7 @@ static char **ft_reallocate_data_array(char **data, int new_size, t_char *info)
     char **temp;
     int i;
 
-    temp = (char **)malloc(new_size * sizeof(char *));
+    temp = (char **)cma_malloc(new_size * sizeof(char *), false);
     if (!temp)
         return (ft_handle_memory_error(info, data, 295));
     i = 0;
@@ -62,7 +63,7 @@ static char **ft_append_target_to_data(char **data, char *content, int ofset, t_
     data = ft_reallocate_data_array(data, i + 2, info);
     if (!data)
         return (nullptr);
-    data[i] = ft_strdup(&content[ofset]);
+    data[i] = cma_strdup(&content[ofset], false);
     if (!data[i])
         return ft_handle_memory_error(info, data, 296);
     data[i + 1] = nullptr;

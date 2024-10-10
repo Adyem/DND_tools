@@ -1,5 +1,6 @@
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/Libft/libft.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -40,13 +41,13 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
     char	**temp;
     int		i;
 
-    temp = (char **)ft_calloc(2, sizeof(char *));
+    temp = (char **)cma_calloc(2, sizeof(char *), false);
     if (!temp)
     {
 		ft_cast_concentration_cleanup(info, target, fd, buff, 2);
         return (1);
     }
-    temp[0] = (char *)malloc((ft_strlen(input[3]) + 1) * sizeof(char));
+    temp[0] = (char *)cma_malloc((ft_strlen(input[3]) + 1) * sizeof(char), false);
     if (!temp[0])
     {
 		ft_cast_concentration_cleanup(info, target, fd, buff, 3);
