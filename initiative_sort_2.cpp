@@ -30,7 +30,7 @@ void ft_initiative_print(void)
     i = 0;
     while (content[i])
     {
-        ft_printf("%s\n", content[i]);
+        ft_printf("%s", content[i]);
         i++;
     }
     cma_free_double(content);
