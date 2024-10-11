@@ -21,9 +21,9 @@ ft_time: A utility for time formatting, including functions like getting the cur
 Enhancing string handling can greatly simplify many programming tasks.
 
     ft_strlen: measure the length of a string (done)
-    ft_strsplit: Splits a string into an array of strings based on a delimiter.
-    ft_strtrim: Removes leading and trailing whitespace or specified characters from a string.
-    ft_strjoin: Joins two strings into a new string.
+    ft_strsplit: Splits a string into an array of strings based on a delimiter. (done)
+    ft_strtrim: Removes leading and trailing whitespace or specified characters from a string. (done)
+    ft_strjoin: Joins two strings into a new string. (done)
     ft_substr: Extracts a substring from a given string.
     ft_strmapi: Applies a function to each character of a string, creating a new string.
     ft_striteri: Applies a function to each character of a string in place.
@@ -32,25 +32,18 @@ Enhancing string handling can greatly simplify many programming tasks.
 
 Implementing these can provide more control and safety over memory operations.
 
-    ft_memset: Fills a block of memory with a specific value.
-    ft_memcpy: Copies a block of memory from one location to another.
-    ft_memmove: Similar to memcpy but handles overlapping memory regions.
-    ft_memcmp: Compares two blocks of memory.
-    ft_bzero: Sets a block of memory to zero.
+    ft_memset: Fills a block of memory with a specific value. (done)
+    ft_memcpy: Copies a block of memory from one location to another. (done)
+    ft_memmove: Similar to memcpy but handles overlapping memory regions. (done)
+    ft_memcmp: Compares two blocks of memory. (done)
+    ft_bzero: Sets a block of memory to zero. (done)
     cma_calloc: Allocates memory and initializes it to zero. (done)
-
-3. Character Checking and Conversion
-
-These functions are essential for parsing and validating data.
-
-    ft_isalpha, ft_isdigit, ft_isalnum, ft_isascii, ft_isprint: Check character types.
-    ft_toupper, ft_tolower: Convert characters to upper or lower case.
 
 4. Conversion Functions
 
 Facilitate the conversion between different data types.
 
-    ft_atoi: Converts a string to an integer.
+    ft_atoi: Converts a string to an integer. (done)
     ft_strtol, ft_strtoul: Convert strings to long and unsigned long integers, respectively.
     ft_itoa: Converts an integer to a string.
 
@@ -108,8 +101,8 @@ Consider adding these to make your library even more robust.
 
 If your projects require parallel processing, these can be beneficial.
 
-    ft_mutex
-    ft_thread: Basic threading and synchronization primitives.
+    ft_mutex (done)
+    ft_thread: Basic threading and synchronization primitives. (done)
 
 14. Networking Utilities
 
