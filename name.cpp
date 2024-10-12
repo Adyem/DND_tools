@@ -109,5 +109,6 @@ t_name *ft_allocate_memory_name()
     ft_add_mob_series(first_node, &last_node, "chaos_crystal", ft_chaos_crystal, 4);
     ft_add_node(first_node, &last_node, "gundren_rockseeker", ft_gundren_rockseeker);
     ft_add_node(first_node, &last_node, "goblin_warmaster", ft_goblin_warmaster);
+	ft_add_node(first_node, &last_node, "maverick", ft_maverick);
     return (first_node);
 }

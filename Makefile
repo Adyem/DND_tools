@@ -16,13 +16,16 @@ HEADER		= 	  dnd_tools.hpp \
 			  ranged_weapons.hpp \
 			  armor.hpp \
 			  gundren_rockseeker.hpp \
-			  goblin_warmaster.hpp
+			  goblin_warmaster.hpp \
+			  maverick.hpp
 
 SRC			= name.cpp \
 			  goblin.cpp \
 			  chaos_goblin.cpp \
 			  veraak.cpp \
 			  veraak_turn.cpp \
+			  maverick.cpp \
+			  maverick_turn.cpp \
 			  chaos_crystal.cpp \
 			  gundren_rockseeker.cpp \
 			  goblin_warmaster.cpp \

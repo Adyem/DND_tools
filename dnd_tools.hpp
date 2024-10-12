@@ -49,6 +49,12 @@ t_char		*ft_veraak(const int index, const char **input, t_name *name, int except
 void		ft_veraak_check_phase(t_char *info);
 void		ft_veraak_turn(t_char *info);
 
+//Maverick
+t_char		*ft_maverick(const int index, const char **input, t_name *name, int exception);
+void		ft_maverick_turn(t_char *info);
+void		ft_maverick_print_s(int first, int second);
+void		ft_maverick_print_f(int first, int second);
+
 //Commands
 void		ft_request_input(t_name *name);
 

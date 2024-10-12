@@ -39,6 +39,8 @@ typedef enum {
     WTYPE_LONGBOW,
     WTYPE_NET,
     WTYPE_WAND,
+
+	WTYPE_CLAW,
     
     ATYPE_PADDED = 10001,
     ATYPE_LEATHER,
@@ -59,6 +61,7 @@ typedef enum {
     WOODEN_BOW_ID,
 	WOODEN_CLUB_ID,
     CHAOS_WAND_ID,
+	CLAW_ID,
 
     LEATHER_ARMOR_ID = 30001,
 } ItemID;

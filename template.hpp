@@ -1,5 +1,5 @@
-#ifndef TEMPLATE_H
-# define TEMPLATE_H
+#ifndef TEMPLATE_HPP
+# define TEMPLATE_HPP
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
