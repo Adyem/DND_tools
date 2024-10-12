@@ -15,7 +15,7 @@ int ft_request_initiative(t_pc *player)
     int initiative;
 
 	if (dnd_test == true)
-		return (ft_dice_roll(1, 20));
+		return (player->initiative = ft_dice_roll(1, 20));
 	message = NULL;
     temp = cma_strjoin("Requesting initiative for ", player->name, false);
     if (!temp)
