@@ -103,7 +103,7 @@ static const t_equipment_id WOODEN_CLUB =
 		.stat = STAT_STR,
 		.effect_type = 0,
 		.effect_dice_amount = 1,
-		.effect_dice_faces = 8,
+		.effect_dice_faces = 10,
 		.effect_secund_dice_amount = 0,
 		.effect_secund_dice_faces = 0,
 		.bonus_mod = 0,
@@ -128,7 +128,7 @@ static const t_equipment_id WOODEN_CLUB =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
-	.slot = SLOT_WEAPON,
+	.slot = SLOT_TWO_HANDED_WEAPON,
 };
 
 static const t_equipment_id CLAW =
@@ -169,7 +169,7 @@ static const t_equipment_id CLAW =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
-	.slot = SLOT_WEAPON | SLOT_OFFHAND_WEAPON,
+	.slot = SLOT_WEAPON,
 };
 
 static const t_equipment_id CLAW_OH =
@@ -210,7 +210,7 @@ static const t_equipment_id CLAW_OH =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
-	.slot = SLOT_OFFHAND_WEAPON | SLOT_OFFHAND_WEAPON,
+	.slot = SLOT_OFFHAND_WEAPON,
 };
 
 #endif

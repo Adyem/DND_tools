@@ -68,19 +68,20 @@ typedef enum {
 
 typedef enum e_equipment_slot
 {
-	SLOT_NONE            = 0,
-	SLOT_WEAPON          = 1 << 0,
-	SLOT_OFFHAND_WEAPON  = 1 << 1,
-	SLOT_RANGED_WEAPON   = 1 << 2,
-	SLOT_ARMOR           = 1 << 3,
-	SLOT_HELMET          = 1 << 4,
-	SLOT_SHIELD          = 1 << 5,
-	SLOT_BOOTS           = 1 << 6,
-	SLOT_GLOVES          = 1 << 7,
-	SLOT_AMULET          = 1 << 8,
-	SLOT_RING_01         = 1 << 9,
-	SLOT_RING_02         = 1 << 10,
-	SLOT_BELT            = 1 << 11,
+	SLOT_NONE				= 0,
+	SLOT_WEAPON				= 1 << 0,
+	SLOT_OFFHAND_WEAPON		= 1 << 1,
+	SLOT_RANGED_WEAPON		= 1 << 2,
+	SLOT_ARMOR				= 1 << 3,
+	SLOT_HELMET				= 1 << 4,
+	SLOT_SHIELD				= 1 << 5,
+	SLOT_BOOTS				= 1 << 6,
+	SLOT_GLOVES				= 1 << 7,
+	SLOT_AMULET				= 1 << 8,
+	SLOT_RING_01			= 1 << 9,
+	SLOT_RING_02			= 1 << 10,
+	SLOT_BELT				= 1 << 11,
+	SLOT_TWO_HANDED_WEAPON	= 1 << 12,
 }	t_equipment_slot;
 
 # define HUNTERS_MARK_ID 1

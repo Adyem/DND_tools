@@ -2,6 +2,14 @@
 #include "maverick.hpp"
 #include "libft/Printf/ft_printf.hpp"
 
+static void	ft_maverick_lightning_strike(t_char *info)
+{
+	info->bufs.lightning_strike.duration = 1;
+	info->bufs.lightning_strike.dice_amount = 1;
+	info->bufs.lightning_strike.dice_faces = 1;
+	info->bufs.lightning_strike.distance = 5;
+}
+
 static void	ft_maverick_print_tp(int number)
 {
 	if (number == 2)
@@ -20,7 +28,7 @@ static void	ft_maverick_print_tp(int number)
 		ft_printf("%s\n", MAVERICK_MTP_EARTH_POUNCE);
 }
 
-void ft_maverick_print_f(int first, int second)
+void ft_maverick_print_f(int first, int second, t_char *info)
 {
 	if (first == 1)
 	{
@@ -30,7 +38,10 @@ void ft_maverick_print_f(int first, int second)
 	else if (first == 2)
 		ft_printf("%s\n", MAVERICK_METEOR_STRIKE);
 	else if (first == 3)
+	{
+		ft_maverick_lightning_strike(info);
 		ft_printf("%s\n", MAVERICK_LIGHTNING_STRIKE);
+	}
 	else if (first == 4)
 		ft_printf("%s\n", MAVERICK_FLAME_GEYSER);
 	else if (first == 5)
@@ -43,7 +54,7 @@ void ft_maverick_print_f(int first, int second)
 		ft_printf("%s\n", MAVERICK_EARTH_POUNCE);
 }
 
-void	ft_maverick_print_s(int first, int second)
+void	ft_maverick_print_s(int first, int second, t_char *info)
 {
 	if (second == 1)
 	{
@@ -53,7 +64,10 @@ void	ft_maverick_print_s(int first, int second)
 	else if (second == 2)
 		ft_printf("%s\n", MAVERICK_METEOR_STRIKE);
 	else if (second == 3)
+	{
+		ft_maverick_lightning_strike(info);
 		ft_printf("%s\n", MAVERICK_LIGHTNING_STRIKE);
+	}
 	else if (second == 4)
 		ft_printf("%s\n", MAVERICK_FLAME_GEYSER);
 	else if (second == 5)

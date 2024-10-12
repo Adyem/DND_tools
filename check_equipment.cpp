@@ -3,54 +3,57 @@
 #include "identification.hpp"
 #include "libft/Printf/ft_printf.hpp"
 
-static void	ft_check_mainhand(t_char *info, int *error)
+static int	ft_check_mainhand(t_char *info)
 {
-	bool	is_two_handed_weapon;
-
-	if (info->equipment.weapon.slot != SLOT_NONE && !(info->equipment.weapon.slot & SLOT_WEAPON))
+	if (info->equipment.offhand_weapon.slot == SLOT_TWO_HANDED_WEAPON)
 	{
-		ft_printf_fd(2, "Error: Weapon is not in the correct slot.\n");
-		*error += 1;
+		ft_printf_fd(2, "Error: Two-handed weapon in offhand slot\n");
+		return (1);
 	}
-	is_two_handed_weapon = !(info->equipment.weapon.slot & SLOT_OFFHAND_WEAPON);
+	if (info->equipment.weapon.slot == SLOT_TWO_HANDED_WEAPON)
+		return (0);
+	if (info->equipment.weapon.slot != SLOT_NONE && 
+	    !(info->equipment.weapon.slot & SLOT_WEAPON))
+	{
+		ft_printf_fd(2, "Error: Weapon is not in the correct slot\n");
+		return (1);
+	}
 	if (info->equipment.offhand_weapon.slot != SLOT_NONE)
 	{
 		if (!(info->equipment.offhand_weapon.slot & SLOT_OFFHAND_WEAPON))
 		{
-			ft_printf_fd(2, "Error: Offhand weapon is not in the correct slot.\n");
-			*error += 2;
-		}
-		else if (is_two_handed_weapon)
-		{
-			ft_printf_fd(2, "Error: Cannot equip offhand weapon with a two-handed weapon in the main hand.\n");
-			*error += 13;
+			ft_printf_fd(2, "Error: Offhand weapon is not in the correct slot\n");
+			return (2);
 		}
 	}
+	return (0);
 }
 
-static void	ft_check_slot(t_equipment_id equipment_slot, int slot_type, const char *error_message, int *error, int error_code)
+static int	ft_check_slot(t_equipment_id equipment_slot, int slot_type, const char *error_message, int error_code)
 {
 	if (equipment_slot.slot != SLOT_NONE && !(equipment_slot.slot & slot_type))
 	{
 		ft_printf_fd(2, "%s\n", error_message);
-		*error += error_code;
+		return error_code;
 	}
+	return (0);
 }
 
 int	ft_check_equipment_slots(t_char *info)
 {
-	int	error = 0;
+	int	error;
 
-	ft_check_mainhand(info, &error);
-	ft_check_slot(info->equipment.ranged_weapon, SLOT_RANGED_WEAPON, "Error: Ranged weapon is not in the correct slot.", &error, 3);
-	ft_check_slot(info->equipment.armor, SLOT_ARMOR, "Error: Armor is not in the correct slot.", &error, 4);
-	ft_check_slot(info->equipment.helmet, SLOT_HELMET, "Error: Helmet is not in the correct slot.", &error, 5);
-	ft_check_slot(info->equipment.shield, SLOT_SHIELD, "Error: Shield is not in the correct slot.", &error, 6);
-	ft_check_slot(info->equipment.boots, SLOT_BOOTS, "Error: Boots are not in the correct slot.", &error, 7);
-	ft_check_slot(info->equipment.gloves, SLOT_GLOVES, "Error: Gloves are not in the correct slot.", &error, 8);
-	ft_check_slot(info->equipment.amulet, SLOT_AMULET, "Error: Amulet is not in the correct slot.", &error, 9);
-	ft_check_slot(info->equipment.ring_01, SLOT_RING_01, "Error: First ring is not in the correct slot.", &error, 10);
-	ft_check_slot(info->equipment.ring_02, SLOT_RING_02, "Error: Second ring is not in the correct slot.", &error, 11);
-	ft_check_slot(info->equipment.belt, SLOT_BELT, "Error: Belt is not in the correct slot.", &error, 12);
+	error = 0;
+	error += ft_check_mainhand(info);
+	error += ft_check_slot(info->equipment.ranged_weapon, SLOT_RANGED_WEAPON, "Error: Ranged weapon is not in the correct slot.", 3);
+	error += ft_check_slot(info->equipment.armor, SLOT_ARMOR, "Error: Armor is not in the correct slot.", 4);
+	error += ft_check_slot(info->equipment.helmet, SLOT_HELMET, "Error: Helmet is not in the correct slot.", 5);
+	error += ft_check_slot(info->equipment.shield, SLOT_SHIELD, "Error: Shield is not in the correct slot.", 6);
+	error += ft_check_slot(info->equipment.boots, SLOT_BOOTS, "Error: Boots are not in the correct slot.", 7);
+	error += ft_check_slot(info->equipment.gloves, SLOT_GLOVES, "Error: Gloves are not in the correct slot.", 8);
+	error += ft_check_slot(info->equipment.amulet, SLOT_AMULET, "Error: Amulet is not in the correct slot.", 9);
+	error += ft_check_slot(info->equipment.ring_01, SLOT_RING_01, "Error: First ring is not in the correct slot.", 10);
+	error += ft_check_slot(info->equipment.ring_02, SLOT_RING_02, "Error: Second ring is not in the correct slot.", 11);
+	error += ft_check_slot(info->equipment.belt, SLOT_BELT, "Error: Belt is not in the correct slot.", 12);
 	return (error);
 }

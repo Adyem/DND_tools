@@ -16,8 +16,8 @@ void	ft_maverick_turn(t_char *info)
 		first = ft_dice_roll(1, 8);
 		second = ft_dice_roll(1, 8);
 	}
-	ft_maverick_print_f(first, second);
-	ft_maverick_print_s(first, second);
+	ft_maverick_print_f(first, second, info);
+	ft_maverick_print_s(first, second, info);
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
