@@ -6,8 +6,16 @@ static void	ft_maverick_lightning_strike(t_char *info)
 {
 	info->bufs.lightning_strike.duration = 1;
 	info->bufs.lightning_strike.dice_amount = 1;
-	info->bufs.lightning_strike.dice_faces = 1;
+	info->bufs.lightning_strike.dice_faces = 8;
 	info->bufs.lightning_strike.distance = 5;
+}
+
+static void	ft_maverick_lightningV2_strike(t_char *info)
+{
+	info->bufs.lightning_strikeV2.duration = 1;
+	info->bufs.lightning_strikeV2.dice_amount = 2;
+	info->bufs.lightning_strikeV2.dice_faces = 8;
+	info->bufs.lightning_strikeV2.distance = 5;
 }
 
 static void	ft_maverick_print_tp(int number)
@@ -47,7 +55,10 @@ void ft_maverick_print_f(int first, int second, t_char *info)
 	else if (first == 5)
 		ft_printf("%s\n", MAVERICK_FORST_BREATH);
 	else if (first == 6)
+	{
+		ft_maverick_lightningV2_strike(info);
 		ft_printf("%s\n", MAVERICK_LIGHTNING_STRIKE_V2);
+	}
 	else if (first == 7)
 		ft_printf("%s\n", MAVERICK_ARCANE_POUNCE);
 	else if (first == 8)
@@ -73,7 +84,10 @@ void	ft_maverick_print_s(int first, int second, t_char *info)
 	else if (second == 5)
 		ft_printf("%s\n", MAVERICK_FORST_BREATH);
 	else if (second == 6)
+	{
+		ft_maverick_lightningV2_strike(info);
 		ft_printf("%s\n", MAVERICK_LIGHTNING_STRIKE_V2);
+	}
 	else if (second == 7)
 		ft_printf("%s\n", MAVERICK_ARCANE_POUNCE);
 	else if (second == 8)

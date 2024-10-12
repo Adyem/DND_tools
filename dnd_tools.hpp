@@ -168,6 +168,7 @@ void		ft_set_debuf_blinded(t_char *info, const char **input);
 //update buff
 void		ft_update_buf(t_char *info);
 void		ft_update_lightning_strike(t_char *info);
+void		ft_update_lightningV2_strike(t_char *info);
 void		ft_npc_update_lightning_strike(t_char *info, const char **input);
 
 //general buffs

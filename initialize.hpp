@@ -183,6 +183,7 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.bless = INITIALIZE_BLESS,
 	.protective_winds = INITIALIZE_PROTECTIVE_WINDS,
 	.lightning_strike = INITIALIZE_LIGHTNING_STRIKE,
+	.lightning_strikeV2 = INITIALIZE_LIGHTNING_STRIKE,
 	.chaos_armor = INITIALIZE_CHAOS_ARMOR,
 };
 

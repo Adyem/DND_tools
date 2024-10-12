@@ -133,6 +133,7 @@ typedef struct	s_bufs
 	t_bless				bless;
 	t_protective_winds	protective_winds;
 	t_lightning_strike	lightning_strike;
+	t_lightning_strike	lightning_strikeV2;
 	t_chaos_armor		chaos_armor;
 }	t_bufs;
 

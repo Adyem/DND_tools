@@ -24,6 +24,8 @@ void	ft_update_buf(t_char *info)
 		ft_update_buf_duration(info, "bless", &info->bufs.bless.duration);
 	if (info->bufs.lightning_strike.duration > 0)
 		ft_update_lightning_strike(info);
+	if (info->bufs.lightning_strikeV2.duration > 0)
+		ft_update_lightningV2_strike(info);
 	if (info->bufs.protective_winds.duration > 0)
 		ft_update_buf_duration(info, "protective winds", &info->bufs.protective_winds.duration);
 	if (info->bufs.chaos_armor.duration > 0)
