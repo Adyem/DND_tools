@@ -8,9 +8,8 @@ void ft_update_lightning_strike(t_char *info)
     if (info->bufs.lightning_strike.dice_amount <= 0 ||
         info->bufs.lightning_strike.dice_faces <= 0 ||
         info->bufs.lightning_strike.distance <= 0)
-        return;
+        return ;
     info->bufs.lightning_strike.duration--;
-
     if (info->bufs.lightning_strike.duration == 0)
     {
         result = ft_dice_roll(1, 8) + info->bufs.lightning_strike.extra_damage;
@@ -24,7 +23,6 @@ void ft_update_lightning_strike(t_char *info)
     else
         ft_printf("%s his lightning strike markers will explode in %d turns\n",
                   info->name, info->bufs.lightning_strike.duration);
-
     return ;
 }
 
@@ -35,7 +33,7 @@ void ft_update_lightningV2_strike(t_char *info)
     if (info->bufs.lightning_strikeV2.dice_amount <= 0 ||
         info->bufs.lightning_strikeV2.dice_faces <= 0 ||
         info->bufs.lightning_strikeV2.distance <= 0)
-        return;
+        return ;
     info->bufs.lightning_strikeV2.duration--;
     if (info->bufs.lightning_strikeV2.duration == 0)
     {
@@ -56,5 +54,50 @@ void ft_update_lightningV2_strike(t_char *info)
         ft_printf("%s's lightning strike will unleash in %d turns.\n",
                   info->name, info->bufs.lightning_strikeV2.duration);
     }
-    return;
+    return ;
 }
+
+void ft_update_flame_geyser(t_char *info)
+{
+    if (!info->bufs.flame_geyser.duration)
+        return ;
+    info->bufs.flame_geyser.duration--;
+    if (info->bufs.flame_geyser.duration == 0)
+    {
+        ft_printf("Flame Geyser explodes, dealing 6 fire damage to every party member.\n");
+        ft_printf("Players who stood underneath a tower take 2 fire damage each.\n");
+    }
+    else if (info->bufs.flame_geyser.duration == 1)
+        ft_printf("Flame Geyser will explode on the boss's next turn.\n");
+    else
+    {
+        ft_printf("Flame Geyser will explode in %d turns.\n",
+                  info->bufs.flame_geyser.duration);
+    }
+    return ;
+}
+
+void ft_update_meteor_strike(t_char *info)
+{
+    if (info->bufs.meteor_strike.duration <= 0)
+        return ;
+    info->bufs.meteor_strike.duration--;
+
+    if (info->bufs.meteor_strike.duration == 0)
+    {
+        ft_printf("%s activates Meteor Strike:\n%s\n",
+                  info->name, MAVERICK_METEOR_STRIKE);
+        info->bufs.meteor_strike.duration = 0;
+    }
+    else if (info->bufs.meteor_strike.duration == 1)
+    {
+        ft_printf("Meteor Strike will impact on %s's next turn.\n", info->name);
+    }
+    else
+    {
+        ft_printf("Meteor Strike will impact in %d turns.\n",
+                  info->bufs.meteor_strike.duration);
+    }
+    return ;
+}
+

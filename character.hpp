@@ -114,6 +114,23 @@ typedef struct	s_lightning_strike
 	int	extra_damage;
 }	t_lightning_strike;
 
+typedef struct s_flame_geyser
+{
+    int duration;
+	int	dice_faces;
+	int	dice_amount;
+    int extra_damage;
+} t_flame_geyser;
+
+typedef struct s_meteor_strike
+{
+    int		duration;
+	int		dice_faces;
+	int		doce_amount;
+	int		extra_damage;
+    char	**target_id;
+} t_meteor_strike;
+
 typedef struct	s_air_totem
 {
 	char	*save_file;
@@ -134,6 +151,8 @@ typedef struct	s_bufs
 	t_protective_winds	protective_winds;
 	t_lightning_strike	lightning_strike;
 	t_lightning_strike	lightning_strikeV2;
+	t_flame_geyser		flame_geyser;
+	t_meteor_strike		meteor_strike;
 	t_chaos_armor		chaos_armor;
 }	t_bufs;
 
