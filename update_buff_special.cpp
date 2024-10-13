@@ -101,3 +101,11 @@ void ft_update_meteor_strike(t_char *info)
     else
         ft_printf("Meteor Strike will impact in %d turns.\n", info->bufs.meteor_strike.duration);
 }
+
+void	ft_update_earth_pounce(t_char *info)
+{
+}
+
+void	ft_update_arcane_pounce(t_char *info)
+{
+}
