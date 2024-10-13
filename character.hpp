@@ -117,17 +117,18 @@ typedef struct	s_lightning_strike
 typedef struct s_flame_geyser
 {
     int duration;
-	int	dice_faces;
-	int	dice_amount;
-    int extra_damage;
+	int	close_to_tower_d;
+	int	tower_explode_d;
 } t_flame_geyser;
 
 typedef struct s_meteor_strike
 {
     int		duration;
-	int		dice_faces;
-	int		doce_amount;
-	int		extra_damage;
+	int		one_target_d;
+	int		two_targets_d;
+	int		three_targets_d;
+	int		four_targets_d;
+	int		five_targets_d;
     char	**target_id;
 } t_meteor_strike;
 

@@ -47,6 +47,48 @@ int ft_npc_check_info_2(t_char *info)
         error += (ft_printf("%s prone flag out of bounds\n", info->name), 1);
     if (info->debufs.blinded.duration < 0 || info->debufs.blinded.duration > 50)
         error += (ft_printf("%s blinded debuff out of bounds\n", info->name), 1);
+    if (info->bufs.flame_geyser.duration < 0 || info->bufs.flame_geyser.duration > 100)
+        error += (ft_printf("%s flame geyser duration out of bounds\n", info->name), 1);
+    if (info->bufs.flame_geyser.close_to_tower_d < 0 || info->bufs.flame_geyser.close_to_tower_d > 100)
+        error += (ft_printf("%s flame geyser close_to_tower_d out of bounds\n", info->name), 1);
+    if (info->bufs.flame_geyser.tower_explode_d < 0 || info->bufs.flame_geyser.tower_explode_d > 100)
+        error += (ft_printf("%s flame geyser tower_explode_d out of bounds\n", info->name), 1);
+    if (info->bufs.meteor_strike.duration < 0 || info->bufs.meteor_strike.duration > 100)
+        error += (ft_printf("%s meteor strike duration out of bounds\n", info->name), 1);
+    if (info->bufs.meteor_strike.one_target_d < 0 || info->bufs.meteor_strike.one_target_d > 100)
+        error += (ft_printf("%s meteor strike one_target_d out of bounds\n", info->name), 1);
+    if (info->bufs.meteor_strike.two_targets_d < 0 || info->bufs.meteor_strike.two_targets_d > 100)
+        error += (ft_printf("%s meteor strike two_targets_d out of bounds\n", info->name), 1);
+    if (info->bufs.meteor_strike.three_targets_d < 0 || info->bufs.meteor_strike.three_targets_d > 100)
+        error += (ft_printf("%s meteor strike three_targets_d out of bounds\n", info->name), 1);
+    if (info->bufs.meteor_strike.four_targets_d < 0 || info->bufs.meteor_strike.four_targets_d > 100)
+        error += (ft_printf("%s meteor strike four_targets_d out of bounds\n", info->name), 1);
+    if (info->bufs.meteor_strike.five_targets_d < 0 || info->bufs.meteor_strike.five_targets_d > 100)
+        error += (ft_printf("%s meteor strike five_targets_d out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strike.duration < 0 || info->bufs.lightning_strike.duration > 100)
+        error += (ft_printf("%s lightning strike duration out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strike.amount < 0 || info->bufs.lightning_strike.amount > 100)
+        error += (ft_printf("%s lightning strike amount out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strike.distance < 0 || info->bufs.lightning_strike.distance > 1000)
+        error += (ft_printf("%s lightning strike distance out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strike.dice_amount < 0 || info->bufs.lightning_strike.dice_amount > 100)
+        error += (ft_printf("%s lightning strike dice_amount out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strike.dice_faces < 0 || info->bufs.lightning_strike.dice_faces > 100)
+        error += (ft_printf("%s lightning strike dice_faces out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strike.extra_damage < 0 || info->bufs.lightning_strike.extra_damage > 1000)
+        error += (ft_printf("%s lightning strike extra_damage out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strikeV2.duration < 0 || info->bufs.lightning_strikeV2.duration > 100)
+        error += (ft_printf("%s lightning strike V2 duration out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strikeV2.amount < 0 || info->bufs.lightning_strikeV2.amount > 100)
+        error += (ft_printf("%s lightning strike V2 amount out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strikeV2.distance < 0 || info->bufs.lightning_strikeV2.distance > 1000)
+        error += (ft_printf("%s lightning strike V2 distance out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strikeV2.dice_amount < 0 || info->bufs.lightning_strikeV2.dice_amount > 100)
+        error += (ft_printf("%s lightning strike V2 dice_amount out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strikeV2.dice_faces < 0 || info->bufs.lightning_strikeV2.dice_faces > 100)
+        error += (ft_printf("%s lightning strike V2 dice_faces out of bounds\n", info->name), 1);
+    if (info->bufs.lightning_strikeV2.extra_damage < 0 || info->bufs.lightning_strikeV2.extra_damage > 1000)
+        error += (ft_printf("%s lightning strike V2 extra_damage out of bounds\n", info->name), 1);
     return (error);
 }
 

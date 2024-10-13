@@ -173,6 +173,24 @@ static const	t_air_totem INITIALIZE_AIR_TOTEM =
 	.erea_of_effect = 0,
 };
 
+static const	t_flame_geyser INITIALIZE_FLAME_GEYSER =
+{
+	.duration = 0,
+	.close_to_tower_d = 0,
+	.tower_explode_d = 0,
+};
+
+static const	t_meteor_strike INITIALIZE_METEOR_STRIKE =
+{
+	.duration = 0,
+	.one_target_d = 0,
+	.two_targets_d = 0,
+	.three_targets_d = 0,
+	.four_targets_d = 0,
+	.five_targets_d = 0,
+	.target_id = nullptr,
+};
+
 static const	t_chaos_armor INITIALIZE_CHAOS_ARMOR =
 {
 	.duration = 0,
@@ -184,6 +202,8 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.protective_winds = INITIALIZE_PROTECTIVE_WINDS,
 	.lightning_strike = INITIALIZE_LIGHTNING_STRIKE,
 	.lightning_strikeV2 = INITIALIZE_LIGHTNING_STRIKE,
+	.flame_geyser = INITIALIZE_FLAME_GEYSER,
+	.meteor_strike = INITIALIZE_METEOR_STRIKE,
 	.chaos_armor = INITIALIZE_CHAOS_ARMOR,
 };
 

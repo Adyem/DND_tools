@@ -114,6 +114,69 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 		info->flags.prone = ft_check_stat(info, content[i], 6);
 	else if (ft_strncmp(content[i], "BLINDED=", 8) == 0)
 		info->debufs.blinded.duration = ft_check_stat(info, content[i], 8);
+	else if (ft_strncmp(content[i], "FLAME_GEYSER_DURATION=", 22) == 0
+			&& info->bufs.flame_geyser.duration == 0)
+		info->bufs.flame_geyser.duration = ft_check_stat(info, content[i], 22);
+	else if (ft_strncmp(content[i], "FLAME_GEYSER_CLOSE_TO_TOWER_D=", 31) == 0
+			&& info->bufs.flame_geyser.close_to_tower_d == 0)
+		info->bufs.flame_geyser.close_to_tower_d = ft_check_stat(info, content[i], 31);
+	else if (ft_strncmp(content[i], "FLAME_GEYSER_TOWER_EXPLODE_D=", 30) == 0
+			&& info->bufs.flame_geyser.tower_explode_d == 0)
+		info->bufs.flame_geyser.tower_explode_d = ft_check_stat(info, content[i], 30);
+	else if (ft_strncmp(content[i], "METEOR_STRIKE_DURATION=", 23) == 0
+			&& info->bufs.meteor_strike.duration == 0)
+		info->bufs.meteor_strike.duration = ft_check_stat(info, content[i], 23);
+	else if (ft_strncmp(content[i], "METEOR_STRIKE_ONE_TARGET_D=", 27) == 0
+			&& info->bufs.meteor_strike.one_target_d == 0)
+		info->bufs.meteor_strike.one_target_d = ft_check_stat(info, content[i], 27);
+	else if (ft_strncmp(content[i], "METEOR_STRIKE_TWO_TARGETS_D=", 28) == 0
+			&& info->bufs.meteor_strike.two_targets_d == 0)
+		info->bufs.meteor_strike.two_targets_d = ft_check_stat(info, content[i], 28);
+	else if (ft_strncmp(content[i], "METEOR_STRIKE_THREE_TARGETS_D=", 30) == 0
+			&& info->bufs.meteor_strike.three_targets_d == 0)
+		info->bufs.meteor_strike.three_targets_d = ft_check_stat(info, content[i], 30);
+	else if (ft_strncmp(content[i], "METEOR_STRIKE_FOUR_TARGETS_D=", 29) == 0
+			&& info->bufs.meteor_strike.four_targets_d == 0)
+		info->bufs.meteor_strike.four_targets_d = ft_check_stat(info, content[i], 29);
+	else if (ft_strncmp(content[i], "METEOR_STRIKE_FIVE_TARGETS_D=", 29) == 0
+			&& info->bufs.meteor_strike.five_targets_d == 0)
+		info->bufs.meteor_strike.five_targets_d = ft_check_stat(info, content[i], 29);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKE_DURATION=", 25) == 0
+			&& info->bufs.lightning_strike.duration == 0)
+		info->bufs.lightning_strike.duration = ft_check_stat(info, content[i], 25);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKE_AMOUNT=", 23) == 0
+			&& info->bufs.lightning_strike.amount == 0)
+		info->bufs.lightning_strike.amount = ft_check_stat(info, content[i], 23);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKE_DISTANCE=", 25) == 0
+			&& info->bufs.lightning_strike.distance == 0)
+		info->bufs.lightning_strike.distance = ft_check_stat(info, content[i], 25);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKE_DICE_AMOUNT=", 29) == 0
+			&& info->bufs.lightning_strike.dice_amount == 0)
+		info->bufs.lightning_strike.dice_amount = ft_check_stat(info, content[i], 29);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKE_DICE_FACES=", 28) == 0
+			&& info->bufs.lightning_strike.dice_faces == 0)
+		info->bufs.lightning_strike.dice_faces = ft_check_stat(info, content[i], 28);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKE_EXTRA_DAMAGE=", 30) == 0
+			&& info->bufs.lightning_strike.extra_damage == 0)
+		info->bufs.lightning_strike.extra_damage = ft_check_stat(info, content[i], 30);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKEV2_DURATION=", 27) == 0
+			&& info->bufs.lightning_strikeV2.duration == 0)
+		info->bufs.lightning_strikeV2.duration = ft_check_stat(info, content[i], 27);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKEV2_AMOUNT=", 25) == 0
+			&& info->bufs.lightning_strikeV2.amount == 0)
+		info->bufs.lightning_strikeV2.amount = ft_check_stat(info, content[i], 25);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKEV2_DISTANCE=", 27) == 0
+			&& info->bufs.lightning_strikeV2.distance == 0)
+		info->bufs.lightning_strikeV2.distance = ft_check_stat(info, content[i], 27);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKEV2_DICE_AMOUNT=", 31) == 0
+			&& info->bufs.lightning_strikeV2.dice_amount == 0)
+		info->bufs.lightning_strikeV2.dice_amount = ft_check_stat(info, content[i], 31);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKEV2_DICE_FACES=", 30) == 0
+			&& info->bufs.lightning_strikeV2.dice_faces == 0)
+		info->bufs.lightning_strikeV2.dice_faces = ft_check_stat(info, content[i], 30);
+	else if (ft_strncmp(content[i], "LIGHTNING_STRIKEV2_EXTRA_DAMAGE=", 32) == 0
+			&& info->bufs.lightning_strikeV2.extra_damage == 0)
+		info->bufs.lightning_strikeV2.extra_damage = ft_check_stat(info, content[i], 32);
 	else
 		r_value = 1;
 	return(r_value);
@@ -121,20 +184,30 @@ int	ft_set_stats_2(t_char *info, char **content, int i)
 
 static int ft_set_stats_string(t_char *info, char **content, int i)
 {
-    if (ft_strncmp(content[i], "CONC_TARGETS=", 13) == 0)
-    {
-        info->concentration.targets = ft_set_stats_con_targets(content[i], 13, info->concentration.targets, info);
+	if (ft_strncmp(content[i], "CONC_TARGETS=", 13) == 0)
+	{
+        info->concentration.targets = ft_set_stats_con_targets(content[i],
+				13, info->concentration.targets, info);
         if (!info->concentration.targets)
-            return -1;
-        return 0;
-    }
-    else if (ft_strncmp(content[i], "HUNTERS_MARK_CASTER=", 20) == 0)
-    {
-        info->debufs.hunters_mark.caster_name = ft_set_stats_con_targets(content[i], 20, info->debufs.hunters_mark.caster_name, info);
+            return (-1);
+        return (0);
+	}
+	else if (ft_strncmp(content[i], "HUNTERS_MARK_CASTER=", 20) == 0)
+	{
+        info->debufs.hunters_mark.caster_name = ft_set_stats_con_targets(content[i],
+				20, info->debufs.hunters_mark.caster_name, info);
         if (!info->debufs.hunters_mark.caster_name)
-            return -1;
-        return 0;
-    }
+            return (-1);
+        return (0);
+	}
+	else if (ft_strncmp(content[i], "METEOR_STRIKE_TARGET=", 21) == 0)
+	{
+		info->bufs.meteor_strike.target_id = ft_set_stats_con_targets(content[i],
+				21, info->bufs.meteor_strike.target_id, info);
+		if (!info->bufs.meteor_strike.target_id)
+			return (-1);
+		return (0);
+	}
     return 1;
 }
 

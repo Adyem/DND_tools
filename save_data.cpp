@@ -24,6 +24,8 @@ static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 	return ;
 }
 
+
+
 static void	ft_npc_write_file_double_char(const char *msg, char **targets, int fd, t_char *info)
 {
 	int	i;
@@ -68,6 +70,28 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_printf_fd(fd, "CHAOS_ARMOR_DURATION=%i\n", info->bufs.chaos_armor.duration);
 	ft_printf_fd(fd, "PRONE=%i\n", info->flags.prone);
 	ft_printf_fd(fd, "BLINDED=%i\n", info->debufs.blinded);
+	ft_printf_fd(fd, "FLAME_GEYSER_DURATION=%i\n", info->bufs.flame_geyser.duration);
+	ft_printf_fd(fd, "FLAME_GEYSER_CLOSE_TO_TOWER_D=%i\n", info->bufs.flame_geyser.close_to_tower_d);
+	ft_printf_fd(fd, "FLAME_GEYSER_TOWER_EXPLODE_D=%i\n", info->bufs.flame_geyser.tower_explode_d);
+	ft_printf_fd(fd, "METEOR_STRIKE_DURATION=%i\n", info->bufs.meteor_strike.duration);
+	ft_printf_fd(fd, "METEOR_STRIKE_ONE_TARGET_D=%i\n", info->bufs.meteor_strike.one_target_d);
+	ft_printf_fd(fd, "METEOR_STRIKE_TWO_TARGETS_D=%i\n", info->bufs.meteor_strike.two_targets_d);
+	ft_printf_fd(fd, "METEOR_STRIKE_THREE_TARGETS_D=%i\n", info->bufs.meteor_strike.three_targets_d);
+	ft_printf_fd(fd, "METEOR_STRIKE_FOUR_TARGETS_D=%i\n", info->bufs.meteor_strike.four_targets_d);
+	ft_printf_fd(fd, "METEOR_STRIKE_FIVE_TARGETS_D=%i\n", info->bufs.meteor_strike.five_targets_d);
+	ft_npc_write_file_double_char("METEOR_STRIKE_TARGET=", info->bufs.meteor_strike.target_id, fd, info);
+	ft_printf_fd(fd, "LIGHTNING_STRIKE_DURATION=%i\n", info->bufs.lightning_strike.duration);
+	ft_printf_fd(fd, "LIGHTNING_STRIKE_AMOUNT=%i\n", info->bufs.lightning_strike.amount);
+	ft_printf_fd(fd, "LIGHTNING_STRIKE_DISTANCE=%i\n", info->bufs.lightning_strike.distance);
+	ft_printf_fd(fd, "LIGHTNING_STRIKE_DICE_AMOUNT=%i\n", info->bufs.lightning_strike.dice_amount);
+	ft_printf_fd(fd, "LIGHTNING_STRIKE_DICE_FACES=%i\n", info->bufs.lightning_strike.dice_faces);
+	ft_printf_fd(fd, "LIGHTNING_STRIKE_EXTRA_DAMAGE=%i\n", info->bufs.lightning_strike.extra_damage);
+	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_DURATION=%i\n", info->bufs.lightning_strikeV2.duration);
+	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_AMOUNT=%i\n", info->bufs.lightning_strikeV2.amount);
+	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_DISTANCE=%i\n", info->bufs.lightning_strikeV2.distance);
+	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_DICE_AMOUNT=%i\n", info->bufs.lightning_strikeV2.dice_amount);
+	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_DICE_FACES=%i\n", info->bufs.lightning_strikeV2.dice_faces);
+	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_EXTRA_DAMAGE=%i\n", info->bufs.lightning_strikeV2.extra_damage);
 	return ;
 }
 

@@ -59,45 +59,44 @@ void ft_update_lightningV2_strike(t_char *info)
 
 void ft_update_flame_geyser(t_char *info)
 {
-    if (!info->bufs.flame_geyser.duration)
-        return ;
+    if (info->bufs.flame_geyser.duration <= 0 ||
+        info->bufs.flame_geyser.close_to_tower_d <= 0 ||
+        info->bufs.flame_geyser.tower_explode_d <= 0)
+        return;
+
     info->bufs.flame_geyser.duration--;
+
     if (info->bufs.flame_geyser.duration == 0)
     {
-        ft_printf("Flame Geyser explodes, dealing 6 fire damage to every party member.\n");
-        ft_printf("Players who stood underneath a tower take 2 fire damage each.\n");
+        printf("%s casts %s\n", info->name, MAVERICK_FLAME_GEYSER);
     }
     else if (info->bufs.flame_geyser.duration == 1)
-        ft_printf("Flame Geyser will explode on the boss's next turn.\n");
+    {
+        printf("Flame Geyser will explode on the boss's next turn.\n");
+    }
     else
     {
-        ft_printf("Flame Geyser will explode in %d turns.\n",
-                  info->bufs.flame_geyser.duration);
+        printf("Flame Geyser will explode in %d turns.\n", info->bufs.flame_geyser.duration);
     }
-    return ;
 }
 
 void ft_update_meteor_strike(t_char *info)
 {
     if (info->bufs.meteor_strike.duration <= 0)
-        return ;
+        return;
+
     info->bufs.meteor_strike.duration--;
 
     if (info->bufs.meteor_strike.duration == 0)
     {
-        ft_printf("%s activates Meteor Strike:\n%s\n",
-                  info->name, MAVERICK_METEOR_STRIKE);
-        info->bufs.meteor_strike.duration = 0;
+        printf("%s casts %s\n", info->name, MAVERICK_METEOR_STRIKE);
     }
     else if (info->bufs.meteor_strike.duration == 1)
     {
-        ft_printf("Meteor Strike will impact on %s's next turn.\n", info->name);
+        printf("Meteor Strike will impact on the boss's next turn.\n");
     }
     else
     {
-        ft_printf("Meteor Strike will impact in %d turns.\n",
-                  info->bufs.meteor_strike.duration);
+        printf("Meteor Strike will impact in %d turns.\n", info->bufs.meteor_strike.duration);
     }
-    return ;
 }
-
