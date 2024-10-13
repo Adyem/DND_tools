@@ -104,8 +104,24 @@ void ft_update_meteor_strike(t_char *info)
 
 void	ft_update_earth_pounce(t_char *info)
 {
+	if (info->bufs.earth_pounce.active != 1 ||
+			info->bufs.earth_pounce.base_damage < 0)
+		return ;
+	info->bufs.earth_pounce.active = 0;
+	ft_printf("%s will jump and pounce at %s dealing %i damage reduced by the total ac of the target\n",
+			info->name, *(info->bufs.earth_pounce.target_id), info->bufs.earth_pounce.base_damage);
+	return ;
 }
 
 void	ft_update_arcane_pounce(t_char *info)
 {
+	if (info->bufs.arcane_pounce.active != 1 ||
+			info->bufs.arcane_pounce.erea_damage < 0 ||
+			info->bufs.arcane_pounce.magic_damage < 0)
+		return ;
+	ft_printf("%s will jump and pounce at %s dealing ",
+			info->name, *(info->bufs.arcane_pounce.target_id));
+	ft_printf("%i damage and %i damage to annyone within 10ft.\n",
+			info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
+	return ;
 }

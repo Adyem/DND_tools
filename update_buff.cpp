@@ -28,6 +28,14 @@ void	ft_update_buf(t_char *info)
 		ft_update_lightningV2_strike(info);
 	if (info->bufs.protective_winds.duration > 0)
 		ft_update_buf_duration(info, "protective winds", &info->bufs.protective_winds.duration);
+	if (info->bufs.flame_geyser.duration > 0)
+		ft_update_flame_geyser(info);
+	if (info->bufs.meteor_strike.duration > 0)
+		ft_update_meteor_strike(info);
+	if (info->bufs.earth_pounce.active == 1)
+		ft_update_earth_pounce(info);
+	if (info->bufs.arcane_pounce.active == 1)
+		ft_update_arcane_pounce(info);
 	if (info->bufs.chaos_armor.duration > 0)
 	{
 		ft_update_buf_duration(info, "chaos armor", &info->bufs.chaos_armor.duration);

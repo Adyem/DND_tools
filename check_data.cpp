@@ -105,6 +105,8 @@ int ft_npc_check_info_2(t_char *info)
 		error += ft_printf("%s arcane pounce too manny targets\n", info->name);
 	if (ft_double_char_length(info->bufs.earth_pounce.target_id) > 1)
 		error += ft_printf("%s earth pounce too manny targets\n", info->name);
+	if (ft_double_char_length(info->bufs.meteor_strike.target_id) > 1)
+		error += ft_printf("invalid amount of targets for meteor strike\n");
     return (error);
 }
 
@@ -141,8 +143,6 @@ int ft_npc_check_info(t_char *info)
 	if (info->debufs.hunters_mark.amount < 0 || info->debufs.hunters_mark.amount
 			!= ft_double_char_length(info->debufs.hunters_mark.caster_name))
         error += (ft_printf("%s hunters mark data is not correct\n", info->name), 1);
-	if (ft_double_char_length(info->bufs.meteor_strike.target_id) > 1)
-		error += ft_printf("invalid amount of targets for meteor strike\n");
     if (info->bufs.protective_winds.duration < 0)
         error += (ft_printf("%s protective winds duration outside of bounds\n", info->name), 1);
     if (info->bufs.chaos_armor.duration < 0)

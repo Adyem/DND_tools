@@ -172,6 +172,8 @@ void		ft_update_lightningV2_strike(t_char *info);
 void		ft_npc_update_lightning_strike(t_char *info, const char **input);
 void		ft_update_flame_geyser(t_char *info);
 void		ft_update_meteor_strike(t_char *info);
+void		ft_update_earth_pounce(t_char *info);
+void		ft_update_arcane_pounce(t_char *info);
 
 //general buffs
 int			ft_check_bless(t_char *info);
