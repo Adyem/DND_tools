@@ -37,6 +37,19 @@ static void ft_maverick_meteor_strike(t_char *info)
 	info->bufs.meteor_strike.five_targets_d = 3;
 }
 
+static void	ft_maverick_earth_pounce(t_char *info)
+{
+	info->bufs.earth_pounce.active = 1;
+	info->bufs.earth_pounce.base_damage = 27;
+}
+
+static void	ft_maverick_arcane_pounce(t_char *info)
+{
+	info->bufs.arcane_pounce.active = 1;
+	info->bufs.arcane_pounce.erea_damage = 8;
+	info->bufs.arcane_pounce.magic_damage = 4;
+}
+
 static void print_meteor_strike(const t_char *info)
 {
     ft_printf("Meteor Strike: Create a circle around the target with arrows pointing towards the center (10ft radius), ");
@@ -125,14 +138,20 @@ void ft_maverick_print_f(int first, int second, t_char *info)
     if (first == 1)
         print_mass_teleport(second);
     else if (first == 2)
+	{
+		ft_maverick_meteor_strike(info);
         print_meteor_strike(info);
+	}
     else if (first == 3)
 	{
         ft_maverick_lightning_strike(info);
         print_lightning_strike(info);
     }
     else if (first == 4)
+	{
+		ft_maverick_flame_geyser(info);
         print_flame_geyser(info);
+	}
     else if (first == 5)
         print_frost_breath(info);
     else if (first == 6)
@@ -141,9 +160,15 @@ void ft_maverick_print_f(int first, int second, t_char *info)
         print_lightning_strike_v2(info);
     }
     else if (first == 7)
-        print_arcane_pounce(info);
+	{
+		ft_maverick_arcane_pounce(info);
+		print_arcane_pounce(info);
+	}
     else if (first == 8)
+	{
+		ft_maverick_earth_pounce(info);
         print_earth_pounce(info);
+	}
     else
         ft_printf("Unknown Ability.\n");
 }
@@ -153,14 +178,20 @@ void ft_maverick_print_s(int first, int second, t_char *info)
     if (second == 1)
         print_mass_teleport(first);
     else if (second == 2)
+	{
+		ft_maverick_meteor_strike(info);
         print_meteor_strike(info);
+	}
     else if (second == 3)
 	{
         ft_maverick_lightning_strike(info);
         print_lightning_strike(info);
     }
     else if (second == 4)
+	{
+		ft_maverick_flame_geyser(info);
         print_flame_geyser(info);
+	}
     else if (second == 5)
         print_frost_breath(info);
     else if (second == 6)
@@ -169,9 +200,15 @@ void ft_maverick_print_s(int first, int second, t_char *info)
         print_lightning_strike_v2(info);
     }
     else if (second == 7)
+	{
+		ft_maverick_arcane_pounce(info);
         print_arcane_pounce(info);
+	}
     else if (second == 8)
+	{
+		ft_maverick_earth_pounce(info);
         print_earth_pounce(info);
+	}
     else
         ft_printf("Unknown Ability.\n");
 }

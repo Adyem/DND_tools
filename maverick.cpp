@@ -9,6 +9,7 @@ void	ft_maverick_turn(t_char *info)
 	int		second;
 
 	ft_update_buf(info);
+	ft_printf("\n\n");
 	first = 0;
 	second = 0;
 	while (first == second)
