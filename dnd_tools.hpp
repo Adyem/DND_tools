@@ -58,6 +58,15 @@ void		ft_maverick_print_f(int first, int second, t_char *info);
 //Commands
 void		ft_request_input(t_name *name);
 
+//Print Abilities
+void		print_meteor_strike(const t_char *info);
+void		print_lightning_strike(const t_char *info);
+void		print_flame_geyser(const t_char *info);
+void		print_frost_breath(const t_char *info);
+void		print_lightning_strike_v2(const t_char *info);
+void		print_arcane_pounce(const t_char *info);
+void		print_earth_pounce(const t_char *info);
+
 //Tester
 void		ft_test(t_name *name);
 int			ft_test_excecute(const char **input, int argc, t_name *name);

@@ -109,7 +109,8 @@ SRC			= name.cpp \
 			  test.cpp \
 			  test_make_input.cpp \
 			  initialize_suggestions_readline.cpp \
-			  test_excecute.cpp
+			  test_excecute.cpp \
+			  print_abilities.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17
