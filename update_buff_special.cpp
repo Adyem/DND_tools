@@ -79,22 +79,25 @@ void ft_update_flame_geyser(t_char *info)
 void ft_update_meteor_strike(t_char *info)
 {
     if (info->bufs.meteor_strike.duration <= 0 ||
-		info->bufs.meteor_strike.one_target_d < 0 ||
-		info->bufs.meteor_strike.two_targets_d < 0 ||
-		info->bufs.meteor_strike.three_targets_d < 0 ||
-		info->bufs.meteor_strike.four_targets_d < 0 ||
-		info->bufs.meteor_strike.five_targets_d < 0 ||
-		info->bufs.meteor_strike.target_id == nullptr)
+        info->bufs.meteor_strike.one_target_d < 0 ||
+        info->bufs.meteor_strike.two_targets_d < 0 ||
+        info->bufs.meteor_strike.three_targets_d < 0 ||
+        info->bufs.meteor_strike.four_targets_d < 0 ||
+        info->bufs.meteor_strike.five_targets_d < 0)
         return;
     info->bufs.meteor_strike.duration--;
     if (info->bufs.meteor_strike.duration == 0)
     {
-		ft_printf("The Meteor above %s lands dealing damage depending on the total amount of players in the erea\n");
-		ft_printf("If 5 players were hit they each take %i damage\n", info->bufs.meteor_strike.five_targets_d);
-		ft_printf("If 4 players were hit they each take %i damage\n", info->bufs.meteor_strike.four_targets_d);
-		ft_printf("If 3 players were hit they each take %i damage\n", info->bufs.meteor_strike.three_targets_d);
-		ft_printf("If 2 players were hit they each take %i damage\n", info->bufs.meteor_strike.two_targets_d);
-		ft_printf("If 1 player was hit he/she takes %i damage\n", info->bufs.meteor_strike.one_target_d);
+        if (info->bufs.meteor_strike.target_id != nullptr)
+            ft_printf("The Meteor above %s lands, dealing damage depending on the total amount of players in the area.\n",
+                      info->bufs.meteor_strike.target_id);
+        else
+            ft_printf("A Meteor lands, dealing damage depending on the total amount of players in the area.\n");
+        ft_printf("If 5 players were hit, they each take %i damage.\n", info->bufs.meteor_strike.five_targets_d);
+        ft_printf("If 4 players were hit, they each take %i damage.\n", info->bufs.meteor_strike.four_targets_d);
+        ft_printf("If 3 players were hit, they each take %i damage.\n", info->bufs.meteor_strike.three_targets_d);
+        ft_printf("If 2 players were hit, they each take %i damage.\n", info->bufs.meteor_strike.two_targets_d);
+        ft_printf("If 1 player was hit, he/she takes %i damage.\n", info->bufs.meteor_strike.one_target_d);
     }
     else if (info->bufs.meteor_strike.duration == 1)
         ft_printf("Meteor Strike will impact on the boss's next turn.\n");
@@ -102,26 +105,32 @@ void ft_update_meteor_strike(t_char *info)
         ft_printf("Meteor Strike will impact in %d turns.\n", info->bufs.meteor_strike.duration);
 }
 
-void	ft_update_earth_pounce(t_char *info)
+void ft_update_earth_pounce(t_char *info)
 {
-	if (info->bufs.earth_pounce.active != 1 ||
-			info->bufs.earth_pounce.base_damage < 0)
-		return ;
-	info->bufs.earth_pounce.active = 0;
-	ft_printf("%s will jump and pounce at %s dealing %i damage reduced by the total ac of the target\n",
-			info->name, *(info->bufs.earth_pounce.target_id), info->bufs.earth_pounce.base_damage);
+    if (info->bufs.earth_pounce.active != 1 ||
+        info->bufs.earth_pounce.base_damage < 0)
+        return;
+    info->bufs.earth_pounce.active = 0;
+	if (info->bufs.earth_pounce.target_id != nullptr && *(info->bufs.earth_pounce.target_id) != nullptr)
+        ft_printf("%s will jump and pounce at %s, dealing %i damage reduced by the total AC of the target.\n",
+                  info->name, *(info->bufs.earth_pounce.target_id), info->bufs.earth_pounce.base_damage);
+	else
+        ft_printf("%s will jump and pounce, dealing %i damage reduced by the total AC of the target.\n",
+                  info->name, info->bufs.earth_pounce.base_damage);
 	return ;
 }
 
-void	ft_update_arcane_pounce(t_char *info)
+void ft_update_arcane_pounce(t_char *info)
 {
-	if (info->bufs.arcane_pounce.active != 1 ||
-			info->bufs.arcane_pounce.erea_damage < 0 ||
-			info->bufs.arcane_pounce.magic_damage < 0)
-		return ;
-	ft_printf("%s will jump and pounce at %s dealing ",
-			info->name, *(info->bufs.arcane_pounce.target_id));
-	ft_printf("%i damage and %i damage to annyone within 10ft.\n",
-			info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
-	return ;
+    if (info->bufs.arcane_pounce.active != 1 ||
+        info->bufs.arcane_pounce.erea_damage < 0 ||
+        info->bufs.arcane_pounce.magic_damage < 0)
+        return;
+    if (info->bufs.arcane_pounce.target_id != nullptr && *(info->bufs.arcane_pounce.target_id) != nullptr)
+        ft_printf("%s will jump and pounce at %s, dealing ", info->name, *(info->bufs.arcane_pounce.target_id));
+    else
+		ft_printf("%s will jump and pounce, dealing ", info->name);
+    ft_printf("%i damage and %i damage to anyone within 10ft.\n",
+              info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
+    return ;
 }

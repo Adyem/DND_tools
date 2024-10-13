@@ -19,6 +19,8 @@ void	ft_maverick_turn(t_char *info)
 	}
 	ft_maverick_print_f(first, second, info);
 	ft_maverick_print_s(first, second, info);
+	ft_printf("\n\n");
+	return ;
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
