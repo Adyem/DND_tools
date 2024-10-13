@@ -63,40 +63,41 @@ void ft_update_flame_geyser(t_char *info)
         info->bufs.flame_geyser.close_to_tower_d <= 0 ||
         info->bufs.flame_geyser.tower_explode_d <= 0)
         return;
-
     info->bufs.flame_geyser.duration--;
-
     if (info->bufs.flame_geyser.duration == 0)
     {
-        printf("%s casts %s\n", info->name, MAVERICK_FLAME_GEYSER);
+        ft_printf("Flame geyser explode this turn: \n");
+		ft_printf("Everyone under a flame geyser takes %i damage\n", info->bufs.flame_geyser.close_to_tower_d);
+		ft_printf("If a tower has no player under it it explodes dealing %i damage to all players\n", info->bufs.flame_geyser.tower_explode_d);
     }
     else if (info->bufs.flame_geyser.duration == 1)
-    {
-        printf("Flame Geyser will explode on the boss's next turn.\n");
-    }
+        ft_printf("Flame Geyser will explode on the boss's next turn.\n");
     else
-    {
-        printf("Flame Geyser will explode in %d turns.\n", info->bufs.flame_geyser.duration);
-    }
+       ft_printf("Flame Geyser will explode in %d turns.\n", info->bufs.flame_geyser.duration);
 }
 
 void ft_update_meteor_strike(t_char *info)
 {
-    if (info->bufs.meteor_strike.duration <= 0)
+    if (info->bufs.meteor_strike.duration <= 0 ||
+		info->bufs.meteor_strike.one_target_d < 0 ||
+		info->bufs.meteor_strike.two_targets_d < 0 ||
+		info->bufs.meteor_strike.three_targets_d < 0 ||
+		info->bufs.meteor_strike.four_targets_d < 0 ||
+		info->bufs.meteor_strike.five_targets_d < 0 ||
+		info->bufs.meteor_strike.target_id == nullptr)
         return;
-
     info->bufs.meteor_strike.duration--;
-
     if (info->bufs.meteor_strike.duration == 0)
     {
-        printf("%s casts %s\n", info->name, MAVERICK_METEOR_STRIKE);
+		ft_printf("The Meteor above %s lands dealing damage depending on the total amount of players in the erea\n");
+		ft_printf("If 5 players were hit they each take %i damage\n", info->bufs.meteor_strike.five_targets_d);
+		ft_printf("If 4 players were hit they each take %i damage\n", info->bufs.meteor_strike.four_targets_d);
+		ft_printf("If 3 players were hit they each take %i damage\n", info->bufs.meteor_strike.three_targets_d);
+		ft_printf("If 2 players were hit they each take %i damage\n", info->bufs.meteor_strike.two_targets_d);
+		ft_printf("If 1 player was hit he/she takes %i damage\n", info->bufs.meteor_strike.one_target_d);
     }
     else if (info->bufs.meteor_strike.duration == 1)
-    {
-        printf("Meteor Strike will impact on the boss's next turn.\n");
-    }
+        ft_printf("Meteor Strike will impact on the boss's next turn.\n");
     else
-    {
-        printf("Meteor Strike will impact in %d turns.\n", info->bufs.meteor_strike.duration);
-    }
+        ft_printf("Meteor Strike will impact in %d turns.\n", info->bufs.meteor_strike.duration);
 }

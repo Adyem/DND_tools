@@ -175,6 +175,7 @@ static const	t_air_totem INITIALIZE_AIR_TOTEM =
 
 static const	t_flame_geyser INITIALIZE_FLAME_GEYSER =
 {
+	.amount = 0,
 	.duration = 0,
 	.close_to_tower_d = 0,
 	.tower_explode_d = 0,

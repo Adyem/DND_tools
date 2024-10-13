@@ -53,6 +53,8 @@ int ft_npc_check_info_2(t_char *info)
         error += (ft_printf("%s flame geyser close_to_tower_d out of bounds\n", info->name), 1);
     if (info->bufs.flame_geyser.tower_explode_d < 0 || info->bufs.flame_geyser.tower_explode_d > 100)
         error += (ft_printf("%s flame geyser tower_explode_d out of bounds\n", info->name), 1);
+    if (info->bufs.flame_geyser.amount < 0 || info->bufs.flame_geyser.amount > 5)
+        error += (ft_printf("%s flame geyser tower_explode_d out of bounds\n", info->name), 1);
     if (info->bufs.meteor_strike.duration < 0 || info->bufs.meteor_strike.duration > 100)
         error += (ft_printf("%s meteor strike duration out of bounds\n", info->name), 1);
     if (info->bufs.meteor_strike.one_target_d < 0 || info->bufs.meteor_strike.one_target_d > 100)

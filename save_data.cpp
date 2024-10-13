@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "identification.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
@@ -7,24 +8,22 @@
 
 static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 {
-	ft_printf_fd(fd, "HEALTH=%i\n", stats->health);
-	ft_printf_fd(fd, "TEMP_HP=%i\n", stats->temp_hp);
-	ft_printf_fd(fd, "STR=%i\n", stats->str);
-	ft_printf_fd(fd, "DEX=%i\n", stats->dex);
-	ft_printf_fd(fd, "CON=%i\n", stats->con);
-	ft_printf_fd(fd, "INT=%i\n", stats->inte);
-	ft_printf_fd(fd, "WIS=%i\n", stats->wis);
-	ft_printf_fd(fd, "CHA=%i\n", stats->cha);
-	ft_printf_fd(fd, "TURN=%i\n", stats->turn);
-	ft_printf_fd(fd, "PHASE=%i\n", stats->phase);
-	ft_printf_fd(fd, "INITIATIVE=%i\n", info->initiative);
-	ft_printf_fd(fd, "BLESS_DUR=%i\n", info->bufs.bless.duration);
-	ft_printf_fd(fd, "LIGHTNING_STRIKE_DUR=%i\n", info->bufs.lightning_strike.duration);
-	ft_printf_fd(fd, "PROTECTIVE_WINDS_DUR=%i\n", info->bufs.protective_winds.duration);
+	ft_printf_fd(fd, "%s%i\n", HEALTH_KEY, stats->health);
+	ft_printf_fd(fd, "%s%i\n", TEMP_HP_KEY, stats->temp_hp);
+	ft_printf_fd(fd, "%s%i\n", STR_KEY, stats->str);
+	ft_printf_fd(fd, "%s%i\n", DEX_KEY, stats->dex);
+	ft_printf_fd(fd, "%s%i\n", CON_KEY, stats->con);
+	ft_printf_fd(fd, "%s%i\n", INT_KEY, stats->inte);
+	ft_printf_fd(fd, "%s%i\n", WIS_KEY, stats->wis);
+	ft_printf_fd(fd, "%s%i\n", CHA_KEY, stats->cha);
+	ft_printf_fd(fd, "%s%i\n", TURN_KEY, stats->turn);
+	ft_printf_fd(fd, "%s%i\n", PHASE_KEY, stats->phase);
+	ft_printf_fd(fd, "%s%i\n", INITIATIVE_KEY, info->initiative);
+	ft_printf_fd(fd, "%s%i\n", BLESS_DUR_KEY, info->bufs.bless.duration);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DUR_KEY, info->bufs.lightning_strike.duration);
+	ft_printf_fd(fd, "%s%i\n", PROTECTIVE_WINDS_DUR_KEY, info->bufs.protective_winds.duration);
 	return ;
 }
-
-
 
 static void	ft_npc_write_file_double_char(const char *msg, char **targets, int fd, t_char *info)
 {
@@ -45,53 +44,54 @@ static void	ft_npc_write_file_double_char(const char *msg, char **targets, int f
 
 static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 {
-	ft_printf_fd(fd, "ACID_RESISTANCE=%i\n", resistance->acid);
-	ft_printf_fd(fd, "BLUDGEONING_RESISTANCE=%i\n", resistance->bludgeoning);
-	ft_printf_fd(fd, "COLD_RESISTANCE=%i\n", resistance->cold);
-	ft_printf_fd(fd, "FIRE_RESISTANCE=%i\n", resistance->fire);
-	ft_printf_fd(fd, "FORCE_RESISTANCE=%i\n", resistance->force);
-	ft_printf_fd(fd, "LIGHTNING_RESISTANCE=%i\n", resistance->lightning);
-	ft_printf_fd(fd, "NECROTIC_RESISTANCE=%i\n", resistance->necrotic);
-	ft_printf_fd(fd, "PIERCING_RESISTANCE=%i\n", resistance->piercing);
-	ft_printf_fd(fd, "POISON_RESISTANCE=%i\n", resistance->poison);
-	ft_printf_fd(fd, "PSYCHIC_RESISTANCE=%i\n", resistance->psychic);
-	ft_printf_fd(fd, "RADIANT_RESISTANCE=%i\n", resistance->radiant);
-	ft_printf_fd(fd, "SLASHING_RESISTANCE=%i\n", resistance->slashing);
-	ft_printf_fd(fd, "THUNDER_RESISTANCE=%i\n", resistance->thunder);
-	ft_printf_fd(fd, "CONCENTRATION=%i\n", info->concentration.concentration);
-	ft_printf_fd(fd, "CONC_SPELL_ID=%i\n", info->concentration.spell_id);
-	ft_printf_fd(fd, "CONC_DICE_AMOUNT=%i\n", info->concentration.dice_amount_mod);
-	ft_printf_fd(fd, "CONC_DICE_FACES=%i\n", info->concentration.dice_faces_mod);
-	ft_printf_fd(fd, "CONC_BASE_MOD=%i\n", info->concentration.base_mod);
-	ft_printf_fd(fd, "CONC_DURATION=%i\n", info->concentration.duration);
-	ft_npc_write_file_double_char("CONC_TARGETS=", info->concentration.targets, fd, info);
-	ft_printf_fd(fd, "HUNTERS_MARK_AMOUNT=%i\n", info->debufs.hunters_mark.amount);
-	ft_npc_write_file_double_char("HUNTERS_MARK_CASTER=", info->debufs.hunters_mark.caster_name, fd, info);
-	ft_printf_fd(fd, "CHAOS_ARMOR_DURATION=%i\n", info->bufs.chaos_armor.duration);
-	ft_printf_fd(fd, "PRONE=%i\n", info->flags.prone);
-	ft_printf_fd(fd, "BLINDED=%i\n", info->debufs.blinded);
-	ft_printf_fd(fd, "FLAME_GEYSER_DURATION=%i\n", info->bufs.flame_geyser.duration);
-	ft_printf_fd(fd, "FLAME_GEYSER_CLOSE_TO_TOWER_D=%i\n", info->bufs.flame_geyser.close_to_tower_d);
-	ft_printf_fd(fd, "FLAME_GEYSER_TOWER_EXPLODE_D=%i\n", info->bufs.flame_geyser.tower_explode_d);
-	ft_printf_fd(fd, "METEOR_STRIKE_DURATION=%i\n", info->bufs.meteor_strike.duration);
-	ft_printf_fd(fd, "METEOR_STRIKE_ONE_TARGET_D=%i\n", info->bufs.meteor_strike.one_target_d);
-	ft_printf_fd(fd, "METEOR_STRIKE_TWO_TARGETS_D=%i\n", info->bufs.meteor_strike.two_targets_d);
-	ft_printf_fd(fd, "METEOR_STRIKE_THREE_TARGETS_D=%i\n", info->bufs.meteor_strike.three_targets_d);
-	ft_printf_fd(fd, "METEOR_STRIKE_FOUR_TARGETS_D=%i\n", info->bufs.meteor_strike.four_targets_d);
-	ft_printf_fd(fd, "METEOR_STRIKE_FIVE_TARGETS_D=%i\n", info->bufs.meteor_strike.five_targets_d);
-	ft_npc_write_file_double_char("METEOR_STRIKE_TARGET=", info->bufs.meteor_strike.target_id, fd, info);
-	ft_printf_fd(fd, "LIGHTNING_STRIKE_DURATION=%i\n", info->bufs.lightning_strike.duration);
-	ft_printf_fd(fd, "LIGHTNING_STRIKE_AMOUNT=%i\n", info->bufs.lightning_strike.amount);
-	ft_printf_fd(fd, "LIGHTNING_STRIKE_DISTANCE=%i\n", info->bufs.lightning_strike.distance);
-	ft_printf_fd(fd, "LIGHTNING_STRIKE_DICE_AMOUNT=%i\n", info->bufs.lightning_strike.dice_amount);
-	ft_printf_fd(fd, "LIGHTNING_STRIKE_DICE_FACES=%i\n", info->bufs.lightning_strike.dice_faces);
-	ft_printf_fd(fd, "LIGHTNING_STRIKE_EXTRA_DAMAGE=%i\n", info->bufs.lightning_strike.extra_damage);
-	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_DURATION=%i\n", info->bufs.lightning_strikeV2.duration);
-	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_AMOUNT=%i\n", info->bufs.lightning_strikeV2.amount);
-	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_DISTANCE=%i\n", info->bufs.lightning_strikeV2.distance);
-	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_DICE_AMOUNT=%i\n", info->bufs.lightning_strikeV2.dice_amount);
-	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_DICE_FACES=%i\n", info->bufs.lightning_strikeV2.dice_faces);
-	ft_printf_fd(fd, "LIGHTNING_STRIKEV2_EXTRA_DAMAGE=%i\n", info->bufs.lightning_strikeV2.extra_damage);
+	ft_printf_fd(fd, "%s%i\n", ACID_RESISTANCE_KEY, resistance->acid);
+	ft_printf_fd(fd, "%s%i\n", BLUDGEONING_RESISTANCE_KEY, resistance->bludgeoning);
+	ft_printf_fd(fd, "%s%i\n", COLD_RESISTANCE_KEY, resistance->cold);
+	ft_printf_fd(fd, "%s%i\n", FIRE_RESISTANCE_KEY, resistance->fire);
+	ft_printf_fd(fd, "%s%i\n", FORCE_RESISTANCE_KEY, resistance->force);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_RESISTANCE_KEY, resistance->lightning);
+	ft_printf_fd(fd, "%s%i\n", NECROTIC_RESISTANCE_KEY, resistance->necrotic);
+	ft_printf_fd(fd, "%s%i\n", PIERCING_RESISTANCE_KEY, resistance->piercing);
+	ft_printf_fd(fd, "%s%i\n", POISON_RESISTANCE_KEY, resistance->poison);
+	ft_printf_fd(fd, "%s%i\n", PSYCHIC_RESISTANCE_KEY, resistance->psychic);
+	ft_printf_fd(fd, "%s%i\n", RADIANT_RESISTANCE_KEY, resistance->radiant);
+	ft_printf_fd(fd, "%s%i\n", SLASHING_RESISTANCE_KEY, resistance->slashing);
+	ft_printf_fd(fd, "%s%i\n", THUNDER_RESISTANCE_KEY, resistance->thunder);
+	ft_printf_fd(fd, "%s%i\n", CONCENTRATION_KEY, info->concentration.concentration);
+	ft_printf_fd(fd, "%s%i\n", CONC_SPELL_ID_KEY, info->concentration.spell_id);
+	ft_printf_fd(fd, "%s%i\n", CONC_DICE_AMOUNT_KEY, info->concentration.dice_amount_mod);
+	ft_printf_fd(fd, "%s%i\n", CONC_DICE_FACES_KEY, info->concentration.dice_faces_mod);
+	ft_printf_fd(fd, "%s%i\n", CONC_BASE_MOD_KEY, info->concentration.base_mod);
+	ft_printf_fd(fd, "%s%i\n", CONC_DURATION_KEY, info->concentration.duration);
+	ft_npc_write_file_double_char(CONC_TARGETS_KEY, info->concentration.targets, fd, info);
+	ft_printf_fd(fd, "%s%i\n", HUNTERS_MARK_AMOUNT_KEY, info->debufs.hunters_mark.amount);
+	ft_npc_write_file_double_char(HUNTERS_MARK_CASTER_KEY, info->debufs.hunters_mark.caster_name, fd, info);
+	ft_printf_fd(fd, "%s%i\n", CHAOS_ARMOR_DURATION_KEY, info->bufs.chaos_armor.duration);
+	ft_printf_fd(fd, "%s%i\n", PRONE_KEY, info->flags.prone);
+	ft_printf_fd(fd, "%s%i\n", BLINDED_KEY, info->debufs.blinded);
+	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_DURATION_KEY, info->bufs.flame_geyser.duration);
+	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_CLOSE_TO_TOWER_D_KEY, info->bufs.flame_geyser.close_to_tower_d);
+	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_TOWER_EXPLODE_D_KEY, info->bufs.flame_geyser.tower_explode_d);
+	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_AMOUNT_KEY, info->bufs.flame_geyser.amount);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_DURATION_KEY, info->bufs.meteor_strike.duration);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_ONE_TARGET_D_KEY, info->bufs.meteor_strike.one_target_d);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_TWO_TARGETS_D_KEY, info->bufs.meteor_strike.two_targets_d);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_THREE_TARGETS_D_KEY, info->bufs.meteor_strike.three_targets_d);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_FOUR_TARGETS_D_KEY, info->bufs.meteor_strike.four_targets_d);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_FIVE_TARGETS_D_KEY, info->bufs.meteor_strike.five_targets_d);
+	ft_npc_write_file_double_char(METEOR_STRIKE_TARGET_KEY, info->bufs.meteor_strike.target_id, fd, info);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DURATION_KEY, info->bufs.lightning_strike.duration);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_AMOUNT_KEY, info->bufs.lightning_strike.amount);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DISTANCE_KEY, info->bufs.lightning_strike.distance);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DICE_AMOUNT_KEY, info->bufs.lightning_strike.dice_amount);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DICE_FACES_KEY, info->bufs.lightning_strike.dice_faces);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_EXTRA_DAMAGE_KEY, info->bufs.lightning_strike.extra_damage);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DURATION_KEY, info->bufs.lightning_strikeV2.duration);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_AMOUNT_KEY, info->bufs.lightning_strikeV2.amount);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DISTANCE_KEY, info->bufs.lightning_strikeV2.distance);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DICE_AMOUNT_KEY, info->bufs.lightning_strikeV2.dice_amount);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DICE_FACES_KEY, info->bufs.lightning_strikeV2.dice_faces);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_EXTRA_DAMAGE_KEY, info->bufs.lightning_strikeV2.extra_damage);
 	return ;
 }
 

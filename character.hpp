@@ -116,6 +116,7 @@ typedef struct	s_lightning_strike
 
 typedef struct s_flame_geyser
 {
+	int	amount;
     int duration;
 	int	close_to_tower_d;
 	int	tower_explode_d;
