@@ -133,6 +133,21 @@ typedef struct s_meteor_strike
     char	**target_id;
 } t_meteor_strike;
 
+typedef struct s_earth_pounce
+{
+	int		duration;
+	int		base_damage;
+	char	**target_id;
+} t_earth_pounce;
+
+typedef struct s_arcane_pounce
+{	
+	int		duration;
+	int		magic_damage;
+	int		erea_damage;
+	char	*target;
+} t_arcane_pounce;
+
 typedef struct	s_air_totem
 {
 	char	*save_file;
@@ -156,6 +171,8 @@ typedef struct	s_bufs
 	t_flame_geyser		flame_geyser;
 	t_meteor_strike		meteor_strike;
 	t_chaos_armor		chaos_armor;
+	t_arcane_pounce		arcane_pounce;
+	t_earth_pounce		earth_pounce;
 }	t_bufs;
 
 typedef struct	s_hunters_mark

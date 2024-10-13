@@ -1,6 +1,7 @@
 #ifndef MAVERICK_HPP
 # define MAVERICK_HPP
 
+#include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
