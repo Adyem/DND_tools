@@ -85,40 +85,39 @@ int ft_set_stats_2(t_char *info, char **content, int i)
         ft_set_stat_int(content[i], LIGHTNING_STRIKEV2_DISTANCE_KEY, &(info->bufs.lightning_strikeV2.distance), 0, info) == 0 ||
         ft_set_stat_int(content[i], LIGHTNING_STRIKEV2_DICE_AMOUNT_KEY, &(info->bufs.lightning_strikeV2.dice_amount), 0, info) == 0 ||
         ft_set_stat_int(content[i], LIGHTNING_STRIKEV2_DICE_FACES_KEY, &(info->bufs.lightning_strikeV2.dice_faces), 0, info) == 0 ||
-        ft_set_stat_int(content[i], LIGHTNING_STRIKEV2_EXTRA_DAMAGE_KEY, &(info->bufs.lightning_strikeV2.extra_damage), 0, info) == 0)
+        ft_set_stat_int(content[i], LIGHTNING_STRIKEV2_EXTRA_DAMAGE_KEY, &(info->bufs.lightning_strikeV2.extra_damage), 0, info) == 0 ||
+		ft_set_stat_int(content[i], EARTH_POUNCE_ACTIVE_KEY, &(info->bufs.earth_pounce.active), 0, info) ||
+		ft_set_stat_int(content[i], EARTH_POUNCE_BASE_DAMAGE_KEY, &(info->bufs.earth_pounce.base_damage), 0, info) ||
+		ft_set_stat_int(content[i], ARCANE_POUNCE_ACTIVE_KEY, &(info->bufs.arcane_pounce.active), 0, info) ||
+		ft_set_stat_int(content[i], ARCANE_POUNCE_EREA_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info) ||
+		ft_set_stat_int(content[i], ARCANE_POUNCE_MAGIC_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info))
     {
         return (0);
     }
     return (1);
 }
 
+static int handle_set_stat(char *content_i, size_t key_len, char ***target_field, t_char *info)
+{
+    *target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
+    if (*target_field == NULL)
+        return (-1);
+    return (0);
+}
+
 static int ft_set_stats_string(t_char *info, char **content, int i)
 {
-    if (ft_strncmp(content[i], CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
-    {
-        info->concentration.targets = ft_set_stats_con_targets(content[i],
-                                                               ft_strlen(CONC_TARGETS_KEY), info->concentration.targets, info);
-        if (!info->concentration.targets)
-            return (-1);
-        return (0);
-    }
-    else if (ft_strncmp(content[i], HUNTERS_MARK_CASTER_KEY, ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
-    {
-        info->debufs.hunters_mark.caster_name = ft_set_stats_con_targets(content[i],
-                                                                         ft_strlen(HUNTERS_MARK_CASTER_KEY), info->debufs.hunters_mark.caster_name, info);
-        if (!info->debufs.hunters_mark.caster_name)
-            return (-1);
-        return (0);
-    }
-    else if (ft_strncmp(content[i], METEOR_STRIKE_TARGET_KEY, ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
-    {
-        info->bufs.meteor_strike.target_id = ft_set_stats_con_targets(content[i],
-                                                                      ft_strlen(METEOR_STRIKE_TARGET_KEY), info->bufs.meteor_strike.target_id, info);
-        if (!info->bufs.meteor_strike.target_id)
-            return (-1);
-        return (0);
-    }
-    return 1;
+	if (ft_strncmp(content[i], CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
+        return (handle_set_stat(content[i], ft_strlen(CONC_TARGETS_KEY), &info->concentration.targets, info));
+	if (ft_strncmp(content[i], HUNTERS_MARK_CASTER_KEY, ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
+        return (handle_set_stat(content[i], ft_strlen(HUNTERS_MARK_CASTER_KEY), &info->debufs.hunters_mark.caster_name, info));
+	if (ft_strncmp(content[i], METEOR_STRIKE_TARGET_KEY, ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
+        return (handle_set_stat(content[i], ft_strlen(METEOR_STRIKE_TARGET_KEY), &info->bufs.meteor_strike.target_id, info));
+	if (ft_strncmp(content[i], EARTH_POUNCE_TARGET_ID_KEY, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY)) == 0)
+		return (handle_set_stat(content[i], ft_strlen(EARTH_POUNCE_TARGET_ID_KEY), &info->bufs.earth_pounce.target_id, info));
+	if (ft_strncmp(content[i], ARCANE_POUNCE_TARGET_ID_KEY, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
+		return (handle_set_stat(content[i], ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY), &info->bufs.arcane_pounce.target_id, info));
+    return (1);
 }
 
 int ft_set_stats(t_char *info, char **content)

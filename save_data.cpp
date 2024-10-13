@@ -92,6 +92,13 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DICE_AMOUNT_KEY, info->bufs.lightning_strikeV2.dice_amount);
 	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DICE_FACES_KEY, info->bufs.lightning_strikeV2.dice_faces);
 	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_EXTRA_DAMAGE_KEY, info->bufs.lightning_strikeV2.extra_damage);
+	ft_printf_fd(fd, "%s%i\n", EARTH_POUNCE_ACTIVE_KEY, info->bufs.earth_pounce.active);
+	ft_printf_fd(fd, "%s%i\n", EARTH_POUNCE_BASE_DAMAGE_KEY, info->bufs.earth_pounce.base_damage);
+	ft_npc_write_file_double_char(EARTH_POUNCE_TARGET_ID, info->bufs.earth_pounce.target_id, fd, info);
+	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_ACTIVE_KEY, info->bufs.arcane_pounce.active);
+	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_EREA_DAMAGE_KEY, info->bufs.arcane_pounce.erea_damage);
+	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_MAGIC_DAMAGE_KEY, info->bufs.arcane_pounce.magic_damage);
+	ft_npc_write_file_double_char(ARCANE_POUNCE_TARGET_ID_KEY, info->bufs.arcane_pounce.target_id, fd, info);
 	return ;
 }
 

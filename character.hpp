@@ -135,17 +135,17 @@ typedef struct s_meteor_strike
 
 typedef struct s_earth_pounce
 {
-	int		duration;
+	int		active;
 	int		base_damage;
 	char	**target_id;
 } t_earth_pounce;
 
 typedef struct s_arcane_pounce
 {	
-	int		duration;
+	int		active;
 	int		magic_damage;
 	int		erea_damage;
-	char	*target;
+	char	**target_id;
 } t_arcane_pounce;
 
 typedef struct	s_air_totem

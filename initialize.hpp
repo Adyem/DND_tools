@@ -197,6 +197,21 @@ static const	t_chaos_armor INITIALIZE_CHAOS_ARMOR =
 	.duration = 0,
 };
 
+static const	t_earth_pounce INITIALIZE_EARTH_POUNCE =
+{
+	.active = 0,
+	.base_damage = 0,
+	.target_id = nullptr,
+};
+
+static const	t_arcane_pounce INITIALIZE_ARCANE_POUNCE =
+{
+	.active = 0,
+	.magic_damage = 0,
+	.erea_damage = 0,
+	.target_id = nullptr,
+};
+
 static const	t_bufs INITIALIZE_BUFFS =
 {
 	.bless = INITIALIZE_BLESS,
@@ -206,6 +221,8 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.flame_geyser = INITIALIZE_FLAME_GEYSER,
 	.meteor_strike = INITIALIZE_METEOR_STRIKE,
 	.chaos_armor = INITIALIZE_CHAOS_ARMOR,
+	.arcane_pounce = INITIALIZE_ARCANE_POUNCE,
+	.earth_pounce = INITIALIZE_EARTH_POUNCE,
 };
 
 static const	t_hunters_mark INITIALIZE_HUNTERS_MARK =
