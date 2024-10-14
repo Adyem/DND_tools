@@ -18,7 +18,6 @@ void	ft_test(t_name *name)
 	ft_excecute_test("add", "player", "Adyem", name);
 	ft_excecute_test("add", "player", "Stormking", name);
 	ft_excecute_test("initiative", name);
-	ft_excecute_test("fclean", name);
 	dnd_test = false;
 	return ;
 }
