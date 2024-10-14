@@ -20,7 +20,6 @@ int main(int argc, char **argv)
         return (1);
     }
     srand((unsigned)time(nullptr));
-
     if (DEBUG == 1)
     {
         ft_printf("DEBUGGING\n");
