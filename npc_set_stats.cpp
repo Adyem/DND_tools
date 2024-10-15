@@ -100,6 +100,8 @@ int ft_set_stats_2(t_char *info, char **content, int i)
 static int handle_set_stat(char *content_i, size_t key_len, char ***target_field, t_char *info)
 {
     *target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
+    if (DEBUG == 1)
+        ft_printf("printing %s", *target_field);
     if (*target_field == NULL)
         return (-1);
     return (0);
