@@ -86,11 +86,11 @@ int ft_set_stats_2(t_char *info, char **content, int i)
         ft_set_stat_int(content[i], LIGHTNING_STRIKEV2_DICE_AMOUNT_KEY, &(info->bufs.lightning_strikeV2.dice_amount), 0, info) == 0 ||
         ft_set_stat_int(content[i], LIGHTNING_STRIKEV2_DICE_FACES_KEY, &(info->bufs.lightning_strikeV2.dice_faces), 0, info) == 0 ||
         ft_set_stat_int(content[i], LIGHTNING_STRIKEV2_EXTRA_DAMAGE_KEY, &(info->bufs.lightning_strikeV2.extra_damage), 0, info) == 0 ||
-		ft_set_stat_int(content[i], EARTH_POUNCE_ACTIVE_KEY, &(info->bufs.earth_pounce.active), 0, info) ||
-		ft_set_stat_int(content[i], EARTH_POUNCE_BASE_DAMAGE_KEY, &(info->bufs.earth_pounce.base_damage), 0, info) ||
-		ft_set_stat_int(content[i], ARCANE_POUNCE_ACTIVE_KEY, &(info->bufs.arcane_pounce.active), 0, info) ||
-		ft_set_stat_int(content[i], ARCANE_POUNCE_EREA_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info) ||
-		ft_set_stat_int(content[i], ARCANE_POUNCE_MAGIC_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info))
+		ft_set_stat_int(content[i], EARTH_POUNCE_ACTIVE_KEY, &(info->bufs.earth_pounce.active), 0, info) == 0 ||
+		ft_set_stat_int(content[i], EARTH_POUNCE_BASE_DAMAGE_KEY, &(info->bufs.earth_pounce.base_damage), 0, info) == 0 ||
+		ft_set_stat_int(content[i], ARCANE_POUNCE_ACTIVE_KEY, &(info->bufs.arcane_pounce.active), 0, info) == 0 ||
+		ft_set_stat_int(content[i], ARCANE_POUNCE_EREA_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info) == 0 ||
+		ft_set_stat_int(content[i], ARCANE_POUNCE_MAGIC_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info) == 0)
     {
         return (0);
     }
@@ -125,8 +125,9 @@ static int ft_set_stats_string(t_char *info, char **content, int i)
 int ft_set_stats(t_char *info, char **content)
 {
     int error;
-    int i = 0;
+    int i;
 
+	i = 0;
     while (content[i])
     {
         if (ft_set_stats_1(info, content, i) == 0)
