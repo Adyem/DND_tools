@@ -44,7 +44,9 @@ static void ft_chaos_crystal_damage(t_char *info)
     temp = ft_strchr(content[result], '=');
     if (temp)
         *temp = '\0';
-    ft_printf("%s shoots a magic missile at %s and he/she takes 1 force damage, the target does not need to make a concentration save for this damage\n", info->name, &content[result][4]);
+    ft_printf("%s shoots a magic missile at %s and he/she takes 1 force damage, " \
+			" the target does not need to make a concentration save for this damage\n",
+			info->name, &content[result][4]);
     cma_free_double(content);
     return ;
 }
@@ -53,7 +55,9 @@ void ft_chaos_crystal_turn(t_char *info)
 {
     ft_update_buf(info);
     ft_chaos_crystal_damage(info);
-    ft_printf("Chaos_crystal currently has %d/%d hp\n", info->stats.health, info->dstats.health);
+    ft_printf("Chaos_crystal currently has %d/%d hp\n",
+			info->stats.health, info->dstats.health);
+	return ;
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
