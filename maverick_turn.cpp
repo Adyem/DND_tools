@@ -1,51 +1,10 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
 #include "maverick.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include <cerrno>
 #include <cstring>
 #include <unistd.h>
 #include <fcntl.h>
-
-static char **ft_maverick_choose_target()
-{
-    char **temp;
-    char **content;
-    int fd;
-    int length;
-    int result;
-
-    fd = open("data/data--initiative", O_RDONLY);
-    if (fd == -1)
-    {
-        ft_printf("280-Error opening file: %s\n", strerror(errno));
-        return (NULL);
-    }
-    content = ft_read_file_dnd(fd);
-    close(fd);
-    if (!content)
-    {
-        ft_printf("281-Error opening file: %s\n", strerror(errno));
-        return (NULL);
-    }
-    length = ft_double_char_length(content);
-    result = -1;
-    while (result == -1 || (ft_strncmp(content[result], "PC--", 4) != 0
-                && ft_strncmp(content[result], "--turn--PC--", 12) != 0))
-    {
-        result = ft_dice_roll(1, length) - 1;
-        if (DEBUG == 1)
-            ft_printf("result = %d\n", result);
-    }
-	temp = (char **)cma_malloc(sizeof(char *), false);
-	if (!temp)
-		return (NULL);
-    *temp = ft_strchr(content[result], '=');
-    if (*temp)
-        *temp = cma_strdup(*temp, false);
-    return (temp);
-}
 
 static void	ft_maverick_lightning_strike(t_char *info)
 {
@@ -80,9 +39,6 @@ static void	ft_maverick_flame_geyser(t_char *info)
 
 static void ft_maverick_meteor_strike(t_char *info)
 {
-	info->bufs.meteor_strike.target_id = ft_maverick_choose_target();
-	if (DEBUG == 1)
-		ft_printf("METEOR STRIKE TARGET = %s\n", *(info->bufs.meteor_strike.target_id));
 	info->bufs.meteor_strike.duration = 1;
 	info->bufs.meteor_strike.one_target_d = 22;
 	info->bufs.meteor_strike.two_targets_d = 10;
@@ -95,9 +51,6 @@ static void ft_maverick_meteor_strike(t_char *info)
 
 static void	ft_maverick_earth_pounce(t_char *info)
 {
-	info->bufs.earth_pounce.target_id = ft_maverick_choose_target();
-	if (DEBUG == 1)
-		ft_printf("EARTH POUNCE TARGET = %s\n", *(info->bufs.earth_pounce.target_id));
 	info->bufs.earth_pounce.active = 1;
 	info->bufs.earth_pounce.base_damage = 27;
 	print_earth_pounce(info);
@@ -106,9 +59,6 @@ static void	ft_maverick_earth_pounce(t_char *info)
 
 static void	ft_maverick_arcane_pounce(t_char *info)
 {
-	info->bufs.arcane_pounce.target_id = ft_maverick_choose_target();
-	if (DEBUG == 1)
-		ft_printf("ARCANE POUNCE TARGET = %s\n", *(info->bufs.arcane_pounce.target_id));
 	info->bufs.arcane_pounce.active = 1;
 	info->bufs.arcane_pounce.erea_damage = 8;
 	info->bufs.arcane_pounce.magic_damage = 4;

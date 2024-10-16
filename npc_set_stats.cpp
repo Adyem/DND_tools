@@ -90,7 +90,7 @@ int ft_set_stats_2(t_char *info, char **content, int i)
 		ft_set_stat_int(content[i], EARTH_POUNCE_BASE_DAMAGE_KEY, &(info->bufs.earth_pounce.base_damage), 0, info) == 0 ||
 		ft_set_stat_int(content[i], ARCANE_POUNCE_ACTIVE_KEY, &(info->bufs.arcane_pounce.active), 0, info) == 0 ||
 		ft_set_stat_int(content[i], ARCANE_POUNCE_EREA_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info) == 0 ||
-		ft_set_stat_int(content[i], ARCANE_POUNCE_MAGIC_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info) == 0)
+		ft_set_stat_int(content[i], ARCANE_POUNCE_MAGIC_DAMAGE_KEY, &(info->bufs.arcane_pounce.magic_damage), 0, info) == 0)
     {
         return (0);
     }
