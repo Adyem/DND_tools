@@ -212,6 +212,13 @@ static const	t_arcane_pounce INITIALIZE_ARCANE_POUNCE =
 	.target_id = nullptr,
 };
 
+static const	t_frost_breath INITIALIZE_FROST_BREATH =
+{
+	.active = 0,
+	.damage = 0,
+	.target_id = nullptr,
+};
+
 static const	t_bufs INITIALIZE_BUFFS =
 {
 	.bless = INITIALIZE_BLESS,
@@ -223,6 +230,7 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.chaos_armor = INITIALIZE_CHAOS_ARMOR,
 	.arcane_pounce = INITIALIZE_ARCANE_POUNCE,
 	.earth_pounce = INITIALIZE_EARTH_POUNCE,
+	.frost_breath = INITIALIZE_FROST_BREATH,
 };
 
 static const	t_hunters_mark INITIALIZE_HUNTERS_MARK =

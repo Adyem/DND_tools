@@ -130,6 +130,8 @@ int ft_set_stats(t_char *info, char **content)
 	i = 0;
     while (content[i])
     {
+		if (DEBUG == 1)
+			ft_printf(content[i]);
         if (ft_set_stats_1(info, content, i) == 0)
         {
             i++;

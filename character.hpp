@@ -148,6 +148,13 @@ typedef struct s_arcane_pounce
 	char	**target_id;
 } t_arcane_pounce;
 
+typedef struct s_frost_breath
+{
+	int		active;
+	int		damage;
+	char	**target_id;
+} t_frost_breath;
+
 typedef struct	s_air_totem
 {
 	char	*save_file;
@@ -173,6 +180,7 @@ typedef struct	s_bufs
 	t_chaos_armor		chaos_armor;
 	t_arcane_pounce		arcane_pounce;
 	t_earth_pounce		earth_pounce;
+	t_frost_breath		frost_breath;
 }	t_bufs;
 
 typedef struct	s_hunters_mark

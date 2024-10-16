@@ -20,7 +20,6 @@ static void	ft_npc_write_file_1(t_char *info, t_stats *stats, int fd)
 	ft_printf_fd(fd, "%s%i\n", PHASE_KEY, stats->phase);
 	ft_printf_fd(fd, "%s%i\n", INITIATIVE_KEY, info->initiative);
 	ft_printf_fd(fd, "%s%i\n", BLESS_DUR_KEY, info->bufs.bless.duration);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DUR_KEY, info->bufs.lightning_strike.duration);
 	ft_printf_fd(fd, "%s%i\n", PROTECTIVE_WINDS_DUR_KEY, info->bufs.protective_winds.duration);
 	return ;
 }
