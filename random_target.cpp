@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
+#include "libft/Printf/ft_printf.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -99,5 +100,7 @@ char **get_random_pc_file(void) {
 
     result[0] = selected_name;
     result[1] = NULL;
+	if (DEBUG == 1)
+		ft_printf(*result);
     return result;
 }
