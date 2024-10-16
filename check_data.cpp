@@ -143,8 +143,6 @@ int ft_npc_check_info(t_char *info)
 	if (info->debufs.hunters_mark.amount < 0 || info->debufs.hunters_mark.amount
 			!= ft_double_char_length(info->debufs.hunters_mark.caster_name))
         error += (ft_printf("%s hunters mark data is not correct\n", info->name), 1);
-	if (DEBUG == 1)
-		ft_printf("TEST %i %i\n", info->debufs.hunters_mark.amount, ft_double_char_length(info->debufs.hunters_mark.caster_name));
     if (info->bufs.protective_winds.duration < 0)
         error += (ft_printf("%s protective winds duration outside of bounds\n", info->name), 1);
     if (info->bufs.chaos_armor.duration < 0)

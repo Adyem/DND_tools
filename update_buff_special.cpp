@@ -45,15 +45,11 @@ void ft_update_lightningV2_strike(t_char *info)
                   info->name, result, info->bufs.lightning_strikeV2.distance);
     }
     else if (info->bufs.lightning_strikeV2.duration == 1)
-    {
         ft_printf("%s is preparing a lightning strike that will unleash on the next turn.\n",
                   info->name);
-    }
     else
-    {
         ft_printf("%s's lightning strike will unleash in %d turns.\n",
                   info->name, info->bufs.lightning_strikeV2.duration);
-    }
     return ;
 }
 
@@ -122,15 +118,24 @@ void ft_update_earth_pounce(t_char *info)
 
 void ft_update_arcane_pounce(t_char *info)
 {
-    if (info->bufs.arcane_pounce.active != 1 ||
+	if (info->bufs.arcane_pounce.active != 1 ||
         info->bufs.arcane_pounce.erea_damage < 0 ||
         info->bufs.arcane_pounce.magic_damage < 0)
-        return;
+        return ;
+	info->bufs.arcane_pounce.active = 0;
     if (info->bufs.arcane_pounce.target_id != nullptr && *(info->bufs.arcane_pounce.target_id) != nullptr)
         ft_printf("%s will jump and pounce at %s, dealing ", info->name, *(info->bufs.arcane_pounce.target_id));
     else
 		ft_printf("%s will jump and pounce, dealing ", info->name);
     ft_printf("%i damage and %i damage to anyone within 10ft.\n",
               info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
+    return ;
+}
+
+void ft_update_frost_breath(t_char *info)
+{
+	if (info->bufs.frost_breath.active != 1 ||
+        info->bufs.frost_breath.damage < 0)
+        return ;
     return ;
 }

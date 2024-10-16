@@ -36,6 +36,8 @@ void	ft_update_buf(t_char *info)
 		ft_update_earth_pounce(info);
 	if (info->bufs.arcane_pounce.active == 1)
 		ft_update_arcane_pounce(info);
+	if (info->bufs.frost_breath.active == 1)
+		ft_update_frost_breath(info);
 	if (info->bufs.chaos_armor.duration > 0)
 	{
 		ft_update_buf_duration(info, "chaos armor", &info->bufs.chaos_armor.duration);

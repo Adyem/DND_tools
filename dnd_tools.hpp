@@ -183,6 +183,7 @@ void		ft_update_flame_geyser(t_char *info);
 void		ft_update_meteor_strike(t_char *info);
 void		ft_update_earth_pounce(t_char *info);
 void		ft_update_arcane_pounce(t_char *info);
+void		ft_update_frost_breath(t_char *info);
 
 //general buffs
 int			ft_check_bless(t_char *info);
