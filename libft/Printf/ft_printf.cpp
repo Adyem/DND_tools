@@ -1,3 +1,4 @@
+#include "ft_printf.hpp"
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdbool.h>
@@ -174,6 +175,8 @@ int ft_printf_fd(int fd, const char *format, ...)
     if (!format)
         return (0);
     va_start(args, format);
+	if (DEBUG == 1)
+		ft_printf(format, args);
     printed_chars = ft_printf_fd_v(fd, format, args);
     va_end(args);
     return (printed_chars);

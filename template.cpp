@@ -1,6 +1,5 @@
 #include "dnd_tools.hpp"
 #include "template.hpp"
-#include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CMA/CMA.hpp"
 
@@ -29,8 +28,6 @@ t_char *ft_template(const int index, const char **input, t_name *name, int excep
 	int error;
 	t_char *info;
 
-	if (DEBUG == 1)
-		ft_printf("exception = %d\n", exception);
 	info = (t_char *)cma_calloc(1, sizeof(t_char), false);
 	if (!info)
 		return (nullptr);

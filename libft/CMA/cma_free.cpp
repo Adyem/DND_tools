@@ -17,12 +17,12 @@ void cma_free(void* ptr)
     UNPROTECT_METADATA(block, sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
     {
-		ft_printf_fd(2, "Invalid free detected at %p\n", ptr);
+		ft_printf_fd(2, "1-Invalid free detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     if (block->free)
     {
-		ft_printf_fd(2, "Double free detected at %p\n", ptr);
+		ft_printf_fd(2, "2-Double free detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     block->free = true;
@@ -79,7 +79,7 @@ void cma_free(void* ptr)
     }
     if (!page)
     {
-		ft_printf_fd(2, "Invalid free detected at %p\n", ptr);
+		ft_printf_fd(2, "3-Invalid free detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     Block* blk = page->blocks;

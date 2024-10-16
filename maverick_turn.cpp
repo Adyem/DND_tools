@@ -81,6 +81,8 @@ static void	ft_maverick_flame_geyser(t_char *info)
 static void ft_maverick_meteor_strike(t_char *info)
 {
 	info->bufs.meteor_strike.target_id = ft_maverick_choose_target();
+	if (DEBUG == 1)
+		ft_printf("METEOR STRIKE TARGET = %s\n", *(info->bufs.meteor_strike.target_id));
 	info->bufs.meteor_strike.duration = 1;
 	info->bufs.meteor_strike.one_target_d = 22;
 	info->bufs.meteor_strike.two_targets_d = 10;
@@ -94,6 +96,8 @@ static void ft_maverick_meteor_strike(t_char *info)
 static void	ft_maverick_earth_pounce(t_char *info)
 {
 	info->bufs.earth_pounce.target_id = ft_maverick_choose_target();
+	if (DEBUG == 1)
+		ft_printf("EARTH POUNCE TARGET = %s\n", *(info->bufs.earth_pounce.target_id));
 	info->bufs.earth_pounce.active = 1;
 	info->bufs.earth_pounce.base_damage = 27;
 	print_earth_pounce(info);
@@ -103,6 +107,8 @@ static void	ft_maverick_earth_pounce(t_char *info)
 static void	ft_maverick_arcane_pounce(t_char *info)
 {
 	info->bufs.arcane_pounce.target_id = ft_maverick_choose_target();
+	if (DEBUG == 1)
+		ft_printf("ARCANE POUNCE TARGET = %s\n", *(info->bufs.arcane_pounce.target_id));
 	info->bufs.arcane_pounce.active = 1;
 	info->bufs.arcane_pounce.erea_damage = 8;
 	info->bufs.arcane_pounce.magic_damage = 4;

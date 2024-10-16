@@ -27,15 +27,14 @@ int ft_npc_open_file(t_char *info)
         return (1);
     close(fd);
     error = ft_initialize_info(info, content);
+	cma_free_double(content);
     if (DEBUG == 1)
         ft_printf("The value of error is %d %d\n", error, info->flags.error);
     if (info->flags.error || error)
 	{
-		cma_free_double(content);
         return (1);
 	}
     error = ft_npc_check_info(info);
-	cma_free_double(content);
     if (error)
         return (1);
     return (0);
