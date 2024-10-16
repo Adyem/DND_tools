@@ -66,6 +66,13 @@ static void	ft_maverick_arcane_pounce(t_char *info)
 	return ;
 }
 
+static void	ft_maverick_frost_breath(t_char *info)
+{
+	info->bufs.frost_breath.active = 1;
+	info->bufs.frost_breath.damage = 25;
+	print_frost_breath(info);
+}
+
 static void print_mass_teleport(int tp_number)
 {
     ft_printf("Mass Teleport: Teleport all players to random locations across the arena depending on what ability it is paired with.\n");    
@@ -99,7 +106,7 @@ void ft_maverick_print_f(int first, int second, t_char *info)
     else if (first == 4)
 		ft_maverick_flame_geyser(info);
     else if (first == 5)
-        print_frost_breath(info);
+        ft_maverick_frost_breath(info);
     else if (first == 6)
         ft_maverick_lightningV2_strike(info);
     else if (first == 7)
@@ -120,7 +127,7 @@ void ft_maverick_print_s(int first, int second, t_char *info)
     else if (second == 4)
 		ft_maverick_flame_geyser(info);
     else if (second == 5)
-        print_frost_breath(info);
+        ft_maverick_frost_breath(info);
     else if (second == 6)
         ft_maverick_lightningV2_strike(info);
     else if (second == 7)

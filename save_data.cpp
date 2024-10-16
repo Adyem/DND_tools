@@ -98,6 +98,9 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_EREA_DAMAGE_KEY, info->bufs.arcane_pounce.erea_damage);
 	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_MAGIC_DAMAGE_KEY, info->bufs.arcane_pounce.magic_damage);
 	ft_npc_write_file_double_char(ARCANE_POUNCE_TARGET_ID_KEY, info->bufs.arcane_pounce.target_id, fd, info);
+	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_ACTIVE_KEY, info->bufs.frost_breath.target_id);
+	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_DAMAGE_KEY, info->bufs.frost_breath.damage);
+	ft_npc_write_file_double_char(FROST_BREATH_TARGET_ID_KEY, info->bufs.frost_breath.target_id, fd, info);
 	return ;
 }
 

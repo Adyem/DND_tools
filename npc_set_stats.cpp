@@ -90,7 +90,9 @@ int ft_set_stats_2(t_char *info, char **content, int i)
 		ft_set_stat_int(content[i], EARTH_POUNCE_BASE_DAMAGE_KEY, &(info->bufs.earth_pounce.base_damage), 0, info) == 0 ||
 		ft_set_stat_int(content[i], ARCANE_POUNCE_ACTIVE_KEY, &(info->bufs.arcane_pounce.active), 0, info) == 0 ||
 		ft_set_stat_int(content[i], ARCANE_POUNCE_EREA_DAMAGE_KEY, &(info->bufs.arcane_pounce.erea_damage), 0, info) == 0 ||
-		ft_set_stat_int(content[i], ARCANE_POUNCE_MAGIC_DAMAGE_KEY, &(info->bufs.arcane_pounce.magic_damage), 0, info) == 0)
+		ft_set_stat_int(content[i], ARCANE_POUNCE_MAGIC_DAMAGE_KEY, &(info->bufs.arcane_pounce.magic_damage), 0, info) == 0 ||
+		ft_set_stat_int(content[i], FROST_BREATH_ACTIVE_KEY, &(info->bufs.frost_breath.active), 0, info) == 0 ||
+		ft_set_stat_int(content[i], FROST_BREATH_DAMAGE_KEY, &(info->bufs.frost_breath.damage), 0, info) == 0)
     {
         return (0);
     }
@@ -119,6 +121,8 @@ static int ft_set_stats_string(t_char *info, char **content, int i)
 		return (handle_set_stat(content[i], ft_strlen(EARTH_POUNCE_TARGET_ID_KEY), &info->bufs.earth_pounce.target_id, info));
 	if (ft_strncmp(content[i], ARCANE_POUNCE_TARGET_ID_KEY, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
 		return (handle_set_stat(content[i], ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY), &info->bufs.arcane_pounce.target_id, info));
+	if (ft_strncmp(content[i], FROST_BREATH_TARGET_ID_KEY, ft_strlen(FROST_BREATH_TARGET_ID_KEY)))
+		return (handle_set_stat(content[i], ft_strlen(FROST_BREATH_TARGET_ID_KEY), &info->bufs.frost_breath.target_id, info));
     return (1);
 }
 

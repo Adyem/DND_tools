@@ -35,8 +35,8 @@ void print_flame_geyser(const t_char *info)
 
 void print_frost_breath(const t_char *info)
 {
-    ft_printf("Frost Breath: The boss takes a deep breath and breathes out, dealing %d cold damage to anyone in a 90-degree cone in front of him.\n", 
-              info->bufs.flame_geyser.amount * 6);
+	(void)info;
+    ft_printf("Frost Breath: The boss takes a deep breath and breathes out, dealing 20 cold damage to anyone in a 90-degree cone in front of him.\n");
     ft_printf("(Be clear about what way the boss is facing when he starts casting the ability)\n");
 	return ;
 }
