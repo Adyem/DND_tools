@@ -9,6 +9,7 @@
 #  define DEBUG 0
 # endif
 
+# define MAX_PLAYERS 6
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
 
@@ -231,6 +232,7 @@ char		*ft_strtrim_prefix(const char *s1, const char *prefix);
 const char	*ft_ordinal_suffix(int number);
 int			ft_check_equipment_slots(t_char *character);
 void		ft_initialize_suggestions_readline();
+char		**ft_get_pc_list();
 
 //check name
 int			ft_set_stats_check_name(const char *name);

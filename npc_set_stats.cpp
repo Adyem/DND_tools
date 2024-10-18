@@ -166,17 +166,11 @@ static int handle_set_stat(char *content_i, size_t key_len, char ***target_field
 static int ft_set_stats_string(t_char *info, char **content, int i)
 {
 	if (ft_strncmp(content[i], CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
-        return (handle_set_stat(content[i], ft_strlen(CONC_TARGETS_KEY), &info->concentration.targets, info));
+        return (handle_set_stat(content[i], ft_strlen(CONC_TARGETS_KEY),
+					&info->concentration.targets, info));
 	if (ft_strncmp(content[i], HUNTERS_MARK_CASTER_KEY, ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
-        return (handle_set_stat(content[i], ft_strlen(HUNTERS_MARK_CASTER_KEY), &info->debufs.hunters_mark.caster_name, info));
-	if (ft_strncmp(content[i], METEOR_STRIKE_TARGET_KEY, ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
-        return (handle_set_stat(content[i], ft_strlen(METEOR_STRIKE_TARGET_KEY), &info->bufs.meteor_strike.target_id, info));
-	if (ft_strncmp(content[i], EARTH_POUNCE_TARGET_ID_KEY, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY)) == 0)
-		return (handle_set_stat(content[i], ft_strlen(EARTH_POUNCE_TARGET_ID_KEY), &info->bufs.earth_pounce.target_id, info));
-	if (ft_strncmp(content[i], ARCANE_POUNCE_TARGET_ID_KEY, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
-		return (handle_set_stat(content[i], ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY), &info->bufs.arcane_pounce.target_id, info));
-	if (ft_strncmp(content[i], FROST_BREATH_TARGET_ID_KEY, ft_strlen(FROST_BREATH_TARGET_ID_KEY)))
-		return (handle_set_stat(content[i], ft_strlen(FROST_BREATH_TARGET_ID_KEY), &info->bufs.frost_breath.target_id, info));
+        return (handle_set_stat(content[i], ft_strlen(HUNTERS_MARK_CASTER_KEY),
+					&info->debufs.hunters_mark.caster_name, info));
     return (1);
 }
 
@@ -213,7 +207,8 @@ int ft_set_stats(t_char *info, char **content)
         }
         else
         {
-            ft_printf_fd(2, "1-Something is wrong with the save file for %s at the line: %s, please reinitialize the save\n", info->name, content[i]);
+            ft_printf_fd(2, "1-Something is wrong with the save file for %s at the " \
+					"line: %s, please reinitialize the save\n", info->name, content[i]);
             info->flags.error = 1;
             return (1);
         }

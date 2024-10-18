@@ -75,23 +75,29 @@ static void	ft_maverick_frost_breath(t_char *info)
 
 static void print_mass_teleport(int tp_number)
 {
-    ft_printf("Mass Teleport: Teleport all players to random locations across the arena depending on what ability it is paired with.\n");    
+    ft_printf("Mass Teleport: Teleport all players to random locations " \
+			"across the arena depending on what ability it is paired with.\n");    
 	if (tp_number == 2)
-        ft_printf("Teleportation Type: Meteor Strike - Spreading players 20ft-60ft. away from one another.\n");
+        ft_printf("Teleportation Type: Meteor Strike - Spreading " \
+				"players 20ft-60ft. away from one another.\n");
 	else if (tp_number == 3)
-        ft_printf("Teleportation Type: Lightning Strike - Teleporting the players close to the boss.\n");
+        ft_printf("Teleportation Type: Lightning Strike - Teleporting " \
+				"the players close to the boss.\n");
 	else if (tp_number == 4)
-        ft_printf("Teleportation Type: Flame Geyser - Teleporting the players to random locations 30-60ft. away from the flame geysers.\n");
+        ft_printf("Teleportation Type: Flame Geyser - Teleporting the " \
+				"players to random locations 30-60ft. away from the flame geysers.\n");
 	else if (tp_number == 5)
-        ft_printf("Teleportation Type: Frost Breath - Teleporting all players in front of the boss.\n");
+        ft_printf("Teleportation Type: Frost Breath - Teleporting all " \
+				"players in front of the boss.\n");
 	else if (tp_number == 6)
-        ft_printf("Teleportation Type: Lightning Strike V2 - Teleporting all players to the marker.\n");
+        ft_printf("Teleportation Type: Lightning Strike V2 - Teleporting " \
+				"all players to the marker.\n");
 	else if (tp_number == 7)
-        ft_printf("Teleportation Type: Arcane Pounce - Teleporting all players around the target.\n");
+        ft_printf("Teleportation Type: Arcane Pounce - Teleporting all " \
+				"players around the target.\n");
 	else if (tp_number == 8)
-        ft_printf("Teleportation Type: Earth Pounce - Teleporting all players around the target.\n");
-	else
-        ft_printf("Unknown Teleportation Type.\n");
+        ft_printf("Teleportation Type: Earth Pounce - Teleporting all " \
+				"players around the target.\n");
 	return ;
 }
 

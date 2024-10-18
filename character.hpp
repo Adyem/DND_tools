@@ -130,14 +130,14 @@ typedef struct s_meteor_strike
 	int		three_targets_d;
 	int		four_targets_d;
 	int		five_targets_d;
-    char	**target_id;
+    char	*target_id;
 } t_meteor_strike;
 
 typedef struct s_earth_pounce
 {
 	int		active;
 	int		base_damage;
-	char	**target_id;
+	char	*target_id;
 } t_earth_pounce;
 
 typedef struct s_arcane_pounce
@@ -145,14 +145,14 @@ typedef struct s_arcane_pounce
 	int		active;
 	int		magic_damage;
 	int		erea_damage;
-	char	**target_id;
+	char	*target_id;
 } t_arcane_pounce;
 
 typedef struct s_frost_breath
 {
 	int		active;
 	int		damage;
-	char	**target_id;
+	char	*target_id;
 } t_frost_breath;
 
 typedef struct	s_air_totem
