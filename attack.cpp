@@ -84,7 +84,9 @@ static void ft_handle_attack_result(t_char *info, t_equipment_id *weapon, t_dama
     else
     {
         ft_check_buff_damage(info);
-        ft_printf("(%d)+%d+%d+%d for a total of %d and ", d_info->result, d_info->stat_mod, info->attack_bonus.attack_bonus, d_info->mod, (d_info->result + d_info->stat_mod + d_info->mod + info->attack_bonus.attack_bonus));
+        ft_printf("(%d)+%d+%d+%d for a total of %d and ", d_info->result, d_info->stat_mod,
+				info->attack_bonus.attack_bonus, d_info->mod, (d_info->result +
+				d_info->stat_mod + d_info->mod + info->attack_bonus.attack_bonus));
         ft_calculate_damage(weapon, d_info, false);
     }
 	return ;

@@ -88,10 +88,11 @@ void ft_update_meteor_strike(t_char *info)
     if (info->bufs.meteor_strike.duration == 0)
     {
         if (info->bufs.meteor_strike.target_id != nullptr)
-            ft_printf("The Meteor above %s lands, dealing damage depending on the total amount of players in the area.\n",
-                      info->bufs.meteor_strike.target_id);
+            ft_printf("The Meteor above %s lands, dealing damage depending on the total " \
+					"amount of players in the area.\n", info->bufs.meteor_strike.target_id);
         else
-            ft_printf("A Meteor lands, dealing damage depending on the total amount of players in the area.\n");
+            ft_printf("A Meteor lands, dealing damage depending on the total amount " \
+					"of players in the area.\n");
         ft_printf("If 5 or more players were hit, they each take %i damage.\n",
 				info->bufs.meteor_strike.five_targets_d);
         ft_printf("If 4 players were hit, they each take %i damage.\n",
