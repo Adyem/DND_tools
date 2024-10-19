@@ -116,12 +116,8 @@ void ft_update_earth_pounce(t_char *info)
         info->bufs.earth_pounce.base_damage < 0)
         return;
     info->bufs.earth_pounce.active = 0;
-	if (info->bufs.earth_pounce.target_id != nullptr && *(info->bufs.earth_pounce.target_id) != nullptr)
-        ft_printf("%s will jump and pounce at %s, dealing %i damage reduced by the total AC of the target.\n",
-                  info->name, *(info->bufs.earth_pounce.target_id), info->bufs.earth_pounce.base_damage);
-	else
-        ft_printf("%s will jump and pounce, dealing %i damage reduced by the total AC of the target.\n",
-                  info->name, info->bufs.earth_pounce.base_damage);
+    ft_printf("%s will jump and pounce, dealing %i damage reduced by the total AC of the target.\n",
+			info->name, info->bufs.earth_pounce.base_damage);
 	return ;
 }
 
@@ -132,10 +128,7 @@ void ft_update_arcane_pounce(t_char *info)
         info->bufs.arcane_pounce.magic_damage < 0)
         return ;
 	info->bufs.arcane_pounce.active = 0;
-    if (info->bufs.arcane_pounce.target_id != nullptr && *(info->bufs.arcane_pounce.target_id) != nullptr)
-        ft_printf("%s will jump and pounce at %s, dealing ", info->name, *(info->bufs.arcane_pounce.target_id));
-    else
-		ft_printf("%s will jump and pounce, dealing ", info->name);
+	ft_printf("%s will jump and pounce, dealing ", info->name);
     ft_printf("%i damage and %i damage to anyone within 10ft.\n",
               info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
     return ;

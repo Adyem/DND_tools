@@ -9,7 +9,7 @@
 #  define DEBUG 0
 # endif
 
-# define MAX_PLAYERS 6
+# define MAX_PLAYERS 8
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
 
@@ -53,8 +53,8 @@ void		ft_veraak_turn(t_char *info);
 //Maverick
 t_char		*ft_maverick(const int index, const char **input, t_name *name, int exception);
 void		ft_maverick_turn(t_char *info);
-void		ft_maverick_print_s(int first, int second, t_char *info);
-void		ft_maverick_print_f(int first, int second, t_char *info);
+void		ft_maverick_print_s(int first, int second, t_char *info, char **player_list);
+void		ft_maverick_print_f(int first, int second, t_char *info, char **player_list);
 
 //Commands
 void		ft_request_input(t_name *name);
@@ -75,9 +75,12 @@ int			ft_test_excecute(const char **input, int argc, t_name *name);
 //Tester Make input strings
 void		ft_excecute_test(const char *string1, t_name *name);
 void		ft_excecute_test(const char *string1, const char *string2, t_name *name);
-void		ft_excecute_test(const char *string1, const char *string2, const char *string3, t_name *name);
-void		ft_excecute_test(const char *string1, const char *string2, const char *string3, const char *string4, t_name *name);
-void		ft_excecute_test(const char *string1, const char *string2, const char *string3, const char *string4, const char *string5, t_name *name);
+void		ft_excecute_test(const char *string1, const char *string2, const char *string3,
+				t_name *name);
+void		ft_excecute_test(const char *string1, const char *string2, const char *string3,
+				const char *string4, t_name *name);
+void		ft_excecute_test(const char *string1, const char *string2, const char *string3,
+				const char *string4, const char *string5, t_name *name);
 
 //Turn
 void		ft_turn_next(t_name *name);
@@ -87,7 +90,8 @@ void		ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand);
 
 //buff update
 void		ft_npc_update_buff(t_char *info, const char **input, int *buff, const char *name);
-void		ft_update_buff_status(t_char *info, int current_dur, int duration, const char *buff_name);
+void		ft_update_buff_status(t_char *info, int current_dur, int duration,
+				const char *buff_name);
 
 //damage buffs
 int			ft_check_buff_damage(t_char *info);
@@ -226,13 +230,15 @@ int			ft_check_stat(t_char *info, const char *stat, const int index);
 char		**ft_set_stats_con_targets(char *content, int ofset, char **data, t_char *info);
 t_char		*ft_get_info(const char *tf_name, t_name *name);
 char		**ft_resize_double_char(char **double_string, const char *string, int size);
-int			ft_double_char_length(char **double_char);
+int			ft_double_char_length(const char **double_char);
 void		ft_dual_save_file(t_char *info, t_char *target);
 char		*ft_strtrim_prefix(const char *s1, const char *prefix);
 const char	*ft_ordinal_suffix(int number);
 int			ft_check_equipment_slots(t_char *character);
 void		ft_initialize_suggestions_readline();
 char		**ft_get_pc_list();
+void		ft_remove_element(const char **array, const char *element);
+void		ft_get_random_target(const char **player_list, const char **target_field);
 
 //check name
 int			ft_set_stats_check_name(const char *name);

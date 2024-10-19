@@ -64,43 +64,77 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_printf_fd(fd, "%s%i\n", CONC_DURATION_KEY, info->concentration.duration);
 	ft_npc_write_file_double_char(CONC_TARGETS_KEY, info->concentration.targets, fd, info);
 	ft_printf_fd(fd, "%s%i\n", HUNTERS_MARK_AMOUNT_KEY, info->debufs.hunters_mark.amount);
-	ft_npc_write_file_double_char(HUNTERS_MARK_CASTER_KEY, info->debufs.hunters_mark.caster_name, fd, info);
+	ft_npc_write_file_double_char(HUNTERS_MARK_CASTER_KEY,
+			info->debufs.hunters_mark.caster_name, fd, info);
 	ft_printf_fd(fd, "%s%i\n", CHAOS_ARMOR_DURATION_KEY, info->bufs.chaos_armor.duration);
 	ft_printf_fd(fd, "%s%i\n", PRONE_KEY, info->flags.prone);
 	ft_printf_fd(fd, "%s%i\n", BLINDED_KEY, info->debufs.blinded);
-	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_DURATION_KEY, info->bufs.flame_geyser.duration);
-	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_CLOSE_TO_TOWER_D_KEY, info->bufs.flame_geyser.close_to_tower_d);
-	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_TOWER_EXPLODE_D_KEY, info->bufs.flame_geyser.tower_explode_d);
-	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_AMOUNT_KEY, info->bufs.flame_geyser.amount);
-	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_DURATION_KEY, info->bufs.meteor_strike.duration);
-	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_ONE_TARGET_D_KEY, info->bufs.meteor_strike.one_target_d);
-	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_TWO_TARGETS_D_KEY, info->bufs.meteor_strike.two_targets_d);
-	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_THREE_TARGETS_D_KEY, info->bufs.meteor_strike.three_targets_d);
-	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_FOUR_TARGETS_D_KEY, info->bufs.meteor_strike.four_targets_d);
-	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_FIVE_TARGETS_D_KEY, info->bufs.meteor_strike.five_targets_d);
-	ft_npc_write_file_double_char(METEOR_STRIKE_TARGET_KEY, info->bufs.meteor_strike.target_id, fd, info);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DURATION_KEY, info->bufs.lightning_strike.duration);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_AMOUNT_KEY, info->bufs.lightning_strike.amount);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DISTANCE_KEY, info->bufs.lightning_strike.distance);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DICE_AMOUNT_KEY, info->bufs.lightning_strike.dice_amount);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DICE_FACES_KEY, info->bufs.lightning_strike.dice_faces);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_EXTRA_DAMAGE_KEY, info->bufs.lightning_strike.extra_damage);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DURATION_KEY, info->bufs.lightning_strikeV2.duration);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_AMOUNT_KEY, info->bufs.lightning_strikeV2.amount);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DISTANCE_KEY, info->bufs.lightning_strikeV2.distance);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DICE_AMOUNT_KEY, info->bufs.lightning_strikeV2.dice_amount);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DICE_FACES_KEY, info->bufs.lightning_strikeV2.dice_faces);
-	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_EXTRA_DAMAGE_KEY, info->bufs.lightning_strikeV2.extra_damage);
-	ft_printf_fd(fd, "%s%i\n", EARTH_POUNCE_ACTIVE_KEY, info->bufs.earth_pounce.active);
-	ft_printf_fd(fd, "%s%i\n", EARTH_POUNCE_BASE_DAMAGE_KEY, info->bufs.earth_pounce.base_damage);
-	ft_npc_write_file_double_char(EARTH_POUNCE_TARGET_ID_KEY, info->bufs.earth_pounce.target_id, fd, info);
-	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_ACTIVE_KEY, info->bufs.arcane_pounce.active);
-	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_EREA_DAMAGE_KEY, info->bufs.arcane_pounce.erea_damage);
-	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_MAGIC_DAMAGE_KEY, info->bufs.arcane_pounce.magic_damage);
-	ft_npc_write_file_double_char(ARCANE_POUNCE_TARGET_ID_KEY, info->bufs.arcane_pounce.target_id, fd, info);
-	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_ACTIVE_KEY, info->bufs.frost_breath.target_id);
-	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_DAMAGE_KEY, info->bufs.frost_breath.damage);
-	ft_npc_write_file_double_char(FROST_BREATH_TARGET_ID_KEY, info->bufs.frost_breath.target_id, fd, info);
+	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_DURATION_KEY,
+			info->bufs.flame_geyser.duration);
+	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_CLOSE_TO_TOWER_D_KEY,
+			info->bufs.flame_geyser.close_to_tower_d);
+	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_TOWER_EXPLODE_D_KEY,
+			info->bufs.flame_geyser.tower_explode_d);
+	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_AMOUNT_KEY,
+			info->bufs.flame_geyser.amount);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_DURATION_KEY,
+			info->bufs.meteor_strike.duration);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_ONE_TARGET_D_KEY,
+			info->bufs.meteor_strike.one_target_d);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_TWO_TARGETS_D_KEY,
+			info->bufs.meteor_strike.two_targets_d);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_THREE_TARGETS_D_KEY,
+			info->bufs.meteor_strike.three_targets_d);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_FOUR_TARGETS_D_KEY,
+			info->bufs.meteor_strike.four_targets_d);
+	ft_printf_fd(fd, "%s%i\n", METEOR_STRIKE_FIVE_TARGETS_D_KEY,
+			info->bufs.meteor_strike.five_targets_d);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DURATION_KEY,
+			info->bufs.lightning_strike.duration);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_AMOUNT_KEY,
+			info->bufs.lightning_strike.amount);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DISTANCE_KEY,
+			info->bufs.lightning_strike.distance);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DICE_AMOUNT_KEY,
+			info->bufs.lightning_strike.dice_amount);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_DICE_FACES_KEY,
+			info->bufs.lightning_strike.dice_faces);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKE_EXTRA_DAMAGE_KEY,
+			info->bufs.lightning_strike.extra_damage);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DURATION_KEY,
+			info->bufs.lightning_strikeV2.duration);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_AMOUNT_KEY,
+			info->bufs.lightning_strikeV2.amount);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DISTANCE_KEY,
+			info->bufs.lightning_strikeV2.distance);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DICE_AMOUNT_KEY,
+			info->bufs.lightning_strikeV2.dice_amount);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_DICE_FACES_KEY,
+			info->bufs.lightning_strikeV2.dice_faces);
+	ft_printf_fd(fd, "%s%i\n", LIGHTNING_STRIKEV2_EXTRA_DAMAGE_KEY,
+			info->bufs.lightning_strikeV2.extra_damage);
+	ft_printf_fd(fd, "%s%i\n", EARTH_POUNCE_ACTIVE_KEY,
+			info->bufs.earth_pounce.active);
+	ft_printf_fd(fd, "%s%i\n", EARTH_POUNCE_BASE_DAMAGE_KEY,
+			info->bufs.earth_pounce.base_damage);
+	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_ACTIVE_KEY,
+			info->bufs.arcane_pounce.active);
+	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_EREA_DAMAGE_KEY,
+			info->bufs.arcane_pounce.erea_damage);
+	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_MAGIC_DAMAGE_KEY,
+			info->bufs.arcane_pounce.magic_damage);
+	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_ACTIVE_KEY,
+			info->bufs.frost_breath.target_id);
+	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_DAMAGE_KEY,
+			info->bufs.frost_breath.damage);
+	ft_printf_fd(fd, "%s%s\n", METEOR_STRIKE_TARGET_KEY,
+			info->bufs.meteor_strike.target_id);
+	ft_printf_fd(fd, "%s%s\n", FROST_BREATH_TARGET_ID_KEY,
+			info->bufs.frost_breath.target_id);
+	ft_printf_fd(fd, "%s%s\n", ARCANE_POUNCE_TARGET_ID_KEY,
+			info->bufs.arcane_pounce.target_id);
+	ft_printf_fd(fd, "%s%s\n", EARTH_POUNCE_TARGET_ID_KEY,
+			info->bufs.earth_pounce.target_id);
 	return ;
 }
 

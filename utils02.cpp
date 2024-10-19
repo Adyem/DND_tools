@@ -5,7 +5,7 @@
 #include <string.h>
 #include <errno.h>
 
-int ft_double_char_length(char **double_char)
+int ft_double_char_length(const char **double_char)
 {
     int i;
 
@@ -52,4 +52,26 @@ void ft_dual_save_file(t_char *info, t_char *target)
     ft_npc_write_file(target, &target->stats, &target->c_resistance, fd_target);
     ft_npc_write_file(info, &info->stats, &info->c_resistance, fd_info);
     return ;
+}
+
+void	ft_remove_element(const char **array, const char *element)
+{
+	int	i;
+	int	j;
+
+	if (!array || !element)
+		return ;
+	i = 0;
+	while (array[i] && array[i] != element)
+		i++;
+	if (array[i] == element)
+	{
+		j = i;
+		while (array[j])
+		{
+			array[j] = array[j + 1];
+			j++;
+		}
+	}
+	return ;
 }

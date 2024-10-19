@@ -37,8 +37,10 @@ static void	ft_maverick_flame_geyser(t_char *info)
 	return ;
 }
 
-static void ft_maverick_meteor_strike(t_char *info)
+static void ft_maverick_meteor_strike(t_char *info, char **player_list)
 {
+	ft_get_random_target((const char **)player_list,
+			(const char **)&info->bufs.meteor_strike.target_id);
 	info->bufs.meteor_strike.duration = 1;
 	info->bufs.meteor_strike.one_target_d = 22;
 	info->bufs.meteor_strike.two_targets_d = 10;
@@ -49,16 +51,20 @@ static void ft_maverick_meteor_strike(t_char *info)
 	return ;
 }
 
-static void	ft_maverick_earth_pounce(t_char *info)
+static void	ft_maverick_earth_pounce(t_char *info, char **player_list)
 {
+	ft_get_random_target((const char **)player_list,
+			(const char **)&info->bufs.earth_pounce.target_id);
 	info->bufs.earth_pounce.active = 1;
 	info->bufs.earth_pounce.base_damage = 27;
 	print_earth_pounce(info);
 	return ;
 }
 
-static void	ft_maverick_arcane_pounce(t_char *info)
+static void	ft_maverick_arcane_pounce(t_char *info, char **player_list)
 {
+	ft_get_random_target((const char **)player_list,
+			(const char **)&info->bufs.arcane_pounce.target_id);
 	info->bufs.arcane_pounce.active = 1;
 	info->bufs.arcane_pounce.erea_damage = 8;
 	info->bufs.arcane_pounce.magic_damage = 4;
@@ -66,11 +72,14 @@ static void	ft_maverick_arcane_pounce(t_char *info)
 	return ;
 }
 
-static void	ft_maverick_frost_breath(t_char *info)
+static void	ft_maverick_frost_breath(t_char *info, char **player_list)
 {
+	ft_get_random_target((const char **)player_list,
+			(const char **)&info->bufs.frost_breath.target_id);
 	info->bufs.frost_breath.active = 1;
 	info->bufs.frost_breath.damage = 25;
 	print_frost_breath(info);
+	return ;
 }
 
 static void print_mass_teleport(int tp_number)
@@ -101,44 +110,44 @@ static void print_mass_teleport(int tp_number)
 	return ;
 }
 
-void ft_maverick_print_f(int first, int second, t_char *info)
+void ft_maverick_print_f(int first, int second, t_char *info, char **player_list)
 {
     if (first == 1)
         print_mass_teleport(second);
     else if (first == 2)
-		ft_maverick_meteor_strike(info);
+		ft_maverick_meteor_strike(info, player_list);
     else if (first == 3)
         ft_maverick_lightning_strike(info);
     else if (first == 4)
 		ft_maverick_flame_geyser(info);
     else if (first == 5)
-        ft_maverick_frost_breath(info);
+        ft_maverick_frost_breath(info, player_list);
     else if (first == 6)
         ft_maverick_lightningV2_strike(info);
     else if (first == 7)
-		ft_maverick_arcane_pounce(info);
+		ft_maverick_arcane_pounce(info, player_list);
     else if (first == 8)
-		ft_maverick_earth_pounce(info);
+		ft_maverick_earth_pounce(info, player_list);
 	return ;
 }
 
-void ft_maverick_print_s(int first, int second, t_char *info)
+void ft_maverick_print_s(int first, int second, t_char *info, char **player_list)
 {
     if (second == 1)
         print_mass_teleport(first);
     else if (second == 2)
-		ft_maverick_meteor_strike(info);
+		ft_maverick_meteor_strike(info, player_list);
     else if (second == 3)
         ft_maverick_lightning_strike(info);
     else if (second == 4)
 		ft_maverick_flame_geyser(info);
     else if (second == 5)
-        ft_maverick_frost_breath(info);
+        ft_maverick_frost_breath(info, player_list);
     else if (second == 6)
         ft_maverick_lightningV2_strike(info);
     else if (second == 7)
-		ft_maverick_arcane_pounce(info);
+		ft_maverick_arcane_pounce(info, player_list);
     else if (second == 8)
-		ft_maverick_earth_pounce(info);
+		ft_maverick_earth_pounce(info, player_list);
 	return ;
 }

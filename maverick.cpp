@@ -7,19 +7,31 @@ void	ft_maverick_turn(t_char *info)
 {
 	int		first;
 	int		second;
+	char	**player_list;
 
 	ft_update_buf(info);
 	ft_printf("\n\n");
+	player_list = ft_get_pc_list();
+	if (ft_double_char_length((const char **)player_list) < 2)
+	{
+		if (ft_double_char_length((const char **)player_list) > 0)
+		{
+			cma_free_double(player_list);
+			ft_printf_fd(2, "283-Error not enough targets for %s\n", info->name);
+		}
+		return ;
+	}
 	first = 0;
 	second = 0;
-	while (first == second)
+	while (first == second && first != 8)
 	{
 		first = ft_dice_roll(1, 8);
 		second = ft_dice_roll(1, 8);
 	}
-	ft_maverick_print_f(first, second, info);
-	ft_maverick_print_s(first, second, info);
+	ft_maverick_print_f(first, second, info, player_list);
+	ft_maverick_print_s(first, second, info, player_list);
 	ft_printf("\n\n");
+	cma_free_double(player_list);
 	return ;
 }
 

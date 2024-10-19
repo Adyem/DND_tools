@@ -81,7 +81,7 @@ void ft_cleanup_hunters_mark(t_char *info, t_char *target, t_buff *buff)
     if (target)
     {
         target->debufs.hunters_mark.amount--;
-		len = ft_double_char_length(target->debufs.hunters_mark.caster_name);
+		len = ft_double_char_length((const char **)target->debufs.hunters_mark.caster_name);
         if (len > 0)
         {
             cma_free(target->debufs.hunters_mark.caster_name[len - 1]);

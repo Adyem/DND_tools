@@ -111,7 +111,8 @@ SRC			= name.cpp \
 			  initialize_suggestions_readline.cpp \
 			  test_excecute.cpp \
 			  print_abilities.cpp \
-			  get_pc_list.cpp
+			  get_pc_list.cpp \
+			  get_random_target.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17

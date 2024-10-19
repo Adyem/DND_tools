@@ -33,18 +33,22 @@ char **ft_get_pc_list()
 	j = 0;
     while (content[i])
     {
-		if (ft_strncmp("pc--", content[i], 4))
+		if (ft_strncmp("PC--", content[i], 4) == 0)
 		{
 			result[j] = cma_strdup(&content[i][4], false);
+			if (ft_strchr(result[j], '='))
+				*ft_strchr(result[j], '=') = '\0';
+			if (DEBUG == 1)
+				ft_printf("found player %s\n", result[j]);
 			j++;
 		}
-		if (ft_strncmp("--turn--pc--", &content[i][12], 12))
+		if (ft_strncmp("--turn--PC--", &content[i][12], 12) == 0)
 		{
 			result[j] = cma_strdup(&content[i][12], false);
+			if (DEBUG == 1)
+				ft_printf("found player %s\n", result[j]);
 			j++;
 		}
-		if (DEBUG == 1)
-			ft_printf("found player %s\n", result[j - 1]);
 		if (j == MAX_PLAYERS)
 			break ;
 		i++;

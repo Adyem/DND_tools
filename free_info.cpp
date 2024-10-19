@@ -11,10 +11,10 @@ void	ft_free_info(t_char *info)
 	{
 		cma_free_double(info->debufs.hunters_mark.caster_name);
 		cma_free_double(info->concentration.targets);
-		cma_free_double(info->bufs.meteor_strike.target_id);
-		cma_free_double(info->bufs.frost_breath.target_id);
-		cma_free_double(info->bufs.arcane_pounce.target_id);
-		cma_free_double(info->bufs.earth_pounce.target_id);
+		cma_free(info->bufs.meteor_strike.target_id);
+		cma_free(info->bufs.frost_breath.target_id);
+		cma_free(info->bufs.arcane_pounce.target_id);
+		cma_free(info->bufs.earth_pounce.target_id);
 		cma_free(info->save_file);
 	}
 	cma_free(info);

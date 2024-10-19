@@ -69,7 +69,7 @@ void ft_request_input(t_name *name)
         input = ft_parse_input(input_string);
         if (!input)
             continue ;
-        i = ft_double_char_length(input);
+        i = ft_double_char_length((const char **)input);
         found = ft_handle_builtins(input, i, name, input_string);
         if (found == -1)
 		{

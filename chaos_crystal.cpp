@@ -31,7 +31,7 @@ static void ft_chaos_crystal_damage(t_char *info)
         ft_printf("281-Error opening file: %s\n", strerror(errno));
         return ;
     }
-    length = ft_double_char_length(content);
+    length = ft_double_char_length((const char **)content);
     result = -1;
     while (result == -1 || (ft_strncmp(content[result], "PC--", 4) != 0
                 && ft_strncmp(content[result], "--turn--PC--", 12) != 0))
