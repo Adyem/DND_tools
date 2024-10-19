@@ -1,49 +1,27 @@
 #include <cerrno>
 #include "dnd_tools.hpp"
 #include "chaos_crystal.hpp"
-#include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <errno.h>
-#include <string.h>
 
 static void ft_chaos_crystal_damage(t_char *info)
 {
-    char **content;
-    int fd;
-    int length;
-    int result;
+	char	**player_list;
+	int		i;
 
-    fd = open("data/data--initiative", O_RDONLY);
-    if (fd == -1)
-    {
-        ft_printf("280-Error opening file: %s\n", strerror(errno));
-        return ;
-    }
-    content = ft_read_file_dnd(fd);
-    close(fd);
-    if (!content)
-    {
-        ft_printf("281-Error opening file: %s\n", strerror(errno));
-        return ;
-    }
-    length = ft_double_char_length((const char **)content);
-    result = -1;
-    while (result == -1 || (ft_strncmp(content[result], "PC--", 4) != 0
-                && ft_strncmp(content[result], "--turn--PC--", 12) != 0))
-    {
-        result = ft_dice_roll(1, length) - 1;
-        if (DEBUG == 1)
-            ft_printf("result = %d\n", result);
-    }
+	player_list = ft_get_pc_list();
+	if (!player_list)
+		return ;
+	i = ft_double_char_length((const char **)player_list);
+	i = ft_dice_roll(1, i);
     ft_printf("%s shoots a magic missile at %s and he/she takes 1 force damage, " \
-			" the target does not need to make a concentration save for this damage\n",
-			info->name, &content[result][4]);
-    cma_free_double(content);
+            " the target does not need to make a concentration save for this damage\n",
+            info->name, player_list[i]);
+    cma_free_double(player_list);
     return ;
 }
 
