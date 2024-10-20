@@ -239,6 +239,7 @@ void		ft_initialize_suggestions_readline();
 char		**ft_get_pc_list();
 void		ft_remove_element(const char **array, const char *element);
 void		ft_get_random_target(const char **player_list, const char **target_field);
+int			ft_check_player_entry(const char *entry);
 
 //check name
 int			ft_set_stats_check_name(const char *name);

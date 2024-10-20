@@ -7,13 +7,20 @@
 #include <errno.h>
 #include <string.h>
 
-char **ft_get_pc_list()
+int	ft_check_player_entry(const char *entry)
 {
-    char		**content;
-	char		**result;
-    int			fd;
-    int			i;
-	int			j;
+	char	*filename;
+
+	filename = cma_strjoin("data/pc--", entry, false);
+	if (access(filename, R_OK | W_OK) == 0)
+		return (1);
+	return (0);
+}
+
+static char	**ft_open_and_read_initiative()
+{
+	int		fd;
+	char	**content;
 
     fd = open("data/data--initiative", O_RDONLY);
     if (fd == -1)
@@ -28,36 +35,62 @@ char **ft_get_pc_list()
         ft_printf("281-Error opening file: %s\n", strerror(errno));
         return (nullptr);
     }
-	result = (char **)cma_calloc(6, sizeof(char *), false);
-	i = 0;
-	j = 0;
-    while (content[i])
+	return (content);
+}
+
+bool ft_handle_player_entry(char **result, char *content, const char *prefix, int *j)
+{
+    if (ft_strncmp(prefix, content, strlen(prefix)) == 0)
     {
-		if (ft_strncmp("PC--", content[i], 4) == 0)
-		{
-			result[j] = cma_strdup(&content[i][4], false);
-			if (ft_strchr(result[j], '='))
-				*ft_strchr(result[j], '=') = '\0';
-			if (DEBUG == 1)
-				ft_printf("found player %s\n", result[j]);
-			j++;
-		}
-		if (ft_strncmp("--turn--PC--", &content[i][12], 12) == 0)
-		{
-			result[j] = cma_strdup(&content[i][12], false);
-			if (DEBUG == 1)
-				ft_printf("found player %s\n", result[j]);
-			j++;
-		}
-		if (j == MAX_PLAYERS)
-			break ;
-		i++;
+        result[*j] = cma_strdup(content + strlen(prefix), false);
+        if (!result[*j])
+        {
+            cma_free_double(result);
+            return false;
+        }
+        char *equal_sign = ft_strchr(result[*j], '=');
+        if (equal_sign)
+            *equal_sign = '\0';
+        if (DEBUG == 1)
+            ft_printf("found player %s\n", result[*j]);
+        if (ft_check_player_entry(result[*j]))
+        {
+            cma_free_double(result);
+            return false;
+        }
+        (*j)++;
     }
-	if (j == 0)
-	{
-		ft_printf_fd(2, "282-Error no player characcter found\n");
-		cma_free(result);
-		return (nullptr);
-	}
-	return (result);
+    return true;
+}
+
+char **ft_get_pc_list()
+{
+    char    **content;
+    char    **result;
+    int     i;
+    int     j;
+
+    content = ft_open_and_read_initiative();
+    if (!content)
+        return (nullptr);
+
+    result = (char **)cma_calloc(MAX_PLAYERS, sizeof(char *), false);
+    if (!result)
+        return (nullptr);
+    i = 0;
+    j = 0;
+    while (content[i] && j < MAX_PLAYERS)
+    {
+        if (!ft_handle_player_entry(result, content[i], "PC--", &j) ||
+	            !ft_handle_player_entry(result, content[i], "--turn--PC--", &j))
+            return (nullptr);
+        i++;
+    }
+    if (j == 0)
+    {
+        ft_printf_fd(2, "282-Error: No player character found\n");
+        cma_free(result);
+        return (nullptr);
+    }
+    return (result);
 }

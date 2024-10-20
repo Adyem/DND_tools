@@ -1,0 +1,19 @@
+#include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
+#include "libft/Libft/libft.hpp"
+#include "assert.h"
+#include <cstddef>
+
+int	ft_set_stat_player(const char *key, const char **field, const char *content)
+{
+	size_t		key_len;
+	size_t		content_len;
+
+	key_len = ft_strlen(key);
+	content_len = ft_strlen(content);
+	assert(content_len >= key_len && "Content is shorter than key!");
+	*field = cma_strdup(&content[key_len], false);
+	if (!*field || ft_check_player_entry(*field))
+		return (-1);
+	return (0);
+}
