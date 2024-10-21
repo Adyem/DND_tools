@@ -1,5 +1,5 @@
 #include <cstring>
-#include <iostream>
+#include "CMA.hpp"
 
 class ft_string {
 private:
@@ -7,17 +7,18 @@ private:
     std::size_t length;
     std::size_t capacity;
     bool errorFlag;
+    bool criticality;
 
     void resize(std::size_t new_capacity) noexcept {
         if (new_capacity <= capacity) return;
-        char* new_data = static_cast<char*>(malloc(new_capacity));
+        char* new_data = static_cast<char*>(cma_malloc(new_capacity, criticality));
         if (!new_data) {
             errorFlag = true;
             return;
         }
         if (data) {
             std::memcpy(new_data, data, length);
-            free(data);
+            cma_free(data);
         }
         data = new_data;
         capacity = new_capacity;
@@ -25,14 +26,14 @@ private:
 
 public:
     ft_string() noexcept 
-        : data(nullptr), length(0), capacity(0), errorFlag(false) {}
+        : data(nullptr), length(0), capacity(0), errorFlag(false), criticality(false) {}
 
-    ft_string(const char* init_str) noexcept 
-        : data(nullptr), length(0), capacity(0), errorFlag(false) {
+    ft_string(const char* init_str, bool crit = false) noexcept 
+        : data(nullptr), length(0), capacity(0), errorFlag(false), criticality(crit) {
         if (init_str) {
             length = std::strlen(init_str);
             capacity = length + 1;
-            data = static_cast<char*>(malloc(capacity));
+            data = static_cast<char*>(cma_malloc(capacity, criticality));
             if (!data) {
                 errorFlag = true;
                 return;
@@ -42,9 +43,10 @@ public:
     }
 
     ft_string(const ft_string& other) noexcept 
-        : data(nullptr), length(other.length), capacity(other.capacity), errorFlag(other.errorFlag) {
+        : data(nullptr), length(other.length), capacity(other.capacity), 
+          errorFlag(other.errorFlag), criticality(other.criticality) {
         if (other.data) {
-            data = static_cast<char*>(malloc(capacity));
+            data = static_cast<char*>(cma_malloc(capacity, criticality));
             if (!data) {
                 errorFlag = true;
                 return;
@@ -58,14 +60,15 @@ public:
             return *this;
         }
 
-        free(data);
+        cma_free(data);
         data = nullptr;
         length = other.length;
         capacity = other.capacity;
         errorFlag = other.errorFlag;
+        criticality = other.criticality;
 
         if (other.data) {
-            data = static_cast<char*>(malloc(capacity));
+            data = static_cast<char*>(cma_malloc(capacity, criticality));
             if (!data) {
                 errorFlag = true;
                 return *this;
@@ -77,7 +80,7 @@ public:
     }
 
     ~ft_string() {
-        free(data);
+        cma_free(data);
     }
 
     void append(char c) noexcept {
@@ -122,5 +125,9 @@ public:
 
     bool hasError() const noexcept {
         return errorFlag;
+    }
+
+    bool isCritical() const noexcept {
+        return criticality;
     }
 };
