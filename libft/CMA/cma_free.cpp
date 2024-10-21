@@ -29,6 +29,8 @@ void print_block_info(Block* block)
 
 void cma_free(void* ptr)
 {
+	if (DEBUG == 1)
+		return (::operator delete[](ptr), (void)0);
     if (!ptr)
         return ;
     Block* block = (Block*)((char*)ptr - sizeof(Block));

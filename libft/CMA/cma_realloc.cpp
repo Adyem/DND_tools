@@ -10,6 +10,25 @@
 
 void* cma_realloc(void* ptr, size_t new_size, bool critical)
 {
+    if (DEBUG == 1)
+    {
+        if (ptr == nullptr)
+            return cma_malloc(new_size, critical);
+
+        if (new_size == 0)
+        {
+            cma_free(ptr);
+            return nullptr;
+        }
+        void* new_ptr = cma_malloc(new_size, critical);
+        if (new_ptr == nullptr)
+            return nullptr;
+        Block* block = (Block*)((char*)ptr - sizeof(Block));
+        size_t copy_size = block->size < new_size ? block->size : new_size;
+        memcpy(new_ptr, ptr, copy_size);
+        cma_free(ptr);
+        return new_ptr;
+    }
     if (ptr == nullptr)
         return cma_malloc(new_size, critical);
     if (new_size == 0)
@@ -22,7 +41,7 @@ void* cma_realloc(void* ptr, size_t new_size, bool critical)
     UNPROTECT_METADATA(block, sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
     {
-		ft_printf_fd(2, "Invalid realloc detected at %p\n", ptr);
+        ft_printf_fd(2, "Invalid realloc detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     if (aligned_new_size <= block->size)
@@ -120,7 +139,7 @@ void* cma_realloc(void* ptr, size_t new_size, bool critical)
             if (!new_ptr)
             {
                 PROTECT_METADATA(block, sizeof(Block));
-                return nullptr; // Allocation failed
+                return (nullptr);
             }
             size_t copy_size = block->size;
             memcpy(new_ptr, ptr, copy_size);
