@@ -1,5 +1,6 @@
 #include "../Libft/libft.hpp"
 #include "../CMA/CMA.hpp"
+#include <cstdio>
 #include "get_next_line.hpp"
 
 static char	*leftovers(char *readed_string, bool critical)
@@ -71,12 +72,9 @@ static char	*fetch_line(char *readed_string, bool critical)
 
 static char	*read_fd(int fd, char *readed_string, bool critical)
 {
-	char	*buffer;
+	char	buffer[BUFFER_SIZE + 1];
 	int		readed_bytes;
 
-	buffer = (char *)cma_malloc(BUFFER_SIZE + 1, false);
-	if (!buffer)
-		return (nullptr);
 	readed_bytes = 1;
 	while (!ft_strchr(readed_string, '\n') && readed_bytes != 0)
 	{
@@ -90,7 +88,6 @@ static char	*read_fd(int fd, char *readed_string, bool critical)
 		buffer[readed_bytes] = '\0';
 		readed_string = ft_strjoin_gnl(readed_string, buffer, critical);
 	}
-	cma_free(buffer);
 	return (readed_string);
 }
 

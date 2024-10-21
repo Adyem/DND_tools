@@ -17,7 +17,8 @@ SRCS := cma_calloc.cpp \
 		cma_itoa.cpp \
 		cma_split.cpp \
 		cma_strjoin.cpp \
-		cma_free_double.cpp
+		cma_free_double.cpp \
+		string.cpp
 
 HEADERS := CMA.hpp
 

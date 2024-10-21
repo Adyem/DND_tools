@@ -1,4 +1,5 @@
 #include "CMA.hpp"
+#include "../Printf/ft_printf.hpp"
 
 void	cma_free_double(char **content)
 {
@@ -9,6 +10,7 @@ void	cma_free_double(char **content)
 	{
 		while (content[i])
 		{
+			ft_printf("freeing %s\n", content[i]);
 			cma_free(content[i]);
 			i++;
 		}

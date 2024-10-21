@@ -60,7 +60,7 @@ char **ft_read_file_dnd(int fd)
         if (!line)
             break ;
 		if (DEBUG == 1)
-			ft_printf("LINE = %s\n", line);
+			ft_printf("LINE = %s", line);
         i++;
         return_v = ft_realloc_dnd(return_v, i);
         if (!return_v)

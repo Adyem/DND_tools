@@ -8,8 +8,6 @@ int ft_check_stat(t_char *info, const char *stat, int index)
     int result;
 
     temp = index;
-    if (DEBUG == 1)
-        ft_printf("%s\n", stat);
     while (index)
     {
         stat++;
@@ -22,19 +20,12 @@ int ft_check_stat(t_char *info, const char *stat, int index)
             stat--;
             temp--;
         }
-        ft_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n", info->name, stat);
+        ft_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n",
+				info->name, stat);
         return (-99999);
     }
     result = ft_atoi(stat);
     return (result);
-}
-
-void ft_print_info(t_char *info)
-{
-    if (DEBUG != 1)
-        return ;
-    ft_printf("info->stats.health=%d\n", info->stats.health);
-    return ;
 }
 
 int ft_initialize_info(t_char *info, char **content)
@@ -56,6 +47,5 @@ int ft_initialize_info(t_char *info, char **content)
         i++;
     }
     error += ft_set_stats(info, content);
-    ft_print_info(info);
     return (error);
 }

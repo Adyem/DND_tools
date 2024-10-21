@@ -164,8 +164,6 @@ static int	ft_handle_set_stat_char_pointer(char *content_i, size_t key_len, char
 static int	ft_handle_set_stat_double_char(char *content_i, size_t key_len, char ***target_field, t_char *info)
 {
     *target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
-    if (DEBUG == 1)
-        ft_printf("printing %s", *target_field);
     if (*target_field == nullptr)
         return (-1);
     return (0);
@@ -174,22 +172,33 @@ static int	ft_handle_set_stat_double_char(char *content_i, size_t key_len, char 
 static int	ft_set_stats_string(t_char *info, char **content, int i)
 {
 	if (ft_strncmp(content[i], CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
-        return (ft_handle_set_stat_double_char(content[i], ft_strlen(CONC_TARGETS_KEY),
+        return (ft_handle_set_stat_double_char(content[i],
+					ft_strlen(CONC_TARGETS_KEY),
 					&info->concentration.targets, info));
-	if (ft_strncmp(content[i], HUNTERS_MARK_CASTER_KEY, ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
-        return (ft_handle_set_stat_double_char(content[i], ft_strlen(HUNTERS_MARK_CASTER_KEY),
+	if (ft_strncmp(content[i], HUNTERS_MARK_CASTER_KEY,
+				ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
+        return (ft_handle_set_stat_double_char(content[i],
+					ft_strlen(HUNTERS_MARK_CASTER_KEY),
 					&info->debufs.hunters_mark.caster_name, info));
-	if (ft_strncmp(content[i], METEOR_STRIKE_TARGET_KEY, ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(content[i], ft_strlen(METEOR_STRIKE_TARGET_KEY),
+	if (ft_strncmp(content[i], METEOR_STRIKE_TARGET_KEY,
+				ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
+		return (ft_handle_set_stat_char_pointer(content[i],
+					ft_strlen(METEOR_STRIKE_TARGET_KEY),
 					&info->bufs.meteor_strike.target_id, info));
-	if (ft_strncmp(content[i], FROST_BREATH_TARGET_ID_KEY, ft_strlen(FROST_BREATH_TARGET_ID_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(content[i], ft_strlen(FROST_BREATH_TARGET_ID_KEY),
+	if (ft_strncmp(content[i], FROST_BREATH_TARGET_ID_KEY,
+				ft_strlen(FROST_BREATH_TARGET_ID_KEY)) == 0)
+		return (ft_handle_set_stat_char_pointer(content[i],
+					ft_strlen(FROST_BREATH_TARGET_ID_KEY),
 					&info->bufs.frost_breath.target_id, info));
-	if (ft_strncmp(content[i], ARCANE_POUNCE_TARGET_ID_KEY, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(content[i], ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY),
+	if (ft_strncmp(content[i], ARCANE_POUNCE_TARGET_ID_KEY,
+				ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
+		return (ft_handle_set_stat_char_pointer(content[i],
+					ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY),
 					&info->bufs.arcane_pounce.target_id, info));
-	if (ft_strncmp(content[i], EARTH_POUNCE_TARGET_ID_KEY, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(content[i], ft_strlen(EARTH_POUNCE_TARGET_ID_KEY),
+	if (ft_strncmp(content[i], EARTH_POUNCE_TARGET_ID_KEY,
+				ft_strlen(EARTH_POUNCE_TARGET_ID_KEY)) == 0)
+		return (ft_handle_set_stat_char_pointer(content[i],
+					ft_strlen(EARTH_POUNCE_TARGET_ID_KEY),
 					&info->bufs.earth_pounce.target_id, info));
     return (1);
 }
@@ -202,8 +211,6 @@ int ft_set_stats(t_char *info, char **content)
 	i = 0;
     while (content[i])
     {
-		if (DEBUG == 1)
-			ft_printf(content[i]);
         if (ft_set_stats_1(info, content, i) == 0)
         {
             i++;

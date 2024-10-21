@@ -125,15 +125,19 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 			info->bufs.arcane_pounce.magic_damage);
 	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_ACTIVE_KEY,
 			info->bufs.frost_breath.target_id);
-	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_DAMAGE_KEY,
+		ft_printf_fd(fd, "%s%i\n", FROST_BREATH_DAMAGE_KEY,
 			info->bufs.frost_breath.damage);
-	ft_printf_fd(fd, "%s%s\n", METEOR_STRIKE_TARGET_KEY,
+	if (info->bufs.meteor_strike.target_id)
+		ft_printf_fd(fd, "%s%s\n", METEOR_STRIKE_TARGET_KEY,
 			info->bufs.meteor_strike.target_id);
-	ft_printf_fd(fd, "%s%s\n", FROST_BREATH_TARGET_ID_KEY,
+	if (info->bufs.frost_breath.target_id)
+		ft_printf_fd(fd, "%s%s\n", FROST_BREATH_TARGET_ID_KEY,
 			info->bufs.frost_breath.target_id);
-	ft_printf_fd(fd, "%s%s\n", ARCANE_POUNCE_TARGET_ID_KEY,
+	if (info->bufs.arcane_pounce.target_id)
+		ft_printf_fd(fd, "%s%s\n", ARCANE_POUNCE_TARGET_ID_KEY,
 			info->bufs.arcane_pounce.target_id);
-	ft_printf_fd(fd, "%s%s\n", EARTH_POUNCE_TARGET_ID_KEY,
+	if (info->bufs.earth_pounce.target_id)
+		ft_printf_fd(fd, "%s%s\n", EARTH_POUNCE_TARGET_ID_KEY,
 			info->bufs.earth_pounce.target_id);
 	return ;
 }

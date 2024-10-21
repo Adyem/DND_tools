@@ -31,9 +31,7 @@ int ft_npc_open_file(t_char *info)
     if (DEBUG == 1)
         ft_printf("The value of error is %d %d\n", error, info->flags.error);
     if (info->flags.error || error)
-	{
         return (1);
-	}
     error = ft_npc_check_info(info);
     if (error)
         return (1);
