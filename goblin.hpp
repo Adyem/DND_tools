@@ -94,7 +94,6 @@ static const	t_resistance GOBLIN_DEFAULT_RESISTANCE =
 	.thunder = 0,
 };
 
-
 static const	t_equipment GOBLIN_EQUIPMENT =
 {
 	.weapon = STEEL_SWORD,
