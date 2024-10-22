@@ -3,8 +3,14 @@
 
 void print_meteor_strike(const t_char *info)
 {
-    ft_printf("Meteor Strike: Create a circle around the target with arrows " \
-			"pointing towards the center (10ft radius), ");
+	const char *target;
+
+	if (info->bufs.meteor_strike.target_id)
+		target = info->bufs.meteor_strike.target_id;
+	else
+		target = "the target";
+    ft_printf("Meteor Strike: Create a circle around %s with arrows " \
+			"pointing towards the center (10ft radius)", target);
     ft_printf("at the start of the next turn a meteor hits the target dealing " \
 			"damage dependent on the number of targets hit.\n");
     ft_printf("(Cannot be the same target as Arcane Pounce or Earth Pounce)\n");
@@ -41,10 +47,15 @@ void print_flame_geyser(const t_char *info)
 
 void print_frost_breath(const t_char *info)
 {
-	(void)info;
-    ft_printf("Frost Breath: The boss takes a deep breath and breathes out on its " \
-			"next turn, dealing %i cold damage to anyone in a 90-degree " \
-			"cone in front of him.\n");
+	const char *target;
+
+	if (info->bufs.frost_breath.target_id)
+		target = info->bufs.frost_breath.target_id;
+	else
+		target = "the target";
+    ft_printf("Frost Breath: The boss looks at a target and takes a deep breath and breathes " \
+			"out on its next turn, dealing %i cold damage to anyone in a 90-degree "
+			"cone in front of him.\n", info->bufs.frost_breath.damage, target);
     ft_printf("(Be clear about what way the boss is facing when " \
 			"he starts casting the ability)\n");
 	return ;
@@ -66,21 +77,31 @@ void print_lightning_strike_v2(const t_char *info)
 
 void print_arcane_pounce(const t_char *info)
 {
+	const char *target;
+
+	if (info->bufs.arcane_pounce.target_id)
+		target = info->bufs.arcane_pounce.target_id;
+	else
+		target = "the target";
     ft_printf("Arcane Pounce: Targets a random player. At the start of the boss's next turn, ");
-    ft_printf("leaps to that player, landing in front of them and pounces, " \
+    ft_printf("leaps to %s, landing in front of him/her and pounces, " \
 			"dealing %d magic damage and %d magic damage to anyone within 5ft.\n",
-              info->bufs.arcane_pounce.magic_damage, 
-              info->bufs.arcane_pounce.erea_damage);
-    ft_printf("(Cannot be the same target as Meteor Strike or Earth Pounce)\n");
+              info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage,
+			  target);
 	return ;
 }
 
 void print_earth_pounce(const t_char *info)
 {
+	const char *target;
+
+	if (info->bufs.earth_pounce.target_id)
+		target = info->bufs.earth_pounce.target_id;
+	else
+		target = "the target";
     ft_printf("Earth Pounce: Targets the player with the highest Armor Class (AC). ");
-    ft_printf("At the start of the boss's next turn, jumps towards the target " \
-			"and deals %d bludgeoning damage reduced by 1 for each AC the target has.\n",
-              info->bufs.earth_pounce.base_damage);
-    ft_printf("(Cannot be the same target as Meteor Strike or Arcane Pounce)\n");
+    ft_printf("At the start of the boss's next turn, jumps towards the %s " \
+			"and deals %d bludgeoning damage reduced by 1 for each AC the %s has.\n",
+              info->bufs.earth_pounce.base_damage, target, target);
 	return ;
 }
