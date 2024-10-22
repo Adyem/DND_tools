@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <valgrind/memcheck.h>
 
 #ifndef PAGE_SIZE
 # define PAGE_SIZE 65536
@@ -20,14 +21,8 @@
 # define DEBUG 0
 #endif
 
-#if DEBUG == 1
-#include <valgrind/memcheck.h>
 #define PROTECT_METADATA(ptr, size) VALGRIND_MAKE_MEM_NOACCESS(ptr, size)
 #define UNPROTECT_METADATA(ptr, size) VALGRIND_MAKE_MEM_DEFINED(ptr, size)
-#else
-#define PROTECT_METADATA(ptr, size)
-#define UNPROTECT_METADATA(ptr, size)
-#endif
 
 struct Block
 {

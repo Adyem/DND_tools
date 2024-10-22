@@ -66,7 +66,8 @@ char **ft_read_file_dnd(int fd)
         if (!return_v)
         {
             cma_free(line);
-            return (nullptr);
+			get_next_line(-1, false);
+			return (nullptr);
         }
         return_v[i - 1] = line;
     }
@@ -87,9 +88,6 @@ char **ft_open_and_read(const char *file)
     content = ft_read_file_dnd(fd);
     close(fd);
     if (!content)
-    {
-        get_next_line(-1, false);
         ft_printf_fd(2, "Error allocating memory for content inside file\n");
-    }
     return (content);
 }

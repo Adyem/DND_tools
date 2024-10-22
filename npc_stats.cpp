@@ -42,20 +42,11 @@ void ft_npc_change_stats(t_char *info, const int index, const char **input)
 {
     int i = 0;
 
-    while (DEBUG == 1 && input[i])
     {
         ft_printf("%s\n", input[i]);
         i++;
     }
     i = 0;
-    if (DEBUG == 1)
-    {
-        while (input[i])
-        {
-            ft_printf("%s\n", input[i]);
-            i++;
-        }
-    }
     if (index == 1)
     {
         if (info->turn)

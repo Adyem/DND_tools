@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 
@@ -140,5 +141,9 @@ void ft_update_frost_breath(t_char *info)
 	if (info->bufs.frost_breath.active != 1 ||
         info->bufs.frost_breath.damage < 0)
         return ;
+	info->bufs.frost_breath.active = 0;
+	info->bufs.frost_breath.damage = 0;
+	cma_free(info->bufs.frost_breath.target_id);
+	info->bufs.frost_breath.target_id = nullptr;
     return ;
 }
