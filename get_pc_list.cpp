@@ -12,8 +12,14 @@ int	ft_check_player_entry(const char *entry)
 	char	*filename;
 
 	filename = cma_strjoin("data/pc--", entry, false);
-	if (access(filename, R_OK | W_OK) == 0)
+	if (!filename)
 		return (1);
+	if (access(filename, R_OK | W_OK) == 0)
+	{
+		cma_free(filename);
+		return (1);
+	}
+	cma_free(filename);
 	return (0);
 }
 
@@ -83,14 +89,20 @@ char **ft_get_pc_list()
     {
         if (!ft_handle_player_entry(result, content[i], "PC--", &j) ||
 	            !ft_handle_player_entry(result, content[i], "--turn--PC--", &j))
+		{
+			cma_free_double(result);
+			cma_free_double(content);
             return (nullptr);
+		}
         i++;
     }
     if (j == 0)
     {
         ft_printf_fd(2, "282-Error: No player character found\n");
-        cma_free(result);
+        cma_free_double(result);
+		cma_free_double(content);
         return (nullptr);
     }
+	cma_free_double(content);
     return (result);
 }

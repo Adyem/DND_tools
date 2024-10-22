@@ -10,7 +10,6 @@ void	cma_free_double(char **content)
 	{
 		while (content[i])
 		{
-			ft_printf("freeing %s\n", content[i]);
 			cma_free(content[i]);
 			i++;
 		}

@@ -15,10 +15,8 @@ void	ft_maverick_turn(t_char *info)
 	if (ft_double_char_length((const char **)player_list) < 2)
 	{
 		if (ft_double_char_length((const char **)player_list) > 0)
-		{
-			cma_free_double(player_list);
 			ft_printf_fd(2, "283-Error not enough targets for %s\n", info->name);
-		}
+		cma_free_double(player_list);
 		return ;
 	}
 	first = 0;

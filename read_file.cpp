@@ -73,23 +73,6 @@ char **ft_read_file_dnd(int fd)
     return (return_v);
 }
 
-static void ft_print_file(char **content)
-{
-    int i;
-
-    if (content && DEBUG == 1)
-    {
-        i = 0;
-        while (content[i])
-        {
-            ft_printf("%s", content[i]);
-            i++;
-        }
-        ft_printf("\n");
-    }
-	return ;
-}
-
 char **ft_open_and_read(const char *file)
 {
     int		fd;
@@ -103,7 +86,6 @@ char **ft_open_and_read(const char *file)
     }
     content = ft_read_file_dnd(fd);
     close(fd);
-    ft_print_file(content);
     if (!content)
     {
         get_next_line(-1, false);
