@@ -2,7 +2,6 @@
 #include <cstring>
 #include <cstdio>
 #include <cassert>
-#include <new>
 #include <sys/mman.h>
 #include <valgrind/memcheck.h>
 #include <csignal>
@@ -53,7 +52,7 @@ void cma_cleanup_non_critical_memory()
                     PROTECT_METADATA(page->next, sizeof(Page));
                 }
                 UNPROTECT_METADATA(page->start, page->size);
-                ::operator delete(page->start);
+                free(page->start);
             }
             else
 			{

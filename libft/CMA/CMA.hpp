@@ -18,7 +18,7 @@
 #endif
 
 #ifndef DEBUG
-# define DEBUG 0
+# define DEBUG 1
 #endif
 
 #define PROTECT_METADATA(ptr, size) VALGRIND_MAKE_MEM_NOACCESS(ptr, size)

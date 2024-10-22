@@ -19,7 +19,7 @@ size_t align8(size_t size)
 void	*cma_malloc(int size, bool critical)
 {
 	if (DEBUG == 1)
-		return (new char[size]);
+		return malloc(size);
     size = align8(size);
 
     if (size == 0)
@@ -78,7 +78,7 @@ void	*cma_malloc(int size, bool critical)
     size_t alloc_size = PAGE_SIZE;
     if (size + sizeof(Block) + sizeof(Page) > PAGE_SIZE)
         alloc_size = size + sizeof(Block) + sizeof(Page);
-    void* page_memory = ::operator new(alloc_size, std::nothrow);
+    void* page_memory = malloc(alloc_size);
     if (!page_memory)
         return (nullptr);
     memset(page_memory, 0, alloc_size);

@@ -1,4 +1,3 @@
-#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 #include "libft/Printf/ft_printf.hpp"
@@ -153,7 +152,8 @@ int ft_set_stats_2(t_char *info, char **content, int i)
     return (1);
 }
 
-static int	ft_handle_set_stat_char_pointer(char *content_i, size_t key_len, char **target_field, t_char *info)
+static int	ft_handle_set_stat_char_pointer(char *content_i, size_t key_len,
+				char **target_field, t_char *info)
 {
 	(void)info;
 	if (ft_set_stat_player(key_len, const_cast<const char **>(target_field), content_i))
@@ -161,7 +161,8 @@ static int	ft_handle_set_stat_char_pointer(char *content_i, size_t key_len, char
 	return (0);
 }
 
-static int	ft_handle_set_stat_double_char(char *content_i, size_t key_len, char ***target_field, t_char *info)
+static int	ft_handle_set_stat_double_char(char *content_i, size_t key_len,
+				char ***target_field, t_char *info)
 {
     *target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
     if (*target_field == nullptr)

@@ -3,7 +3,6 @@
 #include <cstring>
 #include <cstdio>
 #include <cassert>
-#include <new>
 #include <sys/mman.h>
 #include <valgrind/memcheck.h>
 #include <csignal>
@@ -14,7 +13,7 @@ bool cma_add_page(bool critical)
 	if (DEBUG == 1)
 		return (false);
     size_t alloc_size = PAGE_SIZE;
-    void* page_memory = ::operator new(alloc_size, std::nothrow);
+    void* page_memory = malloc(alloc_size);
     if (!page_memory)
         return (false);
     Page* new_page = (Page*)page_memory;

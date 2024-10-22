@@ -30,7 +30,7 @@ void print_block_info(Block* block)
 void cma_free(void* ptr)
 {
 	if (DEBUG == 1)
-		return (::operator delete[](ptr), (void)0);
+		return (free(ptr), (void)0);
     if (!ptr)
         return ;
     Block* block = (Block*)((char*)ptr - sizeof(Block));
@@ -136,7 +136,7 @@ void cma_free(void* ptr)
             PROTECT_METADATA(page->next, sizeof(Page));
         }
         UNPROTECT_METADATA(page->start, page->size);
-        ::operator delete(page->start);
+        free(page->start);
     }
 	else
 	{

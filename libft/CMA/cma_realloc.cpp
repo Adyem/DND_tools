@@ -10,25 +10,8 @@
 
 void* cma_realloc(void* ptr, size_t new_size, bool critical)
 {
-    if (DEBUG == 1)
-    {
-        if (ptr == nullptr)
-            return cma_malloc(new_size, critical);
-
-        if (new_size == 0)
-        {
-            cma_free(ptr);
-            return nullptr;
-        }
-        void* new_ptr = cma_malloc(new_size, critical);
-        if (new_ptr == nullptr)
-            return nullptr;
-        Block* block = (Block*)((char*)ptr - sizeof(Block));
-        size_t copy_size = block->size < new_size ? block->size : new_size;
-        memcpy(new_ptr, ptr, copy_size);
-        cma_free(ptr);
-        return new_ptr;
-    }
+	if (DEBUG == 1)
+		return (realloc(ptr, new_size));
     if (ptr == nullptr)
         return cma_malloc(new_size, critical);
     if (new_size == 0)
