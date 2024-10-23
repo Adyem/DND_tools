@@ -10,7 +10,7 @@
 
 void* cma_realloc(void* ptr, size_t new_size, bool critical)
 {
-	if (DEBUG == 1)
+	if (DEBUG == 1 || OFFSWITCH == 1)
 		return (realloc(ptr, new_size));
     if (ptr == nullptr)
         return cma_malloc(new_size, critical);

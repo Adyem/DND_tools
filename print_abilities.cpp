@@ -86,8 +86,7 @@ void print_arcane_pounce(const t_char *info)
     ft_printf("Arcane Pounce: Targets a random player. At the start of the boss's next turn, ");
     ft_printf("leaps to %s, landing in front of him/her and pounces, " \
 			"dealing %d magic damage and %d magic damage to anyone within 5ft.\n",
-              info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage,
-			  target);
+            target, info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
 	return ;
 }
 
@@ -102,6 +101,6 @@ void print_earth_pounce(const t_char *info)
     ft_printf("Earth Pounce: Targets the player with the highest Armor Class (AC). ");
     ft_printf("At the start of the boss's next turn, jumps towards the %s " \
 			"and deals %d bludgeoning damage reduced by 1 for each AC the %s has.\n",
-              info->bufs.earth_pounce.base_damage, target, target);
+            target, info->bufs.earth_pounce.base_damage, target);
 	return ;
 }

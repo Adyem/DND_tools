@@ -17,7 +17,7 @@ size_t align8(size_t size)
 
 void *cma_malloc(int size, bool critical)
 {
-    if (DEBUG == 1)
+    if (DEBUG == 1 || OFFSWITCH == 1)
         return malloc(size);
     size = align8(size);
     if (size == 0)

@@ -9,7 +9,7 @@
 
 void cma_cleanup_non_critical_memory()
 {
-	if (DEBUG == 1)
+	if (DEBUG == 1 || OFFSWITCH == 1)
 		return ;
     Page* page = page_list;
     while (page)

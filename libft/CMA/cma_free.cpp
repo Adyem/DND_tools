@@ -2,7 +2,6 @@
 #include <cstring>
 #include <cstdio>
 #include <cassert>
-#include <new>
 #include <sys/mman.h>
 #include <valgrind/memcheck.h>
 #include <csignal>
@@ -29,7 +28,7 @@ void print_block_info(Block* block)
 
 void cma_free(void* ptr)
 {
-	if (DEBUG == 1)
+	if (DEBUG == 1 || OFFSWITCH == 1)
 		return (free(ptr), (void)0);
     if (!ptr)
         return ;

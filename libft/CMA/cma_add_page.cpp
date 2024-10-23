@@ -10,7 +10,7 @@
 
 bool cma_add_page(bool critical)
 {
-	if (DEBUG == 1)
+	if (DEBUG == 1 || OFFSWITCH == 1)
 		return (false);
     size_t alloc_size = PAGE_SIZE;
     void* page_memory = malloc(alloc_size);
