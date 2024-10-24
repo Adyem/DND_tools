@@ -5,16 +5,11 @@ void ft_string::resize(std::size_t new_capacity) noexcept
 {
     if (new_capacity <= capacity)
         return ;
-    char* new_data = static_cast<char*>(cma_malloc(new_capacity, criticality));
+    char* new_data = static_cast<char*>(cma_realloc(data, new_capacity, criticality));
     if (!new_data)
     {
         errorFlag = true;
         return ;
-    }
-    if (data)
-    {
-        std::memcpy(new_data, data, length);
-        cma_free(data);
     }
     data = new_data;
     capacity = new_capacity;
