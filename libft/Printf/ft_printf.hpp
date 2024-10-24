@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-int ft_printf(const char *format, ...) __attribute__((format(printf, 1, 2)));
-int ft_printf_fd(int fd, const char *format, ...) __attribute__((format(printf, 2, 3)));
+int ft_printf(const char *format, ...) __attribute__((format(printf, 1, 2), hot));
+int ft_printf_fd(int fd, const char *format, ...) __attribute__((format(printf, 2, 3), hot));
 
 #endif
