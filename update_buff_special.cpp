@@ -161,8 +161,9 @@ void ft_update_frost_breath(t_char *info)
 	if (info->bufs.frost_breath.active != 1 ||
         info->bufs.frost_breath.damage < 0)
         return ;
-    ft_printf("The boss breathes out dealing %s damage to annyone in a 90% degree " \
-			"in front of him\n", info->bufs.frost_breath.damage);
+    ft_printf("The boss breathes out dealing %s damage to annyone in a 90%i degree " \
+			"in front of him\n", info->bufs.frost_breath.target_id,
+			info->bufs.frost_breath.damage);
 	info->bufs.frost_breath.active = 0;
 	info->bufs.frost_breath.damage = 0;
 	cma_free(info->bufs.frost_breath.target_id);

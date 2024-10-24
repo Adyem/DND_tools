@@ -68,7 +68,7 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 			info->debufs.hunters_mark.caster_name, fd, info);
 	ft_printf_fd(fd, "%s%i\n", CHAOS_ARMOR_DURATION_KEY, info->bufs.chaos_armor.duration);
 	ft_printf_fd(fd, "%s%i\n", PRONE_KEY, info->flags.prone);
-	ft_printf_fd(fd, "%s%i\n", BLINDED_KEY, info->debufs.blinded);
+	ft_printf_fd(fd, "%s%i\n", BLINDED_KEY, info->debufs.blinded.duration);
 	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_DURATION_KEY,
 			info->bufs.flame_geyser.duration);
 	ft_printf_fd(fd, "%s%i\n", FLAME_GEYSER_CLOSE_TO_TOWER_D_KEY,
@@ -124,7 +124,7 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	ft_printf_fd(fd, "%s%i\n", ARCANE_POUNCE_MAGIC_DAMAGE_KEY,
 			info->bufs.arcane_pounce.magic_damage);
 	ft_printf_fd(fd, "%s%i\n", FROST_BREATH_ACTIVE_KEY,
-			info->bufs.frost_breath.target_id);
+			info->bufs.frost_breath.active);
 		ft_printf_fd(fd, "%s%i\n", FROST_BREATH_DAMAGE_KEY,
 			info->bufs.frost_breath.damage);
 	if (info->bufs.meteor_strike.target_id)

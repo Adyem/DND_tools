@@ -34,12 +34,12 @@ void print_lightning_strike(const t_char *info)
 void print_flame_geyser(const t_char *info)
 {
     ft_printf("Flame Geyser: %d red towers spawn at random locations. If no one " \
-			"stands underneath a tower at the start of the boss's next turn, ");
-    ft_printf("it will explode, dealing %d fire damage to every member in the " \
-			"party. If one or more players stand ");
-    ft_printf("underneath a tower, it deals %d fire damage to each of those players.\n", 
-              info->bufs.flame_geyser.amount * 3,
-              info->bufs.flame_geyser.close_to_tower_d);
+			"stands underneath a tower at the start of the boss's next turn, it " \
+			"will explode, dealing %d fire damage to every member in the " \
+			"party. If one or more players stand underneath a tower, it deals %d " \
+			"fire damage to each of those players.\n", 
+              info->bufs.flame_geyser.amount, info->bufs.flame_geyser.tower_explode_d,
+			  info->bufs.flame_geyser.close_to_tower_d);
     ft_printf("(Be careful with placement on the flame geyser’s so they don’t " \
 			"appear in areas where other abilities are going to hit)\n");
 	return ;
@@ -52,10 +52,10 @@ void print_frost_breath(const t_char *info)
 	if (info->bufs.frost_breath.target_id)
 		target = info->bufs.frost_breath.target_id;
 	else
-		target = "the target";
-    ft_printf("Frost Breath: The boss looks at a target and takes a deep breath and breathes " \
+		target = "a random target";
+    ft_printf("Frost Breath: The boss looks at %s and takes a deep breath and breathes " \
 			"out on its next turn, dealing %i cold damage to anyone in a 90-degree "
-			"cone in front of him.\n", info->bufs.frost_breath.damage, target);
+			"cone in front of him.\n", target, info->bufs.frost_breath.damage);
     ft_printf("(Be clear about what way the boss is facing when " \
 			"he starts casting the ability)\n");
 	return ;
