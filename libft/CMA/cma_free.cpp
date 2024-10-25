@@ -18,7 +18,7 @@ void print_block_info(Block* block)
     ft_printf_fd(2, "---- Block Information ----\n");
     ft_printf_fd(2, "Address of Block: %p\n", (void*)block);
     ft_printf_fd(2, "Magic Number: 0x%X\n", block->magic);
-    ft_printf_fd(2, "Size: %i bytes\n", (int)block->size);
+    ft_printf_fd(2, "Size: %zu bytes\n", block->size);
     ft_printf_fd(2, "Free: %s\n", block->free ? "Yes" : "No");
     ft_printf_fd(2, "Critical: %s\n", block->critical ? "Yes" : "No");
     ft_printf_fd(2, "Next Block: %p\n", (void*)block->next);

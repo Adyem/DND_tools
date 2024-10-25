@@ -40,6 +40,7 @@ SharedPtr<T>::SharedPtr(T* p, bool crit)
             ptr = nullptr;
         }
     }
+	return ;
 }
 
 template <typename T>
@@ -47,8 +48,9 @@ SharedPtr<T>::SharedPtr(const SharedPtr<T>& other)
     : ptr(other.ptr), ref_count(other.ref_count),
       criticality(other.criticality), errorFlag(other.errorFlag)
 {
-    if (ref_count && !errorFlag)
+	if (ref_count && !errorFlag)
         (*ref_count)++;
+	return ;
 }
 
 template <typename T>
@@ -63,6 +65,7 @@ SharedPtr<T>::~SharedPtr()
         }
         cma_free(ref_count);
     }
+	return ;
 }
 
 template <typename T>
@@ -86,31 +89,33 @@ SharedPtr<T>& SharedPtr<T>::operator=(const SharedPtr<T>& other)
         if (ref_count && !errorFlag)
             (*ref_count)++;
     }
-    return *this;
+    return (*this);
 }
 
 template <typename T>
 T& SharedPtr<T>::operator*() const
 {
-    return *ptr;
+    return (*ptr);
 }
 
 template <typename T>
 T* SharedPtr<T>::operator->() const
 {
-    return ptr;
+    return (ptr);
 }
 
 template <typename T>
 int SharedPtr<T>::use_count() const
 {
-    return (ref_count && !errorFlag) ? *ref_count : 0;
+    if (ref_count && !errorFlag)
+        return (*ref_count);
+    return (0);
 }
 
 template <typename T>
 bool SharedPtr<T>::hasError() const
 {
-    return errorFlag;
+    return (errorFlag);
 }
 
 #endif
