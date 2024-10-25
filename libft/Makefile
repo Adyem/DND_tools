@@ -20,14 +20,16 @@ LIBS := CMA/CustomMemoryAllocator.a \
         Libft/LibFT.a \
         Printf/Printf.a \
         ReadLine/ReadLine.a \
-        PThread/PThread.a
+        PThread/PThread.a \
+		CPP_class/CPP_class.a
 
 DEBUG_LIBS := CMA/CustomMemoryAllocator_debug.a \
               GetNextLine/GetNextLine_debug.a \
               Libft/LibFT_debug.a \
               Printf/Printf_debug.a \
               ReadLine/ReadLine_debug.a \
-              PThread/PThread_debug.a
+              PThread/PThread_debug.a \
+			  CPP_class/CPP_class_debug.a
 
 CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
 
@@ -55,6 +57,9 @@ $(DEBUG_TARGET): $(DEBUG_LIBS)
 	$(AR) $(ARFLAGS) $(DEBUG_TARGET) temp_objs/*.o
 	rm -rf temp_objs
 
+CPP_class/CPP_class.a:
+	$(MAKE) -C CPP_class
+
 CMA/CustomMemoryAllocator.a:
 	$(MAKE) -C CMA
 
@@ -75,6 +80,9 @@ PThread/PThread.a:
 
 CMA/CustomMemoryAllocator_debug.a:
 	$(MAKE) -C CMA debug
+
+CPP_class/CPP_class_debug.a:
+	$(MAKE) -C CPP_class debug
 
 GetNextLine/GetNextLine_debug.a:
 	$(MAKE) -C GetNextLine debug
