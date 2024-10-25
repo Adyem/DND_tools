@@ -13,7 +13,8 @@ SUBDIRS := CMA \
            Libft \
            Printf \
            ReadLine \
-           PThread
+           PThread \
+		   CPP_class
 
 LIBS := CMA/CustomMemoryAllocator.a \
         GetNextLine/GetNextLine.a \
