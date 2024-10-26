@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/string.o",
+      "string.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/CPP_class",
+    "file": "/home/adyem/DND_tools/libft/CPP_class/string.cpp",
+    "output": "/home/adyem/DND_tools/libft/CPP_class/objs/string.o"
+  }
+]
