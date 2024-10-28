@@ -1,5 +1,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -71,7 +72,7 @@ void ft_initiative_sort_2(t_pc *players)
                 highest = temp;
             temp = temp->next;
         }
-        if (highest == nullptr)
+        if (highest == ft_nullptr)
             break;
 
         if (turn == 0)

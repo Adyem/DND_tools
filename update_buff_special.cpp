@@ -1,5 +1,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 
 void ft_update_lightning_strike(t_char *info)
@@ -113,7 +114,7 @@ void ft_update_meteor_strike(t_char *info)
         ft_printf("Meteor Strike will impact in %d turns.\n",
 				info->bufs.meteor_strike.duration);
 	cma_free(info->bufs.meteor_strike.target_id);
-	info->bufs.meteor_strike.target_id = nullptr;
+	info->bufs.meteor_strike.target_id = ft_nullptr;
 }
 
 void ft_update_earth_pounce(t_char *info)
@@ -131,7 +132,7 @@ void ft_update_earth_pounce(t_char *info)
     ft_printf("%s will jump towards %s and pounce, dealing %i damage reduced by the " \
 			"total AC of the target.\n", target, info->name, info->bufs.earth_pounce.base_damage);
 	cma_free(info->bufs.earth_pounce.target_id);
-	info->bufs.earth_pounce.target_id = nullptr;
+	info->bufs.earth_pounce.target_id = ft_nullptr;
 	return ;
 }
 
@@ -152,7 +153,7 @@ void ft_update_arcane_pounce(t_char *info)
     ft_printf("%i damage and %i damage to anyone within 10ft.\n",
               info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
 	cma_free(info->bufs.arcane_pounce.target_id);
-	info->bufs.arcane_pounce.target_id = nullptr;
+	info->bufs.arcane_pounce.target_id = ft_nullptr;
     return ;
 }
 
@@ -167,6 +168,6 @@ void ft_update_frost_breath(t_char *info)
 	info->bufs.frost_breath.active = 0;
 	info->bufs.frost_breath.damage = 0;
 	cma_free(info->bufs.frost_breath.target_id);
-	info->bufs.frost_breath.target_id = nullptr;
+	info->bufs.frost_breath.target_id = ft_nullptr;
     return ;
 }

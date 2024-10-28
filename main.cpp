@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/ReadLine/readline.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include <ctime>
 #include <cstdlib>
 
@@ -19,7 +20,7 @@ int main(int argc, char **argv)
         ft_printf_fd(2, "005-Error: expecting no arguments\n");
         return (1);
     }
-    srand((unsigned)time(nullptr));
+    srand((unsigned)time(ft_nullptr));
     if (DEBUG == 1)
     {
         ft_printf("DEBUGGING\n");

@@ -3,6 +3,7 @@
 #include <cstring>
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 
 static size_t str_len(const char *str)
 {
@@ -39,14 +40,14 @@ char *ft_strtrim_prefix(const char *s1, const char *prefix)
     {
         trimmed_str = str_new(s1_len - prefix_len);
         if (!trimmed_str)
-            return (nullptr);
+            return (ft_nullptr);
         strcpy(trimmed_str, s1 + prefix_len);
     }
     else
     {
         trimmed_str = str_new(s1_len);
         if (!trimmed_str)
-            return (nullptr);
+            return (ft_nullptr);
         strcpy(trimmed_str, s1);
     }
     return (trimmed_str);

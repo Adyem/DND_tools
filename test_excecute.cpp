@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 
 static int ft_handle_custom_commands(const char **input, int argc, t_name *name)
@@ -6,7 +7,7 @@ static int ft_handle_custom_commands(const char **input, int argc, t_name *name)
 	t_name *temp;
 
 	temp = name;
-	while (temp != nullptr)
+	while (temp != ft_nullptr)
 	{
 		if (argc > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
 		{

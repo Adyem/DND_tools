@@ -2,6 +2,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include <cstdlib>
 #include <fcntl.h>
 #include <unistd.h>
@@ -101,7 +102,7 @@ static int ft_turn_run(t_pc *players, t_name *name)
 	const char *temp[2];
 	int found;
 
-	c_name = nullptr;
+	c_name = ft_nullptr;
 	pc_temp = players;
 	found = 0;
 	while (pc_temp && found == 0)
@@ -116,12 +117,12 @@ static int ft_turn_run(t_pc *players, t_name *name)
 				return (1);
 			}
 			n_temp = name;
-			while (n_temp != nullptr && found != 2)
+			while (n_temp != ft_nullptr && found != 2)
 			{
 				if (ft_strcmp_dnd(n_temp->name, c_name) == 0)
 				{
 					temp[0] = c_name;
-					temp[1] = nullptr;
+					temp[1] = ft_nullptr;
 					n_temp->function(1, temp, name, 0);
 					found = 2;
 				}

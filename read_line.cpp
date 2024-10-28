@@ -2,6 +2,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/ReadLine/readline.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include <cstdlib>
 
 static char	**ft_parse_input(char *input_string)
@@ -22,7 +23,7 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
 	t_name *temp;
 
 	temp = name;
-	while (temp != nullptr)
+	while (temp != ft_nullptr)
 	{
 		if (argc > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
 		{
@@ -64,7 +65,7 @@ void ft_request_input(t_name *name)
     int found;
     int i;
 
-    while ((input_string = rl_readline("dndtools: ")) != nullptr)
+    while ((input_string = rl_readline("dndtools: ")) != ft_nullptr)
     {
         input = ft_parse_input(input_string);
         if (!input)

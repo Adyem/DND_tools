@@ -2,6 +2,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 
 typedef int (*RollExecuteFunc)(char *, int *, int);
 
@@ -68,7 +69,7 @@ int ft_command_roll_parse(char *string, int nested)
 
 void ft_command_roll(char **argv)
 {
-    char	*result = nullptr;
+    char	*result = ft_nullptr;
     int		i = 0;
 
     while (argv[i] && DEBUG == 1)

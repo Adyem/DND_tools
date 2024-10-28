@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 
 t_char	*ft_get_info(const char *tf_name, t_name *name)
 {
@@ -11,7 +12,7 @@ t_char	*ft_get_info(const char *tf_name, t_name *name)
 	found = 0;
 	temp = name;
 	input[0] = tf_name;
-	input[1] = nullptr;
+	input[1] = ft_nullptr;
 	while (temp != nullptr && !found)
 	{
 		if (ft_strcmp_dnd(tf_name, temp->name) == 0)

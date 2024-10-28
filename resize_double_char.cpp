@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include <cstdlib>
 
 char **ft_resize_double_char(char **double_string, const char *string, int size)
@@ -11,7 +12,7 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
         i++;
     char **return_v = (char **)cma_calloc(i + size + 1, sizeof(char *), false);
     if (!return_v)
-        return (nullptr);
+        return (ft_nullptr);
     int j = 0;
     while (j < i)
     {
@@ -25,7 +26,7 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
                 j--;
             }
             cma_free(return_v);
-            return (nullptr);
+            return (ft_nullptr);
         }
         j++;
     }
@@ -39,12 +40,12 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
             j++;
         }
         cma_free(return_v);
-        return (nullptr);
+        return (ft_nullptr);
     }
     j = i + 1;
     while (j < i + size + 1)
     {
-        return_v[j] = nullptr;
+        return_v[j] = ft_nullptr;
         j++;
     }
     return (return_v);

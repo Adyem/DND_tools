@@ -1,5 +1,4 @@
 #include "libft/Printf/ft_printf.hpp"
-#include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "dnd_tools.hpp"
 #include "veraak.hpp"
@@ -12,13 +11,13 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
     if (DEBUG == 1)
         ft_printf("killing crystal: %s\n", crystal);
     name = info->struct_name;
-    while (name != nullptr)
+    while (name != ft_nullptr)
     {
         if (ft_strcmp_dnd(name->name, crystal) == 0)
         {
             input[0] = name->name;
             input[1] = "kill";
-            input[2] = nullptr;
+            input[2] = ft_nullptr;
             if (DEBUG == 1)
                 ft_printf("initializing: %s\n", name->name);
             name->function(2, input, name, 0);
@@ -38,23 +37,23 @@ static void ft_veraak_initialize(t_char *info)
     t_name *name;
     int i;
     const char *crystals[5] = {
-        "chaos_crystal_01", "chaos_crystal_02", "chaos_crystal_03", "chaos_crystal_04", nullptr};
+        "chaos_crystal_01", "chaos_crystal_02", "chaos_crystal_03", "chaos_crystal_04", ft_nullptr};
 
     if (DEBUG == 1)
         ft_printf("initializing chaos crystals\n");
     i = 0;
-    while (crystals[i] != nullptr)
+    while (crystals[i] != ft_nullptr)
     {
         if (DEBUG == 1)
             ft_printf("checking crystal: %s\n", crystals[i]);
         name = info->struct_name;
-        while (name != nullptr)
+        while (name != ft_nullptr)
         {
             if (ft_strcmp_dnd(name->name, crystals[i]) == 0)
             {
                 input[0] = name->name;
                 input[1] = "init";
-                input[2] = nullptr;
+                input[2] = ft_nullptr;
                 if (DEBUG == 1)
                     ft_printf("initializing: %s\n", name->name);
                 name->function(2, input, name, 0);
@@ -112,7 +111,7 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
         ft_printf("index = %d\n", index);
     info = (t_char *)cma_calloc(1, sizeof(t_char), false);
     if (!info)
-        return (nullptr);
+        return (ft_nullptr);
     *info = VERAAK_INFO;
     info->name = input[0];
     info->struct_name = name;
@@ -120,7 +119,7 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
     if (!info->save_file)
     {
         ft_free_info(info);
-        return (nullptr);
+        return (ft_nullptr);
     }
     if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
     {
@@ -128,24 +127,24 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
         ft_printf("Stats for %s written on a file\n", info->name);
         ft_veraak_initialize(info);
         ft_free_info(info);
-        return (nullptr);
+        return (ft_nullptr);
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (nullptr);
+        return (ft_nullptr);
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (nullptr);
+        return (ft_nullptr);
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
         return (info);
     ft_npc_change_stats(info, index, input);
     ft_free_info(info);
-    return (nullptr);
+    return (ft_nullptr);
 }

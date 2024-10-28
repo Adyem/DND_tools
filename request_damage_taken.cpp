@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 #include <cstdlib>
@@ -54,8 +54,8 @@ int ft_get_resistance(t_char *info, const char *type)
 
 int ft_request_damage(t_char *info)
 {
-    char	**input = nullptr;
-    char	*line = nullptr;
+    char	**input = ft_nullptr;
+    char	*line = ft_nullptr;
     int		fail = 0;
     int		resistance;
 
@@ -63,7 +63,7 @@ int ft_request_damage(t_char *info)
     {
         if (ft_strcmp_dnd(line, "exit") == 0)
         {
-            ft_deal_damage(info, nullptr, nullptr, 0, 2);
+            ft_deal_damage(info, ft_nullptr, ft_nullptr, 0, 2);
             cma_free(line);
             return (0);
         }
@@ -102,8 +102,8 @@ int ft_request_damage(t_char *info)
         }
         ft_deal_damage(info, input[0], input[1], resistance, 0);
         ft_free_request_damage(line, input);
-        line = nullptr;
-        input = nullptr;
+        line = ft_nullptr;
+        input = ft_nullptr;
     }
     ft_free_request_damage(line, input);
     return (0);

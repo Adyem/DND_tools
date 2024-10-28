@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include <cerrno>
 #include <cstdlib>
 #include <cstring>
@@ -32,18 +33,21 @@ static void ft_add_player(t_pc *player) {
 
 void ft_player(const char **input)
 {
-  t_pc *player = nullptr;
+  t_pc *player = ft_nullptr;
 
-  if (input[1] && input[2]) {
+  if (input[1] && input[2])
+  {
     if (ft_strcmp_dnd(input[0], "add") == 0)
 	{
       player = (t_pc *)cma_malloc(sizeof(t_pc), false);
-      if (!player) {
+      if (!player)
+	  {
         ft_printf("248-Error: Allocating memory for player\n");
         return ;
       }
       player->name = cma_strdup(input[2], false);
-      if (!player->name) {
+      if (!player->name)
+	  {
         ft_printf("249-Error: Allocating memory for player name\n");
         cma_free(player);
         return ;

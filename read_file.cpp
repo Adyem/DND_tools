@@ -2,6 +2,7 @@
 #include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
@@ -34,7 +35,7 @@ static char **ft_realloc_dnd(char **return_v, int index)
     if (!temp)
     {
         ft_malloc_fail_gnl_dnd(return_v);
-        return (nullptr);
+        return (ft_nullptr);
     }
     if (return_v)
     {
@@ -50,8 +51,8 @@ static char **ft_realloc_dnd(char **return_v, int index)
 
 char **ft_read_file_dnd(int fd)
 {
-    char	**return_v = nullptr;
-    char	*line = nullptr;
+    char	**return_v = ft_nullptr;
+    char	*line = ft_nullptr;
     int		i = 0;
 
     while (1)
@@ -67,7 +68,7 @@ char **ft_read_file_dnd(int fd)
         {
             cma_free(line);
 			get_next_line(-1, false);
-			return (nullptr);
+			return (ft_nullptr);
         }
         return_v[i - 1] = line;
     }
@@ -83,7 +84,7 @@ char **ft_open_and_read(const char *file)
     if (fd == -1)
     {
         ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
-        return (nullptr);
+        return (ft_nullptr);
     }
     content = ft_read_file_dnd(fd);
     close(fd);

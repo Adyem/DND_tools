@@ -1,6 +1,7 @@
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
 
@@ -8,7 +9,7 @@ int	ft_read_line_confirm(const char *message)
 {
 	char	*input;
 
-	while ((input = rl_readline(message)) != nullptr)
+	while ((input = rl_readline(message)) != ft_nullptr)
 	{
 		if ((ft_strcmp_dnd(input, "y") == 0) || (ft_strcmp_dnd(input, "Y") == 0) ||
 				(ft_strcmp_dnd(input, "yes") == 0))
