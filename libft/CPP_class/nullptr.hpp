@@ -21,4 +21,3 @@ namespace ft
 #define ft_nullptr (ft::ft_nullptr_instance)
 
 #endif
-
