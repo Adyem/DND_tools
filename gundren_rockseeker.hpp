@@ -123,8 +123,8 @@ static const    t_char GUNDREN_ROCKSEEKER_INFO =
     .passive_perception = 12,
     .initiative = -1,
     .version_number = 2,
-    .save_file = nullptr,
-    .name = nullptr,
+    .save_file = ft_nullptr,
+    .name = ft_nullptr,
     .turn = ft_gundren_rockseeker_turn,
     .flags = INITIALIZE_FLAGS,
     .crit = GUNDREN_ROCKSEEKER_CRIT,
@@ -140,7 +140,7 @@ static const    t_char GUNDREN_ROCKSEEKER_INFO =
     .stats = INITIALIZE_STATS,
     .dstats = GUNDREN_ROCKSEEKER_DEFAULT_STATS,
     .feats = INITIALIZE_FEATS,
-    .struct_name = nullptr,
+    .struct_name = ft_nullptr,
     .physical = GUNDREN_ROCKSEEKER_PHYSICAL,
 };
 

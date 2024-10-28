@@ -1,4 +1,5 @@
 #include "CMA.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 int	itoa_len(int n)
 {
@@ -35,7 +36,7 @@ char	*convert_int(int n, int is_negative, bool critical)
 	i = itoa_len(n);
 	c = (char *)cma_malloc(i + 1 + is_negative, critical);
 	if (!c)
-		return (nullptr);
+		return (ft_nullptr);
 	if (n < 0)
 		num = -n;
 	else

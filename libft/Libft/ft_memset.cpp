@@ -1,4 +1,5 @@
 #include "libft.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -6,8 +7,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	char	*d;
 	const char	*s;
 
-	if (dst == nullptr && src == nullptr)
-		return (nullptr);
+	if (dst == ft_nullptr && src == ft_nullptr)
+		return (ft_nullptr);
 
 	d = (char *)dst;
 	s = (const char *)src;

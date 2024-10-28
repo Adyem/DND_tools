@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include <fcntl.h>
@@ -32,14 +33,14 @@ static char	**ft_open_and_read_initiative()
     if (fd == -1)
     {
         ft_printf("280-Error opening file: %s\n", strerror(errno));
-        return (nullptr);
+        return (ft_nullptr);
     }
     content = ft_read_file_dnd(fd);
     close(fd);
     if (!content)
     {
         ft_printf("281-Error opening file: %s\n", strerror(errno));
-        return (nullptr);
+        return (ft_nullptr);
     }
 	return (content);
 }
@@ -78,11 +79,11 @@ char **ft_get_pc_list()
 
     content = ft_open_and_read_initiative();
     if (!content)
-        return (nullptr);
+        return (ft_nullptr);
 
     result = (char **)cma_calloc(MAX_PLAYERS, sizeof(char *), false);
     if (!result)
-        return (nullptr);
+        return (ft_nullptr);
     i = 0;
     j = 0;
     while (content[i] && j < MAX_PLAYERS)
@@ -92,7 +93,7 @@ char **ft_get_pc_list()
 		{
 			cma_free_double(result);
 			cma_free_double(content);
-            return (nullptr);
+            return (ft_nullptr);
 		}
         i++;
     }
@@ -101,7 +102,7 @@ char **ft_get_pc_list()
         ft_printf_fd(2, "282-Error: No player character found\n");
         cma_free_double(result);
 		cma_free_double(content);
-        return (nullptr);
+        return (ft_nullptr);
     }
 	cma_free_double(content);
     return (result);

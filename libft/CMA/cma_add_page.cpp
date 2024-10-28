@@ -7,6 +7,7 @@
 #include <valgrind/memcheck.h>
 #include <csignal>
 #include "CMA.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 bool cma_add_page(bool critical)
 {
@@ -27,15 +28,15 @@ bool cma_add_page(bool critical)
         page_list->prev = new_page;
         PROTECT_METADATA(page_list, sizeof(Page));
     }
-    new_page->prev = nullptr;
+    new_page->prev = ft_nullptr;
     page_list = new_page;
     Block* first_block = (Block*)((char*)page_memory + sizeof(Page));
     first_block->magic = MAGIC_NUMBER;
     first_block->size = alloc_size - sizeof(Page) - sizeof(Block);
     first_block->free = true;
     first_block->critical = critical;
-    first_block->next = nullptr;
-    first_block->prev = nullptr;
+    first_block->next = ft_nullptr;
+    first_block->prev = ft_nullptr;
     new_page->blocks = first_block;
     PROTECT_METADATA(first_block, sizeof(Block));
     PROTECT_METADATA(new_page, sizeof(Page));

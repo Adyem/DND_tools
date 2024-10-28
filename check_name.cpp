@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "identification.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -27,7 +28,7 @@ int ft_set_stats_check_name(const char *name)
         return (-1);
     }
     dir = opendir(DATA_FOLDER);
-    if (dir == nullptr)
+    if (dir == ft_nullptr)
     {
         ft_printf_fd(2, "295-Error: Opendir has failed: %s\n", strerror(errno));
         return (-2);
@@ -64,7 +65,7 @@ int ft_check_player_character(const char *name)
     char filename[256];
 
     dir = opendir(DATA_FOLDER);
-    if (dir == nullptr)
+    if (dir == ft_nullptr)
     {
         ft_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
         return (-2);

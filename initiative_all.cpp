@@ -1,6 +1,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
 #include <fcntl.h>
@@ -16,13 +17,13 @@ static t_char *ft_check_name(t_name *name, char *file_name)
 
     if (DEBUG == 1)
         ft_printf("Printing file name again: %s\n", file_name);
-    info = nullptr;
-    while (name != nullptr)
+    info = ft_nullptr;
+    while (name != ft_nullptr)
     {
         if (ft_strcmp_dnd(name->name, file_name) == 0)
         {
             input[0] = name->name;
-            input[1] = nullptr;
+            input[1] = ft_nullptr;
             if (DEBUG == 1)
                 ft_printf("Initializing: %s\n", name->name);
             info = name->function(1, input, name, 1);
@@ -45,7 +46,7 @@ static t_char *ft_read_all_files(int fd, t_name *name, char *file_name)
     if (!info)
     {
         ft_printf_fd(2, "255 Error allocating memory\n");
-        return (nullptr);
+        return (ft_nullptr);
     }
     if (DEBUG == 1)
         ft_printf("Initiative file descriptor is %d\n", fd);
@@ -57,7 +58,7 @@ static t_char *ft_read_all_files(int fd, t_name *name, char *file_name)
 static void *ft_initiative_pc_error(const char *message)
 {
     ft_printf_fd(2, "%s\n", message);
-    return (nullptr);
+    return (ft_nullptr);
 }
 
 static t_pc *ft_read_pc_file(int fd, char *filename, char *filepath)
@@ -81,7 +82,7 @@ static t_pc *ft_read_pc_file(int fd, char *filename, char *filepath)
     if (error)
     {
         ft_free_pc(player);
-        return (nullptr);
+        return (ft_nullptr);
     }
     error = ft_request_initiative(player);
     if (!error)
@@ -129,12 +130,12 @@ void ft_open_all_files(t_name *name)
     else
         close(fd);
     dir = opendir("data");
-    if (dir == nullptr)
+    if (dir == ft_nullptr)
     {
         ft_printf_fd(2, "Unable to open directory: %s\n", strerror(errno));
         return ;
     }
-    while ((entry = readdir(dir)) != nullptr)
+    while ((entry = readdir(dir)) != ft_nullptr)
     {
         if (ft_strcmp_dnd(entry->d_name, ".") == 0 || ft_strcmp_dnd(entry->d_name, "..") == 0)
             continue ;

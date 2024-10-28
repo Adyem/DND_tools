@@ -4,6 +4,7 @@
 # include "armor.hpp"
 # include "ranged_weapons.hpp"
 # include "melee_weapons.hpp"
+# include "libft/CPP_class/nullptr.hpp"
 # include "character.hpp"
 # include "initialize.hpp"
 # include <stddef.h>
@@ -125,8 +126,8 @@ static const t_char GOBLIN_INFO =
 	.passive_perception = 12,
 	.initiative = -1,
 	.version_number = 2,
-	.save_file = nullptr,
-	.name = nullptr,
+	.save_file = ft_nullptr,
+	.name = ft_nullptr,
 	.turn = ft_goblin_turn,
 	.flags = INITIALIZE_FLAGS,
 	.crit = GOBLIN_CRIT,
@@ -142,7 +143,7 @@ static const t_char GOBLIN_INFO =
 	.stats = INITIALIZE_STATS,
 	.dstats = GOBLIN_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
-	.struct_name = nullptr,
+	.struct_name = ft_nullptr,
 	.physical = GOBLIN_PHYSICAL,
 };
 

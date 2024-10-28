@@ -6,7 +6,7 @@
 char **ft_resize_double_char(char **double_string, const char *string, int size)
 {
     if (!double_string)
-        return (nullptr);
+        return (ft_nullptr);
     int i = 0;
     while (double_string[i])
         i++;

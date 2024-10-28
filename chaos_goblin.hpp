@@ -1,6 +1,7 @@
 #ifndef CHAOS_GOBLIN_H
 # define CHAOS_GOBLIN_H
 
+# include "libft/CPP_class/nullptr.hpp"
 # include "armor.hpp"
 # include "ranged_weapons.hpp"
 # include "melee_weapons.hpp"
@@ -126,8 +127,8 @@ static const t_char CHAOS_GOBLIN_INFO =
     .passive_perception = 15,
     .initiative = -1,
     .version_number = 2,
-    .save_file = nullptr,
-    .name = nullptr,
+    .save_file = ft_nullptr,
+    .name = ft_nullptr,
     .turn = ft_chaos_goblin_turn,
     .flags = INITIALIZE_FLAGS,
     .crit = CHAOS_GOBLIN_CRIT,
@@ -143,7 +144,7 @@ static const t_char CHAOS_GOBLIN_INFO =
     .stats = INITIALIZE_STATS,
     .dstats = CHAOS_GOBLIN_DEFAULT_STATS,
     .feats = INITIALIZE_FEATS,
-    .struct_name = nullptr,
+    .struct_name = ft_nullptr,
     .physical = CHAOS_GOBLIN_PHYSICAL,
 };
 

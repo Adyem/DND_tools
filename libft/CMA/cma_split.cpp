@@ -1,4 +1,5 @@
 #include "CMA.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 static int	ft_count_words(const char *s, char c)
 {
@@ -36,7 +37,7 @@ static char	**ft_malloc_strs(char **strs, const char *s, char c, bool critical)
 		{
 			strs[x] = (char *)cma_malloc(sizeof(char) * (count + 1), critical);
 			if (!strs[x])
-				return (nullptr);
+				return (ft_nullptr);
 			count = 0;
 			x++;
 		}
@@ -79,11 +80,11 @@ static char	**ft_merror(char **strs)
 	while (strs[i])
 	{
 		cma_free(strs[i]);
-		strs[i] = nullptr;
+		strs[i] = ft_nullptr;
 		i++;
 	}
 	cma_free(strs);
-	return (nullptr);
+	return (ft_nullptr);
 }
 
 char	**cma_split(char const *s, char c, bool critical)
@@ -95,18 +96,18 @@ char	**cma_split(char const *s, char c, bool critical)
 	{
 		strs = (char **)cma_malloc(sizeof(char) * 1, critical);
 		if (!strs)
-			return (nullptr);
-		*strs = nullptr;
+			return (ft_nullptr);
+		*strs = ft_nullptr;
 		return (strs);
 	}
 	wordcount = ft_count_words(s, c);
 	strs = (char **)cma_malloc(sizeof(*strs) * (wordcount + 1), critical);
 	if (!strs)
-		return (nullptr);
+		return (ft_nullptr);
 	if (ft_malloc_strs(strs, s, c, critical))
 	{
 		ft_cpy_strs(strs, s, c);
-		strs[wordcount] = nullptr;
+		strs[wordcount] = ft_nullptr;
 	}
 	else
 		strs = ft_merror(strs);

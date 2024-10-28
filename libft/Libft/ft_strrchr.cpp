@@ -1,4 +1,5 @@
 #include "libft.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -13,5 +14,5 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	if (s[i] == (char)c)
 		return ((char *)s + i);
-	return (nullptr);
+	return (ft_nullptr);
 }

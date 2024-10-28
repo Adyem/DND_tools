@@ -1,4 +1,5 @@
 #include "libft.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 void *ft_memmove(void *destination, const void *source, size_t size)
 {
@@ -9,7 +10,7 @@ void *ft_memmove(void *destination, const void *source, size_t size)
 	if (size == 0 || destination == source)
 		return destination;
 	if (!destination || !source)
-		return (nullptr);
+		return (ft_nullptr);
 	if (dest_ptr < src_ptr)
 	{
 		i = 0;

@@ -3,6 +3,7 @@
 
 # include "character.hpp"
 # include "initialize.hpp"
+# include "libft/CPP_class/nullptr.hpp"
 # include <stddef.h>
 
 typedef struct	s_name t_name;
@@ -123,8 +124,8 @@ static const t_char CHAOS_CRYSTAL_INFO =
     .passive_perception = 15,
     .initiative = -1,
     .version_number = 2,
-    .save_file = nullptr,
-    .name = nullptr,
+    .save_file = ft_nullptr,
+    .name = ft_nullptr,
     .turn = ft_chaos_crystal_turn,
     .flags = INITIALIZE_FLAGS,
     .crit = CHAOS_CRYSTAL_CRIT,
@@ -140,7 +141,7 @@ static const t_char CHAOS_CRYSTAL_INFO =
     .stats = INITIALIZE_STATS,
     .dstats = CHAOS_CRYSTAL_DEFAULT_STATS,
     .feats = INITIALIZE_FEATS,
-    .struct_name = nullptr,
+    .struct_name = ft_nullptr,
     .physical = CHAOS_CRYSTAL_PHYSICAL,
 };
 

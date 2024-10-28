@@ -46,7 +46,7 @@ t_char *ft_maverick(const int index, const char **input, t_name *name, int excep
 
 	info = (t_char *)cma_calloc(1, sizeof(t_char), false);
 	if (!info)
-		return (nullptr);
+		return (ft_nullptr);
 	*info = MAVERICK_INFO;
 	info->name = input[0];
 	info->struct_name = name;
@@ -54,7 +54,7 @@ t_char *ft_maverick(const int index, const char **input, t_name *name, int excep
 	if (!info->save_file)
 	{
 		ft_free_info(info);
-		return (nullptr);
+		return (ft_nullptr);
 	}
 	if (index == 2)
 	{
@@ -63,25 +63,25 @@ t_char *ft_maverick(const int index, const char **input, t_name *name, int excep
 			ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
 			ft_printf("Stats for %s written on a file\n", info->name);
 			ft_free_info(info);
-			return (nullptr);
+			return (ft_nullptr);
 		}
 	}
 	error = ft_npc_open_file(info);
 	if (error)
 	{
 		ft_free_info(info);
-		return (nullptr);
+		return (ft_nullptr);
 	}
 	error = ft_npc_check_info(info);
 	if (error)
 	{
 		ft_free_info(info);
-		return (nullptr);
+		return (ft_nullptr);
 	}
 	ft_initialize_gear_and_feats(info);
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);
 	ft_free_info(info);
-	return (nullptr);
+	return (ft_nullptr);
 }

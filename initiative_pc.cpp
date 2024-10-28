@@ -1,5 +1,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
@@ -46,9 +47,9 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
     int i;
     int j;
 
-    player->name = nullptr;
+    player->name = ft_nullptr;
     player->initiative = -1;
-    player->next = nullptr;
+    player->next = ft_nullptr;
     i = 0;
     while (content[i])
     {
@@ -61,7 +62,7 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
         }
         if (ft_strncmp(content[i], "INITIATIVE=", 11) == 0 && (player->initiative == -1))
             player->initiative = ft_check_int(content[i], 11, filename);
-        else if (ft_strncmp(content[i], "NAME=", 5) == 0 && (player->name == nullptr))
+        else if (ft_strncmp(content[i], "NAME=", 5) == 0 && (player->name == ft_nullptr))
         {
             player->name = ft_check_string(content[i], 5);
             if (!player->name)

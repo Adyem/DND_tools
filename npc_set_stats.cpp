@@ -1,6 +1,7 @@
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "identification.hpp"
 
 int ft_set_stat_int(char *content_i, const char *key, int *field, int unset_value, t_char *info)
@@ -165,7 +166,7 @@ static int	ft_handle_set_stat_double_char(char *content_i, size_t key_len,
 				char ***target_field, t_char *info)
 {
     *target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
-    if (*target_field == nullptr)
+    if (*target_field == ft_nullptr)
         return (-1);
     return (0);
 }

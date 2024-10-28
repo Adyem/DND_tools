@@ -1,4 +1,5 @@
 #include "libft.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 void	*ft_memchr(const void *pointer, int number, size_t size)
 {
@@ -16,5 +17,5 @@ void	*ft_memchr(const void *pointer, int number, size_t size)
 		string++;
 		i++;
 	}
-	return (nullptr);
+	return (ft_nullptr);
 }

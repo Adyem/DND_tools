@@ -1,5 +1,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
 
@@ -25,7 +26,7 @@ void ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
             }
             target->debufs.hunters_mark.amount--;
             if (j > 0)
-                target->debufs.hunters_mark.caster_name[j - 1] = nullptr;
+                target->debufs.hunters_mark.caster_name[j - 1] = ft_nullptr;
 
             if (DEBUG == 1)
                 ft_printf("%s%s", "Found target with debuff and removed it: ", target->name);

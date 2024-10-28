@@ -1,5 +1,6 @@
 #include "string.hpp"
 #include "../CMA/CMA.hpp"
+#include "nullptr.hpp"
 
 void ft_string::resize(std::size_t new_capacity) noexcept
 {
@@ -17,13 +18,13 @@ void ft_string::resize(std::size_t new_capacity) noexcept
 }
 
 ft_string::ft_string() noexcept 
-    : data(nullptr), length(0), capacity(0), errorFlag(false), criticality(false)
+    : data(ft_nullptr), length(0), capacity(0), errorFlag(false), criticality(false)
 {
     return ;
 }
 
 ft_string::ft_string(const char* init_str, bool crit) noexcept 
-    : data(nullptr), length(0), capacity(0), errorFlag(false), criticality(crit)
+    : data(ft_nullptr), length(0), capacity(0), errorFlag(false), criticality(crit)
 {
     if (init_str)
     {
@@ -41,7 +42,7 @@ ft_string::ft_string(const char* init_str, bool crit) noexcept
 }
 
 ft_string::ft_string(const ft_string& other) noexcept 
-    : data(nullptr), length(other.length), capacity(other.capacity), 
+    : data(ft_nullptr), length(other.length), capacity(other.capacity), 
       errorFlag(other.errorFlag), criticality(other.criticality)
 {
     if (other.data)
@@ -61,7 +62,7 @@ ft_string& ft_string::operator=(const ft_string& other) noexcept
     if (this == &other)
         return (*this);
     cma_free(data);
-    data = nullptr;
+    data = ft_nullptr;
     length = other.length;
     capacity = other.capacity;
     errorFlag = other.errorFlag;
@@ -111,7 +112,7 @@ void ft_string::clear() noexcept
 const char* ft_string::at(std::size_t index) const noexcept
 {
     if (index >= length)
-        return (nullptr);
+        return (ft_nullptr);
     return (&data[index]);
 }
 

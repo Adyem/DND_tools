@@ -8,12 +8,12 @@ t_char	*ft_get_info(const char *tf_name, t_name *name)
 	int			found;
 	const char	*input[2];
 
-	info = nullptr;
+	info = ft_nullptr;
 	found = 0;
 	temp = name;
 	input[0] = tf_name;
 	input[1] = ft_nullptr;
-	while (temp != nullptr && !found)
+	while (temp != ft_nullptr && !found)
 	{
 		if (ft_strcmp_dnd(tf_name, temp->name) == 0)
 		{

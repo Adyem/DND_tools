@@ -1,11 +1,11 @@
 #ifndef MAVERICK_HPP
 # define MAVERICK_HPP
 
-#include "ranged_weapons.hpp"
-#include "melee_weapons.hpp"
-#include "character.hpp"
-#include "initialize.hpp"
-#include <stddef.h>
+# include "melee_weapons.hpp"
+# include "libft/CPP_class/nullptr.hpp"
+# include "character.hpp"
+# include "initialize.hpp"
+# include <stddef.h>
 
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
@@ -125,8 +125,8 @@ static const t_char MAVERICK_INFO =
 	.passive_perception = 20,
 	.initiative = -1,
 	.version_number = 2,
-	.save_file = nullptr,
-	.name = nullptr,
+	.save_file = ft_nullptr,
+	.name = ft_nullptr,
 	.turn = ft_maverick_turn,
 	.flags = INITIALIZE_FLAGS,
 	.crit = MAVERICK_CRIT,
@@ -142,7 +142,7 @@ static const t_char MAVERICK_INFO =
 	.stats = INITIALIZE_STATS,
 	.dstats = MAVERICK_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
-	.struct_name = nullptr,
+	.struct_name = ft_nullptr,
 	.physical = MAVERICK_PHYSICAL,
 };
 

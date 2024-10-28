@@ -1,5 +1,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include <fcntl.h>
@@ -35,12 +36,12 @@ int ft_remove_concentration(t_char *info)
         {
             if (ft_check_player_character(info->concentration.targets[i]) == 0)
             {
-                target = nullptr;
+                target = ft_nullptr;
                 i++;
                 continue ;
             } 
             else
-                target = nullptr;
+                target = ft_nullptr;
         }
         else
         {
@@ -57,7 +58,8 @@ int ft_remove_concentration(t_char *info)
             if (fd == -1)
             {
                 ft_free_info(target);
-                return (ft_printf_fd(2, "301-Error opening %s: %s\n", info->save_file, strerror(errno)), 1);
+                return (ft_printf_fd(2, "301-Error opening %s: %s\n", info->save_file,
+							strerror(errno)), 1);
             }
             ft_npc_write_file(target, &target->stats, &info->c_resistance, fd);
             ft_free_info(target);
@@ -71,7 +73,7 @@ int ft_remove_concentration(t_char *info)
     info->concentration.dice_faces_mod = 0;
     info->concentration.base_mod = 0;
 	cma_free_double(info->concentration.targets);
-    info->concentration.targets = nullptr;
+    info->concentration.targets = ft_nullptr;
     info->bufs.chaos_armor.duration = 0;
     return (0);
 }

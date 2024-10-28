@@ -2,6 +2,7 @@
 # define SHARED_PTR_HPP
 
 #include "../CMA/CMA.hpp"
+#include "nullptr.hpp"
 
 template <typename T>
 class SharedPtr
@@ -13,7 +14,7 @@ class SharedPtr
 		bool	errorFlag;
 
 	public:
-	    explicit SharedPtr(T* p = nullptr, bool crit = false);
+	    explicit SharedPtr(T* p = ft_nullptr, bool crit = false);
 	    SharedPtr(const SharedPtr<T>& other);
 	    ~SharedPtr();
 	    SharedPtr<T>& operator=(const SharedPtr<T>& other);
@@ -37,7 +38,7 @@ SharedPtr<T>::SharedPtr(T* p, bool crit)
 		{
             ptr->~T();
             cma_free(ptr);
-            ptr = nullptr;
+            ptr = ft_nullptr;
         }
     }
 	return ;

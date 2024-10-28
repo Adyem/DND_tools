@@ -1,6 +1,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/ReadLine/readline.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -44,12 +45,12 @@ static int ft_open_target_files(t_char *info, t_char **target, int *fd, char **s
             if (target[j])
             {
                 ft_free_info(target[j]);
-                target[j] = nullptr;
+                target[j] = ft_nullptr;
             }
             if (string[j])
             {
                 cma_free(string[j]);
-                string[j] = nullptr;
+                string[j] = ft_nullptr;
             }
 			j++;
         }
@@ -63,9 +64,9 @@ static void ft_initialize_variables(int *fd, char **string, t_char **target)
     int i = 0;
     while (i < 20)
     {
-        string[i] = nullptr;
+        string[i] = ft_nullptr;
         fd[i] = -1;
-        target[i] = nullptr;
+        target[i] = ft_nullptr;
         i++;
     }
     return ;
@@ -91,7 +92,7 @@ static char *ft_read_target_name(int i)
     if (!target_name)
     {
         ft_printf("108-Error: Failed to allocate memory for readline target\n");
-        return (nullptr);
+        return (ft_nullptr);
     }
     return (target_name);
 }
@@ -103,9 +104,9 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
         if (ft_check_player_character(target_name))
         {
             ft_printf("111-Error: target does not exist\n");
-            return (nullptr);
+            return (ft_nullptr);
         }
-        return (nullptr);
+        return (ft_nullptr);
     }
     else
     {
@@ -113,7 +114,7 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
         if (!target_info)
         {
             ft_printf("109-Error: getting info for %s\n", target_name);
-            return (nullptr);
+            return (ft_nullptr);
         }
         return (target_info);
     }
@@ -129,8 +130,8 @@ static void ft_free_memory_cmt(t_char **target, char **string, int amount)
             ft_free_info(target[j]);
         if (string[j])
             cma_free(string[j]);
-        target[j] = nullptr;
-        string[j] = nullptr;
+        target[j] = ft_nullptr;
+        string[j] = ft_nullptr;
         j++;
     }
     return ;
@@ -160,7 +161,7 @@ void ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff
         while (!target[i])
         {
             cma_free(string[i]);
-            string[i] = nullptr;
+            string[i] = ft_nullptr;
             i++;
         }
         i++;

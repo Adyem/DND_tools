@@ -65,10 +65,11 @@ void ft_initiative_sort_2(t_pc *players)
     while (1)
     {
         temp = players;
-        highest = nullptr;
+        highest = ft_nullptr;
         while (temp)
         {
-            if ((highest == nullptr || temp->initiative > highest->initiative) && temp->initiative != -1)
+            if ((highest == ft_nullptr || temp->initiative > highest->initiative)
+					&& temp->initiative != -1)
                 highest = temp;
             temp = temp->next;
         }

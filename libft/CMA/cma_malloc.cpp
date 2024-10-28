@@ -7,8 +7,9 @@
 #include <valgrind/memcheck.h>
 #include <csignal>
 #include "CMA.hpp"
+#include "../CPP_class/nullptr.hpp"
 
-Page *page_list = nullptr;
+Page *page_list = ft_nullptr;
 
 size_t align8(size_t size)
 {
@@ -21,7 +22,7 @@ void *cma_malloc(int size, bool critical)
         return malloc(size);
     size = align8(size);
     if (size == 0)
-        return nullptr;
+        return (ft_nullptr);
     Page* page = page_list;
     while (page)
 	{
@@ -84,7 +85,7 @@ void *cma_malloc(int size, bool critical)
         alloc_size = size + sizeof(Block) + sizeof(Page);
     void* page_memory = malloc(alloc_size);
     if (!page_memory)
-        return nullptr;
+        return (ft_nullptr);
     memset(page_memory, 0, alloc_size);
     Page* new_page = (Page*)page_memory;
     new_page->start = page_memory;
@@ -97,7 +98,7 @@ void *cma_malloc(int size, bool critical)
         page_list->prev = new_page;
         PROTECT_METADATA(page_list, sizeof(Page));
     }
-    new_page->prev = nullptr;
+    new_page->prev = ft_nullptr;
     page_list = new_page;
     uintptr_t first_block_addr = (uintptr_t)page_memory + sizeof(Page);
     first_block_addr = (first_block_addr + 7) & ~7;
@@ -106,8 +107,8 @@ void *cma_malloc(int size, bool critical)
     first_block->size = size;
     first_block->free = false;
     first_block->critical = critical;
-    first_block->next = nullptr;
-    first_block->prev = nullptr;
+    first_block->next = ft_nullptr;
+    first_block->prev = ft_nullptr;
     size_t used_size = first_block_addr - (uintptr_t)page_memory + sizeof(Block) + size;
     size_t remaining_size = alloc_size - used_size;
     if (remaining_size >= sizeof(Block) + 8)
@@ -120,7 +121,7 @@ void *cma_malloc(int size, bool critical)
         free_block->size = alloc_size - (free_block_addr - (uintptr_t)page_memory) - sizeof(Block);
         free_block->free = true;
         free_block->critical = critical;
-        free_block->next = nullptr;
+        free_block->next = ft_nullptr;
         free_block->prev = first_block;
         first_block->next = free_block;
         PROTECT_METADATA(free_block, sizeof(Block));

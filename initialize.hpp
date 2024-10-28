@@ -1,8 +1,9 @@
 #ifndef INITIALIZE_H
 # define INITIALIZE_H
 
-#include <stddef.h>
-#include "character.hpp"
+# include <stddef.h>
+# include "character.hpp"
+# include "libft/CPP_class/nullptr.hpp"
 
 static const	t_saves INITIALIZE_SAVES =
 {
@@ -72,9 +73,9 @@ static const	t_resistance INITIALIZE_CURRENT_RESISTANCE =
 
 static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 {
-	.function = nullptr,
-	.damage_type = nullptr,
-	.stat = nullptr,
+	.function = ft_nullptr,
+	.damage_type = ft_nullptr,
+	.stat = ft_nullptr,
 	.effect_type = 0,
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
@@ -85,8 +86,8 @@ static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 
 static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 {
-	.name = nullptr,
-	.projectile_name = nullptr,
+	.name = ft_nullptr,
+	.projectile_name = ft_nullptr,
 	.equipment_id = 0,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
@@ -136,7 +137,7 @@ static const	t_concentration INITIALIZE_CONCENTRATION =
 	.dice_faces_mod = 0,
 	.base_mod = 0,
 	.duration = 0,
-	.targets = nullptr,
+	.targets = ft_nullptr,
 };
 
 
@@ -146,7 +147,7 @@ static const	t_bless INITIALIZE_BLESS =
 	.dice_amount_mod = 1,
 	.dice_faces_mod = 4,
 	.base_mod = 0,
-	.target = nullptr,
+	.target = ft_nullptr,
 };
 
 static const	t_protective_winds INITIALIZE_PROTECTIVE_WINDS =
@@ -166,7 +167,7 @@ static const	t_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
 
 static const	t_air_totem INITIALIZE_AIR_TOTEM =
 {
-	.save_file = nullptr,
+	.save_file = ft_nullptr,
 	.health = 0,
 	.ac = 0,
 	.knock_back_distance = 0,
@@ -189,7 +190,7 @@ static const	t_meteor_strike INITIALIZE_METEOR_STRIKE =
 	.three_targets_d = 0,
 	.four_targets_d = 0,
 	.five_targets_d = 0,
-	.target_id = nullptr,
+	.target_id = ft_nullptr,
 };
 
 static const	t_chaos_armor INITIALIZE_CHAOS_ARMOR =
@@ -201,7 +202,7 @@ static const	t_earth_pounce INITIALIZE_EARTH_POUNCE =
 {
 	.active = 0,
 	.base_damage = 0,
-	.target_id = nullptr,
+	.target_id = ft_nullptr,
 };
 
 static const	t_arcane_pounce INITIALIZE_ARCANE_POUNCE =
@@ -209,14 +210,14 @@ static const	t_arcane_pounce INITIALIZE_ARCANE_POUNCE =
 	.active = 0,
 	.magic_damage = 0,
 	.erea_damage = 0,
-	.target_id = nullptr,
+	.target_id = ft_nullptr,
 };
 
 static const	t_frost_breath INITIALIZE_FROST_BREATH =
 {
 	.active = 0,
 	.damage = 0,
-	.target_id = nullptr,
+	.target_id = ft_nullptr,
 };
 
 static const	t_bufs INITIALIZE_BUFFS =
@@ -236,7 +237,7 @@ static const	t_bufs INITIALIZE_BUFFS =
 static const	t_hunters_mark INITIALIZE_HUNTERS_MARK =
 {
 	.amount = 0,
-	.caster_name = nullptr,
+	.caster_name = ft_nullptr,
 };
 
 static const	t_blinded INITIALIZE_BLINDED =

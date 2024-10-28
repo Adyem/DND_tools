@@ -1,6 +1,5 @@
 #include "dnd_tools.hpp"
 #include "goblin_warmaster.hpp"
-#include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CMA/CMA.hpp"
 
@@ -32,7 +31,7 @@ t_char *ft_goblin_warmaster(const int index, const char **input, t_name *name, i
 
     info = (t_char *)cma_calloc(1, sizeof(t_char), false);
     if (!info)
-        return (nullptr);
+        return (ft_nullptr);
     *info = WARM_INFO;
     info->name = input[0];
     info->struct_name = name;
@@ -40,7 +39,7 @@ t_char *ft_goblin_warmaster(const int index, const char **input, t_name *name, i
     if (!info->save_file)
     {
         ft_free_info(info);
-        return (nullptr);
+        return (ft_nullptr);
     }
     if (index == 2)
     {
@@ -49,25 +48,25 @@ t_char *ft_goblin_warmaster(const int index, const char **input, t_name *name, i
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
             ft_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
-            return (nullptr);
+            return (ft_nullptr);
         }
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (nullptr);
+        return (ft_nullptr);
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (nullptr);
+        return (ft_nullptr);
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
         return (info);
     ft_npc_change_stats(info, index, input);
     ft_free_info(info);
-    return (nullptr);
+    return (ft_nullptr);
 }

@@ -41,7 +41,7 @@ static void	ft_maverick_flame_geyser(t_char *info)
 static void ft_maverick_meteor_strike(t_char *info, char **player_list)
 {
 	cma_free(info->bufs.meteor_strike.target_id);
-	info->bufs.meteor_strike.target_id = nullptr;
+	info->bufs.meteor_strike.target_id = ft_nullptr;
 	ft_get_random_target((const char **)player_list,
 			(const char **)&info->bufs.meteor_strike.target_id);
 	info->bufs.meteor_strike.duration = 1;
@@ -57,7 +57,7 @@ static void ft_maverick_meteor_strike(t_char *info, char **player_list)
 static void	ft_maverick_earth_pounce(t_char *info, char **player_list)
 {
 	cma_free(info->bufs.earth_pounce.target_id);
-	info->bufs.earth_pounce.target_id = nullptr;
+	info->bufs.earth_pounce.target_id = ft_nullptr;
 	ft_get_random_target((const char **)player_list,
 			(const char **)&info->bufs.earth_pounce.target_id);
 	info->bufs.earth_pounce.active = 1;
@@ -69,7 +69,7 @@ static void	ft_maverick_earth_pounce(t_char *info, char **player_list)
 static void	ft_maverick_arcane_pounce(t_char *info, char **player_list)
 {
 	cma_free(info->bufs.frost_breath.target_id);
-	info->bufs.frost_breath.target_id = nullptr;
+	info->bufs.frost_breath.target_id = ft_nullptr;
 	ft_get_random_target((const char **)player_list,
 			(const char **)&info->bufs.arcane_pounce.target_id);
 	info->bufs.arcane_pounce.active = 1;
@@ -82,7 +82,7 @@ static void	ft_maverick_arcane_pounce(t_char *info, char **player_list)
 static void	ft_maverick_frost_breath(t_char *info, char **player_list)
 {
 	cma_free(info->bufs.frost_breath.target_id);
-	info->bufs.frost_breath.target_id = nullptr;
+	info->bufs.frost_breath.target_id = ft_nullptr;
 	ft_get_random_target((const char **)player_list,
 			(const char **)&info->bufs.frost_breath.target_id);
 	info->bufs.frost_breath.active = 1;

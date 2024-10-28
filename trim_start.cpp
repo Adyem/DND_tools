@@ -19,7 +19,7 @@ static char *str_new(size_t n)
     char *str = (char *)cma_malloc(sizeof(char) * (n + 1), false);
 
     if (!str)
-        return (nullptr);
+        return (ft_nullptr);
     for (size_t i = 0; i <= n; i++)
         str[i] = '\0';
     return (str);
@@ -32,7 +32,7 @@ char *ft_strtrim_prefix(const char *s1, const char *prefix)
     char *trimmed_str;
 
     if (!s1 || !prefix)
-        return (nullptr);
+        return (ft_nullptr);
     prefix_len = str_len(prefix);
     s1_len = str_len(s1);
 

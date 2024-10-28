@@ -5,13 +5,14 @@
 #include "character.hpp"
 #include "identification.hpp"
 #include "initialize.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 
 void	ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand);
 
 static const t_equipment_id STEEL_SWORD =
 {
 	.name = "steel sword",
-	.projectile_name = nullptr,
+	.projectile_name = ft_nullptr,
 	.equipment_id = STEEL_SWORD_ID,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
@@ -52,7 +53,7 @@ static const t_equipment_id STEEL_SWORD =
 static const t_equipment_id STEEL_BATTLE_AXE =
 {
 	.name = "steel battle axe",
-	.projectile_name = nullptr,
+	.projectile_name = ft_nullptr,
 	.equipment_id = STEEL_BATTLE_AXE_ID,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
@@ -93,7 +94,7 @@ static const t_equipment_id STEEL_BATTLE_AXE =
 static const t_equipment_id WOODEN_CLUB =
 {
 	.name = "wooden club",
-	.projectile_name = nullptr,
+	.projectile_name = ft_nullptr,
 	.equipment_id = WOODEN_CLUB_ID,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
@@ -134,7 +135,7 @@ static const t_equipment_id WOODEN_CLUB =
 static const t_equipment_id CLAW =
 {
 	.name = "claw",
-	.projectile_name = nullptr,
+	.projectile_name = ft_nullptr,
 	.equipment_id = CLAW_ID,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
@@ -175,7 +176,7 @@ static const t_equipment_id CLAW =
 static const t_equipment_id CLAW_OH =
 {
 	.name = "claw",
-	.projectile_name = nullptr,
+	.projectile_name = ft_nullptr,
 	.equipment_id = CLAW_ID,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,

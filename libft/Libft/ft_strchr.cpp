@@ -1,11 +1,12 @@
 #include "libft.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 char	*ft_strchr(const char *s, int i)
 {
 	char	c;
 
 	if (!s)
-		return (nullptr);
+		return (ft_nullptr);
 	c = (char)i;
 	while (*s)
 	{
@@ -15,5 +16,5 @@ char	*ft_strchr(const char *s, int i)
 	}
 	if (c == '\0')
 		return ((char *)s);
-	return (nullptr);
+	return (ft_nullptr);
 }

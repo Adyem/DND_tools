@@ -7,17 +7,18 @@
 #include <csignal>
 #include "CMA.hpp"
 #include "../Printf/ft_printf.hpp"
+#include "../CPP_class/nullptr.hpp"
 
 void* cma_realloc(void* ptr, size_t new_size, bool critical)
 {
 	if (DEBUG == 1 || OFFSWITCH == 1)
 		return (realloc(ptr, new_size));
-    if (ptr == nullptr)
+    if (ptr == ft_nullptr)
         return cma_malloc(new_size, critical);
     if (new_size == 0)
     {
         cma_free(ptr);
-        return nullptr;
+        return (ft_nullptr);
     }
     size_t aligned_new_size = align8(new_size);
     Block* block = (Block*)((char*)ptr - sizeof(Block));
@@ -75,7 +76,7 @@ void* cma_realloc(void* ptr, size_t new_size, bool critical)
                     }
                     PROTECT_METADATA(next_block, sizeof(Block));
                     can_expand = true;
-                    break;
+                    break ;
                 }
                 else
                 {
@@ -86,7 +87,7 @@ void* cma_realloc(void* ptr, size_t new_size, bool critical)
             else
             {
                 PROTECT_METADATA(next_block, sizeof(Block));
-                break;
+                break ;
             }
         }
 
@@ -114,7 +115,7 @@ void* cma_realloc(void* ptr, size_t new_size, bool critical)
                 PROTECT_METADATA(new_block, sizeof(Block));
             }
             PROTECT_METADATA(block, sizeof(Block));
-            return ptr;
+            return (ptr);
         }
         else
         {
@@ -122,13 +123,13 @@ void* cma_realloc(void* ptr, size_t new_size, bool critical)
             if (!new_ptr)
             {
                 PROTECT_METADATA(block, sizeof(Block));
-                return (nullptr);
+                return (ft_nullptr);
             }
             size_t copy_size = block->size;
             memcpy(new_ptr, ptr, copy_size);
             cma_free(ptr);
             PROTECT_METADATA(block, sizeof(Block));
-            return new_ptr;
+            return (new_ptr);
         }
     }
 }

@@ -1,4 +1,5 @@
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "dnd_tools.hpp"
@@ -75,13 +76,13 @@ static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *targ
     if (fd[0] == -1)
     {
         info->flags.alreaddy_saved = 1;
-        ft_cast_concentration_cleanup(info, target, fd, nullptr, 4);
+        ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 4);
         return (1) ;
     }
     fd[1] = ft_open_file_write_only(target->save_file);
     if (fd[1] == -1)
     {
-        ft_cast_concentration_cleanup(info, target, fd, nullptr, 5);
+        ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 5);
         return (1) ;
     }
     return (0) ;
@@ -103,7 +104,7 @@ int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
         if (ft_check_player_character(input[3]))
             return(1);
         else
-            target = nullptr;
+            target = ft_nullptr;
     }
     else
     {

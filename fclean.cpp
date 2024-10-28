@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -16,7 +17,7 @@ void ft_fclean(void)
     command[0] = "/bin/sh";
     command[1] = "-c";
     command[2] = "rm -rf ./data/*";
-    command[3] = nullptr;
+    command[3] = ft_nullptr;
     if (dnd_test == false && ft_read_line_confirm("type yes to confirm or no to abort: "))
         return ;
     pid = fork();
@@ -52,7 +53,7 @@ void ft_clean(void)
     command[0] = "/bin/sh";
     command[1] = "-c";
     command[2] = "rm -rf ./logs/*";
-    command[3] = nullptr;
+    command[3] = ft_nullptr;
     if (dnd_test == 0 && ft_read_line_confirm("type yes to confirm or no to abort: "))
         return ;
     pid = fork();
