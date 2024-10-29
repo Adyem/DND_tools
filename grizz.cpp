@@ -9,6 +9,8 @@ void ft_grizz_crackback(t_char *info, int number)
 {
 	if (number < 10 && !info->flags.reaction_used)
 	{
+		ft_printf("because of the low attack roll %s has the oppertunity to react with an " \
+				"oppertunity attack", info->name);
 		if (info->equipment.weapon.attack.function)
 			info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
 		else
