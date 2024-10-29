@@ -2,28 +2,11 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 
-static int ft_calculate_ac(t_char *info)
+void ft_pc_specific(t_char *info, int number)
 {
-	int ac;
-
-	ac = 10;
-	if (((info->stats.dex - 10) / 2) > info->equipment.armor.dex_ac_max_bonus)
-		ac += info->equipment.armor.dex_ac_max_bonus;
-	else
-		ac += (info->stats.dex - 10) / 2;
-	ac += info->equipment.weapon.ac;
-	ac += info->equipment.offhand_weapon.ac;
-	ac += info->equipment.ranged_weapon.ac;
-	ac += info->equipment.armor.ac;
-	ac += info->equipment.helmet.ac;
-	ac += info->equipment.shield.ac;
-	ac += info->equipment.boots.ac;
-	ac += info->equipment.gloves.ac;
-	ac += info->equipment.amulet.ac;
-	ac += info->equipment.ring_01.ac;
-	ac += info->equipment.ring_02.ac;
-	ac += info->equipment.belt.ac;
-	return (ac);
+	if (ft_strcmp_dnd(info->name, "grizz"))
+		ft_grizz_crackback(info, number);
+	return ;
 }
 
 void ft_npc_check_ac(t_char *info, const char **input)
@@ -59,5 +42,7 @@ void ft_npc_check_ac(t_char *info, const char **input)
 	}
 	else
 		ft_printf_fd(2, "2-to hit expecting a number between 1 and 99 or the word 'crit'\n");
+	ft_pc_specific(info, number);
+
 	return ;
 }

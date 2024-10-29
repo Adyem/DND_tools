@@ -48,6 +48,7 @@ void		ft_chaos_goblin_turn(t_char *info);
 //Grizz
 t_char		*ft_grizz(const int index, const char **input, t_name *name, int exception);
 void		ft_grizz_turn(t_char *info);
+void		ft_grizz_crackback(t_char *info, int number);
 
 //Veraak
 t_char		*ft_veraak(const int index, const char **input, t_name *name, int exception);
@@ -116,6 +117,7 @@ int			ft_calculate_con(t_char *info);
 int			ft_calculate_inte(t_char *info);
 int			ft_calculate_wis(t_char *info);
 int			ft_calculate_cha(t_char *info);
+int			ft_calculate_ac(t_char *info);
 
 //calculate skill mods
 int			ft_calculate_athletics(t_char *info);
