@@ -1,3 +1,4 @@
+#include "character.hpp"
 #include "dnd_tools.hpp"
 #include "grizz.hpp"
 #include "libft/Printf/ft_printf.hpp"
@@ -15,6 +16,14 @@ void ft_grizz_turn(t_char *info)
 	else
 		ft_printf("The grizz will try to make either a ranged or melee attack during his turn\n");
 	ft_printf("Grizz currently has %d/%d hp\n", info->stats.health, info->dstats.health);
+	if (info->stats.health < info->dstats.health / 2)
+	{
+		ft_printf("Grizz uses Roar of the Grizz!\n");
+    	ft_printf("All enemies within 15 feet must make a DC 14 Wisdom saving throw.\n");
+    	ft_printf("On a failed save, enemies are frightened, imposing disadvantage on their " \
+				"attack rolls against Grizz until the end of their next turn.\n");
+	}
+	info->flags.reaction_used = 0;
 	return ;
 }
 
@@ -26,8 +35,8 @@ static void ft_initialize_gear_and_feats(t_char *info)
 
 t_char *ft_grizz(const int index, const char **input, t_name *name, int exception)
 {
-	int error;
-	t_char *info;
+	int		error;
+	t_char	*info;
 
 	info = (t_char *)cma_calloc(1, sizeof(t_char), false);
 	if (!info)

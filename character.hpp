@@ -320,6 +320,7 @@ typedef struct s_flags
 	int				flanking;
 	int				advantage;
 	int				prone;
+	int				reaction_used;
 }	t_flags;
 
 typedef struct s_physical

@@ -258,6 +258,7 @@ static const	t_flags INITIALIZE_FLAGS =
 	.flanking = 0,
 	.advantage = 0,
 	.prone = 0,
+	.reaction_used = 0,
 };
 
 static const	t_feats INITIALIZE_FEATS =

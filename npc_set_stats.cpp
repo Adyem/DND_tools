@@ -146,7 +146,9 @@ int ft_set_stats_2(t_char *info, char **content, int i)
         ft_set_stat_int(content[i], FROST_BREATH_ACTIVE_KEY,
 			&(info->bufs.frost_breath.active), 0, info) ||
         ft_set_stat_int(content[i], FROST_BREATH_DAMAGE_KEY,
-			&(info->bufs.frost_breath.damage), 0, info))
+			&(info->bufs.frost_breath.damage), 0, info) ||
+		ft_set_stat_int(content[i], REACTION_USED_KEY,
+			&(info->flags.reaction_used), 0, info))
     {
         return (0);
     }

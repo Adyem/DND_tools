@@ -111,5 +111,6 @@ t_name *ft_allocate_memory_name()
     ft_add_node(first_node, &last_node, "gundren_rockseeker", ft_gundren_rockseeker);
     ft_add_node(first_node, &last_node, "goblin_warmaster", ft_goblin_warmaster);
 	ft_add_node(first_node, &last_node, "maverick", ft_maverick);
+	ft_add_node(first_node, &last_node, "Grizz", ft_grizz);
     return (first_node);
 }

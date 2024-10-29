@@ -28,6 +28,7 @@ SRC         = name.cpp \
               chaos_crystal.cpp \
               gundren_rockseeker.cpp \
               goblin_warmaster.cpp \
+			  grizz.cpp \
               main.cpp \
               template.cpp \
               npc_stats.cpp \

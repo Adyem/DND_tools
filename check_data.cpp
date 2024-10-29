@@ -107,6 +107,8 @@ int ft_npc_check_info_2(t_char *info)
 		error += ft_printf("%s arcane pounce erea damage is out of bounds\n", info->name);
 	if (info->bufs.arcane_pounce.magic_damage < 0 || info->bufs.arcane_pounce.magic_damage > 1000)
 		error += ft_printf("%s arcane pounce magic damage is out of bounds\n", info->name);
+	if (info->flags.reaction_used < 0 || info->flags.reaction_used > 1)
+		error += ft_printf("%s reaction used is out of bounds\n", info->name);
     return (error);
 }
 

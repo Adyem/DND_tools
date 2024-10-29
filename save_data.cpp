@@ -139,6 +139,8 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 	if (info->bufs.earth_pounce.target_id)
 		ft_printf_fd(fd, "%s%s\n", EARTH_POUNCE_TARGET_ID_KEY,
 			info->bufs.earth_pounce.target_id);
+	ft_printf_fd(fd, "%s%i\n", REACTION_USED_KEY,
+			info->flags.reaction_used);
 	return ;
 }
 
