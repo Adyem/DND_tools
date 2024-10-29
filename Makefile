@@ -113,7 +113,8 @@ SRC         = name.cpp \
               print_abilities.cpp \
               get_pc_list.cpp \
               get_random_target.cpp \
-              npc_set_stats_player.cpp
+              npc_set_stats_player.cpp \
+			  feats.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17

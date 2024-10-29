@@ -5,21 +5,6 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/CMA/CMA.hpp"
 
-void ft_grizz_crackback(t_char *info, int number)
-{
-	if (number < 10 && !info->flags.reaction_used)
-	{
-		ft_printf("because of the low attack roll %s has the oppertunity to react with an " \
-				"oppertunity attack", info->name);
-		if (info->equipment.weapon.attack.function)
-			info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
-		else
-			ft_printf_fd(2, "No MH weapon set for %s", info->name);
-		info->flags.reaction_used = 1;
-	}
-	return ;
-}
-
 void ft_grizz_turn(t_char *info)
 {
 	ft_update_buf(info);
@@ -44,7 +29,7 @@ void ft_grizz_turn(t_char *info)
 
 static void ft_initialize_gear_and_feats(t_char *info)
 {
-	(void)info;
+	info->feats.crackback.active = 1;
 	return ;
 }
 

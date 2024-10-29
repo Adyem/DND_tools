@@ -48,7 +48,6 @@ void		ft_chaos_goblin_turn(t_char *info);
 //Grizz
 t_char		*ft_grizz(const int index, const char **input, t_name *name, int exception);
 void		ft_grizz_turn(t_char *info);
-void		ft_grizz_crackback(t_char *info, int number);
 
 //Veraak
 t_char		*ft_veraak(const int index, const char **input, t_name *name, int exception);
@@ -195,6 +194,9 @@ void		ft_update_meteor_strike(t_char *info);
 void		ft_update_earth_pounce(t_char *info);
 void		ft_update_arcane_pounce(t_char *info);
 void		ft_update_frost_breath(t_char *info);
+
+//feats
+void		ft_crackback(t_char *info, int number);
 
 //general buffs
 int			ft_check_bless(t_char *info);

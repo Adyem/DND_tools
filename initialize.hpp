@@ -261,8 +261,14 @@ static const	t_flags INITIALIZE_FLAGS =
 	.reaction_used = 0,
 };
 
+static const	t_crackback INITIALIZE_CRACKBACK =
+{
+	.active = 0,
+};
+
 static const	t_feats INITIALIZE_FEATS =
 {
+	.crackback = INITIALIZE_CRACKBACK,
 };
 
 #endif

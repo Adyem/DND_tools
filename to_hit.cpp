@@ -5,7 +5,7 @@
 void ft_pc_specific(t_char *info, int number)
 {
 	if (ft_strcmp_dnd(info->name, "grizz"))
-		ft_grizz_crackback(info, number);
+		ft_crackback(info, number);
 	return ;
 }
 

@@ -239,8 +239,14 @@ typedef struct	s_resistance
 	int	thunder;
 }	t_resistance;
 
+typedef struct s_crackback
+{
+	int	active;
+}	t_crackback;
+
 typedef struct s_feats
 {
+	t_crackback	crackback;
 }	t_feats;
 
 typedef struct s_equipment_action
