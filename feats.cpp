@@ -3,7 +3,7 @@
 
 void ft_crackback(t_char *info, int number)
 {
-	if (info->feats.crackback.active == 0 && number < 10 && !info->flags.reaction_used)
+	if (number < 10 && !info->flags.reaction_used)
 	{
 		ft_printf("because of the low attack roll %s has the oppertunity to react with an " \
 				"oppertunity attack", info->name);

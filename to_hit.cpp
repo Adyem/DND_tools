@@ -4,7 +4,7 @@
 
 void ft_pc_specific(t_char *info, int number)
 {
-	if (ft_strcmp_dnd(info->name, "grizz"))
+	if (info->feats.crackback.active)
 		ft_crackback(info, number);
 	return ;
 }
