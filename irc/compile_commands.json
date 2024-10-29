@@ -1,0 +1,325 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/channel.o",
+      "channel.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/channel.cpp",
+    "output": "/home/adyem/irc/objs/channel.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/check_input.o",
+      "check_input.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/check_input.cpp",
+    "output": "/home/adyem/irc/objs/check_input.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/create_socket.o",
+      "create_socket.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/create_socket.cpp",
+    "output": "/home/adyem/irc/objs/create_socket.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/main.o",
+      "main.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/main.cpp",
+    "output": "/home/adyem/irc/objs/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/server_class.o",
+      "server_class.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/server_class.cpp",
+    "output": "/home/adyem/irc/objs/server_class.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/start_communication.o",
+      "start_communication.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/start_communication.cpp",
+    "output": "/home/adyem/irc/objs/start_communication.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/client_class.o",
+      "client_class.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/client_class.cpp",
+    "output": "/home/adyem/irc/objs/client_class.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/new_client.o",
+      "new_client.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/new_client.cpp",
+    "output": "/home/adyem/irc/objs/new_client.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/kick.o",
+      "kick.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/kick.cpp",
+    "output": "/home/adyem/irc/objs/kick.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/invite.o",
+      "invite.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/invite.cpp",
+    "output": "/home/adyem/irc/objs/invite.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/part.o",
+      "part.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/part.cpp",
+    "output": "/home/adyem/irc/objs/part.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/quit.o",
+      "quit.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/quit.cpp",
+    "output": "/home/adyem/irc/objs/quit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/split_command.o",
+      "split_command.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/split_command.cpp",
+    "output": "/home/adyem/irc/objs/split_command.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/ping_pong.o",
+      "ping_pong.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/ping_pong.cpp",
+    "output": "/home/adyem/irc/objs/ping_pong.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/cap.o",
+      "cap.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/cap.cpp",
+    "output": "/home/adyem/irc/objs/cap.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/excecute_cmd.o",
+      "excecute_cmd.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/excecute_cmd.cpp",
+    "output": "/home/adyem/irc/objs/excecute_cmd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/send_handshake.o",
+      "send_handshake.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/send_handshake.cpp",
+    "output": "/home/adyem/irc/objs/send_handshake.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/data_handling.o",
+      "data_handling.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/data_handling.cpp",
+    "output": "/home/adyem/irc/objs/data_handling.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-std=c++98",
+      "-I.",
+      "-c",
+      "-o",
+      "objs/accept_client.o",
+      "accept_client.cpp"
+    ],
+    "directory": "/home/adyem/irc",
+    "file": "/home/adyem/irc/accept_client.cpp",
+    "output": "/home/adyem/irc/objs/accept_client.o"
+  }
+]
