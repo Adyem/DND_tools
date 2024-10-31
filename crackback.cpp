@@ -15,10 +15,10 @@ void ft_crackback(t_char *info, int number)
 	if (number < 10 && !info->flags.reaction_used)
 	{
 		ft_printf("because of the low attack roll %s has the oppertunity to react with an " \
-				"oppertunity attack", info->name);
+				"oppertunity attack\n", info->name);
 		while (1)
 		{
-			line = rl_readline("CRACKBACK: ranged or melee attack?");
+			line = rl_readline("CRACKBACK: ranged or melee attack: ");
 			if (!line)
 				return (ft_printf_fd(2, "117-Error: failed to allocate memory for readline %s",
 							info->name), (void)0);
