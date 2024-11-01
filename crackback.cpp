@@ -20,7 +20,7 @@ void ft_crackback(t_char *info, int number)
 		{
 			line = rl_readline("CRACKBACK: ranged or melee attack: ");
 			if (!line)
-				return (ft_printf_fd(2, "117-Error: failed to allocate memory for readline %s",
+				return (ft_printf_fd(2, "117-Error: failed to allocate memory for readline %s\n",
 							info->name), (void)0);
 			if (ft_strcmp_dnd(line, "ranged"))
 			{
@@ -31,7 +31,7 @@ void ft_crackback(t_char *info, int number)
 				}
 				else
 				{	
-					ft_printf_fd(2, "No MH weapon set for %s", info->name);
+					ft_printf_fd(2, "No MH weapon set for %s\n", info->name);
 					melee = 1;
 				}
 			}
@@ -45,7 +45,7 @@ void ft_crackback(t_char *info, int number)
 				}
 				else
 				{
-					ft_printf_fd(2, "No ranged weapon set for %s", info->name);
+					ft_printf_fd(2, "No ranged weapon set for %s\n", info->name);
 					ranged = 1;
 				}
 			}
@@ -56,7 +56,7 @@ void ft_crackback(t_char *info, int number)
 			}
 			else 
 			{
-				ft_printf_fd(2, "118-Error: Invalid input Crackback");
+				ft_printf_fd(2, "118-Error: Invalid input Crackback\n");
 				cma_free(line);
 				continue ;
 			}
