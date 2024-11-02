@@ -1,5 +1,6 @@
 #include "string.hpp"
 #include "../CMA/CMA.hpp"
+#include "../Libft/libft.hpp"
 #include "nullptr.hpp"
 
 void ft_string::resize(std::size_t new_capacity) noexcept
@@ -76,6 +77,28 @@ ft_string& ft_string::operator=(const ft_string& other) noexcept
             return (*this);
         }
         std::memcpy(data, other.data, length + 1);
+    }
+
+    return (*this);
+}
+
+ft_string& ft_string::operator=(const char *&other) noexcept
+{
+    cma_free(data);
+    data = ft_nullptr;
+    length = ft_strlen(other);
+    capacity = ft_strlen(other);
+    errorFlag = false;
+    criticality = false;
+    if (other)
+    {
+        data = static_cast<char*>(cma_malloc(capacity, criticality));
+        if (!data)
+        {
+            errorFlag = true;
+            return (*this);
+        }
+        std::memcpy(this->data, other, length + 1);
     }
 
     return (*this);

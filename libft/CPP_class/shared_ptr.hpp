@@ -12,7 +12,6 @@ class SharedPtr
 	    int		*ref_count;
 	    bool	criticality;
 		bool	errorFlag;
-
 	public:
 	    explicit SharedPtr(T* p = ft_nullptr, bool crit = false);
 	    SharedPtr(const SharedPtr<T>& other);
@@ -33,12 +32,17 @@ SharedPtr<T>::SharedPtr(T* p, bool crit)
         *ref_count = 1;
 	else
 	{
-        errorFlag = true;
-        if (ptr)
+		if (!ptr)
+		{
+        	errorFlag = true;
+			return ;
+		}
+		else if (ptr)
 		{
             ptr->~T();
             cma_free(ptr);
             ptr = ft_nullptr;
+			errorFlag = false;
         }
     }
 	return ;
