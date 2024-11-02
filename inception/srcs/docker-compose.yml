@@ -1,0 +1,105 @@
+# Docker Compose file version
+version: "3.5"
+
+# Mounting Docker volumes to local directories
+volumes:
+  # Volume for WordPress data
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      # Path on the host where the volume is located
+      device: /home/adyem/data/wordpress
+      # Mount the volume in bind mode
+      o: bind
+      type: none
+
+  # Volume for MariaDB data
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      device: /home/adyem/data/mariadb
+      o: bind
+      type: none
+
+# The network of the application
+networks:
+  inception:
+    name: inception
+
+# The services of the application
+services:
+  # Nginx service
+  nginx:
+    container_name: nginx
+    build: 
+      context: ./requirements/nginx
+      # Build arguments
+      args:
+        - DOMAIN=${DOMAIN}
+        - CERTS_=${CERTS_}
+    restart: always
+    # Exposed ports
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
+    # Networks with access to this service and vise versa
+    networks:
+      - inception
+    env_file:
+      - .env
+
+  # WordPress service
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      args:
+        - DOMAIN=${DOMAIN}
+        - DB_NAME=${DB_NAME}
+        - ADM_PASS=${ADM_PASS}
+        - ADM_USER=${ADM_USER}
+        - DB_HOST=${DB_HOST}
+        - TITLE=${TITLE}
+        - ADM_MAIL=${ADM_EMAIL}
+        - NORMAL_USER=${NORMAL_USER}
+        - NORMAL_PASS=${NORMAL_PASS}
+        - NORMAL_MAIL=${NORMAL_EMAIL}
+    restart: always
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    env_file:
+      - .env
+
+  # MariaDB service
+  mariadb:
+    container_name: mariadb
+    build: 
+      context: ./requirements/mariadb
+      args:
+        - DB_NAME=${DB_NAME}
+        - ADM_USER=${ADM_USER}
+        - ADM_PASS=${ADM_PASS}
+        - ROOT_PASS=${MYSQL_ROOT_PASS}
+    restart: always
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
