@@ -18,11 +18,11 @@ void ft_crackback(t_char *info, int number)
 				"oppertunity attack\n", info->name);
 		while (1)
 		{
-			line = rl_readline("CRACKBACK: ranged or melee attack: ");
+			line = rl_readline("CRACKBACK: ranged or melee attack or type exit to do nothing: ");
 			if (!line)
 				return (ft_printf_fd(2, "117-Error: failed to allocate memory for readline %s\n",
 							info->name), (void)0);
-			if (ft_strcmp_dnd(line, "ranged"))
+			if (ft_strcmp_dnd(line, "melee"))
 			{
 				if (info->equipment.weapon.attack.function)
 				{
