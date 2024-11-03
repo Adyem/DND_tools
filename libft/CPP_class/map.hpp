@@ -3,45 +3,44 @@
 
 #include "pair.hpp"
 #include "../CMA/CMA.hpp"
+#include <cstddef>
 
 template <typename KeyType, typename ValueType>
 class Map
 {
-private:
-    struct Node
-    {
-        Pair<KeyType, ValueType> data;
-        Node* left;
-        Node* right;
+	private:
+    	Pair<KeyType, ValueType>	*data;
+    	std::size_t					capacity;
+    	std::size_t					size;
+    	bool						critical;
+    	bool						error;
 
-        Node(const KeyType& key, const ValueType& value)
-            : data{key, value}, left(nullptr), right(nullptr) {}
-    };
-	bool	critical;
-	bool	error;
-    Node	*root;
+	public:
+    	Map(std::size_t initialCapacity = 10, bool criticality = false);
+    	~Map();
 
-public:
-    Map();
-    ~Map();
+    	void		insert(const KeyType& key, const ValueType& value);
+    	ValueType	*find(const KeyType& key);
+    	void		remove(const KeyType& key);
+    	bool		empty() const;
+    	void		clear();
+    	std::size_t	getSize() const;
+    	std::size_t	getCapacity() const;
+		bool		getError() const;
 
-    void insert(const KeyType& key, const ValueType& value);
-    ValueType* find(const KeyType& key);
-    void remove(const KeyType& key);
-    bool empty() const;
-    void clear();
-
-private:
-    void insert(Node*& node, const KeyType& key, const ValueType& value);
-    ValueType* find(Node* node, const KeyType& key) const;
-    void remove(Node*& node, const KeyType& key);
-    void clear(Node* node);
+	private:
+	    void resize(std::size_t newCapacity);
+    	std::size_t findIndex(const KeyType& key) const;
 };
 
-
 template <typename KeyType, typename ValueType>
-Map<KeyType, ValueType>::Map() : root(nullptr)
+Map<KeyType, ValueType>::Map(std::size_t initialCapacity, bool criticality)
+    : capacity(initialCapacity), size(0), critical(criticality), error(false)
 {
+    data = static_cast<Pair<KeyType, ValueType>*>(cma_malloc(sizeof(Pair<KeyType, ValueType>)
+				* capacity, critical));
+	if (!data)
+		error = true;
 	return ;
 }
 
@@ -49,120 +48,124 @@ template <typename KeyType, typename ValueType>
 Map<KeyType, ValueType>::~Map()
 {
     clear();
+    cma_free(data);
 	return ;
 }
 
 template <typename KeyType, typename ValueType>
 void Map<KeyType, ValueType>::insert(const KeyType& key, const ValueType& value)
 {
-    insert(root, key, value);
-	return ;
-}
+    std::size_t index = findIndex(key);
+    if (index != size)
+    {
+        data[index].value = value;
+        return ;
+    }
 
-template <typename KeyType, typename ValueType>
-void Map<KeyType, ValueType>::insert(Node*& node, const KeyType& key, const ValueType& value)
-{
-	if (node == nullptr)
-        node = new Node(key, value);
-	else if (key < node->data.key)
-        insert(node->left, key, value);
-	else if (key > node->data.key)
-        insert(node->right, key, value);
-	else
-    	node->data.value = value;
+    if (size == capacity)
+    {
+        resize(capacity * 2);
+        if (error)
+            return ;
+    }
+    data[size++] = Pair<KeyType, ValueType>{key, value};
 	return ;
 }
 
 template <typename KeyType, typename ValueType>
 ValueType* Map<KeyType, ValueType>::find(const KeyType& key)
 {
-    return (find(root, key));
-}
-
-template <typename KeyType, typename ValueType>
-ValueType* Map<KeyType, ValueType>::find(Node* node, const KeyType& key) const
-{
-	if (node == nullptr)
-        return (nullptr);
-	else if (key < node->data.key)
-        return (find(node->left, key));
-	else if (key > node->data.key)
-        return (find(node->right, key));
-	else
-        return (&node->data.value);
+	std::size_t i = 0;
+	while (i < size)
+    {
+        if (data[i].key == key)
+            return (&data[i].value);
+		i++;
+    }
+    return (nullptr);
 }
 
 template <typename KeyType, typename ValueType>
 void Map<KeyType, ValueType>::remove(const KeyType& key)
 {
-    remove(root, key);
-	return ;
-}
-
-template <typename KeyType, typename ValueType>
-void Map<KeyType, ValueType>::remove(Node*& node, const KeyType& key)
-{
-    if (node == nullptr)
-        return ;
-    if (key < node->data.key)
-        remove(node->left, key);
-    else if (key > node->data.key)
-        remove(node->right, key);
-    else
+	std::size_t i = 0;
+    while (i < size)
     {
-        if (node->left == nullptr && node->right == nullptr)
+        if (data[i].key == key)
         {
-            delete node;
-            node = nullptr;
+            data[i] = data[size - 1];
+            --size;
+            return ;
         }
-        else if (node->left == nullptr)
-        {
-            Node* temp = node;
-            node = node->right;
-            delete temp;
-        }
-        else if (node->right == nullptr)
-        {
-            Node* temp = node;
-            node = node->left;
-            delete temp;
-        }
-        else
-        {
-            Node* successor = node->right;
-            while (successor->left != nullptr)
-                successor = successor->left;
-
-            node->data = successor->data;
-            remove(node->right, successor->data.key);
-        }
+		i++;
     }
+	return ;
 }
 
 template <typename KeyType, typename ValueType>
 bool Map<KeyType, ValueType>::empty() const
 {
-    return (root == nullptr);
+    return (size == 0);
 }
 
 template <typename KeyType, typename ValueType>
 void Map<KeyType, ValueType>::clear()
 {
-    clear(root);
-    root = nullptr;
+    size = 0;
 	return ;
 }
 
 template <typename KeyType, typename ValueType>
-void Map<KeyType, ValueType>::clear(Node* node)
+std::size_t Map<KeyType, ValueType>::getSize() const
 {
-    if (node != nullptr)
+    return (size);
+}
+
+template <typename KeyType, typename ValueType>
+bool Map<KeyType, ValueType>::getError() const
+{
+    return (error);
+}
+
+template <typename KeyType, typename ValueType>
+std::size_t Map<KeyType, ValueType>::getCapacity() const
+{
+    return (capacity);
+}
+
+template <typename KeyType, typename ValueType>
+void Map<KeyType, ValueType>::resize(std::size_t newCapacity)
+{
+    Pair<KeyType, ValueType>* newData = static_cast<Pair<KeyType,
+		ValueType>*>(cma_malloc(sizeof(Pair<KeyType, ValueType>) * newCapacity, critical));
+    if (!newData)
     {
-        clear(node->left);
-        clear(node->right);
-        delete node;
+        error = true;
+        return ;
     }
+	std::size_t i = 0;
+    while (i < size)
+	{
+        newData[i] = data[i];
+		i++;
+	}
+    cma_free(data);
+    data = newData;
+    capacity = newCapacity;
 	return ;
+}
+
+template <typename KeyType, typename ValueType>
+std::size_t Map<KeyType, ValueType>::findIndex(const KeyType& key) const
+{
+	std::size_t i = 0;
+    while (i < size)
+    {
+        if (data[i].key == key)
+            return (i);
+		i++;
+    }
+    return (size);
 }
 
 #endif
