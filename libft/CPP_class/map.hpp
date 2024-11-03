@@ -1,9 +1,9 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
-#include "pair.hpp"
-#include "../CMA/CMA.hpp"
-#include <cstddef>
+# include "pair.hpp"
+# include "../CMA/CMA.hpp"
+# include <cstddef>
 
 template <typename KeyType, typename ValueType>
 class Map
