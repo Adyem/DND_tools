@@ -7,58 +7,83 @@
 #include <cstring>
 #include <fcntl.h>
 #include <unistd.h>
+#include <dirent.h>
+#include <stdio.h>
 
-static void ft_add_player(t_pc *player) {
-  int fd;
-  char *filename;
+static void ft_add_player(t_pc *player)
+{
+	int fd;
+	char *filename;
 
-  filename = cma_strjoin("data/PC--", player->name, false);
-  if (!filename)
-  {
-    pf_printf("240-Error: Allocating memory for player string join\n");
-    return ;
-  }
-  fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-  cma_free(filename);
-  if (fd == -1)
-  {
-    pf_printf("Error opening file: %s\n", strerror(errno));
-    return ;
-  }
-  pf_printf("Adding player %s\n", player->name);
-  ft_save_pc(player, fd);
-  close(fd);
-  return ;
+	filename = cma_strjoin("data/PC--", player->name, false);
+	if (!filename)
+	{
+		pf_printf("240-Error: Allocating memory for player string join\n");
+		return ;
+	}
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	cma_free(filename);
+	if (fd == -1)
+	{
+		pf_printf("Error opening file: %s\n", strerror(errno));
+		return ;
+	}
+	pf_printf("Adding player %s\n", player->name);
+	ft_save_pc(player, fd);
+	close(fd);
+	return ;
 }
 
-void ft_player(const char **input)
+static void	ft_list_players(void)
 {
-  t_pc *player = ft_nullptr;
+	DIR *dir;
+	struct dirent *entry;
 
-  if (input[1] && input[2])
-  {
-    if (ft_strcmp_dnd(input[0], "add") == 0)
+	dir = opendir("data");
+	if (dir == NULL)
 	{
-      player = (t_pc *)cma_malloc(sizeof(t_pc), false);
-      if (!player)
-	  {
-        pf_printf("248-Error: Allocating memory for player\n");
-        return ;
-      }
-      player->name = cma_strdup(input[2], false);
-      if (!player->name)
-	  {
-        pf_printf("249-Error: Allocating memory for player name\n");
-        cma_free(player);
-        return ;
-      }
-      player->initiative = 0;
-      ft_add_player(player);
-    }
-  }
-  else
-    pf_printf("243-Error: Invalid input for player\n");
-  cma_free(player->name);
-  cma_free(player);
-  return ;
+		perror("Unable to open data folder");
+		return ;
+	}
+	while ((entry = readdir(dir)) != NULL)
+	{
+		if (strncmp(entry->d_name, "pc--", 4) == 0)
+			pf_printf("%s\n", entry->d_name + 4);
+	}
+	closedir(dir);
+}
+
+
+void	ft_player(const char **input)
+{
+	t_pc *player = ft_nullptr;
+
+	if (input[1] && input[2])
+	{
+		if (ft_strcmp_dnd(input[0], "add") == 0)
+		{
+			player = (t_pc *)cma_malloc(sizeof(t_pc), false);
+			if (!player)
+			{
+				pf_printf("248-Error: Allocating memory for player\n");
+				return ;
+			}
+			player->name = cma_strdup(input[2], false);
+			if (!player->name)
+			{
+				pf_printf("249-Error: Allocating memory for player name\n");
+				cma_free(player);
+				return ;
+			}
+			player->initiative = 0;
+			ft_add_player(player);
+		}
+		else if (ft_strcmp_dnd(input[0], "list"))
+			ft_list_players();
+	}
+	else
+		pf_printf("243-Error: Invalid input for player\n");
+	cma_free(player->name);
+	cma_free(player);
+	return ;
 }

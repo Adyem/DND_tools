@@ -18,10 +18,10 @@ static const	t_stats GOBLIN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 0,
-	.health = 25,
+	.health = 8,
 	.temp_hp = 0,
 	.str = 12,
-	.dex = 16,
+	.dex = 12,
 	.con = 10,
 	.inte = 10,
 	.wis = 10,
@@ -30,8 +30,8 @@ static const	t_stats GOBLIN_DEFAULT_STATS =
 
 static const	t_savem GOBLIN_SAVE_MODS =
 {
-    .str = 1,
-    .dex = 2,
+    .str = 0,
+    .dex = 0,
 	.inte = 0,
 	.wis = 0, 
     .cha = 0,
