@@ -18,7 +18,7 @@ int suggestion_count = 0;
 static void rl_disable_raw_mode()
 {
     tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);
-    return;
+    return ;
 }
 
 static void rl_enable_raw_mode()
@@ -30,7 +30,7 @@ static void rl_enable_raw_mode()
     raw = orig_termios;
     raw.c_lflag &= ~(ECHO | ICANON);
     tcsetattr(STDIN_FILENO, TCSANOW, &raw);
-    return;
+    return ;
 }
 
 static int rl_read_key()
@@ -71,10 +71,12 @@ static void rl_clear_line(const char *prompt, int buffer_length)
 
 void rl_add_suggestion(const char *word)
 {
-    for (int i = 0; i < suggestion_count; i++)
+	int i = 0;
+    while (i < suggestion_count)
     {
         if (strcmp(suggestions[i], word) == 0)
             return;
+		i++;
     }
     if (suggestion_count < MAX_SUGGESTIONS)
         suggestions[suggestion_count++] = cma_strdup(word, true);
@@ -85,8 +87,12 @@ void rl_add_suggestion(const char *word)
 
 void rl_clear_suggestions()
 {
-    for (int i = 0; i < suggestion_count; i++)
+	int i = 0;
+    while (i < suggestion_count)
+	{
         cma_free(suggestions[i]);
+		i++;
+	}
     suggestion_count = 0;
     return;
 }
@@ -127,7 +133,7 @@ char *rl_readline(const char *prompt)
         if (c == '\r' || c == '\n')
         {
             pf_printf("\n");
-            break;
+            break ;
         }
         else if (c == 127 || c == '\b')
         {
@@ -150,11 +156,10 @@ char *rl_readline(const char *prompt)
                 current_match_index = 0;
             }
             char seq[2];
-
             if (read(STDIN_FILENO, &seq[0], 1) != 1)
-                continue;
+                continue ;
             if (read(STDIN_FILENO, &seq[1], 1) != 1)
-                continue;
+                continue ;
             if (seq[0] == '[')
             {
                 if (seq[1] == 'A')
@@ -249,7 +254,6 @@ char *rl_readline(const char *prompt)
                 strcpy(&buffer[pos], completion);
                 pos += completion_len;
                 buffer[pos] = '\0';
-                // Clear line and redraw
                 rl_clear_line(prompt, prev_buffer_length);
                 pf_printf("%s%s", prompt, buffer);
                 prev_buffer_length = ft_strlen(buffer);
