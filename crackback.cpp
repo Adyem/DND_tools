@@ -16,15 +16,18 @@ void ft_crackback(t_char *info, int number)
 	melee = 0;
 	if (number < 10 && !info->flags.reaction_used)
 	{
-		pf_printf("because of the low attack roll %s has the oppertunity to react with an " \
+		pf_printf("Because of the low attack roll %s has the opportunity to react with an " \
 				"opportunity attack\n", info->name);
 		while (1)
 		{
 			line = rl_readline("CRACKBACK: ranged or melee attack or type exit to do nothing: ");
 			if (!line)
-				return (pf_printf_fd(2, "117-Error: failed to allocate memory for readline %s\n",
-							info->name), (void)0);
-			if (ft_strcmp_dnd(line, "melee"))
+			{
+				pf_printf_fd(2, "117-Error: failed to allocate memory for readline %s\n",
+						info->name);
+				return ;
+			}
+			if (ft_strcmp_dnd(line, "melee") == 0)
 			{
 				if (info->equipment.weapon.attack.function)
 				{
@@ -37,7 +40,7 @@ void ft_crackback(t_char *info, int number)
 					melee = 1;
 				}
 			}
-			else if (ft_strcmp_dnd(line, "ranged"))
+			else if (ft_strcmp_dnd(line, "ranged") == 0)
 			{
 				if (info->equipment.ranged_weapon.attack.function)
 				{
@@ -51,7 +54,7 @@ void ft_crackback(t_char *info, int number)
 					ranged = 1;
 				}
 			}
-			else if (ft_strcmp_dnd(line, "exit"))
+			else if (ft_strcmp_dnd(line, "exit") == 0)
 			{
 				cma_free(line);
 				return ;
