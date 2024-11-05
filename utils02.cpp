@@ -23,7 +23,7 @@ int ft_open_file_write_only(const char *filename)
 
     fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if (fd == -1)
-        ft_printf_fd(2, "Error opening file %s: %s\n", filename, strerror(errno));
+        pf_printf_fd(2, "Error opening file %s: %s\n", filename, strerror(errno));
     return (fd);
 }
 

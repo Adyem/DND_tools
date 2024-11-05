@@ -3,6 +3,7 @@
 
 # include "pair.hpp"
 # include "../CMA/CMA.hpp"
+# include "nullptr.hpp"
 # include <cstddef>
 
 template <typename KeyType, typename ValueType>
@@ -82,7 +83,7 @@ ValueType* Map<KeyType, ValueType>::find(const KeyType& key)
             return (&data[i].value);
 		i++;
     }
-    return (nullptr);
+    return (ft_nullptr);
 }
 
 template <typename KeyType, typename ValueType>

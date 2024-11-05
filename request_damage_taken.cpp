@@ -85,7 +85,7 @@ int ft_request_damage(t_char *info)
         if (ft_check_value(input[0]))
         {
             ft_free_request_damage(line, input);
-            ft_printf_fd(2, "159-Requesting a number between 1 and 5000\n");
+            pf_printf_fd(2, "159-Requesting a number between 1 and 5000\n");
             continue ;
         }
         if (!input[0] || !input[1])
@@ -96,7 +96,7 @@ int ft_request_damage(t_char *info)
         resistance = ft_get_resistance(info, input[1]);
         if (resistance == -9999)
         {
-            ft_printf_fd(2, "158-Error getting Resistance for %s\n", info->name);
+            pf_printf_fd(2, "158-Error getting Resistance for %s\n", info->name);
             ft_free_request_damage(line, input);
             return (1);
         }

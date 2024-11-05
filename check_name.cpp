@@ -24,13 +24,13 @@ int ft_set_stats_check_name(const char *name)
 
     if (!name)
     {
-        ft_printf_fd(2, "259-Error: Name does not exist\n");
+        pf_printf_fd(2, "259-Error: Name does not exist\n");
         return (-1);
     }
     dir = opendir(DATA_FOLDER);
     if (dir == ft_nullptr)
     {
-        ft_printf_fd(2, "295-Error: Opendir has failed: %s\n", strerror(errno));
+        pf_printf_fd(2, "295-Error: Opendir has failed: %s\n", strerror(errno));
         return (-2);
     }
     while (1)
@@ -44,17 +44,17 @@ int ft_set_stats_check_name(const char *name)
         filename[sizeof(filename) - 1] = '\0';
         remove_exclude_prefix(filename);
         if (DEBUG == 1)
-            ft_printf("Checking %s %s\n", filename, name);
+            pf_printf("Checking %s %s\n", filename, name);
         if (ft_strcmp_dnd(filename, name) == 0)
         {
             closedir(dir);
             if (DEBUG == 1)
-                ft_printf("Found %s\n", name);
+                pf_printf("Found %s\n", name);
             return (0);
         }
     }
     closedir(dir);
-    ft_printf_fd(2, "258-Error: Target does not exist\n");
+    pf_printf_fd(2, "258-Error: Target does not exist\n");
     return (1);
 }
 
@@ -67,7 +67,7 @@ int ft_check_player_character(const char *name)
     dir = opendir(DATA_FOLDER);
     if (dir == ft_nullptr)
     {
-        ft_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
+        pf_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
         return (-2);
     }
     while (1)
@@ -80,12 +80,12 @@ int ft_check_player_character(const char *name)
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         if (DEBUG == 1)
-            ft_printf("Checking %s against %s\n", filename, name);
+            pf_printf("Checking %s against %s\n", filename, name);
         if (ft_strcmp_dnd(filename, name) == 0)
         {
             closedir(dir);
             if (DEBUG == 1)
-                ft_printf("Found %s\n", name);
+                pf_printf("Found %s\n", name);
             return (0);
         }
     }

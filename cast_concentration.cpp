@@ -22,15 +22,15 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 	if (error == -1 && target && buff && buff->cleanup_f)
 		buff->cleanup_f(info, target, buff);
 	if (error == 1)
-        ft_printf("305-Error: can't cast %s on yourself\n", buff->spell_name);
+        pf_printf("305-Error: can't cast %s on yourself\n", buff->spell_name);
 	else if (error == 2)
-        ft_printf("299-Error allocating memory for targets\n");
+        pf_printf("299-Error allocating memory for targets\n");
 	else if (error == 3)
-        ft_printf("299-Error allocating memory for targets[0]\n");
+        pf_printf("299-Error allocating memory for targets[0]\n");
 	else if (error == 4)
-        ft_printf("320-Error opening file: %s\n", strerror(errno));
+        pf_printf("320-Error opening file: %s\n", strerror(errno));
 	else if (error == 5)
-        ft_printf("321-Error opening file: %s\n", strerror(errno));
+        pf_printf("321-Error opening file: %s\n", strerror(errno));
 	if (target)
 		ft_free_info(target);
 	return ;
@@ -98,7 +98,7 @@ int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
     fd[0] = -1;
     fd[1] = -1;
     if (DEBUG == 1)
-        ft_printf("casting hunter's mark %s %s\n", input[0], input[3]);
+        pf_printf("casting hunter's mark %s %s\n", input[0], input[3]);
     if (ft_set_stats_check_name(input[3]))
     {
         if (ft_check_player_character(input[3]))
@@ -110,7 +110,7 @@ int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
     {
         target = ft_get_info(input[3], info->struct_name);
         if (!target)
-			return (ft_printf("297-Error getting info %s\n", input[2]), 1);
+			return (pf_printf("297-Error getting info %s\n", input[2]), 1);
     }
     if (ft_cast_concentration_open_file(fd, info, target))
         return(1);

@@ -7,7 +7,7 @@ static int	ft_check_mainhand(t_char *info)
 {
 	if (info->equipment.offhand_weapon.slot == SLOT_TWO_HANDED_WEAPON)
 	{
-		ft_printf_fd(2, "Error: Two-handed weapon in offhand slot\n");
+		pf_printf_fd(2, "Error: Two-handed weapon in offhand slot\n");
 		return (1);
 	}
 	if (info->equipment.weapon.slot == SLOT_TWO_HANDED_WEAPON)
@@ -15,14 +15,14 @@ static int	ft_check_mainhand(t_char *info)
 	if (info->equipment.weapon.slot != SLOT_NONE && 
 	    !(info->equipment.weapon.slot & SLOT_WEAPON))
 	{
-		ft_printf_fd(2, "Error: Weapon is not in the correct slot\n");
+		pf_printf_fd(2, "Error: Weapon is not in the correct slot\n");
 		return (1);
 	}
 	if (info->equipment.offhand_weapon.slot != SLOT_NONE)
 	{
 		if (!(info->equipment.offhand_weapon.slot & SLOT_OFFHAND_WEAPON))
 		{
-			ft_printf_fd(2, "Error: Offhand weapon is not in the correct slot\n");
+			pf_printf_fd(2, "Error: Offhand weapon is not in the correct slot\n");
 			return (2);
 		}
 	}
@@ -34,7 +34,7 @@ static int	ft_check_slot(t_equipment_id equipment_slot, int slot_type,
 {
 	if (equipment_slot.slot != SLOT_NONE && !(equipment_slot.slot & slot_type))
 	{
-		ft_printf_fd(2, "%s\n", error_message);
+		pf_printf_fd(2, "%s\n", error_message);
 		return error_code;
 	}
 	return (0);

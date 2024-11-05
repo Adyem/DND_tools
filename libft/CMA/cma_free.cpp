@@ -12,18 +12,18 @@ void print_block_info(Block* block)
 {
     if (!block)
     {
-        ft_printf_fd(2, "Block pointer is NULL.\n");
+        pf_printf_fd(2, "Block pointer is NULL.\n");
         return;
     }
-    ft_printf_fd(2, "---- Block Information ----\n");
-    ft_printf_fd(2, "Address of Block: %p\n", (void*)block);
-    ft_printf_fd(2, "Magic Number: 0x%X\n", block->magic);
-    ft_printf_fd(2, "Size: %zu bytes\n", block->size);
-    ft_printf_fd(2, "Free: %s\n", block->free ? "Yes" : "No");
-    ft_printf_fd(2, "Critical: %s\n", block->critical ? "Yes" : "No");
-    ft_printf_fd(2, "Next Block: %p\n", (void*)block->next);
-    ft_printf_fd(2, "Previous Block: %p\n", (void*)block->prev);
-    ft_printf_fd(2, "---------------------------\n");
+    pf_printf_fd(2, "---- Block Information ----\n");
+    pf_printf_fd(2, "Address of Block: %p\n", (void*)block);
+    pf_printf_fd(2, "Magic Number: 0x%X\n", block->magic);
+    pf_printf_fd(2, "Size: %zu bytes\n", block->size);
+    pf_printf_fd(2, "Free: %s\n", block->free ? "Yes" : "No");
+    pf_printf_fd(2, "Critical: %s\n", block->critical ? "Yes" : "No");
+    pf_printf_fd(2, "Next Block: %p\n", (void*)block->next);
+    pf_printf_fd(2, "Previous Block: %p\n", (void*)block->prev);
+    pf_printf_fd(2, "---------------------------\n");
 }
 
 void cma_free(void* ptr)
@@ -36,13 +36,13 @@ void cma_free(void* ptr)
     UNPROTECT_METADATA(block, sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
     {
-		ft_printf_fd(2, "1-Invalid free detected at %p\n", ptr);
+		pf_printf_fd(2, "1-Invalid free detected at %p\n", ptr);
 		print_block_info(block);
         raise(SIGSEGV);
     }
     if (block->free)
     {
-		ft_printf_fd(2, "2-Double free detected at %p\n", ptr);
+		pf_printf_fd(2, "2-Double free detected at %p\n", ptr);
 		print_block_info(block);
         raise(SIGSEGV);
     }
@@ -100,7 +100,7 @@ void cma_free(void* ptr)
     }
     if (!page)
     {
-		ft_printf_fd(2, "3-Invalid free detected at %p\n", ptr);
+		pf_printf_fd(2, "3-Invalid free detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     Block* blk = page->blocks;

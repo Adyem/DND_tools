@@ -49,7 +49,7 @@ static char *rl_resize_buffer(char *old_buffer, int current_size, int new_size)
 
     if (!new_buffer)
     {
-        ft_printf_fd(2, "Allocation error\n");
+        pf_printf_fd(2, "Allocation error\n");
         exit(EXIT_FAILURE);
     }
     memcpy(new_buffer, old_buffer, current_size);
@@ -59,13 +59,13 @@ static char *rl_resize_buffer(char *old_buffer, int current_size, int new_size)
 
 static void rl_clear_line(const char *prompt, int buffer_length)
 {
-    ft_printf("\r");
+    pf_printf("\r");
     int line_length = buffer_length + ft_strlen(prompt);
     for (int i = 0; i < line_length; i++)
     {
-        ft_printf(" ");
+        pf_printf(" ");
     }
-    ft_printf("\r");
+    pf_printf("\r");
     return;
 }
 
@@ -79,7 +79,7 @@ void rl_add_suggestion(const char *word)
     if (suggestion_count < MAX_SUGGESTIONS)
         suggestions[suggestion_count++] = cma_strdup(word, true);
     else
-        ft_printf_fd(2, "Suggestion list full\n");
+        pf_printf_fd(2, "Suggestion list full\n");
     return;
 }
 
@@ -107,13 +107,13 @@ char *rl_readline(const char *prompt)
 
     if (!buffer)
     {
-        ft_printf_fd(2, "Allocation error\n");
+        pf_printf_fd(2, "Allocation error\n");
         rl_disable_raw_mode();
         return NULL;
     }
     rl_enable_raw_mode();
     history_index = history_count;
-    ft_printf("%s", prompt);
+    pf_printf("%s", prompt);
     fflush(stdout);
     while (1)
     {
@@ -126,7 +126,7 @@ char *rl_readline(const char *prompt)
         }
         if (c == '\r' || c == '\n')
         {
-            ft_printf("\n");
+            pf_printf("\n");
             break;
         }
         else if (c == 127 || c == '\b')
@@ -136,7 +136,7 @@ char *rl_readline(const char *prompt)
                 pos--;
                 memmove(&buffer[pos], &buffer[pos + 1], ft_strlen(buffer) - pos + 1);
                 rl_clear_line(prompt, prev_buffer_length);
-                ft_printf("%s%s", prompt, buffer);
+                pf_printf("%s%s", prompt, buffer);
                 prev_buffer_length = ft_strlen(buffer);
                 fflush(stdout);
             }
@@ -166,7 +166,7 @@ char *rl_readline(const char *prompt)
                         pos = 0;
                         strncpy(buffer, history[history_index], bufsize - 1);
                         buffer[bufsize - 1] = '\0';
-                        ft_printf("%s%s", prompt, buffer);
+                        pf_printf("%s%s", prompt, buffer);
                         pos = ft_strlen(buffer);
                         prev_buffer_length = pos;
                         fflush(stdout);
@@ -181,7 +181,7 @@ char *rl_readline(const char *prompt)
                         pos = 0;
                         strncpy(buffer, history[history_index], bufsize - 1);
                         buffer[bufsize - 1] = '\0';
-                        ft_printf("%s%s", prompt, buffer);
+                        pf_printf("%s%s", prompt, buffer);
                         pos = ft_strlen(buffer);
                         prev_buffer_length = pos;
                         fflush(stdout);
@@ -192,7 +192,7 @@ char *rl_readline(const char *prompt)
                         rl_clear_line(prompt, prev_buffer_length);
                         pos = 0;
                         buffer[0] = '\0';
-                        ft_printf("%s", prompt);
+                        pf_printf("%s", prompt);
                         prev_buffer_length = 0;
                         fflush(stdout);
                     }
@@ -221,7 +221,7 @@ char *rl_readline(const char *prompt)
                 }
                 if (current_match_count == 0)
                 {
-                    ft_printf("\a");
+                    pf_printf("\a");
                     fflush(stdout);
                 }
                 else
@@ -251,7 +251,7 @@ char *rl_readline(const char *prompt)
                 buffer[pos] = '\0';
                 // Clear line and redraw
                 rl_clear_line(prompt, prev_buffer_length);
-                ft_printf("%s%s", prompt, buffer);
+                pf_printf("%s%s", prompt, buffer);
                 prev_buffer_length = ft_strlen(buffer);
                 fflush(stdout);
                 current_match_index = (current_match_index + 1) % current_match_count;
@@ -267,7 +267,7 @@ char *rl_readline(const char *prompt)
             }
             buffer[pos++] = c;
             buffer[pos] = '\0';
-            ft_printf("%c", c);
+            pf_printf("%c", c);
             prev_buffer_length = ft_strlen(buffer);
             fflush(stdout);
         }

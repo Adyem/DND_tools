@@ -17,13 +17,13 @@ static int ft_open_target_files(t_char *info, t_char **target, int *fd, char **s
     {
         if (!target[i] || !target[i]->save_file)
         {
-            ft_printf("112-Error: invalid target or missing save file\n");
+            pf_printf("112-Error: invalid target or missing save file\n");
             break ;
         }
         fd[i] = open(target[i]->save_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
         if (fd[i] == -1)
         {
-            ft_printf("113-Error: opening file %s\n", target[i]->save_file);
+            pf_printf("113-Error: opening file %s\n", target[i]->save_file);
             break ;
         }
 		i++;
@@ -76,7 +76,7 @@ static int ft_check_target_amount(int target_amount)
 {
     if (target_amount > 20)
     {
-        ft_printf("110-Error: too many targets\n");
+        pf_printf("110-Error: too many targets\n");
         return (0);
     }
     return (1);
@@ -91,7 +91,7 @@ static char *ft_read_target_name(int i)
     target_name = rl_readline(message);
     if (!target_name)
     {
-        ft_printf("108-Error: Failed to allocate memory for readline target\n");
+        pf_printf("108-Error: Failed to allocate memory for readline target\n");
         return (ft_nullptr);
     }
     return (target_name);
@@ -103,7 +103,7 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
     {
         if (ft_check_player_character(target_name))
         {
-            ft_printf("111-Error: target does not exist\n");
+            pf_printf("111-Error: target does not exist\n");
             return (ft_nullptr);
         }
         return (ft_nullptr);
@@ -113,7 +113,7 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
         t_char *target_info = ft_get_info(target_name, info->struct_name);
         if (!target_info)
         {
-            ft_printf("109-Error: getting info for %s\n", target_name);
+            pf_printf("109-Error: getting info for %s\n", target_name);
             return (ft_nullptr);
         }
         return (target_info);

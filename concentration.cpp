@@ -12,8 +12,8 @@ static void ft_concentration_remove_buf(t_char *info, t_char *target)
 {
     if (DEBUG == 1)
     {
-        ft_printf("Memory address of info struct: %p\n", (void *)info);
-        ft_printf("Memory address of target struct: %p\n", (void *)target);
+        pf_printf("Memory address of info struct: %p\n", (void *)info);
+        pf_printf("Memory address of target struct: %p\n", (void *)target);
     }
     if (info->concentration.spell_id == HUNTERS_MARK_ID)
         ft_concentration_remove_hunters_mark(info, target);
@@ -27,7 +27,7 @@ int ft_remove_concentration(t_char *info)
     int fd;
 
     if (DEBUG == 1)
-        ft_printf("Removing concentration\n");
+        pf_printf("Removing concentration\n");
 
     i = 0;
     while (info->concentration.targets && info->concentration.targets[i])
@@ -47,10 +47,10 @@ int ft_remove_concentration(t_char *info)
         {
             target = ft_get_info(info->concentration.targets[i], info->struct_name);
             if (!target)
-                return (ft_printf_fd(2, "300-Error getting info %s\n", info->concentration.targets[i]), 1);
+                return (pf_printf_fd(2, "300-Error getting info %s\n", info->concentration.targets[i]), 1);
         }
         if (target && DEBUG == 1)
-            ft_printf("Target found: %s\n", target->name);
+            pf_printf("Target found: %s\n", target->name);
         if (target)
         {
             ft_concentration_remove_buf(info, target);
@@ -58,7 +58,7 @@ int ft_remove_concentration(t_char *info)
             if (fd == -1)
             {
                 ft_free_info(target);
-                return (ft_printf_fd(2, "301-Error opening %s: %s\n", info->save_file,
+                return (pf_printf_fd(2, "301-Error opening %s: %s\n", info->save_file,
 							strerror(errno)), 1);
             }
             ft_npc_write_file(target, &target->stats, &info->c_resistance, fd);
@@ -84,7 +84,7 @@ void ft_check_concentration(t_char *info, int damage)
     int result;
 
     if (DEBUG == 1)
-        ft_printf("Rolling con save for concentration %s\n", info->name);
+        pf_printf("Rolling con save for concentration %s\n", info->name);
 
     if (!info->concentration.concentration)
         return ;
@@ -94,10 +94,10 @@ void ft_check_concentration(t_char *info, int damage)
         difficulty = damage / 2;
     if (result < difficulty)
     {
-        ft_printf("%s failed his/her concentration save\n", info->name);
+        pf_printf("%s failed his/her concentration save\n", info->name);
         ft_remove_concentration(info);
     }
     else
-        ft_printf("%s made his/her concentration save\n", info->name);
+        pf_printf("%s made his/her concentration save\n", info->name);
     return ;
 }

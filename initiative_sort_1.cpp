@@ -18,7 +18,7 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
     temp = ft_strchr(content, '=');
     if (!temp)
     {
-        ft_printf("Error did not find = sign\n");
+        pf_printf("Error did not find = sign\n");
         return (ft_free_players(head));
     }
     *temp = '\0';
@@ -26,17 +26,17 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
     players->name = cma_strdup(content, false);
     if (!players->name)
     {
-        ft_printf("257 Error allocating memory\n");
+        pf_printf("257 Error allocating memory\n");
         return (ft_free_players(head));
     }
     if (ft_check_value(temp))
     {
-        ft_printf("There is an error on the line: %s\n", temp);
+        pf_printf("There is an error on the line: %s\n", temp);
         return (ft_free_players(head));
     }
     players->initiative = ft_atoi(temp);
     if (DEBUG == 1)
-        ft_printf("The initiative from %s = %d\n", players->name, players->initiative);
+        pf_printf("The initiative from %s = %d\n", players->name, players->initiative);
     return (0);
 }
 
@@ -57,7 +57,7 @@ t_pc *ft_initiative_players_am(char **content)
     players = (t_pc *)cma_malloc(sizeof(t_pc), false);
     if (!players)
     {
-        ft_printf("Error allocating memory: players\n");
+        pf_printf("Error allocating memory: players\n");
         return (ft_nullptr);
     }
     ft_initiative_players_init(players);
@@ -71,7 +71,7 @@ t_pc *ft_initiative_players_am(char **content)
         temp->next = (t_pc *)cma_malloc(sizeof(t_pc), false);
         if (!temp->next)
         {
-            ft_printf("Error allocating memory: players->next\n");
+            pf_printf("Error allocating memory: players->next\n");
             ft_free_players(players);
             return (ft_nullptr);
         }
@@ -91,7 +91,7 @@ void ft_initiative_sort(int fd)
 
     if (fd == -1)
     {
-        ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
+        pf_printf_fd(2, "Error opening file: %s\n", strerror(errno));
         return ;
     }
     content = ft_read_file_dnd(fd);

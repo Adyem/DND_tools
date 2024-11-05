@@ -9,7 +9,7 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
     t_name *name;
 
     if (DEBUG == 1)
-        ft_printf("killing crystal: %s\n", crystal);
+        pf_printf("killing crystal: %s\n", crystal);
     name = info->struct_name;
     while (name != ft_nullptr)
     {
@@ -19,7 +19,7 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
             input[1] = "kill";
             input[2] = ft_nullptr;
             if (DEBUG == 1)
-                ft_printf("initializing: %s\n", name->name);
+                pf_printf("initializing: %s\n", name->name);
             name->function(2, input, name, 0);
             break ;
         }
@@ -27,7 +27,7 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
     }
     info->stats.phase = phase;
     info->stats.turn = 1;
-    ft_printf("veraak transitions to the next phase dropping 2 green orbs at random locations in the arena\n");
+    pf_printf("veraak transitions to the next phase dropping 2 green orbs at random locations in the arena\n");
 	return ;
 }
 
@@ -40,12 +40,12 @@ static void ft_veraak_initialize(t_char *info)
         "chaos_crystal_01", "chaos_crystal_02", "chaos_crystal_03", "chaos_crystal_04", ft_nullptr};
 
     if (DEBUG == 1)
-        ft_printf("initializing chaos crystals\n");
+        pf_printf("initializing chaos crystals\n");
     i = 0;
     while (crystals[i] != ft_nullptr)
     {
         if (DEBUG == 1)
-            ft_printf("checking crystal: %s\n", crystals[i]);
+            pf_printf("checking crystal: %s\n", crystals[i]);
         name = info->struct_name;
         while (name != ft_nullptr)
         {
@@ -55,7 +55,7 @@ static void ft_veraak_initialize(t_char *info)
                 input[1] = "init";
                 input[2] = ft_nullptr;
                 if (DEBUG == 1)
-                    ft_printf("initializing: %s\n", name->name);
+                    pf_printf("initializing: %s\n", name->name);
                 name->function(2, input, name, 0);
                 break ;
             }
@@ -86,12 +86,12 @@ void ft_veraak_turn(t_char *info)
     ft_veraak_check_phase(info);
     if (info->flags.prone)
     {
-        ft_printf("%s will use his/her action to stand up\n", info->name);
+        pf_printf("%s will use his/her action to stand up\n", info->name);
         info->flags.prone = 0;
     }
     else
-        ft_printf("The veraak will try to make either a ranged or melee attack during his turn\n");
-    ft_printf("Veraak currently has %d/%d hp\n", info->stats.health, info->dstats.health);
+        pf_printf("The veraak will try to make either a ranged or melee attack during his turn\n");
+    pf_printf("Veraak currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 	return ;
 }
 
@@ -108,7 +108,7 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
 
     error = 0;
     if (DEBUG == 1)
-        ft_printf("index = %d\n", index);
+        pf_printf("index = %d\n", index);
     info = (t_char *)cma_calloc(1, sizeof(t_char), false);
     if (!info)
         return (ft_nullptr);
@@ -124,7 +124,7 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
     if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
     {
         ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-        ft_printf("Stats for %s written on a file\n", info->name);
+        pf_printf("Stats for %s written on a file\n", info->name);
         ft_veraak_initialize(info);
         ft_free_info(info);
         return (ft_nullptr);

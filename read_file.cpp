@@ -61,7 +61,7 @@ char **ft_read_file_dnd(int fd)
         if (!line)
             break ;
 		if (DEBUG == 1)
-			ft_printf("LINE = %s", line);
+			pf_printf("LINE = %s", line);
         i++;
         return_v = ft_realloc_dnd(return_v, i);
         if (!return_v)
@@ -83,12 +83,12 @@ char **ft_open_and_read(const char *file)
     fd = open(file, O_RDONLY);
     if (fd == -1)
     {
-        ft_printf_fd(2, "Error opening file: %s\n", strerror(errno));
+        pf_printf_fd(2, "Error opening file: %s\n", strerror(errno));
         return (ft_nullptr);
     }
     content = ft_read_file_dnd(fd);
     close(fd);
     if (!content)
-        ft_printf_fd(2, "Error allocating memory for content inside file\n");
+        pf_printf_fd(2, "Error allocating memory for content inside file\n");
     return (content);
 }

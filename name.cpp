@@ -35,14 +35,14 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *n
     new_node = (t_name *)cma_malloc(sizeof(t_name), true);
     if (!new_node)
     {
-        ft_printf_fd(2, "112-Error: Malloc failure in Name Struct\n");
+        pf_printf_fd(2, "112-Error: Malloc failure in Name Struct\n");
         ft_free_memory_name(first_node, 1);
     }
     new_node->name = cma_strdup(new_name, true);
     if (!new_node->name)
     {
         cma_free(new_node);
-        ft_printf_fd(2, "113-Error: Malloc failure in Name Struct\n");
+        pf_printf_fd(2, "113-Error: Malloc failure in Name Struct\n");
         ft_free_memory_name(first_node, 1);
     }
     new_node->function = new_function;
@@ -65,7 +65,7 @@ static char *ft_new_name(const char *name, int index)
     new_name = (char *)cma_calloc(new_name_length, sizeof(char), true);
     if (!new_name)
     {
-        ft_printf_fd(2, "114-Error: Malloc failure in Name Struct\n");
+        pf_printf_fd(2, "114-Error: Malloc failure in Name Struct\n");
         return (ft_nullptr);
     }
     snprintf(new_name, new_name_length, "%s_%02d", name, index);
@@ -85,11 +85,11 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char
         new_name = ft_new_name(base_name, i);
         if (!new_name)
         {
-            ft_printf_fd(2, "115-Error: Malloc failure in Name Struct\n");
+            pf_printf_fd(2, "115-Error: Malloc failure in Name Struct\n");
             ft_free_memory_name(first_node, 1);
         }
         if (DEBUG == 1)
-            ft_printf("%s\n", new_name);
+            pf_printf("%s\n", new_name);
         ft_add_node(first_node, last_node, new_name, function);
         cma_free(new_name);
         i++;

@@ -15,17 +15,17 @@ static void ft_add_player(t_pc *player) {
   filename = cma_strjoin("data/PC--", player->name, false);
   if (!filename)
   {
-    ft_printf("240-Error: Allocating memory for player string join\n");
+    pf_printf("240-Error: Allocating memory for player string join\n");
     return ;
   }
   fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
   cma_free(filename);
   if (fd == -1)
   {
-    ft_printf("Error opening file: %s\n", strerror(errno));
+    pf_printf("Error opening file: %s\n", strerror(errno));
     return ;
   }
-  ft_printf("Adding player %s\n", player->name);
+  pf_printf("Adding player %s\n", player->name);
   ft_save_pc(player, fd);
   close(fd);
   return ;
@@ -42,13 +42,13 @@ void ft_player(const char **input)
       player = (t_pc *)cma_malloc(sizeof(t_pc), false);
       if (!player)
 	  {
-        ft_printf("248-Error: Allocating memory for player\n");
+        pf_printf("248-Error: Allocating memory for player\n");
         return ;
       }
       player->name = cma_strdup(input[2], false);
       if (!player->name)
 	  {
-        ft_printf("249-Error: Allocating memory for player name\n");
+        pf_printf("249-Error: Allocating memory for player name\n");
         cma_free(player);
         return ;
       }
@@ -57,7 +57,7 @@ void ft_player(const char **input)
     }
   }
   else
-    ft_printf("243-Error: Invalid input for player\n");
+    pf_printf("243-Error: Invalid input for player\n");
   cma_free(player->name);
   cma_free(player);
   return ;

@@ -16,7 +16,7 @@ static t_char *ft_check_name(t_name *name, char *file_name)
     t_char *info;
 
     if (DEBUG == 1)
-        ft_printf("Printing file name again: %s\n", file_name);
+        pf_printf("Printing file name again: %s\n", file_name);
     info = ft_nullptr;
     while (name != ft_nullptr)
     {
@@ -25,14 +25,14 @@ static t_char *ft_check_name(t_name *name, char *file_name)
             input[0] = name->name;
             input[1] = ft_nullptr;
             if (DEBUG == 1)
-                ft_printf("Initializing: %s\n", name->name);
+                pf_printf("Initializing: %s\n", name->name);
             info = name->function(1, input, name, 1);
             break ;
         }
         name = name->next;
     }
     if (DEBUG == 1)
-        ft_printf("Memory location of info: %p\n", info);
+        pf_printf("Memory location of info: %p\n", info);
     return (info);
 }
 
@@ -41,15 +41,15 @@ static t_char *ft_read_all_files(int fd, t_name *name, char *file_name)
     t_char *info;
 
     if (DEBUG == 1)
-        ft_printf("Printing file_name: %s\n", file_name);
+        pf_printf("Printing file_name: %s\n", file_name);
     info = ft_check_name(name, file_name + 5);
     if (!info)
     {
-        ft_printf_fd(2, "255 Error allocating memory\n");
+        pf_printf_fd(2, "255 Error allocating memory\n");
         return (ft_nullptr);
     }
     if (DEBUG == 1)
-        ft_printf("Initiative file descriptor is %d\n", fd);
+        pf_printf("Initiative file descriptor is %d\n", fd);
     info->name = file_name + 5;
     ft_roll_initiative(info);
     return (info);
@@ -57,7 +57,7 @@ static t_char *ft_read_all_files(int fd, t_name *name, char *file_name)
 
 static void *ft_initiative_pc_error(const char *message)
 {
-    ft_printf_fd(2, "%s\n", message);
+    pf_printf_fd(2, "%s\n", message);
     return (ft_nullptr);
 }
 
@@ -100,16 +100,16 @@ void ft_initiative_write(int initiative, char *name)
     int fd;
 
     if (DEBUG == 1)
-        ft_printf("Printing initiative to data file\n");
+        pf_printf("Printing initiative to data file\n");
     fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
     if (fd == -1)
     {
-        ft_printf_fd(2, "Error opening data--initiative: %s\n", strerror(errno));
+        pf_printf_fd(2, "Error opening data--initiative: %s\n", strerror(errno));
         return ;
     }
     if (DEBUG == 1)
-        ft_printf("%s=%i\n", name, initiative);
-    ft_printf_fd(fd, "%s=%i\n", name, initiative);
+        pf_printf("%s=%i\n", name, initiative);
+    pf_printf_fd(fd, "%s=%i\n", name, initiative);
 	close(fd);
 }
 
@@ -132,7 +132,7 @@ void ft_open_all_files(t_name *name)
     dir = opendir("data");
     if (dir == ft_nullptr)
     {
-        ft_printf_fd(2, "Unable to open directory: %s\n", strerror(errno));
+        pf_printf_fd(2, "Unable to open directory: %s\n", strerror(errno));
         return ;
     }
     while ((entry = readdir(dir)) != ft_nullptr)
@@ -141,7 +141,7 @@ void ft_open_all_files(t_name *name)
             continue ;
         snprintf(filepath, sizeof(filepath), "%s/%s", "data", entry->d_name);
         if (DEBUG == 1)
-            ft_printf("%s\n", filepath);
+            pf_printf("%s\n", filepath);
         if (ft_strncmp(entry->d_name, "data--", 6) == 0)
             continue ;
         if (entry->d_type == DT_REG)
@@ -149,7 +149,7 @@ void ft_open_all_files(t_name *name)
             fd = open(filepath, O_RDONLY);
             if (fd == -1)
             {
-                ft_printf_fd(2, "Unable to open file: %s\n", strerror(errno));
+                pf_printf_fd(2, "Unable to open file: %s\n", strerror(errno));
                 continue ;
             }
             if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
@@ -166,11 +166,11 @@ void ft_open_all_files(t_name *name)
             if (!info)
                 continue ;
             if (DEBUG == 1)
-                ft_printf("2. Name of the save file is %s\n", filepath);
+                pf_printf("2. Name of the save file is %s\n", filepath);
             fd = open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
             if (fd == -1)
             {
-                ft_printf_fd(2, "Unable to open file: %s\n", strerror(errno));
+                pf_printf_fd(2, "Unable to open file: %s\n", strerror(errno));
                 ft_free_info(info);
                 continue ;
             }

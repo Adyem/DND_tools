@@ -13,7 +13,7 @@ void ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
     while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[i])
     {
         if (DEBUG == 1)
-            ft_printf("%s%s%s", "r-debuff checking ", target->debufs.hunters_mark.caster_name[i], info->name);
+            pf_printf("%s%s%s", "r-debuff checking ", target->debufs.hunters_mark.caster_name[i], info->name);
 
         if (ft_strcmp_dnd(target->debufs.hunters_mark.caster_name[i], info->name) == 0)
         {
@@ -29,11 +29,11 @@ void ft_concentration_remove_hunters_mark(t_char *info, t_char *target)
                 target->debufs.hunters_mark.caster_name[j - 1] = ft_nullptr;
 
             if (DEBUG == 1)
-                ft_printf("%s%s", "Found target with debuff and removed it: ", target->name);
+                pf_printf("%s%s", "Found target with debuff and removed it: ", target->name);
             return ;
         }
         i++;
     }
-    ft_printf_fd(2, "304-Error: %s Hunters mark debuff not found", target->name);
+    pf_printf_fd(2, "304-Error: %s Hunters mark debuff not found", target->name);
     return ;
 }

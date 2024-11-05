@@ -8,7 +8,7 @@ int ft_roll_excecute_md(char *string, int *i, int j)
     while (*i < j)
     {
         if (DEBUG == 1)
-            ft_printf("MD i=%d and j=%d\n", *i, j);
+            pf_printf("MD i=%d and j=%d\n", *i, j);
         if (!string[*i] || string[*i] == ')')
             break;
         if (string[*i] == '*' || string[*i] == '/')
@@ -23,6 +23,6 @@ int ft_roll_excecute_md(char *string, int *i, int j)
     }
     ft_calculate_j(string, &j);
     if (DEBUG == 1)
-        ft_printf("The result after md is %s\n", string);
+        pf_printf("The result after md is %s\n", string);
     return (0);
 }

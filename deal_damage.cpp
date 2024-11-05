@@ -45,42 +45,42 @@ void ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
     {
         if (ft_check_value(input))
         {
-            ft_printf_fd(2, "1-Damage: expecting a number higher than or equal to 0\n");
+            pf_printf_fd(2, "1-Damage: expecting a number higher than or equal to 0\n");
             return ;
         }
         damage = ft_atoi(input);
         if (damage < 0)
         {
-            ft_printf_fd(2, "2-Damage: expecting a number higher than or equal to 0\n");
+            pf_printf_fd(2, "2-Damage: expecting a number higher than or equal to 0\n");
             return ;
         }
         damage_reduction = ft_get_damage_reduction(info, d_type);
         if (damage_reduction == ERROR_RESISTANCE)
-            return (ft_printf_fd(2, "161-Error finding damage reduction\n"), (void)0);
+            return (pf_printf_fd(2, "161-Error finding damage reduction\n"), (void)0);
         damage = damage - damage_reduction;
         if (damage_reduction > 0)
-            ft_printf("The %s damage was reduced by %d.\n", d_type, damage_reduction);
+            pf_printf("The %s damage was reduced by %d.\n", d_type, damage_reduction);
         else if (damage_reduction < 0)
-            ft_printf("The %s damage was increased by %d.\n", d_type, -damage_reduction);
+            pf_printf("The %s damage was increased by %d.\n", d_type, -damage_reduction);
         if (damage < 0)
             damage = 0;
         if (d_type && resistance > 0)
         {
             extra = (damage * resistance) / 100;
-            ft_printf("%s is resistant to %s damage and takes %d%% less damage for a total of %d less damage.\n",
+            pf_printf("%s is resistant to %s damage and takes %d%% less damage for a total of %d less damage.\n",
                       info->name, d_type, resistance, extra);
             damage = damage - extra;
         }
         else if (d_type && resistance < 0)
         {
             extra = damage * ((resistance * -1) / 100);
-            ft_printf("%s is vulnerable to %s damage and takes %d%% more damage for a total of %d more damage.\n",
+            pf_printf("%s is vulnerable to %s damage and takes %d%% more damage for a total of %d more damage.\n",
                       info->name, d_type, -resistance, extra);
             damage = damage + extra;
         }
         else if (d_type && resistance == 100)
         {
-            ft_printf("%s is immune to %s damage.\n", info->name, d_type);
+            pf_printf("%s is immune to %s damage.\n", info->name, d_type);
             damage = 0;
         }
         temp = info->stats.health;
@@ -93,7 +93,7 @@ void ft_deal_damage(t_char *info, const char *input, const char *d_type, int res
     if (override == 1 || override == 2)
     {
         if (DEBUG == 1)
-            ft_printf("%s takes %d damage.\n", info->name, total);
+            pf_printf("%s takes %d damage.\n", info->name, total);
         if (info->version_number >= 2 && info->concentration.concentration)
             ft_check_concentration(info, total);
         total = 0;

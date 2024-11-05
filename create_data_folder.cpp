@@ -16,15 +16,15 @@ int ft_create_data_dir()
         {
             if (mkdir("data", 0700) == -1)
             {
-                ft_printf_fd(2, "001-Error failed to create directory: %s\n", strerror(errno));
+                pf_printf_fd(2, "001-Error failed to create directory: %s\n", strerror(errno));
                 return (1);
             }
             else if (DEBUG == 1)
-                ft_printf("Data folder created successfully\n");
+                pf_printf("Data folder created successfully\n");
         }
         else
         {
-            ft_printf_fd(2, "002-Error failed to stat directory: %s\n", strerror(errno));
+            pf_printf_fd(2, "002-Error failed to stat directory: %s\n", strerror(errno));
             return (1);
         }
     }
@@ -32,15 +32,15 @@ int ft_create_data_dir()
     {
         if (access("data", R_OK | W_OK) == -1)
         {
-            ft_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n", strerror(errno));
+            pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n", strerror(errno));
             return (1);
         }
         if (DEBUG == 1)
-            ft_printf("Data folder already exists with proper access rights\n");
+            pf_printf("Data folder already exists with proper access rights\n");
     }
     else
     {
-        ft_printf_fd(2, "004-Error path exists but is not a directory\n");
+        pf_printf_fd(2, "004-Error path exists but is not a directory\n");
         return (1);
     }
     return (0);

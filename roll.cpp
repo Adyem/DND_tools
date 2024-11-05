@@ -12,7 +12,7 @@ void ft_calculate_j(char *string, int *j)
 	while (string[*j] && string[*j] != ')')
 		(*j)++;
 	if (DEBUG == 1)
-		ft_printf("The new value of J is %d\n", *j);
+		pf_printf("The new value of J is %d\n", *j);
 	return ;
 }
 
@@ -55,7 +55,7 @@ int ft_command_roll_parse(char *string, int nested)
     if (execute_roll_function(string, ft_roll_excecute_pm))
         return 5;
     if (DEBUG == 1)
-        ft_printf("Nested is %d\n", nested);
+        pf_printf("Nested is %d\n", nested);
     if (nested)
     {
         error = ft_roll_parse_brackets(string);
@@ -63,7 +63,7 @@ int ft_command_roll_parse(char *string, int nested)
             return (6);
     }
     if (DEBUG == 1 && nested)
-        ft_printf("Leaving nested braces\n");
+        pf_printf("Leaving nested braces\n");
     return (0);
 }
 
@@ -74,7 +74,7 @@ void ft_command_roll(char **argv)
 
     while (argv[i] && DEBUG == 1)
     {
-        ft_printf("%s\n", argv[i]);
+        pf_printf("%s\n", argv[i]);
         i++;
     }
     if (!argv[1])
@@ -85,23 +85,23 @@ void ft_command_roll(char **argv)
         result = ft_strjoin_gnl(result, argv[i], false);
         if (!result)
         {
-            ft_printf_fd(2, "168-Error: Malloc failed in ft_strjoin_gnl\n");
+            pf_printf_fd(2, "168-Error: Malloc failed in ft_strjoin_gnl\n");
             return ;
         }
         i++;
     }
     if (DEBUG == 1)
-        ft_printf("%s\n", result);
+        pf_printf("%s\n", result);
     if (!result)
         return ;
     if (ft_command_roll_validate(result))
     {
-        ft_printf_fd(2, "169-Command Roll Error with the string: %s\n", result);
+        pf_printf_fd(2, "169-Command Roll Error with the string: %s\n", result);
         cma_free(result);
         return ;
     }
     ft_command_roll_parse(result, 0);
-    ft_printf("%s\n", result);
+    pf_printf("%s\n", result);
     cma_free(result);
 	return ;
 }

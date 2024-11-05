@@ -8,7 +8,7 @@ static char **ft_handle_memory_error(t_char *info, char **data, int error_code)
 {
     info->flags.error = 1;
     cma_free_double(data);
-    ft_printf_fd(2, "%d-Error: Allocating memory\n", error_code);
+    pf_printf_fd(2, "%d-Error: Allocating memory\n", error_code);
     return (ft_nullptr);
 }
 
@@ -16,7 +16,7 @@ static int ft_check_target_exists(char *target)
 {
     if (ft_set_stats_check_name(target))
     {
-        ft_printf_fd(2, "292-Error: Target does not exist\n");
+        pf_printf_fd(2, "292-Error: Target does not exist\n");
         return (1);
     }
     return (0);

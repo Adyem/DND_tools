@@ -13,18 +13,18 @@ int main(int argc, char **argv)
 
     (void)argv;
     if (DEBUG == 1)
-        ft_printf("Size of t_char struct is %zu\n", sizeof(t_char));
+        pf_printf("Size of t_char struct is %zu\n", sizeof(t_char));
     
     if (argc > 1)
     {
-        ft_printf_fd(2, "005-Error: expecting no arguments\n");
+        pf_printf_fd(2, "005-Error: expecting no arguments\n");
         return (1);
     }
     srand((unsigned)time(ft_nullptr));
     if (DEBUG == 1)
     {
-        ft_printf("DEBUGGING\n");
-        ft_printf("Rand Max = %d\n", RAND_MAX);
+        pf_printf("DEBUGGING\n");
+        pf_printf("Rand Max = %d\n", RAND_MAX);
     }
 	if (ft_create_data_dir())
 		return (1);

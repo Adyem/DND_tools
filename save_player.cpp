@@ -3,7 +3,7 @@
 
 void	ft_save_pc(t_pc *player, int fd)
 {
-	ft_printf_fd(fd, "NAME=%s\n", player->name);
-	ft_printf_fd(fd, "INITIATIVE=%d\n", player->initiative);
+	pf_printf_fd(fd, "NAME=%s\n", player->name);
+	pf_printf_fd(fd, "INITIATIVE=%d\n", player->initiative);
 	return ;
 }

@@ -4,11 +4,11 @@
 static void	ft_update_buff_duration(t_char *info, const char *buff_name, int duration)
 {
 	if (duration == 0)
-		ft_printf("%s just lost his %s buff\n", info->name, buff_name);
+		pf_printf("%s just lost his %s buff\n", info->name, buff_name);
 	else if (duration == 1)
-		ft_printf("%s has a single turn of %s left\n", info->name, buff_name);
+		pf_printf("%s has a single turn of %s left\n", info->name, buff_name);
 	else
-		ft_printf("%s has %d turns left on his %s buff\n", info->name, duration, buff_name);
+		pf_printf("%s has %d turns left on his %s buff\n", info->name, duration, buff_name);
 	return ;
 }
 

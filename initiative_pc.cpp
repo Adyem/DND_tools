@@ -13,7 +13,7 @@ static int ft_check_int(char *content, int index, char *filename)
 
     temp = index;
     if (DEBUG == 1)
-        ft_printf("%s\n", content);
+        pf_printf("%s\n", content);
     while (index)
     {
         content++;
@@ -26,7 +26,7 @@ static int ft_check_int(char *content, int index, char *filename)
             content--;
             temp--;
         }
-        ft_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n", filename, content);
+        pf_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n", filename, content);
         return (-99999);
     }
     result = ft_atoi(content);
@@ -70,19 +70,19 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
         }
         else
         {
-            ft_printf_fd(2, "3-There is an error with the line: %s\n", content[i]);
+            pf_printf_fd(2, "3-There is an error with the line: %s\n", content[i]);
             return (1);
         }
         i++;
     }
     if (!(player->initiative >= 0 && player->initiative <= 50))
     {
-        ft_printf_fd(2, "Initiative value not found: %d\n", player->initiative);
+        pf_printf_fd(2, "Initiative value not found: %d\n", player->initiative);
         return (1);
     }
     if (!player->name)
     {
-        ft_printf_fd(2, "Player name not found\n");
+        pf_printf_fd(2, "Player name not found\n");
         return (1);
     }
     return (0);

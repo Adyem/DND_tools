@@ -220,7 +220,7 @@ static int ft_printf_fd_v(int fd, const char *format, va_list args)
     return ((int)count);
 }
 
-int ft_printf_fd(int fd, const char *format, ...)
+int pf_printf_fd(int fd, const char *format, ...)
 {
     va_list args;
     int printed_chars;
@@ -233,7 +233,7 @@ int ft_printf_fd(int fd, const char *format, ...)
     return (printed_chars);
 }
 
-int ft_printf(const char *format, ...)
+int pf_printf(const char *format, ...)
 {
     va_list args;
     int printed_chars;

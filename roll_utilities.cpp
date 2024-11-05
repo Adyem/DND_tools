@@ -29,7 +29,7 @@ int ft_check_value_roll(const char *str)
         if ((sign == 1 && result > INT_MAX) || (sign == -1 && result > limit))
             return (1);
 		if (DEBUG == 1)
-			ft_printf("FT_CHECK_VALUE_ROLL the string is %s\n", str);
+			pf_printf("FT_CHECK_VALUE_ROLL the string is %s\n", str);
     }
     if (sign == -1 && result > limit)
         return (1);
@@ -83,12 +83,12 @@ int ft_roll_convert_previous(char *string, int *i, int *error)
     if (check != 0)
     {
 		*error = 1;
-		ft_printf("171-Error: numbers cant be higher then %d or lower than %d\n", INT_MAX, INT_MIN);
+		pf_printf("171-Error: numbers cant be higher then %d or lower than %d\n", INT_MAX, INT_MIN);
 		return (0);
 	}
     result = ft_atoi(&string[*i]);
     if (DEBUG == 1)
-        ft_printf("the first number is %d and i=%d\n", result, *i);
+        pf_printf("the first number is %d and i=%d\n", result, *i);
     return (result);
 }
 
@@ -101,12 +101,12 @@ int	ft_roll_convert_next(char *string, int i, int *error)
 	if (check != 0)
 	{
 		*error = 1;
-		ft_printf("170-Error: numbers cant be higher then %d or lower than %d\n", INT_MAX, INT_MIN);
+		pf_printf("170-Error: numbers cant be higher then %d or lower than %d\n", INT_MAX, INT_MIN);
 		return (0);
 	}
 	result = ft_atoi(&string[i]);
 	if (DEBUG == 1)
-		ft_printf("the second number is %d\n", result);
+		pf_printf("the second number is %d\n", result);
 	return (result);
 }
 
@@ -116,7 +116,7 @@ int	ft_roll_itoa(int result, int *i, char *string)
 	int		y;
 
 	if (DEBUG == 1)
-		ft_printf("roll itoa: the value of i=%d\n", *i);
+		pf_printf("roll itoa: the value of i=%d\n", *i);
 	temp = cma_itoa(result, false);
 	if (!temp)
 		return (1);

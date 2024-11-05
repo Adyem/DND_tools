@@ -20,7 +20,7 @@ int ft_check_stat(t_char *info, const char *stat, int index)
             stat--;
             temp--;
         }
-        ft_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n",
+        pf_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n",
 				info->name, stat);
         return (-99999);
     }

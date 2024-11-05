@@ -14,13 +14,13 @@ void ft_crackback(t_char *info, int number)
 	melee = 0;
 	if (number < 10 && !info->flags.reaction_used)
 	{
-		ft_printf("because of the low attack roll %s has the oppertunity to react with an " \
+		pf_printf("because of the low attack roll %s has the oppertunity to react with an " \
 				"oppertunity attack\n", info->name);
 		while (1)
 		{
 			line = rl_readline("CRACKBACK: ranged or melee attack or type exit to do nothing: ");
 			if (!line)
-				return (ft_printf_fd(2, "117-Error: failed to allocate memory for readline %s\n",
+				return (pf_printf_fd(2, "117-Error: failed to allocate memory for readline %s\n",
 							info->name), (void)0);
 			if (ft_strcmp_dnd(line, "melee"))
 			{
@@ -31,7 +31,7 @@ void ft_crackback(t_char *info, int number)
 				}
 				else
 				{	
-					ft_printf_fd(2, "No MH weapon set for %s\n", info->name);
+					pf_printf_fd(2, "No MH weapon set for %s\n", info->name);
 					melee = 1;
 				}
 			}
@@ -45,7 +45,7 @@ void ft_crackback(t_char *info, int number)
 				}
 				else
 				{
-					ft_printf_fd(2, "No ranged weapon set for %s\n", info->name);
+					pf_printf_fd(2, "No ranged weapon set for %s\n", info->name);
 					ranged = 1;
 				}
 			}
@@ -56,7 +56,7 @@ void ft_crackback(t_char *info, int number)
 			}
 			else 
 			{
-				ft_printf_fd(2, "118-Error: Invalid input Crackback\n");
+				pf_printf_fd(2, "118-Error: Invalid input Crackback\n");
 				cma_free(line);
 				continue ;
 			}

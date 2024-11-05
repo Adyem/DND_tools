@@ -1,6 +1,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
-#include "libft/Printf/ft_printf.hpp" // Including the ft_printf header
+#include "libft/Printf/ft_printf.hpp" // Including the pf_printf header
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -17,11 +17,11 @@ void ft_initiative_remove(t_char *info)
     int     fd;
 
     if (DEBUG == 1)
-        ft_printf("removing initiative %s\n", info->name);
+        pf_printf("removing initiative %s\n", info->name);
     if (access("data/data--initiative", F_OK) == -1)
     {
         if (DEBUG == 1)
-            ft_printf("File does not exist: data/data--initiative\n");
+            pf_printf("File does not exist: data/data--initiative\n");
         return ;
     }
     content = ft_open_and_read("data/data--initiative");
@@ -31,7 +31,7 @@ void ft_initiative_remove(t_char *info)
     fd = open("data/data--initiative", O_WRONLY | O_TRUNC);
     if (fd == -1)
     {
-        ft_printf("Error opening file: %s\n", strerror(errno));
+        pf_printf("Error opening file: %s\n", strerror(errno));
         cma_free_double(content);
         return ;
     }
@@ -52,13 +52,13 @@ void ft_initiative_remove(t_char *info)
                 && (ft_check_value(&temp[ft_strlen(info->name) + 1])))
         {
             if (DEBUG == 1)
-                ft_printf("found one %s and %c\n", content[i], content[i][ft_strlen(info->name)]);
+                pf_printf("found one %s and %c\n", content[i], content[i][ft_strlen(info->name)]);
             i++;
             if (turn_marker)
-                ft_printf_fd(fd, "--turn--");
+                pf_printf_fd(fd, "--turn--");
             continue ;
         }
-        ft_printf_fd(fd, "%s", content[i]);
+        pf_printf_fd(fd, "%s", content[i]);
         turn_marker = 0;
         i++;
     }
@@ -107,7 +107,7 @@ void ft_initiative_add(t_char *info)
     int     fd;
 
     if (DEBUG == 1)
-        ft_printf("readding initiative %s %d\n", info->name, info->initiative);
+        pf_printf("readding initiative %s %d\n", info->name, info->initiative);
     if (info->initiative <= 0)
         return ;
     content = ft_open_and_read("data/data--initiative");
@@ -116,13 +116,13 @@ void ft_initiative_add(t_char *info)
     if (ft_initiative_check_content(info, content))
     {
         cma_free_double(content);
-        ft_printf("%s is already in initiative\n", info->name);
+        pf_printf("%s is already in initiative\n", info->name);
         return ;
     }
     fd = open("data/data--initiative", O_WRONLY | O_TRUNC);
     if (fd == -1)
     {
-        ft_printf("Error opening file: %s\n", strerror(errno));
+        pf_printf("Error opening file: %s\n", strerror(errno));
         cma_free_double(content);
         return ;
     }
@@ -135,38 +135,38 @@ void ft_initiative_add(t_char *info)
         {
             close(fd);
             cma_free_double(content);
-            ft_printf("Error: data--initiative file is corrupted\n");
+            pf_printf("Error: data--initiative file is corrupted\n");
             return ;
         }
         *n_line = '\0';
         if (DEBUG == 1)
-            ft_printf("%s\n", content[i]);
+            pf_printf("%s\n", content[i]);
         error = ft_initiative_check(info, content, i);
         if (DEBUG == 1)
-            ft_printf("Error = %d\n", error);
+            pf_printf("Error = %d\n", error);
         if (!added && error == 0)
         {
-            ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
+            pf_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
             added = 1;
         }
         if (error != 1 && error != 0)
         {
             close(fd);
             cma_free_double(content);
-            ft_printf("Error: data--initiative file is corrupted\n");
+            pf_printf("Error: data--initiative file is corrupted\n");
             return ;
         }
-        ft_printf_fd(fd, "%s\n", content[i]);
+        pf_printf_fd(fd, "%s\n", content[i]);
         i++;
     }
     if (!content && !added)
     {
-        ft_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
+        pf_printf_fd(fd, "%s=%d\n", info->name, info->initiative);
         added = 1;
     }
     close(fd);
     cma_free_double(content);
     if (DEBUG == 1)
-        ft_printf("added = %d\n", added);
+        pf_printf("added = %d\n", added);
     return ;
 }

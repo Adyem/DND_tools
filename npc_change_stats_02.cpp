@@ -51,14 +51,14 @@ void	ft_npc_sstuff(t_char *info, const char **input)
 		if (info->equipment.weapon.attack.function)
 			info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
 		else
-			ft_printf_fd(2, "no weapon attack set for %s\n", info->name);
+			pf_printf_fd(2, "no weapon attack set for %s\n", info->name);
 	}
 	else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
 	{
 		if (info->equipment.ranged_weapon.attack.function)
 			info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon, 0);
 		else
-			ft_printf_fd(2, "no ranged weapon attack set for %s\n", info->name);
+			pf_printf_fd(2, "no ranged weapon attack set for %s\n", info->name);
 	}
 	else if (ft_strcmp_dnd(input[1], "prone") == 0)
 		info->flags.prone = 1;
@@ -67,12 +67,12 @@ void	ft_npc_sstuff(t_char *info, const char **input)
 	else if (ft_strcmp_dnd(input[1], "damage") == 0)
 		ft_request_damage(info);
 	else if (ft_strcmp_dnd(input[1], "hp") == 0)
-		ft_printf("HP: %d\n", info->stats.health);
+		pf_printf("HP: %d\n", info->stats.health);
 	else if (ft_strcmp_dnd(input[1], "initiative") == 0)
 		ft_check_initiative(info);
 	else if (ft_skill_roll(info, input) == 0)
 		return ;
 	else
-		ft_printf_fd(2, "4-Invalid command given\n");
+		pf_printf_fd(2, "4-Invalid command given\n");
 	return ;
 }

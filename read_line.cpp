@@ -13,7 +13,7 @@ static char	**ft_parse_input(char *input_string)
 	if (!input)
 	{
 		cma_free(input_string);
-		ft_printf_fd(2, "006-Error splitting input\n");
+		pf_printf_fd(2, "006-Error splitting input\n");
 	}
 	return (input);
 }
@@ -80,7 +80,7 @@ void ft_request_input(t_name *name)
         else if (!found)
             found = ft_handle_custom_commands(input, i, name);
         if (!found)
-			ft_printf_fd(2, "007-Error unknown command: %s\n", input_string);
+			pf_printf_fd(2, "007-Error unknown command: %s\n", input_string);
         ft_free_input(input, input_string);
     }
 	return ;

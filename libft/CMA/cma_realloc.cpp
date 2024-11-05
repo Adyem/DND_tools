@@ -25,7 +25,7 @@ void* cma_realloc(void* ptr, size_t new_size, bool critical)
     UNPROTECT_METADATA(block, sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
     {
-        ft_printf_fd(2, "Invalid realloc detected at %p\n", ptr);
+        pf_printf_fd(2, "Invalid realloc detected at %p\n", ptr);
         raise(SIGSEGV);
     }
     if (aligned_new_size <= block->size)

@@ -23,13 +23,13 @@ void ft_fclean(void)
     pid = fork();
     if (pid == -1)
     {
-        ft_printf_fd(2, "Fork failed: %s\n", strerror(errno));
+        pf_printf_fd(2, "Fork failed: %s\n", strerror(errno));
         return ;
     }
     else if (pid == 0)
     {
         execvp(command[0], (char* const*)command);
-        ft_printf_fd(2, "Execvp failed: %s\n", strerror(errno));
+        pf_printf_fd(2, "Execvp failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
     else
@@ -39,7 +39,7 @@ void ft_fclean(void)
         {
             int exit_status = WEXITSTATUS(status);
             if (exit_status != 0)
-                ft_printf_fd(2, "Command failed with exit status %d\n", exit_status);
+                pf_printf_fd(2, "Command failed with exit status %d\n", exit_status);
         }
     }
 }
@@ -59,13 +59,13 @@ void ft_clean(void)
     pid = fork();
     if (pid == -1)
     {
-        ft_printf_fd(2, "Fork failed: %s\n", strerror(errno));
+        pf_printf_fd(2, "Fork failed: %s\n", strerror(errno));
         return ;
     }
     else if (pid == 0)
     {
         execvp(command[0], (char* const*)command);
-        ft_printf_fd(2, "Execvp failed: %s\n", strerror(errno));
+        pf_printf_fd(2, "Execvp failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
     else
@@ -75,7 +75,7 @@ void ft_clean(void)
         {
             int exit_status = WEXITSTATUS(status);
             if (exit_status != 0)
-                ft_printf_fd(2, "Command failed with exit status %d\n", exit_status);
+                pf_printf_fd(2, "Command failed with exit status %d\n", exit_status);
         }
     }
 	return ;

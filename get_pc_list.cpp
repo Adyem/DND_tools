@@ -32,14 +32,14 @@ static char	**ft_open_and_read_initiative()
     fd = open("data/data--initiative", O_RDONLY);
     if (fd == -1)
     {
-        ft_printf("280-Error opening file: %s\n", strerror(errno));
+        pf_printf("280-Error opening file: %s\n", strerror(errno));
         return (ft_nullptr);
     }
     content = ft_read_file_dnd(fd);
     close(fd);
     if (!content)
     {
-        ft_printf("281-Error opening file: %s\n", strerror(errno));
+        pf_printf("281-Error opening file: %s\n", strerror(errno));
         return (ft_nullptr);
     }
 	return (content);
@@ -59,7 +59,7 @@ bool ft_handle_player_entry(char **result, char *content, const char *prefix, in
         if (equal_sign)
             *equal_sign = '\0';
         if (DEBUG == 1)
-            ft_printf("found player %s\n", result[*j]);
+            pf_printf("found player %s\n", result[*j]);
         if (ft_check_player_entry(result[*j]))
         {
             cma_free_double(result);
@@ -99,7 +99,7 @@ char **ft_get_pc_list()
     }
     if (j == 0)
     {
-        ft_printf_fd(2, "282-Error: No player character found\n");
+        pf_printf_fd(2, "282-Error: No player character found\n");
         cma_free_double(result);
 		cma_free_double(content);
         return (ft_nullptr);

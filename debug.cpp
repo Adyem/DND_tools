@@ -13,10 +13,10 @@ void ft_print_content(char **content)
     {
         while (content[i])
         {
-            ft_printf("%s", content[i]);
+            pf_printf("%s", content[i]);
             i++;
         }
     }
-    ft_printf("\n");
+    pf_printf("\n");
     return ;
 }

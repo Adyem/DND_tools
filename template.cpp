@@ -9,12 +9,12 @@ void ft_template_turn(t_char *info)
 	ft_update_buf(info);
 	if (info->flags.prone)
 	{
-		ft_printf("%s will use his/her action to stand up\n", info->name);
+		pf_printf("%s will use his/her action to stand up\n", info->name);
 		info->flags.prone = 0;
 	}
 	else
-		ft_printf("The template will try to make either a ranged or melee attack during his turn\n");
-	ft_printf("Template currently has %d/%d hp\n", info->stats.health, info->dstats.health);
+		pf_printf("The template will try to make either a ranged or melee attack during his turn\n");
+	pf_printf("Template currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 	return ;
 }
 
@@ -46,7 +46,7 @@ t_char *ft_template(const int index, const char **input, t_name *name, int excep
 		if (ft_strcmp_dnd(input[1], "init") == 0)
 		{
 			ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-			ft_printf("Stats for %s written on a file\n", info->name);
+			pf_printf("Stats for %s written on a file\n", info->name);
 			ft_free_info(info);
 			return (ft_nullptr);
 		}

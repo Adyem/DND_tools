@@ -238,7 +238,7 @@ int ft_set_stats(t_char *info, char **content)
         }
         else
         {
-            ft_printf_fd(2, "1-Something is wrong with the save file for %s at the " \
+            pf_printf_fd(2, "1-Something is wrong with the save file for %s at the " \
 					"line: %s, please reinitialize the save\n", info->name, content[i]);
             info->flags.error = 1;
             return (1);

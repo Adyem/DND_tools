@@ -23,7 +23,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 	buff.cleanup_f = ft_cleanup_hunters_mark;
     if (ft_cast_concentration(info, input, &buff))
 		return ;
-	ft_printf("%s cast hunters mark on %s\n", info->name, input[3]);
+	pf_printf("%s cast hunters mark on %s\n", info->name, input[3]);
     return ;
 }
 
@@ -49,12 +49,12 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
 
     (void)buff;
     if (DEBUG == 1)
-        ft_printf("setting the caster name in the target %s %p\n", input[0], (void *)target);
+        pf_printf("setting the caster name in the target %s %p\n", input[0], (void *)target);
     if (target)
     {
         if (ft_is_caster_name_present(target->debufs.hunters_mark.caster_name, input[0]))
         {
-            ft_printf_fd(2, "102-Error: Caster name already present\n");
+            pf_printf_fd(2, "102-Error: Caster name already present\n");
             return (1);
         }
         if (ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0]))
@@ -65,7 +65,7 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
         i = 0;
         while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[i])
         {
-            ft_printf("%s has cast hunter's mark\n", target->debufs.hunters_mark.caster_name[i]);
+            pf_printf("%s has cast hunter's mark\n", target->debufs.hunters_mark.caster_name[i]);
             i++;
         }
     }

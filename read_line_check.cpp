@@ -24,6 +24,6 @@ int	ft_read_line_confirm(const char *message)
 			return (1);
 		}
 	}
-	ft_printf_fd(2, "116-Error: read line memory allocation failed\n");
+	pf_printf_fd(2, "116-Error: read line memory allocation failed\n");
 	return (-1);
 }

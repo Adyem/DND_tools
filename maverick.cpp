@@ -10,12 +10,12 @@ void	ft_maverick_turn(t_char *info)
 	char	**player_list;
 
 	ft_update_buf(info);
-	ft_printf("\n\n");
+	pf_printf("\n\n");
 	player_list = ft_get_pc_list();
 	if (ft_double_char_length((const char **)player_list) < 2)
 	{
 		if (ft_double_char_length((const char **)player_list) > 0)
-			ft_printf_fd(2, "283-Error not enough targets for %s\n", info->name);
+			pf_printf_fd(2, "283-Error not enough targets for %s\n", info->name);
 		cma_free_double(player_list);
 		return ;
 	}
@@ -28,7 +28,7 @@ void	ft_maverick_turn(t_char *info)
 	}
 	ft_maverick_print_f(first, second, info, player_list);
 	ft_maverick_print_s(first, second, info, player_list);
-	ft_printf("\n\n");
+	pf_printf("\n\n");
 	cma_free_double(player_list);
 	return ;
 }
@@ -61,7 +61,7 @@ t_char *ft_maverick(const int index, const char **input, t_name *name, int excep
 		if (ft_strcmp_dnd(input[1], "init") == 0)
 		{
 			ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
-			ft_printf("Stats for %s written on a file\n", info->name);
+			pf_printf("Stats for %s written on a file\n", info->name);
 			ft_free_info(info);
 			return (ft_nullptr);
 		}

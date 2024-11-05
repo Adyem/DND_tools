@@ -5,7 +5,7 @@
 
 static void ft_print_overflow_error(int error_code)
 {
-    ft_printf("%d-Error: Result is higher than %d or lower than %d\n", error_code, INT_MAX, INT_MIN);
+    pf_printf("%d-Error: Result is higher than %d or lower than %d\n", error_code, INT_MAX, INT_MIN);
     return ;
 }
 
@@ -51,7 +51,7 @@ static int ft_check_div_overflow(int first_number, int second_number)
 {
     if (second_number == 0)
     {
-        ft_printf("176-Error: Division by zero is undefined\n");
+        pf_printf("176-Error: Division by zero is undefined\n");
         return (1);
     }
     if (first_number == INT_MIN && second_number == -1)
@@ -99,7 +99,7 @@ static void ft_update_string(char *string, int *i, int x)
     while (string[x] >= '0' && string[x] <= '9')
         x++;
     if (DEBUG == 1)
-        ft_printf("string = %s and x = %d\n", string, x);
+        pf_printf("string = %s and x = %d\n", string, x);
     while (string[x])
     {
         string[*i] = string[x];
@@ -132,7 +132,7 @@ int ft_process_sign(char *string, int *i, int j, int *error)
         return (1);
     result = ft_calculate_result(first_number, second_number, sign);
     if (DEBUG == 1)
-        ft_printf("result = %d and i=%d\n", result, *i);
+        pf_printf("result = %d and i=%d\n", result, *i);
     if (ft_roll_itoa(result, i, string))
         return (1);
     ft_update_string(string, i, x);
