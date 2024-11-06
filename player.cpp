@@ -42,7 +42,7 @@ static void	ft_list_players(void)
 	dir = opendir("data");
 	if (dir == NULL)
 	{
-		perror("Unable to open data folder");
+		pf_printf("Unable to open data folder: %s", strerror(errno));
 		return ;
 	}
 	while ((entry = readdir(dir)) != NULL)
@@ -51,6 +51,7 @@ static void	ft_list_players(void)
 			pf_printf("%s\n", entry->d_name + 4);
 	}
 	closedir(dir);
+	return ;
 }
 
 
