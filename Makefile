@@ -104,6 +104,7 @@ SRC         = name.cpp \
               roll_dice.cpp \
               create_data_folder.cpp \
               cast_concentration_multi_target_01.cpp \
+			  cast_concentration_multi_target_02.cpp \
               ordinal_suffix.cpp \
               check_equipment.cpp \
               test.cpp \
