@@ -28,7 +28,8 @@ void ft_free_memory_name(t_name *name, int exit_failure)
     return ;
 }
 
-static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *new_name, c_name new_function)
+static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *new_name,
+							c_name new_function)
 {
     t_name *new_node;
 
@@ -72,7 +73,8 @@ static char *ft_new_name(const char *name, int index)
     return (new_name);
 }
 
-static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char *base_name, c_name function, int count)
+static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char *base_name,
+								c_name function, int count)
 {
     int i;
     char *new_name;
@@ -80,7 +82,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char
     i = 1;
     while (i <= count)
     {
-        if (i > 99)
+        if (i > 50)
             break ;
         new_name = ft_new_name(base_name, i);
         if (!new_name)
