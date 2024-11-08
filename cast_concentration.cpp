@@ -84,16 +84,12 @@ static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *targ
 {
     if (ft_check_write_permissions(info->save_file) != 0)
     {
-        pf_printf_fd(2, "No write permission for file %s: %s\n", info->save_file,
-				strerror(errno));
         info->flags.alreaddy_saved = 1;
         ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 4);
         return (1);
     }
     if (ft_check_write_permissions(target->save_file) != 0)
     {
-        pf_printf_fd(2, "No write permission for file %s: %s\n", target->save_file,
-				strerror(errno));
         ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 5);
         return (1);
     }
@@ -138,8 +134,7 @@ int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
         if (!target)
 			return (pf_printf("297-Error getting info %s\n", input[2]), 1);
     }
-    if (ft_cast_concentration_open_file(fd, info, target))
-        return(1);
+
     if (ft_strcmp_dnd(target->name, info->name) == 0)
     {
 		ft_cast_concentration_cleanup(info, target, fd, buff, 1);
@@ -153,10 +148,12 @@ int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
             return (1);
         }
     }
-    if (ft_remove_concentration(info))
+	if (ft_remove_concentration(info))
         return (ft_cast_concentration_cleanup(info, target, fd, buff, 0), 1);
-    if (ft_apply_concentration_buff(info, target, fd, input, buff))
+	if (ft_apply_concentration_buff(info, target, fd, input, buff))
         return (1);
+	if (ft_cast_concentration_open_file(fd, info, target))
+        return(1);
     ft_cast_concentration_cleanup(info, target, fd, buff, -1);
     return (0);
 }

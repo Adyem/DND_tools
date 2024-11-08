@@ -69,37 +69,6 @@ static void ft_initialize_variables(t_target_data *target_data)
 	return ;
 }
 
-static int ft_open_target_files(t_target_data *target_data, int amount)
-{
-    int i;
-
-    for (i = 0; i < amount; i++)
-    {
-        if (!target_data->target[i] || !target_data->target[i]->save_file)
-        {
-            pf_printf("112-Error: invalid target or missing save file\n");
-            break ;
-        }
-        target_data->fd[i] = open(target_data->target[i]->save_file,
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        if (target_data->fd[i] == -1)
-        {
-            pf_printf("113-Error: opening file %s\n", target_data->target[i]->save_file);
-            break ;
-        }
-    }
-    if (i != amount)
-    {
-        for (int j = 0; j < i; j++)
-        {
-            close(target_data->fd[j]);
-            target_data->fd[j] = -1;
-        }
-        return (0);
-    }
-    return (1);
-}
-
 static void ft_free_memory_cmt(t_target_data *target_data, int amount)
 {
     int j = 0;
@@ -153,11 +122,6 @@ void ft_cast_concentration_multi_target_01(t_char *info, const char **input, t_b
             return ;
         }
         i++;
-    }
-    if (!ft_open_target_files(&target_data, buff->target_amount))
-    {
-        ft_free_memory_cmt(&target_data, buff->target_amount);
-        return ;
     }
     for (i = 0; i < buff->target_amount; i++)
     {
