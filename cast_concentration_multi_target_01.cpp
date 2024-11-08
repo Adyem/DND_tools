@@ -1,3 +1,4 @@
+#include "character.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/ReadLine/readline.hpp"
@@ -6,71 +7,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstdlib>
-
-static int ft_open_target_files(t_char *info, t_char **target, int *fd, char **string, int amount)
-{
-    int i;
-	int j;
-
-	i = 0;
-    while (i < amount)
-    {
-        if (!target[i] || !target[i]->save_file)
-        {
-            pf_printf("112-Error: invalid target or missing save file\n");
-            break ;
-        }
-        fd[i] = open(target[i]->save_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        if (fd[i] == -1)
-        {
-            pf_printf("113-Error: opening file %s\n", target[i]->save_file);
-            break ;
-        }
-		i++;
-    }
-
-    if (i < amount)
-    {
-		j = 0;
-        while (j < i)
-		{
-            ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[j]);
-            close(fd[j]);
-            fd[j] = -1;
-			j++;
-        }
-		j = 0;
-        while(j < amount)
-        {
-            if (target[j])
-            {
-                ft_free_info(target[j]);
-                target[j] = ft_nullptr;
-            }
-            if (string[j])
-            {
-                cma_free(string[j]);
-                string[j] = ft_nullptr;
-            }
-			j++;
-        }
-        return (0);
-    }
-	return (1);
-}
-
-static void ft_initialize_variables(int *fd, char **string, t_char **target)
-{
-    int i = 0;
-    while (i < 20)
-    {
-        string[i] = ft_nullptr;
-        fd[i] = -1;
-        target[i] = ft_nullptr;
-        i++;
-    }
-    return ;
-}
 
 static int ft_check_target_amount(int target_amount)
 {
@@ -120,54 +56,115 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
     }
 }
 
-static void ft_free_memory_cmt(t_char **target, char **string, int amount)
+static void ft_initialize_variables(t_target_data *target_data)
+{
+    int i = 0;
+    while (i < 20)
+    {
+        target_data->string[i] = ft_nullptr;
+        target_data->fd[i] = -1;
+        target_data->target[i] = ft_nullptr;
+        i++;
+    }
+	return ;
+}
+
+static int ft_open_target_files(t_target_data *target_data, int amount)
+{
+    int i;
+
+    for (i = 0; i < amount; i++)
+    {
+        if (!target_data->target[i] || !target_data->target[i]->save_file)
+        {
+            pf_printf("112-Error: invalid target or missing save file\n");
+            break ;
+        }
+        target_data->fd[i] = open(target_data->target[i]->save_file,
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        if (target_data->fd[i] == -1)
+        {
+            pf_printf("113-Error: opening file %s\n", target_data->target[i]->save_file);
+            break ;
+        }
+    }
+
+    if (i != amount)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            close(target_data->fd[j]);
+            target_data->fd[j] = -1;
+        }
+        return (0);
+    }
+    return (1);
+}
+
+static void ft_free_memory_cmt(t_target_data *target_data, int amount)
 {
     int j = 0;
 
     while (j < amount)
     {
-        if (target[j])
-            ft_free_info(target[j]);
-        if (string[j])
-            cma_free(string[j]);
-        target[j] = ft_nullptr;
-        string[j] = ft_nullptr;
+        if (target_data->target[j])
+        {
+            ft_free_info(target_data->target[j]);
+            target_data->target[j] = ft_nullptr;
+        }
+        if (target_data->string[j])
+        {
+            cma_free(target_data->string[j]);
+            target_data->string[j] = ft_nullptr;
+        }
+        if (target_data->fd[j] != -1)
+        {
+            close(target_data->fd[j]);
+            target_data->fd[j] = -1;
+        }
         j++;
     }
-    return ;
+	return ;
 }
 
 void ft_cast_concentration_multi_target_01(t_char *info, const char **input, t_buff *buff)
 {
-    int     fd[20];
-    char    *string[20];
-    t_char  *target[20];
-    int     i;
+    t_target_data target_data;
+    int           i;
 
     (void)input;
-    ft_initialize_variables(fd, string, target);
+    ft_initialize_variables(&target_data);
     if (!ft_check_target_amount(buff->target_amount))
         return ;
     i = 0;
     while (i < buff->target_amount)
     {
-        string[i] = ft_read_target_name(i);
-        if (!string[i])
+        target_data.string[i] = ft_read_target_name(i);
+        if (!target_data.string[i])
         {
-            ft_free_memory_cmt(target, string, i);
+            ft_free_memory_cmt(&target_data, i);
             return ;
         }
-        target[i] = ft_validate_and_fetch_target(string[i], info);
-        while (!target[i])
+        target_data.target[i] = ft_validate_and_fetch_target(target_data.string[i], info);
+        if (!target_data.target[i])
         {
-            cma_free(string[i]);
-            string[i] = ft_nullptr;
-            i++;
+            cma_free(target_data.string[i]);
+            target_data.string[i] = ft_nullptr;
+            ft_free_memory_cmt(&target_data, i);
+            return ;
         }
         i++;
     }
-    if (!ft_open_target_files(info, target, fd, string, buff->target_amount))
-		return ;
-	ft_free_memory_cmt(target, string, i);
-	return ;
+    if (!ft_open_target_files(&target_data, buff->target_amount))
+    {
+        ft_free_memory_cmt(&target_data, buff->target_amount);
+        return ;
+    }
+    for (i = 0; i < buff->target_amount; i++)
+    {
+        ft_npc_write_file(info, &info->stats, &info->c_resistance, target_data.fd[i]);
+        close(target_data.fd[i]);
+        target_data.fd[i] = -1;
+    }
+    ft_free_memory_cmt(&target_data, buff->target_amount);
 }

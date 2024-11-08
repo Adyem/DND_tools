@@ -15,6 +15,14 @@ typedef void	(*c_turn)(t_char *);
 
 typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 
+typedef struct s_target_data
+{
+	int		fd[20];
+	char	*string[20];
+	t_char	*target[20];
+}	t_target_data;
+
+
 typedef struct s_buff
 {
 	int	target_amount;

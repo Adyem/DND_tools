@@ -15,12 +15,14 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 {
 	if (info)
 	{
-		info->flags.dont_save = 1;
+		if (error != -1)
+			info->flags.dont_save = 1;
         ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[0]);
 	}
 	if (target)
 	{
-		target->flags.dont_save = 1;
+		if (error != -1)
+			target->flags.dont_save = 1;
 		ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[1]);
 	}
 	if (fd[0] != -1)
@@ -44,8 +46,8 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 	return ;
 }
 
-
-int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const char **input, t_buff *buff)
+int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const char **input,
+									t_buff *buff)
 {
     char	**temp;
     int		i;
