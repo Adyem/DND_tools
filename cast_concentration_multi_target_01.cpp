@@ -58,14 +58,14 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
 
 static void ft_initialize_variables(t_target_data *target_data)
 {
-    int i = 0;
-    while (i < 20)
-    {
-        target_data->string[i] = ft_nullptr;
-        target_data->fd[i] = -1;
-        target_data->target[i] = ft_nullptr;
-        i++;
-    }
+	int i = 0;
+	while (i < 20)
+	{
+		target_data->string[i] = ft_nullptr;
+		target_data->fd[i] = -1;
+		target_data->target[i] = ft_nullptr;
+		i++;
+	}
 	return ;
 }
 
@@ -88,7 +88,6 @@ static int ft_open_target_files(t_target_data *target_data, int amount)
             break ;
         }
     }
-
     if (i != amount)
     {
         for (int j = 0; j < i; j++)
