@@ -100,7 +100,6 @@ void ft_cast_concentration_multi_target_01(t_char *info, const char **input, t_b
     t_target_data target_data;
     int           i;
 
-    (void)input;
     ft_initialize_variables(&target_data);
     if (!ft_check_target_amount(buff->target_amount))
         return ;
@@ -129,5 +128,8 @@ void ft_cast_concentration_multi_target_01(t_char *info, const char **input, t_b
         close(target_data.fd[i]);
         target_data.fd[i] = -1;
     }
+	target_data.buff_info = buff;
+	ft_cast_concentration_multi_target_02(info, input, &target_data);
     ft_free_memory_cmt(&target_data, buff->target_amount);
+	return ;
 }

@@ -20,6 +20,7 @@ typedef struct s_target_data
 	int		fd[20];
 	char	*string[20];
 	t_char	*target[20];
+	t_buff	*buff_info;
 }	t_target_data;
 
 
