@@ -259,6 +259,7 @@ static const	t_flags INITIALIZE_FLAGS =
 	.advantage = 0,
 	.prone = 0,
 	.reaction_used = 0,
+	.dont_save = 0,
 };
 
 static const	t_crackback INITIALIZE_CRACKBACK =

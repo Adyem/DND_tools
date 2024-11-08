@@ -137,7 +137,7 @@ static void ft_free_memory_cmt(t_char **target, char **string, int amount)
     return ;
 }
 
-void ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff *buff)
+void ft_cast_concentration_multi_target_01(t_char *info, const char **input, t_buff *buff)
 {
     int     fd[20];
     char    *string[20];

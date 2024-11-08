@@ -9,12 +9,20 @@
 #include <cerrno>
 #include <cstring>
 
-static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2], t_buff *buff, int error)
+
+static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2], t_buff *buff,
+											int error)
 {
 	if (info)
+	{
+		info->flags.dont_save = 1;
         ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[0]);
+	}
 	if (target)
+	{
+		target->flags.dont_save = 1;
 		ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[1]);
+	}
 	if (fd[0] != -1)
         close(fd[0]);
 	if (fd[1] != -1)
@@ -72,20 +80,36 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
 
 static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *target)
 {
+    if (ft_check_write_permissions(info->save_file) != 0)
+    {
+        pf_printf_fd(2, "No write permission for file %s: %s\n", info->save_file,
+				strerror(errno));
+        info->flags.alreaddy_saved = 1;
+        ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 4);
+        return (1);
+    }
+    if (ft_check_write_permissions(target->save_file) != 0)
+    {
+        pf_printf_fd(2, "No write permission for file %s: %s\n", target->save_file,
+				strerror(errno));
+        ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 5);
+        return (1);
+    }
     fd[0] = ft_open_file_write_only(info->save_file);
     if (fd[0] == -1)
     {
-        info->flags.alreaddy_saved = 1;
-        ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 4);
-        return (1) ;
+        pf_printf_fd(2, "Unexpected error opening file %s: %s\n", info->save_file,
+				strerror(errno));
+        abort();
     }
     fd[1] = ft_open_file_write_only(target->save_file);
     if (fd[1] == -1)
     {
-        ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 5);
-        return (1) ;
+        pf_printf_fd(2, "Unexpected error opening file %s: %s\n", target->save_file,
+				strerror(errno));
+        abort();
     }
-    return (0) ;
+    return (0);
 }
 
 int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)

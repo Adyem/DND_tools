@@ -208,7 +208,7 @@ void		ft_check_concentration(t_char *info, int  damage);
 int			ft_remove_concentration(t_char *info);
 void		ft_cast_chaos_armor(t_char *info);
 int			ft_update_caster_name(char ***caster_name, const char *input_name);
-void		ft_cast_concentration_multi_target(t_char *info, const char **input, t_buff *buff);
+void		ft_cast_concentration_multi_target_01(t_char *info, const char **input, t_buff *buff);
 
 //hunters mark
 void		ft_concentration_remove_hunters_mark(t_char *info, t_char *target);
@@ -249,6 +249,7 @@ void		ft_remove_element(const char **array, const char *element);
 void		ft_get_random_target(const char **player_list, const char **target_field);
 int			ft_check_player_entry(const char *entry);
 int			ft_set_stat_player(size_t key_len, const char **field, const char *content);
+int			ft_check_write_permissions(const char *filepath);
 
 //check name
 int			ft_set_stats_check_name(const char *name);

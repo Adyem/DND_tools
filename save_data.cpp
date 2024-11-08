@@ -148,7 +148,7 @@ void	ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, i
 {
 	if (DEBUG == 1)
 		pf_printf("fd = %i\n", fd);
-	if (info->flags.alreaddy_saved)
+	if (info->flags.alreaddy_saved || info->flags.dont_save)
 		return ;
 	if (fd == -1)
 		fd = open(info->save_file, O_WRONLY | O_CREAT | O_TRUNC,

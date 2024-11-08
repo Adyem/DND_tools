@@ -327,6 +327,7 @@ typedef struct s_flags
 	int				advantage;
 	int				prone;
 	int				reaction_used;
+	int				dont_save;
 }	t_flags;
 
 typedef struct s_physical

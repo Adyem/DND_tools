@@ -54,6 +54,16 @@ void ft_dual_save_file(t_char *info, t_char *target)
     return ;
 }
 
+int ft_check_write_permissions(const char *filepath)
+{
+    if (access(filepath, F_OK) == 0)
+    {
+        if (access(filepath, W_OK) != 0)
+            return (-1);
+    }
+    return (0);
+}
+
 void	ft_remove_element(const char **array, const char *element)
 {
 	int	i;
