@@ -95,7 +95,7 @@ static void ft_free_memory_cmt(t_target_data *target_data, int amount)
 	return ;
 }
 
-void ft_cast_concentration_multi_target_01(t_char *info, const char **input, t_buff *buff)
+void ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff)
 {
     t_target_data target_data;
     int           i;
@@ -129,7 +129,7 @@ void ft_cast_concentration_multi_target_01(t_char *info, const char **input, t_b
         target_data.fd[i] = -1;
     }
 	target_data.buff_info = buff;
-	ft_cast_concentration_multi_target_02(info, input, &target_data);
+	ft_cast_concentration_multi_target_02(info, &target_data);
     ft_free_memory_cmt(&target_data, buff->target_amount);
 	return ;
 }
