@@ -6,6 +6,19 @@
 #include <cstring>
 #include <strings.h>
 
+static void	ft_set_not_save_flag(t_target_data *target_data, t_char *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < target_data->buff_info->target_amount)
+	{
+		target_data->target[i]->flags.dont_save = 1;
+		i++;
+	}
+	info->flags.dont_save = 1;
+}
+
 static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 {
 	int	i;
@@ -16,6 +29,7 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 	{
 		if (ft_check_write_permissions(target_data->target[i]->save_file))
 		{
+			ft_set_not_save_flag(target_data, info);
 			pf_printf_fd(2, "118-Error trying to acces file: %s", strerror(errno));
 			return (-1);
 		}
@@ -23,6 +37,7 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 	}
 	if (ft_check_write_permissions(info->save_file))
 	{
+		ft_set_not_save_flag(target_data, info);
 		pf_printf_fd(2, "120-Error trying to acces file: %s", strerror(errno));
 		return (-1);
 	}
