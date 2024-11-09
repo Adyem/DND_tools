@@ -17,6 +17,7 @@ static void	ft_set_not_save_flag(t_target_data *target_data, t_char *info)
 		i++;
 	}
 	info->flags.dont_save = 1;
+	return ;
 }
 
 static int	ft_check_and_open(t_target_data *target_data, t_char *info)

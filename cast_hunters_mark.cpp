@@ -6,21 +6,31 @@
 #include "identification.hpp"
 #include <cstdlib>
 
+static const	t_buff BUFF_HUNTERS_MARK =
+{
+	.target_amount = 1,
+	.target = ft_nullptr,
+	.spell_name = "hunters mark",
+	.spell_id = HUNTERS_MARK_ID,
+	.dice_faces_mod = 6,
+	.dice_amount_mod = 1,
+	.duration = 10,
+	.buff = 0,
+	.error = 0,
+	.cast_spell = ft_cast_hunters_mark_apply_debuf,
+	.cleanup_f = ft_cleanup_hunters_mark,
+};
+
 void ft_cast_hunters_mark(t_char *info, const char **input)
 {
-    t_buff buff;
+    t_buff buff = BUFF_HUNTERS_MARK;
 
-	buff.spell_name = "hunters mark";
-    buff.target_amount = 1;
-    buff.error = 1;
-    buff.duration = 50;
-    buff.dice_faces_mod = 6;
-    buff.dice_amount_mod = 1;
-    buff.target_amount = 1;
-    buff.spell_id = HUNTERS_MARK_ID;
-    buff.buff = 0;
-    buff.cast_spell = ft_cast_hunters_mark_apply_debuf;
-	buff.cleanup_f = ft_cleanup_hunters_mark;
+	buff.target = cma_strdup(input[3], false);
+	if (!buff.target)
+	{
+		pf_printf_fd(2, "121-Error allocating memory hunters mark target");
+		return ;
+	}
     if (ft_cast_concentration(info, input, &buff))
 		return ;
 	pf_printf("%s cast hunters mark on %s\n", info->name, input[3]);

@@ -26,7 +26,7 @@ typedef struct s_target_data
 
 typedef struct s_buff
 {
-	int	target_amount;
+	int							target_amount;
     char						*target;
 	const char					*spell_name;
     int							spell_id;
