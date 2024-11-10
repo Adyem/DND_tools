@@ -100,6 +100,8 @@ void ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff)
     t_target_data target_data;
     int           i;
 
+	if (ft_remove_concentration(info))
+		return ;
     ft_initialize_variables(&target_data);
     if (!ft_check_target_amount(buff->target_amount))
         return ;
@@ -122,11 +124,13 @@ void ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff)
         }
         i++;
     }
-    for (i = 0; i < buff->target_amount; i++)
+	i = 0;
+    while (i < buff->target_amount)
     {
         ft_npc_write_file(info, &info->stats, &info->c_resistance, target_data.fd[i]);
         close(target_data.fd[i]);
         target_data.fd[i] = -1;
+		i++;
     }
 	target_data.buff_info = buff;
 	ft_cast_concentration_multi_target_02(info, &target_data);

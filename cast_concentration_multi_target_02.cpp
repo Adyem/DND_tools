@@ -66,8 +66,6 @@ void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
 {
 	int	fd;
 
-	if (ft_remove_concentration(info))
-		return ;
 	fd = ft_check_and_open(target_data, info);
 	if (fd == -1)
 		return ;
