@@ -20,8 +20,8 @@ static int ft_check_target_amount(int target_amount)
 
 static char *ft_read_target_name(int i)
 {
-    char message[55];
-    char *target_name;
+    char	message[55];
+    char	*target_name;
 
     sprintf(message, "Requesting the name of the %s target", ft_ordinal_suffix(i + 1));
     target_name = rl_readline(message);
@@ -59,6 +59,7 @@ static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
 static void ft_initialize_variables(t_target_data *target_data)
 {
 	int i = 0;
+
 	while (i < 20)
 	{
 		target_data->string[i] = ft_nullptr;
