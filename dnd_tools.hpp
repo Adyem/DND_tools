@@ -25,6 +25,10 @@ void		ft_npc_init_stats(t_char *info);
 t_char		*ft_template(const int index, const char **input, t_name *name, int exception);
 void		ft_template_turn(t_char *info);
 
+//Frank
+t_char		*ft_frank(const int index, const char **input, t_name *name, int exception);
+void		ft_frank_turn(t_char *info);
+
 //Goblin Warmaster
 t_char		*ft_goblin_warmaster(const int index, const char **input, t_name *name, int exception);
 void		ft_goblin_warmaster_turn(t_char *info);

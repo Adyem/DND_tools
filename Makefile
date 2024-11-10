@@ -16,7 +16,9 @@ HEADER      = dnd_tools.hpp \
               armor.hpp \
               gundren_rockseeker.hpp \
               goblin_warmaster.hpp \
-              maverick.hpp
+              maverick.hpp \
+              frank.hpp \
+              grizz.hpp
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -28,7 +30,7 @@ SRC         = name.cpp \
               chaos_crystal.cpp \
               gundren_rockseeker.cpp \
               goblin_warmaster.cpp \
-			  grizz.cpp \
+              grizz.cpp \
               main.cpp \
               template.cpp \
               npc_stats.cpp \
@@ -104,7 +106,7 @@ SRC         = name.cpp \
               roll_dice.cpp \
               create_data_folder.cpp \
               cast_concentration_multi_target_01.cpp \
-			  cast_concentration_multi_target_02.cpp \
+              cast_concentration_multi_target_02.cpp \
               ordinal_suffix.cpp \
               check_equipment.cpp \
               test.cpp \
@@ -115,7 +117,8 @@ SRC         = name.cpp \
               get_pc_list.cpp \
               get_random_target.cpp \
               npc_set_stats_player.cpp \
-			  crackback.cpp
+              crackback.cpp \
+              frank.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17
