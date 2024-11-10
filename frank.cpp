@@ -28,9 +28,10 @@ void ft_frank_turn(t_char *info)
 	pf_printf("Frank currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 	if (info->stats.turn == 1)
 		info->bufs.lightning_strikeV2 = FRANK_LIGHTNING_STRIKE_V2;
-	if (info->stats.turn == 4)
+	if (info->stats.turn == 3)
 		info->stats.turn = 1;
-	info->stats.turn++;
+	else
+		info->stats.turn++;
 	return ;
 }
 
