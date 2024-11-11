@@ -18,7 +18,6 @@ static const	t_buff BUFF_HUNTERS_MARK =
 	.buff = 0,
 	.error = 0,
 	.cast_spell = ft_cast_hunters_mark_apply_debuf,
-	.cleanup_f = ft_cleanup_hunters_mark,
 };
 
 void ft_cast_hunters_mark(t_char *info, const char **input)
@@ -81,23 +80,4 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
     }
     target->debufs.hunters_mark.amount++;
     return (0);
-}
-
-void ft_cleanup_hunters_mark(t_char *info, t_char *target, t_buff *buff)
-{
-	int len;
-
-	(void)info;
-	(void)buff;
-    if (target)
-    {
-        target->debufs.hunters_mark.amount--;
-		len = ft_double_char_length((const char **)target->debufs.hunters_mark.caster_name);
-        if (len > 0)
-        {
-            cma_free(target->debufs.hunters_mark.caster_name[len - 1]);
-            target->debufs.hunters_mark.caster_name[len - 1] = ft_nullptr;
-        }
-    }
-	return ;
 }

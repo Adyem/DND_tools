@@ -29,8 +29,6 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
         close(fd[0]);
 	if (fd[1] != -1)
         close(fd[1]);
-	if (error == -1 && target && buff && buff->cleanup_f)
-		buff->cleanup_f(info, target, buff);
 	if (error == 1)
         pf_printf("305-Error: can't cast %s on yourself\n", buff->spell_name);
 	else if (error == 2)

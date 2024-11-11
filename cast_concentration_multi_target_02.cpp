@@ -1,3 +1,4 @@
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
@@ -31,7 +32,6 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 	{
 		if (ft_check_write_permissions(target_data->target[i]->save_file))
 		{
-			ft_set_not_save_flag(target_data, info);
 			pf_printf_fd(2, "118-Error trying to acces file: %s", strerror(errno));
 			return (-1);
 		}
@@ -39,7 +39,6 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 	}
 	if (ft_check_write_permissions(info->save_file))
 	{
-		ft_set_not_save_flag(target_data, info);
 		pf_printf_fd(2, "120-Error trying to acces file: %s", strerror(errno));
 		return (-1);
 	}
@@ -67,11 +66,19 @@ static int	ft_apply_concentration(t_target_data *target_data, t_char *info, cons
 {
 	int	i = 0;
 
+	info->concentration.targets = (char **)cma_calloc(target_data->buff_info->target_amount,
+			sizeof(char *), false);
+	if (!info->concentration.targets)
+		return (1);
 	while (i < target_data->buff_info->target_amount)
 	{
 		if (target_data->target[i])
 		{
-			if (target_data->buff_info->cast_spell(target_data->target[i], input, target_data->buff_info))
+			if (target_data->buff_info->cast_spell(target_data->target[i], input,
+						target_data->buff_info))
+				return (1);
+			info->concentration.targets[i] = cma_strdup(target_data->Pchar_name[i], false);
+			if (!info->concentration.targets[i])
 				return (1);
 		}
 		i++;
@@ -84,14 +91,35 @@ static int	ft_apply_concentration(t_target_data *target_data, t_char *info, cons
     return (0);
 }
 
-void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data, const char **input)
+static void	ft_cast_concentration_save_files(t_char *info, t_target_data *target_data, int fd)
+{
+	int	i = 0;
+
+	while (i < target_data->buff_info->target_amount)
+	{
+		ft_npc_write_file(target_data->target[i], &target_data->target[i]->stats,
+				&target_data->target[i]->c_resistance, target_data->fd[i]);
+		i++;
+	}
+	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
+}
+
+void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
+			const char **input)
 {
 	int	fd;
 
 	if (ft_apply_concentration(target_data, info, input))
+	{
+		ft_set_not_save_flag(target_data, info);
 		return ;
+	}
 	fd = ft_check_and_open(target_data, info);
 	if (fd == -1)
+	{
+		ft_set_not_save_flag(target_data, info);
 		return ;
+	}
+	ft_cast_concentration_save_files(info, target_data, fd);
 	return ;
 }

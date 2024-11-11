@@ -8,7 +8,6 @@ typedef struct	s_char t_char;
 typedef struct	s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 
-typedef void	(*cast_buff_debuff_cleanup)(t_char *info, t_char *target, t_buff *buff);
 typedef int		(*cast_buff_debuff)(t_char *, const char **, t_buff *);
 typedef void	(*c_action)(t_char *, t_equipment_id *, int);
 typedef void	(*c_turn)(t_char *);
@@ -18,7 +17,7 @@ typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 typedef struct s_target_data
 {
 	int		fd[20];
-	char	*string[20];
+	char	*Pchar_name[20];
 	t_char	*target[20];
 	t_buff	*buff_info;
 }	t_target_data;
@@ -36,7 +35,6 @@ typedef struct s_buff
 	int							buff;
 	int							error;
 	cast_buff_debuff			cast_spell;
-	cast_buff_debuff_cleanup	cleanup_f;
 }	t_buff;
 
 

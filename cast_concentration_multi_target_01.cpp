@@ -66,7 +66,7 @@ static void ft_initialize_variables(t_target_data *target_data)
 
 	while (i < 20)
 	{
-		target_data->string[i] = ft_nullptr;
+		target_data->Pchar_name[i] = ft_nullptr;
 		target_data->fd[i] = -1;
 		target_data->target[i] = ft_nullptr;
 		i++;
@@ -85,10 +85,10 @@ static void ft_free_memory_cmt(t_target_data *target_data, int amount)
             ft_free_info(target_data->target[j]);
             target_data->target[j] = ft_nullptr;
         }
-        if (target_data->string[j])
+        if (target_data->Pchar_name[j])
         {
-            cma_free(target_data->string[j]);
-            target_data->string[j] = ft_nullptr;
+            cma_free(target_data->Pchar_name[j]);
+            target_data->Pchar_name[j] = ft_nullptr;
         }
         if (target_data->fd[j] != -1)
         {
@@ -114,26 +114,26 @@ void ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff, const cha
         return ;
     while (targets_collected < buff->target_amount)
     {
-        target_data.string[targets_collected] = ft_read_target_name(targets_collected);
-        if (!target_data.string[targets_collected])
+        target_data.Pchar_name[targets_collected] = ft_read_target_name(targets_collected);
+        if (!target_data.Pchar_name[targets_collected])
         {
             ft_free_memory_cmt(&target_data, targets_collected);
             return ;
         }
         target_data.target[targets_collected] =
-			ft_validate_and_fetch_target(target_data.string[targets_collected],
+			ft_validate_and_fetch_target(target_data.Pchar_name[targets_collected],
 											info, &error_code);
         if (!target_data.target[targets_collected])
         {
             if (error_code == 0)
             {
-                cma_free(target_data.string[targets_collected]);
-                target_data.string[targets_collected] = ft_nullptr;
+                cma_free(target_data.Pchar_name[targets_collected]);
+                target_data.Pchar_name[targets_collected] = ft_nullptr;
             }
             else
             {
-                cma_free(target_data.string[targets_collected]);
-                target_data.string[targets_collected] = ft_nullptr;
+                cma_free(target_data.Pchar_name[targets_collected]);
+                target_data.Pchar_name[targets_collected] = ft_nullptr;
                 error++;
                 if (error >= MAX_ERROR_COUNT)
                 {
