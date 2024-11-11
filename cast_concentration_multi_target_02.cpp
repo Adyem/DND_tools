@@ -1,6 +1,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CPP_class/TemporaryFile.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
@@ -99,61 +100,65 @@ static bool	ft_cast_concentration_save_files(t_char *info, t_target_data *target
 	return (true);
 }
 
-void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
-			const char **input)
+void ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
+                const char **input)
 {
-	if (ft_apply_concentration(target_data, info, input))
-	{
-		ft_set_not_save_flag(target_data, info);
-		return ;
-	}
-	if (!ft_check_write_permissions(target_data, info))
-	{
-		ft_set_not_save_flag(target_data, info);
-		return ;
-	}
-	std::vector<std::unique_ptr<TemporaryFile>> temp_files;
-	try
-	{
-		temp_files.emplace_back(std::make_unique<TemporaryFile>(info->save_file));
-		for (int i = 0; i < target_data->buff_info->target_amount; i++)
-		{
-			if (target_data->target[i])
-			{
-				temp_files.emplace_back(std::make_unique<TemporaryFile>(target_data->target[i]
-							->save_file));
-			}
-			else
-				temp_files.emplace_back(nullptr);
-		}
-	}
-	catch (const std::exception& e)
-	{
-		pf_printf_fd(2, "Error creating temporary files: %s", e.what());
-		ft_set_not_save_flag(target_data, info);
-		return ;
-	}
-	if (!ft_cast_concentration_save_files(info, target_data, temp_files))
-	{
-		pf_printf_fd(2, "Error writing to temporary files. Aborting save operation.");
-		ft_set_not_save_flag(target_data, info);
-		return ;
-	}
-	try
-	{
-		if (temp_files[0])
-			temp_files[0]->finalize();
-		for (int i = 0; i < target_data->buff_info->target_amount; i++)
-		{
-			if (target_data->target[i] && temp_files[i + 1])
-				temp_files[i + 1]->finalize();
-		}
-	}
-	catch (const std::exception& e)
-	{
-		pf_printf_fd(2, "Error finalizing temporary files: %s", e.what());
-		ft_set_not_save_flag(target_data, info);
-		return ;
-	}
-	return ;
+    if (ft_apply_concentration(target_data, info, input))
+    {
+        ft_set_not_save_flag(target_data, info);
+        return ;
+    }
+    if (!ft_check_write_permissions(target_data, info))
+    {
+        ft_set_not_save_flag(target_data, info);
+        return ;
+    }
+    try
+    {
+        std::vector<std::unique_ptr<TemporaryFile>> temp_files;
+        temp_files.emplace_back(std::make_unique<TemporaryFile>(info->save_file));
+        for (int i = 0; i < target_data->buff_info->target_amount; i++)
+        {
+            if (target_data->target[i])
+            {
+                temp_files.emplace_back(std::make_unique<TemporaryFile>(
+                    target_data->target[i]->save_file));
+            }
+            else
+            {
+                temp_files.emplace_back(ft_nullptr);
+            }
+        }
+        if (!ft_cast_concentration_save_files(info, target_data, temp_files))
+        {
+            pf_printf_fd(2, "Error writing to temporary files. Aborting save operation.");
+            ft_set_not_save_flag(target_data, info);
+            return ;
+        }
+        try
+        {
+            if (temp_files[0])
+                temp_files[0]->finalize();
+			int i = 0;
+            while (i < target_data->buff_info->target_amount)
+            {
+                if (target_data->target[i] && temp_files[i + 1])
+                    temp_files[i + 1]->finalize();
+				i++;
+            }
+        }
+        catch (const std::exception& e)
+        {
+            pf_printf_fd(2, "Error finalizing temporary files: %s", e.what());
+            ft_set_not_save_flag(target_data, info);
+            return ;
+        }
+    }
+    catch (const std::exception& e)
+    {
+        pf_printf_fd(2, "Error during temporary file operations: %s", e.what());
+        ft_set_not_save_flag(target_data, info);
+        return;
+    }
+    return ;
 }

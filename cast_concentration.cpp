@@ -1,9 +1,11 @@
+#include "character.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/TemporaryFile.hpp"
 #include "dnd_tools.hpp"
+#include <exception>
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstdlib>
@@ -18,7 +20,6 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
     {
         if (error != -1)
             info->flags.dont_save = 1;
-
         if (temp_info_file && temp_info_file->fd != -1)
         {
             try
@@ -33,12 +34,10 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
             }
         }
     }
-
     if (target)
     {
         if (error != -1)
             target->flags.dont_save = 1;
-
         if (temp_target_file && temp_target_file->fd != -1)
         {
             try
@@ -54,7 +53,6 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
             }
         }
     }
-
     if (error == 1)
         pf_printf("305-Error: can't cast %s on yourself\n", buff->spell_name);
     else if (error == 2)
@@ -65,7 +63,6 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
         pf_printf("320-Error opening file: %s\n", strerror(errno));
     else if (error == 5)
         pf_printf("321-Error opening file: %s\n", strerror(errno));
-
     if (target)
         ft_free_info(target);
     return;
@@ -79,13 +76,13 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, const char **input
     temp = (char **)cma_calloc(2, sizeof(char *), false);
     if (!temp)
     {
-        ft_cast_concentration_cleanup(info, target, nullptr, nullptr, buff, 2);
+        ft_cast_concentration_cleanup(info, target, ft_nullptr, ft_nullptr, buff, 2);
         return 1;
     }
     temp[0] = (char *)cma_malloc((ft_strlen(input[3]) + 1) * sizeof(char), false);
     if (!temp[0])
     {
-        ft_cast_concentration_cleanup(info, target, nullptr, nullptr, buff, 3);
+        ft_cast_concentration_cleanup(info, target, ft_nullptr, ft_nullptr, buff, 3);
         return 1;
     }
     info->concentration.targets = temp;
@@ -111,13 +108,13 @@ static int ft_cast_concentration_open_file(std::unique_ptr<TemporaryFile>& temp_
     {
         info->flags.alreaddy_saved = 1;
         ft_cast_concentration_cleanup(info, target, temp_info_file.get(),
-				temp_target_file.get(), nullptr, 4);
+				temp_target_file.get(), ft_nullptr, 4);
         return (1);
     }
     if (ft_check_write_permissions(target->save_file) != 0)
     {
         ft_cast_concentration_cleanup(info, target, temp_info_file.get(),
-				temp_target_file.get(), nullptr, 5);
+				temp_target_file.get(), ft_nullptr, 5);
         return (1);
     }
     try
@@ -129,7 +126,7 @@ static int ft_cast_concentration_open_file(std::unique_ptr<TemporaryFile>& temp_
     {
         pf_printf_fd(2, "Error creating temporary files: %s\n", e.what());
         ft_cast_concentration_cleanup(info, target, temp_info_file.get(), 
-				temp_target_file.get(), nullptr, 0);
+				temp_target_file.get(), ft_nullptr, 0);
         return (1);
     }
     return (0);
@@ -137,16 +134,14 @@ static int ft_cast_concentration_open_file(std::unique_ptr<TemporaryFile>& temp_
 
 int ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 {
-    t_char *target;
-    std::unique_ptr<TemporaryFile> temp_info_file;
-    std::unique_ptr<TemporaryFile> temp_target_file;
+    t_char							*target;
+    std::unique_ptr<TemporaryFile>	temp_info_file;
+    std::unique_ptr<TemporaryFile>	temp_target_file;
 
     if (ft_remove_concentration(info))
         return (1);
-
     if (DEBUG == 1)
         pf_printf("casting hunter's mark %s %s\n", input[0], input[3]);
-
     if (ft_set_stats_check_name(input[3]))
     {
         if (ft_check_player_character(input[3]))
@@ -160,13 +155,11 @@ int ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
         if (!target)
             return (pf_printf("297-Error getting info %s\n", input[2]), 1);
     }
-
     if (ft_strcmp_dnd(target->name, info->name) == 0)
     {
-        ft_cast_concentration_cleanup(info, target, nullptr, nullptr, buff, 1);
+        ft_cast_concentration_cleanup(info, target, ft_nullptr, ft_nullptr, buff, 1);
         return (1);
     }
-
     if (target && target->version_number >= 2)
     {
         if (buff->cast_spell(target, input, buff))
@@ -176,20 +169,23 @@ int ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
             return (1);
         }
     }
-
     if (ft_remove_concentration(info))
     {
         ft_cast_concentration_cleanup(info, target, temp_info_file.get(),
 				temp_target_file.get(), buff, 0);
         return (1);
     }
-
-    if (ft_apply_concentration_buff(info, target, input, buff))
-        return (1);
-
-    if (ft_cast_concentration_open_file(temp_info_file, temp_target_file, info, target))
-        return (1);
-
+	if (ft_apply_concentration_buff(info, target, input, buff))
+		return (1);
+	try
+	{
+		ft_cast_concentration_open_file(temp_info_file, temp_target_file, info, target);
+	}
+	catch (const std::exception &e)
+    {
+		pf_printf_fd(2, "Error allocating memory for classes: %s", e.what());
+		return (1);
+	}
     ft_cast_concentration_cleanup(info, target, temp_info_file.get(), temp_target_file.get(),
 			buff, -1);
     return (0);
