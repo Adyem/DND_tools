@@ -64,9 +64,12 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 
 static int	ft_apply_concentration(t_target_data *target_data, t_char *info)
 {
-	(void)info;
-	(void)target_data;
-	return (0);
+    info->concentration.concentration = 1;
+    info->concentration.spell_id = target_data->buff_info->spell_id;
+    info->concentration.dice_faces_mod = target_data->buff_info->dice_faces_mod;
+    info->concentration.dice_amount_mod = target_data->buff_info->dice_amount_mod;
+    info->concentration.duration = target_data->buff_info->duration;
+    return (0);
 }
 
 void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data)

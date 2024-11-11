@@ -77,7 +77,7 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
     info->concentration.dice_faces_mod = buff->dice_faces_mod;
     info->concentration.dice_amount_mod = buff->dice_amount_mod;
     info->concentration.duration = buff->duration;
-    return (0) ;
+    return (0);
 }
 
 static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *target)
