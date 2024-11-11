@@ -81,29 +81,12 @@ static bool	ft_cast_concentration_save_files(t_char *info, t_target_data *target
 {
 	int	i = 0;
 
-	// Write to each target's temporary file first
 	while (i < target_data->buff_info->target_amount)
 	{
-		if (target_data->target[i])
-		{
-			try
-			{
-				// Example: Assuming ft_npc_write_file writes all necessary data to the
-				// temporary file
-				// Modify ft_npc_write_file to accept a TemporaryFile object or its file descriptor
-				ft_npc_write_file(target_data->target[i], &target_data->target[i]->stats,
-					&target_data->target[i]->c_resistance, temp_files[i]->fd);
-			}
-			catch (const std::exception& e)
-			{
-				pf_printf_fd(2, "Error writing to temporary file for target %d: %s", i, e.what());
-				return (false);
-			}
-		}
+		ft_npc_write_file(target_data->target[i], &target_data->target[i]->stats,
+				&target_data->target[i]->c_resistance, temp_files[i]->fd);
 		i++;
 	}
-
-	// Write to the info's temporary file
 	try
 	{
 		ft_npc_write_file(info, &info->stats, &info->c_resistance, temp_files[i]->fd);
@@ -113,35 +96,26 @@ static bool	ft_cast_concentration_save_files(t_char *info, t_target_data *target
 		pf_printf_fd(2, "Error writing to temporary file for info: %s", e.what());
 		return (false);
 	}
-
 	return (true);
 }
 
 void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
 			const char **input)
 {
-	// Step 1: Apply concentration effects
 	if (ft_apply_concentration(target_data, info, input))
 	{
 		ft_set_not_save_flag(target_data, info);
 		return ;
 	}
-
-	// Step 2: Check write permissions
 	if (!ft_check_write_permissions(target_data, info))
 	{
 		ft_set_not_save_flag(target_data, info);
 		return ;
 	}
-
-	// Step 3: Create temporary files
 	std::vector<std::unique_ptr<TemporaryFile>> temp_files;
 	try
 	{
-		// Create temporary file for info
 		temp_files.emplace_back(std::make_unique<TemporaryFile>(info->save_file));
-
-		// Create temporary files for each target
 		for (int i = 0; i < target_data->buff_info->target_amount; i++)
 		{
 			if (target_data->target[i])
@@ -150,10 +124,7 @@ void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
 							->save_file));
 			}
 			else
-			{
-				// If target is null, push a nullptr to keep indexing consistent
 				temp_files.emplace_back(nullptr);
-			}
 		}
 	}
 	catch (const std::exception& e)
@@ -162,23 +133,16 @@ void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
 		ft_set_not_save_flag(target_data, info);
 		return ;
 	}
-
-	// Step 4: Write data to temporary files
 	if (!ft_cast_concentration_save_files(info, target_data, temp_files))
 	{
 		pf_printf_fd(2, "Error writing to temporary files. Aborting save operation.");
 		ft_set_not_save_flag(target_data, info);
 		return ;
 	}
-
-	// Step 5: Finalize and replace original files with temporary files
 	try
 	{
-		// Finalize info's temporary file
 		if (temp_files[0])
 			temp_files[0]->finalize();
-
-		// Finalize each target's temporary file
 		for (int i = 0; i < target_data->buff_info->target_amount; i++)
 		{
 			if (target_data->target[i] && temp_files[i + 1])
@@ -191,7 +155,5 @@ void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
 		ft_set_not_save_flag(target_data, info);
 		return ;
 	}
-
-	// At this point, all files have been successfully written and replaced
 	return ;
 }

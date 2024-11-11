@@ -16,5 +16,41 @@
     "directory": "/home/adyem/DND_tools/libft/CPP_class",
     "file": "/home/adyem/DND_tools/libft/CPP_class/string.cpp",
     "output": "/home/adyem/DND_tools/libft/CPP_class/objs/string.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/nullptr.o",
+      "nullptr.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/CPP_class",
+    "file": "/home/adyem/DND_tools/libft/CPP_class/nullptr.cpp",
+    "output": "/home/adyem/DND_tools/libft/CPP_class/objs/nullptr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/TemporaryFile.o",
+      "TemporaryFile.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/CPP_class",
+    "file": "/home/adyem/DND_tools/libft/CPP_class/TemporaryFile.cpp",
+    "output": "/home/adyem/DND_tools/libft/CPP_class/objs/TemporaryFile.o"
   }
 ]
