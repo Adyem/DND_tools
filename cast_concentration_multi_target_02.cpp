@@ -47,7 +47,7 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 	if (fd == -1)
 	{
 		pf_printf_fd(2, "121-Error opening file: %s", strerror(errno));
-		abort();
+		return (-1);
 	}
 	while (i < target_data->buff_info->target_amount)
 	{
@@ -97,7 +97,8 @@ static void	ft_cast_concentration_save_files(t_char *info, t_target_data *target
 
 	while (i < target_data->buff_info->target_amount)
 	{
-		ft_npc_write_file(target_data->target[i], &target_data->target[i]->stats,
+		if (target_data->target[i])
+			ft_npc_write_file(target_data->target[i], &target_data->target[i]->stats,
 				&target_data->target[i]->c_resistance, target_data->fd[i]);
 		i++;
 	}
