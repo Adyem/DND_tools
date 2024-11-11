@@ -33,28 +33,32 @@ static char *ft_read_target_name(int i)
     return (target_name);
 }
 
-static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info)
+static t_char *ft_validate_and_fetch_target(char *target_name, t_char *info,
+		int *error_code)
 {
-    if (ft_set_stats_check_name(target_name))
+    if (!ft_set_stats_check_name(target_name))
     {
-        if (ft_check_player_character(target_name))
-        {
-            pf_printf("111-Error: target does not exist\n");
-            return (ft_nullptr);
-        }
+        pf_printf("111-Error: target does not exist\n");
+        *error_code = 1;
         return (ft_nullptr);
     }
-    else
+
+    if (ft_check_player_character(target_name))
     {
-        t_char *target_info = ft_get_info(target_name, info->struct_name);
-        if (!target_info)
-        {
-            pf_printf("109-Error: getting info for %s\n", target_name);
-            return (ft_nullptr);
-        }
-        return (target_info);
+        *error_code = 0;
+        return (ft_nullptr);
     }
+    t_char *target_info = ft_get_info(target_name, info->struct_name);
+    if (!target_info)
+    {
+        pf_printf("109-Error: getting info for %s\n", target_name);
+        *error_code = 2;
+        return (ft_nullptr);
+    }
+    *error_code = 0;
+    return (target_info);
 }
+
 
 static void ft_initialize_variables(t_target_data *target_data)
 {
@@ -96,45 +100,63 @@ static void ft_free_memory_cmt(t_target_data *target_data, int amount)
 	return ;
 }
 
-void ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff)
+void ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff, const char **input)
 {
-    t_target_data target_data;
-    int           i;
+    t_target_data	target_data;
+    int				error = 0;
+    int				targets_collected = 0;
+    int				error_code;
 
-	if (ft_remove_concentration(info))
-		return ;
+    if (ft_remove_concentration(info))
+        return ;
     ft_initialize_variables(&target_data);
     if (!ft_check_target_amount(buff->target_amount))
         return ;
-    i = 0;
-    while (i < buff->target_amount)
+    while (targets_collected < buff->target_amount)
     {
-        target_data.string[i] = ft_read_target_name(i);
-        if (!target_data.string[i])
+        target_data.string[targets_collected] = ft_read_target_name(targets_collected);
+        if (!target_data.string[targets_collected])
         {
-            ft_free_memory_cmt(&target_data, i);
+            ft_free_memory_cmt(&target_data, targets_collected);
             return ;
         }
-        target_data.target[i] = ft_validate_and_fetch_target(target_data.string[i], info);
-        if (!target_data.target[i])
+        target_data.target[targets_collected] =
+			ft_validate_and_fetch_target(target_data.string[targets_collected],
+											info, &error_code);
+        if (!target_data.target[targets_collected])
         {
-            cma_free(target_data.string[i]);
-            target_data.string[i] = ft_nullptr;
-            ft_free_memory_cmt(&target_data, i);
-            return ;
+            if (error_code == 0)
+            {
+                cma_free(target_data.string[targets_collected]);
+                target_data.string[targets_collected] = ft_nullptr;
+            }
+            else
+            {
+                cma_free(target_data.string[targets_collected]);
+                target_data.string[targets_collected] = ft_nullptr;
+                error++;
+                if (error >= MAX_ERROR_COUNT)
+                {
+                    ft_free_memory_cmt(&target_data, targets_collected);
+                    return ;
+                }
+				continue ;
+            }
         }
-        i++;
+        targets_collected++;
     }
-	i = 0;
-    while (i < buff->target_amount)
+    buff->target_amount = targets_collected;
+    for (int i = 0; i < buff->target_amount; i++)
     {
         ft_npc_write_file(info, &info->stats, &info->c_resistance, target_data.fd[i]);
-        close(target_data.fd[i]);
-        target_data.fd[i] = -1;
-		i++;
+        if (target_data.fd[i] != -1)
+        {
+            close(target_data.fd[i]);
+            target_data.fd[i] = -1;
+        }
     }
-	target_data.buff_info = buff;
-	ft_cast_concentration_multi_target_02(info, &target_data);
+    target_data.buff_info = buff;
+    ft_cast_concentration_multi_target_02(info, &target_data, input);
     ft_free_memory_cmt(&target_data, buff->target_amount);
-	return ;
+    return ;
 }

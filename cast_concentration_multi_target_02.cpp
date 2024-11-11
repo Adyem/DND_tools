@@ -13,7 +13,8 @@ static void	ft_set_not_save_flag(t_target_data *target_data, t_char *info)
 	i = 0;
 	while (i < target_data->buff_info->target_amount)
 	{
-		target_data->target[i]->flags.dont_save = 1;
+		if (target_data->target[i])
+			target_data->target[i]->flags.dont_save = 1;
 		i++;
 	}
 	info->flags.dont_save = 1;
@@ -62,8 +63,19 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 	return (fd);
 }
 
-static int	ft_apply_concentration(t_target_data *target_data, t_char *info)
+static int	ft_apply_concentration(t_target_data *target_data, t_char *info, const char **input)
 {
+	int	i = 0;
+
+	while (i < target_data->buff_info->target_amount)
+	{
+		if (target_data->target[i])
+		{
+			if (target_data->buff_info->cast_spell(target_data->target[i], input, target_data->buff_info))
+				return (1);
+		}
+		i++;
+	}
     info->concentration.concentration = 1;
     info->concentration.spell_id = target_data->buff_info->spell_id;
     info->concentration.dice_faces_mod = target_data->buff_info->dice_faces_mod;
@@ -72,11 +84,11 @@ static int	ft_apply_concentration(t_target_data *target_data, t_char *info)
     return (0);
 }
 
-void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data)
+void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data, const char **input)
 {
 	int	fd;
 
-	if (ft_apply_concentration(target_data, info))
+	if (ft_apply_concentration(target_data, info, input))
 		return ;
 	fd = ft_check_and_open(target_data, info);
 	if (fd == -1)
