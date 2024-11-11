@@ -62,10 +62,19 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 	return (fd);
 }
 
+static int	ft_apply_concentration(t_target_data *target_data, t_char *info)
+{
+	(void)info;
+	(void)target_data;
+	return (0);
+}
+
 void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data)
 {
 	int	fd;
 
+	if (ft_apply_concentration(target_data, info))
+		return ;
 	fd = ft_check_and_open(target_data, info);
 	if (fd == -1)
 		return ;
