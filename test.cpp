@@ -15,6 +15,7 @@ void	ft_test(t_name *name)
 	ft_excecute_test("goblin_02", "init", name);
 	ft_excecute_test("veraak", "cast", "hunters_mark", "goblin_01", name);
 	ft_excecute_test("goblin_02", "cast", "hunters_mark", "goblin_01", name);
+	ft_excecute_test("frank", "init", name);
 	ft_excecute_test("add", "player", "Adyem", name);
 	ft_excecute_test("add", "player", "Stormking", name);
 	ft_excecute_test("initiative", name);
