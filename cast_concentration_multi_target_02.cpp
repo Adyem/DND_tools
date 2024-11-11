@@ -126,9 +126,7 @@ void ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
                     target_data->target[i]->save_file));
             }
             else
-            {
                 temp_files.emplace_back(ft_nullptr);
-            }
 			i++;
         }
         if (!ft_cast_concentration_save_files(info, target_data, temp_files))
