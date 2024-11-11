@@ -27,9 +27,9 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
                 ft_npc_write_file(info, &info->stats, &info->c_resistance, temp_info_file->fd);
                 temp_info_file->finalize();
             }
-            catch (const std::exception& e)
+            catch (const std::exception& error)
             {
-                pf_printf_fd(2, "Error writing to info's temporary file: %s\n", e.what());
+                pf_printf_fd(2, "Error writing to info's temporary file: %s\n", error.what());
                 info->flags.dont_save = 1;
             }
         }
@@ -46,9 +46,9 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
 						temp_target_file->fd);
                 temp_target_file->finalize();
             }
-            catch (const std::exception& e)
+            catch (const std::exception& error)
             {
-                pf_printf_fd(2, "Error writing to target's temporary file: %s\n", e.what());
+                pf_printf_fd(2, "Error writing to target's temporary file: %s\n", error.what());
                 target->flags.dont_save = 1;
             }
         }
@@ -122,9 +122,9 @@ static int ft_cast_concentration_open_file(std::unique_ptr<TemporaryFile>& temp_
         temp_info_file = std::make_unique<TemporaryFile>(info->save_file);
         temp_target_file = std::make_unique<TemporaryFile>(target->save_file);
     }
-    catch (const std::exception& e)
+    catch (const std::exception& error)
     {
-        pf_printf_fd(2, "Error creating temporary files: %s\n", e.what());
+        pf_printf_fd(2, "Error creating temporary files: %s\n", error.what());
         ft_cast_concentration_cleanup(info, target, temp_info_file.get(), 
 				temp_target_file.get(), ft_nullptr, 0);
         return (1);
@@ -181,9 +181,9 @@ int ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 	{
 		ft_cast_concentration_open_file(temp_info_file, temp_target_file, info, target);
 	}
-	catch (const std::exception &e)
+	catch (const std::exception &error)
     {
-		pf_printf_fd(2, "Error allocating memory for classes: %s", e.what());
+		pf_printf_fd(2, "Error allocating memory for classes: %s", error.what());
 		return (1);
 	}
     ft_cast_concentration_cleanup(info, target, temp_info_file.get(), temp_target_file.get(),

@@ -11,7 +11,7 @@ TemporaryFile::TemporaryFile(const std::string& filename) : original_filename(fi
 {
     temp_filename = filename + ".tmpXXXXXX";
     std::vector<char> temp_path(temp_filename.begin(), temp_filename.end());
-    temp_path.push_back('\0'); // Null-terminate the string
+    temp_path.push_back('\0');
     fd = mkstemp(temp_path.data());
     if (fd == -1)
     {
@@ -85,4 +85,3 @@ void TemporaryFile::finalize()
     fd = -1;
 	return ;
 }
-

@@ -117,7 +117,8 @@ void ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
     {
         std::vector<std::unique_ptr<TemporaryFile>> temp_files;
         temp_files.emplace_back(std::make_unique<TemporaryFile>(info->save_file));
-        for (int i = 0; i < target_data->buff_info->target_amount; i++)
+		int	i = 0;
+        while (i < target_data->buff_info->target_amount)
         {
             if (target_data->target[i])
             {
@@ -128,6 +129,7 @@ void ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
             {
                 temp_files.emplace_back(ft_nullptr);
             }
+			i++;
         }
         if (!ft_cast_concentration_save_files(info, target_data, temp_files))
         {
@@ -147,16 +149,16 @@ void ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
 				i++;
             }
         }
-        catch (const std::exception& e)
+        catch (const std::exception& error)
         {
-            pf_printf_fd(2, "Error finalizing temporary files: %s", e.what());
+			pf_printf_fd(2, "Error finalizing temporary files: %s", error.what());
             ft_set_not_save_flag(target_data, info);
             return ;
         }
     }
-    catch (const std::exception& e)
+    catch (const std::exception& error)
     {
-        pf_printf_fd(2, "Error during temporary file operations: %s", e.what());
+        pf_printf_fd(2, "Error during temporary file operations: %s", error.what());
         ft_set_not_save_flag(target_data, info);
         return;
     }
