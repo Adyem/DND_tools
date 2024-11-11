@@ -9,7 +9,8 @@ TARGET := CPP_class.a
 DEBUG_TARGET := CPP_class_debug.a
 
 SRCS :=  string.cpp \
-		 nullptr.cpp
+		 nullptr.cpp \
+		 TemporaryFile.cpp
 
 HEADERS := string.hpp \
 		   nullptr.hpp \
