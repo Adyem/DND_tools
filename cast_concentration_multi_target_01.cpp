@@ -8,6 +8,37 @@
 #include <unistd.h>
 #include <cstdlib>
 
+static void ft_free_memory_cmt(t_target_data *target_data, int amount)
+{
+    int j = 0;
+
+    while (j < amount)
+    {
+        if (target_data->target[j])
+        {
+            ft_free_info(target_data->target[j]);
+            target_data->target[j] = ft_nullptr;
+        }
+		if (target_data->target_copy[j])
+		{
+			ft_free_info(target_data->target_copy[j]);
+			target_data->target[j] = ft_nullptr;
+		}
+        if (target_data->Pchar_name[j])
+        {
+            cma_free(target_data->Pchar_name[j]);
+            target_data->Pchar_name[j] = ft_nullptr;
+        }
+        if (target_data->fd[j] != -1)
+        {
+            close(target_data->fd[j]);
+            target_data->fd[j] = -1;
+        }
+        j++;
+    }
+	return ;
+}
+
 static int ft_check_target_amount(int target_amount)
 {
     if (target_amount > 20)
@@ -69,34 +100,9 @@ static void ft_initialize_variables(t_target_data *target_data)
 		target_data->Pchar_name[i] = ft_nullptr;
 		target_data->fd[i] = -1;
 		target_data->target[i] = ft_nullptr;
+		target_data->target_copy[i] = ft_nullptr;
 		i++;
 	}
-	return ;
-}
-
-static void ft_free_memory_cmt(t_target_data *target_data, int amount)
-{
-    int j = 0;
-
-    while (j < amount)
-    {
-        if (target_data->target[j])
-        {
-            ft_free_info(target_data->target[j]);
-            target_data->target[j] = ft_nullptr;
-        }
-        if (target_data->Pchar_name[j])
-        {
-            cma_free(target_data->Pchar_name[j]);
-            target_data->Pchar_name[j] = ft_nullptr;
-        }
-        if (target_data->fd[j] != -1)
-        {
-            close(target_data->fd[j]);
-            target_data->fd[j] = -1;
-        }
-        j++;
-    }
 	return ;
 }
 
@@ -120,9 +126,10 @@ void ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff, const cha
             ft_free_memory_cmt(&target_data, targets_collected);
             return ;
         }
-        target_data.target[targets_collected] =
-			ft_validate_and_fetch_target(target_data.Pchar_name[targets_collected],
-											info, &error_code);
+        target_data.target[targets_collected] = ft_validate_and_fetch_target
+			(target_data.Pchar_name[targets_collected], info, &error_code);
+		target_data.target_copy[targets_collected] = ft_validate_and_fetch_target
+			(target_data.Pchar_name[targets_collected], info, &error_code);
         if (!target_data.target[targets_collected])
         {
             if (error_code == 0)
@@ -146,15 +153,6 @@ void ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff, const cha
         targets_collected++;
     }
     buff->target_amount = targets_collected;
-    for (int i = 0; i < buff->target_amount; i++)
-    {
-        ft_npc_write_file(info, &info->stats, &info->c_resistance, target_data.fd[i]);
-        if (target_data.fd[i] != -1)
-        {
-            close(target_data.fd[i]);
-            target_data.fd[i] = -1;
-        }
-    }
     target_data.buff_info = buff;
     ft_cast_concentration_multi_target_02(info, &target_data, input);
     ft_free_memory_cmt(&target_data, buff->target_amount);

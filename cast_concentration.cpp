@@ -80,30 +80,28 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
 
 static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *target)
 {
-    if (ft_check_write_permissions(info->save_file) != 0)
-    {
-        info->flags.alreaddy_saved = 1;
-        ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 4);
-        return (1);
-    }
-    if (ft_check_write_permissions(target->save_file) != 0)
-    {
-        ft_cast_concentration_cleanup(info, target, fd, ft_nullptr, 5);
-        return (1);
-    }
     fd[0] = ft_open_file_write_only(info->save_file);
     if (fd[0] == -1)
     {
         pf_printf_fd(2, "Unexpected error opening file %s: %s\n", info->save_file,
 				strerror(errno));
-        abort();
+        return (1);
     }
     fd[1] = ft_open_file_write_only(target->save_file);
     if (fd[1] == -1)
     {
         pf_printf_fd(2, "Unexpected error opening file %s: %s\n", target->save_file,
 				strerror(errno));
-        abort();
+		cma_free(info->concentration.targets[0]);
+		cma_free(info->concentration.targets);
+	    info->concentration.targets = ft_nullptr;
+    	info->concentration.concentration = 0;
+    	info->concentration.spell_id = 0;
+    	info->concentration.dice_faces_mod = 0;
+    	info->concentration.dice_amount_mod = 0;
+    	info->concentration.duration = 0;
+		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[1]);
+		return (1);
     }
     return (0);
 }

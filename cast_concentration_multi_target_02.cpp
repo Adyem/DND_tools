@@ -1,5 +1,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
@@ -16,9 +17,25 @@ static void	ft_set_not_save_flag(t_target_data *target_data, t_char *info)
 	{
 		if (target_data->target[i])
 			target_data->target[i]->flags.dont_save = 1;
+		if (target_data->target_copy[i])
+			target_data->target_copy[i]->flags.dont_save = 1;
 		i++;
 	}
 	info->flags.dont_save = 1;
+	return ;
+}
+
+static void	ft_revert_changes_info(t_char *info, int fd)
+{
+	cma_free(info->concentration.targets[0]);
+	cma_free(info->concentration.targets);
+    info->concentration.targets = ft_nullptr;
+   	info->concentration.concentration = 0;
+   	info->concentration.spell_id = 0;
+   	info->concentration.dice_faces_mod = 0;
+   	info->concentration.dice_amount_mod = 0;
+   	info->concentration.duration = 0;
+	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
 	return ;
 }
 
@@ -27,21 +44,6 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 	int	i;
 	int	fd;
 
-	i = 0;
-	while (i < target_data->buff_info->target_amount)
-	{
-		if (ft_check_write_permissions(target_data->target[i]->save_file))
-		{
-			pf_printf_fd(2, "118-Error trying to acces file: %s", strerror(errno));
-			return (-1);
-		}
-		i++;
-	}
-	if (ft_check_write_permissions(info->save_file))
-	{
-		pf_printf_fd(2, "120-Error trying to acces file: %s", strerror(errno));
-		return (-1);
-	}
 	i = 0;
 	fd = ft_open_file_write_only(info->save_file);
 	if (fd == -1)
@@ -55,7 +57,19 @@ static int	ft_check_and_open(t_target_data *target_data, t_char *info)
 		if (target_data->fd[i] == -1)
 		{
 			pf_printf_fd(2, "119-Error opening file: %s", strerror(errno));
-			abort();
+			ft_revert_changes_info(info, fd);
+			int j = 0;
+			while (j <= i)
+			{
+				if (target_data->target_copy[j])
+				{
+					t_char *target = target_data->target_copy[j];
+					ft_npc_write_file(target, &target->stats,
+							&target->c_resistance, target_data->fd[j]);
+				}
+				j++;
+			}
+			return (-1);
 		}
 		i++;
 	}
