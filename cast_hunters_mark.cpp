@@ -22,7 +22,8 @@ static const	t_buff BUFF_HUNTERS_MARK =
 
 void ft_cast_hunters_mark(t_char *info, const char **input)
 {
-    t_buff buff = BUFF_HUNTERS_MARK;
+    t_buff	buff = BUFF_HUNTERS_MARK;
+	int		error;
 
 	buff.target = cma_strdup(input[3], false);
 	if (!buff.target)
@@ -30,7 +31,9 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 		pf_printf_fd(2, "121-Error allocating memory hunters mark target");
 		return ;
 	}
-    if (ft_cast_concentration(info, input, &buff))
+    error = ft_cast_concentration(info, input, &buff);
+	cma_free(buff.target);
+	if (error)
 		return ;
 	pf_printf("%s cast hunters mark on %s\n", info->name, input[3]);
     return ;
