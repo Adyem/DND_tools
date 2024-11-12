@@ -28,7 +28,6 @@ int ft_remove_concentration(t_char *info)
 
     if (DEBUG == 1)
         pf_printf("Removing concentration\n");
-
     i = 0;
     while (info->concentration.targets && info->concentration.targets[i])
     {
@@ -47,7 +46,8 @@ int ft_remove_concentration(t_char *info)
         {
             target = ft_get_info(info->concentration.targets[i], info->struct_name);
             if (!target)
-                return (pf_printf_fd(2, "300-Error getting info %s\n", info->concentration.targets[i]), 1);
+                return (pf_printf_fd(2, "300-Error getting info %s\n",
+							info->concentration.targets[i]), 1);
         }
         if (target && DEBUG == 1)
             pf_printf("Target found: %s\n", target->name);
@@ -85,7 +85,6 @@ void ft_check_concentration(t_char *info, int damage)
 
     if (DEBUG == 1)
         pf_printf("Rolling con save for concentration %s\n", info->name);
-
     if (!info->concentration.concentration)
         return ;
     result = ft_saving_throw(info, "constitution", info->stats.con, info->save_mod.con);
