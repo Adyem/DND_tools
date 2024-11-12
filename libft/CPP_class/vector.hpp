@@ -47,9 +47,9 @@ Vector<T>::Vector(size_t initial_capacity, bool criticality)
 template <typename T>
 Vector<T>::~Vector()
 {
-    for (size_t i = 0; i < size_; ++i)
+	for (size_t i = 0; i < size_; ++i)
         data[i].~T();
-    if (data != nullptr)
+	if (data != nullptr)
         cma_free(data);
 	return ;
 }
