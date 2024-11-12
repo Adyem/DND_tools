@@ -53,7 +53,7 @@ ft_string::ft_string(const ft_string& other) noexcept
             errorFlag = true;
             return ;
         }
-        std::memcpy(data, other.data, length + 1);
+        ft_memcpy(data, other.data, length + 1);
     }
     return ;
 }
