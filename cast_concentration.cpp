@@ -45,7 +45,7 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 }
 
 int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const char **input,
-									t_buff *buff)
+		t_buff *buff)
 {
     char	**temp;
     int		i;

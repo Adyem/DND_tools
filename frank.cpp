@@ -27,7 +27,10 @@ void ft_frank_turn(t_char *info)
 		pf_printf("The frank will try to make either a ranged or melee attack during his turn\n");
 	pf_printf("Frank currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 	if (info->stats.turn == 1)
+	{
 		info->bufs.lightning_strikeV2 = FRANK_LIGHTNING_STRIKE_V2;
+		print_lightning_strike_v2(info);
+	}
 	if (info->stats.turn == 3)
 		info->stats.turn = 1;
 	else
