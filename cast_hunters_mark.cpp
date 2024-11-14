@@ -96,10 +96,12 @@ void	ft_concentration_remove_hunters_mark(t_char *info, t_target_data *targets)
 		j = 0;
 		while (targets->target[i]->debufs.hunters_mark.caster_name[j])
 		{
-			if (ft_strcmp_dnd(targets->target[i]->debufs.hunters_mark.caster_name[j], info->name) == 0)
+			if (ft_strcmp_dnd(targets->target[i]->debufs.hunters_mark.caster_name[j],
+						info->name) == 0)
 			{
 				cma_free(targets->target[i]->debufs.hunters_mark.caster_name[j]);
 				targets->target[i]->debufs.hunters_mark.caster_name[j] = ft_nullptr;
+				targets->target[i]->debufs.hunters_mark.amount--;
 			}
 			j++;
 		}
