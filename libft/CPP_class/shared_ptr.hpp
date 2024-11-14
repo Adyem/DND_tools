@@ -23,6 +23,7 @@ class SharedPtr
         int use_count() const;
         bool hasError() const;
 };
+
 template <typename ManagedType>
 SharedPtr<ManagedType>::SharedPtr(ManagedType* p, bool crit)
     : ptr(p), ref_count(static_cast<int*>(cma_malloc(sizeof(int), crit))),
@@ -35,7 +36,7 @@ SharedPtr<ManagedType>::SharedPtr(ManagedType* p, bool crit)
         if (!ptr)
         {
             errorFlag = true;
-            return;
+            return ;
         }
         else if (ptr)
         {
@@ -45,7 +46,7 @@ SharedPtr<ManagedType>::SharedPtr(ManagedType* p, bool crit)
             errorFlag = false;
         }
     }
-    return;
+    return ;
 }
 
 template <typename ManagedType>
@@ -55,7 +56,7 @@ SharedPtr<ManagedType>::SharedPtr(const SharedPtr<ManagedType>& other)
 {
     if (ref_count && !errorFlag)
         (*ref_count)++;
-    return;
+    return ;
 }
 
 template <typename ManagedType>
@@ -70,7 +71,7 @@ SharedPtr<ManagedType>::~SharedPtr()
         }
         cma_free(ref_count);
     }
-    return;
+    return ;
 }
 
 template <typename ManagedType>

@@ -1,3 +1,4 @@
+#include "character.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -8,63 +9,33 @@
 #include <cerrno>
 #include <cstring>
 
-static void ft_concentration_remove_buf(t_char *info, t_char *target)
+static void ft_concentration_remove_buf(t_char *info, t_target_data *targets)
 {
-    if (DEBUG == 1)
-    {
-        pf_printf("Memory address of info struct: %p\n", (void *)info);
-        pf_printf("Memory address of target struct: %p\n", (void *)target);
-    }
     if (info->concentration.spell_id == HUNTERS_MARK_ID)
+	{
         ft_concentration_remove_hunters_mark(info, target);
+	}
     return ;
 }
 
 int ft_remove_concentration(t_char *info)
 {
-    int i;
-    t_char *target;
-    int fd;
+	t_target_data	targets;
+    int				i;
+	int				error;
 
     if (DEBUG == 1)
         pf_printf("Removing concentration\n");
     i = 0;
+	targets.buff_info = ft_nullptr;
     while (info->concentration.targets && info->concentration.targets[i])
     {
-        if (ft_set_stats_check_name(info->concentration.targets[i]))
-        {
-            if (ft_check_player_character(info->concentration.targets[i]) == 0)
-            {
-                target = ft_nullptr;
-                i++;
-                continue ;
-            } 
-            else
-                target = ft_nullptr;
-        }
-        else
-        {
-            target = ft_get_info(info->concentration.targets[i], info->struct_name);
-            if (!target)
-                return (pf_printf_fd(2, "300-Error getting info %s\n",
-							info->concentration.targets[i]), 1);
-        }
-        if (target && DEBUG == 1)
-            pf_printf("Target found: %s\n", target->name);
-        if (target)
-        {
-            ft_concentration_remove_buf(info, target);
-            fd = open(target->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-            if (fd == -1)
-            {
-                ft_free_info(target);
-                return (pf_printf_fd(2, "301-Error opening %s: %s\n", info->save_file,
-							strerror(errno)), 1);
-            }
-            ft_npc_write_file(target, &target->stats, &info->c_resistance, fd);
-            ft_free_info(target);
-            close(fd);
-        }
+		targets.target[i] = ft_validate_and_fetch_target(info->concentration.targets[i], info, &error);
+		if (error || !targets.target[i])
+			return (1);
+		targets.target_copy[i] = ft_validate_and_fetch_target(info->concentration.targets[i], info, &error);
+		if (error || !targets.target_copy[i])
+			return (1);
         i++;
     }
     info->concentration.concentration = 0;
