@@ -42,6 +42,10 @@ SRC         = name.cpp \
               utils01.cpp \
               utils02.cpp \
               debug.cpp \
+			  fetch_target.cpp \
+			  initialize.cpp \
+			  remove_element.cpp \
+			  open.cpp \
               initiative_all.cpp \
               initiative_pc.cpp \
               initiative_request.cpp \
