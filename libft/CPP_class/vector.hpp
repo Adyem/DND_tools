@@ -8,11 +8,11 @@ template <typename ElementType>
 class Vector
 {
 	private:
-	    ElementType* data;
-    	size_t size_;
-   		size_t capacity_;
-    	bool error_flag;
-    	bool critical;
+	    ElementType	*data;
+    	size_t		size_;
+   		size_t		capacity_;
+    	bool		error_flag;
+    	bool		critical;
 
     	void destroy_elements(size_t from, size_t to);
 

@@ -5,6 +5,7 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include <cstdlib>
+#include <cstring>
 
 static const	t_buff BUFF_HUNTERS_MARK =
 {
@@ -83,4 +84,34 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
     }
     target->debufs.hunters_mark.amount++;
     return (0);
+}
+
+void	ft_concentration_remove_hunters_mark(t_char *info, t_target_data *targets)
+{
+	int i = 0;
+	int	j;
+
+	while (targets->target[i])
+	{
+		j = 0;
+		while (targets->target[i]->debufs.hunters_mark.caster_name[j])
+		{
+			if (ft_strcmp_dnd(targets->target[i]->debufs.hunters_mark.caster_name[j], info->name) == 0)
+			{
+				cma_free(targets->target[i]->debufs.hunters_mark.caster_name[j]);
+				targets->target[i]->debufs.hunters_mark.caster_name[j] = ft_nullptr;
+			}
+			j++;
+		}
+		i++;
+	}
+    info->concentration.concentration = 0;
+    info->concentration.spell_id = 0;
+    info->concentration.dice_amount_mod = 0;
+    info->concentration.dice_faces_mod = 0;
+    info->concentration.base_mod = 0;
+	cma_free_double(info->concentration.targets);
+    info->concentration.targets = ft_nullptr;
+    info->bufs.chaos_armor.duration = 0;
+	return ;
 }

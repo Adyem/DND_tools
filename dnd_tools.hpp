@@ -219,7 +219,7 @@ void		ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_
 				const char **input);
 
 //hunters mark
-void		ft_concentration_remove_hunters_mark(t_char *info, t_char *target);
+void		ft_concentration_remove_hunters_mark(t_char *info, t_target_data *targets);
 int			ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff *buff);
 
 //resistance
@@ -292,6 +292,8 @@ void		ft_npc_check_ac(t_char *info, const char **input);
 int			ft_npc_check_info(t_char *info);
 void		ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, int fd);
 void		ft_save_pc(t_pc *player, int fd);
+void		ft_cast_concentration_save_files(t_char *info, t_target_data *target_data, int fd);
+int			ft_check_and_open(t_target_data *target_data, t_char *info);
 
 //fclean
 void		ft_fclean(void);

@@ -12,9 +12,7 @@
 static void ft_concentration_remove_buf(t_char *info, t_target_data *targets)
 {
     if (info->concentration.spell_id == HUNTERS_MARK_ID)
-	{
-        ft_concentration_remove_hunters_mark(info, target);
-	}
+        ft_concentration_remove_hunters_mark(info, targets);
     return ;
 }
 
@@ -23,6 +21,7 @@ int ft_remove_concentration(t_char *info)
 	t_target_data	targets;
     int				i;
 	int				error;
+	int				fd;
 
     if (DEBUG == 1)
         pf_printf("Removing concentration\n");
@@ -38,14 +37,11 @@ int ft_remove_concentration(t_char *info)
 			return (1);
         i++;
     }
-    info->concentration.concentration = 0;
-    info->concentration.spell_id = 0;
-    info->concentration.dice_amount_mod = 0;
-    info->concentration.dice_faces_mod = 0;
-    info->concentration.base_mod = 0;
-	cma_free_double(info->concentration.targets);
-    info->concentration.targets = ft_nullptr;
-    info->bufs.chaos_armor.duration = 0;
+	fd = ft_check_and_open(&targets, info);
+	if (fd == -1)
+		return (1);
+	ft_concentration_remove_buf(info, &targets);
+	ft_cast_concentration_save_files(info, &targets, fd);
     return (0);
 }
 

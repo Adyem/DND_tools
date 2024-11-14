@@ -87,7 +87,6 @@ SRC         = name.cpp \
               free_info.cpp \
               get_character_info.cpp \
               resize_double_char.cpp \
-              concentration_remove_debuf.cpp \
               check_buff_damage.cpp \
               attack.cpp \
               to_hit_check_buffs.cpp \
