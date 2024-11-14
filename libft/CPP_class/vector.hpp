@@ -1,144 +1,232 @@
 #ifndef VECTOR_H
-# define VECTOR_H
+#define VECTOR_H
 
 #include "../CMA/CMA.hpp"
 #include <cstddef>
+#include <iterator>
 
-template <typename T>
+template <typename ElementType>
 class Vector {
-	private:
-    	T* data;
-    	size_t size_;
-    	size_t capacity_;
-    	bool error_flag;
-    	bool critical;
+private:
+    ElementType* data;
+    size_t size_;
+    size_t capacity_;
+    bool error_flag;
+    bool critical;
 
-	public:
-	    Vector(size_t initial_capacity = 0, bool criticality = false);
-	    ~Vector();
-	    Vector(const Vector&) = delete;
-    	Vector& operator=(const Vector&) = delete;
-    	size_t size() const;
-    	size_t capacity() const;
-    	bool has_error() const;
-    	void push_back(const T& value);
-    	void pop_back();
-    	T& operator[](size_t index);
-    	const T& operator[](size_t index) const;
-    	void clear();
-    	void reserve(size_t new_capacity);
+    void destroy_elements(size_t from, size_t to);
+
+public:
+    using iterator = ElementType*;
+    using const_iterator = const ElementType*;
+
+    Vector(size_t initial_capacity = 0, bool criticality = false);
+    ~Vector();
+    Vector(const Vector&) = delete;
+    Vector& operator=(const Vector&) = delete;
+
+    size_t size() const;
+    size_t capacity() const;
+    bool has_error() const;
+
+    void push_back(const ElementType& value);
+    void pop_back();
+
+    ElementType& operator[](size_t index);
+    const ElementType& operator[](size_t index) const;
+
+    void clear();
+    void reserve(size_t new_capacity);
+    void resize(size_t new_size, const ElementType& value = ElementType());
+
+    iterator insert(iterator pos, const ElementType& value);
+    iterator erase(iterator pos);
+    iterator begin();
+    const_iterator begin() const;
+    iterator end();
+    const_iterator end() const;
 };
 
-template <typename T>
-Vector<T>::Vector(size_t initial_capacity, bool criticality)
+template <typename ElementType>
+Vector<ElementType>::Vector(size_t initial_capacity, bool criticality)
     : data(nullptr), size_(0), capacity_(0), error_flag(false), critical(criticality)
 {
     if (initial_capacity > 0)
-	{
-        data = static_cast<T*>(cma_malloc(initial_capacity * sizeof(T), critical));
+    {
+        data = static_cast<ElementType*>(cma_malloc(initial_capacity * sizeof(ElementType), critical));
         if (data == nullptr)
             error_flag = true;
         else
             capacity_ = initial_capacity;
     }
-	return ;
 }
 
-template <typename T>
-Vector<T>::~Vector()
+template <typename ElementType>
+Vector<ElementType>::~Vector()
 {
-	for (size_t i = 0; i < size_; ++i)
-        data[i].~T();
-	if (data != nullptr)
+    destroy_elements(0, size_);
+    if (data != nullptr)
         cma_free(data);
-	return ;
 }
 
-template <typename T>
-size_t Vector<T>::size() const
+template <typename ElementType>
+void Vector<ElementType>::destroy_elements(size_t from, size_t to)
 {
-    return (size_);
+    for (size_t i = from; i < to; ++i)
+        data[i].~ElementType();
 }
 
-template <typename T>
-size_t Vector<T>::capacity() const
+template <typename ElementType>
+size_t Vector<ElementType>::size() const
 {
-    return (capacity_);
+    return size_;
 }
 
-template <typename T>
-bool Vector<T>::has_error() const
+template <typename ElementType>
+size_t Vector<ElementType>::capacity() const
 {
-    return (error_flag);
+    return capacity_;
 }
 
-template <typename T>
-void Vector<T>::push_back(const T& value)
+template <typename ElementType>
+bool Vector<ElementType>::has_error() const
+{
+    return error_flag;
+}
+
+template <typename ElementType>
+void Vector<ElementType>::push_back(const ElementType& value)
 {
     if (size_ >= capacity_)
-	{
-        size_t new_capacity = (capacity_ == 0) ? 1 : capacity_ * 2;
-        T* new_data = static_cast<T*>(cma_realloc(data, new_capacity * sizeof(T), critical));
-        if (new_data == nullptr)
-		{
-            error_flag = true;
-            return ;
-        }
-        data = new_data;
-        capacity_ = new_capacity;
+    {
+        reserve(capacity_ > 0 ? capacity_ * 2 : 1);
+        if (error_flag) return;
     }
-    new (&data[size_]) T(value);
+    new (&data[size_]) ElementType(value);
     size_++;
-	return ;
 }
 
-template <typename T>
-void Vector<T>::pop_back()
+template <typename ElementType>
+void Vector<ElementType>::pop_back()
 {
     if (size_ > 0)
-	{
-        data[size_ - 1].~T();
+    {
+        data[size_ - 1].~ElementType();
         size_--;
     }
-	return ;
 }
 
-template <typename T>
-T& Vector<T>::operator[](size_t index)
+template <typename ElementType>
+ElementType& Vector<ElementType>::operator[](size_t index)
 {
-    return (data[index]);
+    return data[index];
 }
 
-template <typename T>
-const T& Vector<T>::operator[](size_t index) const
+template <typename ElementType>
+const ElementType& Vector<ElementType>::operator[](size_t index) const
 {
-    return (data[index]);
+    return data[index];
 }
 
-template <typename T>
-void Vector<T>::clear()
+template <typename ElementType>
+void Vector<ElementType>::clear()
 {
-    for (size_t i = 0; i < size_; ++i)
-        data[i].~T();
+    destroy_elements(0, size_);
     size_ = 0;
-	return ;
 }
 
-template <typename T>
-void Vector<T>::reserve(size_t new_capacity)
+template <typename ElementType>
+void Vector<ElementType>::reserve(size_t new_capacity)
 {
     if (new_capacity > capacity_)
-	{
-        T* new_data = static_cast<T*>(cma_realloc(data, new_capacity * sizeof(T), critical));
+    {
+        ElementType* new_data = static_cast<ElementType*>(cma_realloc(data, new_capacity * sizeof(ElementType), critical));
         if (new_data == nullptr)
-		{
+        {
             error_flag = true;
-            return ;
+            return;
         }
         data = new_data;
         capacity_ = new_capacity;
     }
-	return ;
+}
+
+template <typename ElementType>
+void Vector<ElementType>::resize(size_t new_size, const ElementType& value)
+{
+    if (new_size < size_)
+    {
+        destroy_elements(new_size, size_);
+    }
+    else if (new_size > size_)
+    {
+        reserve(new_size);
+        if (error_flag)
+			return ;
+        for (size_t i = size_; i < new_size; ++i)
+            new (&data[i]) ElementType(value);
+    }
+    size_ = new_size;
+}
+
+template <typename ElementType>
+typename Vector<ElementType>::iterator Vector<ElementType>::insert(iterator pos, const ElementType& value)
+{
+    size_t index = pos - data;
+    if (index > size_) return end();
+
+    if (size_ >= capacity_)
+    {
+        reserve(capacity_ > 0 ? capacity_ * 2 : 1);
+        if (error_flag) return end();
+    }
+    for (size_t i = size_; i > index; --i)
+    {
+        new (&data[i]) ElementType(data[i - 1]);
+        data[i - 1].~ElementType();
+    }
+    new (&data[index]) ElementType(value);
+    size_++;
+    return &data[index];
+}
+
+template <typename ElementType>
+typename Vector<ElementType>::iterator Vector<ElementType>::erase(iterator pos)
+{
+    size_t index = pos - data;
+    if (index >= size_) return end();
+    data[index].~ElementType();
+    for (size_t i = index; i < size_ - 1; ++i)
+    {
+        new (&data[i]) ElementType(data[i + 1]);
+        data[i + 1].~ElementType();
+    }
+    size_--;
+    return &data[index];
+}
+
+template <typename ElementType>
+typename Vector<ElementType>::iterator Vector<ElementType>::begin()
+{
+    return data;
+}
+
+template <typename ElementType>
+typename Vector<ElementType>::const_iterator Vector<ElementType>::begin() const
+{
+    return data;
+}
+
+template <typename ElementType>
+typename Vector<ElementType>::iterator Vector<ElementType>::end()
+{
+    return data + size_;
+}
+
+template <typename ElementType>
+typename Vector<ElementType>::const_iterator Vector<ElementType>::end() const
+{
+    return data + size_;
 }
 
 #endif
