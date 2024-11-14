@@ -8,37 +8,6 @@
 #include <unistd.h>
 #include <cstdlib>
 
-static void ft_free_memory_cmt(t_target_data *target_data, int amount)
-{
-    int j = 0;
-
-    while (j < amount)
-    {
-        if (target_data->target[j])
-        {
-            ft_free_info(target_data->target[j]);
-            target_data->target[j] = ft_nullptr;
-        }
-		if (target_data->target_copy[j])
-		{
-			ft_free_info(target_data->target_copy[j]);
-			target_data->target[j] = ft_nullptr;
-		}
-        if (target_data->Pchar_name[j])
-        {
-            cma_free(target_data->Pchar_name[j]);
-            target_data->Pchar_name[j] = ft_nullptr;
-        }
-        if (target_data->fd[j] != -1)
-        {
-            close(target_data->fd[j]);
-            target_data->fd[j] = -1;
-        }
-        j++;
-    }
-	return ;
-}
-
 static int ft_check_target_amount(int target_amount)
 {
     if (target_amount > 20)

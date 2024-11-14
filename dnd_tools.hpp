@@ -277,6 +277,7 @@ void		ft_free_pc(t_pc *player);
 int			ft_free_players(t_pc *players);
 void		ft_free_info(t_char *info);
 void		ft_free_input(char **input, char *input_string);
+void		ft_free_memory_cmt(t_target_data *target_data, int amount);
 
 //debug
 void		ft_print_content(char **content);

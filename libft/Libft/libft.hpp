@@ -1,6 +1,9 @@
 #ifndef LIBFT_HPP
 # define LIBFT_HPP
 
+#define SUCCES 0
+#define FAILURE 1
+
 #include <cstddef>
 
 int		ft_strlen(const char *string);
