@@ -51,7 +51,8 @@ int ft_remove_concentration(t_char *info)
 	targets.buff_info = ft_nullptr;
     while (info->concentration.targets && info->concentration.targets[i])
     {
-		ft_remove_concentration_fetch_targets(&targets, info, i);
+		if (ft_remove_concentration_fetch_targets(&targets, info, i))
+			return (FAILURE);
         i++;
     }
 	fd = ft_check_and_open(&targets, info);
@@ -61,4 +62,3 @@ int ft_remove_concentration(t_char *info)
 	ft_cast_concentration_save_files(info, &targets, fd);
     return (SUCCES);
 }
-
