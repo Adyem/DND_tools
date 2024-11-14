@@ -43,7 +43,8 @@ static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info
         d_info->dice_amount = weapon->attack.effect_secund_dice_amount;
         d_info->dice_faces = weapon->attack.effect_secund_dice_faces;
     }
-    else if (!offhand && weapon->slot == SLOT_WEAPON && info->equipment.offhand_weapon.equipment_id == 0)
+    else if (!offhand && weapon->slot == SLOT_WEAPON
+			&& info->equipment.offhand_weapon.equipment_id == 0)
     {
         d_info->dice_amount = weapon->attack.effect_dice_amount;
         d_info->dice_faces = weapon->attack.effect_dice_faces;
@@ -68,7 +69,8 @@ static void ft_print_attack_roll(t_char *info, t_equipment_id *weapon, t_damage_
 static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit)
 {
     int multiplier = is_crit ? 2 : 1;
-    d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces) + d_info->stat_mod;
+    d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces)
+		+ d_info->stat_mod;
     pf_printf("deals %d %s damage\n", d_info->damage, weapon->attack.damage_type);
 	return ;
 }

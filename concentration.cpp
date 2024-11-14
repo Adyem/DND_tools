@@ -29,10 +29,12 @@ int ft_remove_concentration(t_char *info)
 	targets.buff_info = ft_nullptr;
     while (info->concentration.targets && info->concentration.targets[i])
     {
-		targets.target[i] = ft_validate_and_fetch_target(info->concentration.targets[i], info, &error);
+		targets.target[i] = ft_validate_and_fetch_target(info->concentration.targets[i],
+				info, &error);
 		if (error || !targets.target[i])
 			return (1);
-		targets.target_copy[i] = ft_validate_and_fetch_target(info->concentration.targets[i], info, &error);
+		targets.target_copy[i] = ft_validate_and_fetch_target(info->concentration.targets[i],
+				info, &error);
 		if (error || !targets.target_copy[i])
 			return (1);
         i++;
