@@ -253,12 +253,12 @@ int			ft_check_equipment_slots(t_char *character);
 void		ft_initialize_suggestions_readline();
 char		**ft_get_pc_list();
 void		ft_remove_element(const char **array, const char *element);
+void		ft_add_element(const char ***array, const char *element);
 void		ft_get_random_target(const char **player_list, const char **target_field);
 int			ft_check_player_entry(const char *entry);
 int			ft_set_stat_player(size_t key_len, const char **field, const char *content);
 int			ft_check_write_permissions(const char *filepath);
-t_char		*ft_validate_and_fetch_target(char *target_name, t_char *info,
-				int *error_code);
+t_char		*ft_validate_and_fetch_target(char *target_name, t_char *info, int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
 
 //check name

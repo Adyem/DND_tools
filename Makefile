@@ -42,6 +42,7 @@ SRC         = name.cpp \
               utils01.cpp \
               utils02.cpp \
               debug.cpp \
+			  add_element.cpp \
 			  fetch_target.cpp \
 			  remove_concentration.cpp \
 			  initialize.cpp \
