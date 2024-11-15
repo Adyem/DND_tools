@@ -4,23 +4,18 @@
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 
-static bool is_crackback_possible(t_char *info, int number)
+static bool ft_is_crackback_possible(t_char *info, int number)
 {
     return (number < 10 && !info->flags.reaction_used);
 }
 
-static char* prompt_user()
-{
-    return (rl_readline("CRACKBACK: ranged or melee attack or type exit to do nothing: "));
-}
-
-static void notify_no_weapon(t_char *info, const char *weapon_type)
+static void ft_notify_no_weapon(t_char *info, const char *weapon_type)
 {
     pf_printf_fd(2, "No %s set for %s\n", weapon_type, info->name);
 	return ;
 }
 
-static bool handle_attack_choice(t_char *info, const char *choice)
+static bool ft_handle_attack_choice(t_char *info, const char *choice)
 {
     if (ft_strcmp_dnd(choice, "melee") == 0)
     {
@@ -32,7 +27,7 @@ static bool handle_attack_choice(t_char *info, const char *choice)
         }
         else
         {   
-            notify_no_weapon(info, "mainhand weapon");
+            ft_notify_no_weapon(info, "mainhand weapon");
             return (false);
         }
     }
@@ -46,14 +41,14 @@ static bool handle_attack_choice(t_char *info, const char *choice)
         }
         else
         {
-            notify_no_weapon(info, "ranged weapon");
+            ft_notify_no_weapon(info, "ranged weapon");
             return (false);
         }
     }
     return (false);
 }
 
-static void execute_crackback(t_char *info)
+static void ft_execute_crackback(t_char *info)
 {
     char *line;
     int max_tries = 0;
@@ -62,7 +57,7 @@ static void execute_crackback(t_char *info)
 
     while (true)
     {
-        line = prompt_user();
+        line = rl_readline("CRACKBACK: ranged or melee attack or type exit to do nothing: ");
         if (!line)
         {
             pf_printf_fd(2, "117-Error: failed to allocate memory for readline %s\n", info->name);
@@ -74,7 +69,7 @@ static void execute_crackback(t_char *info)
             cma_free(line);
             return ;
         }
-        else if (handle_attack_choice(info, line))
+        else if (ft_handle_attack_choice(info, line))
         {
             cma_free(line);
             break ;
@@ -100,9 +95,10 @@ static void execute_crackback(t_char *info)
 
 void ft_crackback(t_char *info, int number)
 {
-    if (!is_crackback_possible(info, number))
+    if (!ft_is_crackback_possible(info, number))
         return ;
     pf_printf("Because of the low attack roll %s has the opportunity to react with " \
 			"an opportunity attack\n", info->name);
-    execute_crackback(info);
+    ft_execute_crackback(info);
+	return ;
 }

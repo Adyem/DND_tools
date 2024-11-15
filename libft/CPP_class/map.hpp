@@ -168,4 +168,3 @@ std::size_t Map<Key, MappedType>::findIndex(const Key& key) const
 }
 
 #endif
-
