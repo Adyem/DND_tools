@@ -4,17 +4,18 @@
 #include <unistd.h>
 #include <string.h>
 
-void ft_add_element(const char ***array, const char *element)
+void ft_add_element(const char ***array, const char *element, bool critical)
 {
     size_t i, current_size;
     const char **new_array;
+
     if (!array || !element)
-        return;
+        return ;
     if (*array == NULL)
     {
-        new_array = (const char **)cma_realloc(NULL, 2 * sizeof(char *), true);
+        new_array = (const char **)cma_malloc(2 * sizeof(char *), critical);
         if (!new_array)
-            return;
+            return ;
         new_array[0] = element;
         new_array[1] = NULL;
         *array = new_array;
@@ -24,13 +25,13 @@ void ft_add_element(const char ***array, const char *element)
     while ((*array)[i] != NULL)
     {
         if (strcmp((*array)[i], element) == 0)
-            return;
+            return ;
         i++;
     }
     current_size = (i + 2) * sizeof(char *);
-    new_array = (const char **)cma_realloc(*array, current_size, true);
+    new_array = (const char **)cma_realloc(*array, current_size, critical);
     if (!new_array)
-        return;
+        return ;
     new_array[i] = element;
     new_array[i + 1] = NULL;
     *array = new_array;
