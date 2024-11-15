@@ -1,3 +1,4 @@
+#include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
@@ -30,17 +31,17 @@ static int	ft_apply_concentration(t_target_data *target_data, t_char *info, cons
 	info->concentration.targets = (char **)cma_calloc(target_data->buff_info->target_amount,
 			sizeof(char *), false);
 	if (!info->concentration.targets)
-		return (1);
+		return (FAILURE);
 	while (i < target_data->buff_info->target_amount)
 	{
 		if (target_data->target[i])
 		{
 			if (target_data->buff_info->cast_spell(target_data->target[i], input,
 						target_data->buff_info))
-				return (1);
+				return (FAILURE);
 			info->concentration.targets[i] = cma_strdup(target_data->Pchar_name[i], false);
 			if (!info->concentration.targets[i])
-				return (1);
+				return (FAILURE);
 		}
 		i++;
 	}
@@ -49,7 +50,7 @@ static int	ft_apply_concentration(t_target_data *target_data, t_char *info, cons
     info->concentration.dice_faces_mod = target_data->buff_info->dice_faces_mod;
     info->concentration.dice_amount_mod = target_data->buff_info->dice_amount_mod;
     info->concentration.duration = target_data->buff_info->duration;
-    return (0);
+    return (SUCCES);
 }
 
 void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
