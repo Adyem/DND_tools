@@ -9,9 +9,8 @@
 
 static void	ft_set_not_save_flag(t_target_data *target_data, t_char *info)
 {
-	int	i;
+	int	i = 0;
 
-	i = 0;
 	while (i < target_data->buff_info->target_amount)
 	{
 		if (target_data->target[i])
