@@ -20,7 +20,7 @@ void ft_gundren_rockseeker_turn(t_char *info)
 
 static void ft_initialize_gear_and_feats(t_char *info)
 {
-    (void)info;
+	info->feats.crackback.active = 1;
     return ;
 }
 
