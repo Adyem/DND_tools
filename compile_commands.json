@@ -723,6 +723,24 @@
     "arguments": [
       "/usr/bin/g++",
       "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/file.o",
+      "file.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/CPP_class",
+    "file": "/home/adyem/DND_tools/libft/CPP_class/file.cpp",
+    "output": "/home/adyem/DND_tools/libft/CPP_class/objs/file.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
       "-Werror",
       "-Wextra",
       "-g",
@@ -880,6 +898,78 @@
     "directory": "/home/adyem/DND_tools",
     "file": "/home/adyem/DND_tools/gundren_rockseeker.cpp",
     "output": "/home/adyem/DND_tools/objs/gundren_rockseeker.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/dorgar_stoneguard.o",
+      "dorgar_stoneguard.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools",
+    "file": "/home/adyem/DND_tools/dorgar_stoneguard.cpp",
+    "output": "/home/adyem/DND_tools/objs/dorgar_stoneguard.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/hilda_stormshield.o",
+      "hilda_stormshield.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools",
+    "file": "/home/adyem/DND_tools/hilda_stormshield.cpp",
+    "output": "/home/adyem/DND_tools/objs/hilda_stormshield.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/murna_claygrip.o",
+      "murna_claygrip.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools",
+    "file": "/home/adyem/DND_tools/murna_claygrip.cpp",
+    "output": "/home/adyem/DND_tools/objs/murna_claygrip.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Werror",
+      "-Wextra",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/thorbald_ironpocket.o",
+      "thorbald_ironpocket.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools",
+    "file": "/home/adyem/DND_tools/thorbald_ironpocket.cpp",
+    "output": "/home/adyem/DND_tools/objs/thorbald_ironpocket.o"
   },
   {
     "arguments": [
