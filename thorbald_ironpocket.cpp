@@ -1,9 +1,9 @@
 #include "dnd_tools.hpp"
-#include "thorbald_ironsocket.hpp"
+#include "thorbald_ironpocket.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CMA/CMA.hpp"
 
-void ft_thorbald_ironsocket_turn(t_char *info)
+void ft_thorbald_ironpocket_turn(t_char *info)
 {
     ft_update_buf(info);
     if (info->flags.prone)
@@ -24,7 +24,7 @@ static void ft_initialize_gear_and_feats(t_char *info)
     return ;
 }
 
-t_char *ft_thorbald_ironsocket(const int index, const char **input, t_name *name, int exception)
+t_char *ft_thorbald_ironpocket(const int index, const char **input, t_name *name, int exception)
 {
     int error;
     t_char *info;
@@ -32,7 +32,7 @@ t_char *ft_thorbald_ironsocket(const int index, const char **input, t_name *name
     info = (t_char *)cma_calloc(1, sizeof(t_char), false);
     if (!info)
         return (ft_nullptr);
-    *info = THORBALD_IRONSOCKET_INFO;
+    *info = THORBALD_IRONPOCKET_INFO;
     info->name = input[0];
     info->struct_name = name;
     info->save_file = cma_strjoin("data/", input[0], false);

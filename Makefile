@@ -22,7 +22,7 @@ HEADER      = dnd_tools.hpp \
 			  dorgar_stoneguard.hpp \
 			  hilda_stormshield.hpp \
 			  murna_claygrip.hpp \
-			  thorbald_ironsocket.hpp
+			  thorbald_ironpocket.hpp
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -36,7 +36,7 @@ SRC         = name.cpp \
 			  dorgar_stoneguard.cpp \
 			  hilda_stormshield.cpp \
 			  murna_claygrip.cpp \
-			  thorbald_ironsocket.cpp \
+			  thorbald_ironpocket.cpp \
               goblin_warmaster.cpp \
               grizz.cpp \
               main.cpp \

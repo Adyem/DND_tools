@@ -1,5 +1,5 @@
-#ifndef THORBALD_IRONSOCKET_HPP
-# define THORBALD_IRONSOCKET_HPP
+#ifndef THORBALD_IRONPOCKET_HPP
+# define THORBALD_IRONPOCKET_HPP
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
@@ -10,9 +10,9 @@
 typedef struct  s_name t_name;
 typedef struct  s_char t_char;
 
-void    ft_thorbald_ironsocket_turn(t_char *info);
+void    ft_thorbald_ironpocket_turn(t_char *info);
 
-static const    t_stats THORBALD_IRONSOCKET_DEFAULT_STATS =
+static const    t_stats THORBALD_IRONPOCKET_DEFAULT_STATS =
 {
     .phase = 0,
     .turn = 0,
@@ -26,7 +26,7 @@ static const    t_stats THORBALD_IRONSOCKET_DEFAULT_STATS =
     .cha = 8,
 };
 
-static const    t_savem THORBALD_IRONSOCKET_SAVE_MODS =
+static const    t_savem THORBALD_IRONPOCKET_SAVE_MODS =
 {
     .str = 2,
     .dex = 0,
@@ -36,7 +36,7 @@ static const    t_savem THORBALD_IRONSOCKET_SAVE_MODS =
     .con = 2,
 };
 
-static const    t_skillsm THORBALD_IRONSOCKET_SKILL_MODS =
+static const    t_skillsm THORBALD_IRONPOCKET_SKILL_MODS =
 {
     .athletics = 3,
     .acrobatics = 0,
@@ -58,13 +58,13 @@ static const    t_skillsm THORBALD_IRONSOCKET_SKILL_MODS =
     .persuasion = 0,
 };
 
-static const    t_attack THORBALD_IRONSOCKET_ATTACK =
+static const    t_attack THORBALD_IRONPOCKET_ATTACK =
 {
     .attack_bonus = 2,
     .ranged_bonus = 0,
 };
 
-static const    t_crit_mod THORBALD_IRONSOCKET_CRIT =
+static const    t_crit_mod THORBALD_IRONPOCKET_CRIT =
 {
     .attack = 0,
     .attack_d = 0,
@@ -75,7 +75,7 @@ static const    t_crit_mod THORBALD_IRONSOCKET_CRIT =
     .skill_fail = 0,
 };
 
-static const    t_resistance THORBALD_IRONSOCKET_DEFAULT_RESISTANCE =
+static const    t_resistance THORBALD_IRONPOCKET_DEFAULT_RESISTANCE =
 {
     .acid = 0,
     .bludgeoning = 0,
@@ -92,7 +92,7 @@ static const    t_resistance THORBALD_IRONSOCKET_DEFAULT_RESISTANCE =
     .thunder = 0,
 };
 
-static const    t_equipment THORBALD_IRONSOCKET_EQUIPMENT =
+static const    t_equipment THORBALD_IRONPOCKET_EQUIPMENT =
 {
     .weapon = STEEL_BATTLE_AXE,
     .offhand_weapon = INITIALIZE_EQUIPMENT_ID,
@@ -108,7 +108,7 @@ static const    t_equipment THORBALD_IRONSOCKET_EQUIPMENT =
     .belt = INITIALIZE_EQUIPMENT_ID,
 };
 
-static const    t_physical THORBALD_IRONSOCKET_PHYSICAL =
+static const    t_physical THORBALD_IRONPOCKET_PHYSICAL =
 {
     .height = 48,
     .weight = 150,
@@ -116,7 +116,7 @@ static const    t_physical THORBALD_IRONSOCKET_PHYSICAL =
     .speed = 25,
 };
 
-static const    t_char THORBALD_IRONSOCKET_INFO =
+static const    t_char THORBALD_IRONPOCKET_INFO =
 {
     .level = 0,
     .mechanical = 0,
@@ -125,23 +125,23 @@ static const    t_char THORBALD_IRONSOCKET_INFO =
     .version_number = 2,
     .save_file = ft_nullptr,
     .name = ft_nullptr,
-    .turn = ft_thorbald_ironsocket_turn,
+    .turn = ft_thorbald_ironpocket_turn,
     .flags = INITIALIZE_FLAGS,
-    .crit = THORBALD_IRONSOCKET_CRIT,
-    .attack_bonus = THORBALD_IRONSOCKET_ATTACK,
+    .crit = THORBALD_IRONPOCKET_CRIT,
+    .attack_bonus = THORBALD_IRONPOCKET_ATTACK,
     .bufs = INITIALIZE_BUFFS,
     .debufs = INITIALIZE_DEBUFFS,
     .concentration = INITIALIZE_CONCENTRATION,
-    .d_resistance = THORBALD_IRONSOCKET_DEFAULT_RESISTANCE,
+    .d_resistance = THORBALD_IRONPOCKET_DEFAULT_RESISTANCE,
     .c_resistance = INITIALIZE_CURRENT_RESISTANCE,
-    .equipment = THORBALD_IRONSOCKET_EQUIPMENT,
-    .skill_mod = THORBALD_IRONSOCKET_SKILL_MODS,
-    .save_mod = THORBALD_IRONSOCKET_SAVE_MODS,
+    .equipment = THORBALD_IRONPOCKET_EQUIPMENT,
+    .skill_mod = THORBALD_IRONPOCKET_SKILL_MODS,
+    .save_mod = THORBALD_IRONPOCKET_SAVE_MODS,
     .stats = INITIALIZE_STATS,
-    .dstats = THORBALD_IRONSOCKET_DEFAULT_STATS,
+    .dstats = THORBALD_IRONPOCKET_DEFAULT_STATS,
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
-    .physical = THORBALD_IRONSOCKET_PHYSICAL,
+    .physical = THORBALD_IRONPOCKET_PHYSICAL,
 };
 
 #endif
