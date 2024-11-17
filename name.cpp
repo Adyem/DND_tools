@@ -103,7 +103,7 @@ t_name *ft_allocate_memory_name()
     t_name *last_node;
     t_name *first_node;
 
-	last_node = ft_nullptr;
+    last_node = ft_nullptr;
     first_node = ft_add_node(ft_nullptr, &last_node, "template", ft_template);
     ft_add_mob_series(first_node, &last_node, "template", ft_template, 10);
     ft_add_mob_series(first_node, &last_node, "goblin", ft_goblin, 10);
@@ -111,9 +111,14 @@ t_name *ft_allocate_memory_name()
     ft_add_node(first_node, &last_node, "veraak", ft_veraak);
     ft_add_mob_series(first_node, &last_node, "chaos_crystal", ft_chaos_crystal, 4);
     ft_add_node(first_node, &last_node, "gundren_rockseeker", ft_gundren_rockseeker);
+    ft_add_node(first_node, &last_node, "thorbald_ironpocket", ft_thorbald_ironpocket);
+    ft_add_node(first_node, &last_node, "murna_claygrip", ft_murna_claygrip);
+    ft_add_node(first_node, &last_node, "dorgar_stoneguard", ft_dorgar_stoneguard);
+    ft_add_node(first_node, &last_node, "hilda_stormshield", ft_hilda_stormshield);
     ft_add_node(first_node, &last_node, "goblin_warmaster", ft_goblin_warmaster);
-	ft_add_node(first_node, &last_node, "maverick", ft_maverick);
-	ft_add_node(first_node, &last_node, "grizz", ft_grizz);
-	ft_add_node(first_node, &last_node, "frank", ft_frank);
+    ft_add_node(first_node, &last_node, "maverick", ft_maverick);
+    ft_add_node(first_node, &last_node, "grizz", ft_grizz);
+    ft_add_node(first_node, &last_node, "frank", ft_frank);
     return (first_node);
 }
+

@@ -18,7 +18,11 @@ HEADER      = dnd_tools.hpp \
               goblin_warmaster.hpp \
               maverick.hpp \
               frank.hpp \
-              grizz.hpp
+              grizz.hpp \
+			  dorgar_stoneguard.hpp \
+			  hilda_stormshield.hpp \
+			  murna_claygrip.hpp \
+			  thorbald_ironsocket.hpp
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -29,6 +33,10 @@ SRC         = name.cpp \
               maverick_turn.cpp \
               chaos_crystal.cpp \
               gundren_rockseeker.cpp \
+			  dorgar_stoneguard.cpp \
+			  hilda_stormshield.cpp \
+			  murna_claygrip.cpp \
+			  thorbald_ironsocket.cpp \
               goblin_warmaster.cpp \
               grizz.cpp \
               main.cpp \

@@ -31,11 +31,38 @@ t_char		*ft_frank(const int index, const char **input, t_name *name, int excepti
 void		ft_frank_turn(t_char *info);
 
 //Goblin Warmaster
-t_char		*ft_goblin_warmaster(const int index, const char **input, t_name *name, int exception);
+t_char		*ft_goblin_warmaster(const int index, const char **input, t_name *name,
+				int exception);
 void		ft_goblin_warmaster_turn(t_char *info);
 
+// Gundren Rockseeker
+t_char		*ft_gundren_rockseeker(const int index, const char **input, t_name *name,
+				int exception);
+void		ft_gundren_rockseeker_turn(t_char *info);
+
+// Thorbald Ironpocket
+t_char		*ft_thorbald_ironpocket(const int index, const char **input, t_name *name,
+				int exception);
+void		ft_thorbald_ironpocket_turn(t_char *info);
+
+// Murna Claygrip
+t_char		*ft_murna_claygrip(const int index, const char **input, t_name *name,
+				int exception);
+void		ft_murna_claygrip_turn(t_char *info);
+
+// Dorgar Stoneguard
+t_char		*ft_dorgar_stoneguard(const int index, const char **input, t_name *name,
+				int exception);
+void		ft_dorgar_stoneguard_turn(t_char *info);
+
+// Hilda Stormshield
+t_char		*ft_hilda_stormshield(const int index, const char **input, t_name *name,
+				int exception);
+void		ft_hilda_stormshield_turn(t_char *info);
+
 //Gundren Rockseeker
-t_char		*ft_gundren_rockseeker(const int index, const char **input, t_name *name, int exception);
+t_char		*ft_gundren_rockseeker(const int index, const char **input, t_name *name,
+				int exception);
 void		ft_gundren_rockseeker_turn(t_char *info);
 
 //Goblin
