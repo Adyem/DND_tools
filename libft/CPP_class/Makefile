@@ -9,11 +9,13 @@ TARGET := CPP_class.a
 DEBUG_TARGET := CPP_class_debug.a
 
 SRCS :=  string.cpp \
-		 nullptr.cpp
+		 nullptr.cpp \
+		 file.cpp
 
 HEADERS := string.hpp \
 		   nullptr.hpp \
-		   shared_ptr.hpp
+		   shared_ptr.hpp \
+		   file.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))
