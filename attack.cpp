@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "libft/Printf/ft_printf.hpp"
-#include <algorithm>
+#include "libft/CPP_class/math.hpp"
 
 typedef struct s_damage_info
 {
@@ -30,7 +30,7 @@ static int ft_weapon_find_stat(t_char *info, t_equipment_id *weapon)
     if (ft_strcmp_dnd(weapon->attack.stat, STAT_CHA) == 0)
         return (ft_calculate_cha(info));
     if (ft_strcmp_dnd(weapon->attack.stat, FINESSE) == 0)
-        return std::max(ft_calculate_str(info), ft_calculate_dex(info));
+        return max(ft_calculate_str(info), ft_calculate_dex(info));
     return (0);
 }
 
