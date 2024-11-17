@@ -42,8 +42,7 @@ static void ft_maverick_meteor_strike(t_char *info, char **player_list)
 {
 	cma_free(info->bufs.meteor_strike.target_id);
 	info->bufs.meteor_strike.target_id = ft_nullptr;
-	ft_get_random_target((const char **)player_list,
-			(const char **)&info->bufs.meteor_strike.target_id);
+	ft_get_random_target(player_list, &info->bufs.meteor_strike.target_id);
 	info->bufs.meteor_strike.duration = 1;
 	info->bufs.meteor_strike.one_target_d = 22;
 	info->bufs.meteor_strike.two_targets_d = 10;
@@ -58,8 +57,7 @@ static void	ft_maverick_earth_pounce(t_char *info, char **player_list)
 {
 	cma_free(info->bufs.earth_pounce.target_id);
 	info->bufs.earth_pounce.target_id = ft_nullptr;
-	ft_get_random_target((const char **)player_list,
-			(const char **)&info->bufs.earth_pounce.target_id);
+	ft_get_random_target(player_list, &info->bufs.earth_pounce.target_id);
 	info->bufs.earth_pounce.active = 1;
 	info->bufs.earth_pounce.base_damage = 27;
 	print_earth_pounce(info);
@@ -70,8 +68,7 @@ static void	ft_maverick_arcane_pounce(t_char *info, char **player_list)
 {
 	cma_free(info->bufs.frost_breath.target_id);
 	info->bufs.frost_breath.target_id = ft_nullptr;
-	ft_get_random_target((const char **)player_list,
-			(const char **)&info->bufs.arcane_pounce.target_id);
+	ft_get_random_target(player_list, &info->bufs.arcane_pounce.target_id);
 	info->bufs.arcane_pounce.active = 1;
 	info->bufs.arcane_pounce.erea_damage = 8;
 	info->bufs.arcane_pounce.magic_damage = 4;
@@ -83,8 +80,7 @@ static void	ft_maverick_frost_breath(t_char *info, char **player_list)
 {
 	cma_free(info->bufs.frost_breath.target_id);
 	info->bufs.frost_breath.target_id = ft_nullptr;
-	ft_get_random_target((const char **)player_list,
-			(const char **)&info->bufs.frost_breath.target_id);
+	ft_get_random_target(player_list, &info->bufs.frost_breath.target_id);
 	info->bufs.frost_breath.active = 1;
 	info->bufs.frost_breath.damage = 25;
 	print_frost_breath(info);

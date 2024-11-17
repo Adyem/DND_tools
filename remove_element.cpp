@@ -1,8 +1,9 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 
-void	ft_remove_element(const char **array, const char *element)
+void	ft_remove_element(char **array, char *element, bool free_element)
 {
 	int	i;
 	int	j;
@@ -14,6 +15,8 @@ void	ft_remove_element(const char **array, const char *element)
 		i++;
 	if (array[i] == element)
 	{
+		if (free_element)
+			cma_free(element);
 		j = i;
 		while (array[j])
 		{
