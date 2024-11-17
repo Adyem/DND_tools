@@ -96,6 +96,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char
         cma_free(new_name);
         i++;
     }
+	return ;
 }
 
 t_name *ft_allocate_memory_name()
@@ -121,4 +122,3 @@ t_name *ft_allocate_memory_name()
     ft_add_node(first_node, &last_node, "frank", ft_frank);
     return (first_node);
 }
-
