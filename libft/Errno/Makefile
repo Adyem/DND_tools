@@ -8,7 +8,8 @@ DEBUG_OBJDIR := objs_debug
 TARGET := errno.a
 DEBUG_TARGET := errno_debug.a
 
-SRCS := errno.cpp
+SRCS := errno.cpp \
+		perror.cpp
 
 HEADERS := errno.hpp
 
