@@ -4,8 +4,6 @@
 #define SLEEP_TIME 100
 #define MAX_SLEEP 10000
 
-extern thread_local const char *pt_errno_msg;
-
 typedef struct t_mutex
 {
 	volatile bool lock;

@@ -1,19 +1,19 @@
 #include "PThread.hpp"
+#include "../Errno/errno.hpp"
 
-thread_local const char *pt_errno_msg;
+thread_local int ft_errno;
 
 int pt_mutex_unlock(t_mutex *mutex, int thread_id)
 {
-    pt_errno_msg = nullptr;
-
+    ft_errno = SUCCESS;
     if (!mutex)
     {
-        pt_errno_msg = "pt_mutex_unlock: The provided mutex pointer is null.";
+        ft_errno = PT_ERR_MUTEX_NULLPTR;
         return (-1);
     }
     if (mutex->thread_id != thread_id)
     {
-        pt_errno_msg = "pt_mutex_unlock: Thread does not own the lock.";
+        ft_errno = PT_ERR_MUTEX_OWNER;
         return (-1);
     }
     mutex->thread_id = -1;

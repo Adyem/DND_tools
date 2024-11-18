@@ -1,14 +1,15 @@
 #include "PThread.hpp"
+#include "../Errno/errno.hpp"
 
-thread_local const char *pt_errno_msg;
+thread_local int	ft_errno;
 
 int pt_mutex_try_lock(t_mutex *mutex, int thread_id)
 {
-    pt_errno_msg = nullptr;
+    ft_errno = SUCCESS;
 
     if (!mutex)
     {
-        pt_errno_msg = "pt_mutex_try_lock: The provided mutex pointer is null.";
+        ft_errno = PT_ERR_MUTEX_NULLPTR;
         return (-2);
     }
     if (__sync_bool_compare_and_swap(&mutex->lock, false, true))

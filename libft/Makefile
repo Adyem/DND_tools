@@ -22,7 +22,8 @@ LIBS := CMA/CustomMemoryAllocator.a \
         Printf/Printf.a \
         ReadLine/ReadLine.a \
         PThread/PThread.a \
-		CPP_class/CPP_class.a
+		CPP_class/CPP_class.a \
+		Errno/errno.a
 
 DEBUG_LIBS := CMA/CustomMemoryAllocator_debug.a \
               GetNextLine/GetNextLine_debug.a \
@@ -30,7 +31,8 @@ DEBUG_LIBS := CMA/CustomMemoryAllocator_debug.a \
               Printf/Printf_debug.a \
               ReadLine/ReadLine_debug.a \
               PThread/PThread_debug.a \
-			  CPP_class/CPP_class_debug.a
+			  CPP_class/CPP_class_debug.a \
+			  Errno/errno_debug.a
 
 CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
 
@@ -78,6 +80,12 @@ ReadLine/ReadLine.a:
 
 PThread/PThread.a:
 	$(MAKE) -C PThread
+
+Errno/errno.a:
+	$(MAKE) -C Errno
+
+Errno/errno_debug.a:
+	$(MAKE) -C Errno debug
 
 CMA/CustomMemoryAllocator_debug.a:
 	$(MAKE) -C CMA debug

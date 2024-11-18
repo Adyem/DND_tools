@@ -1,12 +1,13 @@
 #include "PThread.hpp"
+#include "../Errno/errno.hpp"
 #include <unistd.h>
 #include <algorithm>
 
-thread_local const char *pt_errno_msg;
+thread_local int ft_errno;
 
 int pt_mutex_lock(t_mutex* mutex, int thread_id)
 {
-    pt_errno_msg = nullptr;
+    ft_errno = SUCCESS;
     int sleep_time = SLEEP_TIME;
     const int max_sleep = MAX_SLEEP;
 
@@ -18,7 +19,7 @@ int pt_mutex_lock(t_mutex* mutex, int thread_id)
             if (__sync_bool_compare_and_swap(&mutex->lock, false, true))
             {
                 mutex->thread_id = thread_id;
-                return (0);
+                return (SUCCESS);
             }
         }
         bool already_waiting = false;
@@ -38,7 +39,7 @@ int pt_mutex_lock(t_mutex* mutex, int thread_id)
             int next_end = (mutex->wait_queue_end + 1) % 128;
             if (next_end == mutex->wait_queue_start)
             {
-                pt_errno_msg = "Wait queue is full";
+                ft_errno = PT_ERR_QUEUE_FULL;
                 return (-1);
             }
             mutex->wait_queue[mutex->wait_queue_end] = thread_id;
@@ -55,10 +56,10 @@ int pt_mutex_lock(t_mutex* mutex, int thread_id)
                 if (__sync_bool_compare_and_swap(&mutex->lock, false, true))
                 {
                     mutex->thread_id = thread_id;
-                    return (0);
+                    return (SUCCESS);
                 }
             }
         }
     }
-    return (0);
+    return (SUCCESS);
 }
