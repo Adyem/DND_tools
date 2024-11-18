@@ -1,6 +1,8 @@
 #ifndef ERRNO_HPP
 # define ERRNO_HPP
 
+#define ERRNO_OFFSET 2000
+
 enum PTErrorCode
 {
     SUCCESS = 0,

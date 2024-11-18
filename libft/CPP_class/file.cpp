@@ -1,4 +1,5 @@
 #include "file.hpp"
+#include "../Errno/errno.hpp"
 #include <cerrno>
 
 ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept 
@@ -6,7 +7,10 @@ ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept
 {
     _fd = open(filename, flags, mode);
 	if (_fd == -1)
-        _error_code = errno;
+	{
+		ft_errno = errno + ERRNO_OFFSET;
+        _error_code = errno + ERRNO_OFFSET;
+	}
 	return ;
 }
 
@@ -60,18 +64,17 @@ int ft_file::get_fd() const
 
 bool ft_file::has_error() const noexcept
 {
-    return _error_code != 0;
+    return (_error_code != 0);
 }
 
 int ft_file::get_error_code() const noexcept
 {
-    return _error_code;
+	return (_error_code);
 }
 
 const char *ft_file::get_error_message() const noexcept
 {
-    if (_error_code != 0) {
-        return std::strerror(_error_code);
-    }
-    return "No error";
+    if (_error_code != 0)
+        return ft_strerror(_error_code);
+    return ("No error");
 }

@@ -42,10 +42,8 @@ template <typename ManagedType>
 SharedPtr<ManagedType>::SharedPtr(ManagedType* pointer, size_t size, bool arrayType, bool critical)
     : managedPointer(pointer),
       referenceCount(static_cast<int*>(cma_malloc(sizeof(int), critical))),
-      arraySize(size),
-      isArrayType(arrayType),
-      isCritical(critical),
-      errorCode(SHARED_PTR_NO_ERROR)
+      arraySize(size), isArrayType(arrayType), isCritical(critical),
+	  errorCode(SHARED_PTR_NO_ERROR)
 {
     if (referenceCount)
         *referenceCount = 1;
@@ -71,12 +69,9 @@ SharedPtr<ManagedType>::SharedPtr(ManagedType* pointer, size_t size, bool arrayT
 
 template <typename ManagedType>
 SharedPtr<ManagedType>::SharedPtr(const SharedPtr<ManagedType>& other)
-    : managedPointer(other.managedPointer),
-      referenceCount(other.referenceCount),
-      arraySize(other.arraySize),
-      isArrayType(other.isArrayType),
-      isCritical(other.isCritical),
-      errorCode(other.errorCode)
+    : managedPointer(other.managedPointer), referenceCount(other.referenceCount),
+      arraySize(other.arraySize), isArrayType(other.isArrayType),
+      isCritical(other.isCritical), errorCode(other.errorCode)
 {
 	if (referenceCount && errorCode == SHARED_PTR_NO_ERROR)
         (*referenceCount)++;
