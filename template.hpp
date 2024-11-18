@@ -119,6 +119,20 @@ static const t_physical TEMPLATE_PHYSICAL =
     .speed = 0,
 };
 
+static const t_spell_slots TEMPLATE_SPELL_SLOTS =
+{
+	.level_1 = INITIALIZE_SPELL_SLOT,
+	.level_2 = INITIALIZE_SPELL_SLOT,
+	.level_3 = INITIALIZE_SPELL_SLOT,
+	.level_4 = INITIALIZE_SPELL_SLOT,
+	.level_5 = INITIALIZE_SPELL_SLOT,
+	.level_6 = INITIALIZE_SPELL_SLOT,
+	.level_7 = INITIALIZE_SPELL_SLOT,
+	.level_8 = INITIALIZE_SPELL_SLOT,
+	.level_9 = INITIALIZE_SPELL_SLOT,
+	.warlock = INITIALIZE_SPELL_SLOT,
+};
+
 static const t_char TEMPLATE_INFO =
 {
 	.level = 0,
@@ -129,7 +143,7 @@ static const t_char TEMPLATE_INFO =
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
 	.turn = ft_template_turn,
-	.spell_slots = INITIALIZE_SPELL_SLOTS,
+	.spell_slots = TEMPLATE_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
 	.crit = TEMPLATE_CRIT,
 	.attack_bonus = TEMPLATE_ATTACK,

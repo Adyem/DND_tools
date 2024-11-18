@@ -351,6 +351,7 @@ typedef struct	s_spell_slot
 	int available;
 	int total;
 	int	level;
+	int	replenishing_slot;
 }	t_spell_slot;
 
 typedef struct	s_spell_slots

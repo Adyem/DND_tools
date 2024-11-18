@@ -277,6 +277,7 @@ static const t_spell_slot INITIALIZE_SPELL_SLOT =
 	.available = 0,
 	.total = 0,
 	.level = 0,
+	.replenishing_slot = 0,
 };
 
 static const t_spell_slots INITIALIZE_SPELL_SLOTS =
