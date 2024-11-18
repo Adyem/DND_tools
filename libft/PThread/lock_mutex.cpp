@@ -1,83 +1,64 @@
 #include "PThread.hpp"
-#include <queue>
-#include <atomic>
 #include <unistd.h>
+#include <algorithm>
 
 thread_local const char *pt_errno_msg;
 
-int pt_mutex_lock(t_mutex* mutex, int thread_id, int sleep_time, int max_sleep)
+int pt_mutex_lock(t_mutex* mutex, int thread_id)
 {
-	pt_errno_msg = nullptr;
+    pt_errno_msg = nullptr;
+    int sleep_time = SLEEP_TIME;
+    const int max_sleep = MAX_SLEEP;
+
     while (true)
     {
-        bool expected = false;
-        try
-		{
-            if (mutex->wait_queue.empty() &&
-                mutex->lock.compare_exchange_strong(expected, true, std::memory_order_acquire))
-			{
-                mutex->thread_id.store(thread_id, std::memory_order_release);
+        if (mutex->wait_queue_start == mutex->wait_queue_end &&
+            mutex->lock == false)
+        {
+            if (__sync_bool_compare_and_swap(&mutex->lock, false, true))
+            {
+                mutex->thread_id = thread_id;
                 return (0);
             }
         }
-		catch (const std::exception& error)
-		{
-			pt_errno_msg = error.what();
-            return (-1);
-        }
         bool already_waiting = false;
-        try
-		{
-            std::queue<int> temp_queue = mutex->wait_queue;
-            while (!temp_queue.empty())
+        int start = mutex->wait_queue_start;
+        int end = mutex->wait_queue_end;
+        while (start != end)
+        {
+            if (mutex->wait_queue[start] == thread_id)
             {
-                if (temp_queue.front() == thread_id)
-                {
-                    already_waiting = true;
-                    break ;
-                }
-                temp_queue.pop();
+                already_waiting = true;
+                break ;
             }
+            start = (start + 1) % 128;
         }
-		catch (const std::exception& error)
-		{
-			pt_errno_msg = error.what();
-            return (-1);
-        }
-        try
-		{
-            if (!already_waiting)
-                mutex->wait_queue.push(thread_id);
-        }
-		catch (const std::exception& error)
-		{
-			pt_errno_msg = error.what();
-            return (-1);
+        if (!already_waiting)
+        {
+            int next_end = (mutex->wait_queue_end + 1) % 128;
+            if (next_end == mutex->wait_queue_start)
+            {
+                pt_errno_msg = "Wait queue is full";
+                return (-1);
+            }
+            mutex->wait_queue[mutex->wait_queue_end] = thread_id;
+            mutex->wait_queue_end = next_end;
         }
         usleep(sleep_time);
         sleep_time = std::min(sleep_time * 2, max_sleep);
-		try
-		{
-            if (mutex->lock_released.load())
+        if (mutex->lock_released)
+        {
+            if (mutex->wait_queue[mutex->wait_queue_start] == thread_id)
             {
-                if (!mutex->wait_queue.empty() && mutex->wait_queue.front() == thread_id)
+                int next_start = (mutex->wait_queue_start + 1) % 128;
+                mutex->wait_queue_start = next_start;
+                if (__sync_bool_compare_and_swap(&mutex->lock, false, true))
                 {
-                    mutex->wait_queue.pop();
-                    expected = false;
-                    if (mutex->lock.compare_exchange_strong(expected, true, std::memory_order_acquire))
-					{
-                        mutex->thread_id.store(thread_id, std::memory_order_release);
-                        return (0);
-                    }
+                    mutex->thread_id = thread_id;
+                    return (0);
                 }
             }
         }
-		catch (const std::exception& error)
-		{
-			pt_errno_msg = error.what();
-            return (-1);
-        }
     }
-	return (0);
+    return (0);
 }
-

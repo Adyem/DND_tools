@@ -1,19 +1,19 @@
 #ifndef PTHREAD_HPP
 # define PTHREAD_HPP
 
-#include <atomic>
-#include <queue>
-
 #define SLEEP_TIME 100
+#define MAX_SLEEP 10000
 
 extern thread_local const char *pt_errno_msg;
 
 typedef struct t_mutex
 {
-	std::atomic<bool>	lock = {false};
-	std::atomic<int>	thread_id = {-1};
-	std::queue<int>		wait_queue;
-	std::atomic<bool>	lock_released = {false};
+	volatile bool lock;
+	volatile int thread_id;
+	int wait_queue[128];
+	int wait_queue_start;
+	int wait_queue_end;
+	volatile bool lock_released;
 } s_mutex;
 
 int		pt_mutex_lock(t_mutex *mutex, int thread_id);
