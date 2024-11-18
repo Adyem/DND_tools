@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/errno.o",
+      "errno.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Errno",
+    "file": "/home/adyem/DND_tools/libft/Errno/errno.cpp",
+    "output": "/home/adyem/DND_tools/libft/Errno/objs/errno.o"
+  }
+]
