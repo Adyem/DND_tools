@@ -14,7 +14,8 @@ SUBDIRS := CMA \
            Printf \
            ReadLine \
            PThread \
-		   CPP_class
+		   CPP_class \
+		   Errno
 
 LIBS := CMA/CustomMemoryAllocator.a \
         GetNextLine/GetNextLine.a \
