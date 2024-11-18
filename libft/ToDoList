@@ -255,7 +255,7 @@ Use Cases
 
 Functions to Implement
 
-For ft_shared_ptr:
+For ft_shared_ptr: don donee
 
     Reference counting
     ft_shared_ptr_new
