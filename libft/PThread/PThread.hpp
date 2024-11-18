@@ -6,6 +6,8 @@
 
 #define SLEEP_TIME 100
 
+extern thread_local const char *pt_errno_msg;
+
 typedef struct t_mutex
 {
 	std::atomic<bool>	lock = {false};
