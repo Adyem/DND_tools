@@ -346,18 +346,27 @@ typedef struct s_physical
     int speed;
 } t_physical;
 
+typedef struct	s_spell_slot
+{
+	int available;
+	int total;
+	int	level;
+}	t_spell_slot;
+
 typedef struct	s_spell_slots
 {
-	int	level_1[2];
-	int	level_2[2];
-	int	level_3[2];
-	int	level_4[2];
-	int	level_5[2];
-	int	level_6[2];
-	int	level_7[2];
-	int	level_8[2];
-	int	level_9[2];
+	t_spell_slot	level_1;
+	t_spell_slot	level_2;
+	t_spell_slot	level_3;
+	t_spell_slot	level_4;
+	t_spell_slot	level_5;
+	t_spell_slot	level_6;
+	t_spell_slot	level_7;
+	t_spell_slot	level_8;
+	t_spell_slot	level_9;
+	t_spell_slot	warlock;
 }	t_spell_slots;
+
 
 typedef struct	s_char
 {

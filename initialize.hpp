@@ -272,17 +272,25 @@ static const	t_feats INITIALIZE_FEATS =
 	.crackback = INITIALIZE_CRACKBACK,
 };
 
+static const t_spell_slot INITIALIZE_SPELL_SLOT =
+{
+	.available = 0,
+	.total = 0,
+	.level = 0,
+};
+
 static const t_spell_slots INITIALIZE_SPELL_SLOTS =
 {
-	.level_1 = {0, 0},
-	.level_2 = {0, 0},
-	.level_3 = {0, 0},
-	.level_4 = {0, 0},
-	.level_5 = {0, 0},
-	.level_6 = {0, 0},
-	.level_7 = {0, 0},
-	.level_8 = {0, 0},
-	.level_9 = {0, 0},
+	.level_1 = INITIALIZE_SPELL_SLOT,
+	.level_2 = INITIALIZE_SPELL_SLOT,
+	.level_3 = INITIALIZE_SPELL_SLOT,
+	.level_4 = INITIALIZE_SPELL_SLOT,
+	.level_5 = INITIALIZE_SPELL_SLOT,
+	.level_6 = INITIALIZE_SPELL_SLOT,
+	.level_7 = INITIALIZE_SPELL_SLOT,
+	.level_8 = INITIALIZE_SPELL_SLOT,
+	.level_9 = INITIALIZE_SPELL_SLOT,
+	.warlock = INITIALIZE_SPELL_SLOT,
 };
 
 #endif
