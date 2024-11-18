@@ -126,6 +126,7 @@ static const    t_char MURNA_CLAYGRIP_INFO =
     .save_file = ft_nullptr,
     .name = ft_nullptr,
     .turn = ft_murna_claygrip_turn,
+	.spell_slots = INITIALIZE_SPELL_SLOTS,
     .flags = INITIALIZE_FLAGS,
     .crit = MURNA_CLAYGRIP_CRIT,
     .attack_bonus = MURNA_CLAYGRIP_ATTACK,

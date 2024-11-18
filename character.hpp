@@ -346,6 +346,19 @@ typedef struct s_physical
     int speed;
 } t_physical;
 
+typedef struct	s_spell_slots
+{
+	int	level_1[2];
+	int	level_2[2];
+	int	level_3[2];
+	int	level_4[2];
+	int	level_5[2];
+	int	level_6[2];
+	int	level_7[2];
+	int	level_8[2];
+	int	level_9[2];
+}	t_spell_slots;
+
 typedef struct	s_char
 {
 	int				level;
@@ -356,6 +369,7 @@ typedef struct	s_char
 	char			*save_file;
 	const char		*name;
 	c_turn			turn;
+	t_spell_slots	spell_slots;
 	t_flags			flags;
 	t_crit_mod		crit;
 	t_attack		attack_bonus;

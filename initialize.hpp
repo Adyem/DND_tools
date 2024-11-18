@@ -272,4 +272,17 @@ static const	t_feats INITIALIZE_FEATS =
 	.crackback = INITIALIZE_CRACKBACK,
 };
 
+static const t_spell_slots INITIALIZE_SPELL_SLOTS =
+{
+	.level_1 = {0, 0},
+	.level_2 = {0, 0},
+	.level_3 = {0, 0},
+	.level_4 = {0, 0},
+	.level_5 = {0, 0},
+	.level_6 = {0, 0},
+	.level_7 = {0, 0},
+	.level_8 = {0, 0},
+	.level_9 = {0, 0},
+};
+
 #endif

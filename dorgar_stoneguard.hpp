@@ -126,6 +126,7 @@ static const    t_char DORGAR_STONEGUARD_INFO =
     .save_file = ft_nullptr,
     .name = ft_nullptr,
     .turn = ft_dorgar_stoneguard_turn,
+	.spell_slots = INITIALIZE_SPELL_SLOTS,
     .flags = INITIALIZE_FLAGS,
     .crit = DORGAR_STONEGUARD_CRIT,
     .attack_bonus = DORGAR_STONEGUARD_ATTACK,

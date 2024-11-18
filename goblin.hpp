@@ -129,6 +129,7 @@ static const t_char GOBLIN_INFO =
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
 	.turn = ft_goblin_turn,
+	.spell_slots = INITIALIZE_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
 	.crit = GOBLIN_CRIT,
 	.attack_bonus = GOBLIN_ATTACK,

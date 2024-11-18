@@ -128,6 +128,7 @@ static const t_char WARM_INFO =
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
 	.turn = ft_goblin_warmaster_turn,
+	.spell_slots = INITIALIZE_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
 	.crit = WARM_CRIT,
 	.attack_bonus = WARM_ATTACK,

@@ -127,6 +127,7 @@ static const t_char CHAOS_CRYSTAL_INFO =
     .save_file = ft_nullptr,
     .name = ft_nullptr,
     .turn = ft_chaos_crystal_turn,
+	.spell_slots = INITIALIZE_SPELL_SLOTS,
     .flags = INITIALIZE_FLAGS,
     .crit = CHAOS_CRYSTAL_CRIT,
     .attack_bonus = CHAOS_CRYSTAL_ATTACK,
