@@ -3,6 +3,7 @@
 
 #include "pair.hpp"
 #include "../CMA/CMA.hpp"
+#include "../Errno/errno.hpp"
 #include "nullptr.hpp"
 #include <cstddef>
 
@@ -36,12 +37,15 @@ class Map
 
 template <typename Key, typename MappedType>
 Map<Key, MappedType>::Map(std::size_t initialCapacity, bool criticality)
-    : capacity(initialCapacity), size_(0), critical(criticality), error(false)
+    : capacity(initialCapacity), size_(0), critical(criticality), error(SUCCESS)
 {
-    data = static_cast<Pair<Key, MappedType>*>(cma_malloc(sizeof(Pair<Key, MappedType>) * capacity, critical));
+    data = static_cast<Pair<Key, MappedType>*>(cma_malloc(sizeof(Pair<Key,
+        MappedType>) * capacity, critical));
     if (!data)
-        error = true;
-    return;
+    {
+        error = SHARED_PTR_ALLOCATION_FAILED;
+        ft_errno = SHARED_PTR_ALLOCATION_FAILED;
+    }
 }
 
 template <typename Key, typename MappedType>
@@ -55,6 +59,7 @@ Map<Key, MappedType>::~Map()
 template <typename Key, typename MappedType>
 void Map<Key, MappedType>::insert(const Key& key, const MappedType& value)
 {
+    error = SUCCESS;
     std::size_t index = findIndex(key);
     if (index != size_)
     {
@@ -65,11 +70,10 @@ void Map<Key, MappedType>::insert(const Key& key, const MappedType& value)
     if (size_ == capacity)
     {
         resize(capacity * 2);
-        if (error)
+        if (error != SUCCESS)
             return;
     }
     data[size_++] = Pair<Key, MappedType>{key, value};
-    return;
 }
 
 template <typename Key, typename MappedType>
@@ -136,10 +140,13 @@ bool Map<Key, MappedType>::getError() const
 template <typename Key, typename MappedType>
 void Map<Key, MappedType>::resize(std::size_t newCapacity)
 {
-    Pair<Key, MappedType>* newData = static_cast<Pair<Key, MappedType>*>(cma_malloc(sizeof(Pair<Key, MappedType>) * newCapacity, critical));
+    error = SUCCESS;
+    Pair<Key, MappedType>* newData = static_cast<Pair<Key,
+		MappedType>*>(cma_malloc(sizeof(Pair<Key, MappedType>) * newCapacity, critical));
     if (!newData)
     {
-        error = true;
+        error = SHARED_PTR_ALLOCATION_FAILED;
+        ft_errno = SHARED_PTR_ALLOCATION_FAILED;
         return;
     }
     std::size_t i = 0;
@@ -151,7 +158,6 @@ void Map<Key, MappedType>::resize(std::size_t newCapacity)
     cma_free(data);
     data = newData;
     capacity = newCapacity;
-    return;
 }
 
 template <typename Key, typename MappedType>

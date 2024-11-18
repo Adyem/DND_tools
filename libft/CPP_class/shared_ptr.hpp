@@ -1,15 +1,10 @@
 #ifndef SHARED_PTR_HPP
 #define SHARED_PTR_HPP
 
+#include "../Errno/errno.hpp"
 #include "../CMA/CMA.hpp"
 #include "nullptr.hpp"
 #include <cstddef>
-
-#define SHARED_PTR_NO_ERROR 0
-#define SHARED_PTR_NULL_PTR 1
-#define SHARED_PTR_OUT_OF_BOUNDS 2
-#define SHARED_PTR_ALLOCATION_FAILED 3
-#define SHARED_PTR_INVALID_OPERATION 4
 
 template <typename ManagedType>
 class SharedPtr
@@ -29,9 +24,9 @@ class SharedPtr
 	    SharedPtr(const SharedPtr<ManagedType>& other);
     	~SharedPtr();
     	SharedPtr<ManagedType>& operator=(const SharedPtr<ManagedType>& other);
-    	ManagedType& operator*() const;
-    	ManagedType* operator->() const;
-    	ManagedType& operator[](size_t index) const;
+    	ManagedType& operator*();
+    	ManagedType* operator->();
+    	ManagedType& operator[](size_t index);
     	int use_count() const;
     	bool hasError() const;
     	int getErrorCode() const;
@@ -57,6 +52,7 @@ SharedPtr<ManagedType>::SharedPtr(ManagedType* pointer, size_t size, bool arrayT
     else
     {
         errorCode = SHARED_PTR_ALLOCATION_FAILED;
+		ft_errno = SHARED_PTR_ALLOCATION_FAILED;
         if (managedPointer)
         {
             if (isArrayType)
@@ -136,19 +132,18 @@ SharedPtr<ManagedType>& SharedPtr<ManagedType>::operator=(const SharedPtr<Manage
         isCritical = other.isCritical;
         errorCode = other.errorCode;
         if (referenceCount && errorCode == SHARED_PTR_NO_ERROR)
-        {
             (*referenceCount)++;
-        }
     }
     return (*this);
 }
 
 template <typename ManagedType>
-ManagedType& SharedPtr<ManagedType>::operator*() const
+ManagedType& SharedPtr<ManagedType>::operator*()
 {
     if (!managedPointer)
     {
-        const_cast<SharedPtr*>(this)->errorCode = SHARED_PTR_NULL_PTR;
+        this->errorCode = SHARED_PTR_NULL_PTR;
+		ft_errno = SHARED_PTR_NULL_PTR;
         static ManagedType defaultInstance;
         return defaultInstance;
     }
@@ -156,34 +151,38 @@ ManagedType& SharedPtr<ManagedType>::operator*() const
 }
 
 template <typename ManagedType>
-ManagedType* SharedPtr<ManagedType>::operator->() const
+ManagedType* SharedPtr<ManagedType>::operator->()
 {
     if (!managedPointer)
     {
-        const_cast<SharedPtr*>(this)->errorCode = SHARED_PTR_NULL_PTR;
+        this->errorCode = SHARED_PTR_NULL_PTR;
+		ft_errno = SHARED_PTR_NULL_PTR;
         return ft_nullptr;
     }
     return (managedPointer);
 }
 
 template <typename ManagedType>
-ManagedType& SharedPtr<ManagedType>::operator[](size_t index) const
+ManagedType& SharedPtr<ManagedType>::operator[](size_t index)
 {
     if (!isArrayType)
     {
-        const_cast<SharedPtr*>(this)->errorCode = SHARED_PTR_INVALID_OPERATION;
+        this->errorCode = SHARED_PTR_INVALID_OPERATION;
+		ft_errno = SHARED_PTR_INVALID_OPERATION;
         static ManagedType defaultInstance;
         return (defaultInstance);
     }
     if (!managedPointer)
     {
-        const_cast<SharedPtr*>(this)->errorCode = SHARED_PTR_NULL_PTR;
+        this->errorCode = SHARED_PTR_NULL_PTR;
+		ft_errno = SHARED_PTR_NULL_PTR;
         static ManagedType defaultInstance;
         return (defaultInstance);
     }
     if (index >= arraySize)
     {
-        const_cast<SharedPtr*>(this)->errorCode = SHARED_PTR_OUT_OF_BOUNDS;
+        this->errorCode = SHARED_PTR_OUT_OF_BOUNDS;
+		ft_errno = SHARED_PTR_OUT_OF_BOUNDS;
         static ManagedType defaultInstance;
         return (defaultInstance);
     }
@@ -213,18 +212,7 @@ int SharedPtr<ManagedType>::getErrorCode() const
 template <typename ManagedType>
 const char* SharedPtr<ManagedType>::errorMessage() const
 {
-    if (errorCode == SHARED_PTR_NO_ERROR)
-        return "No error";
-    else if (errorCode == SHARED_PTR_NULL_PTR)
-        return "Null pointer dereference";
-    else if (errorCode == SHARED_PTR_OUT_OF_BOUNDS)
-        return "Array index out of bounds";
-    else if (errorCode == SHARED_PTR_ALLOCATION_FAILED)
-        return "Memory allocation failed";
-    else if (errorCode == SHARED_PTR_INVALID_OPERATION)
-        return "Invalid operation";
-    else
-        return "Unknown error";
+	return (ft_strerror(this->errorCode));
 }
 
 template <typename ManagedType>
@@ -250,12 +238,11 @@ void SharedPtr<ManagedType>::reset(ManagedType* pointer, size_t size, bool array
     errorCode = SHARED_PTR_NO_ERROR;
     referenceCount = static_cast<int*>(cma_malloc(sizeof(int), critical));
     if (referenceCount)
-    {
         *referenceCount = 1;
-    }
     else
     {
         errorCode = SHARED_PTR_ALLOCATION_FAILED;
+		ft_errno = SHARED_PTR_ALLOCATION_FAILED;
         if (managedPointer)
         {
             if (isArrayType)
