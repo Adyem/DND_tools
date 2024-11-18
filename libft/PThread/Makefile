@@ -25,7 +25,6 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
-	$(CXX) -pthread -shared -o lib$(@:.a=.so) $^
 
 $(OBJDIR)/%.o: %.cpp $(HEADERS) | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
@@ -35,7 +34,6 @@ debug: $(DEBUG_TARGET)
 
 $(DEBUG_TARGET): $(DEBUG_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
-	$(CXX) -pthread -shared -o lib$(@:.a=.so) $^
 
 $(DEBUG_OBJDIR)/%.o: %.cpp $(HEADERS) | $(DEBUG_OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
@@ -47,7 +45,7 @@ clean:
 	rm -rf $(OBJDIR) $(DEBUG_OBJDIR)
 
 fclean: clean
-	rm -f $(TARGET) $(DEBUG_TARGET) libPThread.so libPThread_debug.so
+	rm -f $(TARGET) $(DEBUG_TARGET)
 
 re: fclean all
 
