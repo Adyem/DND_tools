@@ -125,7 +125,7 @@ static void	ft_npc_write_file_2(t_char *info, t_resistance *resistance, int fd)
 			info->bufs.arcane_pounce.magic_damage);
 	pf_printf_fd(fd, "%s%i\n", FROST_BREATH_ACTIVE_KEY,
 			info->bufs.frost_breath.active);
-		pf_printf_fd(fd, "%s%i\n", FROST_BREATH_DAMAGE_KEY,
+	pf_printf_fd(fd, "%s%i\n", FROST_BREATH_DAMAGE_KEY,
 			info->bufs.frost_breath.damage);
 	if (info->bufs.meteor_strike.target_id)
 		pf_printf_fd(fd, "%s%s\n", METEOR_STRIKE_TARGET_KEY,
