@@ -11,6 +11,15 @@ ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept
 	return ;
 }
 
+ft_file::ft_file(const char* filename, int flags) noexcept 
+    : _fd(-1), _error_code(0)
+{
+    _fd = open(filename, flags);
+	if (_fd == -1)
+		this->set_error(errno + ERRNO_OFFSET);
+	return ;
+}
+
 ft_file::ft_file(int fd) noexcept 
     : _fd(fd), _error_code(0)
 {

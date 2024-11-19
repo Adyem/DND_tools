@@ -6,7 +6,8 @@
 class ft_file
 {
 public:
-    ft_file(const char* filename, int flags, mode_t mode = 0) noexcept;
+    ft_file(const char* filename, int flags, mode_t mode) noexcept;
+	ft_file(const char* filename, int flags) noexcept;
     ft_file(int fd) noexcept;
 
     ~ft_file() noexcept;
