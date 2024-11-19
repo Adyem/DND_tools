@@ -33,7 +33,7 @@ ft_file::~ft_file() noexcept
         if (close(this->_fd) == -1)
 		{
             if (_error_code == 0)
-                _error_code = errno;
+                set_error(errno);
         }
     }
 	return ;
@@ -66,6 +66,7 @@ ft_file& ft_file::operator=(ft_file&& other) noexcept
 
 void	ft_file::set_error(int error_code)
 {
+	ft_errno = error_code;
 	_error_code = error_code;
 	return ;
 }
