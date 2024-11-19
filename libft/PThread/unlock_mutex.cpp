@@ -5,7 +5,7 @@ thread_local int ft_errno;
 
 int pt_mutex_unlock(t_mutex *mutex, int thread_id)
 {
-    ft_errno = SUCCESS;
+    ft_errno = ER_SUCCESS;
     if (!mutex)
     {
         ft_errno = PT_ERR_MUTEX_NULLPTR;

@@ -4,7 +4,7 @@
 
 const char* ft_strerror(int error_code)
 {
-	if (error_code == SUCCESS)
+	if (error_code == ER_SUCCESS)
         return ("Operation successful");
 	else if (error_code == PT_ERR_QUEUE_FULL)
         return ("Wait queue is full");
@@ -26,6 +26,8 @@ const char* ft_strerror(int error_code)
         return ("Map memory allocation failed");
 	else if (error_code == MAP_KEY_NOT_FOUND)
 		return ("Map key not found");
+	else if (error_code == EINVAL)
+		return ("Invalid argument");
 	else if (error_code > ERRNO_OFFSET)
 	{
 		const char *message = strerror(error_code - ERRNO_OFFSET);

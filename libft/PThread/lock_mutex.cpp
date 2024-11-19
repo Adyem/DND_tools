@@ -1,5 +1,6 @@
 #include "PThread.hpp"
 #include "../Errno/errno.hpp"
+#include "../Libft/libft.hpp"
 #include <unistd.h>
 #include <algorithm>
 
@@ -7,7 +8,7 @@ thread_local int ft_errno;
 
 int pt_mutex_lock(t_mutex* mutex, int thread_id)
 {
-    ft_errno = SUCCESS;
+    ft_errno = ER_SUCCESS;
     int sleep_time = SLEEP_TIME;
     const int max_sleep = MAX_SLEEP;
 
@@ -19,7 +20,7 @@ int pt_mutex_lock(t_mutex* mutex, int thread_id)
             if (__sync_bool_compare_and_swap(&mutex->lock, false, true))
             {
                 mutex->thread_id = thread_id;
-                return (SUCCESS);
+                return (SUCCES);
             }
         }
         bool already_waiting = false;
@@ -56,10 +57,10 @@ int pt_mutex_lock(t_mutex* mutex, int thread_id)
                 if (__sync_bool_compare_and_swap(&mutex->lock, false, true))
                 {
                     mutex->thread_id = thread_id;
-                    return (SUCCESS);
+                    return (SUCCES);
                 }
             }
         }
     }
-    return (SUCCESS);
+    return (SUCCES);
 }

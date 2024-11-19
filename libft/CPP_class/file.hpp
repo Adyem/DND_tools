@@ -23,6 +23,7 @@ public:
     bool		has_error() const noexcept;
 	void		set_error(int error_code);
     int			get_error_code() const noexcept;
+	int			read(char *buffer, int count) noexcept;
     const char	*get_error_message() const noexcept;
 
 private:

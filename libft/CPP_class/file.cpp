@@ -1,6 +1,7 @@
 #include "file.hpp"
 #include "../Errno/errno.hpp"
 #include <cerrno>
+#include <unistd.h>
 
 ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept 
     : _fd(-1), _error_code(0)
@@ -87,4 +88,17 @@ int ft_file::get_error_code() const noexcept
 const char *ft_file::get_error_message() const noexcept
 {
 	return (ft_strerror(_error_code));
+}
+
+int	ft_file::read(char *buffer, int count) noexcept
+{
+	if (buffer == NULL || count <= 0)
+	{
+		set_error(EINVAL);
+		return (-1);
+	}
+	int bytes_read = ::read(_fd, buffer, count);
+	if (bytes_read == -1)
+		set_error(errno + ERRNO_OFFSET);
+	return (bytes_read);
 }

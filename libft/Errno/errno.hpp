@@ -5,7 +5,7 @@
 
 enum PTErrorCode
 {
-    SUCCESS = 0,
+    ER_SUCCESS = 0,
     PT_ERR_QUEUE_FULL,
     PT_ERR_MUTEX_NULLPTR,
     PT_ERR_MUTEX_OWNER,
@@ -17,6 +17,7 @@ enum PTErrorCode
     MAP_NO_ERROR,
     MAP_ALLOCATION_FAILED,
     MAP_KEY_NOT_FOUND,
+	EINVAL,
 };
 
 const char* ft_strerror(int error_code);
