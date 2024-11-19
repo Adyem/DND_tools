@@ -7,10 +7,7 @@ ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept
 {
     _fd = open(filename, flags, mode);
 	if (_fd == -1)
-	{
-		ft_errno = errno + ERRNO_OFFSET;
-        _error_code = errno + ERRNO_OFFSET;
-	}
+		this->set_error(errno + ERRNO_OFFSET);
 	return ;
 }
 
@@ -57,6 +54,12 @@ ft_file& ft_file::operator=(ft_file&& other) noexcept
     return (*this);
 }
 
+void	ft_file::set_error(int error_code)
+{
+	_error_code = error_code;
+	return ;
+}
+
 int ft_file::get_fd() const
 {
     return (this->_fd);
@@ -74,7 +77,5 @@ int ft_file::get_error_code() const noexcept
 
 const char *ft_file::get_error_message() const noexcept
 {
-    if (_error_code != 0)
-        return ft_strerror(_error_code);
-    return ("No error");
+	return (ft_strerror(_error_code));
 }

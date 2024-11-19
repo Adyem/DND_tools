@@ -19,9 +19,10 @@ public:
 
     int get_fd() const;
 
-    bool has_error() const noexcept;
-    int get_error_code() const noexcept;
-    const char *get_error_message() const noexcept;
+    bool		has_error() const noexcept;
+	void		set_error(int error_code);
+    int			get_error_code() const noexcept;
+    const char	*get_error_message() const noexcept;
 
 private:
     int _fd;
