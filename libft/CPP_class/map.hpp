@@ -4,6 +4,7 @@
 #include "pair.hpp"
 #include "../CMA/CMA.hpp"
 #include "../Errno/errno.hpp"
+#include "../Libft/libft.hpp"
 #include "nullptr.hpp"
 #include <cstddef>
 
@@ -11,11 +12,14 @@ template <typename Key, typename MappedType>
 class Map
 {
     private:
-        Pair<Key, MappedType>* data;
+        Pair<Key, MappedType>	*data;
         std::size_t             capacity;
         std::size_t             size_;
         bool                    critical;
         bool                    error;
+
+        void        resize(std::size_t newCapacity);
+        std::size_t findIndex(const Key& key) const;
 
     public:
         Map(std::size_t initialCapacity = 10, bool criticality = false);
@@ -29,15 +33,11 @@ class Map
         std::size_t getSize() const;
         std::size_t getCapacity() const;
         bool        getError() const;
-
-    private:
-        void        resize(std::size_t newCapacity);
-        std::size_t findIndex(const Key& key) const;
 };
 
 template <typename Key, typename MappedType>
 Map<Key, MappedType>::Map(std::size_t initialCapacity, bool criticality)
-    : capacity(initialCapacity), size_(0), critical(criticality), error(SUCCESS)
+    : capacity(initialCapacity), size_(0), critical(criticality), error(SUCCES)
 {
     data = static_cast<Pair<Key, MappedType>*>(cma_malloc(sizeof(Pair<Key,
         MappedType>) * capacity, critical));
@@ -59,7 +59,7 @@ Map<Key, MappedType>::~Map()
 template <typename Key, typename MappedType>
 void Map<Key, MappedType>::insert(const Key& key, const MappedType& value)
 {
-    error = SUCCESS;
+    error = ER_SUCCESS;
     std::size_t index = findIndex(key);
     if (index != size_)
     {
@@ -70,7 +70,7 @@ void Map<Key, MappedType>::insert(const Key& key, const MappedType& value)
     if (size_ == capacity)
     {
         resize(capacity * 2);
-        if (error != SUCCESS)
+        if (error != ER_SUCCESS)
             return;
     }
     data[size_++] = Pair<Key, MappedType>{key, value};
@@ -140,7 +140,7 @@ bool Map<Key, MappedType>::getError() const
 template <typename Key, typename MappedType>
 void Map<Key, MappedType>::resize(std::size_t newCapacity)
 {
-    error = SUCCESS;
+    error = ER_SUCCESS;
     Pair<Key, MappedType>* newData = static_cast<Pair<Key,
 		MappedType>*>(cma_malloc(sizeof(Pair<Key, MappedType>) * newCapacity, critical));
     if (!newData)

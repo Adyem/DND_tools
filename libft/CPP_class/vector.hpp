@@ -53,7 +53,8 @@ Vector<ElementType>::Vector(size_t initial_capacity, bool criticality)
 {
     if (initial_capacity > 0)
     {
-        data = static_cast<ElementType*>(cma_malloc(initial_capacity * sizeof(ElementType), critical));
+        data = static_cast<ElementType*>(cma_malloc(initial_capacity * sizeof(ElementType),
+					critical));
         if (data == nullptr)
             error_flag = true;
         else
@@ -146,7 +147,8 @@ void Vector<ElementType>::reserve(size_t new_capacity)
 {
     if (new_capacity > capacity_)
     {
-        ElementType* new_data = static_cast<ElementType*>(cma_realloc(data, new_capacity * sizeof(ElementType), critical));
+        ElementType* new_data = static_cast<ElementType*>(cma_realloc(data,
+					new_capacity * sizeof(ElementType), critical));
         if (new_data == nullptr)
         {
             error_flag = true;
@@ -176,7 +178,8 @@ void Vector<ElementType>::resize(size_t new_size, const ElementType& value)
 }
 
 template <typename ElementType>
-typename Vector<ElementType>::iterator Vector<ElementType>::insert(iterator pos, const ElementType& value)
+typename Vector<ElementType>::iterator Vector<ElementType>::insert(iterator pos,
+		const ElementType& value)
 {
     size_t index = pos - data;
     if (index > size_) return end();
