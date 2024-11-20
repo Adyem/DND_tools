@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <algorithm>
 
+#undef FAILURE
+#define FAILURE -1
+
 thread_local int ft_errno;
 
 int pt_mutex_lock(t_mutex* mutex, int thread_id)
@@ -41,7 +44,7 @@ int pt_mutex_lock(t_mutex* mutex, int thread_id)
             if (next_end == mutex->wait_queue_start)
             {
                 ft_errno = PT_ERR_QUEUE_FULL;
-                return (-1);
+                return (FAILURE);
             }
             mutex->wait_queue[mutex->wait_queue_end] = thread_id;
             mutex->wait_queue_end = next_end;
@@ -62,5 +65,4 @@ int pt_mutex_lock(t_mutex* mutex, int thread_id)
             }
         }
     }
-    return (SUCCES);
 }
