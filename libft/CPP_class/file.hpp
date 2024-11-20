@@ -5,28 +5,31 @@
 
 class ft_file
 {
-public:
-    ft_file(const char* filename, int flags, mode_t mode = 0) noexcept;
-	ft_file(const char* filename, int flags) noexcept;
-    ft_file(int fd) noexcept;
+	private:
+    	int _fd;
+    	int _error_code;
 
-    ~ft_file() noexcept;
+		void		set_error(int error_code);
 
-    ft_file(const ft_file&) = delete;
-    ft_file &operator=(const ft_file&) = delete;
+	public:
+		ft_file() noexcept;
+	    ft_file(const char* filename, int flags, mode_t mode = 0) noexcept;
+		ft_file(const char* filename, int flags) noexcept;
+	    ft_file(int fd) noexcept;
 
-    ft_file(ft_file&& other) noexcept;
-    ft_file& operator=(ft_file&& other) noexcept;
+	    ~ft_file() noexcept;
 
-    int get_fd() const;
+	    ft_file(const ft_file&) = delete;
+    	ft_file &operator=(const ft_file&) = delete;
 
-    bool		has_error() const noexcept;
-	void		set_error(int error_code);
-    int			get_error_code() const noexcept;
-	int			read(char *buffer, int count) noexcept;
-    const char	*get_error_message() const noexcept;
+    	ft_file(ft_file&& other) noexcept;
+    	ft_file& operator=(ft_file&& other) noexcept;
 
-private:
-    int _fd;
-    int _error_code;
+    	int			get_fd() const;
+	    int			get_error_code() const noexcept;
+
+    	const char	*get_error_message() const noexcept;
+
+		void		close() noexcept;
+		int			read(char *buffer, int count) noexcept;
 };

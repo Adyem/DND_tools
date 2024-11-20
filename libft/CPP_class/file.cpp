@@ -3,10 +3,17 @@
 #include <cerrno>
 #include <unistd.h>
 
+ft_file::ft_file() noexcept
+{
+	this->_fd = -1;
+	this->_error_code = 0;
+	return ;
+}
+
 ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept 
     : _fd(-1), _error_code(0)
 {
-    _fd = open(filename, flags, mode);
+    this->_fd = open(filename, flags, mode);
 	if (_fd == -1)
 		this->set_error(errno + ERRNO_OFFSET);
 	return ;
@@ -15,14 +22,13 @@ ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept
 ft_file::ft_file(const char* filename, int flags) noexcept 
     : _fd(-1), _error_code(0)
 {
-    _fd = open(filename, flags);
-	if (_fd == -1)
+    this->_fd = open(filename, flags);
+	if (this->_fd == -1)
 		this->set_error(errno + ERRNO_OFFSET);
 	return ;
 }
 
-ft_file::ft_file(int fd) noexcept 
-    : _fd(fd), _error_code(0)
+ft_file::ft_file(int fd) noexcept : _fd(fd), _error_code(0)
 {
 	return ;
 }
@@ -30,10 +36,10 @@ ft_file::ft_file(int fd) noexcept
 ft_file::~ft_file() noexcept
 {
     if (this->_fd >= 0) {
-        if (close(this->_fd) == -1)
+        if (::close(this->_fd) == -1)
 		{
-            if (_error_code == 0)
-                set_error(errno);
+            if (this->_error_code == 0)
+                this->set_error(errno);
         }
     }
 	return ;
@@ -51,23 +57,33 @@ ft_file& ft_file::operator=(ft_file&& other) noexcept
 {
     if (this != &other)
 	{
-        if (_fd >= 0)
+        if (this->_fd >= 0)
 		{
-            if (close(_fd) == -1 && _error_code == 0)
-                _error_code = errno;
+            if (::close(_fd) == -1 && this->_error_code == 0)
+                this->_error_code = errno;
         }
-        _fd = other._fd;
-        _error_code = other._error_code;
+        this->_fd = other._fd;
+        this->_error_code = other._error_code;
         other._fd = -1;
         other._error_code = 0;
     }
     return (*this);
 }
 
+void	ft_file::close() noexcept
+{
+	if (this->_fd != -1)
+	{
+		::close(this->_fd);
+		this->_fd = -1;
+	}
+	return ;
+}
+
 void	ft_file::set_error(int error_code)
 {
 	ft_errno = error_code;
-	_error_code = error_code;
+	this->_error_code = error_code;
 	return ;
 }
 
@@ -76,14 +92,9 @@ int ft_file::get_fd() const
     return (this->_fd);
 }
 
-bool ft_file::has_error() const noexcept
-{
-    return (_error_code != 0);
-}
-
 int ft_file::get_error_code() const noexcept
 {
-	return (_error_code);
+	return (this->_error_code);
 }
 
 const char *ft_file::get_error_message() const noexcept
@@ -95,11 +106,11 @@ int	ft_file::read(char *buffer, int count) noexcept
 {
 	if (buffer == NULL || count <= 0)
 	{
-		set_error(EINVAL);
+		this->set_error(EINVAL);
 		return (-1);
 	}
-	int bytes_read = ::read(_fd, buffer, count);
+	int bytes_read = ::read(this->_fd, buffer, count);
 	if (bytes_read == -1)
-		set_error(errno + ERRNO_OFFSET);
+		this->set_error(errno + ERRNO_OFFSET);
 	return (bytes_read);
 }
