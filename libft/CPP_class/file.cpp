@@ -13,8 +13,8 @@ ft_file::ft_file() noexcept
 ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept 
     : _fd(-1), _error_code(0)
 {
-    this->_fd = open(filename, flags, mode);
-	if (_fd == -1)
+    this->_fd = ::open(filename, flags, mode);
+	if (_fd < 0)
 		this->set_error(errno + ERRNO_OFFSET);
 	return ;
 }
@@ -22,8 +22,8 @@ ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept
 ft_file::ft_file(const char* filename, int flags) noexcept 
     : _fd(-1), _error_code(0)
 {
-    this->_fd = open(filename, flags);
-	if (this->_fd == -1)
+    this->_fd = ::open(filename, flags);
+	if (this->_fd < 0)
 		this->set_error(errno + ERRNO_OFFSET);
 	return ;
 }
@@ -35,12 +35,10 @@ ft_file::ft_file(int fd) noexcept : _fd(fd), _error_code(0)
 
 ft_file::~ft_file() noexcept
 {
-    if (this->_fd >= 0) {
+    if (this->_fd >= 0)
+	{
         if (::close(this->_fd) == -1)
-		{
-            if (this->_error_code == 0)
-                this->set_error(errno);
-        }
+			ft_errno = errno + ERRNO_OFFSET;
     }
 	return ;
 }
@@ -72,12 +70,36 @@ ft_file& ft_file::operator=(ft_file&& other) noexcept
 
 void	ft_file::close() noexcept
 {
-	if (this->_fd != -1)
+	if (this->_fd >= 0)
 	{
 		::close(this->_fd);
 		this->_fd = -1;
 	}
 	return ;
+}
+
+int	ft_file::open(const char* filename, int flags, mode_t mode) noexcept
+{
+	this->close();
+	_fd = ::open(filename, flags, mode);
+	if (this->_fd < 0)
+	{
+		this->set_error(errno + ERRNO_OFFSET);
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_file::open(const char* filename, int flags) noexcept
+{
+	this->close();
+	_fd = ::open(filename, flags);
+	if (this->_fd < 0)
+	{
+		this->set_error(errno + ERRNO_OFFSET);
+		return (1);
+	}
+	return (0);
 }
 
 void	ft_file::set_error(int error_code)
@@ -107,6 +129,11 @@ int	ft_file::read(char *buffer, int count) noexcept
 	if (buffer == NULL || count <= 0)
 	{
 		this->set_error(EINVAL);
+		return (-1);
+	}
+	if (this->_fd < 0)
+	{
+		this->set_error(FILE_INVALID_FD);
 		return (-1);
 	}
 	int bytes_read = ::read(this->_fd, buffer, count);

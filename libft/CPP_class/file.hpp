@@ -25,6 +25,8 @@ class ft_file
     	int			get_fd() const;
 	    int			get_error_code() const noexcept;
     	const char	*get_error_message() const noexcept;
+	    int			open(const char* filename, int flags, mode_t mode) noexcept;
+		int			open(const char* filename, int flags) noexcept;
 		void		close() noexcept;
 		int			read(char *buffer, int count) noexcept;
 };

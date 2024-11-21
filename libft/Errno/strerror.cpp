@@ -26,6 +26,8 @@ const char* ft_strerror(int error_code)
         return ("Map memory allocation failed");
 	else if (error_code == MAP_KEY_NOT_FOUND)
 		return ("Map key not found");
+	else if (error_code == FILE_INVALID_FD)
+		return ("Bad File descriptor");
 	else if (error_code == EINVAL)
 		return ("Invalid argument");
 	else if (error_code > ERRNO_OFFSET)
