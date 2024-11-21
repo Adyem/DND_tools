@@ -129,7 +129,7 @@ int	ft_file::read(char *buffer, int count) noexcept
 {
 	if (buffer == NULL || count <= 0)
 	{
-		this->set_error(EINVAL);
+		this->set_error(FT_EINVAL);
 		return (-1);
 	}
 	if (this->_fd < 0)
@@ -147,7 +147,7 @@ int ft_file::write(const char *string) noexcept
 {
     if (string == nullptr)
     {
-        this->set_error(EINVAL);
+        this->set_error(FT_EINVAL);
         return (-1);
     }
     int result = ::write(this->_fd, string, ft_strlen(string));

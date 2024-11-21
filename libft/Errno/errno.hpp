@@ -18,7 +18,7 @@ enum PTErrorCode
     MAP_ALLOCATION_FAILED,
     MAP_KEY_NOT_FOUND,
 	FILE_INVALID_FD,
-	EINVAL,
+	FT_EINVAL,
 };
 
 const char* ft_strerror(int error_code);
