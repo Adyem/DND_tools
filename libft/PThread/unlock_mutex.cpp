@@ -3,21 +3,16 @@
 
 thread_local int ft_errno;
 
-int pt_mutex_unlock(t_mutex *mutex, int thread_id)
+int pt_mutex::unlock(int thread_id)
 {
-    ft_errno = ER_SUCCESS;
-    if (!mutex)
+    this->set_error(ER_SUCCESS);
+    if (this->_thread_id != thread_id)
     {
-        ft_errno = PT_ERR_MUTEX_NULLPTR;
+        this->set_error(PT_ERR_MUTEX_OWNER);
         return (-1);
     }
-    if (mutex->thread_id != thread_id)
-    {
-        ft_errno = PT_ERR_MUTEX_OWNER;
-        return (-1);
-    }
-    mutex->thread_id = -1;
-    mutex->lock = false;
-    mutex->lock_released = true;
+    this->_thread_id = -1;
+    this->_lock = false;
+    this->_lock_released = true;
     return (0); 
 }

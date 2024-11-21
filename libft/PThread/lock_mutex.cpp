@@ -4,34 +4,30 @@
 #include <unistd.h>
 #include <algorithm>
 
-#undef FAILURE
-#define FAILURE -1
-
 thread_local int ft_errno;
 
-int pt_mutex_lock(t_mutex* mutex, int thread_id)
+int pt_mutex::lock(int thread_id)
 {
-    ft_errno = ER_SUCCESS;
+    this->set_error(ER_SUCCESS);
     int sleep_time = SLEEP_TIME;
     const int max_sleep = MAX_SLEEP;
 
     while (true)
     {
-        if (mutex->wait_queue_start == mutex->wait_queue_end &&
-            mutex->lock == false)
+        if (this->_wait_queue_start == this->_wait_queue_end && !this->_lock)
         {
-            if (__sync_bool_compare_and_swap(&mutex->lock, false, true))
+            if (__sync_bool_compare_and_swap(&this->_lock, false, true))
             {
-                mutex->thread_id = thread_id;
+                this->_thread_id = thread_id;
                 return (SUCCES);
             }
         }
         bool already_waiting = false;
-        int start = mutex->wait_queue_start;
-        int end = mutex->wait_queue_end;
+        int start = this->_wait_queue_start;
+        int end = this->_wait_queue_end;
         while (start != end)
         {
-            if (mutex->wait_queue[start] == thread_id)
+            if (this->_wait_queue[start] == thread_id)
             {
                 already_waiting = true;
                 break ;
@@ -40,28 +36,25 @@ int pt_mutex_lock(t_mutex* mutex, int thread_id)
         }
         if (!already_waiting)
         {
-            int next_end = (mutex->wait_queue_end + 1) % 128;
-            if (next_end == mutex->wait_queue_start)
+            int next_end = (this->_wait_queue_end + 1) % 128;
+            if (next_end == this->_wait_queue_start)
             {
-                ft_errno = PT_ERR_QUEUE_FULL;
+                this->set_error(PT_ERR_QUEUE_FULL);
                 return (FAILURE);
             }
-            mutex->wait_queue[mutex->wait_queue_end] = thread_id;
-            mutex->wait_queue_end = next_end;
+            this->_wait_queue[this->_wait_queue_end] = thread_id;
+            this->_wait_queue_end = next_end;
         }
         usleep(sleep_time);
         sleep_time = std::min(sleep_time * 2, max_sleep);
-        if (mutex->lock_released)
+        if (this->_lock_released && this->_wait_queue[this->_wait_queue_start] == thread_id)
         {
-            if (mutex->wait_queue[mutex->wait_queue_start] == thread_id)
+            int next_start = (this->_wait_queue_start + 1) % 128;
+            this->_wait_queue_start = next_start;
+            if (__sync_bool_compare_and_swap(&this->_lock, false, true))
             {
-                int next_start = (mutex->wait_queue_start + 1) % 128;
-                mutex->wait_queue_start = next_start;
-                if (__sync_bool_compare_and_swap(&mutex->lock, false, true))
-                {
-                    mutex->thread_id = thread_id;
-                    return (SUCCES);
-                }
+                this->_thread_id = thread_id;
+                return (SUCCES);
             }
         }
     }

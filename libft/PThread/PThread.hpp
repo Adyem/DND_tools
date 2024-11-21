@@ -3,19 +3,33 @@
 
 #define SLEEP_TIME 100
 #define MAX_SLEEP 10000
+#define MAX_QUEUE 128
 
-typedef struct t_mutex
+class pt_mutex
 {
-	volatile bool lock;
-	volatile int thread_id;
-	int wait_queue[128];
-	int wait_queue_start;
-	int wait_queue_end;
-	volatile bool lock_released;
-} s_mutex;
+	private:
+		volatile bool	_lock;
+		volatile int	_thread_id;
+		int				_wait_queue[MAX_QUEUE];
+		int				_wait_queue_start;
+		int				_wait_queue_end;
+		int				_error;
+		volatile bool	_lock_released;
 
-int		pt_mutex_lock(t_mutex *mutex, int thread_id);
-int		pt_mutex_unlock(t_mutex *mutex, int thread_id);
-int		pt_mutex_try_lock(t_mutex *mutex, int thread_id);
+		void	set_error(int error);
+
+		pt_mutex(const pt_mutex&) = delete;
+		pt_mutex& operator=(const pt_mutex&) = delete;
+    	pt_mutex(pt_mutex&&) = delete;
+    	pt_mutex& operator=(pt_mutex&&) = delete;
+
+	public:
+		pt_mutex();
+		~pt_mutex();
+
+		int		lock(int thread_id);
+		int		unlock(int thread_id);
+		int		try_lock(int thread_id);
+};
 
 #endif
