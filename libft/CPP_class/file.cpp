@@ -1,4 +1,5 @@
 #include "file.hpp"
+#include "../Libft/libft.hpp"
 #include "../Errno/errno.hpp"
 #include <cerrno>
 #include <unistd.h>
@@ -140,4 +141,32 @@ int	ft_file::read(char *buffer, int count) noexcept
 	if (bytes_read == -1)
 		this->set_error(errno + ERRNO_OFFSET);
 	return (bytes_read);
+}
+
+int ft_file::write(const char *string) noexcept
+{
+    if (string == nullptr)
+    {
+        this->set_error(EINVAL);
+        return (-1);
+    }
+    int result = ::write(this->_fd, string, ft_strlen(string));
+    if (result == -1)
+    {
+        this->set_error(errno + ERRNO_OFFSET);
+        return (-1);
+    }
+
+    return (result);
+}
+
+int ft_file::seek(off_t offset, int whence) noexcept
+{
+    off_t result = ::lseek(this->_fd, offset, whence);
+    if (result == -1)
+    {
+        this->set_error(errno + ERRNO_OFFSET);
+        return (-1);
+    }
+    return (0);
 }

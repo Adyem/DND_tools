@@ -17,6 +17,7 @@ class ft_file
 		ft_file(const char* filename, int flags) noexcept;
 	    ft_file(int fd) noexcept;
 	    ~ft_file() noexcept;
+
 	    ft_file(const ft_file&) = delete;
     	ft_file &operator=(const ft_file&) = delete;
     	ft_file(ft_file&& other) noexcept;
@@ -25,8 +26,11 @@ class ft_file
     	int			get_fd() const;
 	    int			get_error_code() const noexcept;
     	const char	*get_error_message() const noexcept;
+
 	    int			open(const char* filename, int flags, mode_t mode) noexcept;
 		int			open(const char* filename, int flags) noexcept;
+		int			write(const char *string) noexcept;
 		void		close() noexcept;
+		int			seek(off_t offset, int whence) noexcept;
 		int			read(char *buffer, int count) noexcept;
 };
