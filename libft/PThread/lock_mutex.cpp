@@ -9,10 +9,10 @@ thread_local int ft_errno;
 
 int pt_mutex::lock(int thread_id)
 {
-    this->set_error(ER_SUCCESS);
-    int sleep_time = SLEEP_TIME;
-    const int max_sleep = MAX_SLEEP;
+    int			sleep_time = SLEEP_TIME;
+    const int	max_sleep = MAX_SLEEP;
 
+	this->set_error(ER_SUCCESS);
     while (true)
     {
         if (this->_wait_queue_start == this->_wait_queue_end && !this->_lock)
