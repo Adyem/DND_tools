@@ -5,6 +5,9 @@
 #include <unistd.h>
 #include <algorithm>
 
+#undef FAILURE
+#define FAILURE -1
+
 thread_local int ft_errno;
 
 int pt_mutex::lock(int thread_id)
