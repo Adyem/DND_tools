@@ -12,15 +12,13 @@ const char* ft_strerror(int error_code)
         return ("Mutex pointer is null");
 	else if (error_code == PT_ERR_MUTEX_OWNER)
         return ("Thread is not the owner of the mutex");
-	else if (error_code == SHARED_PTR_NO_ERROR)
-        return ("No error");
+	else if (error_code == PT_ERR_ALRDY_LOCKED)
+		return ("Thread alreaddy locked the mutex");
 	else if (error_code == SHARED_PTR_NULL_PTR)
         return ("Null pointer dereference");
 	else if (error_code == SHARED_PTR_OUT_OF_BOUNDS)
         return ("Array index out of bounds");
 	else if (error_code == SHARED_PTR_ALLOCATION_FAILED)
-        return ("Memory allocation failed");
-	else if (error_code == MAP_NO_ERROR)
         return ("No error in Map");
 	else if (error_code == MAP_ALLOCATION_FAILED)
         return ("Map memory allocation failed");

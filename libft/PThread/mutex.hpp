@@ -14,7 +14,7 @@ class pt_mutex
 		int				_error;
 		volatile bool	_lock_released;
 
-		void	set_error(int error);
+		void		set_error(int error);
 
 		pt_mutex(const pt_mutex&) = delete;
 		pt_mutex& operator=(const pt_mutex&) = delete;
@@ -25,9 +25,11 @@ class pt_mutex
 		pt_mutex();
 		~pt_mutex();
 
-		int		lock(int thread_id);
-		int		unlock(int thread_id);
-		int		try_lock(int thread_id);
+		const volatile bool	&lockState() const;
+
+		int			lock(int thread_id);
+		int			unlock(int thread_id);
+		int			try_lock(int thread_id);
 };
 
 #endif

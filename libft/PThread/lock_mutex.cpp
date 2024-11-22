@@ -12,6 +12,11 @@ int pt_mutex::lock(int thread_id)
     int			sleep_time = SLEEP_TIME;
     const int	max_sleep = MAX_SLEEP;
 
+	if (this->_lock && this->_thread_id == thread_id)
+	{
+		this->set_error(PT_ERR_ALRDY_LOCKED);
+		return (FAILURE);
+	}
 	this->set_error(ER_SUCCESS);
     while (true)
     {

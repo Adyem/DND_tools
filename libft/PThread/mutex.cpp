@@ -30,3 +30,8 @@ void	pt_mutex::set_error(int	error)
 	ft_errno = error;
 	return ;
 }
+
+const volatile bool	&pt_mutex::lockState() const
+{
+    return _lock;
+}
