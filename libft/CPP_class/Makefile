@@ -8,11 +8,11 @@ DEBUG_OBJDIR := objs_debug
 TARGET := CPP_class.a
 DEBUG_TARGET := CPP_class_debug.a
 
-SRCS :=  string.cpp \
+SRCS :=  	 string.cpp \
 		 nullptr.cpp \
 		 file.cpp
 
-HEADERS := string.hpp \
+HEADERS := 	   string.hpp \
 		   nullptr.hpp \
 		   shared_ptr.hpp \
 		   file.hpp
