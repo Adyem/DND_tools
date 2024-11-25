@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/file.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -141,16 +142,14 @@ void ft_turn_next(t_name *name)
 {
 	t_pc *players;
 	char **content;
-	int fd;
 
-	fd = open("data/data--initiative", O_RDONLY);
-	if (fd == -1)
+	ft_file initiative_file("data/data--initiative", O_RDONLY);
+	if (initiative_file.get_error_code())
 	{
-		pf_printf("Error opening data initiative file %s\n", strerror(errno));
+		pf_printf("Error opening data initiative file %s\n", initiative_file.get_error_message());
 		return ;
 	}
-	content = ft_read_file_dnd(fd);
-	close(fd);
+	content = ft_read_file_dnd(initiative_file);
 	if (!content)
 		return ;
 	players = ft_initiative_players_am(content);

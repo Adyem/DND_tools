@@ -76,13 +76,3 @@ char **ft_read_file_dnd(ft_file &file)
     }
     return (return_v);
 }
-
-char **ft_open_and_read(ft_file &file)
-{
-    char	**content;
-
-    content = ft_read_file_dnd(file);
-    if (!content)
-        pf_printf_fd(2, "Error allocating memory for content inside file\n");
-    return (content);
-}

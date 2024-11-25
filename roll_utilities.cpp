@@ -5,7 +5,7 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 
-int ft_check_value_roll(const char *str)
+static int ft_check_value_roll(const char *str)
 {
     int					sign;
     unsigned long long	result;

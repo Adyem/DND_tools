@@ -109,12 +109,10 @@ static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *targ
 int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 {
     t_char *target;
-    int fd[2];
+    int file[2];
 
     if (ft_remove_concentration(info))
         return(1);
-    fd[0] = -1;
-    fd[1] = -1;
     if (DEBUG == 1)
         pf_printf("casting hunter's mark %s %s\n", input[0], input[3]);
     if (ft_set_stats_check_name(input[3]))

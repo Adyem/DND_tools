@@ -2,7 +2,7 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 
-void ft_pc_specific(t_char *info, int number)
+static void ft_pc_specific(t_char *info, int number)
 {
 	if (info->feats.crackback.active)
 		ft_crackback(info, number);

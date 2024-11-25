@@ -63,7 +63,7 @@ static int	ft_check_close_braces(char *string, int i,
 	return (0);
 }
 
-int	ft_check_plus_minus(char *string, int i)
+static int	ft_check_plus_minus(char *string, int i)
 {
 	int sign_seen;
 

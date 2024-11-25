@@ -94,7 +94,7 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
     return (player);
 }
 
-void ft_initiative_write(int initiative, char *name)
+static void ft_initiative_write(int initiative, char *name)
 {
     int fd;
 

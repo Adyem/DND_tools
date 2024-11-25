@@ -16,7 +16,7 @@ void ft_calculate_j(char *string, int *j)
 	return ;
 }
 
-int execute_roll_function(char *string, RollExecuteFunc func)
+static int execute_roll_function(char *string, RollExecuteFunc func)
 {
     int i = 0;
     int j;
@@ -35,7 +35,7 @@ int execute_roll_function(char *string, RollExecuteFunc func)
     return (0);
 }
 
-int ft_command_roll_parse(char *string, int nested)
+static int ft_command_roll_parse(char *string, int nested)
 {
     int error;
     int i = nested;

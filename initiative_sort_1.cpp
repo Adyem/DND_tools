@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/file.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -84,19 +85,12 @@ t_pc *ft_initiative_players_am(char **content)
     return (players);
 }
 
-void ft_initiative_sort(int fd)
+void ft_initiative_sort(ft_file &file)
 {
     t_pc *players;
     char **content;
 
-    if (fd == -1)
-    {
-        pf_printf_fd(2, "Error opening file: %s\n", strerror(errno));
-        return ;
-    }
-    content = ft_read_file_dnd(fd);
-    close(fd);
-
+    content = ft_read_file_dnd(file);
     if (!content)
         return ;
     players = ft_initiative_players_am(content);

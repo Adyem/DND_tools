@@ -10,43 +10,29 @@
 
 void ft_initiative_print(void)
 {
-    int i;
-    int fd;
+    int index;
     char **content;
 
-    fd = open("data/data--initiative", O_RDONLY);
-    if (fd == -1)
+    ft_file file("data/data--initiative", O_RDONLY);
+    if (file.get_error_code())
     {
-        pf_printf("Error opening file: %s\n", strerror(errno));
+        pf_printf("Error opening file: %s\n", file.get_error_message());
         return ;
     }
-    content = ft_read_file_dnd(fd);
-    close(fd);
+    content = ft_read_file_dnd(file);
     if (!content)
     {
         pf_printf("261-Error allocating memory\n");
         return ;
     }
     pf_printf("\n\nInitiative rolls are:\n");
-    i = 0;
-    while (content[i])
+    index = 0;
+    while (content[index])
     {
-        pf_printf("%s", content[i]);
-        i++;
+        pf_printf("%s", content[index]);
+        index++;
     }
     cma_free_double(content);
-}
-
-void ft_initiative_print_pc(t_pc *players)
-{
-    t_pc *temp;
-
-	temp = players;
-    while (temp)
-    {
-        pf_printf("%s=%d\n", temp->name, temp->initiative);
-        temp = temp->next;
-    }
 }
 
 void ft_initiative_sort_2(t_pc *players)

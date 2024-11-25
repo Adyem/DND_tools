@@ -1,7 +1,8 @@
 #include "libft/Printf/ft_printf.hpp"
 #include "dnd_tools.hpp"
 
-int check_range(int value, int min, int max, const char *name, const char *field_name, int *error)
+static int check_range(int value, int min, int max, const char *name,
+		const char *field_name, int *error)
 {
     if (value < min || value > max)
 	{
@@ -12,7 +13,7 @@ int check_range(int value, int min, int max, const char *name, const char *field
     return (0);
 }
 
-int check_flag(int value, const char *name, const char *field_name, int *error)
+static int check_flag(int value, const char *name, const char *field_name, int *error)
 {
     if (value != 0 && value != 1)
 	{
@@ -23,7 +24,7 @@ int check_flag(int value, const char *name, const char *field_name, int *error)
     return (0);
 }
 
-void check_resistances(t_char *info, int *error) 
+static void check_resistances(t_char *info, int *error) 
 {
     check_range(info->c_resistance.bludgeoning, -500, 500, info->name,
 			"bludgeoning resistance", error);
@@ -53,7 +54,7 @@ void check_resistances(t_char *info, int *error)
 			"acid resistance", error);
 }
 
-void check_concentration(t_char *info, int *error)
+static void check_concentration(t_char *info, int *error)
 {
     if (info->concentration.concentration < 0)
 	{
@@ -91,7 +92,7 @@ void check_concentration(t_char *info, int *error)
 	return ;
 }
 
-void check_flags(t_char *info, int *error)
+static void check_flags(t_char *info, int *error)
 {
     check_flag(info->flags.prone, info->name,
 			"prone", error);
@@ -99,13 +100,13 @@ void check_flags(t_char *info, int *error)
 			"reaction_used", error);
 }
 
-void check_debuffs(t_char *info, int *error)
+static void check_debuffs(t_char *info, int *error)
 {
     check_range(info->debufs.blinded.duration, 0, 50, info->name,
 			"blinded debuff duration", error);
 }
 
-void check_buffs(t_char *info, int *error)
+static void check_buffs(t_char *info, int *error)
 {
     check_range(info->bufs.flame_geyser.duration, 0, 100, info->name,
 			"flame geyser duration", error);
@@ -164,7 +165,7 @@ void check_buffs(t_char *info, int *error)
 	return ;
 }
 
-int ft_npc_check_info_2(t_char *info)
+static int ft_npc_check_info_2(t_char *info)
 {
     int error = 0;
     check_resistances(info, &error);
@@ -175,7 +176,7 @@ int ft_npc_check_info_2(t_char *info)
     return (error);
 }
 
-void check_stats(t_char *info, int *error)
+static void check_stats(t_char *info, int *error)
 {
     check_range(info->stats.health, 0, info->dstats.health, info->name, "health", error);
     check_range(info->stats.temp_hp, 0, 5000, info->name, "temp_hp", error);
@@ -189,7 +190,7 @@ void check_stats(t_char *info, int *error)
     check_range(info->stats.phase, 0, 30, info->name, "phase", error);
 }
 
-void check_other_buffs_debuffs(t_char *info, int *error)
+static void check_other_buffs_debuffs(t_char *info, int *error)
 {
     check_range(info->bufs.bless.duration, 0, 50, info->name, "bless duration", error);
     if (info->initiative < -50)
