@@ -12,7 +12,6 @@
 
 static void ft_add_player(t_pc *player)
 {
-	int fd;
 	char *filename;
 
 	filename = cma_strjoin("data/PC--", player->name, false);
@@ -21,16 +20,15 @@ static void ft_add_player(t_pc *player)
 		pf_printf("240-Error: Allocating memory for player string join\n");
 		return ;
 	}
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	ft_file pc_file(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	cma_free(filename);
-	if (fd == -1)
+	if (pc_file.get_error_code())
 	{
-		pf_printf("Error opening file: %s\n", strerror(errno));
+		pf_printf("Error opening file: %s\n", pc_file.get_error_message());
 		return ;
 	}
 	pf_printf("Adding player %s\n", player->name);
-	ft_save_pc(player, fd);
-	close(fd);
+	ft_save_pc(player, pc_file);
 	return ;
 }
 

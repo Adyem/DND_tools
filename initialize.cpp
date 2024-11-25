@@ -9,7 +9,6 @@ void ft_initialize_variables(t_target_data *target_data)
 	while (i < 20)
 	{
 		target_data->Pchar_name[i] = ft_nullptr;
-		target_data->fd[i] = -1;
 		target_data->target[i] = ft_nullptr;
 		target_data->target_copy[i] = ft_nullptr;
 		i++;

@@ -27,7 +27,8 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info, int phase)
     }
     info->stats.phase = phase;
     info->stats.turn = 1;
-    pf_printf("veraak transitions to the next phase dropping 2 green orbs at random locations in the arena\n");
+    pf_printf("veraak transitions to the next phase dropping 2 green orbs " \
+			"at random locations in the arena\n");
 	return ;
 }
 
@@ -123,7 +124,8 @@ t_char *ft_veraak(const int index, const char **input, t_name *name, int excepti
     }
     if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
     {
-        ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
+		ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
         pf_printf("Stats for %s written on a file\n", info->name);
         ft_veraak_initialize(info);
         ft_free_info(info);

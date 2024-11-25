@@ -134,7 +134,7 @@ SRC         = name.cpp \
               frank.cpp
 
 CC          = g++
-CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17
+CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations
 
 LIBFT_DIR   = ./libft
 

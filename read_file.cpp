@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/CPP_class/file.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CMA/CMA.hpp"
@@ -49,7 +50,7 @@ static char **ft_realloc_dnd(char **return_v, int index)
     return (temp);
 }
 
-char **ft_read_file_dnd(int fd)
+char **ft_read_file_dnd(ft_file &file)
 {
     char	**return_v = ft_nullptr;
     char	*line = ft_nullptr;
@@ -57,7 +58,7 @@ char **ft_read_file_dnd(int fd)
 
     while (1)
     {
-        line = get_next_line(fd, false);
+        line = get_next_line(file, false);
         if (!line)
             break ;
 		if (DEBUG == 1)
@@ -66,8 +67,9 @@ char **ft_read_file_dnd(int fd)
         return_v = ft_realloc_dnd(return_v, i);
         if (!return_v)
         {
+			file.close();
             cma_free(line);
-			get_next_line(-1, false);
+			get_next_line(file, false);
 			return (ft_nullptr);
         }
         return_v[i - 1] = line;
@@ -75,19 +77,11 @@ char **ft_read_file_dnd(int fd)
     return (return_v);
 }
 
-char **ft_open_and_read(const char *file)
+char **ft_open_and_read(ft_file &file)
 {
-    int		fd;
     char	**content;
 
-    fd = open(file, O_RDONLY);
-    if (fd == -1)
-    {
-        pf_printf_fd(2, "Error opening file: %s\n", strerror(errno));
-        return (ft_nullptr);
-    }
-    content = ft_read_file_dnd(fd);
-    close(fd);
+    content = ft_read_file_dnd(file);
     if (!content)
         pf_printf_fd(2, "Error allocating memory for content inside file\n");
     return (content);

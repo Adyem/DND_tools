@@ -42,7 +42,6 @@ int ft_remove_concentration(t_char *info)
 {
 	t_target_data	targets;
     int				i;
-	int				fd;
 
 	ft_initialize_variables(&targets);
     if (DEBUG == 1)
@@ -55,10 +54,10 @@ int ft_remove_concentration(t_char *info)
 			return (FAILURE);
         i++;
     }
-	fd = ft_check_and_open(&targets, info);
-	if (fd == -1)
+	ft_file info_save_file(ft_check_and_open(&targets, info));
+	if (info_save_file.get_error_code())
 		return (FAILURE);
 	ft_concentration_remove_buf(info, &targets);
-	ft_cast_concentration_save_files(info, &targets, fd);
+	ft_cast_concentration_save_files(info, &targets, info_save_file);
     return (SUCCES);
 }

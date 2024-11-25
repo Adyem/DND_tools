@@ -16,7 +16,8 @@ void ft_chaos_goblin_turn(t_char *info)
     }
     else
     {
-        pf_printf("The chaos_goblin will try to make either a ranged or melee attack during his turn\n");
+        pf_printf("The chaos_goblin will try to make either a ranged or melee attack " \
+				"during his turn\n");
     }
     pf_printf("Chaos_goblin currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 }
@@ -52,7 +53,8 @@ t_char *ft_chaos_goblin(const int index, const char **input, t_name *name, int e
     {
         if (ft_strcmp_dnd(input[1], "init") == 0)
         {
-            ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
+            ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+            ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
             pf_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
             return (ft_nullptr);

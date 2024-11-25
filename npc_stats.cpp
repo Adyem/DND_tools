@@ -1,5 +1,6 @@
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/file.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
 #include <fcntl.h>
@@ -9,23 +10,22 @@
 int ft_npc_open_file(t_char *info)
 {
     int error;
-    int fd;
     char **content;
 
-    fd = open(info->save_file, O_RDONLY);
-    if (DEBUG == 1)
-        pf_printf("Opening file %s on fd %d\n", info->save_file, fd);
-    if (fd == -1)
+    ft_file info_file(info->save_file, O_RDONLY);
+    if (info_file.get_error_code())
     {
-        pf_printf_fd(2, "1-Error opening file %s: %s\n", info->save_file, strerror(errno));
+        pf_printf_fd(2, "1-Error opening file %s: %s\n", info->save_file,
+				info_file.get_error_message());
         return (1);
     }
-    content = ft_read_file_dnd(fd);
+	if (DEBUG == 1)
+        pf_printf("Opening file %s on fd %d\n", info->save_file, info_file.get_fd());
+    content = ft_read_file_dnd(info_file);
     if (DEBUG == 1)
         pf_printf("Content is at address %p\n", content);
     if (!content)
         return (1);
-    close(fd);
     error = ft_initialize_info(info, content);
 	cma_free_double(content);
     if (DEBUG == 1)
@@ -62,6 +62,7 @@ void ft_npc_change_stats(t_char *info, const int index, const char **input)
         ft_change_stats_04(info, input);
     else
         pf_printf_fd(2, "Error: Too many arguments given\n");
-    ft_npc_write_file(info, &info->stats, &info->c_resistance, -1);
+    ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
     return ;
 }

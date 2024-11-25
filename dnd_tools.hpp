@@ -1,6 +1,8 @@
 #ifndef DND_TOOLS_H
 # define DND_TOOLS_H
 
+class ft_file;
+
 #include <cstdio>
 #include "character.hpp"
 #include "player_character.hpp"
@@ -256,7 +258,7 @@ int			ft_get_resistance(t_char *info, const char *type);
 void		ft_reroll(t_char *info, int *result);
 
 //open and read
-char		**ft_read_file_dnd(int fd);
+char		**ft_read_file_dnd(ft_file &file);
 char		**ft_open_and_read(const char *file);
 int			ft_open_file_write_only(const char *filename);
 
@@ -318,10 +320,12 @@ void		ft_npc_check_ac(t_char *info, const char **input);
 
 //save file
 int			ft_npc_check_info(t_char *info);
-void		ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, int fd);
-void		ft_save_pc(t_pc *player, int fd);
-void		ft_cast_concentration_save_files(t_char *info, t_target_data *target_data, int fd);
-int			ft_check_and_open(t_target_data *target_data, t_char *info);
+void		ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance,
+				ft_file &file);
+void		ft_save_pc(t_pc *player, ft_file &file);
+void		ft_cast_concentration_save_files(t_char *info, t_target_data *target_data,
+				ft_file &file);
+ft_file		ft_check_and_open(t_target_data *target_data, t_char *info);
 
 //fclean
 void		ft_fclean(void);

@@ -81,7 +81,8 @@ void	ft_file::close() noexcept
 
 int	ft_file::open(const char* filename, int flags, mode_t mode) noexcept
 {
-	this->close();
+	if (this->_fd != -1)
+		this->close();
 	_fd = ::open(filename, flags, mode);
 	if (this->_fd < 0)
 	{
@@ -107,6 +108,12 @@ void	ft_file::set_error(int error_code)
 {
 	ft_errno = error_code;
 	this->_error_code = error_code;
+	return ;
+}
+
+void	ft_file::set_fd(int fd)
+{
+	this->_fd = fd;
 	return ;
 }
 

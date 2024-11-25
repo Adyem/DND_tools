@@ -4,7 +4,8 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "identification.hpp"
 
-int ft_set_stat_int(char *content_i, const char *key, int *field, int unset_value, t_char *info)
+static int ft_set_stat_int(char *content_i, const char *key, int *field, int unset_value,
+		t_char *info)
 {
 	int	i;
 
@@ -17,7 +18,7 @@ int ft_set_stat_int(char *content_i, const char *key, int *field, int unset_valu
     return (0);
 }
 
-int ft_set_stats_1(t_char *info, char **content, int i)
+static int ft_set_stats_1(t_char *info, char **content, int i)
 {
     if (ft_set_stat_int(content[i], HEALTH_KEY, &(info->stats.health), -1, info) ||
         ft_set_stat_int(content[i], TEMP_HP_KEY, &(info->stats.temp_hp), -1, info) ||
@@ -41,7 +42,7 @@ int ft_set_stats_1(t_char *info, char **content, int i)
     return (1);
 }
 
-int ft_set_stats_2(t_char *info, char **content, int i)
+static int ft_set_stats_2(t_char *info, char **content, int i)
 {
     if (ft_set_stat_int(content[i], ACID_RESISTANCE_KEY,
 			&(info->c_resistance.acid), -501, info) ||

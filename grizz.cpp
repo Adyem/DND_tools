@@ -54,7 +54,8 @@ t_char *ft_grizz(const int index, const char **input, t_name *name, int exceptio
 	{
 		if (ft_strcmp_dnd(input[1], "init") == 0)
 		{
-			ft_npc_write_file(info, &info->dstats, &info->d_resistance, -1);
+			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+            ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
 			pf_printf("Stats for %s written on a file\n", info->name);
 			ft_free_info(info);
 			return (ft_nullptr);

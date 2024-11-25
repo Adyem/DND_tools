@@ -1,6 +1,8 @@
 #ifndef CHARACTER_H
 # define CHARACTER_H
 
+#include "libft/CPP_class/file.hpp"
+
 # define ERROR_RESISTANCE 9999
 
 typedef struct	s_buff t_buff;
@@ -16,7 +18,7 @@ typedef t_char	*(*c_name)(int, const char **, t_name *, int);
 
 typedef struct s_target_data
 {
-	int		fd[20];
+	ft_file	file[20];
 	char	*Pchar_name[20];
 	t_char	*target[20];
 	t_char	*target_copy[20];

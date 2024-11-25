@@ -1,6 +1,7 @@
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/file.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -19,28 +20,21 @@ int ft_open_file_write_only(const char *filename)
 
 void ft_dual_save_file(t_char *info, t_char *target)
 {
-    int fd_target;
-    int fd_info;
-
-    fd_target = ft_open_file_write_only(target->save_file);
-    if (fd_target == -1)
+    ft_file file_target(ft_open_file_write_only(target->save_file));
+    if (file_target.get_error_code())
     {
         info->flags.alreaddy_saved = 1;
         return ;
     }
-    fd_info = ft_open_file_write_only(info->save_file);
-    if (fd_target == -1 || fd_info == -1)
+    ft_file file_info(ft_open_file_write_only(info->save_file));
+    if (file_target.get_error_code() || file_info.get_error_code())
     {
-        if (fd_target != -1)
-            close(fd_target);
-        if (fd_info != -1)
-            close(fd_info);
         info->flags.alreaddy_saved = 1;
         ft_free_info(target);
         return ;
     }
-    ft_npc_write_file(target, &target->stats, &target->c_resistance, fd_target);
-    ft_npc_write_file(info, &info->stats, &info->c_resistance, fd_info);
+    ft_npc_write_file(target, &target->stats, &target->c_resistance, file_target);
+    ft_npc_write_file(info, &info->stats, &info->c_resistance, file_info);
     return ;
 }
 
@@ -54,20 +48,20 @@ int ft_check_write_permissions(const char *filepath)
     return (0);
 }
 
-void	ft_cast_concentration_save_files(t_char *info, t_target_data *target_data, int fd)
+void	ft_cast_concentration_save_files(t_char *info, t_target_data *target_data, ft_file &file)
 {
 	int	i = 0;
 
 	while (i < target_data->buff_info->target_amount)
 	{
 		ft_npc_write_file(target_data->target[i], &target_data->target[i]->stats,
-				&target_data->target[i]->c_resistance, target_data->fd[i]);
+				&target_data->target[i]->c_resistance, target_data->file[i]);
 		i++;
 	}
-	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
+	ft_npc_write_file(info, &info->stats, &info->c_resistance, file);
 }
 
-static void	ft_revert_changes_info(t_char *info, int fd)
+static void	ft_revert_changes_info(t_char *info, ft_file &file)
 {
 	cma_free(info->concentration.targets[0]);
 	cma_free(info->concentration.targets);
@@ -77,44 +71,41 @@ static void	ft_revert_changes_info(t_char *info, int fd)
    	info->concentration.dice_faces_mod = 0;
    	info->concentration.dice_amount_mod = 0;
    	info->concentration.duration = 0;
-	ft_npc_write_file(info, &info->stats, &info->c_resistance, fd);
+	ft_npc_write_file(info, &info->stats, &info->c_resistance, file);
 	return ;
 }
 
-int	ft_check_and_open(t_target_data *target_data, t_char *info)
+ft_file ft_check_and_open(t_target_data *target_data, t_char *info)
 {
-	int	i;
-	int	fd;
-
-	i = 0;
-	fd = ft_open_file_write_only(info->save_file);
-	if (fd == -1)
-	{
-		pf_printf_fd(2, "121-Error opening file: %s", strerror(errno));
-		return (-1);
-	}
-	while (i < target_data->buff_info->target_amount)
-	{
-		target_data->fd[i] = ft_open_file_write_only(target_data->target[i]->save_file);
-		if (target_data->fd[i] == -1)
-		{
-			pf_printf_fd(2, "119-Error opening file: %s", strerror(errno));
-			ft_revert_changes_info(info, fd);
-			int j = 0;
-			while (j <= i)
-			{
-				if (target_data->target_copy[j])
-				{
-					t_char *target = target_data->target_copy[j];
-					ft_npc_write_file(target, &target->stats,
-							&target->c_resistance, target_data->fd[j]);
-				}
-				j++;
-			}
-			return (-1);
-		}
-		i++;
-	}
-	return (fd);
+    int target_index = 0;
+    ft_file info_save_file(ft_open_file_write_only(info->save_file));
+    if (info_save_file.get_error_code())
+    {
+        pf_printf_fd(2, "121-Error opening file: %s", info_save_file.get_error_message());
+        return (-1);
+    }
+    while (target_index < target_data->buff_info->target_amount)
+    {
+        target_data->file[target_index].set_fd(ft_open_file_write_only
+                (target_data->target[target_index]->save_file));
+        if (target_data->file[target_index].get_error_code())
+        {
+            pf_printf_fd(2, "119-Error opening file: %s", strerror(errno));
+            ft_revert_changes_info(info, info_save_file);
+            int rollback_index = 0;
+            while (rollback_index <= target_index)
+            {
+                if (target_data->target_copy[rollback_index])
+                {
+                    t_char *target = target_data->target_copy[rollback_index];
+                    ft_npc_write_file(target, &target->stats,
+                            &target->c_resistance, target_data->file[rollback_index]);
+                }
+                rollback_index++;
+            }
+            return (-1);
+        }
+        target_index++;
+    }
+    return (info_save_file);
 }
-
