@@ -67,7 +67,6 @@ char **ft_read_file_dnd(ft_file &file)
         return_v = ft_realloc_dnd(return_v, i);
         if (!return_v)
         {
-			file.close();
             cma_free(line);
 			get_next_line(file, false);
 			return (ft_nullptr);

@@ -122,8 +122,6 @@ void ft_open_all_files(t_name *name)
     info_save_file.open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if (info_save_file.get_error_code())
         error = 1;
-    else
-        info_save_file.close();
     dir = opendir("data");
     if (dir == ft_nullptr)
     {
@@ -151,8 +149,6 @@ void ft_open_all_files(t_name *name)
             if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
             {
                 player = ft_read_pc_file(file, entry->d_name, filepath);
-                file.close();
-
                 if (!player)
                     continue;
                 ft_initiative_write(player->initiative, entry->d_name);
@@ -160,7 +156,6 @@ void ft_open_all_files(t_name *name)
                 continue;
             }
             info = ft_read_all_files(file, name, filepath);
-            file.close();
             if (!info)
                 continue;
             if (DEBUG == 1)
@@ -175,7 +170,6 @@ void ft_open_all_files(t_name *name)
                 continue;
             }
             ft_npc_write_file(info, &info->stats, &info->c_resistance, write_file);
-            write_file.close();
             if (error == 0)
                 ft_initiative_write(info->initiative, entry->d_name);
             ft_free_info(info);
@@ -185,5 +179,4 @@ void ft_open_all_files(t_name *name)
     ft_file initiative_file;
     initiative_file.open("data/data--initiative", O_RDONLY);
     ft_initiative_sort(initiative_file);
-    initiative_file.close();
 }

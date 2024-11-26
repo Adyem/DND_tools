@@ -111,12 +111,6 @@ void	ft_file::set_error(int error_code)
 	return ;
 }
 
-void	ft_file::set_fd(int fd)
-{
-	this->_fd = fd;
-	return ;
-}
-
 int ft_file::get_fd() const
 {
     return (this->_fd);

@@ -30,7 +30,6 @@ class ft_file
 	    int			get_error_code() const noexcept;
     	const char	*get_error_message() const noexcept;
 
-		void		set_fd(int fd);
 	    int			open(const char* filename, int flags, mode_t mode) noexcept;
 		int			open(const char* filename, int flags) noexcept;
 		int			write(const char *string) noexcept;
