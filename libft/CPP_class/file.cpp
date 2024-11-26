@@ -94,7 +94,8 @@ int	ft_file::open(const char* filename, int flags, mode_t mode) noexcept
 
 int	ft_file::open(const char* filename, int flags) noexcept
 {
-	this->close();
+	if (this->_fd != -1)
+		this->close();
 	_fd = ::open(filename, flags);
 	if (this->_fd < 0)
 	{

@@ -101,9 +101,7 @@ void SharedPtr<ManagedType>::release()
                         managedPointer[i].~ManagedType();
                 }
                 else
-                {
                     managedPointer->~ManagedType();
-                }
                 cma_free(managedPointer);
             }
             cma_free(referenceCount);
