@@ -1,4 +1,5 @@
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/file.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
@@ -40,12 +41,11 @@ void ft_initiative_sort_2(t_pc *players)
     int turn = 0;
     t_pc *temp;
     t_pc *highest;
-    int fd;
 
-	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (fd == -1)
+	ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (initiative_file.get_error_code())
     {
-        pf_printf("262-Error opening file: %s\n", strerror(errno));
+        pf_printf("262-Error opening file: %s\n", initiative_file.get_error_message());
         return ;
     }
     while (1)
@@ -64,13 +64,13 @@ void ft_initiative_sort_2(t_pc *players)
 
         if (turn == 0)
         {
-            pf_printf_fd(fd, "--turn--%s=%d\n", highest->name, highest->initiative);
+            pf_printf_fd(initiative_file.get_fd(), "--turn--%s=%d\n", highest->name,
+					highest->initiative);
             turn = 1;
         }
         else
-            pf_printf_fd(fd, "%s=%d\n", highest->name, highest->initiative);
+            pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", highest->name, highest->initiative);
 
         highest->initiative = -1;
     }
-    close(fd);
 }

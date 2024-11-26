@@ -96,20 +96,17 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
 
 static void ft_initiative_write(int initiative, char *name)
 {
-    int fd;
-
     if (DEBUG == 1)
         pf_printf("Printing initiative to data file\n");
-    fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-    if (fd == -1)
+    ft_file file("data/data--initiative", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+    if (file.get_error_code())
     {
-        pf_printf_fd(2, "Error opening data--initiative: %s\n", strerror(errno));
+        pf_printf_fd(2, "Error opening data--initiative: %s\n", file.get_error_message());
         return ;
     }
     if (DEBUG == 1)
         pf_printf("%s=%i\n", name, initiative);
-    pf_printf_fd(fd, "%s=%i\n", name, initiative);
-	close(fd);
+    pf_printf_fd(file.get_fd(), "%s=%i\n", name, initiative);
 }
 
 void ft_open_all_files(t_name *name)

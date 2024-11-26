@@ -76,22 +76,21 @@ static int ft_turn_move_marker(t_pc *players)
 
 static int ft_turn_write(t_pc *players)
 {
-	int fd;
 	t_pc *temp;
 
-	fd = open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-	if (fd == -1)
+	ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR);
+	if (initiative_file.get_error_code())
 	{
-		pf_printf("263-Error opening file %s\n", strerror(errno));
+		pf_printf("263-Error opening file %s\n", initiative_file.get_error_message());
 		return (1);
 	}
 	temp = players;
 	while (temp)
 	{
-		pf_printf_fd(fd, "%s=%d\n", temp->name, temp->initiative);
+		pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", temp->name, temp->initiative);
 		temp = temp->next;
 	}
-	close(fd);
 	return (0);
 }
 
