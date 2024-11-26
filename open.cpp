@@ -89,6 +89,8 @@ ft_file ft_check_and_open(t_target_data *target_data, t_char *info)
         pf_printf_fd(2, "121-Error opening file: %s", info_save_file.get_error_message());
         return (-1);
     }
+	if (DEBUG == 1)
+		pf_printf("memory address of buff info is %p", target_data->buff_info);
     while (target_index < target_data->buff_info->target_amount)
     {
         ft_open_file_write_only(target_data->target[target_index]->save_file,

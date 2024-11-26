@@ -1,4 +1,5 @@
 #include "character.hpp"
+#include "initialize.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
@@ -54,6 +55,9 @@ int ft_remove_concentration(t_char *info)
 			return (FAILURE);
         i++;
     }
+	t_buff buff = INITIALIZE_T_BUFF;
+	buff.target_amount = ft_double_char_length((const char **)info->concentration.targets);
+	targets.buff_info = &buff;
 	ft_file info_save_file(ft_check_and_open(&targets, info));
 	if (info_save_file.get_error_code())
 		return (FAILURE);
