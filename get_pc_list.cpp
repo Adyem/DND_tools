@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/file.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/ft_printf.hpp"
@@ -26,17 +27,16 @@ int	ft_check_player_entry(const char *entry)
 
 static char	**ft_open_and_read_initiative()
 {
-	int		fd;
+	ft_file	initiative_file;
 	char	**content;
 
-    fd = open("data/data--initiative", O_RDONLY);
-    if (fd == -1)
+    initiative_file = open("data/data--initiative", O_RDONLY);
+    if (initiative_file.get_error_code())
     {
-        pf_printf("280-Error opening file: %s\n", strerror(errno));
+        pf_printf("280-Error opening file: %s\n", initiative_file.get_error_message());
         return (ft_nullptr);
     }
-    content = ft_read_file_dnd(fd);
-    close(fd);
+    content = ft_read_file_dnd(initiative_file);
     if (!content)
     {
         pf_printf("281-Error opening file: %s\n", strerror(errno));
@@ -45,65 +45,65 @@ static char	**ft_open_and_read_initiative()
 	return (content);
 }
 
-bool ft_handle_player_entry(char **result, char *content, const char *prefix, int *j)
+static bool ft_process_player_entry(char **player_list, char *line, const char *entry_prefix,
+									int *player_count)
 {
-    if (ft_strncmp(prefix, content, strlen(prefix)) == 0)
+    if (ft_strncmp(entry_prefix, line, strlen(entry_prefix)) == 0)
     {
-        result[*j] = cma_strdup(content + strlen(prefix), false);
-        if (!result[*j])
+        player_list[*player_count] = cma_strdup(line + strlen(entry_prefix), false);
+        if (!player_list[*player_count])
         {
-            cma_free_double(result);
+            cma_free_double(player_list);
             return false;
         }
-        char *equal_sign = ft_strchr(result[*j], '=');
-        if (equal_sign)
-            *equal_sign = '\0';
+        char *delimiter = ft_strchr(player_list[*player_count], '=');
+        if (delimiter)
+            *delimiter = '\0';
         if (DEBUG == 1)
-            pf_printf("found player %s\n", result[*j]);
-        if (ft_check_player_entry(result[*j]))
+            pf_printf("found player %s\n", player_list[*player_count]);
+        if (ft_check_player_entry(player_list[*player_count]))
         {
-            cma_free_double(result);
+            cma_free_double(player_list);
             return false;
         }
-        (*j)++;
+        (*player_count)++;
     }
     return true;
 }
 
 char **ft_get_pc_list()
 {
-    char    **content;
-    char    **result;
-    int     i;
-    int     j;
+    char **lines;
+    char **player_list;
+    int line_index;
+    int player_count;
 
-    content = ft_open_and_read_initiative();
-    if (!content)
+    lines = ft_open_and_read_initiative();
+    if (!lines)
         return (ft_nullptr);
-
-    result = (char **)cma_calloc(MAX_PLAYERS, sizeof(char *), false);
-    if (!result)
+    player_list = (char **)cma_calloc(MAX_PLAYERS, sizeof(char *), false);
+    if (!player_list)
         return (ft_nullptr);
-    i = 0;
-    j = 0;
-    while (content[i] && j < MAX_PLAYERS)
+    line_index = 0;
+    player_count = 0;
+    while (lines[line_index] && player_count < MAX_PLAYERS)
     {
-        if (!ft_handle_player_entry(result, content[i], "PC--", &j) ||
-	            !ft_handle_player_entry(result, content[i], "--turn--PC--", &j))
-		{
-			cma_free_double(result);
-			cma_free_double(content);
+        if (!ft_process_player_entry(player_list, lines[line_index], "PC--", &player_count) ||
+            !ft_process_player_entry(player_list, lines[line_index], "--turn--PC--", &player_count))
+        {
+            cma_free_double(player_list);
+            cma_free_double(lines);
             return (ft_nullptr);
-		}
-        i++;
+        }
+        line_index++;
     }
-    if (j == 0)
+    if (player_count == 0)
     {
         pf_printf_fd(2, "282-Error: No player character found\n");
-        cma_free_double(result);
-		cma_free_double(content);
+        cma_free_double(player_list);
+        cma_free_double(lines);
         return (ft_nullptr);
     }
-	cma_free_double(content);
-    return (result);
+    cma_free_double(lines);
+    return (player_list);
 }

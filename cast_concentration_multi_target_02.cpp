@@ -1,3 +1,4 @@
+#include "libft/CPP_class/file.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "character.hpp"
@@ -55,19 +56,19 @@ static int	ft_apply_concentration(t_target_data *target_data, t_char *info, cons
 void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
 			const char **input)
 {
-	int	fd;
+	ft_file info_save_file;
 
 	if (ft_apply_concentration(target_data, info, input))
 	{
 		ft_set_not_save_flag(target_data, info);
 		return ;
 	}
-	fd = ft_check_and_open(target_data, info);
-	if (fd == -1)
+	info_save_file = ft_check_and_open(target_data, info);
+	if (info_save_file.get_fd() == -1)
 	{
 		ft_set_not_save_flag(target_data, info);
 		return ;
 	}
-	ft_cast_concentration_save_files(info, target_data, fd);
+	ft_cast_concentration_save_files(info, target_data, info_save_file);
 	return ;
 }

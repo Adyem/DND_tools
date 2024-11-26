@@ -8,25 +8,29 @@
 #include <string.h>
 #include <errno.h>
 
-int ft_open_file_write_only(const char *filename)
+int ft_open_file_write_only(const char *filename, ft_file &file)
 {
-    int fd;
-
-    fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    if (fd == -1)
-        pf_printf_fd(2, "Error opening file %s: %s\n", filename, strerror(errno));
-    return (fd);
+    file.open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    if (file.get_error_code())
+	{
+        pf_printf_fd(2, "Error opening file %s: %s\n", filename, file.get_error_message());
+		return (1);
+	}
+    return (0);
 }
 
 void ft_dual_save_file(t_char *info, t_char *target)
 {
-    ft_file file_target(ft_open_file_write_only(target->save_file));
+    ft_file file_info;
+    ft_file file_target;
+
+	ft_open_file_write_only(target->save_file, file_target);
     if (file_target.get_error_code())
     {
         info->flags.alreaddy_saved = 1;
         return ;
     }
-    ft_file file_info(ft_open_file_write_only(info->save_file));
+	ft_open_file_write_only(info->save_file, file_info);
     if (file_target.get_error_code() || file_info.get_error_code())
     {
         info->flags.alreaddy_saved = 1;
@@ -78,7 +82,8 @@ static void	ft_revert_changes_info(t_char *info, ft_file &file)
 ft_file ft_check_and_open(t_target_data *target_data, t_char *info)
 {
     int target_index = 0;
-    ft_file info_save_file(ft_open_file_write_only(info->save_file));
+    ft_file info_save_file;
+	ft_open_file_write_only(info->save_file, info_save_file);
     if (info_save_file.get_error_code())
     {
         pf_printf_fd(2, "121-Error opening file: %s", info_save_file.get_error_message());
@@ -86,8 +91,8 @@ ft_file ft_check_and_open(t_target_data *target_data, t_char *info)
     }
     while (target_index < target_data->buff_info->target_amount)
     {
-        target_data->file[target_index].set_fd(ft_open_file_write_only
-                (target_data->target[target_index]->save_file));
+        ft_open_file_write_only(target_data->target[target_index]->save_file,
+			target_data->file[target_index]);
         if (target_data->file[target_index].get_error_code())
         {
             pf_printf_fd(2, "119-Error opening file: %s", strerror(errno));

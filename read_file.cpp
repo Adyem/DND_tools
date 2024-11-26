@@ -76,3 +76,15 @@ char **ft_read_file_dnd(ft_file &file)
     }
     return (return_v);
 }
+
+char	**ft_open_and_read(const char *file_name)
+{
+	ft_file file(file_name, O_RDONLY);
+
+	if (file.get_error_code())
+	{
+		pf_printf_fd(2, "error opening file %s: %s", file_name, file.get_error_message());
+		return (ft_nullptr);
+	}
+	return (ft_read_file_dnd(file));
+}

@@ -1,7 +1,9 @@
+#include "character.hpp"
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/file.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -10,25 +12,21 @@
 #include <cstring>
 
 
-static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2], t_buff *buff,
-											int error)
+static void ft_cast_concentration_cleanup(t_char *info, t_char *target, ft_file save_files[2],
+											t_buff *buff, int error)
 {
 	if (info)
 	{
 		if (error != -1)
 			info->flags.dont_save = 1;
-        ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[0]);
+        ft_npc_write_file(info, &info->stats, &info->c_resistance, save_files[0]);
 	}
 	if (target)
 	{
 		if (error != -1)
 			target->flags.dont_save = 1;
-		ft_npc_write_file(target, &target->stats, &target->c_resistance, fd[1]);
+		ft_npc_write_file(target, &target->stats, &target->c_resistance, save_files[1]);
 	}
-	if (fd[0] != -1)
-        close(fd[0]);
-	if (fd[1] != -1)
-        close(fd[1]);
 	if (error == 1)
         pf_printf("305-Error: can't cast %s on yourself\n", buff->spell_name);
 	else if (error == 2)
@@ -44,8 +42,8 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target, int fd[2
 	return ;
 }
 
-int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const char **input,
-		t_buff *buff)
+static int ft_apply_concentration_buff(t_char *info, t_char *target, ft_file save_files[2],
+									const char **input, t_buff *buff)
 {
     char	**temp;
     int		i;
@@ -53,13 +51,13 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
     temp = (char **)cma_calloc(2, sizeof(char *), false);
     if (!temp)
     {
-		ft_cast_concentration_cleanup(info, target, fd, buff, 2);
+		ft_cast_concentration_cleanup(info, target, save_files, buff, 2);
         return (1);
     }
     temp[0] = (char *)cma_malloc((ft_strlen(input[3]) + 1) * sizeof(char), false);
     if (!temp[0])
     {
-		ft_cast_concentration_cleanup(info, target, fd, buff, 3);
+		ft_cast_concentration_cleanup(info, target, save_files, buff, 3);
         return (1);
     }
     info->concentration.targets = temp;
@@ -78,17 +76,15 @@ int ft_apply_concentration_buff(t_char *info, t_char *target, int fd[2], const c
     return (0);
 }
 
-static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *target)
+static int ft_cast_concentration_open_file(ft_file save_files[2], t_char *info, t_char *target)
 {
-    fd[0] = ft_open_file_write_only(info->save_file);
-    if (fd[0] == -1)
+    if (ft_open_file_write_only(info->save_file, save_files[0]))
     {
         pf_printf_fd(2, "Unexpected error opening file %s: %s\n", info->save_file,
 				strerror(errno));
         return (1);
     }
-    fd[1] = ft_open_file_write_only(target->save_file);
-    if (fd[1] == -1)
+    if (ft_open_file_write_only(target->save_file, save_files[1]))
     {
         pf_printf_fd(2, "Unexpected error opening file %s: %s\n", target->save_file,
 				strerror(errno));
@@ -100,7 +96,7 @@ static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *targ
     	info->concentration.dice_faces_mod = 0;
     	info->concentration.dice_amount_mod = 0;
     	info->concentration.duration = 0;
-		ft_npc_write_file(info, &info->stats, &info->c_resistance, fd[1]);
+		ft_npc_write_file(info, &info->stats, &info->c_resistance, save_files[1]);
 		return (1);
     }
     return (0);
@@ -108,8 +104,8 @@ static int ft_cast_concentration_open_file(int fd[2], t_char *info, t_char *targ
 
 int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 {
-    t_char *target;
-    int file[2];
+    t_char	*target;
+    ft_file	save_files[2];
 
     if (ft_remove_concentration(info))
         return(1);
@@ -131,23 +127,23 @@ int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 
     if (ft_strcmp_dnd(target->name, info->name) == 0)
     {
-		ft_cast_concentration_cleanup(info, target, fd, buff, 1);
+		ft_cast_concentration_cleanup(info, target, save_files, buff, 1);
         return (1);
     }
     if (target && target->version_number >= 2)
     {
         if (buff->cast_spell(target, input, buff))
         {
-			ft_cast_concentration_cleanup(info, target, fd, buff, 0);
+			ft_cast_concentration_cleanup(info, target, save_files, buff, 0);
             return (1);
         }
     }
 	if (ft_remove_concentration(info))
-        return (ft_cast_concentration_cleanup(info, target, fd, buff, 0), 1);
-	if (ft_apply_concentration_buff(info, target, fd, input, buff))
+        return (ft_cast_concentration_cleanup(info, target, save_files, buff, 0), 1);
+	if (ft_apply_concentration_buff(info, target, save_files, input, buff))
         return (1);
-	if (ft_cast_concentration_open_file(fd, info, target))
+	if (ft_cast_concentration_open_file(save_files, info, target))
         return(1);
-    ft_cast_concentration_cleanup(info, target, fd, buff, -1);
+    ft_cast_concentration_cleanup(info, target, save_files, buff, -1);
     return (0);
 }

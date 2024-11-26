@@ -156,17 +156,22 @@ static void ft_npc_write_file_2(t_char *info, t_resistance *resistance, ft_file 
 
 void ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, ft_file &file)
 {
+	if (file.get_error_code())
+	{
+		pf_printf_fd(2, "Error opening file %s: %s\n", info->save_file, file.get_error_message());
+		return ;
+	}
     if (DEBUG == 1)
         pf_printf("fd = %i\n", file.get_fd());
     if (info->flags.alreaddy_saved)
-        return;
+        return ;
     if (file.get_fd() == -1)
     {
         pf_printf_fd(2, "2-Error opening file %s: %s\n", info->save_file, strerror(errno));
-        return;
+        return ;
     }
     ft_npc_write_file_1(info, stats, file);
     ft_npc_write_file_2(info, resistance, file);
     info->flags.alreaddy_saved = 1;
-    return;
+    return ;
 }

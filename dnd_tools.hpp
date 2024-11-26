@@ -260,7 +260,7 @@ void		ft_reroll(t_char *info, int *result);
 //open and read
 char		**ft_read_file_dnd(ft_file &file);
 char		**ft_open_and_read(const char *file);
-int			ft_open_file_write_only(const char *filename);
+int			ft_open_file_write_only(const char *filename, ft_file &file);
 
 //utils
 int			ft_create_data_dir();
@@ -370,5 +370,6 @@ int			ft_roll_convert_next(char *string, int i, int *error);
 
 //player
 void		ft_player(const char **input);
+char		**retrieve_player_list();
 
 #endif
