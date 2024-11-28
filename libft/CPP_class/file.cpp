@@ -1,7 +1,9 @@
 #include "file.hpp"
 #include "../Libft/libft.hpp"
 #include "../Errno/errno.hpp"
+#include "../Printf/ft_printf.hpp"
 #include <cerrno>
+#include <cstdarg>
 #include <unistd.h>
 
 ft_file::ft_file() noexcept
@@ -171,4 +173,16 @@ int ft_file::seek(off_t offset, int whence) noexcept
         return (-1);
     }
     return (0);
+}
+
+int	ft_file::printf(const char *format, ...) const
+{
+    va_list args;
+
+    if (!format)
+        return (0);
+    va_start(args, format);
+    int printed_chars = pf_printf_fd_v(this->_fd, format, args);
+    va_end(args);
+    return (printed_chars);
 }

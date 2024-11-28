@@ -1,4 +1,5 @@
 #include "ft_printf.hpp"
+#include <cstdarg>
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdbool.h>
@@ -32,7 +33,8 @@ static void ft_putchar_fd(const char c, int fd, size_t *count)
 
 static void ft_putstr_fd(const char *s, int fd, size_t *count)
 {
-    if (!s) {
+    if (!s)
+	{
         write(fd, "(null)", 6);
         *count += 6;
         return ;
@@ -46,7 +48,8 @@ static void ft_putstr_fd(const char *s, int fd, size_t *count)
 static void ft_putnbr_fd_recursive(long n, int fd, size_t *count)
 {
     char c;
-    if (n < 0) {
+    if (n < 0)
+	{
         ft_putchar_fd('-', fd, count);
         n = -n;
     }
@@ -106,7 +109,7 @@ static void ft_putptr_fd(void *ptr, int fd, size_t *count)
     return ;
 }
 
-static int ft_printf_fd_v(int fd, const char *format, va_list args)
+int pf_printf_fd_v(int fd, const char *format, va_list args)
 {
     size_t count = 0;
     size_t i = 0;
@@ -223,25 +226,25 @@ static int ft_printf_fd_v(int fd, const char *format, va_list args)
 int pf_printf_fd(int fd, const char *format, ...)
 {
     va_list args;
-    int printed_chars;
+    int		printed_chars;
 
     if (!format)
         return (0);
     va_start(args, format);
-    printed_chars = ft_printf_fd_v(fd, format, args);
+    printed_chars = pf_printf_fd_v(fd, format, args);
     va_end(args);
     return (printed_chars);
 }
 
 int pf_printf(const char *format, ...)
 {
-    va_list args;
-    int printed_chars;
+    va_list	args;
+    int		printed_chars;
 
     if (!format)
         return (0);
     va_start(args, format);
-    printed_chars = ft_printf_fd_v(1, format, args);
+    printed_chars = pf_printf_fd_v(1, format, args);
     va_end(args);
     return (printed_chars);
 }

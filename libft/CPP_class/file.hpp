@@ -36,6 +36,8 @@ class ft_file
 		void		close() noexcept;
 		int			seek(off_t offset, int whence) noexcept;
 		int			read(char *buffer, int count) noexcept;
+		int			printf(const char *format, ...) const
+						__attribute__((format(printf, 2, 3), hot));
 };
 
 #endif
