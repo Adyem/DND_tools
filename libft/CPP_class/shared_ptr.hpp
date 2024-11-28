@@ -23,17 +23,24 @@ class SharedPtr
 			bool arrayType = false, bool critical = false);
 	    SharedPtr(const SharedPtr<ManagedType>& other);
     	~SharedPtr();
+		SharedPtr(SharedPtr<ManagedType>&& other) noexcept;
+		SharedPtr<ManagedType>& operator=(SharedPtr<ManagedType>&& other) noexcept;
     	SharedPtr<ManagedType>& operator=(const SharedPtr<ManagedType>& other);
     	ManagedType& operator*();
+    	const ManagedType& operator*() const;
     	ManagedType* operator->();
+    	const ManagedType* operator->() const;
     	ManagedType& operator[](size_t index);
+    	const ManagedType& operator[](size_t index) const;
     	int use_count() const;
     	bool hasError() const;
 		void set_error(int error);
     	int getErrorCode() const;
     	const char* errorMessage() const;
-    	ManagedType* get() const;
+    	ManagedType* get();
+    	const ManagedType* get() const;
     	bool unique() const;
+		explicit operator bool() const noexcept;
     	void reset(ManagedType* pointer = ft_nullptr, size_t size = 1,
 			bool arrayType = false, bool critical = false);
     	void swap(SharedPtr<ManagedType>& other);
@@ -113,6 +120,37 @@ void SharedPtr<ManagedType>::release()
 }
 
 template <typename ManagedType>
+SharedPtr<ManagedType>::SharedPtr(SharedPtr<ManagedType>&& other) noexcept
+    : managedPointer(other.managedPointer),
+      referenceCount(other.referenceCount),
+      arraySize(other.arraySize),
+      isArrayType(other.isArrayType),
+      isCritical(other.isCritical),
+      errorCode(other.errorCode)
+{
+    other.managedPointer = ft_nullptr;
+    other.referenceCount = ft_nullptr;
+}
+
+template <typename ManagedType>
+SharedPtr<ManagedType>& SharedPtr<ManagedType>::operator=(SharedPtr<ManagedType>&& other) noexcept
+{
+    if (this != &other)
+    {
+        release();
+        managedPointer = other.managedPointer;
+        referenceCount = other.referenceCount;
+        arraySize = other.arraySize;
+        isArrayType = other.isArrayType;
+        isCritical = other.isCritical;
+        errorCode = other.errorCode;
+        other.managedPointer = ft_nullptr;
+        other.referenceCount = ft_nullptr;
+    }
+    return *this;
+}
+
+template <typename ManagedType>
 SharedPtr<ManagedType>& SharedPtr<ManagedType>::operator=(const SharedPtr<ManagedType>& other)
 {
     if (this != &other)
@@ -131,13 +169,66 @@ SharedPtr<ManagedType>& SharedPtr<ManagedType>::operator=(const SharedPtr<Manage
 }
 
 template <typename ManagedType>
+const ManagedType& SharedPtr<ManagedType>::operator*() const
+{
+    if (!managedPointer)
+    {
+        this->set_error(SHARED_PTR_NULL_PTR);
+        static ManagedType defaultInstance;
+        return defaultInstance;
+    }
+    return (*managedPointer);
+}
+
+template <typename ManagedType>
+const ManagedType* SharedPtr<ManagedType>::operator->() const
+{
+    if (!managedPointer)
+    {
+        this->set_error(SHARED_PTR_NULL_PTR);
+        return ft_nullptr;
+    }
+    return managedPointer;
+}
+
+template <typename ManagedType>
+const ManagedType& SharedPtr<ManagedType>::operator[](size_t index) const
+{
+    if (!isArrayType)
+    {
+        this->set_error(SHARED_PTR_INVALID_OPERATION);
+        static ManagedType defaultInstance;
+        return defaultInstance;
+    }
+    if (!managedPointer)
+    {
+        this->set_error(SHARED_PTR_NULL_PTR);
+        static ManagedType defaultInstance;
+        return defaultInstance;
+    }
+    if (index >= arraySize)
+    {
+        this->set_error(SHARED_PTR_OUT_OF_BOUNDS);
+        static ManagedType defaultInstance;
+        return defaultInstance;
+    }
+    return managedPointer[index];
+}
+
+template <typename ManagedType>
+ManagedType* SharedPtr<ManagedType>::get()
+{
+    return managedPointer;
+}
+
+template <typename ManagedType>
 ManagedType& SharedPtr<ManagedType>::operator*()
 {
     if (!managedPointer)
     {
 		this->set_error(SHARED_PTR_NULL_PTR);
         static ManagedType defaultInstance;
-        return defaultInstance;
+        return (defaultInstance);
     }
     return (*managedPointer);
 }
@@ -204,7 +295,7 @@ const char* SharedPtr<ManagedType>::errorMessage() const
 }
 
 template <typename ManagedType>
-ManagedType* SharedPtr<ManagedType>::get() const
+const ManagedType* SharedPtr<ManagedType>::get() const
 {
     return (managedPointer);
 }
@@ -251,6 +342,12 @@ void SharedPtr<ManagedType>::reset(ManagedType* pointer, size_t size, bool array
         managedPointer = ft_nullptr;
     }
 	return ;
+}
+
+template <typename ManagedType>
+SharedPtr<ManagedType>::operator bool() const noexcept
+{
+    return managedPointer != ft_nullptr;
 }
 
 #endif

@@ -37,7 +37,7 @@ ft_string::ft_string(const char* init_str, bool crit) noexcept
             errorFlag = true;
             return ;
         }
-        std::memcpy(data, init_str, length + 1);
+        ft_memcpy(data, init_str, length + 1);
     }
     return ;
 }
@@ -76,7 +76,7 @@ ft_string& ft_string::operator=(const ft_string& other) noexcept
             errorFlag = true;
             return (*this);
         }
-        std::memcpy(data, other.data, length + 1);
+        ft_memcpy(data, other.data, length + 1);
     }
 
     return (*this);
@@ -98,7 +98,7 @@ ft_string& ft_string::operator=(const char *&other) noexcept
             errorFlag = true;
             return (*this);
         }
-        std::memcpy(this->data, other, length + 1);
+        ft_memcpy(this->data, other, length + 1);
     }
 
     return (*this);
