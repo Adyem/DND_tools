@@ -11,7 +11,7 @@ typedef struct s_damage_info
     int stat_mod;
     int dice_amount;
     int dice_faces;
-} t_damage_info;
+}	t_damage_info;
 
 static int ft_weapon_find_stat(t_char *info, t_equipment_id *weapon)
 {
