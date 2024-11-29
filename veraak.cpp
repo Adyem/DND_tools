@@ -98,7 +98,7 @@ void ft_veraak_turn(t_char *info)
 
 static void ft_initialize_gear_and_feats(t_char *info)
 {
-    (void)info;
+	info->spells.hunters_mark = VERAAK_SPELLS_HUNTERS_MARK;
     return ;
 }
 

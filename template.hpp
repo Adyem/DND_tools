@@ -143,6 +143,7 @@ static const t_char TEMPLATE_INFO =
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
 	.turn = ft_template_turn,
+	.spells = INITIALIZE_SPELLS,
 	.spell_slots = TEMPLATE_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
 	.crit = TEMPLATE_CRIT,

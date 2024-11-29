@@ -126,6 +126,7 @@ static const    t_char GUNDREN_ROCKSEEKER_INFO =
     .save_file = ft_nullptr,
     .name = ft_nullptr,
     .turn = ft_gundren_rockseeker_turn,
+	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,
     .flags = INITIALIZE_FLAGS,
     .crit = GUNDREN_ROCKSEEKER_CRIT,

@@ -23,9 +23,10 @@ static const	t_buff BUFF_HUNTERS_MARK =
 
 void ft_cast_hunters_mark(t_char *info, const char **input)
 {
+	if (info->spells.hunters_mark.learned != 1)
+		pf_printf_fd(2, "%s hasn't learned the spell", info->name);
     t_buff	buff = BUFF_HUNTERS_MARK;
-	int		error;
-
+	int		error = 0;
 	buff.target = cma_strdup(input[3], false);
 	if (!buff.target)
 	{

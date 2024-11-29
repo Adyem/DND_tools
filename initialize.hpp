@@ -5,6 +5,20 @@
 # include "character.hpp"
 # include "libft/CPP_class/nullptr.hpp"
 
+static const	t_buff INITIALIZE_T_BUFF =
+{
+	.target_amount = 0,
+	.target = ft_nullptr,
+	.spell_name = ft_nullptr,
+	.spell_id = 0,
+	.dice_faces_mod = 0,
+	.dice_amount_mod = 0,
+	.duration = 0,
+	.buff = 0,
+	.error = 0,
+	.cast_spell = ft_nullptr,
+};
+
 static const	t_saves INITIALIZE_SAVES =
 {
 	.str = 0,
@@ -294,18 +308,18 @@ static const t_spell_slots INITIALIZE_SPELL_SLOTS =
 	.warlock = INITIALIZE_SPELL_SLOT,
 };
 
-static const	t_buff INITIALIZE_T_BUFF =
+static const t_spell_hunters_mark INITIALIZE_SPELL_HUNTERS_MARK =
 {
-	.target_amount = 0,
-	.target = ft_nullptr,
-	.spell_name = ft_nullptr,
-	.spell_id = 0,
-	.dice_faces_mod = 0,
-	.dice_amount_mod = 0,
+	.learned = 0,
 	.duration = 0,
-	.buff = 0,
-	.error = 0,
-	.cast_spell = ft_nullptr,
+	.dice_amount = 0,
+	.dice_faces = 0,
+	.extra_damage = 0,
+};
+
+static const t_spells INITIALIZE_SPELLS =
+{
+	.hunters_mark = INITIALIZE_SPELL_HUNTERS_MARK,
 };
 
 #endif

@@ -126,6 +126,7 @@ static const    t_char HILDA_STORMSHIELD_INFO =
     .save_file = ft_nullptr,
     .name = ft_nullptr,
     .turn = ft_hilda_stormshield_turn,
+	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,
     .flags = INITIALIZE_FLAGS,
     .crit = HILDA_STORMSHIELD_CRIT,

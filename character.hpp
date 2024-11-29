@@ -370,6 +370,20 @@ typedef struct	s_spell_slots
 	t_spell_slot	warlock;
 }	t_spell_slots;
 
+typedef struct s_spell_hunters_mark
+{
+	int		learned;
+	int		duration;
+	int		dice_amount;
+	int		dice_faces;
+	int		extra_damage;
+}	t_spell_hunters_mark;
+
+typedef struct	s_spells
+{
+	t_spell_hunters_mark	hunters_mark;
+}	t_spells;
+
 typedef struct	s_char
 {
 	int				level;
@@ -380,6 +394,7 @@ typedef struct	s_char
 	char			*save_file;
 	const char		*name;
 	c_turn			turn;
+	t_spells		spells;
 	t_spell_slots	spell_slots;
 	t_flags			flags;
 	t_crit_mod		crit;

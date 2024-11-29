@@ -121,6 +121,15 @@ static const t_physical VERAAK_PHYSICAL =
     .speed = 30,
 };
 
+static const t_spell_hunters_mark VERAAK_SPELLS_HUNTERS_MARK =
+{
+	.learned = 1,
+	.duration = 50,
+	.dice_amount = 1,
+	.dice_faces = 6,
+	.extra_damage = 0,
+};
+
 static const t_char VERAAK_INFO =
 {
 	.level = 2,
@@ -131,6 +140,7 @@ static const t_char VERAAK_INFO =
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
 	.turn = ft_veraak_turn,
+	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
 	.crit = VERAAK_CRIT,
