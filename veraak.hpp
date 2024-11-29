@@ -128,6 +128,9 @@ static const t_spell_hunters_mark VERAAK_SPELLS_HUNTERS_MARK =
 	.dice_amount = 1,
 	.dice_faces = 6,
 	.extra_damage = 0,
+	.upcast_extra_dice_face = 0,
+	.upcast_extra_dice_amount = 0,
+	.upcast_extra_damage = 0,
 };
 
 static const t_char VERAAK_INFO =

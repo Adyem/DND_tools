@@ -377,6 +377,9 @@ typedef struct s_spell_hunters_mark
 	int		dice_amount;
 	int		dice_faces;
 	int		extra_damage;
+	int		upcast_extra_dice_face;
+	int		upcast_extra_dice_amount;
+	int		upcast_extra_damage;
 }	t_spell_hunters_mark;
 
 typedef struct	s_spells
