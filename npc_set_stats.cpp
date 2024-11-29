@@ -13,12 +13,12 @@ typedef struct s_key_value_pair
 static int ft_set_stat_int(char *content_i, const char *key, int *field, int unset_value,
 		t_char *info)
 {
-	int	i;
+	int	index;
 
-	i = ft_strlen(key);
-    if (ft_strncmp(content_i, key, i) == 0 && *field == unset_value)
+	index = ft_strlen(key);
+    if (ft_strncmp(content_i, key, index) == 0 && *field == unset_value)
     {
-        *field = ft_check_stat(info, content_i, i);
+        *field = ft_check_stat(info, content_i, index);
         return (1);
     }
     return (0);
@@ -304,46 +304,37 @@ static int	ft_set_stats_string(t_char *info, char **content, int i)
 
 int ft_set_stats(t_char *info, char **content)
 {
-    int error;
-    int i;
+    int i = 0;
+    int (*handlers[])(t_char *, char **, int) =
+	{
+        ft_set_stats_1,
+        ft_set_stats_2,
+        ft_set_spell_slots,
+        ft_set_stats_string,
+		ft_nullptr
+    };
 
-	i = 0;
     while (content[i])
     {
-        if (ft_set_stats_1(info, content, i) == 0)
-        {
-            i++;
-            continue ;
-        }
-        if (ft_set_stats_2(info, content, i) == 0)
-        {
-            i++;
-            continue ;
-        }
-		if (ft_set_spell_slots(info, content, i) == 0)
+        for (int j = 0; handlers[j]; j++)
 		{
-			i++;
-			continue ;
-		}
-        error = ft_set_stats_string(info, content, i);
-        if (error <= 0)
-        {
+            int error = handlers[j](info, content, i);
+
             if (error == 0)
             {
                 i++;
-                continue ;
+                break ;
             }
             else if (error < 0)
                 return (1);
+            else if (j == 3)
+            {
+                pf_printf_fd(2, "1-Something is wrong with the save file for %s at the "
+                              "line: %s, please reinitialize the save\n", info->name, content[i]);
+                info->flags.error = 1;
+                return (1);
+            }
         }
-        else
-        {
-            pf_printf_fd(2, "1-Something is wrong with the save file for %s at the " \
-					"line: %s, please reinitialize the save\n", info->name, content[i]);
-            info->flags.error = 1;
-            return (1);
-        }
-        i++;
     }
     return (0);
 }

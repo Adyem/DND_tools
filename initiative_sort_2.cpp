@@ -3,6 +3,7 @@
 #include "libft/Printf/ft_printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
+#include "player_character.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
@@ -38,9 +39,9 @@ void ft_initiative_print(void)
 
 void ft_initiative_sort_2(t_pc *players)
 {
-    int turn = 0;
-    t_pc *temp;
-    t_pc *highest;
+    int		turn = 0;
+    t_pc	*temp;
+    t_pc	*highest;
 
 	ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (initiative_file.get_error_code())
