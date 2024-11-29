@@ -4,6 +4,12 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "identification.hpp"
 
+typedef struct s_key_value_pair
+{
+    const char *key;
+    int *value;
+} t_key_value_pair;
+
 static int ft_set_stat_int(char *content_i, const char *key, int *field, int unset_value,
 		t_char *info)
 {
@@ -40,6 +46,62 @@ static int ft_set_stats_1(t_char *info, char **content, int i)
         return (0);
     }
     return (1);
+}
+
+static int ft_set_spell_slots(t_char *info, char **content, int i)
+{
+    t_key_value_pair key_values[] =
+	{
+        { LEVEL_1_AVAILABLE_KEY, &(info->spell_slots.level_1.available) },
+        { LEVEL_1_TOTAL_KEY, &(info->spell_slots.level_1.total) },
+        { LEVEL_1_LEVEL_KEY, &(info->spell_slots.level_1.level) },
+        { LEVEL_1_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_1.replenishing_slot) },
+        { LEVEL_2_AVAILABLE_KEY, &(info->spell_slots.level_2.available) },
+        { LEVEL_2_TOTAL_KEY, &(info->spell_slots.level_2.total) },
+        { LEVEL_2_LEVEL_KEY, &(info->spell_slots.level_2.level) },
+        { LEVEL_2_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_2.replenishing_slot) },
+        { LEVEL_3_AVAILABLE_KEY, &(info->spell_slots.level_3.available) },
+        { LEVEL_3_TOTAL_KEY, &(info->spell_slots.level_3.total) },
+        { LEVEL_3_LEVEL_KEY, &(info->spell_slots.level_3.level) },
+        { LEVEL_3_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_3.replenishing_slot) },
+        { LEVEL_4_AVAILABLE_KEY, &(info->spell_slots.level_4.available) },
+        { LEVEL_4_TOTAL_KEY, &(info->spell_slots.level_4.total) },
+        { LEVEL_4_LEVEL_KEY, &(info->spell_slots.level_4.level) },
+        { LEVEL_4_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_4.replenishing_slot) },
+        { LEVEL_5_AVAILABLE_KEY, &(info->spell_slots.level_5.available) },
+        { LEVEL_5_TOTAL_KEY, &(info->spell_slots.level_5.total) },
+        { LEVEL_5_LEVEL_KEY, &(info->spell_slots.level_5.level) },
+        { LEVEL_5_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_5.replenishing_slot) },
+        { LEVEL_6_AVAILABLE_KEY, &(info->spell_slots.level_6.available) },
+        { LEVEL_6_TOTAL_KEY, &(info->spell_slots.level_6.total) },
+        { LEVEL_6_LEVEL_KEY, &(info->spell_slots.level_6.level) },
+        { LEVEL_6_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_6.replenishing_slot) },
+        { LEVEL_7_AVAILABLE_KEY, &(info->spell_slots.level_7.available) },
+        { LEVEL_7_TOTAL_KEY, &(info->spell_slots.level_7.total) },
+        { LEVEL_7_LEVEL_KEY, &(info->spell_slots.level_7.level) },
+        { LEVEL_7_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_7.replenishing_slot) },
+        { LEVEL_8_AVAILABLE_KEY, &(info->spell_slots.level_8.available) },
+        { LEVEL_8_TOTAL_KEY, &(info->spell_slots.level_8.total) },
+        { LEVEL_8_LEVEL_KEY, &(info->spell_slots.level_8.level) },
+        { LEVEL_8_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_8.replenishing_slot) },
+        { LEVEL_9_AVAILABLE_KEY, &(info->spell_slots.level_9.available) },
+        { LEVEL_9_TOTAL_KEY, &(info->spell_slots.level_9.total) },
+        { LEVEL_9_LEVEL_KEY, &(info->spell_slots.level_9.level) },
+        { LEVEL_9_REPLENISHING_SLOT_KEY, &(info->spell_slots.level_9.replenishing_slot) },
+        { WARLOCK_AVAILABLE_KEY, &(info->spell_slots.warlock.available) },
+        { WARLOCK_TOTAL_KEY, &(info->spell_slots.warlock.total) },
+        { WARLOCK_LEVEL_KEY, &(info->spell_slots.warlock.level) },
+        { WARLOCK_REPLENISHING_SLOT_KEY, &(info->spell_slots.warlock.replenishing_slot) },
+        { NULL, NULL }
+    };
+	int j = 0;
+    while (key_values[j].key != NULL)
+    {
+        if (ft_set_stat_int(content[i], key_values[j].key, key_values[j].value, -1, info))
+            return 0;
+		j++;
+    }
+    return 1;
 }
 
 static int ft_set_stats_2(t_char *info, char **content, int i)
@@ -226,6 +288,11 @@ int ft_set_stats(t_char *info, char **content)
             i++;
             continue ;
         }
+		if (ft_set_spell_slots(info, content, i) == 0)
+		{
+			i++;
+			continue ;
+		}
         error = ft_set_stats_string(info, content, i);
         if (error <= 0)
         {

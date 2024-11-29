@@ -130,7 +130,7 @@ typedef struct s_flame_geyser
     int duration;
 	int	close_to_tower_d;
 	int	tower_explode_d;
-} t_flame_geyser;
+}	t_flame_geyser;
 
 typedef struct s_meteor_strike
 {
@@ -141,14 +141,14 @@ typedef struct s_meteor_strike
 	int		four_targets_d;
 	int		five_targets_d;
     char	*target_id;
-} t_meteor_strike;
+}	t_meteor_strike;
 
 typedef struct s_earth_pounce
 {
 	int		active;
 	int		base_damage;
 	char	*target_id;
-} t_earth_pounce;
+}	t_earth_pounce;
 
 typedef struct s_arcane_pounce
 {	
@@ -156,14 +156,14 @@ typedef struct s_arcane_pounce
 	int		magic_damage;
 	int		erea_damage;
 	char	*target_id;
-} t_arcane_pounce;
+}	t_arcane_pounce;
 
 typedef struct s_frost_breath
 {
 	int		active;
 	int		damage;
 	char	*target_id;
-} t_frost_breath;
+}	t_frost_breath;
 
 typedef struct	s_air_totem
 {
@@ -346,7 +346,7 @@ typedef struct s_physical
     int weight;
     int age;
     int speed;
-} t_physical;
+}	t_physical;
 
 typedef struct	s_spell_slot
 {
@@ -397,6 +397,6 @@ typedef struct	s_char
 	t_feats			feats;
 	t_name			*struct_name;
     t_physical      physical;
-} t_char;
+}	t_char;
 
 #endif
