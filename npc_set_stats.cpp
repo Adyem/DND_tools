@@ -316,7 +316,8 @@ int ft_set_stats(t_char *info, char **content)
 
     while (content[i])
     {
-        for (int j = 0; handlers[j]; j++)
+		int j = 0;
+        while (handlers[j])
 		{
             int error = handlers[j](info, content, i);
 
@@ -334,6 +335,7 @@ int ft_set_stats(t_char *info, char **content)
                 info->flags.error = 1;
                 return (1);
             }
+			j++;
         }
     }
     return (0);

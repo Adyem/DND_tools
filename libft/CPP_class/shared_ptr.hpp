@@ -62,8 +62,12 @@ SharedPtr<ManagedType>::SharedPtr(ManagedType* pointer, size_t size, bool arrayT
         {
             if (isArrayType)
             {
-                for (size_t i = 0; i < arraySize; ++i)
-                    managedPointer[i].~ManagedType();
+				size_t index = 0;
+                while (index < arraySize)
+				{
+                    managedPointer[index].~ManagedType();
+					index++;
+				}
             }
             else
                 managedPointer->~ManagedType();
@@ -104,8 +108,12 @@ void SharedPtr<ManagedType>::release()
             {
                 if (isArrayType)
                 {
-                    for (size_t i = 0; i < arraySize; ++i)
-                        managedPointer[i].~ManagedType();
+					size_t index = 0;
+                    while (index < arraySize)
+					{
+                        managedPointer[index].~ManagedType();
+						index++;
+					}
                 }
                 else
                     managedPointer->~ManagedType();
@@ -332,8 +340,12 @@ void SharedPtr<ManagedType>::reset(ManagedType* pointer, size_t size, bool array
         {
             if (isArrayType)
             {
-                for (size_t i = 0; i < arraySize; ++i)
-                    managedPointer[i].~ManagedType();
+				size_t index = 0;
+                while (index < arraySize)
+				{
+                    managedPointer[index].~ManagedType();
+					index++;
+				}
             }
             else
                 managedPointer->~ManagedType();

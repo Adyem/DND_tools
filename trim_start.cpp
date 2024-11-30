@@ -18,10 +18,14 @@ static char *str_new(size_t n)
 {
     char *str = (char *)cma_malloc(sizeof(char) * (n + 1), false);
 
-    if (!str)
-        return (ft_nullptr);
-    for (size_t i = 0; i <= n; i++)
-        str[i] = '\0';
+	if (!str)
+		return (ft_nullptr);
+	size_t index = 0;
+    while (index <= n)
+	{
+        str[index] = '\0';
+		index++;
+	}
     return (str);
 }
 

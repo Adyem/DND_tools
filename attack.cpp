@@ -34,7 +34,8 @@ static int ft_weapon_find_stat(t_char *info, t_equipment_id *weapon)
     return (0);
 }
 
-static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info, int offhand, t_char *info)
+static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
+			int offhand, t_char *info)
 {
     d_info->dice_amount = weapon->attack.effect_dice_amount;
     d_info->dice_faces = weapon->attack.effect_dice_faces;
@@ -55,7 +56,8 @@ static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info
 static void ft_print_attack_roll(t_char *info, t_equipment_id *weapon, t_damage_info *d_info)
 {
     if (weapon->projectile_name)
-        pf_printf("%s uses his/her %s to fire a %s and rolled ", info->name, weapon->name, weapon->projectile_name);
+        pf_printf("%s uses his/her %s to fire a %s and rolled ", info->name,
+				weapon->name, weapon->projectile_name);
     else
         pf_printf("%s attacks with his/her %s and rolled ", info->name, weapon->name);
     if (d_info->result <= 1 + info->crit.attack_fail)

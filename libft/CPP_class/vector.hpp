@@ -75,8 +75,12 @@ Vector<ElementType>::~Vector()
 template <typename ElementType>
 void Vector<ElementType>::destroy_elements(size_t from, size_t to)
 {
-	for (size_t i = from; i < to; ++i)
-        data[i].~ElementType();
+	size_t index = from;
+	while (index < to)
+	{
+        data[index].~ElementType();
+		index++;
+	}
 	return ;
 }
 
@@ -170,8 +174,12 @@ void Vector<ElementType>::resize(size_t new_size, const ElementType& value)
         reserve(new_size);
         if (error_flag)
 			return ;
-        for (size_t i = size_; i < new_size; ++i)
-            new (&data[i]) ElementType(value);
+		size_t index = size_;
+        while (index < new_size)
+		{
+            new (&data[index]) ElementType(value);
+			index++;
+		}
     }
     size_ = new_size;
 	return ;
@@ -189,11 +197,13 @@ typename Vector<ElementType>::iterator Vector<ElementType>::insert(iterator pos,
         reserve(capacity_ > 0 ? capacity_ * 2 : 1);
         if (error_flag) return end();
     }
-    for (size_t i = size_; i > index; --i)
-    {
-        new (&data[i]) ElementType(data[i - 1]);
-        data[i - 1].~ElementType();
-    }
+	size_t i = size_;
+	while (i > index)
+	{
+	    new (&data[i]) ElementType(data[i - 1]);
+	    data[i - 1].~ElementType();
+	    --i;
+	}
     new (&data[index]) ElementType(value);
     size_++;
     return (&data[index]);
@@ -205,11 +215,13 @@ typename Vector<ElementType>::iterator Vector<ElementType>::erase(iterator pos)
     size_t index = pos - data;
     if (index >= size_) return end();
     data[index].~ElementType();
-    for (size_t i = index; i < size_ - 1; ++i)
-    {
-        new (&data[i]) ElementType(data[i + 1]);
-        data[i + 1].~ElementType();
-    }
+	size_t i = index;
+	while (i < size_ - 1)
+	{
+	    new (&data[i]) ElementType(data[i + 1]);
+	    data[i + 1].~ElementType();
+	    ++i;
+	}
     size_--;
     return (&data[index]);
 }

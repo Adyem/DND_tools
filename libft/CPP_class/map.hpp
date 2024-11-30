@@ -66,8 +66,12 @@ Map<Key, MappedType>::Map(const Map<Key, MappedType>& other)
             this->_capacity = 0;
             return;
         }
-        for (std::size_t i = 0; i < this->_size; ++i)
-            this->_data[i] = other._data[i];
+		std::size_t index = 0;
+        while (index < this->_size)
+		{
+            this->_data[index] = other._data[index];
+			index++;
+		}
 	}
 	else
         this->_data = ft_nullptr;
@@ -89,9 +93,11 @@ Map<Key, MappedType>& Map<Key, MappedType>::operator=(const Map<Key, MappedType>
                 this->setError(SHARED_PTR_ALLOCATION_FAILED);
                 return *this;
             }
-            for (std::size_t i = 0; i < other._size; ++i)
+			size_t index = 0;
+            while (index < other._size)
             {
-                newData[i] = other._data[i];
+                newData[index] = other._data[index];
+				index++;
             }
         }
         cma_free(this->_data);
@@ -122,13 +128,11 @@ Map<Key, MappedType>& Map<Key, MappedType>::operator=(Map<Key, MappedType>&& oth
     if (this != &other)
     {
         cma_free(this->_data);
-
         this->_data = other._data;
         this->_capacity = other._capacity;
         this->_size = other._size;
         this->_critical = other._critical;
         this->_error = other._error;
-
         other._data = ft_nullptr;
         other._capacity = 0;
         other._size = 0;
@@ -162,12 +166,12 @@ void Map<Key, MappedType>::insert(const Key& key, const MappedType& value)
 template <typename Key, typename MappedType>
 MappedType* Map<Key, MappedType>::find(const Key& key)
 {
-    std::size_t i = 0;
-    while (i < this->_size)
+    std::size_t index = 0;
+    while (index < this->_size)
     {
-        if (this->_data[i].key == key)
-            return (&this->_data[i].value);
-        i++;
+        if (this->_data[index].key == key)
+            return (&this->_data[index].value);
+        index++;
     }
     return (ft_nullptr);
 }
@@ -175,16 +179,16 @@ MappedType* Map<Key, MappedType>::find(const Key& key)
 template <typename Key, typename MappedType>
 void Map<Key, MappedType>::remove(const Key& key)
 {
-    std::size_t i = 0;
-    while (i < this->_size)
+    std::size_t index = 0;
+    while (index < this->_size)
     {
-        if (this->_data[i].key == key)
+        if (this->_data[index].key == key)
         {
-            this->_data[i] = this->_data[this->_size - 1];
+            this->_data[index] = this->_data[this->_size - 1];
             --this->_size;
             return ;
         }
-        i++;
+        index++;
     }
     return ;
 }
@@ -239,11 +243,11 @@ void Map<Key, MappedType>::resize(std::size_t newCapacity)
 		this->setError(SHARED_PTR_ALLOCATION_FAILED);
         return ;
     }
-    std::size_t i = 0;
-    while (i < this->_size)
+    std::size_t index = 0;
+    while (index < this->_size)
     {
-        newData[i] = this->_data[i];
-        i++;
+        newData[index] = this->_data[index];
+        index++;
     }
     cma_free(this->_data);
     this->_data = newData;
@@ -254,12 +258,12 @@ void Map<Key, MappedType>::resize(std::size_t newCapacity)
 template <typename Key, typename MappedType>
 std::size_t Map<Key, MappedType>::findIndex(const Key& key) const
 {
-    std::size_t i = 0;
-    while (i < this->_size)
+    std::size_t index = 0;
+    while (index < this->_size)
     {
-        if (this->_data[i].key == key)
-            return (i);
-        i++;
+        if (this->_data[index].key == key)
+            return (index);
+        index++;
     }
     return (this->_size);
 }
