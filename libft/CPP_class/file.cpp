@@ -175,12 +175,17 @@ int ft_file::seek(off_t offset, int whence) noexcept
     return (0);
 }
 
-int	ft_file::printf(const char *format, ...) const
+int	ft_file::printf(const char *format, ...)
 {
     va_list args;
 
-    if (!format)
+	if (!format)
         return (0);
+	if (this->_fd == -1)
+	{
+		this->set_error(FILE_INVALID_FD);
+		return (0);
+	}
     va_start(args, format);
     int printed_chars = pf_printf_fd_v(this->_fd, format, args);
     va_end(args);

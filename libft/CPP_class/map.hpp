@@ -4,7 +4,6 @@
 #include "pair.hpp"
 #include "../CMA/CMA.hpp"
 #include "../Errno/errno.hpp"
-#include "../Libft/libft.hpp"
 #include "nullptr.hpp"
 #include <cstddef>
 
@@ -216,7 +215,7 @@ std::size_t Map<Key, MappedType>::getCapacity() const
 }
 
 template <typename Key, typename MappedType>
-bool Map<Key, MappedType>::getError() const
+int Map<Key, MappedType>::getError() const
 {
     return (this->_error);
 }
