@@ -28,6 +28,8 @@ const char* ft_strerror(int error_code)
 		return ("Bad File descriptor");
 	else if (error_code == FT_EINVAL)
 		return ("Invalid argument");
+	else if (error_code == STRING_MEM_ALLOC_FAIL)
+		return("String memory allocation failed");
 	else if (error_code > ERRNO_OFFSET)
 	{
 		const char *message = strerror(error_code - ERRNO_OFFSET);

@@ -18,6 +18,7 @@ enum PTErrorCode
     MAP_KEY_NOT_FOUND,
 	FILE_INVALID_FD,
 	FT_EINVAL,
+	STRING_MEM_ALLOC_FAIL,
 };
 
 const char* ft_strerror(int error_code);
