@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 
 static int ft_get_damage_reduction(t_char *info, const char *type)
 {

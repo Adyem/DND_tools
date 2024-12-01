@@ -1,5 +1,4 @@
 #include "CMA.hpp"
-#include "../Printf/ft_printf.hpp"
 
 void	cma_free_double(char **content)
 {

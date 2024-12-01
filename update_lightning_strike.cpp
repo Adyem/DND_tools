@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 #include "libft/Libft/libft.hpp"
 
 void ft_npc_update_lightning_strike(t_char *info, const char **input)

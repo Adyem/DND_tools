@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "chaos_goblin.hpp"
 #include "libft/CPP_class/nullptr.hpp"
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 
 void ft_chaos_goblin_turn(t_char *info)

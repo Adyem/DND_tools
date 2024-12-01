@@ -1,4 +1,4 @@
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
 
 void ft_check_initiative(t_char *info)

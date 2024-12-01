@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 
 static bool ft_is_crackback_possible(t_char *info, int number)

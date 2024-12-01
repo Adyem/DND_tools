@@ -6,7 +6,7 @@
 #include <sys/mman.h>
 #include <csignal>
 #include "CMA.hpp"
-#include "../Printf/ft_printf.hpp"
+#include "../Printf/printf.hpp"
 #include "../CPP_class/nullptr.hpp"
 
 void* cma_realloc(void* ptr, size_t new_size, bool critical)

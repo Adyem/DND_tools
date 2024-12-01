@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 
 static int	ft_check_mainhand(t_char *info)
 {

@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 
 static void	ft_update_buff_duration(t_char *info, const char *buff_name, int duration)
 {

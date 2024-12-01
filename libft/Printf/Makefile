@@ -8,9 +8,12 @@ DEBUG_OBJDIR := objs_debug
 TARGET := Printf.a
 DEBUG_TARGET := Printf_debug.a
 
-SRCS := ft_printf.cpp
+SRCS := printf.cpp \
+		format.cpp \
+		print_args.cpp
 
-HEADERS := ft_printf.hpp
+HEADERS := printf.hpp \
+		   printf_internal.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))

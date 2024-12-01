@@ -1,7 +1,7 @@
 #include "file.hpp"
 #include "../Libft/libft.hpp"
 #include "../Errno/errno.hpp"
-#include "../Printf/ft_printf.hpp"
+#include "../Printf/printf_internal.hpp"
 #include <cerrno>
 #include <cstdarg>
 #include <unistd.h>

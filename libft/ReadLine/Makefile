@@ -14,9 +14,12 @@ SRCS := readline.cpp \
 	suggestions.cpp \
 	utilities.cpp \
 	tab_completion.cpp \
-	printeble_char.cpp
+	printeble_char.cpp \
+	raw_mode.cpp \
+	initialize.cpp
 
-HEADERS := readline.hpp
+HEADERS := readline.hpp \
+		   readline_internal.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))

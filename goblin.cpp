@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "goblin.hpp"
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 
 void ft_goblin_turn(t_char *info)

@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/Printf/ft_printf.hpp"
+#include "libft/Printf/printf.hpp"
 
 void ft_set_debuf_blinded(t_char *info, const char **input)
 {
