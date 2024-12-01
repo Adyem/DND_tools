@@ -194,9 +194,9 @@ const ManagedType* SharedPtr<ManagedType>::operator->() const
     if (!managedPointer)
     {
         this->set_error(SHARED_PTR_NULL_PTR);
-        return ft_nullptr;
+        return (ft_nullptr);
     }
-    return managedPointer;
+    return (managedPointer);
 }
 
 template <typename ManagedType>
@@ -206,27 +206,27 @@ const ManagedType& SharedPtr<ManagedType>::operator[](size_t index) const
     {
         this->set_error(SHARED_PTR_INVALID_OPERATION);
         static ManagedType defaultInstance;
-        return defaultInstance;
+        return (defaultInstance);
     }
     if (!managedPointer)
     {
         this->set_error(SHARED_PTR_NULL_PTR);
         static ManagedType defaultInstance;
-        return defaultInstance;
+        return (defaultInstance);
     }
     if (index >= arraySize)
     {
         this->set_error(SHARED_PTR_OUT_OF_BOUNDS);
         static ManagedType defaultInstance;
-        return defaultInstance;
+        return (defaultInstance);
     }
-    return managedPointer[index];
+    return (managedPointer[index]);
 }
 
 template <typename ManagedType>
 ManagedType* SharedPtr<ManagedType>::get()
 {
-    return managedPointer;
+    return (managedPointer);
 }
 
 template <typename ManagedType>
@@ -319,6 +319,7 @@ void SharedPtr<ManagedType>::set_error(int error)
 {
 	ft_errno = error;
 	this->errorCode = error;
+	return ;
 }
 
 template <typename ManagedType>

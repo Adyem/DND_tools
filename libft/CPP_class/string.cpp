@@ -3,7 +3,7 @@
 #include "../Libft/libft.hpp"
 #include "nullptr.hpp"
 
-void ft_string::resize(std::size_t new_capacity) noexcept
+void ft_string::resize(size_t new_capacity) noexcept
 {
     if (new_capacity <= capacity)
         return ;
@@ -132,7 +132,7 @@ void ft_string::clear() noexcept
     return ;
 }
 
-const char* ft_string::at(std::size_t index) const noexcept
+const char* ft_string::at(size_t index) const noexcept
 {
     if (index >= length)
         return (ft_nullptr);
@@ -153,7 +153,7 @@ char* ft_string::print() noexcept
     return (const_cast<char *>(""));
 }
 
-std::size_t ft_string::size() const noexcept
+size_t ft_string::size() const noexcept
 {
     return (length);
 }

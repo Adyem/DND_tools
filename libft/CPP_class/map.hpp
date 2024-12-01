@@ -11,17 +11,17 @@ template <typename Key, typename MappedType>
 class Map
 {
     private:
-        Pair<Key, MappedType>*   _data;
-        std::size_t              _capacity;
-        std::size_t              _size;
-        bool                     _critical;
-        int                      _error;
+        Pair<Key, MappedType>*	_data;
+        size_t					_capacity;
+        size_t					_size;
+        bool					_critical;
+        int						_error;
 
-        void        resize(std::size_t newCapacity);
-        std::size_t findIndex(const Key& key) const;
+        void	resize(size_t newCapacity);
+        size_t	findIndex(const Key& key) const;
 
     public:
-        Map(std::size_t initialCapacity = 10, bool criticality = false);
+        Map(size_t initialCapacity = 10, bool criticality = false);
         Map(const Map& other);
         Map& operator=(const Map& other);
         Map(Map&& other) noexcept;
@@ -34,13 +34,13 @@ class Map
         bool        empty() const;
         void        clear();
         void        setError(int error);
-        std::size_t getSize() const;
-        std::size_t getCapacity() const;
+        size_t		getSize() const;
+        size_t		getCapacity() const;
         int         getError() const;
 };
 
 template <typename Key, typename MappedType>
-Map<Key, MappedType>::Map(std::size_t initialCapacity, bool criticality)
+Map<Key, MappedType>::Map(size_t initialCapacity, bool criticality)
     : _capacity(initialCapacity), _size(0), _critical(criticality), _error(ER_SUCCESS)
 {
     this->_data = static_cast<Pair<Key, MappedType>*>(cma_malloc(sizeof(Pair<Key, MappedType>)
@@ -66,7 +66,7 @@ Map<Key, MappedType>::Map(const Map<Key, MappedType>& other)
             this->_capacity = 0;
             return;
         }
-		std::size_t index = 0;
+		size_t index = 0;
         while (index < this->_size)
 		{
             this->_data[index] = other._data[index];
@@ -112,7 +112,8 @@ Map<Key, MappedType>& Map<Key, MappedType>::operator=(const Map<Key, MappedType>
 
 template <typename Key, typename MappedType>
 Map<Key, MappedType>::Map(Map<Key, MappedType>&& other) noexcept
-    : _data(other._data), _capacity(other._capacity), _size(other._size), _critical(other._critical), _error(other._error)
+    : _data(other._data), _capacity(other._capacity), _size(other._size),
+	_critical(other._critical), _error(other._error)
 {
     other._data = ft_nullptr;
     other._capacity = 0;
@@ -146,7 +147,7 @@ template <typename Key, typename MappedType>
 void Map<Key, MappedType>::insert(const Key& key, const MappedType& value)
 {
     this->_error = ER_SUCCESS;
-    std::size_t index = findIndex(key);
+    size_t index = findIndex(key);
     if (index != this->_size)
     {
         this->_data[index].value = value;
@@ -166,7 +167,7 @@ void Map<Key, MappedType>::insert(const Key& key, const MappedType& value)
 template <typename Key, typename MappedType>
 MappedType* Map<Key, MappedType>::find(const Key& key)
 {
-    std::size_t index = 0;
+    size_t index = 0;
     while (index < this->_size)
     {
         if (this->_data[index].key == key)
@@ -179,7 +180,7 @@ MappedType* Map<Key, MappedType>::find(const Key& key)
 template <typename Key, typename MappedType>
 void Map<Key, MappedType>::remove(const Key& key)
 {
-    std::size_t index = 0;
+    size_t index = 0;
     while (index < this->_size)
     {
         if (this->_data[index].key == key)
@@ -207,13 +208,13 @@ void Map<Key, MappedType>::clear()
 }
 
 template <typename Key, typename MappedType>
-std::size_t Map<Key, MappedType>::getSize() const
+size_t Map<Key, MappedType>::getSize() const
 {
     return (this->_size);
 }
 
 template <typename Key, typename MappedType>
-std::size_t Map<Key, MappedType>::getCapacity() const
+size_t Map<Key, MappedType>::getCapacity() const
 {
     return (this->_capacity);
 }
@@ -233,7 +234,7 @@ void Map<key, MappedType>::setError(int error)
 }
 
 template <typename Key, typename MappedType>
-void Map<Key, MappedType>::resize(std::size_t newCapacity)
+void Map<Key, MappedType>::resize(size_t newCapacity)
 {
     this->_error = ER_SUCCESS;
     Pair<Key, MappedType>* newData = static_cast<Pair<Key,
@@ -243,7 +244,7 @@ void Map<Key, MappedType>::resize(std::size_t newCapacity)
 		this->setError(SHARED_PTR_ALLOCATION_FAILED);
         return ;
     }
-    std::size_t index = 0;
+    size_t index = 0;
     while (index < this->_size)
     {
         newData[index] = this->_data[index];
@@ -256,9 +257,9 @@ void Map<Key, MappedType>::resize(std::size_t newCapacity)
 }
 
 template <typename Key, typename MappedType>
-std::size_t Map<Key, MappedType>::findIndex(const Key& key) const
+size_t Map<Key, MappedType>::findIndex(const Key& key) const
 {
-    std::size_t index = 0;
+    size_t index = 0;
     while (index < this->_size)
     {
         if (this->_data[index].key == key)
