@@ -1,4 +1,5 @@
 #include "readline.hpp"
+#include "readline_internal.hpp"
 #include "../CMA/CMA.hpp"
 
 void rl_clear_history()

@@ -24,6 +24,8 @@ enum PTErrorCode
 	VECTOR_INVALID_PTR,
 	VECTOR_CRITICAL_ERROR,
 	VECTOR_INVALID_OPERATION,
+	FT_EALLOC,
+	FT_ETERM,
 };
 
 const char* ft_strerror(int error_code);

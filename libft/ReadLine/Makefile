@@ -9,7 +9,12 @@ TARGET := ReadLine.a
 DEBUG_TARGET := ReadLine_debug.a
 
 SRCS := readline.cpp \
-	clear_history.cpp
+	clear_history.cpp \
+	handle_keypress.cpp \
+	suggestions.cpp \
+	utilities.cpp \
+	tab_completion.cpp \
+	printeble_char.cpp
 
 HEADERS := readline.hpp
 
