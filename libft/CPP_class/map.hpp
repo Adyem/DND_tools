@@ -19,6 +19,7 @@ class Map
 
         void	resize(size_t newCapacity);
         size_t	findIndex(const Key& key) const;
+        void    setError(int error);
 
     public:
         Map(size_t initialCapacity = 10, bool criticality = false);
@@ -33,7 +34,6 @@ class Map
         void        remove(const Key& key);
         bool        empty() const;
         void        clear();
-        void        setError(int error);
         size_t		getSize() const;
         size_t		getCapacity() const;
         int         getError() const;
