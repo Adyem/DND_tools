@@ -8,7 +8,7 @@
 int rl_initialize_state(readline_state_t *state)
 {
 	state->bufsize = INITIAL_BUFFER_SIZE;
-    state->buffer = (char *)cma_malloc(state->bufsize, true);
+    state->buffer = (char *)cma_calloc(state->bufsize, sizeof(char), true);
     if (!state->buffer)
     {
         pf_printf_fd(2, "Allocation error\n");
