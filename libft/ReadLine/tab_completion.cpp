@@ -60,7 +60,7 @@ static void apply_completion(readline_state_t *state, const char *completion)
 
 static void update_display(const char *prompt, readline_state_t *state)
 {
-    rl_clear_line(prompt, state->prev_buffer_length);
+    rl_clear_line(prompt, state->buffer);
     pf_printf("%s%s", prompt, state->buffer);
     state->prev_buffer_length = ft_strlen(state->buffer);
     fflush(stdout);

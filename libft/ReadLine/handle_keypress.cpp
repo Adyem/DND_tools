@@ -15,7 +15,7 @@ void rl_handle_backspace(readline_state_t *state, const char *prompt)
         memmove(&state->buffer[state->pos], &state->buffer[state->pos + 1],
                 ft_strlen(state->buffer) - state->pos);
         state->prev_buffer_length = ft_strlen(state->buffer);
-        rl_clear_line(prompt, state->prev_buffer_length + 1);
+        rl_clear_line(prompt, state->buffer);
         pf_printf("%s%s", prompt, state->buffer);
         int len_after_cursor = state->prev_buffer_length - state->pos;
         if (len_after_cursor > 0)
@@ -49,13 +49,15 @@ static void rl_handle_right_arrow(readline_state_t *state)
 	return ;
 }
 
-void rl_reset_completion_mode(readline_state_t *state) {
+void rl_reset_completion_mode(readline_state_t *state)
+{
     state->in_completion_mode = 0;
     state->current_match_count = 0;
     state->current_match_index = 0;
 }
 
-int rl_read_escape_sequence(char seq[2]) {
+int rl_read_escape_sequence(char seq[2])
+{
     if (read(STDIN_FILENO, &seq[0], 1) != 1)
         return 0;
     if (read(STDIN_FILENO, &seq[1], 1) != 1)
@@ -68,7 +70,7 @@ static void rl_handle_up_arrow(readline_state_t *state, const char *prompt)
     if (state->history_index > 0)
 	{
         state->history_index--;
-        rl_clear_line(prompt, state->prev_buffer_length);
+        rl_clear_line(prompt, state->buffer);
         state->pos = 0;
         strncpy(state->buffer, history[state->history_index], state->bufsize - 1);
         state->buffer[state->bufsize - 1] = '\0';
@@ -84,7 +86,7 @@ static void rl_handle_down_arrow(readline_state_t *state, const char *prompt)
 	if (state->history_index < history_count - 1)
 	{
         state->history_index++;
-        rl_clear_line(prompt, state->prev_buffer_length);
+        rl_clear_line(prompt, state->buffer);
         state->pos = 0;
         strncpy(state->buffer, history[state->history_index], state->bufsize - 1);
         state->buffer[state->bufsize - 1] = '\0';
@@ -96,7 +98,7 @@ static void rl_handle_down_arrow(readline_state_t *state, const char *prompt)
 	else if (state->history_index == history_count - 1)
 	{
         state->history_index++;
-        rl_clear_line(prompt, state->prev_buffer_length);
+        rl_clear_line(prompt, state->buffer);
         state->pos = 0;
         state->buffer[0] = '\0';
         pf_printf("%s", prompt);

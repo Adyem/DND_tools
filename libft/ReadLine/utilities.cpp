@@ -2,6 +2,7 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include <sys/ioctl.h>
 #include "../CMA/CMA.hpp"
 #include "../Printf/printf.hpp"
 #include "../Libft/libft.hpp"
@@ -21,16 +22,28 @@ char *rl_resize_buffer(char *old_buffer, int current_size, int new_size)
     return (new_buffer);
 }
 
-void rl_clear_line(const char *prompt, int buffer_length)
+int get_terminal_width()
 {
-    pf_printf("\r");
-	pf_printf("\033[K");
-    int line_length = buffer_length + ft_strlen(prompt);
-    for (int i = 0; i < line_length; i++)
-        pf_printf(" ");
-    pf_printf("\r");
-	return ;
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    return w.ws_col;
 }
+
+void rl_clear_line(const char *prompt, const char *buffer)
+{
+    int total_length = ft_strlen(prompt) + ft_strlen(buffer);
+    pf_printf("\r");
+    int term_width = get_terminal_width();
+    int line_count = (total_length / term_width) + 1;
+    for (int i = 0; i < line_count; i++)
+    {
+        pf_printf("\033[2K");
+        if (i < line_count - 1)
+            pf_printf("\033[A");
+    }
+    pf_printf("\r");
+}
+
 
 int rl_read_key()
 {

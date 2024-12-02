@@ -38,7 +38,7 @@ void rl_disable_raw_mode();
 void rl_enable_raw_mode();
 
 //Buffer Management Functions
-void rl_clear_line(const char *prompt, int buffer_length);
+void rl_clear_line(const char *prompt, const char *buffer);
 char *rl_resize_buffer(char *old_buffer, int current_size, int new_size);
 
 //Input Handling Functions
