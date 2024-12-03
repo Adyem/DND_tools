@@ -15,6 +15,7 @@ static const	t_buff BUFF_HUNTERS_MARK =
 	.spell_id = HUNTERS_MARK_ID,
 	.dice_faces_mod = 6,
 	.dice_amount_mod = 1,
+	.extra_mod = 0,
 	.duration = 10,
 	.buff = 0,
 	.error = 0,
@@ -27,6 +28,9 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 		pf_printf_fd(2, "%s hasn't learned the spell", info->name);
     t_buff	buff = BUFF_HUNTERS_MARK;
 	int		error = 0;
+	buff.dice_amount_mod = info->spells.hunters_mark.dice_amount;
+	buff.dice_faces_mod = info->spells.hunters_mark.dice_faces;
+	buff.extra_mod = info->spells.hunters_mark.extra_damage;
 	buff.target = cma_strdup(input[3], false);
 	if (!buff.target)
 	{

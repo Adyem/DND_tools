@@ -28,16 +28,17 @@ typedef struct s_target_data
 
 typedef struct s_buff
 {
-	int							target_amount;
-    char						*target;
-	const char					*spell_name;
-    int							spell_id;
-    int							dice_faces_mod;
-    int							dice_amount_mod;
-    int							duration;
-	int							buff;
-	int							error;
-	cast_buff_debuff			cast_spell;
+	int					target_amount;
+    char				*target;
+	const char			*spell_name;
+    int					spell_id;
+    int					dice_faces_mod;
+    int					dice_amount_mod;
+	int					extra_mod;
+    int					duration;
+	int					buff;
+	int					error;
+	cast_buff_debuff	cast_spell;
 }	t_buff;
 
 
@@ -227,6 +228,7 @@ typedef struct	s_concentration
 	int		spell_id;
 	int		dice_amount_mod;
 	int		dice_faces_mod;
+	int		extra;
 	int		base_mod;
 	int		duration;
 	char	**targets;
