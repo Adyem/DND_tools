@@ -120,5 +120,6 @@ t_name *ft_allocate_memory_name()
     ft_add_node(first_node, &last_node, "maverick", ft_maverick);
     ft_add_node(first_node, &last_node, "grizz", ft_grizz);
     ft_add_node(first_node, &last_node, "frank", ft_frank);
+	ft_add_node(first_node, &last_node, "Ghost", ft_ghost);
     return (first_node);
 }

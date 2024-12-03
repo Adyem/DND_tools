@@ -1,11 +1,10 @@
-#include "character.hpp"
 #include "dnd_tools.hpp"
-#include "grizz.hpp"
+#include "ghost.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/CMA/CMA.hpp"
 
-void ft_grizz_turn(t_char *info)
+void ft_ghost_turn(t_char *info)
 {
 	ft_update_buf(info);
 	if (info->flags.prone)
@@ -14,8 +13,7 @@ void ft_grizz_turn(t_char *info)
 		info->flags.prone = 0;
 	}
 	else
-		pf_printf("The grizz will try to make either a ranged or melee attack during his turn\n");
-	pf_printf("Grizz currently has %d/%d hp\n", info->stats.health, info->dstats.health);
+		pf_printf("The ghost will try to make either a ranged or melee attack during his turn\n");
 	if (info->stats.health < info->dstats.health / 2)
 	{
 		pf_printf("%s uses Roar of the Grizz!\n", info->name);
@@ -23,25 +21,25 @@ void ft_grizz_turn(t_char *info)
     	pf_printf("On a failed save, enemies are frightened, imposing disadvantage on their " \
 				"attack rolls against Grizz until the end of their next turn.\n");
 	}
-	info->flags.reaction_used = 0;
+	pf_printf("Ghost currently has %d/%d hp\n", info->stats.health, info->dstats.health);
 	return ;
 }
 
 static void ft_initialize_gear_and_feats(t_char *info)
 {
-	info->feats.crackback.active = 1;
+	(void)info;
 	return ;
 }
 
-t_char *ft_grizz(const int index, const char **input, t_name *name, int exception)
+t_char *ft_ghost(const int index, const char **input, t_name *name, int exception)
 {
-	int		error;
-	t_char	*info;
+	int error;
+	t_char *info;
 
 	info = (t_char *)cma_calloc(1, sizeof(t_char), false);
 	if (!info)
 		return (ft_nullptr);
-	*info = GRIZZ_INFO;
+	*info = GHOST_INFO;
 	info->name = input[0];
 	info->struct_name = name;
 	info->save_file = cma_strjoin("data/", input[0], false);

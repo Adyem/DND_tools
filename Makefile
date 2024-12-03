@@ -19,6 +19,7 @@ HEADER      = dnd_tools.hpp \
               maverick.hpp \
               frank.hpp \
               grizz.hpp \
+			  ghost.hpp \
 			  dorgar_stoneguard.hpp \
 			  hilda_stormshield.hpp \
 			  murna_claygrip.hpp \
@@ -39,6 +40,7 @@ SRC         = name.cpp \
 			  thorbald_ironpocket.cpp \
               goblin_warmaster.cpp \
               grizz.cpp \
+			  ghost.cpp \
               main.cpp \
               template.cpp \
               npc_stats.cpp \
