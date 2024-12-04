@@ -44,7 +44,7 @@ class SharedPtr
     	void reset(ManagedType* pointer = ft_nullptr, size_t size = 1,
 			bool arrayType = false, bool critical = false);
     	void swap(SharedPtr<ManagedType>& other);
-		void remove(size_t index);
+		void remove(int index);
 		void add(const ManagedType& element);
 };
 
@@ -407,14 +407,14 @@ void SharedPtr<ManagedType>::add(const ManagedType& element)
 }
 
 template <typename ManagedType>
-void SharedPtr<ManagedType>::remove(size_t index)
+void SharedPtr<ManagedType>::remove(int index)
 {
     if (!isArrayType)
     {
         this->set_error(SHARED_PTR_INVALID_OPERATION);
         return ;
     }
-    if (!managedPointer || index >= arraySize)
+    if (!managedPointer || index >= arraySize || index < 0)
     {
         this->set_error(SHARED_PTR_OUT_OF_BOUNDS);
         return ;

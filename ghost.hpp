@@ -97,9 +97,9 @@ static const	t_resistance GHOST_DEFAULT_RESISTANCE =
 
 static const	t_equipment GHOST_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = GHOSTLY_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
+	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
 	.armor = INITIALIZE_EQUIPMENT_ID,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
