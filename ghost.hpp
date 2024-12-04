@@ -1,7 +1,6 @@
 #ifndef GHOST_HPP
 # define GHOST_HPP
 
-#include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
@@ -16,15 +15,15 @@ void	ft_ghost_turn(t_char *info);
 static const	t_stats GHOST_DEFAULT_STATS =
 {
 	.phase = 0,
-	.turn = 1,
+	.turn = 0,
 	.health = 70,
 	.temp_hp = 0,
-	.str = 12,
-	.dex = 18,
+	.str = 8,
+	.dex = 14,
 	.con = 10,
 	.inte = 10,
 	.wis = 10,
-	.cha = 8,
+	.cha = 10,
 };
 
 static const	t_savem GHOST_SAVE_MODS =
