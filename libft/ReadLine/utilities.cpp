@@ -44,7 +44,6 @@ void rl_clear_line(const char *prompt, const char *buffer)
     pf_printf("\r");
 }
 
-
 int rl_read_key()
 {
     int nread;
