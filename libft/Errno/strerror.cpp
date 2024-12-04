@@ -22,6 +22,8 @@ const char* ft_strerror(int error_code)
         return ("Shared pointer allocation failed");
 	else if (error_code == SHARED_PTR_INVALID_OPERATION)
         return ("Invalid operation on shared pointer");
+	else if (error_code == SHARED_PTR_ELEMENT_ALREADDY_ADDED)
+		return ("Element alreaddy on the array");
 	else if (error_code == MAP_ALLOCATION_FAILED)
         return ("Map memory allocation failed");
 	else if (error_code == MAP_KEY_NOT_FOUND)

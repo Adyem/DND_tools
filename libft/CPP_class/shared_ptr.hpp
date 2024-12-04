@@ -44,6 +44,8 @@ class SharedPtr
     	void reset(ManagedType* pointer = ft_nullptr, size_t size = 1,
 			bool arrayType = false, bool critical = false);
     	void swap(SharedPtr<ManagedType>& other);
+		void remove(size_t index);
+		void add(const ManagedType& element);
 };
 
 template <typename ManagedType>
@@ -360,7 +362,88 @@ void SharedPtr<ManagedType>::reset(ManagedType* pointer, size_t size, bool array
 template <typename ManagedType>
 SharedPtr<ManagedType>::operator bool() const noexcept
 {
-    return managedPointer != ft_nullptr;
+    return (managedPointer != ft_nullptr);
+}
+
+template <typename ManagedType>
+void SharedPtr<ManagedType>::add(const ManagedType& element)
+{
+    if (!isArrayType)
+    {
+        this->set_error(SHARED_PTR_INVALID_OPERATION);
+        return ;
+    }
+    if (!managedPointer)
+    {
+        managedPointer = static_cast<ManagedType*>(cma_malloc(sizeof(ManagedType), isCritical));
+        if (!managedPointer)
+        {
+            this->set_error(SHARED_PTR_ALLOCATION_FAILED);
+            return ;
+        }
+        new (managedPointer) ManagedType(element);
+        arraySize = 1;
+        return ;
+    }
+	for (size_t i = 0; i < arraySize; ++i)
+    {
+        if (&managedPointer[i] == &element)
+        {
+			this->set_error(SHARED_PTR_ELEMENT_ALREADDY_ADDED);
+            return ;
+        }
+    }
+    ManagedType* newArray = static_cast<ManagedType*>(cma_realloc(managedPointer,
+				sizeof(ManagedType) * (arraySize + 1), isCritical));
+    if (!newArray)
+    {
+        this->set_error(SHARED_PTR_ALLOCATION_FAILED);
+        return ;
+    }
+    managedPointer = newArray;
+    new (&managedPointer[arraySize]) ManagedType(element);
+    arraySize += 1;
+	return ;
+}
+
+template <typename ManagedType>
+void SharedPtr<ManagedType>::remove(size_t index)
+{
+    if (!isArrayType)
+    {
+        this->set_error(SHARED_PTR_INVALID_OPERATION);
+        return ;
+    }
+    if (!managedPointer || index >= arraySize)
+    {
+        this->set_error(SHARED_PTR_OUT_OF_BOUNDS);
+        return ;
+    }
+    managedPointer[index].~ManagedType();
+    for (size_t i = index; i < arraySize - 1; ++i)
+    {
+        new (&managedPointer[i]) ManagedType(managedPointer[i + 1]);
+        managedPointer[i + 1].~ManagedType();
+    }
+    arraySize -= 1;
+    if (arraySize == 0)
+    {
+        cma_free(managedPointer);
+        managedPointer = ft_nullptr;
+        release();
+    }
+    else
+    {
+        ManagedType* newArray = static_cast<ManagedType*>(cma_realloc(managedPointer,
+					sizeof(ManagedType) * arraySize, isCritical));
+        if (!newArray)
+        {
+            this->set_error(SHARED_PTR_ALLOCATION_FAILED);
+            return ;
+        }
+        managedPointer = newArray;
+    }
+	return ;
 }
 
 #endif

@@ -7,7 +7,7 @@
 #include "readline_internal.hpp"
 #include "readline.hpp"
 
-struct termios orig_termios;
+termios orig_termios;
 char *history[MAX_HISTORY];
 int history_count = 0;
 char *suggestions[MAX_SUGGESTIONS];
@@ -24,26 +24,26 @@ char *rl_readline(const char *prompt)
     fflush(stdout);
     while (1)
     {
-        int c = rl_read_key();
-        if (c != '\t' && state.in_completion_mode)
+        int character = rl_read_key();
+        if (character != '\t' && state.in_completion_mode)
         {
             state.in_completion_mode = 0;
             state.current_match_count = 0;
             state.current_match_index = 0;
         }
-        if (c == '\r' || c == '\n')
+        if (character == '\r' || character == '\n')
         {
             pf_printf("\n");
             break;
         }
-        else if (c == 127 || c == '\b')
+        else if (character == 127 || character == '\b')
             rl_handle_backspace(&state, prompt);
-        else if (c == 27)
+        else if (character == 27)
             rl_handle_escape_sequence(&state, prompt);
-        else if (c == '\t')
+        else if (character == '\t')
             rl_handle_tab_completion(&state, prompt);
-        else if (c >= 32 && c <= 126)
-            rl_handle_printable_char(&state, c, prompt);
+        else if (character >= 32 && character <= 126)
+            rl_handle_printable_char(&state, character, prompt);
     }
     state.buffer[state.pos] = '\0';
     update_history(state.buffer);
