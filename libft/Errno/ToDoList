@@ -1,0 +1,33 @@
+// ft_error.cpp (continued)
+#include "ft_error.h"
+#include <cstring>
+
+// Implement ft_strerror
+const char* ft_strerror(int error_code) {
+    if (error_code >= 0) {
+        // Assume positive codes are standard errno values
+        return std::strerror(error_code);
+    }
+
+    // Handle custom FT_Error codes
+    switch (static_cast<FT_Error>(error_code)) {
+        case FT_Error::NONE:
+            return "No error.";
+        case FT_Error::SOCKET_CREATION_FAILED:
+            return "Failed to create socket.";
+        case FT_Error::SOCKET_BIND_FAILED:
+            return "Failed to bind socket.";
+        case FT_Error::SOCKET_LISTEN_FAILED:
+            return "Failed to listen on socket.";
+        case FT_Error::SOCKET_CONNECT_FAILED:
+            return "Failed to connect to server.";
+        case FT_Error::INVALID_IP_FORMAT:
+            return "Invalid IP address format.";
+        case FT_Error::UNSUPPORTED_SOCKET_TYPE:
+            return "Unsupported socket type.";
+        // Handle additional custom errors here
+        default:
+            return "Unknown error.";
+    }
+}
+
