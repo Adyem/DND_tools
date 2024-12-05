@@ -3,15 +3,15 @@
 
 void ft_initialize_variables(t_target_data *target_data)
 {
-	int i = 0;
+	int index = 0;
 
 	target_data->buff_info = ft_nullptr;
-	while (i < 20)
+	while (index < 20)
 	{
-		target_data->Pchar_name[i] = ft_nullptr;
-		target_data->target[i] = ft_nullptr;
-		target_data->target_copy[i] = ft_nullptr;
-		i++;
+		target_data->Pchar_name[index] = ft_nullptr;
+		target_data->target[index] = ft_nullptr;
+		target_data->target_copy[index] = ft_nullptr;
+		index++;
 	}
 	return ;
 }
