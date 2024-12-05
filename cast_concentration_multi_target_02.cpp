@@ -10,15 +10,15 @@
 
 static void	ft_set_not_save_flag(t_target_data *target_data, t_char *info)
 {
-	int	i = 0;
+	int	index = 0;
 
-	while (i < target_data->buff_info->target_amount)
+	while (index < target_data->buff_info->target_amount)
 	{
-		if (target_data->target[i])
-			target_data->target[i]->flags.dont_save = 1;
-		if (target_data->target_copy[i])
-			target_data->target_copy[i]->flags.dont_save = 1;
-		i++;
+		if (target_data->target[index])
+			target_data->target[index]->flags.dont_save = 1;
+		if (target_data->target_copy[index])
+			target_data->target_copy[index]->flags.dont_save = 1;
+		index++;
 	}
 	info->flags.dont_save = 1;
 	return ;
@@ -26,24 +26,24 @@ static void	ft_set_not_save_flag(t_target_data *target_data, t_char *info)
 
 static int	ft_apply_concentration(t_target_data *target_data, t_char *info, const char **input)
 {
-	int	i = 0;
+	int	index = 0;
 
 	info->concentration.targets = (char **)cma_calloc(target_data->buff_info->target_amount,
 			sizeof(char *), false);
 	if (!info->concentration.targets)
 		return (FAILURE);
-	while (i < target_data->buff_info->target_amount)
+	while (index < target_data->buff_info->target_amount)
 	{
-		if (target_data->target[i])
+		if (target_data->target[index])
 		{
-			if (target_data->buff_info->cast_spell(target_data->target[i], input,
+			if (target_data->buff_info->cast_spell(target_data->target[index], input,
 						target_data->buff_info))
 				return (FAILURE);
-			info->concentration.targets[i] = cma_strdup(target_data->Pchar_name[i], false);
-			if (!info->concentration.targets[i])
+			info->concentration.targets[index] = cma_strdup(target_data->Pchar_name[index], false);
+			if (!info->concentration.targets[index])
 				return (FAILURE);
 		}
-		i++;
+		index++;
 	}
     info->concentration.concentration = 1;
 	info->concentration.extra = target_data->buff_info->extra_mod;

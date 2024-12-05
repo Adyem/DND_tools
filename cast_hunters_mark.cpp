@@ -47,23 +47,20 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 
 static int ft_is_caster_name_present(char **caster_name_list, const char *name)
 {
-    int i;
-
     if (!caster_name_list || !name)
         return (0);
-    i = 0;
-    while (caster_name_list[i])
+    int index = 0;
+    while (caster_name_list[index])
     {
-        if (ft_strcmp_dnd(caster_name_list[i], name) == 0)
+        if (ft_strcmp_dnd(caster_name_list[index], name) == 0)
             return (1);
-        i++;
+        index++;
     }
     return (0);
 }
 
 int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff *buff)
 {
-    int i;
 
     (void)buff;
     if (DEBUG == 1)
@@ -78,47 +75,48 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
         if (ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0]))
             return (2);
     }
+
     if (DEBUG == 1 && target)
     {
-        i = 0;
-        while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[i])
+        int index = 0;
+        while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[index])
         {
-            pf_printf("%s has cast hunter's mark\n", target->debufs.hunters_mark.caster_name[i]);
-            i++;
+            pf_printf("%s has cast hunter's mark\n", target->debufs.hunters_mark.caster_name[index]);
+            index++;
         }
     }
     target->debufs.hunters_mark.amount++;
     return (0);
 }
 
-void	ft_concentration_remove_hunters_mark(t_char *info, t_target_data *targets)
+void	ft_concentration_remove_hunters_mark(t_char *character, t_target_data *targets_data)
 {
-	int i = 0;
-	int	j;
+	int target_index = 0;
+	int caster_index;
 
-	while (targets->target[i])
+	while (targets_data->target[target_index])
 	{
-		j = 0;
-		while (targets->target[i]->debufs.hunters_mark.caster_name[j])
+		caster_index = 0;
+		while (targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index])
 		{
-			if (ft_strcmp_dnd(targets->target[i]->debufs.hunters_mark.caster_name[j],
-						info->name) == 0)
+			if (ft_strcmp_dnd(targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index],
+					character->name) == 0)
 			{
-				cma_free(targets->target[i]->debufs.hunters_mark.caster_name[j]);
-				targets->target[i]->debufs.hunters_mark.caster_name[j] = ft_nullptr;
-				targets->target[i]->debufs.hunters_mark.amount--;
+				cma_free(targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index]);
+				targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index] = ft_nullptr;
+				targets_data->target[target_index]->debufs.hunters_mark.amount--;
 			}
-			j++;
+			caster_index++;
 		}
-		i++;
+		target_index++;
 	}
-    info->concentration.concentration = 0;
-    info->concentration.spell_id = 0;
-    info->concentration.dice_amount_mod = 0;
-    info->concentration.dice_faces_mod = 0;
-    info->concentration.base_mod = 0;
-	cma_free_double(info->concentration.targets);
-    info->concentration.targets = ft_nullptr;
-    info->bufs.chaos_armor.duration = 0;
+	character->concentration.concentration = 0;
+	character->concentration.spell_id = 0;
+	character->concentration.dice_amount_mod = 0;
+	character->concentration.dice_faces_mod = 0;
+	character->concentration.base_mod = 0;
+	character->concentration.targets = ft_nullptr;
+	character->bufs.chaos_armor.duration = 0;
+	cma_free_double(character->concentration.targets);
 	return ;
 }

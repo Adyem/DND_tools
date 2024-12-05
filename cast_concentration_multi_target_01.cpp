@@ -18,12 +18,12 @@ static int ft_check_target_amount(int target_amount)
     return (1);
 }
 
-static char *ft_read_target_name(int i)
+static char *ft_read_target_name(int index)
 {
     char	message[55];
     char	*target_name;
 
-    sprintf(message, "Requesting the name of the %s target", ft_ordinal_suffix(i + 1));
+    sprintf(message, "Requesting the name of the %s target", ft_ordinal_suffix(index + 1));
     target_name = rl_readline(message);
     if (!target_name)
     {

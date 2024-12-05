@@ -86,7 +86,7 @@ ft_file ft_check_and_open(t_target_data *target_data, t_char *info)
 	ft_open_file_write_only(info->save_file, info_save_file);
     if (info_save_file.get_error_code())
     {
-        pf_printf_fd(2, "121-Error opening file: %s", info_save_file.get_error_message());
+        pf_printf_fd(2, "122-Error opening file: %s", info_save_file.get_error_message());
         return (-1);
     }
 	if (DEBUG == 1)

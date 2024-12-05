@@ -252,7 +252,7 @@ void		ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_
 				const char **input);
 
 //hunters mark
-void		ft_concentration_remove_hunters_mark(t_char *info, t_target_data *targets);
+void		ft_concentration_remove_hunters_mark(t_char *character, t_target_data *targets_data);
 int			ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff *buff);
 
 //resistance

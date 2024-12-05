@@ -46,7 +46,6 @@ static int ft_apply_concentration_buff(t_char *info, t_char *target, ft_file sav
 									const char **input, t_buff *buff)
 {
     char	**temp;
-    int		i;
 
     temp = (char **)cma_calloc(2, sizeof(char *), false);
     if (!temp)
@@ -61,14 +60,14 @@ static int ft_apply_concentration_buff(t_char *info, t_char *target, ft_file sav
         return (1);
     }
     info->concentration.targets = temp;
-    i = 0;
-    while (input[3][i])
+    int index = 0;
+    while (input[3][index])
     {
-        info->concentration.targets[0][i] = input[3][i];
-        i++;
+        info->concentration.targets[0][index] = input[3][index];
+        index++;
     }
 	info->concentration.extra = buff->extra_mod;
-    info->concentration.targets[0][i] = '\0';
+    info->concentration.targets[0][index] = '\0';
     info->concentration.concentration = 1;
     info->concentration.spell_id = buff->spell_id;
     info->concentration.dice_faces_mod = buff->dice_faces_mod;
@@ -109,13 +108,13 @@ int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
     ft_file	save_files[2];
 
     if (ft_remove_concentration(info))
-        return(1);
+        return (1);
     if (DEBUG == 1)
         pf_printf("casting hunter's mark %s %s\n", input[0], input[3]);
     if (ft_set_stats_check_name(input[3]))
     {
         if (ft_check_player_character(input[3]))
-            return(1);
+            return (1);
         else
             target = ft_nullptr;
     }
@@ -144,7 +143,7 @@ int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 	if (ft_apply_concentration_buff(info, target, save_files, input, buff))
         return (1);
 	if (ft_cast_concentration_open_file(save_files, info, target))
-        return(1);
+        return (1);
     ft_cast_concentration_cleanup(info, target, save_files, buff, -1);
     return (0);
 }

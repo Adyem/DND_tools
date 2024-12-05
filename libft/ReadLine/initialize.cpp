@@ -2,7 +2,6 @@
 #include <termios.h>
 #include <unistd.h>
 #include "../CMA/CMA.hpp"
-#include "../Printf/printf.hpp"
 #include "readline_internal.hpp"
 
 int rl_initialize_state(readline_state_t *state)
@@ -11,7 +10,6 @@ int rl_initialize_state(readline_state_t *state)
     state->buffer = (char *)cma_calloc(state->bufsize, sizeof(char), true);
     if (!state->buffer)
     {
-        pf_printf_fd(2, "Allocation error\n");
         rl_disable_raw_mode();
         return (1);
     }

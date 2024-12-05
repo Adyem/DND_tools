@@ -9,81 +9,81 @@
 #include <cerrno>
 #include <cstring>
 
-static void ft_malloc_fail_gnl_dnd(char **return_v)
+static void handle_allocation_failure(char **lines)
 {
-    int	i;
+    int index = 0;
 
-    i = 0;
-    if (return_v)
+    if (lines)
     {
-        while (return_v[i])
+        while (lines[index])
         {
-            cma_free(return_v[i]);
-            i++;
+            cma_free(lines[index]);
+            index++;
         }
-        cma_free(return_v);
+        cma_free(lines);
     }
-	return ;
+    return;
 }
 
-static char **ft_realloc_dnd(char **return_v, int index)
+static char **reallocate_lines(char **lines, int new_size)
 {
-    int		i;
-    char	**temp;
+    int index = 0;
+    char **new_lines = (char **)cma_calloc(new_size + 1, sizeof(char *), false);
 
-    i = 0;
-    temp = (char **)cma_calloc(index + 1, sizeof(char *), false);
-    if (!temp)
+    if (!new_lines)
     {
-        ft_malloc_fail_gnl_dnd(return_v);
+        handle_allocation_failure(lines);
         return (ft_nullptr);
     }
-    if (return_v)
+
+    if (lines)
     {
-        while (return_v[i])
+        while (lines[index])
         {
-            temp[i] = return_v[i];
-            i++;
+            new_lines[index] = lines[index];
+            index++;
         }
     }
-    cma_free(return_v);
-    return (temp);
+    cma_free(lines);
+    return (new_lines);
 }
 
-char **ft_read_file_dnd(ft_file &file)
+char **read_file_lines(ft_file &file)
 {
-    char	**return_v = ft_nullptr;
-    char	*line = ft_nullptr;
-    int		i = 0;
+    char **lines = ft_nullptr;
+    char *current_line = ft_nullptr;
+    int line_count = 0;
 
-    while (1)
+    while (true)
     {
-        line = get_next_line(file, false);
-        if (!line)
-            break ;
-		if (DEBUG == 1)
-			pf_printf("LINE = %s", line);
-        i++;
-        return_v = ft_realloc_dnd(return_v, i);
-        if (!return_v)
+        current_line = get_next_line(file, false);
+        if (!current_line)
+            break;
+
+        if (DEBUG == 1)
+            pf_printf("LINE = %s", current_line);
+
+        line_count++;
+        lines = reallocate_lines(lines, line_count);
+        if (!lines)
         {
-            cma_free(line);
-			get_next_line(file, false);
-			return (ft_nullptr);
+            cma_free(current_line);
+            get_next_line(file, false);
+            return (ft_nullptr);
         }
-        return_v[i - 1] = line;
+        lines[line_count - 1] = current_line;
     }
-    return (return_v);
+    return (lines);
 }
 
-char	**ft_open_and_read(const char *file_name)
+char **open_and_read_file(const char *file_name)
 {
-	ft_file file(file_name, O_RDONLY);
+    ft_file file(file_name, O_RDONLY);
 
-	if (file.get_error_code())
-	{
-		pf_printf_fd(2, "error opening file %s: %s", file_name, file.get_error_message());
-		return (ft_nullptr);
-	}
-	return (ft_read_file_dnd(file));
+    if (file.get_error_code())
+    {
+        pf_printf_fd(2, "120-Error opening file %s: %s", file_name, file.get_error_message());
+        return (ft_nullptr);
+    }
+    return (read_file_lines(file));
 }

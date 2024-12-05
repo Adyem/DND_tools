@@ -9,19 +9,19 @@ void ft_ghost_turn(t_char *info)
 	ft_update_buf(info);
 	if (info->flags.prone)
 	{
-		pf_printf("%s will use his/her action to stand up\n", info->name);
+		pf_printf("%s uses their action to stand up.\n", info->name);
 		info->flags.prone = 0;
 	}
 	else
-		pf_printf("The ghost will try to make either a ranged or melee attack during his turn\n");
+		pf_printf("%s attempts to make either a ranged or melee attack during their turn.\n", info->name);
 	if (info->stats.health < info->dstats.health / 2)
 	{
-		pf_printf("%s uses Roar of the Grizz!\n", info->name);
-    	pf_printf("All enemies within 15 feet must make a DC 14 Wisdom saving throw.\n");
-    	pf_printf("On a failed save, enemies are frightened, imposing disadvantage on their " \
-				"attack rolls against Grizz until the end of their next turn.\n");
+		pf_printf("%s lets out a terrifying screech!\n", info->name);
+		pf_printf("All enemies within 15 feet must make a DC 14 Wisdom saving throw.\n");
+		pf_printf("On a failed save, enemies are frightened and have disadvantage on their attack rolls " \
+				  "against %s until the end of their next turn.\n", info->name);
 	}
-	pf_printf("Ghost currently has %d/%d hp\n", info->stats.health, info->dstats.health);
+	pf_printf("%s currently has %d/%d HP.\n", info->name, info->stats.health, info->dstats.health);
 	return ;
 }
 
