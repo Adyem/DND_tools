@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/socket_class.o",
+      "socket_class.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Networking",
+    "file": "/home/adyem/DND_tools/libft/Networking/socket_class.cpp",
+    "output": "/home/adyem/DND_tools/libft/Networking/objs/socket_class.o"
+  }
+]
