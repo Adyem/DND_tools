@@ -53,15 +53,14 @@ int	ft_check_string_number(char *string)
 
 void	ft_free_parse(char **to_parse)
 {
-	int	i;
+	int	index = 0;
 
-	i = 0;
 	if (to_parse)
 	{
-		while (to_parse[i])
+		while (to_parse[index])
 		{
 			cma_free(to_parse[1]);
-			i++;
+			index++;
 		}
 		cma_free(to_parse);
 	}

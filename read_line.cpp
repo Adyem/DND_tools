@@ -62,23 +62,21 @@ void ft_request_input(t_name *name)
 {
     char *input_string;
     char **input;
-    int found;
-    int i;
 
     while ((input_string = rl_readline("dndtools: ")) != ft_nullptr)
     {
         input = ft_parse_input(input_string);
         if (!input)
             continue ;
-        i = ft_double_char_length((const char **)input);
-        found = ft_handle_builtins(input, i, name, input_string);
+        int index = ft_double_char_length((const char **)input);
+        int found = ft_handle_builtins(input, index, name, input_string);
         if (found == -1)
 		{
 			rl_clear_history();
             return ;
 		}
         else if (!found)
-            found = ft_handle_custom_commands(input, i, name);
+            found = ft_handle_custom_commands(input, index, name);
         if (!found)
 			pf_printf_fd(2, "007-Error unknown command: %s\n", input_string);
         ft_free_input(input, input_string);

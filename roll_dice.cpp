@@ -5,24 +5,21 @@
 
 int ft_dice_roll(int number, int faces)
 {
-    int roll;
-    int result;
-    int i;
 
     if (faces < 1 || number < 1)
         return (-1);
     if (faces == 1)
         return (number);
-    result = 0;
-    i = 0;
-    roll = 0;
-    while (i < number)
+    int result = 0;
+    int index = 0;
+    int roll = 0;
+    while (index < number)
     {
         roll = rand();
         if (result > INT_MAX - ((roll % faces) + 1))
             return -1;
         result += (roll % faces) + 1;
-        i++;
+        index++;
     }
     if (DEBUG == 1)
         pf_printf_fd(2, "The dice rolled %d on %d faces with %d amount of dice\n", result, faces, number);
