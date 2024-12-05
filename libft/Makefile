@@ -8,32 +8,35 @@ DEBUG_OBJDIR := objs_debug
 TARGET := Full_Libft.a
 DEBUG_TARGET := Full_Libft_debug.a
 
-SUBDIRS := CMA \
-           GetNextLine \
-           Libft \
-           Printf \
-           ReadLine \
-           PThread \
-		   CPP_class \
-		   Errno
+SUBDIRS := 	CMA \
+           	GetNextLine \
+           	Libft \
+           	Printf \
+           	ReadLine \
+           	PThread \
+			CPP_class \
+			Errno \
+			Networking
 
-LIBS := CMA/CustomMemoryAllocator.a \
-        GetNextLine/GetNextLine.a \
-        Libft/LibFT.a \
-        Printf/Printf.a \
-        ReadLine/ReadLine.a \
-        PThread/PThread.a \
-		CPP_class/CPP_class.a \
-		Errno/errno.a
+LIBS := 	CMA/CustomMemoryAllocator.a \
+        	GetNextLine/GetNextLine.a \
+        	Libft/LibFT.a \
+        	Printf/Printf.a \
+        	ReadLine/ReadLine.a \
+        	PThread/PThread.a \
+			CPP_class/CPP_class.a \
+			Errno/errno.a \
+			Networking/networking.a
 
-DEBUG_LIBS := CMA/CustomMemoryAllocator_debug.a \
-              GetNextLine/GetNextLine_debug.a \
-              Libft/LibFT_debug.a \
-              Printf/Printf_debug.a \
-              ReadLine/ReadLine_debug.a \
-              PThread/PThread_debug.a \
-			  CPP_class/CPP_class_debug.a \
-			  Errno/errno_debug.a
+DEBUG_LIBS := 	CMA/CustomMemoryAllocator_debug.a \
+              	GetNextLine/GetNextLine_debug.a \
+              	Libft/LibFT_debug.a \
+              	Printf/Printf_debug.a \
+              	ReadLine/ReadLine_debug.a \
+              	PThread/PThread_debug.a \
+				CPP_class/CPP_class_debug.a \
+				Errno/errno_debug.a \
+				Networking/networking_debug.a
 
 CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
 
@@ -108,6 +111,12 @@ ReadLine/ReadLine_debug.a:
 
 PThread/PThread_debug.a:
 	$(MAKE) -C PThread debug
+
+Networking/networking.a:
+	$(MAKE) -C Networking
+
+Networking/networking_debug.a:
+	$(MAKE) -C Networking debug
 
 clean:
 	@for dir in $(SUBDIRS); do \

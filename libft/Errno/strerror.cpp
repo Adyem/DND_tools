@@ -49,33 +49,37 @@ const char* ft_strerror(int error_code)
 	else if (error_code == FT_ETERM)
 		return ("Terminal error");
 	else if (error_code == SOCKET_CREATION_FAILED)
-        return "Failed to create socket.";
+        return ("Failed to create socket.");
 	else if (error_code == SOCKET_BIND_FAILED)
-        return "Failed to bind socket.";
+        return ("Failed to bind socket.");
 	else if (error_code == SOCKET_LISTEN_FAILED)
-        return "Failed to listen on socket.";
+        return ("Failed to listen on socket.");
 	else if (error_code == SOCKET_CONNECT_FAILED)
-        return "Failed to connect to server.";
+        return ("Failed to connect to server.");
 	else if (error_code == INVALID_IP_FORMAT)
-        return "Invalid IP address format.";
+        return ("Invalid IP address format.");
 	else if (error_code == UNSUPPORTED_SOCKET_TYPE)
-        return "Unsupported socket type.";
+        return ("Unsupported socket type.");
 	else if (error_code == SOCKET_ACCEPT_FAILED)
-        return "Failed to accept connection.";
+        return ("Failed to accept connection.");
 	else if (error_code == SOCKET_SEND_FAILED)
-        return "Failed to send data through socket.";
+        return ("Failed to send data through socket.");
 	else if (error_code == SOCKET_RECEIVE_FAILED)
-		return "Failed to receive data from socket.";
+		return ("Failed to receive data from socket.");
 	else if (error_code == SOCKET_CLOSE_FAILED)
-        return "Failed to close socket.";
+        return ("Failed to close socket.");
+	else if (error_code == SOCKET_INVALID_CONFIGURATION)
+		return ("Socket invalid configuration");
+	else if (error_code == SOCKET_UNSUPPORTED_TYPE)
+		return ("Socket unsupported type");
 	else if (error_code > ERRNO_OFFSET)
 	{
         int standard_errno = error_code - ERRNO_OFFSET;
         const char *message = strerror(standard_errno);
         if (message)
             return message;
-        return "Unrecognized error code";
+        return ("Unrecognized error code");
 	}
 	else
-        return "Unrecognized error code";
+        return ("Unrecognized error code");
 }
