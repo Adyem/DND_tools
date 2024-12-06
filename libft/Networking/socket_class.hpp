@@ -28,6 +28,7 @@ class ft_socket
 		struct sockaddr_storage _address;
     	int socket_fd;
     	int _error;
+
     	int setup_server(const SocketConfig &config);
     	int setup_client(const SocketConfig &config);
 
