@@ -2,7 +2,6 @@
 #define FT_SOCKET_H
 
 #include "networking.hpp"
-#include "../CPP_class/string.hpp"
 
 class ft_socket
 {
@@ -18,8 +17,8 @@ class ft_socket
 	private:
     	int socket_fd;
     	int _error;
-    	void setup_server(const ft_string &ip, int port, int backlog);
-    	void setup_client(const ft_string &ip, int port);
+    	int setup_server(const SocketConfig &config);
+    	int setup_client(const SocketConfig &config);
 
     	ft_socket(const ft_socket &other) = delete;
 		ft_socket(ft_socket &&other) = delete;

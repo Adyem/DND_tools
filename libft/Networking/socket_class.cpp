@@ -3,112 +3,151 @@
 #include "../CPP_class/string.hpp"
 #include <cstring>
 #include <cerrno>
+#include <fcntl.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <sys/socket.h>
 
-ft_socket::ft_socket(const SocketConfig &config) : socket_fd(-1), _error(0)
+ft_socket::ft_socket(const SocketConfig &config) : socket_fd(-1), _error(ER_SUCCESS)
 {
-	if (config.type == SocketType::SERVER)
-        setup_server(config.ip, config.port, config.backlog);
-	else if (config.type == SocketType::CLIENT)
-        setup_client(config.ip, config.port);
-	else
-	{
+    if (config.type == SocketType::SERVER)
+        setup_server(config);
+    else if (config.type == SocketType::CLIENT)
+        setup_client(config);
+    else
+    {
         ft_errno = SOCKET_UNSUPPORTED_TYPE;
         _error = ft_errno;
     }
-	return ;
 }
 
-ft_socket::~ft_socket()
+int ft_socket::setup_server(const SocketConfig &config)
 {
-	if (socket_fd >= 0)
-        close(socket_fd);
-	return ;
-}
-
-void ft_socket::setup_server(const ft_string &ip, int port, int backlog)
-{
-    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+    socket_fd = socket(config.address_family, SOCK_STREAM, config.protocol);
     if (socket_fd < 0)
-	{
+    {
         ft_errno = errno + ERRNO_OFFSET;
         _error = ft_errno;
-        return ;
+        return _error;
     }
-    int opt = 1;
-    if (setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
-	{
-        ft_errno = errno + ERRNO_OFFSET;
-        _error = ft_errno;
-        close(socket_fd);
-        socket_fd = -1;
-        return ;
+    if (config.reuse_address)
+    {
+        int opt = 1;
+        if (setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
+        {
+            ft_errno = errno + ERRNO_OFFSET;
+            _error = ft_errno;
+            close(socket_fd);
+            socket_fd = -1;
+            return _error;
+        }
     }
-    sockaddr_in addr;
+    if (config.non_blocking)
+    {
+        int flags = fcntl(socket_fd, F_GETFL, 0);
+        if (flags == -1)
+        {
+            ft_errno = errno + ERRNO_OFFSET;
+            _error = ft_errno;
+            close(socket_fd);
+            socket_fd = -1;
+            return _error;
+        }
+        if (fcntl(socket_fd, F_SETFL, flags | O_NONBLOCK) == -1)
+        {
+            ft_errno = errno + ERRNO_OFFSET;
+            _error = ft_errno;
+            close(socket_fd);
+            socket_fd = -1;
+            return _error;
+        }
+    }
+    if (config.recv_timeout > 0)
+    {
+        struct timeval tv;
+        tv.tv_sec = config.recv_timeout / 1000;
+        tv.tv_usec = (config.recv_timeout % 1000) * 1000;
+        if (setsockopt(socket_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0)
+        {
+            ft_errno = errno + ERRNO_OFFSET;
+            _error = ft_errno;
+            close(socket_fd);
+            socket_fd = -1;
+            return _error;
+        }
+    }
+    if (config.send_timeout > 0)
+    {
+        struct timeval tv;
+        tv.tv_sec = config.send_timeout / 1000;
+        tv.tv_usec = (config.send_timeout % 1000) * 1000;
+        if (setsockopt(socket_fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv)) < 0)
+        {
+            ft_errno = errno + ERRNO_OFFSET;
+            _error = ft_errno;
+            close(socket_fd);
+            socket_fd = -1;
+            return _error;
+        }
+    }
+    struct sockaddr_storage addr;
     std::memset(&addr, 0, sizeof(addr));
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(port);
-    if (inet_pton(AF_INET, ip.c_str(), &addr.sin_addr) <= 0)
-	{
-        ft_errno = SOCKET_INVALID_CONFIGURATION;
-        _error = ft_errno;
-        close(socket_fd);
-        socket_fd = -1;
-        return ;
-    }
-    if (::bind(socket_fd, (struct sockaddr*)&addr, sizeof(addr)) < 0)
-	{
-        ft_errno = errno + ERRNO_OFFSET;
-        _error = ft_errno;
-        close(socket_fd);
-        socket_fd = -1;
-        return ;
-    }
-    if (::listen(socket_fd, backlog) < 0)
-	{
-        ft_errno = errno + ERRNO_OFFSET;
-        _error = ft_errno;
-        close(socket_fd);
-        socket_fd = -1;
-        return ;
-    }
-    _error = ER_SUCCESS;
-	return ;
-}
 
-void ft_socket::setup_client(const ft_string &ip, int port)
-{
-    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (socket_fd < 0)
-	{
-        ft_errno = errno + ERRNO_OFFSET;
-        _error = ft_errno;
-        return ;
+    if (config.address_family == AF_INET)
+    {
+        struct sockaddr_in *addr_in = (struct sockaddr_in*)&addr;
+        addr_in->sin_family = AF_INET;
+        addr_in->sin_port = htons(config.port);
+        if (inet_pton(AF_INET, config.ip.c_str(), &addr_in->sin_addr) <= 0)
+        {
+            ft_errno = SOCKET_INVALID_CONFIGURATION;
+            _error = ft_errno;
+            close(socket_fd);
+            socket_fd = -1;
+            return _error;
+        }
     }
-    sockaddr_in server_addr;
-    std::memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(port);
-    if (inet_pton(AF_INET, ip.c_str(), &server_addr.sin_addr) <= 0)
-	{
+    else if (config.address_family == AF_INET6)
+    {
+        struct sockaddr_in6 *addr_in6 = (struct sockaddr_in6*)&addr;
+        addr_in6->sin6_family = AF_INET6;
+        addr_in6->sin6_port = htons(config.port);
+        if (inet_pton(AF_INET6, config.ip.c_str(), &addr_in6->sin6_addr) <= 0)
+        {
+            ft_errno = SOCKET_INVALID_CONFIGURATION;
+            _error = ft_errno;
+            close(socket_fd);
+            socket_fd = -1;
+            return _error;
+        }
+    }
+    else
+    {
         ft_errno = SOCKET_INVALID_CONFIGURATION;
         _error = ft_errno;
         close(socket_fd);
         socket_fd = -1;
-        return ;
+        return _error;
     }
-    if (::connect(socket_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0)
-	{
+    if (::bind(socket_fd, (struct sockaddr*)&addr, (config.address_family == AF_INET)
+				? sizeof(sockaddr_in) : sizeof(sockaddr_in6)) < 0)
+    {
         ft_errno = errno + ERRNO_OFFSET;
         _error = ft_errno;
         close(socket_fd);
         socket_fd = -1;
-        return ;
+        return _error;
+    }
+    if (::listen(socket_fd, config.backlog) < 0)
+    {
+        ft_errno = errno + ERRNO_OFFSET;
+        _error = ft_errno;
+        close(socket_fd);
+        socket_fd = -1;
+        return _error;
     }
     _error = ER_SUCCESS;
-	return ;
+    return _error;
 }
 
 int ft_socket::send_data(const void *data, size_t size, int flags)
