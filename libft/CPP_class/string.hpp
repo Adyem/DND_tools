@@ -20,7 +20,9 @@ class ft_string
 	    ft_string() noexcept;
 	    ft_string(const char *init_str, bool crit = false) noexcept;
 	    ft_string(const ft_string& other) noexcept;
+		ft_string(ft_string&& other) noexcept;
 	    ft_string &operator=(const ft_string& other) noexcept;
+		ft_string &operator=(ft_string&& other) noexcept;
 		ft_string &operator=(const char *&other) noexcept;
 	    ~ft_string();
 
@@ -34,6 +36,7 @@ class ft_string
 		int			getError() const noexcept;
 		const char	*errorStr() const noexcept;
 	    bool		isCritical() const noexcept;
+		void		move(ft_string& other) noexcept;
 };
 
 #endif

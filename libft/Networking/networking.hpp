@@ -30,24 +30,12 @@ class SocketConfig
     	ft_string multicast_interface;
 
     	SocketConfig();
-    	SocketConfig(SocketType type,
-    	const ft_string& ip,
-    	int port,
-    	int	backlog,
-    	int protocol,
-    	int address_family,
-    	bool reuse_address,
-    	bool non_blocking,
-    	int recv_timeout,
-    	int send_timeout,
-    	const ft_string& multicast_group = "",
-    	const ft_string& multicast_interface = "");
     	~SocketConfig();
 
-    	SocketConfig(const SocketConfig& other) = default;
-    	SocketConfig(SocketConfig&& other) noexcept = default;
-    	SocketConfig& operator=(const SocketConfig& other) = default;
-    	SocketConfig& operator=(SocketConfig&& other) noexcept = default;
+    	SocketConfig(const SocketConfig& other) noexcept;
+    	SocketConfig(SocketConfig&& other) noexcept;
+    	SocketConfig& operator=(const SocketConfig& other) noexcept;
+    	SocketConfig& operator=(SocketConfig&& other) noexcept;
 
 		int getError();
 		const char *getStrError();

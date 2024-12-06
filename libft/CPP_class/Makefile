@@ -8,7 +8,8 @@ DEBUG_OBJDIR := objs_debug
 TARGET := CPP_class.a
 DEBUG_TARGET := CPP_class_debug.a
 
-SRCS :=  	 string.cpp \
+SRCS :=  string_constructors.cpp \
+		 string_methods.cpp \
 		 nullptr.cpp \
 		 file.cpp
 
