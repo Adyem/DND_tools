@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 
-ft_socket::ft_socket(const SocketConfig &config)
+ft_socket::ft_socket(const SocketConfig &config) : socket_fd(-1), _error(0)
 {
 	if (config.type == SocketType::SERVER)
         setup_server(config.ip, config.port, config.backlog);
@@ -23,27 +23,27 @@ ft_socket::ft_socket(const SocketConfig &config)
 
 ft_socket::~ft_socket()
 {
-	if (sock_fd >= 0)
-        close(sock_fd);
+	if (socket_fd >= 0)
+        close(socket_fd);
 	return ;
 }
 
 void ft_socket::setup_server(const ft_string &ip, int port, int backlog)
 {
-    sock_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock_fd < 0)
+    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (socket_fd < 0)
 	{
         ft_errno = errno + ERRNO_OFFSET;
         _error = ft_errno;
         return ;
     }
     int opt = 1;
-    if (setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
+    if (setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
 	{
         ft_errno = errno + ERRNO_OFFSET;
         _error = ft_errno;
-        close(sock_fd);
-        sock_fd = -1;
+        close(socket_fd);
+        socket_fd = -1;
         return ;
     }
     sockaddr_in addr;
@@ -54,24 +54,24 @@ void ft_socket::setup_server(const ft_string &ip, int port, int backlog)
 	{
         ft_errno = SOCKET_INVALID_CONFIGURATION;
         _error = ft_errno;
-        close(sock_fd);
-        sock_fd = -1;
+        close(socket_fd);
+        socket_fd = -1;
         return ;
     }
-    if (::bind(sock_fd, (struct sockaddr*)&addr, sizeof(addr)) < 0)
+    if (::bind(socket_fd, (struct sockaddr*)&addr, sizeof(addr)) < 0)
 	{
         ft_errno = errno + ERRNO_OFFSET;
         _error = ft_errno;
-        close(sock_fd);
-        sock_fd = -1;
+        close(socket_fd);
+        socket_fd = -1;
         return ;
     }
-    if (::listen(sock_fd, backlog) < 0)
+    if (::listen(socket_fd, backlog) < 0)
 	{
         ft_errno = errno + ERRNO_OFFSET;
         _error = ft_errno;
-        close(sock_fd);
-        sock_fd = -1;
+        close(socket_fd);
+        socket_fd = -1;
         return ;
     }
     _error = ER_SUCCESS;
@@ -80,8 +80,8 @@ void ft_socket::setup_server(const ft_string &ip, int port, int backlog)
 
 void ft_socket::setup_client(const ft_string &ip, int port)
 {
-    sock_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock_fd < 0)
+    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (socket_fd < 0)
 	{
         ft_errno = errno + ERRNO_OFFSET;
         _error = ft_errno;
@@ -95,16 +95,16 @@ void ft_socket::setup_client(const ft_string &ip, int port)
 	{
         ft_errno = SOCKET_INVALID_CONFIGURATION;
         _error = ft_errno;
-        close(sock_fd);
-        sock_fd = -1;
+        close(socket_fd);
+        socket_fd = -1;
         return ;
     }
-    if (::connect(sock_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0)
+    if (::connect(socket_fd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0)
 	{
         ft_errno = errno + ERRNO_OFFSET;
         _error = ft_errno;
-        close(sock_fd);
-        sock_fd = -1;
+        close(socket_fd);
+        socket_fd = -1;
         return ;
     }
     _error = ER_SUCCESS;
@@ -113,13 +113,13 @@ void ft_socket::setup_client(const ft_string &ip, int port)
 
 int ft_socket::send_data(const void *data, size_t size, int flags)
 {
-    if (sock_fd < 0)
+    if (socket_fd < 0)
 	{
         ft_errno = SOCKET_INVALID_CONFIGURATION;
         _error = ft_errno;
         return (-1);
     }
-    int bytes_sent = ::send(sock_fd, data, size, flags);
+    int bytes_sent = ::send(socket_fd, data, size, flags);
     if (bytes_sent < 0)
 	{
         ft_errno = errno + ERRNO_OFFSET;
@@ -132,13 +132,13 @@ int ft_socket::send_data(const void *data, size_t size, int flags)
 
 int ft_socket::receive_data(void *buffer, size_t size, int flags)
 {
-    if (sock_fd < 0)
+    if (socket_fd < 0)
 	{
         ft_errno = FT_EINVAL;
         _error = ft_errno;
         return (-1);
 	} 
-    int bytes_received = ::recv(sock_fd, buffer, size, flags);
+    int bytes_received = ::recv(socket_fd, buffer, size, flags);
     if (bytes_received < 0)
 	{
         ft_errno = errno + ERRNO_OFFSET;
@@ -151,11 +151,11 @@ int ft_socket::receive_data(void *buffer, size_t size, int flags)
 
 bool ft_socket::close_socket()
 {
-    if (sock_fd >= 0)
+    if (socket_fd >= 0)
 	{
-        if (::close(sock_fd) == 0)
+        if (::close(socket_fd) == 0)
 		{
-            sock_fd = -1;
+            socket_fd = -1;
             _error = ER_SUCCESS;
             return (true);
         }

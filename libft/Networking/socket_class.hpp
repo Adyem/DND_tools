@@ -2,7 +2,6 @@
 #define FT_SOCKET_H
 
 #include "networking.hpp"
-#include "../Errno/errno.hpp"
 #include "../CPP_class/string.hpp"
 
 class ft_socket
@@ -17,8 +16,8 @@ class ft_socket
     	const char* get_error_message() const;
 
 	private:
-    	int sock_fd = -1;
-    	int _error = ER_SUCCESS;
+    	int socket_fd;
+    	int _error;
     	void setup_server(const ft_string &ip, int port, int backlog);
     	void setup_client(const ft_string &ip, int port);
 
