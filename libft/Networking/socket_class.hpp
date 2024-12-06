@@ -15,6 +15,15 @@ class ft_socket
     	const char* get_error_message() const;
 
 	private:
+		int create_socket(const SocketConfig &config);
+    	int set_reuse_address(const SocketConfig &config);
+    	int set_non_blocking(const SocketConfig &config);
+    	int set_timeouts(const SocketConfig &config);
+    	int configure_address(const SocketConfig &config, struct sockaddr_storage &addr);
+    	int bind_socket(const struct sockaddr_storage &addr, const SocketConfig &config);
+    	int listen_socket(const SocketConfig &config);
+    	void handle_error(int error_code);
+	
     	int socket_fd;
     	int _error;
     	int setup_server(const SocketConfig &config);

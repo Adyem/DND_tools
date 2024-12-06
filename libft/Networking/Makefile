@@ -8,9 +8,12 @@ DEBUG_OBJDIR := objs_debug
 TARGET := networking.a
 DEBUG_TARGET := networking_debug.a
 
-SRCS := socket_class.cpp
+SRCS := socket_class.cpp \
+		networking.cpp \
+		setup_server.cpp
 
-HEADERS := socket_class.hpp
+HEADERS := socket_class.hpp \
+		   networking.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))
