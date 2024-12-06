@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/math.hpp"
+#include "libft/Template/math.hpp"
 
 typedef struct s_damage_info
 {

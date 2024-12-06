@@ -15,7 +15,6 @@ SRCS :=  string_constructors.cpp \
 
 HEADERS := 	   string.hpp \
 		   nullptr.hpp \
-		   shared_ptr.hpp \
 		   file.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
