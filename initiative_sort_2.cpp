@@ -21,7 +21,7 @@ void ft_initiative_print(void)
         pf_printf("Error opening file: %s\n", file.get_error_message());
         return ;
     }
-    content = ft_read_file_dnd(file);
+    content = ft_read_file_lines(file);
     if (!content)
     {
         pf_printf("261-Error allocating memory\n");

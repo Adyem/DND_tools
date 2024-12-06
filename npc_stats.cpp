@@ -21,7 +21,7 @@ int ft_npc_open_file(t_char *info)
     }
 	if (DEBUG == 1)
         pf_printf("Opening file %s on fd %d\n", info->save_file, info_file.get_fd());
-    content = ft_read_file_dnd(info_file);
+    content = ft_read_file_lines(info_file);
     if (DEBUG == 1)
         pf_printf("Content is at address %p\n", content);
     if (!content)

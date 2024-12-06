@@ -67,7 +67,7 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
     t_pc *player;
     int error;
 
-    content = ft_read_file_dnd(file);
+    content = ft_read_file_lines(file);
     if (!content)
         return (t_pc *)ft_initiative_pc_error("253 Error allocating memory");
     player = (t_pc *)cma_malloc(sizeof(t_pc), false);

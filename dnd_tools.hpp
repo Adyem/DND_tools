@@ -262,8 +262,8 @@ int			ft_get_resistance(t_char *info, const char *type);
 void		ft_reroll(t_char *info, int *result);
 
 //open and read
-char		**ft_read_file_dnd(ft_file &file);
-char		**ft_open_and_read(const char *file);
+char		**ft_read_file_lines(ft_file &file);
+char		**ft_open_and_read_file(const char *file_name);
 int			ft_open_file_write_only(const char *filename, ft_file &file);
 
 //utils

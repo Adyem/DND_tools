@@ -36,7 +36,7 @@ static char	**ft_open_and_read_initiative()
         pf_printf("280-Error opening file: %s\n", initiative_file.get_error_message());
         return (ft_nullptr);
     }
-    content = ft_read_file_dnd(initiative_file);
+    content = ft_read_file_lines(initiative_file);
     if (!content)
     {
         pf_printf("281-Error opening file: %s\n", strerror(errno));

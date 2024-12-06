@@ -9,7 +9,7 @@
 #include <cerrno>
 #include <cstring>
 
-static void handle_allocation_failure(char **lines)
+static void ft_handle_allocation_failure(char **lines)
 {
     int index = 0;
 
@@ -25,14 +25,14 @@ static void handle_allocation_failure(char **lines)
     return;
 }
 
-static char **reallocate_lines(char **lines, int new_size)
+static char **ft_reallocate_lines(char **lines, int new_size)
 {
     int index = 0;
     char **new_lines = (char **)cma_calloc(new_size + 1, sizeof(char *), false);
 
     if (!new_lines)
     {
-        handle_allocation_failure(lines);
+        ft_handle_allocation_failure(lines);
         return (ft_nullptr);
     }
 
@@ -48,7 +48,7 @@ static char **reallocate_lines(char **lines, int new_size)
     return (new_lines);
 }
 
-char **read_file_lines(ft_file &file)
+char **ft_read_file_lines(ft_file &file)
 {
     char **lines = ft_nullptr;
     char *current_line = ft_nullptr;
@@ -64,7 +64,7 @@ char **read_file_lines(ft_file &file)
             pf_printf("LINE = %s", current_line);
 
         line_count++;
-        lines = reallocate_lines(lines, line_count);
+        lines = ft_reallocate_lines(lines, line_count);
         if (!lines)
         {
             cma_free(current_line);
@@ -76,7 +76,7 @@ char **read_file_lines(ft_file &file)
     return (lines);
 }
 
-char **open_and_read_file(const char *file_name)
+char **ft_open_and_read_file(const char *file_name)
 {
     ft_file file(file_name, O_RDONLY);
 
@@ -85,5 +85,5 @@ char **open_and_read_file(const char *file_name)
         pf_printf_fd(2, "120-Error opening file %s: %s", file_name, file.get_error_message());
         return (ft_nullptr);
     }
-    return (read_file_lines(file));
+    return (ft_read_file_lines(file));
 }

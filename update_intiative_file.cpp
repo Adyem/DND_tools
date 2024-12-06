@@ -23,7 +23,7 @@ void ft_initiative_remove(t_char *info)
             pf_printf("File does not exist: data/data--initiative\n");
         return ;
     }
-    content = ft_open_and_read("data/data--initiative");
+    content = ft_open_and_read_file("data/data--initiative");
     if (!content)
         return ;
     i = 0;
@@ -107,7 +107,7 @@ void ft_initiative_add(t_char *info)
         pf_printf("readding initiative %s %d\n", info->name, info->initiative);
     if (info->initiative <= 0)
         return ;
-    content = ft_open_and_read("data/data--initiative");
+    content = ft_open_and_read_file("data/data--initiative");
     if (!content)
         return ;
     if (ft_initiative_check_content(info, content))

@@ -148,7 +148,7 @@ void ft_turn_next(t_name *name)
 		pf_printf("Error opening data initiative file %s\n", initiative_file.get_error_message());
 		return ;
 	}
-	content = ft_read_file_dnd(initiative_file);
+	content = ft_read_file_lines(initiative_file);
 	if (!content)
 		return ;
 	players = ft_initiative_players_am(content);

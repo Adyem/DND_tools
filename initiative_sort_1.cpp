@@ -90,7 +90,7 @@ void ft_initiative_sort(ft_file &file)
     t_pc *players;
     char **content;
 
-    content = ft_read_file_dnd(file);
+    content = ft_read_file_lines(file);
     if (!content)
         return ;
     players = ft_initiative_players_am(content);
