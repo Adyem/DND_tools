@@ -1,5 +1,6 @@
 #include "client_class.hpp"
 #include "../CPP_class/string.hpp"
+#include "../Errno/errno.hpp"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <atomic>
@@ -100,12 +101,14 @@ ft_string ft_client::get_client_address() const
 {
     char host[NI_MAXHOST], service[NI_MAXSERV];
     if (getnameinfo(reinterpret_cast<const struct sockaddr*>(&client_addr), sizeof(client_addr),
-				host, sizeof(host), service, sizeof(service), NI_NUMERICHOST
-				| NI_NUMERICSERV) != 0)
+                    host, sizeof(host), service, sizeof(service), NI_NUMERICHOST | NI_NUMERICSERV) != 0)
     {
         return "Unknown";
     }
-    ft_string address = ft_string(host) + ":" + ft_string(service);
+
+    ft_string address(host);
+    address.append(':');
+    address.append(static_cast<const char*>(service));
     return address;
 }
 
@@ -115,4 +118,16 @@ void ft_client::retrieve_client_address()
     if (getpeername(client_fd, reinterpret_cast<struct sockaddr*>(&client_addr), &addr_len) == -1)
 	{
 	}
+}
+
+int ft_client::get_fd() const
+{
+	return (client_fd);
+}
+
+void ft_client::set_error(int error)
+{
+	this->_error = error;
+	ft_errno = error;
+	return ;
 }

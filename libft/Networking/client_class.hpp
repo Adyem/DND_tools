@@ -23,10 +23,12 @@ class ft_client
     	ssize_t receive_data(void* buffer, size_t size, int flags = 0);
     	void close_connection();
     	bool is_closed() const;
-    	int get_fd() const { return client_fd; }
+    	int get_fd() const;
+		void set_error(int error);
     	ft_string get_client_address() const;
 
 	private:
+		int _error;
 	    int client_fd;
 	    std::atomic<bool> closed;
 	    struct sockaddr_storage client_addr;
