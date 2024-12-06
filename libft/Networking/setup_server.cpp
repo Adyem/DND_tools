@@ -89,13 +89,13 @@ int ft_socket::set_timeouts(const SocketConfig &config)
     return (ER_SUCCESS);
 }
 
-int ft_socket::configure_address(const SocketConfig &config, struct sockaddr_storage &addr)
+int ft_socket::configure_address(const SocketConfig &config)
 {
-    std::memset(&addr, 0, sizeof(addr));
+    std::memset(&this->_address, 0, sizeof(this->_address));
 
     if (config.address_family == AF_INET)
 	{
-        struct sockaddr_in *addr_in = reinterpret_cast<struct sockaddr_in*>(&addr);
+        struct sockaddr_in *addr_in = reinterpret_cast<struct sockaddr_in*>(&this->_address);
         addr_in->sin_family = AF_INET;
         addr_in->sin_port = htons(config.port);
         if (inet_pton(AF_INET, config.ip.c_str(), &addr_in->sin_addr) <= 0)
@@ -108,7 +108,7 @@ int ft_socket::configure_address(const SocketConfig &config, struct sockaddr_sto
     }
     else if (config.address_family == AF_INET6)
 	{
-        struct sockaddr_in6 *addr_in6 = reinterpret_cast<struct sockaddr_in6*>(&addr);
+        struct sockaddr_in6 *addr_in6 = reinterpret_cast<struct sockaddr_in6*>(&this->_address);
         addr_in6->sin6_family = AF_INET6;
         addr_in6->sin6_port = htons(config.port);
         if (inet_pton(AF_INET6, config.ip.c_str(), &addr_in6->sin6_addr) <= 0)
@@ -129,7 +129,7 @@ int ft_socket::configure_address(const SocketConfig &config, struct sockaddr_sto
     return (ER_SUCCESS);
 }
 
-int ft_socket::bind_socket(const struct sockaddr_storage &addr, const SocketConfig &config)
+int ft_socket::bind_socket(const SocketConfig &config)
 {
     socklen_t addr_len;
 
@@ -144,7 +144,7 @@ int ft_socket::bind_socket(const struct sockaddr_storage &addr, const SocketConf
         socket_fd = -1;
         return (_error);
     }
-    if (::bind(socket_fd, reinterpret_cast<const struct sockaddr*>(&addr), addr_len) < 0)
+    if (::bind(socket_fd, reinterpret_cast<const struct sockaddr*>(&this->_address), addr_len) < 0)
     {
         handle_error(errno + ERRNO_OFFSET);
         close(socket_fd);
@@ -187,10 +187,9 @@ int ft_socket::setup_server(const SocketConfig &config)
     if (config.recv_timeout > 0 || config.send_timeout > 0)
         if (set_timeouts(config) != ER_SUCCESS)
             return (_error);
-    struct sockaddr_storage addr;
-    if (configure_address(config, addr) != ER_SUCCESS)
+    if (configure_address(config) != ER_SUCCESS)
         return (_error);
-    if (bind_socket(addr, config) != ER_SUCCESS)
+    if (bind_socket(config) != ER_SUCCESS)
         return (_error);
     if (listen_socket(config) != ER_SUCCESS)
         return (_error);

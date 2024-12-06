@@ -1,6 +1,5 @@
 #include "socket_class.hpp"
 #include "../Errno/errno.hpp"
-#include "../CPP_class/string.hpp"
 #include <cstring>
 #include <cerrno>
 #include <fcntl.h>
@@ -19,6 +18,7 @@ ft_socket::ft_socket(const SocketConfig &config) : socket_fd(-1), _error(ER_SUCC
         ft_errno = SOCKET_UNSUPPORTED_TYPE;
         _error = ft_errno;
     }
+	return ;
 }
 
 int ft_socket::send_data(const void *data, size_t size, int flags)

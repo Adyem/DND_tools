@@ -4,6 +4,29 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+SocketConfig::SocketConfig()
+    : type(SocketType::SERVER),
+      ip("127.0.0.1"),
+      port(8080),
+      backlog(10),
+      protocol(IPPROTO_TCP),
+      address_family(AF_INET),
+      reuse_address(true),
+      non_blocking(false),
+      recv_timeout(5000),
+      send_timeout(5000),
+      multicast_group(""),
+      multicast_interface("")
+{
+    if (!_error && ip.getError())
+        _error = ip.getError();
+    if (!_error && multicast_group.getError())
+        _error = multicast_group.getError();
+    if (!_error && multicast_interface.getError())
+        _error = multicast_interface.getError();
+    return ;
+}
+
 SocketConfig::SocketConfig(const SocketConfig& other) noexcept
     : _error(other._error),
       type(other.type),
@@ -53,29 +76,6 @@ SocketConfig& SocketConfig::operator=(const SocketConfig& other) noexcept
     if (!_error && multicast_interface.getError())
         _error = multicast_interface.getError();
     return (*this);
-}
-
-SocketConfig::SocketConfig()
-    : type(SocketType::SERVER),
-      ip("127.0.0.1"),
-      port(8080),
-      backlog(10),
-      protocol(IPPROTO_TCP),
-      address_family(AF_INET),
-      reuse_address(true),
-      non_blocking(false),
-      recv_timeout(5000),
-      send_timeout(5000),
-      multicast_group(""),
-      multicast_interface("")
-{
-    if (!_error && ip.getError())
-        _error = ip.getError();
-    if (!_error && multicast_group.getError())
-        _error = multicast_group.getError();
-    if (!_error && multicast_interface.getError())
-        _error = multicast_interface.getError();
-    return;
 }
 
 SocketConfig::SocketConfig(SocketConfig&& other) noexcept
