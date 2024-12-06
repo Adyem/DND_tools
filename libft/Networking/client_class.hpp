@@ -1,9 +1,9 @@
 #ifndef FT_CLIENT_H
 #define FT_CLIENT_H
 
+#include "../CPP_class/string.hpp"
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <string>
 #include <atomic>
 #include <unistd.h>
 #include <cstring>
@@ -24,7 +24,7 @@ class ft_client
     	void close_connection();
     	bool is_closed() const;
     	int get_fd() const { return client_fd; }
-    	std::string get_client_address() const;
+    	ft_string get_client_address() const;
 
 	private:
 	    int client_fd;

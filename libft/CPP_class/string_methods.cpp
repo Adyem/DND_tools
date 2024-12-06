@@ -99,7 +99,7 @@ void ft_string::move(ft_string& other) noexcept
 {
     if (this != &other)
     {
-        delete[] _data;
+        cma_free(_data);
         _data = other._data;
         _length = other._length;
         _capacity = other._capacity;
@@ -112,4 +112,40 @@ void ft_string::move(ft_string& other) noexcept
         other._criticality = false;
     }
 	return ;
+}
+
+ft_string& ft_string::operator+=(const ft_string& other) noexcept
+{
+	size_t index = 0;
+
+    while (index < other._length)
+	{
+        this->append(other._data[index]);
+		if (_errorCode)
+			return (*this);
+		index++;
+	}
+    return (*this);
+}
+
+ft_string& ft_string::operator+=(const char* cstr) noexcept
+{
+    if (cstr)
+	{
+        size_t i = 0;
+        while (cstr[i] != '\0')
+		{
+            this->append(cstr[i]);
+			if (_errorCode)
+				return (*this);
+            ++i;
+        }
+    }
+    return (*this);
+}
+
+ft_string& ft_string::operator+=(char c) noexcept
+{
+    this->append(c);
+    return (*this);
 }

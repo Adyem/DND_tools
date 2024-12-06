@@ -24,6 +24,9 @@ class ft_string
 	    ft_string &operator=(const ft_string& other) noexcept;
 		ft_string &operator=(ft_string&& other) noexcept;
 		ft_string &operator=(const char *&other) noexcept;
+		ft_string& operator+=(const ft_string& other) noexcept;
+		ft_string& operator+=(const char* cstr) noexcept;
+		ft_string& operator+=(char c) noexcept;
 	    ~ft_string();
 
 	    void		append(char c) noexcept;
