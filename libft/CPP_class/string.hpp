@@ -30,6 +30,7 @@ class ft_string
 	    ~ft_string();
 
 	    void		append(char c) noexcept;
+		void		append(const char *string) noexcept;
 	    void		clear() noexcept;
 		const char	*at(size_t index) const noexcept;
 	    const char	*c_str() const noexcept;

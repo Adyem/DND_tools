@@ -26,9 +26,33 @@ void ft_string::append(char c) noexcept
     {
         resize(this->_capacity == 0 ? 16 : this->_capacity * 2);
         if (this->_errorCode)
-            return;
+            return ;
     }
     this->_data[this->_length++] = c;
+    this->_data[this->_length] = '\0';
+    return ;
+}
+
+void ft_string::append(const char *string) noexcept
+{
+    if (!string)
+        return;
+    size_t string_length = std::strlen(string);
+    if (this->_length + string_length >= this->_capacity)
+    {
+        size_t new_capacity;
+        if (this->_capacity == 0)
+            new_capacity = 16;
+        else
+            new_capacity = this->_capacity;
+        while (this->_length + string_length >= new_capacity)
+            new_capacity *= 2;
+        resize(new_capacity);
+        if (this->_errorCode)
+            return;
+    }
+    std::memcpy(this->_data + this->_length, string, string_length);
+    this->_length += string_length;
     this->_data[this->_length] = '\0';
     return;
 }

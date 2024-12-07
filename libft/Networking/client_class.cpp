@@ -10,26 +10,36 @@
 #include <cerrno>
 
 ft_client::ft_client(int client_fd_)
-    : client_fd(client_fd_), closed(false), client_addr()
+    : _error(0),
+      client_fd(client_fd_),
+      closed(false),
+      client_addr()
 {
     if (client_fd < 0)
     {
+        set_error(errno + ERRNO_OFFSET);
         return ;
     }
-
     retrieve_client_address();
+	return ;
 }
 
 ft_client::~ft_client()
 {
     close_connection();
+	return ;
 }
 
 ft_client::ft_client(ft_client&& other) noexcept
-    : client_fd(other.client_fd), closed(other.closed.load()), client_addr(other.client_addr)
+    : _error(other._error),
+      client_fd(other.client_fd),
+      closed(other.closed.load()),
+      client_addr(other.client_addr)
 {
     other.client_fd = -1;
     other.closed = true;
+    other._error = 0;
+	return ;
 }
 
 ft_client& ft_client::operator=(ft_client&& other) noexcept
@@ -37,44 +47,42 @@ ft_client& ft_client::operator=(ft_client&& other) noexcept
     if (this != &other)
     {
         close_connection();
-
+        _error = other._error;
         client_fd = other.client_fd;
         closed = other.closed.load();
         client_addr = other.client_addr;
-
         other.client_fd = -1;
         other.closed = true;
+        other._error = 0;
     }
-    return *this;
+    return (*this);
 }
 
 ssize_t ft_client::send_data(const void* data, size_t size, int flags)
 {
     if (is_closed())
     {
-        return -1;
+        set_error((EBADF) + ERRNO_OFFSET);
+        return (-1);
     }
 
     ssize_t bytes_sent = send(client_fd, data, size, flags);
     if (bytes_sent == -1)
-    {
-    }
-
-    return bytes_sent;
+        set_error(errno + ERRNO_OFFSET);
+    return (bytes_sent);
 }
 
 ssize_t ft_client::receive_data(void* buffer, size_t size, int flags)
 {
     if (is_closed())
     {
-        return -1;
+        set_error((EBADF) + ERRNO_OFFSET);
+        return (-1);
     }
     ssize_t bytes_received = recv(client_fd, buffer, size, flags);
     if (bytes_received == -1)
-    {
-    }
-
-    return bytes_received;
+        set_error(errno + ERRNO_OFFSET);
+    return (bytes_received);
 }
 
 void ft_client::close_connection()
@@ -85,49 +93,59 @@ void ft_client::close_connection()
         if (client_fd != -1)
         {
             if (close(client_fd) == -1)
-			{
-			}
+                set_error(errno + ERRNO_OFFSET);
             client_fd = -1;
         }
     }
+	return ;
 }
 
 bool ft_client::is_closed() const
 {
-    return closed.load();
+    return (closed.load());
 }
 
-ft_string ft_client::get_client_address() const
+ft_string ft_client::getClientAddress() const
 {
     char host[NI_MAXHOST], service[NI_MAXSERV];
-    if (getnameinfo(reinterpret_cast<const struct sockaddr*>(&client_addr), sizeof(client_addr),
-                    host, sizeof(host), service, sizeof(service), NI_NUMERICHOST | NI_NUMERICSERV) != 0)
+    if (getnameinfo(reinterpret_cast<const struct sockaddr*>(&client_addr),
+                    sizeof(client_addr),
+                    host, sizeof(host),
+                    service, sizeof(service),
+                    NI_NUMERICHOST | NI_NUMERICSERV) != 0)
     {
-        return "Unknown";
+       _error = EFAULT + ERRNO_OFFSET;
+	   ft_errno = _error;
+        return ("Unknown");
     }
-
     ft_string address(host);
     address.append(':');
-    address.append(static_cast<const char*>(service));
-    return address;
+    address.append(service);
+    return (address);
 }
 
 void ft_client::retrieve_client_address()
 {
     socklen_t addr_len = sizeof(client_addr);
-    if (getpeername(client_fd, reinterpret_cast<struct sockaddr*>(&client_addr), &addr_len) == -1)
-	{
-	}
+	if (getpeername(client_fd, reinterpret_cast<struct sockaddr*>(&client_addr),
+			&addr_len) == -1)
+		set_error(errno + ERRNO_OFFSET);
+	return ;
 }
 
 int ft_client::get_fd() const
 {
-	return (client_fd);
+    return (client_fd);
 }
 
 void ft_client::set_error(int error)
 {
-	this->_error = error;
-	ft_errno = error;
+    this->_error = error;
+    ft_errno = error;
 	return ;
+}
+
+const char* ft_client::getErrorMsg(int errorCode) const
+{
+    return (ft_strerror(errorCode));
 }

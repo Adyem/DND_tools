@@ -7,15 +7,18 @@
 #include <atomic>
 #include <unistd.h>
 #include <cstring>
+#include <cerrno>
+#include <netdb.h>
 
 class ft_client
 {
 	public:
     	explicit ft_client(int client_fd);
-
     	~ft_client();
+
     	ft_client(const ft_client&) = delete;
     	ft_client& operator=(const ft_client&) = delete;
+
     	ft_client(ft_client&& other) noexcept;
     	ft_client& operator=(ft_client&& other) noexcept;
 
@@ -25,14 +28,17 @@ class ft_client
     	bool is_closed() const;
     	int get_fd() const;
 		void set_error(int error);
-    	ft_string get_client_address() const;
+    	ft_string getClientAddress() const;
+		const char *getErrorMsg(int errorCode) const;
 
 	private:
-		int _error;
+		mutable int _error;
 	    int client_fd;
 	    std::atomic<bool> closed;
 	    struct sockaddr_storage client_addr;
+
 	    void retrieve_client_address();
 };
 
 #endif
+
