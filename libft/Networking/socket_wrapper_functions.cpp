@@ -34,3 +34,10 @@ int nw_socket(int domain, int type, int protocol)
         return (-1);
     return (sockfd);
 }
+
+int nw_connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
+{
+    if (connect(sockfd, addr, addrlen) == -1)
+        return (-1);
+    return (0);
+}

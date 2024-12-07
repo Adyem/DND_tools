@@ -5,6 +5,7 @@
 #include <netinet/in.h>
 
 int nw_bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+int nw_connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 int nw_accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 int nw_listen(int sockfd, int backlog);
 int nw_socket(int domain, int type, int protocol);

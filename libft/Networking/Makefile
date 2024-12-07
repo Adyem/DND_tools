@@ -11,6 +11,7 @@ DEBUG_TARGET := networking_debug.a
 SRCS := socket_class.cpp \
 		networking.cpp \
 		setup_server.cpp \
+		setup_client.cpp \
 		client_class.cpp \
 		socket_wrapper_functions.cpp
 
