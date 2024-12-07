@@ -11,7 +11,7 @@
 
 int ft_socket::create_socket(const SocketConfig &config)
 {
-    socket_fd = socket(config.address_family, SOCK_STREAM, config.protocol);
+    socket_fd = nw_socket(config.address_family, SOCK_STREAM, config.protocol);
     if (socket_fd < 0)
 	{
         handle_error(errno + ERRNO_OFFSET);
@@ -144,7 +144,7 @@ int ft_socket::bind_socket(const SocketConfig &config)
         socket_fd = -1;
         return (_error);
     }
-    if (::bind(socket_fd, reinterpret_cast<const struct sockaddr*>(&this->_address), addr_len) < 0)
+    if (nw_bind(socket_fd, reinterpret_cast<const struct sockaddr*>(&this->_address), addr_len) < 0)
     {
         handle_error(errno + ERRNO_OFFSET);
         close(socket_fd);
@@ -157,7 +157,7 @@ int ft_socket::bind_socket(const SocketConfig &config)
 
 int ft_socket::listen_socket(const SocketConfig &config)
 {
-    if (::listen(socket_fd, config.backlog) < 0)
+    if (nw_listen(socket_fd, config.backlog) < 0)
 	{
         handle_error(errno + ERRNO_OFFSET);
         close(socket_fd);

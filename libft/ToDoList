@@ -84,7 +84,7 @@ Implementing these can provide more flexibility and efficiency.
 
 Improving error reporting can make debugging easier.
 
-    ft_perror: Custom error printing similar to perror.
+    ft_perror: Custom error printing similar to perror. (done)
     ft_exit: Gracefully exit the program with an error message.
 
 7. Advanced Data Structures
@@ -493,16 +493,16 @@ For ft_future:
 11. Networking Utilities
 
 For network-related projects, consider implementing:
-11.1 ft_socket
+11.1 ft_socket (done)
 
 Description: Simplified socket creation and management.
-11.2 ft_bind
+11.2 ft_bind (done)
 
 Description: Binds a socket to an address.
-11.3 ft_listen
+11.3 ft_listen (done)
 
 Description: Listens for incoming connections.
-11.4 ft_accept
+11.4 ft_accept (done)
 
 Description: Accepts an incoming connection.
 12. Configuration and Environment Utilities
