@@ -49,6 +49,9 @@ void rl_handle_printable_char(readline_state_t *state, int c, const char *prompt
 
 //Utilities
 int rl_read_key();
+int get_terminal_width();
+int rl_read_escape_sequence(char seq[2]);
 void update_history(const char *buffer);
+void rl_reset_completion_mode(readline_state_t *state);
 
 #endif

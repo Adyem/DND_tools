@@ -24,7 +24,7 @@ HEADERS := readline.hpp \
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))
 
-CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17
+CXXFLAGS := -Wall -Wextra -Werror -g -O0 -std=c++17 -Wmissing-declarations
 
 all: $(TARGET)
 
