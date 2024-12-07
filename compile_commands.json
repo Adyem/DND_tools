@@ -874,12 +874,30 @@
       "-std=c++17",
       "-c",
       "-o",
-      "objs/string.o",
-      "string.cpp"
+      "objs/string_constructors.o",
+      "string_constructors.cpp"
     ],
     "directory": "/home/adyem/DND_tools/libft/CPP_class",
-    "file": "/home/adyem/DND_tools/libft/CPP_class/string.cpp",
-    "output": "/home/adyem/DND_tools/libft/CPP_class/objs/string.o"
+    "file": "/home/adyem/DND_tools/libft/CPP_class/string_constructors.cpp",
+    "output": "/home/adyem/DND_tools/libft/CPP_class/objs/string_constructors.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/string_methods.o",
+      "string_methods.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/CPP_class",
+    "file": "/home/adyem/DND_tools/libft/CPP_class/string_methods.cpp",
+    "output": "/home/adyem/DND_tools/libft/CPP_class/objs/string_methods.o"
   },
   {
     "arguments": [
@@ -970,6 +988,78 @@
     "directory": "/home/adyem/DND_tools/libft/Networking",
     "file": "/home/adyem/DND_tools/libft/Networking/socket_class.cpp",
     "output": "/home/adyem/DND_tools/libft/Networking/objs/socket_class.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/networking.o",
+      "networking.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Networking",
+    "file": "/home/adyem/DND_tools/libft/Networking/networking.cpp",
+    "output": "/home/adyem/DND_tools/libft/Networking/objs/networking.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/setup_server.o",
+      "setup_server.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Networking",
+    "file": "/home/adyem/DND_tools/libft/Networking/setup_server.cpp",
+    "output": "/home/adyem/DND_tools/libft/Networking/objs/setup_server.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/client_class.o",
+      "client_class.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Networking",
+    "file": "/home/adyem/DND_tools/libft/Networking/client_class.cpp",
+    "output": "/home/adyem/DND_tools/libft/Networking/objs/client_class.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-O0",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "objs/socket_wrapper_functions.o",
+      "socket_wrapper_functions.cpp"
+    ],
+    "directory": "/home/adyem/DND_tools/libft/Networking",
+    "file": "/home/adyem/DND_tools/libft/Networking/socket_wrapper_functions.cpp",
+    "output": "/home/adyem/DND_tools/libft/Networking/objs/socket_wrapper_functions.o"
   },
   {
     "arguments": [
