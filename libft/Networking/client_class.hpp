@@ -33,10 +33,10 @@ class ft_client
 
 	private:
 		mutable int _error;
-	    int client_fd;
+	    int _client_fd;
+
 	    std::atomic<bool> closed;
 	    struct sockaddr_storage client_addr;
-
 	    void retrieve_client_address();
 };
 

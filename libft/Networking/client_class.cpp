@@ -11,11 +11,11 @@
 
 ft_client::ft_client(int client_fd_)
     : _error(0),
-      client_fd(client_fd_),
+      _client_fd(client_fd_),
       closed(false),
       client_addr()
 {
-    if (client_fd < 0)
+    if (this->_client_fd < 0)
     {
         set_error(errno + ERRNO_OFFSET);
         return ;
@@ -32,11 +32,11 @@ ft_client::~ft_client()
 
 ft_client::ft_client(ft_client&& other) noexcept
     : _error(other._error),
-      client_fd(other.client_fd),
+      _client_fd(other._client_fd),
       closed(other.closed.load()),
       client_addr(other.client_addr)
 {
-    other.client_fd = -1;
+    other._client_fd = -1;
     other.closed = true;
     other._error = 0;
 	return ;
@@ -47,11 +47,11 @@ ft_client& ft_client::operator=(ft_client&& other) noexcept
     if (this != &other)
     {
         close_connection();
-        _error = other._error;
-        client_fd = other.client_fd;
-        closed = other.closed.load();
-        client_addr = other.client_addr;
-        other.client_fd = -1;
+        this->_error = other._error;
+        this->_client_fd = other._client_fd;
+        this->closed = other.closed.load();
+        this->client_addr = other.client_addr;
+        other._client_fd = -1;
         other.closed = true;
         other._error = 0;
     }
@@ -66,7 +66,7 @@ ssize_t ft_client::send_data(const void* data, size_t size, int flags)
         return (-1);
     }
 
-    ssize_t bytes_sent = send(client_fd, data, size, flags);
+    ssize_t bytes_sent = send(this->_client_fd, data, size, flags);
     if (bytes_sent == -1)
         set_error(errno + ERRNO_OFFSET);
     return (bytes_sent);
@@ -79,7 +79,7 @@ ssize_t ft_client::receive_data(void* buffer, size_t size, int flags)
         set_error((EBADF) + ERRNO_OFFSET);
         return (-1);
     }
-    ssize_t bytes_received = recv(client_fd, buffer, size, flags);
+    ssize_t bytes_received = recv(this->_client_fd, buffer, size, flags);
     if (bytes_received == -1)
         set_error(errno + ERRNO_OFFSET);
     return (bytes_received);
@@ -90,11 +90,11 @@ void ft_client::close_connection()
     bool expected = false;
     if (closed.compare_exchange_strong(expected, true))
     {
-        if (client_fd != -1)
+        if (this->_client_fd != -1)
         {
-            if (close(client_fd) == -1)
+            if (close(this->_client_fd) == -1)
                 set_error(errno + ERRNO_OFFSET);
-            client_fd = -1;
+            this->_client_fd = -1;
         }
     }
 	return ;
@@ -137,7 +137,7 @@ ft_string ft_client::getClientAddress() const
 void ft_client::retrieve_client_address()
 {
     socklen_t addr_len = sizeof(client_addr);
-	if (getpeername(client_fd, reinterpret_cast<struct sockaddr*>(&client_addr),
+	if (getpeername(this->_client_fd, reinterpret_cast<struct sockaddr*>(&client_addr),
 			&addr_len) == -1)
 		set_error(errno + ERRNO_OFFSET);
 	return ;
@@ -145,7 +145,7 @@ void ft_client::retrieve_client_address()
 
 int ft_client::get_fd() const
 {
-    return (client_fd);
+    return (this->_client_fd);
 }
 
 void ft_client::set_error(int error)
