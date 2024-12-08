@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include "nullptr.hpp"
+#include "../CPP_class/nullptr.hpp"
 #include "../Errno/errno.hpp"
 #include "../CMA/CMA.hpp"
 #include <cstddef>

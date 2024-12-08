@@ -3,7 +3,7 @@
 
 #include "../Errno/errno.hpp"
 #include "../CMA/CMA.hpp"
-#include "nullptr.hpp"
+#include "../CPP_class/nullptr.hpp"
 #include <cstddef>
 
 template <typename ManagedType>
