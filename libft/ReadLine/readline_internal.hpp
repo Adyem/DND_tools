@@ -17,6 +17,13 @@ extern int history_count;
 extern char *suggestions[MAX_SUGGESTIONS];
 extern int suggestion_count;
 
+struct terminal_dimensions {
+    unsigned short rows;
+    unsigned short cols;
+    unsigned short x_pixels;
+    unsigned short y_pixels;
+};
+
 typedef struct {
     char *buffer;
     int bufsize;
@@ -35,17 +42,17 @@ int rl_initialize_state(readline_state_t *state);
 
 //Raw mode functions
 void rl_disable_raw_mode();
-void rl_enable_raw_mode();
+int rl_enable_raw_mode();
 
 //Buffer Management Functions
-void rl_clear_line(const char *prompt, const char *buffer);
+int rl_clear_line(const char *prompt, const char *buffer);
 char *rl_resize_buffer(char *old_buffer, int current_size, int new_size);
 
 //Input Handling Functions
-void rl_handle_escape_sequence(readline_state_t *state, const char *prompt);
-void rl_handle_backspace(readline_state_t *state, const char *prompt);
-void rl_handle_tab_completion(readline_state_t *state, const char *prompt);
-void rl_handle_printable_char(readline_state_t *state, int c, const char *prompt);
+int rl_handle_escape_sequence(readline_state_t *state, const char *prompt);
+int rl_handle_backspace(readline_state_t *state, const char *prompt);
+int rl_handle_tab_completion(readline_state_t *state, const char *prompt);
+int rl_handle_printable_char(readline_state_t *state, int c, const char *prompt);
 
 //Utilities
 int rl_read_key();

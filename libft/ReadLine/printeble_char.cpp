@@ -6,12 +6,14 @@
 #include "../Libft/libft.hpp"
 #include "readline_internal.hpp"
 
-void rl_handle_printable_char(readline_state_t *state, int c, const char *prompt)
+int rl_handle_printable_char(readline_state_t *state, int c, const char *prompt)
 {
     if (state->pos >= state->bufsize - 1)
 	{
         int new_bufsize = state->bufsize * 2;
         state->buffer = rl_resize_buffer(state->buffer, state->bufsize, new_bufsize);
+		if (!state->buffer)
+			return (-1);
         state->bufsize = new_bufsize;
     }
     ft_memmove(&state->buffer[state->pos + 1], &state->buffer[state->pos],
@@ -26,4 +28,5 @@ void rl_handle_printable_char(readline_state_t *state, int c, const char *prompt
         pf_printf("\033[%dD", len_after_cursor);
     }
     fflush(stdout);
+	return (0);
 }

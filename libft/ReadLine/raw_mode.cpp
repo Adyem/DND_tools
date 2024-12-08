@@ -9,14 +9,16 @@ void rl_disable_raw_mode()
 	return ;
 }
 
-void rl_enable_raw_mode()
+int rl_enable_raw_mode()
 {
     struct termios raw;
-
-    tcgetattr(STDIN_FILENO, &orig_termios);
-    atexit(rl_disable_raw_mode);
+    if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
+        return (-1);
+    if (atexit(rl_disable_raw_mode) != 0)
+        return (-1);
     raw = orig_termios;
     raw.c_lflag &= ~(ECHO | ICANON);
-    tcsetattr(STDIN_FILENO, TCSANOW, &raw);
-	return ;
+    if (tcsetattr(STDIN_FILENO, TCSANOW, &raw) == -1)
+        return (-1);
+    return (0);
 }

@@ -3,6 +3,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include "../CPP_class/nullptr.hpp"
 #include "../CMA/CMA.hpp"
 #include "../Printf/printf.hpp"
 #include "../Libft/libft.hpp"
@@ -15,7 +16,7 @@ char *rl_resize_buffer(char *old_buffer, int current_size, int new_size)
     if (!new_buffer)
     {
         pf_printf_fd(2, "Allocation error\n");
-        exit(EXIT_FAILURE);
+        return (ft_nullptr);
     }
     memcpy(new_buffer, old_buffer, current_size);
     cma_free(old_buffer);
@@ -24,16 +25,20 @@ char *rl_resize_buffer(char *old_buffer, int current_size, int new_size)
 
 int get_terminal_width()
 {
-    struct winsize w;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    return w.ws_col;
+    struct terminal_dimensions terminalSize;
+    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &terminalSize) == -1) {
+        return -1;
+    }
+    return terminalSize.cols;
 }
 
-void rl_clear_line(const char *prompt, const char *buffer)
+int rl_clear_line(const char *prompt, const char *buffer)
 {
     int total_length = ft_strlen(prompt) + ft_strlen(buffer);
     pf_printf("\r");
     int term_width = get_terminal_width();
+	if (term_width == -1)
+		return (-1);
     int line_count = (total_length / term_width) + 1;
     for (int i = 0; i < line_count; i++)
     {
@@ -42,6 +47,7 @@ void rl_clear_line(const char *prompt, const char *buffer)
             pf_printf("\033[A");
     }
     pf_printf("\r");
+	return (0);
 }
 
 int rl_read_key()

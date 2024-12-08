@@ -32,7 +32,7 @@ static void gather_matching_suggestions(readline_state_t *state, const char *pre
 	return ;
 }
 
-static void resize_buffer_if_needed(readline_state_t *state, int required_size)
+static int resize_buffer_if_needed(readline_state_t *state, int required_size)
 {
     if (required_size >= state->bufsize)
 	{
@@ -40,22 +40,25 @@ static void resize_buffer_if_needed(readline_state_t *state, int required_size)
         while (required_size >= new_bufsize)
             new_bufsize *= 2;
         state->buffer = rl_resize_buffer(state->buffer, state->bufsize, new_bufsize);
+		if (!state->buffer)
+			return (-1);
         state->bufsize = new_bufsize;
     }
-	return ;
+	return (0);
 }
 
-static void apply_completion(readline_state_t *state, const char *completion)
+static int apply_completion(readline_state_t *state, const char *completion)
 {
     int completion_len = ft_strlen(completion);
     state->pos = state->word_start;
     state->buffer[state->pos] = '\0';
     int required_size = state->pos + completion_len;
-    resize_buffer_if_needed(state, required_size);
+    if (resize_buffer_if_needed(state, required_size) == -1)
+		return (-1);
     strcpy(&state->buffer[state->pos], completion);
     state->pos += completion_len;
     state->buffer[state->pos] = '\0';
-	return ;
+	return (0);
 }
 
 static void update_display(const char *prompt, readline_state_t *state)
@@ -67,7 +70,7 @@ static void update_display(const char *prompt, readline_state_t *state)
 	return ;
 }
 
-void rl_handle_tab_completion(readline_state_t *state, const char *prompt)
+int rl_handle_tab_completion(readline_state_t *state, const char *prompt)
 {
     if (!state->in_completion_mode)
 	{
@@ -75,7 +78,7 @@ void rl_handle_tab_completion(readline_state_t *state, const char *prompt)
         int prefix_len;
         find_word_start_and_prefix(state, prefix, &prefix_len);
         if (prefix_len == 0)
-            return ;
+            return (0);
         gather_matching_suggestions(state, prefix, prefix_len);
 		if (state->current_match_count == 0)
 		{
@@ -91,8 +94,10 @@ void rl_handle_tab_completion(readline_state_t *state, const char *prompt)
     if (state->in_completion_mode && state->current_match_count > 0)
 	{
         const char *completion = state->current_matches[state->current_match_index];
-        apply_completion(state, completion);
+        if (apply_completion(state, completion))
+			return (-1);
         update_display(prompt, state);
         state->current_match_index = (state->current_match_index + 1) % state->current_match_count;
     }
+	return (0);
 }
