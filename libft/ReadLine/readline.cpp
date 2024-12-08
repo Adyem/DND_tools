@@ -84,7 +84,7 @@ char *rl_readline(const char *prompt)
 		}
     }
     state.buffer[state.pos] = '\0';
-    update_history(state.buffer);
+    rl_update_history(state.buffer);
     rl_disable_raw_mode();
     return (state.buffer);
 }

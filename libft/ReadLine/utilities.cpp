@@ -23,7 +23,7 @@ char *rl_resize_buffer(char *old_buffer, int current_size, int new_size)
     return (new_buffer);
 }
 
-int get_terminal_width()
+int rl_get_terminal_width()
 {
     struct terminal_dimensions terminalSize;
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &terminalSize) == -1) {
@@ -36,7 +36,7 @@ int rl_clear_line(const char *prompt, const char *buffer)
 {
     int total_length = ft_strlen(prompt) + ft_strlen(buffer);
     pf_printf("\r");
-    int term_width = get_terminal_width();
+    int term_width = rl_get_terminal_width();
 	if (term_width == -1)
 		return (-1);
     int line_count = (total_length / term_width) + 1;
@@ -60,7 +60,7 @@ int rl_read_key()
     return (c);
 }
 
-void update_history(const char *buffer)
+void rl_update_history(const char *buffer)
 {
     if (history_count < MAX_HISTORY)
         history[history_count++] = cma_strdup(buffer, true);

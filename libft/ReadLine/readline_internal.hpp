@@ -38,27 +38,27 @@ typedef struct {
 } readline_state_t;
 
 //Initialize memory
-int rl_initialize_state(readline_state_t *state);
+int		rl_initialize_state(readline_state_t *state);
 
 //Raw mode functions
-void rl_disable_raw_mode();
-int rl_enable_raw_mode();
+void	rl_disable_raw_mode();
+int		rl_enable_raw_mode();
 
 //Buffer Management Functions
-int rl_clear_line(const char *prompt, const char *buffer);
-char *rl_resize_buffer(char *old_buffer, int current_size, int new_size);
+int		rl_clear_line(const char *prompt, const char *buffer);
+char	*rl_resize_buffer(char *old_buffer, int current_size, int new_size);
 
 //Input Handling Functions
-int rl_handle_escape_sequence(readline_state_t *state, const char *prompt);
-int rl_handle_backspace(readline_state_t *state, const char *prompt);
-int rl_handle_tab_completion(readline_state_t *state, const char *prompt);
-int rl_handle_printable_char(readline_state_t *state, int c, const char *prompt);
+int		rl_handle_escape_sequence(readline_state_t *state, const char *prompt);
+int		rl_handle_backspace(readline_state_t *state, const char *prompt);
+int		rl_handle_tab_completion(readline_state_t *state, const char *prompt);
+int		rl_handle_printable_char(readline_state_t *state, int c, const char *prompt);
 
 //Utilities
-int rl_read_key();
-int get_terminal_width();
-int rl_read_escape_sequence(char seq[2]);
-void update_history(const char *buffer);
-void rl_reset_completion_mode(readline_state_t *state);
+int		rl_read_key();
+int		rl_get_terminal_width();
+int		rl_read_escape_sequence(char seq[2]);
+void	rl_update_history(const char *buffer);
+void	rl_reset_completion_mode(readline_state_t *state);
 
 #endif

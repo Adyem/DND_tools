@@ -7,7 +7,7 @@
 #include "../Libft/libft.hpp"
 #include "readline_internal.hpp"
 
-static void find_word_start_and_prefix(readline_state_t *state, char *prefix, int *prefix_len)
+static void rl_find_word_start_and_prefix(readline_state_t *state, char *prefix, int *prefix_len)
 {
     state->word_start = state->pos - 1;
     while (state->word_start >= 0 && state->buffer[state->word_start] != ' ')
@@ -21,7 +21,7 @@ static void find_word_start_and_prefix(readline_state_t *state, char *prefix, in
 	return ;
 }
 
-static void gather_matching_suggestions(readline_state_t *state, const char *prefix, int prefix_len)
+static void rl_gather_matching_suggestions(readline_state_t *state, const char *prefix, int prefix_len)
 {
     state->current_match_count = 0;
     for (int i = 0; i < suggestion_count; i++)
@@ -32,7 +32,7 @@ static void gather_matching_suggestions(readline_state_t *state, const char *pre
 	return ;
 }
 
-static int resize_buffer_if_needed(readline_state_t *state, int required_size)
+static int rl_resize_buffer_if_needed(readline_state_t *state, int required_size)
 {
     if (required_size >= state->bufsize)
 	{
@@ -47,13 +47,13 @@ static int resize_buffer_if_needed(readline_state_t *state, int required_size)
 	return (0);
 }
 
-static int apply_completion(readline_state_t *state, const char *completion)
+static int rl_apply_completion(readline_state_t *state, const char *completion)
 {
     int completion_len = ft_strlen(completion);
     state->pos = state->word_start;
     state->buffer[state->pos] = '\0';
     int required_size = state->pos + completion_len;
-    if (resize_buffer_if_needed(state, required_size) == -1)
+    if (rl_resize_buffer_if_needed(state, required_size) == -1)
 		return (-1);
     strcpy(&state->buffer[state->pos], completion);
     state->pos += completion_len;
@@ -61,7 +61,7 @@ static int apply_completion(readline_state_t *state, const char *completion)
 	return (0);
 }
 
-static void update_display(const char *prompt, readline_state_t *state)
+static void rl_update_display(const char *prompt, readline_state_t *state)
 {
     rl_clear_line(prompt, state->buffer);
     pf_printf("%s%s", prompt, state->buffer);
@@ -76,10 +76,10 @@ int rl_handle_tab_completion(readline_state_t *state, const char *prompt)
 	{
         char prefix[INITIAL_BUFFER_SIZE];
         int prefix_len;
-        find_word_start_and_prefix(state, prefix, &prefix_len);
+        rl_find_word_start_and_prefix(state, prefix, &prefix_len);
         if (prefix_len == 0)
             return (0);
-        gather_matching_suggestions(state, prefix, prefix_len);
+        rl_gather_matching_suggestions(state, prefix, prefix_len);
 		if (state->current_match_count == 0)
 		{
             pf_printf("\a");
@@ -94,9 +94,9 @@ int rl_handle_tab_completion(readline_state_t *state, const char *prompt)
     if (state->in_completion_mode && state->current_match_count > 0)
 	{
         const char *completion = state->current_matches[state->current_match_index];
-        if (apply_completion(state, completion))
+        if (rl_apply_completion(state, completion))
 			return (-1);
-        update_display(prompt, state);
+        rl_update_display(prompt, state);
         state->current_match_index = (state->current_match_index + 1) % state->current_match_count;
     }
 	return (0);
