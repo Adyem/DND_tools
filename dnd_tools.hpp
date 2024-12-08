@@ -299,7 +299,8 @@ int			ft_set_stats_check_name(const char *name);
 int			ft_check_player_character(const char *name);
 
 //readline checks
-int			ft_read_line_confirm(const char *mesage);
+int			ft_readline_confirm(const char *mesage);
+int			ft_readline_spell_level(const char *message);
 
 //dice rolling
 int			ft_saving_throw(t_char *info, const char *ability_score, int ability_mod, int save_mod);
