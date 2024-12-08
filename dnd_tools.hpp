@@ -300,7 +300,7 @@ int			ft_check_player_character(const char *name);
 
 //readline checks
 int			ft_readline_confirm(const char *mesage);
-int			ft_readline_spell_level(const char *message);
+int			ft_readline_spell_level(const char *message, t_char *character);
 
 //dice rolling
 int			ft_saving_throw(t_char *info, const char *ability_score, int ability_mod, int save_mod);
