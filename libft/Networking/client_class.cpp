@@ -120,7 +120,17 @@ ft_string ft_client::getClientAddress() const
     }
     ft_string address(host);
     address.append(':');
+	if (address.getError())
+	{
+		this->_error = address.getError();
+		ft_errno = this->_error;
+	}
     address.append(service);
+	if (address.getError())
+	{
+		this->_error = address.getError();
+		ft_errno = this->_error;
+	}
     return (address);
 }
 
