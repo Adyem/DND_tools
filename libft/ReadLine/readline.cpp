@@ -21,6 +21,7 @@ static void rl_cleanup_state(readline_state_t *state)
         cma_free(state->buffer);
         state->buffer = NULL;
     }
+	return ;
 }
 
 char *rl_readline(const char *prompt)
