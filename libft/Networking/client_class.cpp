@@ -119,13 +119,7 @@ ft_string ft_client::getClientAddress() const
         return ("Unknown");
     }
     ft_string address(host);
-    address.append(':');
-	if (address.getError())
-	{
-		this->_error = address.getError();
-		ft_errno = this->_error;
-	}
-    address.append(service);
+    address = address + ": " + service;
 	if (address.getError())
 	{
 		this->_error = address.getError();

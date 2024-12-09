@@ -210,6 +210,41 @@ void ft_string::erase(size_t index, int count) noexcept
         this->_length -= count;
         this->_data[this->_length] = '\0';
     }
-
     return ;
+}
+
+ft_string operator+(const ft_string &lhs, const ft_string &rhs) noexcept
+{
+    ft_string result(lhs);
+    result += rhs;
+    return (result);
+}
+
+ft_string operator+(const ft_string &lhs, const char *rhs) noexcept
+{
+    ft_string result(lhs);
+    result += rhs;
+    return (result);
+}
+
+ft_string operator+(const char *lhs, const ft_string &rhs) noexcept
+{
+    ft_string result(lhs ? lhs : "");
+    result += rhs;
+    return (result);
+}
+
+ft_string operator+(const ft_string &lhs, char rhs) noexcept
+{
+    ft_string result(lhs);
+    result += rhs;
+    return (result);
+}
+
+ft_string operator+(char lhs, const ft_string &rhs) noexcept
+{
+    ft_string result;
+    result += lhs;
+    result += rhs;
+    return (result);
 }
