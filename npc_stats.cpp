@@ -42,6 +42,7 @@ void ft_npc_change_stats(t_char *info, const int index, const char **input)
 {
     int i = 0;
 
+	while (DEBUG == 1 && input[i])
     {
         pf_printf("%s\n", input[i]);
         i++;
