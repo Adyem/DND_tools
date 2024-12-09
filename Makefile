@@ -78,7 +78,7 @@ SRC         = name.cpp \
               update_buff_special.cpp \
               update_lightning_strike.cpp \
               to_hit.cpp \
-              read_line_check.cpp \
+              readline_check.cpp \
               roll.cpp \
               roll_utilities.cpp \
               roll_parse_dice.cpp \
@@ -133,7 +133,8 @@ SRC         = name.cpp \
               get_random_target.cpp \
               npc_set_stats_player.cpp \
               crackback.cpp \
-              frank.cpp
+              frank.cpp \
+			  cast_divine_smite.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations

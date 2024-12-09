@@ -63,6 +63,8 @@ int ft_readline_spell_level(const char *message, t_char *character)
 		input = rl_readline(message);
 		if (!input)
 			return (-1);
+		if (ft_strcmp_dnd("exit", input) == 0)
+			return (-1);
 		if (ft_check_value(input))
 		{
 			pf_printf_fd(2, "Invalid input\n");

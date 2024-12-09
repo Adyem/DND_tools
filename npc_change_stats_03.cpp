@@ -81,9 +81,11 @@ void ft_npc_set_stat(t_char *info, const char **input)
     }
     else if (ft_strcmp_dnd(input[1], "cast") == 0)
     {
-        if (ft_strcmp_dnd(input[2], "chaos_armor") == 0)
+		if (ft_strcmp_dnd(input[2], "chaos_armor") == 0)
             ft_cast_chaos_armor(info);
-        else
+		else if (ft_strcmp_dnd(input[2], "divine_smite") == 0)
+			ft_cast_divine_smite(info);
+		else
             pf_printf("7-%s invalid command\n", info->name);
     }
     else if (ft_strcmp_dnd(input[1], "initiative") == 0)

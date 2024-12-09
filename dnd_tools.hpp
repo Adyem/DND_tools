@@ -148,6 +148,9 @@ int			ft_attack_roll_check_buffs(t_char *info, int *roll);
 //to_hit check buffs
 void		ft_to_hit_check_buff(t_char *info);
 
+//cast spell
+void		ft_cast_divine_smite(t_char *character);
+
 //calculate stats
 int			ft_calculate_str(t_char *info);
 int			ft_calculate_dex(t_char *info);
@@ -294,7 +297,7 @@ int			ft_set_stat_player(size_t key_len, const char **field, const char *content
 int			ft_check_write_permissions(const char *filepath);
 t_char		*ft_validate_and_fetch_target(char *target_name, t_char *info, int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
-ft_string	ft_check_availeble_spell_slots(int spell_level, t_char *character);
+ft_string	ft_check_availeble_spell_slots(t_char *character);
 
 //check name
 int			ft_set_stats_check_name(const char *name);
