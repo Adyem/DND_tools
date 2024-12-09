@@ -34,6 +34,8 @@ const char* ft_strerror(int error_code)
         return ("Invalid argument");
 	else if (error_code == STRING_MEM_ALLOC_FAIL)
         return ("String memory allocation failed");
+	else if (error_code == STRING_ERASE_OUT_OF_BOUNDS)
+		return ("String acces out of bounds");
 	else if (error_code == VECTOR_ALLOC_FAIL)
         return ("Vector memory allocation failed");
 	else if (error_code == VECTOR_OUT_OF_BOUNDS)

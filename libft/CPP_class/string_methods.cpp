@@ -1,6 +1,7 @@
 #include "string.hpp"
 #include <cstring>
 #include "../CMA/CMA.hpp"
+#include "../Libft/libft.hpp"
 #include "../Errno/errno.hpp"
 #include "nullptr.hpp"
 
@@ -172,4 +173,24 @@ ft_string& ft_string::operator+=(char c) noexcept
 {
     this->append(c);
     return (*this);
+}
+
+void ft_string::erase(size_t index, int count) noexcept
+{
+    if (index >= this->_length || count < 0)
+    {
+        this->setError(STRING_ERASE_OUT_OF_BOUNDS);
+        return ;
+    }
+    if (index + count > this->_length)
+        count = this->_length - index;
+    if (count > 0)
+    {
+        ft_memmove(this->_data + index, this->_data + index + count,
+				this->_length - index - count);
+        this->_length -= count;
+        this->_data[this->_length] = '\0';
+    }
+
+    return ;
 }

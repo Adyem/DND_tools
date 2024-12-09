@@ -41,6 +41,7 @@ class ft_string
 		const char	*errorStr() const noexcept;
 	    bool		isCritical() const noexcept;
 		void		move(ft_string& other) noexcept;
+		void		erase(size_t index, int count) noexcept;
 };
 
 #endif

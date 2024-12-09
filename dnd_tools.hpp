@@ -1,6 +1,7 @@
 #ifndef DND_TOOLS_H
 # define DND_TOOLS_H
 
+#include "libft/CPP_class/string.hpp"
 class ft_file;
 
 #include <cstdio>
@@ -293,6 +294,7 @@ int			ft_set_stat_player(size_t key_len, const char **field, const char *content
 int			ft_check_write_permissions(const char *filepath);
 t_char		*ft_validate_and_fetch_target(char *target_name, t_char *info, int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
+ft_string	ft_check_availeble_spell_slots(int spell_level, t_char *character);
 
 //check name
 int			ft_set_stats_check_name(const char *name);
