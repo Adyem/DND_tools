@@ -322,8 +322,21 @@ static const t_spell_hunters_mark INITIALIZE_SPELL_HUNTERS_MARK =
 	.upcast_extra_damage = 0,
 };
 
+static const t_divine_smite INITIALIZE_DIVINE_SMITE =
+{
+	.learned = 0,
+	.duration = 0,
+	.dice_amount = 0,
+	.dice_faces = 0,
+	.extra_damage = 0,
+	.upcast_extra_dice_face = 0,
+	.upcast_extra_dice_amount = 0,
+	.upcast_extra_damage = 0,
+};
+
 static const t_spells INITIALIZE_SPELLS =
 {
+	.divine_smite = INITIALIZE_DIVINE_SMITE,
 	.hunters_mark = INITIALIZE_SPELL_HUNTERS_MARK,
 };
 
