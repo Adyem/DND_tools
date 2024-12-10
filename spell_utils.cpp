@@ -33,6 +33,8 @@ static ft_string ft_check_availeble_spell_slots(t_char *character, int base_leve
 
 int ft_prompt_spell_level(t_char *character, int base_level)
 {
+	assert (base_level >= 0 && base_level <= 9);
+
 	ft_string available_slots = ft_check_availeble_spell_slots(character, base_level);
     if (available_slots.getError())
     {
