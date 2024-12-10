@@ -8,24 +8,29 @@
 void ft_string::resize(size_t new_capacity) noexcept
 {
     if (new_capacity <= this->_capacity)
-        return;
+        return ;
     char* new_data = static_cast<char*>(cma_realloc(this->_data, new_capacity,
                 this->_criticality));
     if (!new_data)
     {
         this->setError(STRING_MEM_ALLOC_FAIL);
-        return;
+        return ;
     }
     this->_data = new_data;
     this->_capacity = new_capacity;
-    return;
+    return ;
 }
 
 void ft_string::append(char c) noexcept
 {
     if (this->_length + 1 >= this->_capacity)
     {
-        resize(this->_capacity == 0 ? 16 : this->_capacity * 2);
+        size_t new_capacity = this->_capacity;
+        if (new_capacity == 0)
+            new_capacity = 16;
+        else
+            new_capacity *= 2;
+        resize(new_capacity);
         if (this->_errorCode)
             return ;
     }
@@ -37,26 +42,29 @@ void ft_string::append(char c) noexcept
 void ft_string::append(const ft_string& string) noexcept
 {
     if (string._length == 0)
-        return;
+        return ;
     size_t new_length = this->_length + string._length;
     if (new_length >= this->_capacity)
     {
-        size_t new_capacity = (this->_capacity == 0) ? 16 : this->_capacity;
+        size_t new_capacity = this->_capacity;
+        if (new_capacity == 0)
+            new_capacity = 16;
         while (new_capacity <= new_length)
             new_capacity *= 2;
         resize(new_capacity);
         if (this->_errorCode)
-            return;
+            return ;
     }
     std::memcpy(this->_data + this->_length, string._data, string._length);
     this->_length = new_length;
     this->_data[this->_length] = '\0';
+	return ;
 }
 
 void ft_string::append(const char *string) noexcept
 {
     if (!string)
-        return;
+        return ;
     size_t string_length = std::strlen(string);
     if (this->_length + string_length >= this->_capacity)
     {
@@ -69,12 +77,12 @@ void ft_string::append(const char *string) noexcept
             new_capacity *= 2;
         resize(new_capacity);
         if (this->_errorCode)
-            return;
+            return ;
     }
     std::memcpy(this->_data + this->_length, string, string_length);
     this->_length += string_length;
     this->_data[this->_length] = '\0';
-    return;
+    return ;
 }
 
 void ft_string::clear() noexcept
@@ -83,7 +91,7 @@ void ft_string::clear() noexcept
     if (this->_data)
         this->_data[0] = '\0';
     this->_errorCode = 0;
-    return;
+    return ;
 }
 
 const char* ft_string::at(size_t index) const noexcept
@@ -229,7 +237,11 @@ ft_string operator+(const ft_string &lhs, const char *rhs) noexcept
 
 ft_string operator+(const char *lhs, const ft_string &rhs) noexcept
 {
-    ft_string result(lhs ? lhs : "");
+    ft_string result;
+    if (lhs)
+        result = lhs;
+    else
+        result = "";
     result += rhs;
     return (result);
 }
