@@ -64,6 +64,6 @@ void ft_npc_change_stats(t_char *info, const int index, const char **input)
     else
         pf_printf_fd(2, "Error: Too many arguments given\n");
     ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
+    ft_npc_write_file(info, &info->stats, &info->d_resistance, file);
     return ;
 }

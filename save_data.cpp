@@ -208,18 +208,16 @@ void ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, f
 {
     if (file.get_error_code())
     {
-        pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file, file.get_error_message());
+        pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
+				file.get_error_message());
         return;
     }
-    if (DEBUG == 1)
+	if (DEBUG == 1)
         pf_printf("fd = %i\n", file.get_fd());
-    if (info->flags.alreaddy_saved)
+	if (info->flags.alreaddy_saved)
         return;
-    if (file.get_fd() == -1)
-    {
-        pf_printf_fd(2, "124-Error opening file %s: %s\n", info->save_file, strerror(errno));
-        return;
-    }
+	if (DEBUG == 1)
+		pf_printf("saving %s %i\n", info->name, stats->health);
     ft_npc_write_file_1(info, stats, file);
     ft_npc_write_file_2(info, resistance, file);
 	ft_npc_write_spell_slots(info, file);
