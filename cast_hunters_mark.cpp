@@ -79,7 +79,8 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
     if (DEBUG == 1 && target)
     {
         int index = 0;
-        while (target->debufs.hunters_mark.caster_name && target->debufs.hunters_mark.caster_name[index])
+        while (target->debufs.hunters_mark.caster_name
+				&& target->debufs.hunters_mark.caster_name[index])
         {
             pf_printf("%s has cast hunter's mark\n", target->debufs.hunters_mark.caster_name[index]);
             index++;
@@ -99,11 +100,14 @@ void	ft_concentration_remove_hunters_mark(t_char *character, t_target_data *targ
 		caster_index = 0;
 		while (targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index])
 		{
-			if (ft_strcmp_dnd(targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index],
+			if (ft_strcmp_dnd(targets_data->target[target_index]->debufs.hunters_mark.caster_name
+						[caster_index],
 					character->name) == 0)
 			{
-				cma_free(targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index]);
-				targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index] = ft_nullptr;
+				cma_free(targets_data->target[target_index]->debufs.hunters_mark.caster_name
+						[caster_index]);
+				targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index]
+					= ft_nullptr;
 				targets_data->target[target_index]->debufs.hunters_mark.amount--;
 			}
 			caster_index++;

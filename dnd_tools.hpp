@@ -151,6 +151,13 @@ void		ft_to_hit_check_buff(t_char *info);
 //cast spell
 void		ft_cast_divine_smite(t_char *character);
 
+//spells utils
+ft_string	ft_get_available_spell_slots(t_char *character, int base_level);
+int			ft_prompt_spell_level(t_char *character, const ft_string *available_slots,
+				int base_level);
+int			ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage);
+ft_string	ft_check_availeble_spell_slots(t_char *character, int base_level);
+
 //calculate stats
 int			ft_calculate_str(t_char *info);
 int			ft_calculate_dex(t_char *info);
@@ -297,7 +304,6 @@ int			ft_set_stat_player(size_t key_len, const char **field, const char *content
 int			ft_check_write_permissions(const char *filepath);
 t_char		*ft_validate_and_fetch_target(char *target_name, t_char *info, int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
-ft_string	ft_check_availeble_spell_slots(t_char *character);
 
 //check name
 int			ft_set_stats_check_name(const char *name);
@@ -305,7 +311,8 @@ int			ft_check_player_character(const char *name);
 
 //readline checks
 int			ft_readline_confirm(const char *mesage);
-int			ft_readline_spell_level(const char *message, t_char *character);
+int			ft_readline_spell_level(const char *message, t_char *character,
+				int *invalid_input_amount);
 
 //dice rolling
 int			ft_saving_throw(t_char *info, const char *ability_score, int ability_mod, int save_mod);

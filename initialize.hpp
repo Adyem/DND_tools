@@ -313,6 +313,8 @@ static const t_spell_slots INITIALIZE_SPELL_SLOTS =
 static const t_spell_hunters_mark INITIALIZE_SPELL_HUNTERS_MARK =
 {
 	.learned = 0,
+	.base_level = 0,
+	.casting_at_level = 0,
 	.duration = 0,
 	.dice_amount = 0,
 	.dice_faces = 0,
@@ -325,6 +327,8 @@ static const t_spell_hunters_mark INITIALIZE_SPELL_HUNTERS_MARK =
 static const t_divine_smite INITIALIZE_DIVINE_SMITE =
 {
 	.learned = 0,
+	.base_level = 0,
+	.casting_at_level = 0,
 	.duration = 0,
 	.dice_amount = 0,
 	.dice_faces = 0,

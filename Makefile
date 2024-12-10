@@ -134,7 +134,8 @@ SRC         = name.cpp \
               npc_set_stats_player.cpp \
               crackback.cpp \
               frank.cpp \
-			  cast_divine_smite.cpp
+			  cast_divine_smite.cpp \
+			  spell_utils.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations

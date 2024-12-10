@@ -52,10 +52,9 @@ static int ft_check_spell_slots(int spell_level, t_char *character)
 	return (0);
 }
 
-int ft_readline_spell_level(const char *message, t_char *character)
+int ft_readline_spell_level(const char *message, t_char *character, int *invalid_input_amount)
 {
 	char	*input;
-	int		invalid_input_amount = 0;
 	int		spell_level;
 
 	while (1)
@@ -68,8 +67,8 @@ int ft_readline_spell_level(const char *message, t_char *character)
 		if (ft_check_value(input))
 		{
 			pf_printf_fd(2, "Invalid input\n");
-			invalid_input_amount++;
-			if (invalid_input_amount >= 5)
+			(*invalid_input_amount)++;
+			if (*invalid_input_amount >= 5)
 				return (-1);
 			continue ;
 		}
@@ -79,16 +78,16 @@ int ft_readline_spell_level(const char *message, t_char *character)
 		if (spell_level < 1 || spell_level > 9)
 		{
 			pf_printf_fd(2, "Invalid input\n");
-			invalid_input_amount++;
-			if (invalid_input_amount >= 5)
+			(*invalid_input_amount)++;
+			if (*invalid_input_amount >= 5)
 				return (-1);
 			continue ;
 		}
 		if (ft_check_spell_slots(spell_level, character) == -1)
 		{
 			pf_printf_fd(2, "No spell slots left at level %i\n", spell_level);
-			invalid_input_amount++;
-			if (invalid_input_amount >= 5)
+			(*invalid_input_amount)++;
+			if (*invalid_input_amount >= 5)
 				return (-1);
 			continue ;
 		}

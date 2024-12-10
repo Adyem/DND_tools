@@ -2,6 +2,7 @@
 # define CHARACTER_H
 
 #include "libft/CPP_class/file.hpp"
+#include <type_traits>
 
 # define ERROR_RESISTANCE 9999
 
@@ -375,6 +376,8 @@ typedef struct	s_spell_slots
 typedef struct s_spell_hunters_mark
 {
 	int		learned;
+	int		base_level;
+	int		casting_at_level;
 	int		duration;
 	int		dice_amount;
 	int		dice_faces;
@@ -387,6 +390,8 @@ typedef struct s_spell_hunters_mark
 typedef struct s_divine_smite
 {
 	int		learned;
+	int		base_level;
+	int		casting_at_level;
 	int		duration;
 	int		dice_amount;
 	int		dice_faces;

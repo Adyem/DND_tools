@@ -1,0 +1,86 @@
+#include "character.hpp"
+#include "dnd_tools.hpp"
+#include "libft/CPP_class/string.hpp"
+#include "libft/Printf/printf.hpp"
+
+ft_string ft_check_availeble_spell_slots(t_char *character, int base_level)
+{
+	ft_string available_levels;
+
+	if (base_level >= 1 && character->spell_slots.level_1.available > 0)
+		available_levels.append(" 1,");
+	if (base_level >= 2 && character->spell_slots.level_2.available > 0)
+		available_levels.append(" 2,");
+	if (base_level >= 3 && character->spell_slots.level_3.available > 0)
+		available_levels.append(" 3,");
+	if (base_level >= 4 && character->spell_slots.level_4.available > 0)
+		available_levels.append(" 4,");
+	if (base_level >= 5 && character->spell_slots.level_5.available > 0)
+		available_levels.append(" 5,");
+	if (base_level >= 6 && character->spell_slots.level_6.available > 0)
+		available_levels.append(" 6,");
+	if (base_level >= 7 && character->spell_slots.level_7.available > 0)
+		available_levels.append(" 7,");
+	if (base_level >= 8 && character->spell_slots.level_8.available > 0)
+		available_levels.append(" 8,");
+	if (base_level >= 9 && character->spell_slots.level_9.available > 0)
+		available_levels.append(" 9,");
+	if (!available_levels.empty())
+		available_levels.erase(available_levels.size() - 1, 1);
+	return (available_levels);
+}
+
+ft_string ft_get_available_spell_slots(t_char *character, int base_level)
+{
+    return (ft_check_availeble_spell_slots(character, base_level));
+}
+
+int ft_prompt_spell_level(t_char *character, const ft_string *available_slots, int base_level)
+{
+    ft_string message = "Select the level you want to cast the spell at: "
+        + *available_slots + ": ";
+    if (message.getError())
+    {
+        pf_printf_fd(2, "Error: Failed to initialize message string %s\n", message.errorStr());
+        return (-1);
+    }
+    int level = 0;
+    int invalid_input_amount = 0;
+    while (level < base_level)
+    {
+        if (invalid_input_amount >= 5)
+        {
+            pf_printf_fd(2, "Error: Too many invalid attempts to select spell level.\n");
+            return (-1);
+        }
+        level = ft_readline_spell_level(message.c_str(), character, &invalid_input_amount);
+        if (level == -1)
+            return (-1);
+        if (level < base_level)
+        {
+            pf_printf_fd(2, "Error: Selected level %d is below the minimum required level %d.\n",
+                          level, base_level);
+            invalid_input_amount++;
+        }
+    }
+    return (level);
+}
+
+static int ft_perform_dice_roll(int total_dice, int dice_faces)
+{
+    int result = ft_dice_roll(total_dice, dice_faces);
+    if (result == -1)
+    {
+        pf_printf_fd(2, "Error: Dice roll failed.\n");
+        return (-1);
+    }
+    return (result);
+}
+
+int ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage)
+{
+    int dice_roll_result = ft_perform_dice_roll(total_dice, dice_faces);
+    if (dice_roll_result == -1)
+        return (-1);
+    return (dice_roll_result + extra_damage);
+}
