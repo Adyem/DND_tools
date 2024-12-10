@@ -248,3 +248,8 @@ ft_string operator+(char lhs, const ft_string &rhs) noexcept
     result += rhs;
     return (result);
 }
+
+ft_string::operator const char*() const
+{
+    return (_data);
+}

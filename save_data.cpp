@@ -4,7 +4,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
-#include <string.h>
 
 static void ft_npc_write_spell_slots(t_char *info, ft_file &file)
 {
@@ -222,4 +221,5 @@ void ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, f
     ft_npc_write_file_2(info, resistance, file);
 	ft_npc_write_spell_slots(info, file);
     info->flags.alreaddy_saved = 1;
+	return ;
 }
