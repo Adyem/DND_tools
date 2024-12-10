@@ -26,7 +26,7 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
 {
 	if (info->spells.hunters_mark.learned != 1)
 	{
-		pf_printf_fd(2, "%s hasn't learned the spell", info->name);
+		pf_printf_fd(2, "%s hasn't learned the spell hunters mark\n", info->name);
 		return ;
 	}
 	int cast_at_level = ft_prompt_spell_level(info, info->spells.hunters_mark.base_level);

@@ -16,7 +16,7 @@ static int ft_set_stat_int(char *content_i, const char *key, int *field, int uns
 	int	index;
 
 	index = ft_strlen(key);
-    if (ft_strncmp(content_i, key, index) == 0 && *field == unset_value)
+    if (ft_strncmp(content_i, key, index) == 0 && (unset_value == -1 || *field == unset_value))
     {
         *field = ft_check_stat(info, content_i, index);
         return (1);
@@ -51,85 +51,85 @@ static int ft_set_stats_1(t_char *info, char **content, int i)
 static int ft_set_spell_slots(t_char *info, char **content, int i)
 {
     if (ft_set_stat_int(content[i], LEVEL_1_AVAILABLE_KEY,
-				&(info->spell_slots.level_1.available), 0, info) ||
+                &(info->spell_slots.level_1.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_1_TOTAL_KEY,
-			&(info->spell_slots.level_1.total), 0, info) ||
+            &(info->spell_slots.level_1.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_1_LEVEL_KEY,
-			&(info->spell_slots.level_1.level), 0, info) ||
+            &(info->spell_slots.level_1.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_1_REPLENISHING_SLOT_KEY,
-			&(info->spell_slots.level_1.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_1.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_2_AVAILABLE_KEY,
-			&(info->spell_slots.level_2.available), 0, info) ||
+            &(info->spell_slots.level_2.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_2_TOTAL_KEY,
-			&(info->spell_slots.level_2.total), 0, info) ||
+            &(info->spell_slots.level_2.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_2_LEVEL_KEY,
-			&(info->spell_slots.level_2.level), 0, info) ||
+            &(info->spell_slots.level_2.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_2_REPLENISHING_SLOT_KEY,
-			&(info->spell_slots.level_2.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_2.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_3_AVAILABLE_KEY,
-			&(info->spell_slots.level_3.available), 0, info) ||
+            &(info->spell_slots.level_3.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_3_TOTAL_KEY,
-			&(info->spell_slots.level_3.total), 0, info) ||
+            &(info->spell_slots.level_3.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_3_LEVEL_KEY,
-			&(info->spell_slots.level_3.level), 0, info) ||
+            &(info->spell_slots.level_3.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_3_REPLENISHING_SLOT_KEY,
-				&(info->spell_slots.level_3.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_3.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_4_AVAILABLE_KEY,
-				&(info->spell_slots.level_4.available), 0, info) ||
+            &(info->spell_slots.level_4.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_4_TOTAL_KEY,
-				&(info->spell_slots.level_4.total), 0, info) ||
+            &(info->spell_slots.level_4.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_4_LEVEL_KEY,
-				&(info->spell_slots.level_4.level), 0, info) ||
+            &(info->spell_slots.level_4.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_4_REPLENISHING_SLOT_KEY,
-				&(info->spell_slots.level_4.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_4.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_5_AVAILABLE_KEY,
-				&(info->spell_slots.level_5.available), 0, info) ||
+            &(info->spell_slots.level_5.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_5_TOTAL_KEY,
-				&(info->spell_slots.level_5.total), 0, info) ||
+            &(info->spell_slots.level_5.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_5_LEVEL_KEY,
-				&(info->spell_slots.level_5.level), 0, info) ||
+            &(info->spell_slots.level_5.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_5_REPLENISHING_SLOT_KEY,
-				&(info->spell_slots.level_5.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_5.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_6_AVAILABLE_KEY,
-				&(info->spell_slots.level_6.available), 0, info) ||
+            &(info->spell_slots.level_6.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_6_TOTAL_KEY,
-				&(info->spell_slots.level_6.total), 0, info) ||
+            &(info->spell_slots.level_6.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_6_LEVEL_KEY,
-				&(info->spell_slots.level_6.level), 0, info) ||
+            &(info->spell_slots.level_6.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_6_REPLENISHING_SLOT_KEY,
-				&(info->spell_slots.level_6.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_6.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_7_AVAILABLE_KEY,
-				&(info->spell_slots.level_7.available), 0, info) ||
+            &(info->spell_slots.level_7.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_7_TOTAL_KEY,
-				&(info->spell_slots.level_7.total), 0, info) ||
+            &(info->spell_slots.level_7.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_7_LEVEL_KEY,
-				&(info->spell_slots.level_7.level), 0, info) ||
+            &(info->spell_slots.level_7.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_7_REPLENISHING_SLOT_KEY,
-				&(info->spell_slots.level_7.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_7.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_8_AVAILABLE_KEY,
-				&(info->spell_slots.level_8.available), 0, info) ||
+            &(info->spell_slots.level_8.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_8_TOTAL_KEY,
-				&(info->spell_slots.level_8.total), 0, info) ||
+            &(info->spell_slots.level_8.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_8_LEVEL_KEY,
-				&(info->spell_slots.level_8.level), 0, info) ||
+            &(info->spell_slots.level_8.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_8_REPLENISHING_SLOT_KEY,
-				&(info->spell_slots.level_8.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_8.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_9_AVAILABLE_KEY,
-				&(info->spell_slots.level_9.available), 0, info) ||
+            &(info->spell_slots.level_9.available), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_9_TOTAL_KEY,
-				&(info->spell_slots.level_9.total), 0, info) ||
+            &(info->spell_slots.level_9.total), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_9_LEVEL_KEY,
-				&(info->spell_slots.level_9.level), 0, info) ||
+            &(info->spell_slots.level_9.level), -1, info) ||
         ft_set_stat_int(content[i], LEVEL_9_REPLENISHING_SLOT_KEY,
-				&(info->spell_slots.level_9.replenishing_slot), 0, info) ||
+            &(info->spell_slots.level_9.replenishing_slot), -1, info) ||
         ft_set_stat_int(content[i], WARLOCK_AVAILABLE_KEY,
-				&(info->spell_slots.warlock.available), 0, info) ||
+            &(info->spell_slots.warlock.available), -1, info) ||
         ft_set_stat_int(content[i], WARLOCK_TOTAL_KEY,
-				&(info->spell_slots.warlock.total), 0, info) ||
+            &(info->spell_slots.warlock.total), -1, info) ||
         ft_set_stat_int(content[i], WARLOCK_LEVEL_KEY,
-				&(info->spell_slots.warlock.level), 0, info) ||
+            &(info->spell_slots.warlock.level), -1, info) ||
         ft_set_stat_int(content[i], WARLOCK_REPLENISHING_SLOT_KEY,
-				&(info->spell_slots.warlock.replenishing_slot), 0, info))
+            &(info->spell_slots.warlock.replenishing_slot), -1, info))
     {
         return (0);
     }
