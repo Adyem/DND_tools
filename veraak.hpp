@@ -124,6 +124,8 @@ static const t_physical VERAAK_PHYSICAL =
 static const t_spell_hunters_mark VERAAK_SPELLS_HUNTERS_MARK =
 {
 	.learned = 1,
+	.base_level = 1,
+	.casting_at_level = 0,
 	.duration = 50,
 	.dice_amount = 1,
 	.dice_faces = 6,
@@ -131,6 +133,29 @@ static const t_spell_hunters_mark VERAAK_SPELLS_HUNTERS_MARK =
 	.upcast_extra_dice_face = 0,
 	.upcast_extra_dice_amount = 0,
 	.upcast_extra_damage = 0,
+};
+
+
+static const t_spell_slot VERAAK_SPELL_SLOT_LEVEL_1 =
+{
+	.available = 4,
+	.total = 4,
+	.level = 0,
+	.replenishing_slot = 0,
+};
+
+static const t_spell_slots VERAAK_SPELL_SLOTS =
+{
+	.level_1 = VERAAK_SPELL_SLOT_LEVEL_1,
+	.level_2 = INITIALIZE_SPELL_SLOT,
+	.level_3 = INITIALIZE_SPELL_SLOT,
+	.level_4 = INITIALIZE_SPELL_SLOT,
+	.level_5 = INITIALIZE_SPELL_SLOT,
+	.level_6 = INITIALIZE_SPELL_SLOT,
+	.level_7 = INITIALIZE_SPELL_SLOT,
+	.level_8 = INITIALIZE_SPELL_SLOT,
+	.level_9 = INITIALIZE_SPELL_SLOT,
+	.warlock = INITIALIZE_SPELL_SLOT,
 };
 
 static const t_char VERAAK_INFO =
@@ -144,7 +169,7 @@ static const t_char VERAAK_INFO =
 	.name = ft_nullptr,
 	.turn = ft_veraak_turn,
 	.spells = INITIALIZE_SPELLS,
-	.spell_slots = INITIALIZE_SPELL_SLOTS,
+	.spell_slots = VERAAK_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
 	.crit = VERAAK_CRIT,
 	.attack_bonus = VERAAK_ATTACK,

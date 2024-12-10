@@ -2,8 +2,9 @@
 #include "dnd_tools.hpp"
 #include "libft/CPP_class/string.hpp"
 #include "libft/Printf/printf.hpp"
+#include <cassert>
 
-ft_string ft_check_availeble_spell_slots(t_char *character, int base_level)
+static ft_string ft_check_availeble_spell_slots(t_char *character, int base_level)
 {
 	ft_string available_levels;
 
@@ -30,15 +31,23 @@ ft_string ft_check_availeble_spell_slots(t_char *character, int base_level)
 	return (available_levels);
 }
 
-ft_string ft_get_available_spell_slots(t_char *character, int base_level)
+int ft_prompt_spell_level(t_char *character, int base_level)
 {
-    return (ft_check_availeble_spell_slots(character, base_level));
-}
-
-int ft_prompt_spell_level(t_char *character, const ft_string *available_slots, int base_level)
-{
+	ft_string available_slots = ft_check_availeble_spell_slots(character, base_level);
+    if (available_slots.getError())
+    {
+        pf_printf_fd(2, "Error: Failed to retrieve available spell slots for %s.\n",
+                character->name);
+        return (-1);
+    }
+    if (available_slots.empty())
+    {
+        pf_printf_fd(2, "Error: No available spell slots for %s to cast Divine Smite.\n",
+                character->name);
+        return (-1);
+    }
     ft_string message = "Select the level you want to cast the spell at: "
-        + *available_slots + ": ";
+        + available_slots + ": ";
     if (message.getError())
     {
         pf_printf_fd(2, "Error: Failed to initialize message string %s\n", message.errorStr());
@@ -83,4 +92,29 @@ int ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage)
     if (dice_roll_result == -1)
         return (-1);
     return (dice_roll_result + extra_damage);
+}
+
+void ft_remove_spell_slot(t_spell_slots *spell_slots, int level_spell_used)
+{
+	assert(level_spell_used >= 1 && level_spell_used <= 9);
+
+	if (level_spell_used == 1 && spell_slots->level_1.available > 0)
+        spell_slots->level_1.available--;
+	else if (level_spell_used == 2 && spell_slots->level_2.available > 0)
+        spell_slots->level_2.available--;
+	else if (level_spell_used == 3 && spell_slots->level_3.available > 0)
+        spell_slots->level_3.available--;
+	else if (level_spell_used == 4 && spell_slots->level_4.available > 0)
+        spell_slots->level_4.available--;
+	else if (level_spell_used == 5 && spell_slots->level_5.available > 0)
+        spell_slots->level_5.available--;
+	else if (level_spell_used == 6 && spell_slots->level_6.available > 0)
+        spell_slots->level_6.available--;
+	else if (level_spell_used == 7 && spell_slots->level_7.available > 0)
+        spell_slots->level_7.available--;
+	else if (level_spell_used == 8 && spell_slots->level_8.available > 0)
+        spell_slots->level_8.available--;
+	else if (level_spell_used == 9 && spell_slots->level_9.available > 0)
+        spell_slots->level_9.available--;
+	return ;
 }

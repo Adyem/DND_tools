@@ -152,11 +152,9 @@ void		ft_to_hit_check_buff(t_char *info);
 void		ft_cast_divine_smite(t_char *character);
 
 //spells utils
-ft_string	ft_get_available_spell_slots(t_char *character, int base_level);
-int			ft_prompt_spell_level(t_char *character, const ft_string *available_slots,
-				int base_level);
+int			ft_prompt_spell_level(t_char *character, int base_level);
 int			ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage);
-ft_string	ft_check_availeble_spell_slots(t_char *character, int base_level);
+void		ft_remove_spell_slot(t_spell_slots *spell_slots, int level_spell_used);
 
 //calculate stats
 int			ft_calculate_str(t_char *info);
