@@ -1,3 +1,4 @@
+#include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "libft/CPP_class/string.hpp"
@@ -30,7 +31,15 @@ void	ft_cast_divine_smite(t_char *character)
 		return ;
 	}
 	int level = ft_readline_spell_level(message.c_str(), character);
-	int dice_roll_result = ft_dice_roll(level + 1, 8);
+	t_divine_smite *divine_smite = &character->spells.divine_smite;
+	int total_dice = divine_smite->dice_amount 
+                + divine_smite->upcast_extra_dice_amount * level 
+                - divine_smite->upcast_extra_dice_amount;
+	int dice_faces = divine_smite->upcast_extra_dice_face * level 
+               - divine_smite->upcast_extra_dice_amount;
+	int extra_damage = divine_smite->upcast_extra_damage * level 
+                 - divine_smite->upcast_extra_damage;
+	int dice_roll_result = ft_dice_roll(total_dice, dice_faces) + extra_damage;
 	if (dice_roll_result == -1)
 	{
 		pf_printf_fd(2, "Error: Dice roll for Divine Smite failed.\n");
