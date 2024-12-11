@@ -86,5 +86,7 @@ char *rl_readline(const char *prompt)
     state.buffer[state.pos] = '\0';
     rl_update_history(state.buffer);
     rl_disable_raw_mode();
+	if (DEBUG == 1)
+		pf_printf("returning %s\n", state.buffer);
     return (state.buffer);
 }

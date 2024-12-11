@@ -5,6 +5,10 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#ifndef DEBUG
+# define DEBUG 0
+#endif
+
 #define MAX_HISTORY 1000
 #define MAX_SUGGESTIONS 1000
 #define INITIAL_BUFFER_SIZE 1024
