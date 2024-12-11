@@ -56,8 +56,8 @@ Vector<ElementType>::Vector(size_t initial_capacity, bool criticality)
 {
     if (initial_capacity > 0)
     {
-        this->_data = static_cast<ElementType*>(cma_malloc(initial_capacity * sizeof(ElementType),
-					this->_critical));
+        this->_data = static_cast<ElementType*>(cma_malloc(initial_capacity
+					* sizeof(ElementType), this->_critical));
         if (this->_data == ft_nullptr)
             this->setError(VECTOR_ALLOC_FAIL);
         else
@@ -125,11 +125,11 @@ void Vector<ElementType>::push_back(const ElementType& value)
             newCapacity = 1;
         reserve(newCapacity);
         if (this->_errorCode)
-            return;
+            return ;
     }
     new (&this->_data[this->_size]) ElementType(value);
     this->_size++;
-    return;
+    return ;
 }
 
 template <typename ElementType>
@@ -223,7 +223,7 @@ typename Vector<ElementType>::iterator Vector<ElementType>::insert(iterator pos,
 {
     size_t index = pos - this->_data;
     if (index > this->_size)
-		return end();
+		return (end());
     if (this->_size >= this->_capacity)
     {
         size_t new_capacity = 1;
@@ -233,7 +233,7 @@ typename Vector<ElementType>::iterator Vector<ElementType>::insert(iterator pos,
         }
         reserve(new_capacity);
         if (this->_errorCode)
-			return end();
+			return (end());
     }
 	size_t i = this->_size;
 	while (i > index)

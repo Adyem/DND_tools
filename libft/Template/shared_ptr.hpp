@@ -140,6 +140,7 @@ SharedPtr<ManagedType>::SharedPtr(SharedPtr<ManagedType>&& other) noexcept
 {
     other.managedPointer = ft_nullptr;
     other.referenceCount = ft_nullptr;
+	return ;
 }
 
 template <typename ManagedType>

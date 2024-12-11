@@ -58,6 +58,7 @@ ft_string::ft_string(ft_string&& other) noexcept
     other._capacity = 0;
     other._errorCode = 0;
     other._criticality = false;
+	return ;
 }
 
 ft_string& ft_string::operator=(const ft_string& other) noexcept
