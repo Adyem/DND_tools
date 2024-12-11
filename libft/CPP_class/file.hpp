@@ -38,6 +38,8 @@ class ft_file
 		int			read(char *buffer, int count) noexcept;
 		int			printf(const char *format, ...)
 						__attribute__((format(printf, 2, 3), hot));
+
+		operator int() const;
 };
 
 #endif

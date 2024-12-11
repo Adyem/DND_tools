@@ -191,3 +191,8 @@ int	ft_file::printf(const char *format, ...)
     va_end(args);
     return (printed_chars);
 }
+
+ft_file::operator int() const
+{
+	return (this->_fd);
+}

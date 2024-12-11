@@ -1,7 +1,9 @@
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
+#include "../Libft/libft.hpp"
 #include "../CPP_class/nullptr.hpp"
 #include "../Printf/printf.hpp"
 #include "../CMA/CMA.hpp"
@@ -26,18 +28,27 @@ static void rl_cleanup_state(readline_state_t *state)
 
 char *rl_readline(const char *prompt)
 {
-    readline_state_t state;
+	static int			file_reset;
+    readline_state_t 	state;
 
-    if (rl_initialize_state(&state))
+	if (rl_initialize_state(&state))
         return (ft_nullptr);
-    if (rl_enable_raw_mode() == -1)
+	if (file_reset == 0)
+	{
+		state.error_file.open("data/data--log", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+		file_reset = 1;
+	}
+	else	
+    	state.error_file.open("data/data--log", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+	if (state.error_file != -1)
+		state.error_file.printf("printing to log file\n");
+	if (rl_enable_raw_mode() == -1)
 	{
 		rl_cleanup_state(&state);
 		return (ft_nullptr);
 	}
     pf_printf("%s", prompt);
     fflush(stdout);
-
     while (1)
     {
         int character = rl_read_key();
@@ -83,7 +94,8 @@ char *rl_readline(const char *prompt)
             }
 		}
     }
-    state.buffer[state.pos] = '\0';
+    int line_length = ft_strlen(state.buffer);
+	state.buffer[line_length] = '\0';
     rl_update_history(state.buffer);
     rl_disable_raw_mode();
 	if (DEBUG == 1)

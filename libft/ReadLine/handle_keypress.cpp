@@ -14,15 +14,19 @@ int rl_handle_backspace(readline_state_t *state, const char *prompt)
         state->pos--;
         ft_memmove(&state->buffer[state->pos], &state->buffer[state->pos + 1],
            ft_strlen(state->buffer) - state->pos + 1);
+		if (state->error_file != -1)
+			state->error_file.printf("BUFFER = %s\n", state->buffer);
         state->prev_buffer_length = ft_strlen(state->buffer);
         if (rl_clear_line(prompt, state->buffer) == -1)
+		{
+			state->error_file.printf("clear line failed");
 			return (-1);
+		}
         pf_printf("%s%s", prompt, state->buffer);
         int len_after_cursor = state->prev_buffer_length - state->pos;
         if (len_after_cursor > 0)
             pf_printf("\033[%dD", len_after_cursor);
-		if (DEBUG == 1)
-			pf_printf("BUFFER = %s\n", state->buffer);
+
         fflush(stdout);
     }
 	return (0);

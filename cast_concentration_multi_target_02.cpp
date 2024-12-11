@@ -65,7 +65,7 @@ void	ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_d
 		return ;
 	}
 	info_save_file = ft_check_and_open(target_data, info);
-	if (info_save_file.get_fd() == -1)
+	if (info_save_file == -1)
 	{
 		ft_set_not_save_flag(target_data, info);
 		return ;

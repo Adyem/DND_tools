@@ -88,7 +88,7 @@ static int ft_turn_write(t_pc *players)
 	temp = players;
 	while (temp)
 	{
-		pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", temp->name, temp->initiative);
+		pf_printf_fd(initiative_file, "%s=%d\n", temp->name, temp->initiative);
 		temp = temp->next;
 	}
 	return (0);

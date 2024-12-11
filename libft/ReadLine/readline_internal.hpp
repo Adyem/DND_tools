@@ -1,6 +1,7 @@
 #ifndef READLINE_INTERNAL_HPP
 #define READLINE_INTERNAL_HPP
 
+#include "../CPP_class/file.hpp"
 #include <termios.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -29,16 +30,17 @@ struct terminal_dimensions {
 };
 
 typedef struct {
-    char *buffer;
-    int bufsize;
-    int pos;
-    int prev_buffer_length;
-    int history_index;
-    int in_completion_mode;
-    int current_match_count;
-    int current_match_index;
-    int word_start;
-    char *current_matches[MAX_SUGGESTIONS];
+    char	*buffer;
+    int		bufsize;
+    int		pos;
+    int		prev_buffer_length;
+    int		history_index;
+    int		in_completion_mode;
+    int		current_match_count;
+    int		current_match_index;
+    int		word_start;
+    char	*current_matches[MAX_SUGGESTIONS];
+	ft_file	error_file;
 } readline_state_t;
 
 //Initialize memory

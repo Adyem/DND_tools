@@ -142,18 +142,18 @@ char	*get_next_line(ft_file &file, bool criticality)
 	static char	*readed_string[4096];
 	int			index = 0;
 
-	while (file.get_fd() == -1 && index < 4096)
+	while (file == -1 && index < 4096)
 	{
 		free(readed_string[index]);
 		readed_string[index] = nullptr;
 		index++;
 	}
-	if (BUFFER_SIZE <= 0 || file.get_fd() < 0)
+	if (BUFFER_SIZE <= 0 || file < 0)
 		return (nullptr);
-	readed_string[file.get_fd()] = read_fd(file, readed_string[file.get_fd()], criticality);
-	if (!readed_string[file.get_fd()])
+	readed_string[file] = read_fd(file, readed_string[file], criticality);
+	if (!readed_string[file])
 		return (nullptr);
-	string = fetch_line(readed_string[file.get_fd()], criticality);
-	readed_string[file.get_fd()] = leftovers(readed_string[file.get_fd()], criticality);
+	string = fetch_line(readed_string[file], criticality);
+	readed_string[file] = leftovers(readed_string[file], criticality);
 	return (string);
 }

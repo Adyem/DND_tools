@@ -4,7 +4,7 @@
 
 void	ft_save_pc(t_pc *player, ft_file &file)
 {
-	pf_printf_fd(file.get_fd(), "NAME=%s\n", player->name);
-	pf_printf_fd(file.get_fd(), "INITIATIVE=%d\n", player->initiative);
+	pf_printf_fd(file, "NAME=%s\n", player->name);
+	pf_printf_fd(file, "INITIATIVE=%d\n", player->initiative);
 	return ;
 }
