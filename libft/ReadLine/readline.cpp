@@ -62,7 +62,7 @@ char *rl_readline(const char *prompt)
         if (character == '\r' || character == '\n')
         {
             pf_printf("\n");
-            break;
+            break ;
         }
         else if (character == 127 || character == '\b')
             rl_handle_backspace(&state, prompt);
