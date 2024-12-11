@@ -57,6 +57,7 @@ static void ft_npc_write_spell_slots(t_char *info, ft_file &file)
     file.printf("%s%i\n", WARLOCK_LEVEL_KEY, info->spell_slots.warlock.level);
     file.printf("%s%i\n", WARLOCK_REPLENISHING_SLOT_KEY,
 			info->spell_slots.warlock.replenishing_slot);
+	return ;
 }
 
 
@@ -205,7 +206,7 @@ static void ft_npc_write_file_2(t_char *info, t_resistance *resistance, ft_file 
 
 void ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, ft_file &file)
 {
-    if (file.get_error_code())
+    if (file == -1)
     {
         pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
 				file.get_error_message());
