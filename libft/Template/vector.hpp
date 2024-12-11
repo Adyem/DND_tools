@@ -257,10 +257,12 @@ typename Vector<ElementType>::iterator Vector<ElementType>::erase(iterator pos)
         return (end()); 
     }
     this->_data[index].~ElementType();
-    for (size_t i = index; i < this->_size - 1; ++i)
+	size_t i = index;
+    while (i < this->_size - 1)
     {
         new (&this->_data[i]) ElementType(this->_data[i + 1]);
         this->_data[i + 1].~ElementType();
+		i++;
     }
     --this->_size;
     if (index == this->_size)

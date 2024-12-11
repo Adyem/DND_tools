@@ -24,10 +24,12 @@ static void rl_find_word_start_and_prefix(readline_state_t *state, char *prefix,
 static void rl_gather_matching_suggestions(readline_state_t *state, const char *prefix, int prefix_len)
 {
     state->current_match_count = 0;
-    for (int i = 0; i < suggestion_count; i++)
+	int index = 0;
+    while (index < suggestion_count)
 	{
-        if (ft_strncmp(suggestions[i], prefix, prefix_len) == 0)
-            state->current_matches[state->current_match_count++] = suggestions[i];
+        if (ft_strncmp(suggestions[index], prefix, prefix_len) == 0)
+            state->current_matches[state->current_match_count++] = suggestions[index];
+		index++;
     }
 	return ;
 }

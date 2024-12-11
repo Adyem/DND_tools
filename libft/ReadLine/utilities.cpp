@@ -40,11 +40,13 @@ int rl_clear_line(const char *prompt, const char *buffer)
 	if (term_width == -1)
 		return (-1);
     int line_count = (total_length / term_width) + 1;
-    for (int i = 0; i < line_count; i++)
+	int index = 0;
+    while (index < line_count)
     {
         pf_printf("\033[2K");
-        if (i < line_count - 1)
+        if (index < line_count - 1)
             pf_printf("\033[A");
+		index++;
     }
     pf_printf("\r");
 	return (0);
@@ -52,12 +54,12 @@ int rl_clear_line(const char *prompt, const char *buffer)
 
 int rl_read_key()
 {
-    int nread;
-    char c;
+    int		bytes_read;
+    char	character;
 
-    while ((nread = read(STDIN_FILENO, &c, 1)) != 1)
+    while ((bytes_read = read(STDIN_FILENO, &character, 1)) != 1)
         ;
-    return (c);
+    return (character);
 }
 
 void rl_update_history(const char *buffer)

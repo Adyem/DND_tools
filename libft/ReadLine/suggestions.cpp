@@ -9,22 +9,28 @@
 
 void rl_add_suggestion(const char *word)
 {
-	for (int i = 0; i < suggestion_count; i++)
-	{
-        if (strcmp(suggestions[i], word) == 0)
+    int index = 0;
+    while (index < suggestion_count)
+    {
+        if (strcmp(suggestions[index], word) == 0)
             return ;
-	}
-	if (suggestion_count < MAX_SUGGESTIONS)
+        index++;
+    }
+    if (suggestion_count < MAX_SUGGESTIONS)
         suggestions[suggestion_count++] = cma_strdup(word, true);
-	else
+    else
         pf_printf_fd(2, "Suggestion list full\n");
-	return ;
+    return ;
 }
 
 void rl_clear_suggestions()
 {
-    for (int i = 0; i < suggestion_count; i++)
-        cma_free(suggestions[i]);
+    int index = 0;
+    while (index < suggestion_count)
+    {
+        cma_free(suggestions[index]);
+        index++;
+    }
     suggestion_count = 0;
-	return ;
+    return ;
 }
