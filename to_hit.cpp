@@ -12,9 +12,9 @@ static void ft_pc_specific(t_char *info, int number)
 void ft_npc_check_ac(t_char *info, const char **input)
 {
 	int number;
-	int ac;
 
-	ac = ft_calculate_ac(info);
+	int armor_class = ft_calculate_ac(info);
+	pf_printf("%s has an ac of %i\n", info->name, armor_class);
 	ft_to_hit_check_buff(info);
 	if (ft_strcmp_dnd(input[2], "crit") == 0)
 	{
@@ -35,7 +35,7 @@ void ft_npc_check_ac(t_char *info, const char **input)
 		if (info->bufs.protective_winds.duration > 0)
 			pf_printf("%s has protective winds running, any projectiles are thrown "
 			          "back at the attacker\n", info->name);
-		if (ac <= number)
+		if (armor_class <= number)
 			pf_printf("%s was hit by the attack\n", info->name);
 		else
 			pf_printf("the attack missed %s\n", info->name);
