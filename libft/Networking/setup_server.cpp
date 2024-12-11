@@ -98,7 +98,7 @@ int ft_socket::configure_address(const SocketConfig &config)
         struct sockaddr_in *addr_in = reinterpret_cast<struct sockaddr_in*>(&this->_address);
         addr_in->sin_family = AF_INET;
         addr_in->sin_port = htons(config.port);
-        if (inet_pton(AF_INET, config.ip.c_str(), &addr_in->sin_addr) <= 0)
+        if (inet_pton(AF_INET, config.ip, &addr_in->sin_addr) <= 0)
 		{
             handle_error(SOCKET_INVALID_CONFIGURATION);
             close(socket_fd);
@@ -111,7 +111,7 @@ int ft_socket::configure_address(const SocketConfig &config)
         struct sockaddr_in6 *addr_in6 = reinterpret_cast<struct sockaddr_in6*>(&this->_address);
         addr_in6->sin6_family = AF_INET6;
         addr_in6->sin6_port = htons(config.port);
-        if (inet_pton(AF_INET6, config.ip.c_str(), &addr_in6->sin6_addr) <= 0)
+        if (inet_pton(AF_INET6, config.ip, &addr_in6->sin6_addr) <= 0)
 		{
             handle_error(SOCKET_INVALID_CONFIGURATION);
             close(socket_fd);
