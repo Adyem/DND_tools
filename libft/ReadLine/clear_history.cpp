@@ -14,4 +14,5 @@ void rl_clear_history()
 		i++;
     }
     history_count = 0;
+	return ;
 }
