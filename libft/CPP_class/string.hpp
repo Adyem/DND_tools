@@ -44,7 +44,7 @@ class ft_string
         void        move(ft_string& other) noexcept;
         void        erase(size_t index, int count) noexcept;
 
-		operator const char*() const;
+		operator const char*() const noexcept;
 
         friend ft_string operator+(const ft_string &lhs, const ft_string &rhs) noexcept;
         friend ft_string operator+(const ft_string &lhs, const char *rhs) noexcept;

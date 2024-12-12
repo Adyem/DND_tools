@@ -261,7 +261,7 @@ ft_string operator+(char lhs, const ft_string &rhs) noexcept
     return (result);
 }
 
-ft_string::operator const char*() const
+ft_string::operator const char*() const noexcept
 {
     return (_data);
 }
