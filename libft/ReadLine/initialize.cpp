@@ -4,7 +4,7 @@
 #include "../CMA/CMA.hpp"
 #include "readline_internal.hpp"
 
-void rl_open_log_file(readline_state_t *state)
+static void rl_open_log_file(readline_state_t *state)
 {
 	static int file_reset;
 

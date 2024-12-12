@@ -12,8 +12,9 @@ void rl_disable_raw_mode()
 int rl_enable_raw_mode()
 {
     struct termios raw;
-    if (tcgetattr(STDIN_FILENO, &raw) == -1)
+	if (tcgetattr(STDIN_FILENO, &raw) == -1)
         return (-1);
+	orig_termios = raw;
     raw.c_lflag &= ~(ECHO | ICANON);
     if (tcsetattr(STDIN_FILENO, TCSANOW, &raw) == -1)
         return (-1);
