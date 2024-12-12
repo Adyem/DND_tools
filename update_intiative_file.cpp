@@ -1,6 +1,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp" // Including the pf_printf header
+#include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -54,10 +54,10 @@ void ft_initiative_remove(t_char *info)
                 pf_printf("found one %s and %c\n", content[i], content[i][ft_strlen(info->name)]);
             i++;
             if (turn_marker)
-                pf_printf_fd(initiative_file.get_fd(), "--turn--");
+                pf_printf_fd(initiative_file, "--turn--");
             continue ;
         }
-        pf_printf_fd(initiative_file.get_fd(), "%s", content[i]);
+        pf_printf_fd(initiative_file, "%s", content[i]);
         turn_marker = 0;
         i++;
     }
@@ -117,7 +117,7 @@ void ft_initiative_add(t_char *info)
         return ;
     }
     ft_file initiative_file("data/data--initiative", O_WRONLY | O_TRUNC);
-    if (initiative_file.get_error_code())
+    if (initiative_file == -1)
     {
         pf_printf("Error opening file: %s\n", initiative_file.get_error_message());
         cma_free_double(content);
@@ -142,7 +142,7 @@ void ft_initiative_add(t_char *info)
             pf_printf("Error = %d\n", error);
         if (!added && error == 0)
         {
-            pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", info->name, info->initiative);
+            pf_printf_fd(initiative_file, "%s=%d\n", info->name, info->initiative);
             added = 1;
         }
         if (error != 1 && error != 0)
@@ -151,12 +151,12 @@ void ft_initiative_add(t_char *info)
             pf_printf("Error: data--initiative file is corrupted\n");
             return ;
         }
-        pf_printf_fd(initiative_file.get_fd(), "%s\n", content[i]);
+        pf_printf_fd(initiative_file, "%s\n", content[i]);
         i++;
     }
     if (!content && !added)
     {
-        pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", info->name, info->initiative);
+        pf_printf_fd(initiative_file, "%s=%d\n", info->name, info->initiative);
         added = 1;
     }
     cma_free_double(content);
