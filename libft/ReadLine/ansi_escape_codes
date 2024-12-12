@@ -1,0 +1,22 @@
+To achieve the functionality of moving other lines in the terminal up by one line each time the prompt exceeds the terminal width, you'll need to manage how your prompt and buffer are displayed across multiple lines. This involves detecting when the combined length of the prompt and buffer surpasses the terminal width, adjusting the display accordingly, and ensuring that existing terminal content is scrolled up to accommodate the new lines.
+
+Here's a comprehensive guide to implementing this behavior:
+1. Understanding the Problem
+
+When the combined length of the prompt and buffer exceeds the terminal's width, the text wraps onto the next line(s). To maintain a clean interface, you want to:
+
+    Clear the current multi-line prompt and buffer.
+    Scroll existing terminal content up by the number of new lines added.
+    Redraw the updated prompt and buffer in their new positions.
+
+2. Key Concepts and ANSI Escape Codes
+a. ANSI Escape Codes
+
+ANSI escape codes allow you to control cursor movement, text formatting, and other terminal behaviors. Some relevant codes for this task include:
+
+    Clear Line: \033[2K clears the entire current line.
+    Move Cursor Up: \033[A moves the cursor up by one line.
+    Scroll Up: \033[S scrolls the terminal content up by one line.
+    Move Cursor Down: \033[B moves the cursor down by one line.
+    Move Cursor to Column: \033[%dG moves the cursor to the specified column.
+    Move Cursor Left: \033[%dD moves the cursor left by d columns.
