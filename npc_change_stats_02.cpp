@@ -60,6 +60,13 @@ void	ft_npc_sstuff(t_char *info, const char **input)
 		else
 			pf_printf_fd(2, "no ranged weapon attack set for %s\n", info->name);
 	}
+	else if (ft_strcmp_dnd(input[1], "move") == 0)
+	{
+		if (info->flags.prone)
+			pf_printf("%s has %i movement", info->name, info->physical.speed / 2);
+		else
+			pf_printf("%s has %i movement", info->name, info->physical.speed);
+	}
 	else if (ft_strcmp_dnd(input[1], "prone") == 0)
 		info->flags.prone = 1;
 	else if (ft_strcmp_dnd(input[1], "kill") == 0)
