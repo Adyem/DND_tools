@@ -10,11 +10,11 @@
 #include "readline_internal.hpp"
 #include "readline.hpp"
 
-termios orig_termios;
-char *history[MAX_HISTORY];
-int history_count = 0;
-char *suggestions[MAX_SUGGESTIONS];
-int suggestion_count = 0;
+termios	orig_termios;
+char	*history[MAX_HISTORY];
+int		history_count = 0;
+char	*suggestions[MAX_SUGGESTIONS];
+int		suggestion_count = 0;
 
 static void rl_cleanup_state(readline_state_t *state)
 {
@@ -26,27 +26,19 @@ static void rl_cleanup_state(readline_state_t *state)
 	return ;
 }
 
+static char *rl_error(readline_state_t *state)
+{
+	rl_cleanup_state(state);
+	rl_disable_raw_mode();
+	return (ft_nullptr);
+}
+
 char *rl_readline(const char *prompt)
 {
-	static int			file_reset;
     readline_state_t 	state;
 
 	if (rl_initialize_state(&state))
         return (ft_nullptr);
-	if (file_reset == 0)
-	{
-		state.error_file.open("data/data--log", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-		file_reset = 1;
-	}
-	else	
-    	state.error_file.open("data/data--log", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-	if (state.error_file != -1)
-		state.error_file.printf("printing to log file\n");
-	if (rl_enable_raw_mode() == -1)
-	{
-		rl_cleanup_state(&state);
-		return (ft_nullptr);
-	}
     pf_printf("%s", prompt);
     fflush(stdout);
     while (1)
@@ -69,29 +61,17 @@ char *rl_readline(const char *prompt)
         else if (character == 27)
         {
             if (rl_handle_escape_sequence(&state, prompt) == -1)
-            {
-                rl_cleanup_state(&state);
-                rl_disable_raw_mode();
-                return (ft_nullptr);
-            }
+				rl_error(&state);
         }
         else if (character == '\t')
 		{
             if (rl_handle_tab_completion(&state, prompt) == -1)
-            {
-                rl_cleanup_state(&state);
-                rl_disable_raw_mode();
-                return (ft_nullptr);
-            }
+				rl_error(&state);
 		}
         else if (character >= 32 && character <= 126)
 		{
 			if (rl_handle_printable_char(&state, character, prompt) == -1)
-            {
-                rl_cleanup_state(&state);
-                rl_disable_raw_mode();
-                return (ft_nullptr);
-            }
+            	rl_error(&state);
 		}
     }
     int line_length = ft_strlen(state.buffer);
