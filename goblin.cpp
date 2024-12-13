@@ -25,7 +25,7 @@ static void ft_initialize_gear_and_feats(SharedPtr<t_char>info)
     return ;
 }
 
-SharedPtr<t_char>ft_goblin(const int index, const char **input, t_name *name, int exception)
+SharedPtr<t_char> ft_goblin(const int index, const char **input, t_name *name, int exception)
 {
     int error = 0;
     SharedPtr<t_char> info((t_char *)cma_calloc(1, sizeof(t_char), false));
