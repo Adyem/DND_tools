@@ -1,5 +1,5 @@
 #ifndef FT_OSTREAM_HPP
-#define FT_OSTREAM_HPP
+# define FT_OSTREAM_HPP
 
 #include <stddef.h>
 
@@ -11,6 +11,8 @@ class ft_ostream
 		size_t size;
 		bool   error_flag;
 
+		bool ensure_capacity(size_t additional_size);
+
 	public:
 		ft_ostream();
 		~ft_ostream();
@@ -19,10 +21,10 @@ class ft_ostream
 		ft_ostream& operator<<(int val);
 		ft_ostream& operator<<(char c);
 
-		int write(const char* data, size_t len);
-		char* str();
-		bool bad() const;
-		void clear();
+		int		write(const char* data, size_t len);
+		char	*str();
+		bool	bad() const;
+		void	clear();
 };
 
 #endif 
