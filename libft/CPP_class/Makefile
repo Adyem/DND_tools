@@ -12,12 +12,10 @@ SRCS :=  string_constructors.cpp \
 		 string_methods.cpp \
 		 nullptr.cpp \
 		 file.cpp \
-		 ostream.cpp
 
 HEADERS := 	   string.hpp \
 		   nullptr.hpp \
 		   file.hpp \
-		   ostream.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))
