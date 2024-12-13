@@ -19,8 +19,9 @@ class SharedPtr
 	    void release();
 
 	public:
-	    explicit SharedPtr(ManagedType* pointer = ft_nullptr, size_t size = 1,
-			bool arrayType = false, bool critical = false);
+		SharedPtr();
+	    explicit SharedPtr(ManagedType* pointer, bool critical = false);	
+		SharedPtr(ManagedType* pointer, size_t size, bool critical = false);
 	    SharedPtr(const SharedPtr<ManagedType>& other);
     	~SharedPtr();
 		SharedPtr(SharedPtr<ManagedType>&& other) noexcept;
@@ -49,36 +50,69 @@ class SharedPtr
 };
 
 template <typename ManagedType>
-SharedPtr<ManagedType>::SharedPtr(ManagedType* pointer, size_t size, bool arrayType, bool critical)
+SharedPtr<ManagedType>::SharedPtr()
+    : managedPointer(ft_nullptr),
+      referenceCount(ft_nullptr),
+      arraySize(0),
+      isArrayType(false),
+      isCritical(false),
+      errorCode(ER_SUCCESS)
+{
+	return ;
+}
+
+
+template <typename ManagedType>
+SharedPtr<ManagedType>::SharedPtr(ManagedType* pointer, bool critical)
     : managedPointer(pointer),
       referenceCount(static_cast<int*>(cma_malloc(sizeof(int), critical))),
-      arraySize(size), isArrayType(arrayType), isCritical(critical),
-	  errorCode(ER_SUCCESS)
+      arraySize(1), // Single object
+      isArrayType(false),
+      isCritical(critical),
+      errorCode(ER_SUCCESS)
 {
     if (referenceCount)
         *referenceCount = 1;
     else
     {
-		set_error(SHARED_PTR_ALLOCATION_FAILED);
+        set_error(SHARED_PTR_ALLOCATION_FAILED);
         if (managedPointer)
         {
-            if (isArrayType)
-            {
-				size_t index = 0;
-                while (index < arraySize)
-				{
-                    managedPointer[index].~ManagedType();
-					index++;
-				}
-            }
-            else
-                managedPointer->~ManagedType();
+            managedPointer->~ManagedType();
             cma_free(managedPointer);
         }
         managedPointer = ft_nullptr;
     }
-	return ;
 }
+
+template <typename ManagedType>
+SharedPtr<ManagedType>::SharedPtr(ManagedType* pointer, size_t size, bool critical)
+    : managedPointer(pointer),
+      referenceCount(static_cast<int*>(cma_malloc(sizeof(int), critical))),
+      arraySize(size),
+      isArrayType(true),
+      isCritical(critical),
+      errorCode(ER_SUCCESS)
+{
+    if (referenceCount)
+        *referenceCount = 1;
+    else
+    {
+        set_error(SHARED_PTR_ALLOCATION_FAILED);
+        if (managedPointer)
+        {
+            size_t index = 0;
+            while (index < arraySize)
+            {
+                managedPointer[index].~ManagedType();
+                index++;
+            }
+            cma_free(managedPointer);
+        }
+        managedPointer = ft_nullptr;
+    }
+}
+
 
 template <typename ManagedType>
 SharedPtr<ManagedType>::SharedPtr(const SharedPtr<ManagedType>& other)
