@@ -10,14 +10,13 @@
 #include <cerrno>
 #include <dirent.h>
 
-static t_char *ft_check_name(t_name *name, char *file_name)
+static SharedPtr<t_char>ft_check_name(t_name *name, char *file_name)
 {
     const char *input[2];
-    t_char *info;
+    SharedPtr<t_char>info;
 
     if (DEBUG == 1)
         pf_printf("Printing file name again: %s\n", file_name);
-    info = ft_nullptr;
     while (name != ft_nullptr)
     {
         if (ft_strcmp_dnd(name->name, file_name) == 0)
@@ -31,14 +30,12 @@ static t_char *ft_check_name(t_name *name, char *file_name)
         }
         name = name->next;
     }
-    if (DEBUG == 1)
-        pf_printf("Memory location of info: %p\n", info);
     return (info);
 }
 
-static t_char *ft_read_all_files(ft_file &file, t_name *name, char *file_name)
+static SharedPtr<t_char>ft_read_all_files(ft_file &file, t_name *name, char *file_name)
 {
-    t_char *info;
+    SharedPtr<t_char>info;
 
     if (DEBUG == 1)
         pf_printf("Printing file_name: %s\n", file_name);
@@ -46,7 +43,7 @@ static t_char *ft_read_all_files(ft_file &file, t_name *name, char *file_name)
     if (!info)
     {
         pf_printf_fd(2, "255 Error allocating memory\n");
-        return (ft_nullptr);
+        return (SharedPtr<t_char>());
     }
     if (DEBUG == 1)
         pf_printf("Initiative file descriptor is %d\n", file.get_fd());
@@ -112,10 +109,10 @@ static void ft_initiative_write(int initiative, char *name)
 void ft_open_all_files(t_name *name)
 {
     int error = 0;
-    t_char *info = NULL;
-    t_pc *player = NULL;
-    DIR *dir = NULL;
-    struct dirent *entry = NULL;
+    SharedPtr<t_char>info;
+    t_pc *player = ft_nullptr;
+    DIR *dir = ft_nullptr;
+    struct dirent *entry = ft_nullptr;
     char filepath[1024];
     ft_file info_save_file;
 

@@ -10,7 +10,7 @@
 typedef struct  s_name t_name;
 typedef struct  s_char t_char;
 
-void    ft_gundren_rockseeker_turn(t_char *info);
+void    ft_gundren_rockseeker_turn(SharedPtr<t_char>info);
 
 static const    t_stats GUNDREN_ROCKSEEKER_DEFAULT_STATS =
 {

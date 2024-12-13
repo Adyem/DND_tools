@@ -18,7 +18,8 @@ ft_string::ft_string(const char* init_str, bool crit) noexcept
     {
         this->_length = std::strlen(init_str);
         this->_capacity = this->_length + 1;
-        this->_data = static_cast<char*>(cma_malloc(this->_capacity, this->_criticality));
+        this->_data = static_cast<char*>(cma_calloc(this->_capacity + 1, sizeof(char),
+					this->_criticality));
         if (!this->_data)
         {
             this->setError(STRING_MEM_ALLOC_FAIL);
@@ -35,7 +36,8 @@ ft_string::ft_string(const ft_string& other) noexcept
 {
     if (other._data)
     {
-        this->_data = static_cast<char*>(cma_malloc(this->_capacity, this->_criticality));
+        this->_data = static_cast<char*>(cma_calloc(this->_capacity + 1, sizeof(char),
+					this->_criticality));
         if (!this->_data)
         {
             this->setError(STRING_MEM_ALLOC_FAIL);
@@ -73,7 +75,8 @@ ft_string& ft_string::operator=(const ft_string& other) noexcept
     this->_criticality = other._criticality;
     if (other._data)
     {
-        this->_data = static_cast<char*>(cma_malloc(this->_capacity, this->_criticality));
+        this->_data = static_cast<char*>(cma_calloc(this->_capacity + 1, sizeof(char),
+					this->_criticality));
         if (!this->_data)
         {
             this->setError(STRING_MEM_ALLOC_FAIL);
@@ -94,7 +97,8 @@ ft_string& ft_string::operator=(const char*& other) noexcept
     this->_criticality = false;
     if (other)
     {
-        this->_data = static_cast<char*>(cma_malloc(this->_capacity, this->_criticality));
+        this->_data = static_cast<char*>(cma_calloc(this->_capacity + 1, sizeof(char),
+					this->_criticality));
         if (!this->_data)
         {
             this->setError(STRING_MEM_ALLOC_FAIL);

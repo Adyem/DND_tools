@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 
-int	ft_attack_roll_check_buffs(t_char *info, int *roll)
+int	ft_attack_roll_check_buffs(SharedPtr<t_char>info, int *roll)
 {
 	int	return_value;
 

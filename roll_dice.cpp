@@ -26,7 +26,7 @@ int ft_dice_roll(int number, int faces)
     return (result);
 }
 
-void ft_reroll(t_char *info, int *result)
+void ft_reroll(SharedPtr<t_char>info, int *result)
 {
     int second_roll;
 

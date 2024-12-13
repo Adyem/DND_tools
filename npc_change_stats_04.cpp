@@ -2,7 +2,7 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 
-void ft_change_stats_04(t_char *info, const char **input)
+void ft_change_stats_04(SharedPtr<t_char>info, const char **input)
 {
     int resistance;
 

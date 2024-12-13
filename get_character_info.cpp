@@ -1,14 +1,13 @@
 #include "dnd_tools.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 
-t_char	*ft_get_info(const char *tf_name, t_name *name)
+SharedPtr<t_char>ft_get_info(const char *tf_name, t_name *name)
 {
-	t_name		*temp;
-	t_char		*info;
-	int			found;
-	const char	*input[2];
+	t_name				*temp;
+	SharedPtr<t_char>	info;
+	int					found;
+	const char			*input[2];
 
-	info = ft_nullptr;
 	found = 0;
 	temp = name;
 	input[0] = tf_name;

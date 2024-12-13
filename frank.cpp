@@ -2,7 +2,6 @@
 #include "dnd_tools.hpp"
 #include "frank.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
 #include "libft/CMA/CMA.hpp"
 
 static const	t_lightning_strike FRANK_LIGHTNING_STRIKE_V2 =
@@ -15,7 +14,7 @@ static const	t_lightning_strike FRANK_LIGHTNING_STRIKE_V2 =
 	.extra_damage = 5,
 };
 
-void ft_frank_turn(t_char *info)
+void ft_frank_turn(SharedPtr<t_char>info)
 {
 	ft_update_buf(info);
 	if (info->flags.prone)
@@ -38,20 +37,22 @@ void ft_frank_turn(t_char *info)
 	return ;
 }
 
-static void ft_initialize_gear_and_feats(t_char *info)
+static void ft_initialize_gear_and_feats(SharedPtr<t_char>info)
 {
 	(void)info;
 	return ;
 }
 
-t_char *ft_frank(const int index, const char **input, t_name *name, int exception)
+SharedPtr<t_char>ft_frank(const int index, const char **input, t_name *name, int exception)
 {
-	int error;
-	t_char *info;
+	int error = 0;
+    SharedPtr<t_char> info((t_char *)cma_calloc(1, sizeof(t_char), false));
 
-	info = (t_char *)cma_calloc(1, sizeof(t_char), false);
 	if (!info)
-		return (ft_nullptr);
+    {
+        pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
+        return (SharedPtr<t_char>());
+    }
 	*info = FRANK_INFO;
 	info->name = input[0];
 	info->struct_name = name;
@@ -59,7 +60,7 @@ t_char *ft_frank(const int index, const char **input, t_name *name, int exceptio
 	if (!info->save_file)
 	{
 		ft_free_info(info);
-		return (ft_nullptr);
+		return (SharedPtr<t_char>());
 	}
 	if (index == 2)
 	{
@@ -69,25 +70,25 @@ t_char *ft_frank(const int index, const char **input, t_name *name, int exceptio
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
 			pf_printf("Stats for %s written on a file\n", info->name);
 			ft_free_info(info);
-			return (ft_nullptr);
+			return (SharedPtr<t_char>());
 		}
 	}
 	error = ft_npc_open_file(info);
 	if (error)
 	{
 		ft_free_info(info);
-		return (ft_nullptr);
+		return (SharedPtr<t_char>());
 	}
 	error = ft_npc_check_info(info);
 	if (error)
 	{
 		ft_free_info(info);
-		return (ft_nullptr);
+		return (SharedPtr<t_char>());
 	}
 	ft_initialize_gear_and_feats(info);
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);
 	ft_free_info(info);
-	return (ft_nullptr);
+	return (SharedPtr<t_char>());
 }

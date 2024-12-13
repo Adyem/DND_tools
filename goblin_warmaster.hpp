@@ -12,7 +12,7 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_goblin_warmaster_turn(t_char *info);
+void	ft_goblin_warmaster_turn(SharedPtr<t_char>info);
 
 static const	t_stats WARM_DEFAULT_STATS =
 {

@@ -9,8 +9,6 @@ void ft_initialize_variables(t_target_data *target_data)
 	while (index < 20)
 	{
 		target_data->Pchar_name[index] = ft_nullptr;
-		target_data->target[index] = ft_nullptr;
-		target_data->target_copy[index] = ft_nullptr;
 		index++;
 	}
 	return ;

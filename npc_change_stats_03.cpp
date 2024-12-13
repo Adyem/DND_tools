@@ -2,7 +2,7 @@
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 
-static void ft_npc_update_hp(t_char *info, const char **input)
+static void ft_npc_update_hp(SharedPtr<t_char>info, const char **input)
 {
     int number;
     int temp;
@@ -23,7 +23,7 @@ static void ft_npc_update_hp(t_char *info, const char **input)
 	return ;
 }
 
-void ft_npc_set_stat(t_char *info, const char **input)
+void ft_npc_set_stat(SharedPtr<t_char>info, const char **input)
 {
     if (ft_strcmp_dnd(input[2], "flank") == 0 || ft_strcmp_dnd(input[2], "flanking") == 0)
     {

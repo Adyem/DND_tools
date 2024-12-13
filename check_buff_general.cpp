@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 
-int ft_check_bless(t_char *info)
+int ft_check_bless(SharedPtr<t_char>info)
 {
     int result;
 

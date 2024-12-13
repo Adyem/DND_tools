@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 
-void	ft_kill(t_char *info)
+void	ft_kill(SharedPtr<t_char>info)
 {
 	int temp;
 

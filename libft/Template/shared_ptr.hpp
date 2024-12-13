@@ -15,7 +15,7 @@ class SharedPtr
 	    size_t arraySize;
 	    bool isArrayType;
 	    bool isCritical;
-	    int errorCode;
+		mutable int errorCode;
 	    void release();
 
 	public:
@@ -196,7 +196,8 @@ const ManagedType* SharedPtr<ManagedType>::operator->() const
 {
     if (!managedPointer)
     {
-        this->set_error(SHARED_PTR_NULL_PTR);
+		this->errorCode = SHARED_PTR_NULL_PTR;
+		ft_errno = SHARED_PTR_NULL_PTR;
         return (ft_nullptr);
     }
     return (managedPointer);

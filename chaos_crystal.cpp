@@ -8,7 +8,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-static void ft_chaos_crystal_damage(t_char *info)
+static void ft_chaos_crystal_damage(SharedPtr<t_char>info)
 {
 	char	**player_list;
 	int		i;
@@ -25,7 +25,7 @@ static void ft_chaos_crystal_damage(t_char *info)
     return ;
 }
 
-void ft_chaos_crystal_turn(t_char *info)
+void ft_chaos_crystal_turn(SharedPtr<t_char>info)
 {
     ft_update_buf(info);
     ft_chaos_crystal_damage(info);
@@ -34,22 +34,21 @@ void ft_chaos_crystal_turn(t_char *info)
 	return ;
 }
 
-static void ft_initialize_gear_and_feats(t_char *info)
+static void ft_initialize_gear_and_feats(SharedPtr<t_char>info)
 {
     (void)info;
     return ;
 }
 
-t_char *ft_chaos_crystal(const int index, const char **input, t_name *name, int exception)
+SharedPtr<t_char>ft_chaos_crystal(const int index, const char **input, t_name *name, int exception)
 {
-    int error;
-    t_char *info;
+    int error = 0;
+    SharedPtr<t_char> info((t_char *)cma_calloc(1, sizeof(t_char), false));
 
-    info = (t_char *)cma_calloc(1, sizeof(t_char), false);
-    if (!info)
+	if (!info)
     {
-        pf_printf("103-Error: Failed to allocate memory info %s\n", input[0]);
-        return (ft_nullptr);
+        pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
+        return (SharedPtr<t_char>());
     }
     *info = CHAOS_CRYSTAL_INFO;
     info->name = input[0];
@@ -59,7 +58,7 @@ t_char *ft_chaos_crystal(const int index, const char **input, t_name *name, int 
     {
         pf_printf("106-Error: Failed to allocate memory save_file name %s\n", info->name);
         ft_free_info(info);
-        return (ft_nullptr);
+        return (SharedPtr<t_char>());
     }
     if (index == 2)
     {
@@ -69,25 +68,25 @@ t_char *ft_chaos_crystal(const int index, const char **input, t_name *name, int 
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
             pf_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
-            return (ft_nullptr);
+            return (SharedPtr<t_char>());
         }
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (ft_nullptr);
+        return (SharedPtr<t_char>());
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (ft_nullptr);
+        return (SharedPtr<t_char>());
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
         return (info);
     ft_npc_change_stats(info, index, input);
     ft_free_info(info);
-    return (ft_nullptr);
+    return (SharedPtr<t_char>());
 }

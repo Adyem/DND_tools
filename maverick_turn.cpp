@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-static void	ft_maverick_lightning_strike(t_char *info)
+static void	ft_maverick_lightning_strike(SharedPtr<t_char>info)
 {
 	info->bufs.lightning_strike.amount = 3;
 	info->bufs.lightning_strike.duration = 1;
@@ -18,7 +18,7 @@ static void	ft_maverick_lightning_strike(t_char *info)
 	return ;
 }
 
-static void	ft_maverick_lightningV2_strike(t_char *info)
+static void	ft_maverick_lightningV2_strike(SharedPtr<t_char>info)
 {
 	info->bufs.lightning_strikeV2.duration = 1;
 	info->bufs.lightning_strikeV2.dice_amount = 2;
@@ -28,7 +28,7 @@ static void	ft_maverick_lightningV2_strike(t_char *info)
 	return ;
 }
 
-static void	ft_maverick_flame_geyser(t_char *info)
+static void	ft_maverick_flame_geyser(SharedPtr<t_char>info)
 {
 	info->bufs.flame_geyser.amount = 2;
 	info->bufs.flame_geyser.duration = 1;
@@ -38,7 +38,7 @@ static void	ft_maverick_flame_geyser(t_char *info)
 	return ;
 }
 
-static void ft_maverick_meteor_strike(t_char *info, char **player_list)
+static void ft_maverick_meteor_strike(SharedPtr<t_char>info, char **player_list)
 {
 	cma_free(info->bufs.meteor_strike.target_id);
 	info->bufs.meteor_strike.target_id = ft_nullptr;
@@ -53,7 +53,7 @@ static void ft_maverick_meteor_strike(t_char *info, char **player_list)
 	return ;
 }
 
-static void	ft_maverick_earth_pounce(t_char *info, char **player_list)
+static void	ft_maverick_earth_pounce(SharedPtr<t_char>info, char **player_list)
 {
 	cma_free(info->bufs.earth_pounce.target_id);
 	info->bufs.earth_pounce.target_id = ft_nullptr;
@@ -64,7 +64,7 @@ static void	ft_maverick_earth_pounce(t_char *info, char **player_list)
 	return ;
 }
 
-static void	ft_maverick_arcane_pounce(t_char *info, char **player_list)
+static void	ft_maverick_arcane_pounce(SharedPtr<t_char>info, char **player_list)
 {
 	cma_free(info->bufs.frost_breath.target_id);
 	info->bufs.frost_breath.target_id = ft_nullptr;
@@ -76,7 +76,7 @@ static void	ft_maverick_arcane_pounce(t_char *info, char **player_list)
 	return ;
 }
 
-static void	ft_maverick_frost_breath(t_char *info, char **player_list)
+static void	ft_maverick_frost_breath(SharedPtr<t_char>info, char **player_list)
 {
 	cma_free(info->bufs.frost_breath.target_id);
 	info->bufs.frost_breath.target_id = ft_nullptr;
@@ -115,7 +115,7 @@ static void print_mass_teleport(int tp_number)
 	return ;
 }
 
-void ft_maverick_print_f(int first, int second, t_char *info, char **player_list)
+void ft_maverick_print_f(int first, int second, SharedPtr<t_char>info, char **player_list)
 {
     if (first == 1)
         print_mass_teleport(second);
@@ -136,7 +136,7 @@ void ft_maverick_print_f(int first, int second, t_char *info, char **player_list
 	return ;
 }
 
-void ft_maverick_print_s(int first, int second, t_char *info, char **player_list)
+void ft_maverick_print_s(int first, int second, SharedPtr<t_char>info, char **player_list)
 {
     if (second == 1)
         print_mass_teleport(first);

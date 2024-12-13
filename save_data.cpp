@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <cerrno>
 
-static void ft_npc_write_spell_slots(t_char *info, ft_file &file)
+static void ft_npc_write_spell_slots(SharedPtr<t_char>info, ft_file &file)
 {
     file.printf("%s%i\n", LEVEL_1_AVAILABLE_KEY, info->spell_slots.level_1.available);
     file.printf("%s%i\n", LEVEL_1_TOTAL_KEY, info->spell_slots.level_1.total);
@@ -61,7 +61,7 @@ static void ft_npc_write_spell_slots(t_char *info, ft_file &file)
 }
 
 
-static void ft_npc_write_file_1(t_char *info, t_stats *stats, ft_file &file)
+static void ft_npc_write_file_1(SharedPtr<t_char>info, t_stats *stats, ft_file &file)
 {
     file.printf("%s%i\n", HEALTH_KEY, stats->health);
     file.printf("%s%i\n", TEMP_HP_KEY, stats->temp_hp);
@@ -81,7 +81,7 @@ static void ft_npc_write_file_1(t_char *info, t_stats *stats, ft_file &file)
 }
 
 static void ft_npc_write_file_double_char(const char *msg, char **targets, ft_file &file,
-											t_char *info)
+											SharedPtr<t_char>info)
 {
     int i = 0;
     if (targets)
@@ -97,7 +97,7 @@ static void ft_npc_write_file_double_char(const char *msg, char **targets, ft_fi
 	return ;
 }
 
-static void ft_npc_write_file_2(t_char *info, t_resistance *resistance, ft_file &file)
+static void ft_npc_write_file_2(SharedPtr<t_char>info, t_resistance *resistance, ft_file &file)
 {
     file.printf("%s%i\n", ACID_RESISTANCE_KEY, resistance->acid);
     file.printf("%s%i\n", BLUDGEONING_RESISTANCE_KEY, resistance->bludgeoning);
@@ -204,7 +204,7 @@ static void ft_npc_write_file_2(t_char *info, t_resistance *resistance, ft_file 
 	return ;
 }
 
-void ft_npc_write_file(t_char *info, t_stats *stats, t_resistance *resistance, ft_file &file)
+void ft_npc_write_file(SharedPtr<t_char>info, t_stats *stats, t_resistance *resistance, ft_file &file)
 {
     if (file == -1)
     {
