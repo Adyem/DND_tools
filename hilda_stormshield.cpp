@@ -27,7 +27,7 @@ static void ft_initialize_gear_and_feats(SharedPtr<t_char>info)
 SharedPtr<t_char>ft_hilda_stormshield(const int index, const char **input, t_name *name, int exception)
 {
     int error = 0;
-    SharedPtr<t_char> info((t_char *)cma_calloc(1, sizeof(t_char), false));
+    SharedPtr<t_char> info(1);
 
 	if (!info)
     {
