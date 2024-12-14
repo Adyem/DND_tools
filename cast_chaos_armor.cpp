@@ -2,7 +2,7 @@
 #include "identification.hpp"
 #include "libft/Printf/printf.hpp"
 
-void	ft_cast_chaos_armor(SharedPtr<t_char>info)
+void	ft_cast_chaos_armor(SharedPtr<t_char> info)
 {
 	ft_remove_concentration(info);
 	info->concentration.concentration = 1;

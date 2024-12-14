@@ -2,7 +2,7 @@
 #include "veraak.hpp"
 #include "libft/Printf/printf.hpp"
 
-static void	ft_veraak_phase_second(SharedPtr<t_char>info)
+static void	ft_veraak_phase_second(SharedPtr<t_char> info)
 {
 	if (info->stats.turn == 1)
 		ft_cast_chaos_armor(info);
@@ -12,7 +12,7 @@ static void	ft_veraak_phase_second(SharedPtr<t_char>info)
 	return ;
 }
 
-static void	ft_veraak_phase_third(SharedPtr<t_char>info)
+static void	ft_veraak_phase_third(SharedPtr<t_char> info)
 {
 	if (info->stats.turn == 1)
 		pf_printf(CHAOS_SMASH);
@@ -22,7 +22,7 @@ static void	ft_veraak_phase_third(SharedPtr<t_char>info)
 	return ;
 }
 
-static void	ft_veraak_phase_four(SharedPtr<t_char>info)
+static void	ft_veraak_phase_four(SharedPtr<t_char> info)
 {
 	if (info->stats.turn == 1)
 		pf_printf(CHAOS_BREATH);
@@ -32,7 +32,7 @@ static void	ft_veraak_phase_four(SharedPtr<t_char>info)
 	return ;
 }
 
-static void	ft_veraak_phase_five(SharedPtr<t_char>info)
+static void	ft_veraak_phase_five(SharedPtr<t_char> info)
 {
 	if (info->stats.turn == 1)
 		ft_cast_chaos_armor(info);
@@ -46,7 +46,7 @@ static void	ft_veraak_phase_five(SharedPtr<t_char>info)
 	return ;
 }
 
-void	ft_veraak_check_phase(SharedPtr<t_char>info)
+void	ft_veraak_check_phase(SharedPtr<t_char> info)
 {
 	if (info->stats.phase == 2)
 		ft_veraak_phase_second(info);

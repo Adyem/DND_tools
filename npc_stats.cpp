@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <cstring>
 
-int ft_npc_open_file(SharedPtr<t_char>info)
+int ft_npc_open_file(SharedPtr<t_char> info)
 {
     int error;
     char **content;
@@ -38,7 +38,7 @@ int ft_npc_open_file(SharedPtr<t_char>info)
     return (0);
 }
 
-void ft_npc_change_stats(SharedPtr<t_char>info, const int index, const char **input)
+void ft_npc_change_stats(SharedPtr<t_char> info, const int index, const char **input)
 {
     int i = 0;
 

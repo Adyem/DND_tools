@@ -7,7 +7,7 @@
 #include "initialize.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 
-void	ft_weapon_attack(SharedPtr<t_char>info, t_equipment_id *weapon, int offhand);
+void	ft_weapon_attack(SharedPtr<t_char> info, t_equipment_id *weapon, int offhand);
 
 static const t_equipment_id STEEL_SWORD =
 {

@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 
 
-int ft_calculate_ac(SharedPtr<t_char>info)
+int ft_calculate_ac(SharedPtr<t_char> info)
 {
 	int ac;
 
@@ -25,7 +25,7 @@ int ft_calculate_ac(SharedPtr<t_char>info)
 	return (ac);
 }
 
-int	ft_calculate_str(SharedPtr<t_char>info)
+int	ft_calculate_str(SharedPtr<t_char> info)
 {
 	int str;
 
@@ -45,7 +45,7 @@ int	ft_calculate_str(SharedPtr<t_char>info)
 	return (str);
 }
 
-int	ft_calculate_dex(SharedPtr<t_char>info)
+int	ft_calculate_dex(SharedPtr<t_char> info)
 {
 	int dex;
 
@@ -65,7 +65,7 @@ int	ft_calculate_dex(SharedPtr<t_char>info)
 	return (dex);
 }
 
-int	ft_calculate_con(SharedPtr<t_char>info)
+int	ft_calculate_con(SharedPtr<t_char> info)
 {
 	int con;
 
@@ -85,7 +85,7 @@ int	ft_calculate_con(SharedPtr<t_char>info)
 	return (con);
 }
 
-int	ft_calculate_inte(SharedPtr<t_char>info)
+int	ft_calculate_inte(SharedPtr<t_char> info)
 {
 	int inte;
 
@@ -105,7 +105,7 @@ int	ft_calculate_inte(SharedPtr<t_char>info)
 	return (inte);
 }
 
-int	ft_calculate_wis(SharedPtr<t_char>info)
+int	ft_calculate_wis(SharedPtr<t_char> info)
 {
 	int wis;
 
@@ -125,7 +125,7 @@ int	ft_calculate_wis(SharedPtr<t_char>info)
 	return (wis);
 }
 
-int	ft_calculate_cha(SharedPtr<t_char>info)
+int	ft_calculate_cha(SharedPtr<t_char> info)
 {
 	int cha;
 

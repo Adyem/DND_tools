@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 
-int	ft_calculate_acid_dr(SharedPtr<t_char>info)
+int	ft_calculate_acid_dr(SharedPtr<t_char> info)
 {
 	int acid_dr;
 
@@ -19,7 +19,7 @@ int	ft_calculate_acid_dr(SharedPtr<t_char>info)
 	return (acid_dr);
 }
 
-int	ft_calculate_bludgeoning_dr(SharedPtr<t_char>info)
+int	ft_calculate_bludgeoning_dr(SharedPtr<t_char> info)
 {
 	int bludgeoning_dr;
 
@@ -38,7 +38,7 @@ int	ft_calculate_bludgeoning_dr(SharedPtr<t_char>info)
 	return (bludgeoning_dr);
 }
 
-int	ft_calculate_cold_dr(SharedPtr<t_char>info)
+int	ft_calculate_cold_dr(SharedPtr<t_char> info)
 {
 	int cold_dr;
 
@@ -57,7 +57,7 @@ int	ft_calculate_cold_dr(SharedPtr<t_char>info)
 	return (cold_dr);
 }
 
-int	ft_calculate_fire_dr(SharedPtr<t_char>info)
+int	ft_calculate_fire_dr(SharedPtr<t_char> info)
 {
 	int fire_dr;
 
@@ -76,7 +76,7 @@ int	ft_calculate_fire_dr(SharedPtr<t_char>info)
 	return (fire_dr);
 }
 
-int	ft_calculate_force_dr(SharedPtr<t_char>info)
+int	ft_calculate_force_dr(SharedPtr<t_char> info)
 {
 	int force_dr;
 
@@ -95,7 +95,7 @@ int	ft_calculate_force_dr(SharedPtr<t_char>info)
 	return (force_dr);
 }
 
-int	ft_calculate_lightning_dr(SharedPtr<t_char>info)
+int	ft_calculate_lightning_dr(SharedPtr<t_char> info)
 {
 	int lightning_dr;
 
@@ -114,7 +114,7 @@ int	ft_calculate_lightning_dr(SharedPtr<t_char>info)
 	return (lightning_dr);
 }
 
-int	ft_calculate_necrotic_dr(SharedPtr<t_char>info)
+int	ft_calculate_necrotic_dr(SharedPtr<t_char> info)
 {
 	int necrotic_dr;
 
@@ -133,7 +133,7 @@ int	ft_calculate_necrotic_dr(SharedPtr<t_char>info)
 	return (necrotic_dr);
 }
 
-int	ft_calculate_piercing_dr(SharedPtr<t_char>info)
+int	ft_calculate_piercing_dr(SharedPtr<t_char> info)
 {
 	int piercing_dr;
 
@@ -152,7 +152,7 @@ int	ft_calculate_piercing_dr(SharedPtr<t_char>info)
 	return (piercing_dr);
 }
 
-int	ft_calculate_poison_dr(SharedPtr<t_char>info)
+int	ft_calculate_poison_dr(SharedPtr<t_char> info)
 {
 	int poison_dr;
 
@@ -171,7 +171,7 @@ int	ft_calculate_poison_dr(SharedPtr<t_char>info)
 	return (poison_dr);
 }
 
-int	ft_calculate_psychic_dr(SharedPtr<t_char>info)
+int	ft_calculate_psychic_dr(SharedPtr<t_char> info)
 {
 	int psychic_dr;
 
@@ -190,7 +190,7 @@ int	ft_calculate_psychic_dr(SharedPtr<t_char>info)
 	return (psychic_dr);
 }
 
-int	ft_calculate_radiant_dr(SharedPtr<t_char>info)
+int	ft_calculate_radiant_dr(SharedPtr<t_char> info)
 {
 	int radiant_dr;
 
@@ -209,7 +209,7 @@ int	ft_calculate_radiant_dr(SharedPtr<t_char>info)
 	return (radiant_dr);
 }
 
-int	ft_calculate_slashing_dr(SharedPtr<t_char>info)
+int	ft_calculate_slashing_dr(SharedPtr<t_char> info)
 {
 	int slashing_dr;
 
@@ -228,7 +228,7 @@ int	ft_calculate_slashing_dr(SharedPtr<t_char>info)
 	return (slashing_dr);
 }
 
-int	ft_calculate_thunder_dr(SharedPtr<t_char>info)
+int	ft_calculate_thunder_dr(SharedPtr<t_char> info)
 {
 	int thunder_dr;
 

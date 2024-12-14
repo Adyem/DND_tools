@@ -4,7 +4,7 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include <cstdlib>
 
-static char **ft_handle_memory_error(SharedPtr<t_char>info, char **data, int error_code)
+static char **ft_handle_memory_error(SharedPtr<t_char> info, char **data, int error_code)
 {
     info->flags.error = 1;
     cma_free_double(data);
@@ -22,7 +22,7 @@ static int ft_check_target_exists(char *target)
     return (0);
 }
 
-static char **ft_allocate_initial_data(char *content, int ofset, SharedPtr<t_char>info)
+static char **ft_allocate_initial_data(char *content, int ofset, SharedPtr<t_char> info)
 {
     char **data;
 
@@ -36,7 +36,7 @@ static char **ft_allocate_initial_data(char *content, int ofset, SharedPtr<t_cha
     return (data);
 }
 
-static char **ft_reallocate_data_array(char **data, int new_size, SharedPtr<t_char>info)
+static char **ft_reallocate_data_array(char **data, int new_size, SharedPtr<t_char> info)
 {
     char **temp;
     int i;
@@ -54,7 +54,7 @@ static char **ft_reallocate_data_array(char **data, int new_size, SharedPtr<t_ch
     return (temp);
 }
 
-static char **ft_append_target_to_data(char **data, char *content, int ofset, SharedPtr<t_char>info)
+static char **ft_append_target_to_data(char **data, char *content, int ofset, SharedPtr<t_char> info)
 {
     int i = 0;
 
@@ -70,7 +70,7 @@ static char **ft_append_target_to_data(char **data, char *content, int ofset, Sh
     return (data);
 }
 
-char **ft_set_stats_con_targets(char *content, int ofset, char **data, SharedPtr<t_char>info)
+char **ft_set_stats_con_targets(char *content, int ofset, char **data, SharedPtr<t_char> info)
 {
     if (ft_check_target_exists(&content[ofset]))
         return (ft_nullptr);

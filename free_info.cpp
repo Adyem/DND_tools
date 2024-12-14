@@ -3,7 +3,7 @@
 #include "dnd_tools.hpp"
 #include <cstdlib>
 
-void	ft_free_info(SharedPtr<t_char>info)
+void	ft_free_info(SharedPtr<t_char> info)
 {
 	if (info && DEBUG == 1)
 		pf_printf("freeing info %s\n", info->name);

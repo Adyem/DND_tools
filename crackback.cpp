@@ -4,18 +4,18 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 
-static bool ft_is_crackback_possible(SharedPtr<t_char>info, int number)
+static bool ft_is_crackback_possible(SharedPtr<t_char> info, int number)
 {
     return (number < 10 && !info->flags.reaction_used);
 }
 
-static void ft_notify_no_weapon(SharedPtr<t_char>info, const char *weapon_type)
+static void ft_notify_no_weapon(SharedPtr<t_char> info, const char *weapon_type)
 {
     pf_printf_fd(2, "No %s set for %s\n", weapon_type, info->name);
 	return ;
 }
 
-static bool ft_handle_attack_choice(SharedPtr<t_char>info, const char *choice)
+static bool ft_handle_attack_choice(SharedPtr<t_char> info, const char *choice)
 {
     if (ft_strcmp_dnd(choice, "melee") == 0)
     {
@@ -48,7 +48,7 @@ static bool ft_handle_attack_choice(SharedPtr<t_char>info, const char *choice)
     return (false);
 }
 
-static void ft_execute_crackback(SharedPtr<t_char>info)
+static void ft_execute_crackback(SharedPtr<t_char> info)
 {
     char *line;
     int max_tries = 0;
@@ -93,7 +93,7 @@ static void ft_execute_crackback(SharedPtr<t_char>info)
 	return ;
 }
 
-void ft_crackback(SharedPtr<t_char>info, int number)
+void ft_crackback(SharedPtr<t_char> info, int number)
 {
     if (!ft_is_crackback_possible(info, number))
         return ;

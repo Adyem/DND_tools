@@ -11,7 +11,7 @@ typedef struct s_key_value_pair
 } t_key_value_pair;
 
 static int ft_set_stat_int(char *content_i, const char *key, int *field, int unset_value,
-		SharedPtr<t_char>info)
+		SharedPtr<t_char> info)
 {
 	int	index;
 
@@ -24,7 +24,7 @@ static int ft_set_stat_int(char *content_i, const char *key, int *field, int uns
     return (0);
 }
 
-static int ft_set_stats_1(SharedPtr<t_char>info, char **content, int i)
+static int ft_set_stats_1(SharedPtr<t_char> info, char **content, int i)
 {
     if (ft_set_stat_int(content[i], HEALTH_KEY, &(info->stats.health), -1, info) ||
         ft_set_stat_int(content[i], TEMP_HP_KEY, &(info->stats.temp_hp), -1, info) ||
@@ -48,7 +48,7 @@ static int ft_set_stats_1(SharedPtr<t_char>info, char **content, int i)
     return (1);
 }
 
-static int ft_set_spell_slots(SharedPtr<t_char>info, char **content, int i)
+static int ft_set_spell_slots(SharedPtr<t_char> info, char **content, int i)
 {
     if (ft_set_stat_int(content[i], LEVEL_1_AVAILABLE_KEY,
                 &(info->spell_slots.level_1.available), -1, info) ||
@@ -136,7 +136,7 @@ static int ft_set_spell_slots(SharedPtr<t_char>info, char **content, int i)
     return (1);
 }
 
-static int ft_set_stats_2(SharedPtr<t_char>info, char **content, int i)
+static int ft_set_stats_2(SharedPtr<t_char> info, char **content, int i)
 {
     if (ft_set_stat_int(content[i], ACID_RESISTANCE_KEY,
 			&(info->c_resistance.acid), -501, info) ||
@@ -251,7 +251,7 @@ static int ft_set_stats_2(SharedPtr<t_char>info, char **content, int i)
 }
 
 static int	ft_handle_set_stat_char_pointer(char *content_i, size_t key_len,
-				char **target_field, SharedPtr<t_char>info)
+				char **target_field, SharedPtr<t_char> info)
 {
 	(void)info;
 	if (ft_set_stat_player(key_len, const_cast<const char **>(target_field), content_i))
@@ -260,7 +260,7 @@ static int	ft_handle_set_stat_char_pointer(char *content_i, size_t key_len,
 }
 
 static int	ft_handle_set_stat_double_char(char *content_i, size_t key_len,
-				char ***target_field, SharedPtr<t_char>info)
+				char ***target_field, SharedPtr<t_char> info)
 {
     *target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
     if (*target_field == ft_nullptr)
@@ -268,7 +268,7 @@ static int	ft_handle_set_stat_double_char(char *content_i, size_t key_len,
     return (0);
 }
 
-static int	ft_set_stats_string(SharedPtr<t_char>info, char **content, int i)
+static int	ft_set_stats_string(SharedPtr<t_char> info, char **content, int i)
 {
 	if (ft_strncmp(content[i], CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
         return (ft_handle_set_stat_double_char(content[i],
@@ -302,10 +302,10 @@ static int	ft_set_stats_string(SharedPtr<t_char>info, char **content, int i)
     return (1);
 }
 
-int ft_set_stats(SharedPtr<t_char>info, char **content)
+int ft_set_stats(SharedPtr<t_char> info, char **content)
 {
     int i = 0;
-    int (*handlers[])(SharedPtr<t_char>, char **, int) =
+    int (*handlers[])(SharedPtr<t_char> , char **, int) =
 	{
         ft_set_stats_1,
         ft_set_stats_2,

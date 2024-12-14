@@ -10,7 +10,7 @@
 typedef struct  s_name t_name;
 typedef struct  s_char t_char;
 
-void    ft_thorbald_ironpocket_turn(SharedPtr<t_char>info);
+void    ft_thorbald_ironpocket_turn(SharedPtr<t_char> info);
 
 static const    t_stats THORBALD_IRONPOCKET_DEFAULT_STATS =
 {

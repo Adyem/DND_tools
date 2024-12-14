@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 
-int ft_calculate_athletics(SharedPtr<t_char>info)
+int ft_calculate_athletics(SharedPtr<t_char> info)
 {
     int athletics;
 
@@ -20,7 +20,7 @@ int ft_calculate_athletics(SharedPtr<t_char>info)
     return (athletics);
 }
 
-int ft_calculate_acrobatics(SharedPtr<t_char>info)
+int ft_calculate_acrobatics(SharedPtr<t_char> info)
 {
     int acrobatics;
 
@@ -40,7 +40,7 @@ int ft_calculate_acrobatics(SharedPtr<t_char>info)
     return (acrobatics);
 }
 
-int ft_calculate_sleight_of_hand(SharedPtr<t_char>info)
+int ft_calculate_sleight_of_hand(SharedPtr<t_char> info)
 {
     int sleight_of_hand;
 
@@ -60,7 +60,7 @@ int ft_calculate_sleight_of_hand(SharedPtr<t_char>info)
     return (sleight_of_hand);
 }
 
-int ft_calculate_stealth(SharedPtr<t_char>info)
+int ft_calculate_stealth(SharedPtr<t_char> info)
 {
     int stealth;
 
@@ -80,7 +80,7 @@ int ft_calculate_stealth(SharedPtr<t_char>info)
     return (stealth);
 }
 
-int ft_calculate_arcana(SharedPtr<t_char>info)
+int ft_calculate_arcana(SharedPtr<t_char> info)
 {
     int arcana;
 
@@ -100,7 +100,7 @@ int ft_calculate_arcana(SharedPtr<t_char>info)
     return (arcana);
 }
 
-int ft_calculate_history(SharedPtr<t_char>info)
+int ft_calculate_history(SharedPtr<t_char> info)
 {
     int history;
 
@@ -120,7 +120,7 @@ int ft_calculate_history(SharedPtr<t_char>info)
     return (history);
 }
 
-int ft_calculate_investigation(SharedPtr<t_char>info)
+int ft_calculate_investigation(SharedPtr<t_char> info)
 {
     int investigation;
 
@@ -140,7 +140,7 @@ int ft_calculate_investigation(SharedPtr<t_char>info)
     return (investigation);
 }
 
-int ft_calculate_nature(SharedPtr<t_char>info)
+int ft_calculate_nature(SharedPtr<t_char> info)
 {
     int nature;
 
@@ -160,7 +160,7 @@ int ft_calculate_nature(SharedPtr<t_char>info)
     return (nature);
 }
 
-int ft_calculate_religion(SharedPtr<t_char>info)
+int ft_calculate_religion(SharedPtr<t_char> info)
 {
     int religion;
 
@@ -180,7 +180,7 @@ int ft_calculate_religion(SharedPtr<t_char>info)
     return (religion);
 }
 
-int ft_calculate_animal_handling(SharedPtr<t_char>info)
+int ft_calculate_animal_handling(SharedPtr<t_char> info)
 {
     int animal_handling;
 
@@ -200,7 +200,7 @@ int ft_calculate_animal_handling(SharedPtr<t_char>info)
     return (animal_handling);
 }
 
-int ft_calculate_insight(SharedPtr<t_char>info)
+int ft_calculate_insight(SharedPtr<t_char> info)
 {
     int insight;
 
@@ -220,7 +220,7 @@ int ft_calculate_insight(SharedPtr<t_char>info)
     return (insight);
 }
 
-int ft_calculate_medicine(SharedPtr<t_char>info)
+int ft_calculate_medicine(SharedPtr<t_char> info)
 {
     int medicine;
 
@@ -240,7 +240,7 @@ int ft_calculate_medicine(SharedPtr<t_char>info)
     return (medicine);
 }
 
-int ft_calculate_perception(SharedPtr<t_char>info)
+int ft_calculate_perception(SharedPtr<t_char> info)
 {
     int perception;
 
@@ -260,7 +260,7 @@ int ft_calculate_perception(SharedPtr<t_char>info)
     return (perception);
 }
 
-int ft_calculate_survival(SharedPtr<t_char>info)
+int ft_calculate_survival(SharedPtr<t_char> info)
 {
     int survival;
 
@@ -280,7 +280,7 @@ int ft_calculate_survival(SharedPtr<t_char>info)
     return (survival);
 }
 
-int ft_calculate_deception(SharedPtr<t_char>info)
+int ft_calculate_deception(SharedPtr<t_char> info)
 {
     int deception;
 
@@ -300,7 +300,7 @@ int ft_calculate_deception(SharedPtr<t_char>info)
     return (deception);
 }
 
-int ft_calculate_intimidation(SharedPtr<t_char>info)
+int ft_calculate_intimidation(SharedPtr<t_char> info)
 {
     int intimidation;
 
@@ -320,7 +320,7 @@ int ft_calculate_intimidation(SharedPtr<t_char>info)
     return (intimidation);
 }
 
-int ft_calculate_performance(SharedPtr<t_char>info)
+int ft_calculate_performance(SharedPtr<t_char> info)
 {
     int performance;
 
@@ -340,7 +340,7 @@ int ft_calculate_performance(SharedPtr<t_char>info)
     return (performance);
 }
 
-int ft_calculate_persuasion(SharedPtr<t_char>info)
+int ft_calculate_persuasion(SharedPtr<t_char> info)
 {
     int persuasion;
 

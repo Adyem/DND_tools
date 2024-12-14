@@ -3,7 +3,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 
-void ft_goblin_turn(SharedPtr<t_char>info)
+void ft_goblin_turn(SharedPtr<t_char> info)
 {
     ft_update_buf(info);
 	if (info->flags.prone)
@@ -19,7 +19,7 @@ void ft_goblin_turn(SharedPtr<t_char>info)
 	return ;
 }
 
-static void ft_initialize_gear_and_feats(SharedPtr<t_char>info)
+static void ft_initialize_gear_and_feats(SharedPtr<t_char> info)
 {
     (void)info;
     return ;
@@ -33,7 +33,7 @@ SharedPtr<t_char> ft_goblin(const int index, const char **input, t_name *name, i
 	if (!info)
     {
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     *info = GOBLIN_INFO;
     info->name = input[0];
@@ -42,7 +42,7 @@ SharedPtr<t_char> ft_goblin(const int index, const char **input, t_name *name, i
     if (!info->save_file)
     {
         ft_free_info(info);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     if (index == 2)
     {
@@ -52,25 +52,25 @@ SharedPtr<t_char> ft_goblin(const int index, const char **input, t_name *name, i
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
             pf_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
-            return (SharedPtr<t_char>());
+            return (SharedPtr<t_char> ());
         }
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
         return (info);
     ft_npc_change_stats(info, index, input);
 	ft_free_info(info);
-    return (SharedPtr<t_char>());
+    return (SharedPtr<t_char> ());
 }

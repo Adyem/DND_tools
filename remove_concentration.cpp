@@ -11,14 +11,14 @@
 #include <cerrno>
 #include <cstring>
 
-static void ft_concentration_remove_buf(SharedPtr<t_char>info, t_target_data *targets)
+static void ft_concentration_remove_buf(SharedPtr<t_char> info, t_target_data *targets)
 {
     if (info->concentration.spell_id == HUNTERS_MARK_ID)
         ft_concentration_remove_hunters_mark(info, targets);
     return ;
 }
 
-static int	ft_remove_concentration_fetch_targets(t_target_data *targets, SharedPtr<t_char>info, int i)
+static int	ft_remove_concentration_fetch_targets(t_target_data *targets, SharedPtr<t_char> info, int i)
 {
 	int	error = 0;
 
@@ -39,7 +39,7 @@ static int	ft_remove_concentration_fetch_targets(t_target_data *targets, SharedP
 	return (SUCCES);
 }
 
-int ft_remove_concentration(SharedPtr<t_char>info)
+int ft_remove_concentration(SharedPtr<t_char> info)
 {
 	t_target_data	targets;
     int				i;

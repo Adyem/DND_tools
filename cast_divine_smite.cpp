@@ -3,7 +3,7 @@
 #include "identification.hpp"
 #include "libft/Printf/printf.hpp"
 
-static int ft_check_divine_smite_learned(SharedPtr<t_char>character)
+static int ft_check_divine_smite_learned(SharedPtr<t_char> character)
 {
     if (character->spells.divine_smite.learned == 0)
     {
@@ -13,7 +13,7 @@ static int ft_check_divine_smite_learned(SharedPtr<t_char>character)
     return (1);
 }
 
-void ft_cast_divine_smite(SharedPtr<t_char>character)
+void ft_cast_divine_smite(SharedPtr<t_char> character)
 {
     if (!ft_check_divine_smite_learned(character))
         return ;

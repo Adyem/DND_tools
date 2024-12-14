@@ -8,7 +8,7 @@
 #include <cstring>
 #include <strings.h>
 
-static void	ft_set_not_save_flag(t_target_data *target_data, SharedPtr<t_char>info)
+static void	ft_set_not_save_flag(t_target_data *target_data, SharedPtr<t_char> info)
 {
 	int	index = 0;
 
@@ -24,7 +24,7 @@ static void	ft_set_not_save_flag(t_target_data *target_data, SharedPtr<t_char>in
 	return ;
 }
 
-static int	ft_apply_concentration(t_target_data *target_data, SharedPtr<t_char>info, const char **input)
+static int	ft_apply_concentration(t_target_data *target_data, SharedPtr<t_char> info, const char **input)
 {
 	int	index = 0;
 
@@ -54,7 +54,7 @@ static int	ft_apply_concentration(t_target_data *target_data, SharedPtr<t_char>i
     return (SUCCES);
 }
 
-void	ft_cast_concentration_multi_target_02(SharedPtr<t_char>info, t_target_data *target_data,
+void	ft_cast_concentration_multi_target_02(SharedPtr<t_char> info, t_target_data *target_data,
 			const char **input)
 {
 	ft_file info_save_file;

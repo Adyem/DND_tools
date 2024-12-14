@@ -4,7 +4,7 @@
 #include "dnd_tools.hpp"
 #include "veraak.hpp"
 
-static void ft_veraak_kill_crystal(const char *crystal, SharedPtr<t_char>info, int phase)
+static void ft_veraak_kill_crystal(const char *crystal, SharedPtr<t_char> info, int phase)
 {
     const char *input[3];
     t_name *name;
@@ -33,7 +33,7 @@ static void ft_veraak_kill_crystal(const char *crystal, SharedPtr<t_char>info, i
 	return ;
 }
 
-static void ft_veraak_initialize(SharedPtr<t_char>info)
+static void ft_veraak_initialize(SharedPtr<t_char> info)
 {
     const char *input[3];
     t_name *name;
@@ -68,7 +68,7 @@ static void ft_veraak_initialize(SharedPtr<t_char>info)
 	return ;
 }
 
-static void ft_veraak_phase_transition(SharedPtr<t_char>info)
+static void ft_veraak_phase_transition(SharedPtr<t_char> info)
 {
 	if (info->stats.health <= 200 && info->stats.phase == 1)
 		ft_veraak_kill_crystal("chaos_crystal_01", info, 2);
@@ -81,7 +81,7 @@ static void ft_veraak_phase_transition(SharedPtr<t_char>info)
 	return ;
 }
 
-void ft_veraak_turn(SharedPtr<t_char>info)
+void ft_veraak_turn(SharedPtr<t_char> info)
 {
     ft_update_buf(info);
     ft_veraak_phase_transition(info);
@@ -97,13 +97,13 @@ void ft_veraak_turn(SharedPtr<t_char>info)
 	return ;
 }
 
-static void ft_initialize_gear_and_feats(SharedPtr<t_char>info)
+static void ft_initialize_gear_and_feats(SharedPtr<t_char> info)
 {
 	info->spells.hunters_mark = VERAAK_SPELLS_HUNTERS_MARK;
     return ;
 }
 
-SharedPtr<t_char>ft_veraak(const int index, const char **input, t_name *name, int exception)
+SharedPtr<t_char> ft_veraak(const int index, const char **input, t_name *name, int exception)
 {
     int error = 0;
     SharedPtr<t_char> info(1);
@@ -111,7 +111,7 @@ SharedPtr<t_char>ft_veraak(const int index, const char **input, t_name *name, in
 	if (!info)
     {
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     *info = VERAAK_INFO;
     info->name = input[0];
@@ -120,7 +120,7 @@ SharedPtr<t_char>ft_veraak(const int index, const char **input, t_name *name, in
     if (!info->save_file)
     {
         ft_free_info(info);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
     {
@@ -129,24 +129,24 @@ SharedPtr<t_char>ft_veraak(const int index, const char **input, t_name *name, in
         pf_printf("Stats for %s written on a file\n", info->name);
         ft_veraak_initialize(info);
         ft_free_info(info);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (SharedPtr<t_char>());
+        return (SharedPtr<t_char> ());
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
         return (info);
     ft_npc_change_stats(info, index, input);
     ft_free_info(info);
-    return (SharedPtr<t_char>());
+    return (SharedPtr<t_char> ());
 }

@@ -10,7 +10,7 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_ghost_turn(SharedPtr<t_char>info);
+void	ft_ghost_turn(SharedPtr<t_char> info);
 
 static const	t_stats GHOST_DEFAULT_STATS =
 {

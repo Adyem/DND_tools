@@ -3,7 +3,7 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "dnd_tools.hpp"
 
-void ft_update_lightning_strike(SharedPtr<t_char>info)
+void ft_update_lightning_strike(SharedPtr<t_char> info)
 {
     int result;
 
@@ -28,7 +28,7 @@ void ft_update_lightning_strike(SharedPtr<t_char>info)
     return ;
 }
 
-void ft_update_lightningV2_strike(SharedPtr<t_char>info)
+void ft_update_lightningV2_strike(SharedPtr<t_char> info)
 {
     int result;
 
@@ -55,7 +55,7 @@ void ft_update_lightningV2_strike(SharedPtr<t_char>info)
     return ;
 }
 
-void ft_update_flame_geyser(SharedPtr<t_char>info)
+void ft_update_flame_geyser(SharedPtr<t_char> info)
 {
     if (info->bufs.flame_geyser.duration <= 0 ||
         info->bufs.flame_geyser.close_to_tower_d <= 0 ||
@@ -77,7 +77,7 @@ void ft_update_flame_geyser(SharedPtr<t_char>info)
 			   info->bufs.flame_geyser.duration);
 }
 
-void ft_update_meteor_strike(SharedPtr<t_char>info)
+void ft_update_meteor_strike(SharedPtr<t_char> info)
 {
 	const char *target;
 
@@ -117,7 +117,7 @@ void ft_update_meteor_strike(SharedPtr<t_char>info)
 	info->bufs.meteor_strike.target_id = ft_nullptr;
 }
 
-void ft_update_earth_pounce(SharedPtr<t_char>info)
+void ft_update_earth_pounce(SharedPtr<t_char> info)
 {
 	const char *target;
 
@@ -136,7 +136,7 @@ void ft_update_earth_pounce(SharedPtr<t_char>info)
 	return ;
 }
 
-void ft_update_arcane_pounce(SharedPtr<t_char>info)
+void ft_update_arcane_pounce(SharedPtr<t_char> info)
 {
 	const char *target;
 
@@ -157,7 +157,7 @@ void ft_update_arcane_pounce(SharedPtr<t_char>info)
     return ;
 }
 
-void ft_update_frost_breath(SharedPtr<t_char>info)
+void ft_update_frost_breath(SharedPtr<t_char> info)
 {
 	if (info->bufs.frost_breath.active != 1 ||
         info->bufs.frost_breath.damage < 0)

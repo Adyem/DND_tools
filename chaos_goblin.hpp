@@ -12,7 +12,7 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_chaos_goblin_turn(SharedPtr<t_char>info);
+void	ft_chaos_goblin_turn(SharedPtr<t_char> info);
 
 static const	t_stats CHAOS_GOBLIN_DEFAULT_STATS =
 {

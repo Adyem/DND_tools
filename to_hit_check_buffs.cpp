@@ -31,7 +31,7 @@ static void ft_to_hit_check_buff_chaos_armor()
 		pf_printf("Chaos Armor activates: But nothing happens...\n");
 }
 
-void ft_to_hit_check_buff(SharedPtr<t_char>info)
+void ft_to_hit_check_buff(SharedPtr<t_char> info)
 {
 	if ((info->bufs.chaos_armor.duration) > 0)
 		ft_to_hit_check_buff_chaos_armor();
