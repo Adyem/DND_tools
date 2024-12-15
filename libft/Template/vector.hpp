@@ -1,5 +1,5 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef FT_VECTOR_H
+#define FT_VECTOR_H
 
 #include "../CPP_class/nullptr.hpp"
 #include "../Errno/errno.hpp"
@@ -7,133 +7,129 @@
 #include <cstddef>
 
 template <typename ElementType>
-class Vector
+class ft_vector
 {
-	private:
-	    ElementType	*_data;
-    	size_t		_size;
-   		size_t		_capacity;
-    	bool		_errorCode;
-    	bool		_critical;
+    private:
+        ElementType	*_data;
+        size_t		_size;
+        size_t		_capacity;
+        bool		_errorCode;
+        bool		_critical;
 
-    	void	destroy_elements(size_t from, size_t to);
-		void	setError(int errorCode);
+        void	destroy_elements(size_t from, size_t to);
+        void	setError(int errorCode);
 
-	public:
-	    using iterator = ElementType*;
-	    using const_iterator = const ElementType*;
+    public:
+        using iterator = ElementType*;
+        using const_iterator = const ElementType*;
 
-	    Vector(size_t initial_capacity = 0, bool criticality = false);
-	    ~Vector();
-	    Vector(const Vector&) = delete;
-	    Vector& operator=(const Vector&) = delete;
+        ft_vector(size_t initial_capacity = 0, bool criticality = false);
+        ~ft_vector();
+        ft_vector(const ft_vector&) = delete;
+        ft_vector& operator=(const ft_vector&) = delete;
 
-	    size_t size() const;
-	    size_t capacity() const;
-	    int getError() const;
+        size_t size() const;
+        size_t capacity() const;
+        int getError() const;
 
-	    void push_back(const ElementType& value);
-	    void pop_back();
+        void push_back(const ElementType& value);
+        void pop_back();
 
-	    ElementType& operator[](size_t index);
-	    const ElementType& operator[](size_t index) const;
+        ElementType& operator[](size_t index);
+        const ElementType& operator[](size_t index) const;
 
-	    void clear();
-	    void reserve(size_t new_capacity);
-	    void resize(size_t new_size, const ElementType& value = ElementType());
+        void clear();
+        void reserve(size_t new_capacity);
+        void resize(size_t new_size, const ElementType& value = ElementType());
 
-	    iterator insert(iterator pos, const ElementType& value);
-	    iterator erase(iterator pos);
-	    iterator begin();
-	    const_iterator begin() const;
-	    iterator end();
-	    const_iterator end() const;
+        iterator insert(iterator pos, const ElementType& value);
+        iterator erase(iterator pos);
+        iterator begin();
+        const_iterator begin() const;
+        iterator end();
+        const_iterator end() const;
 };
 
 template <typename ElementType>
-Vector<ElementType>::Vector(size_t initial_capacity, bool criticality)
-    : _data(nullptr), _size(0), _capacity(0), _errorCode(0), _critical(criticality)
+ft_vector<ElementType>::ft_vector(size_t initial_capacity, bool criticality)
+    : _data(nullptr), _size(0), _capacity(0), _errorCode(false), _critical(criticality)
 {
     if (initial_capacity > 0)
     {
         this->_data = static_cast<ElementType*>(cma_malloc(initial_capacity
-					* sizeof(ElementType), this->_critical));
+                    * sizeof(ElementType), this->_critical));
         if (this->_data == ft_nullptr)
             this->setError(VECTOR_ALLOC_FAIL);
         else
             this->_capacity = initial_capacity;
     }
-	return ;
+    return;
 }
 
 template <typename ElementType>
-Vector<ElementType>::~Vector()
+ft_vector<ElementType>::~ft_vector()
 {
     destroy_elements(0, this->_size);
-	if (this->_data != nullptr)
+    if (this->_data != nullptr)
         cma_free(this->_data);
-	return ;
+    return;
 }
 
 template <typename ElementType>
-void Vector<ElementType>::destroy_elements(size_t from, size_t to)
+void ft_vector<ElementType>::destroy_elements(size_t from, size_t to)
 {
-	size_t index = from;
-	while (index < to)
-	{
+    size_t index = from;
+    while (index < to)
+    {
         this->_data[index].~ElementType();
-		index++;
-	}
-	return ;
+        index++;
+    }
+    return;
 }
 
 template <typename ElementType>
-size_t Vector<ElementType>::size() const
+size_t ft_vector<ElementType>::size() const
 {
     return (this->_size);
 }
 
 template <typename ElementType>
-size_t Vector<ElementType>::capacity() const
+size_t ft_vector<ElementType>::capacity() const
 {
     return (this->_capacity);
 }
 
 template <typename ElementType>
-void Vector<ElementType>::setError(int errorCode)
+void ft_vector<ElementType>::setError(int errorCode)
 {
-	this->_errorCode = errorCode;
-	ft_errno = errorCode;
-	return ;
+    this->_errorCode = true;
+    ft_errno = errorCode;
+    return;
 }
 
 template <typename ElementType>
-int Vector<ElementType>::getError() const
+int ft_vector<ElementType>::getError() const
 {
-    return (this->_errorCode);
+    return (this->_errorCode ? ft_errno : 0);
 }
 
 template <typename ElementType>
-void Vector<ElementType>::push_back(const ElementType& value)
+void ft_vector<ElementType>::push_back(const ElementType& value)
 {
     if (this->_size >= this->_capacity)
     {
-        size_t newCapacity;
-        if (this->_capacity > 0)
-            newCapacity = this->_capacity * 2;
-        else
-            newCapacity = 1;
+        size_t newCapacity = (this->_capacity > 0) ? this->_capacity * 2 : 1;
         reserve(newCapacity);
         if (this->_errorCode)
-            return ;
+            return;
     }
     new (&this->_data[this->_size]) ElementType(value);
     this->_size++;
-    return ;
+    return;
 }
 
 template <typename ElementType>
-void Vector<ElementType>::pop_back()
+void ft_vector<ElementType>::pop_back()
 {
     if (this->_size > 0)
     {
@@ -142,13 +138,13 @@ void Vector<ElementType>::pop_back()
     }
     else
         this->setError(VECTOR_INVALID_OPERATION);
-    return ;
+    return;
 }
 
 template <typename ElementType>
-ElementType& Vector<ElementType>::operator[](size_t index)
+ElementType& ft_vector<ElementType>::operator[](size_t index)
 {
-    if (index >= this->_size || index < 0)
+    if (index >= this->_size)
     {
         this->setError(VECTOR_OUT_OF_BOUNDS);
         static ElementType defaultInstance = ElementType();
@@ -158,9 +154,9 @@ ElementType& Vector<ElementType>::operator[](size_t index)
 }
 
 template <typename ElementType>
-const ElementType& Vector<ElementType>::operator[](size_t index) const
+const ElementType& ft_vector<ElementType>::operator[](size_t index) const
 {
-    if (index >= this->_size || index < 0)
+    if (index >= this->_size)
     {
         this->setError(VECTOR_OUT_OF_BOUNDS);
         static const ElementType defaultInstance = ElementType();
@@ -169,35 +165,34 @@ const ElementType& Vector<ElementType>::operator[](size_t index) const
     return (this->_data[index]);
 }
 
-
 template <typename ElementType>
-void Vector<ElementType>::clear()
+void ft_vector<ElementType>::clear()
 {
     destroy_elements(0, this->_size);
     this->_size = 0;
-	return ;
+    return;
 }
 
 template <typename ElementType>
-void Vector<ElementType>::reserve(size_t new_capacity)
+void ft_vector<ElementType>::reserve(size_t new_capacity)
 {
     if (new_capacity > this->_capacity)
     {
         ElementType* new_data = static_cast<ElementType*>(cma_realloc(this->_data,
-					new_capacity * sizeof(ElementType), this->_critical));
+                    new_capacity * sizeof(ElementType), this->_critical));
         if (new_data == nullptr)
         {
             this->setError(VECTOR_ALLOC_FAIL);
-            return ;
+            return;
         }
         this->_data = new_data;
         this->_capacity = new_capacity;
     }
-	return ;
+    return;
 }
 
 template <typename ElementType>
-void Vector<ElementType>::resize(size_t new_size, const ElementType& value)
+void ft_vector<ElementType>::resize(size_t new_size, const ElementType& value)
 {
     if (new_size < this->_size)
         destroy_elements(new_size, this->_size);
@@ -205,50 +200,46 @@ void Vector<ElementType>::resize(size_t new_size, const ElementType& value)
     {
         reserve(new_size);
         if (this->_errorCode)
-			return ;
-		size_t index = this->_size;
+            return;
+        size_t index = this->_size;
         while (index < new_size)
-		{
+        {
             new (&this->_data[index]) ElementType(value);
-			index++;
-		}
+            index++;
+        }
     }
     this->_size = new_size;
-	return ;
+    return;
 }
 
 template <typename ElementType>
-typename Vector<ElementType>::iterator Vector<ElementType>::insert(iterator pos,
-		const ElementType& value)
+typename ft_vector<ElementType>::iterator ft_vector<ElementType>::insert(iterator pos,
+        const ElementType& value)
 {
     size_t index = pos - this->_data;
     if (index > this->_size)
-		return (end());
+        return (end());
     if (this->_size >= this->_capacity)
     {
-        size_t new_capacity = 1;
-        if (this->_capacity > 0)
-        {
-            new_capacity = this->_capacity * 2;
-        }
+        size_t new_capacity = (this->_capacity > 0) ? this->_capacity * 2 : 1;
         reserve(new_capacity);
         if (this->_errorCode)
-			return (end());
+            return (end());
     }
-	size_t i = this->_size;
-	while (i > index)
-	{
-	    new (&this->_data[i]) ElementType(this->_data[i - 1]);
-	    this->_data[i - 1].~ElementType();
-	    --i;
-	}
+    size_t i = this->_size;
+    while (i > index)
+    {
+        new (&this->_data[i]) ElementType(this->_data[i - 1]);
+        this->_data[i - 1].~ElementType();
+        --i;
+    }
     new (&this->_data[index]) ElementType(value);
     this->_size++;
     return (&this->_data[index]);
 }
 
 template <typename ElementType>
-typename Vector<ElementType>::iterator Vector<ElementType>::erase(iterator pos)
+typename ft_vector<ElementType>::iterator ft_vector<ElementType>::erase(iterator pos)
 {
     size_t index = pos - this->_data; 
     if (index >= this->_size)
@@ -257,12 +248,12 @@ typename Vector<ElementType>::iterator Vector<ElementType>::erase(iterator pos)
         return (end()); 
     }
     this->_data[index].~ElementType();
-	size_t i = index;
+    size_t i = index;
     while (i < this->_size - 1)
     {
         new (&this->_data[i]) ElementType(this->_data[i + 1]);
         this->_data[i + 1].~ElementType();
-		i++;
+        i++;
     }
     --this->_size;
     if (index == this->_size)
@@ -271,25 +262,25 @@ typename Vector<ElementType>::iterator Vector<ElementType>::erase(iterator pos)
 }
 
 template <typename ElementType>
-typename Vector<ElementType>::iterator Vector<ElementType>::begin()
+typename ft_vector<ElementType>::iterator ft_vector<ElementType>::begin()
 {
     return (this->_data);
 }
 
 template <typename ElementType>
-typename Vector<ElementType>::const_iterator Vector<ElementType>::begin() const
+typename ft_vector<ElementType>::const_iterator ft_vector<ElementType>::begin() const
 {
     return (this->_data);
 }
 
 template <typename ElementType>
-typename Vector<ElementType>::iterator Vector<ElementType>::end()
+typename ft_vector<ElementType>::iterator ft_vector<ElementType>::end()
 {
     return (this->_data + this->_size);
 }
 
 template <typename ElementType>
-typename Vector<ElementType>::const_iterator Vector<ElementType>::end() const
+typename ft_vector<ElementType>::const_iterator ft_vector<ElementType>::end() const
 {
     return (this->_data + this->_size);
 }

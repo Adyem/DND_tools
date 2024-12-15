@@ -12,12 +12,10 @@ SRCS := socket_class.cpp \
 		networking.cpp \
 		setup_server.cpp \
 		setup_client.cpp \
-		client_class.cpp \
 		socket_wrapper_functions.cpp
 
 HEADERS := socket_class.hpp \
 		   networking.hpp \
-		   client_class.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))
