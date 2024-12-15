@@ -101,6 +101,12 @@ ft_socket::ft_socket(const SocketConfig &config) : _socket_fd(-1), _error(ER_SUC
 	return ;
 }
 
+ft_socket::~ft_socket()
+{
+	close(this->_socket_fd);
+	return ;
+}
+
 int ft_socket::send_data(const void *data, size_t size, int flags)
 {
     if (this->_socket_fd < 0)
