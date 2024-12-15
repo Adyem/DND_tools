@@ -10,7 +10,7 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_maverick_turn(SharedPtr<t_char> info);
+void	ft_maverick_turn(ft_sharedptr<t_char> &info);
 
 static const	t_stats MAVERICK_DEFAULT_STATS =
 {

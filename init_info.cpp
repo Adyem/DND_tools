@@ -2,7 +2,7 @@
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 
-int ft_check_stat(SharedPtr<t_char> info, const char *stat, int index)
+int ft_check_stat(ft_sharedptr<t_char> &info, const char *stat, int index)
 {
     int temp;
     int result;
@@ -28,7 +28,7 @@ int ft_check_stat(SharedPtr<t_char> info, const char *stat, int index)
     return (result);
 }
 
-int ft_initialize_info(SharedPtr<t_char> info, char **content)
+int ft_initialize_info(ft_sharedptr<t_char> &info, char **content)
 {
     int j;
     int i;

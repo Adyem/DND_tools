@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 
-void ft_set_debuf_blinded(SharedPtr<t_char> info, const char **input)
+void ft_set_debuf_blinded(ft_sharedptr<t_char> &info, const char **input)
 {
 	int result;
 

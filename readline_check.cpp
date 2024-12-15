@@ -29,7 +29,7 @@ int	ft_readline_confirm(const char *message)
 	return (-1);
 }
 
-static int ft_check_spell_slots(int spell_level, SharedPtr<t_char> character)
+static int ft_check_spell_slots(int spell_level, ft_sharedptr<t_char> &character)
 {
 	if (spell_level == 1 && character->spell_slots.level_1.available == 0)
 		return (-1);
@@ -52,7 +52,8 @@ static int ft_check_spell_slots(int spell_level, SharedPtr<t_char> character)
 	return (0);
 }
 
-int ft_readline_spell_level(const char *message, SharedPtr<t_char> character, int *invalid_input_amount)
+int ft_readline_spell_level(const char *message, ft_sharedptr<t_char> &character,
+								int *invalid_input_amount)
 {
 	char	*input;
 	int		spell_level;

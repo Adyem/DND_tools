@@ -1,8 +1,9 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/Template/shared_ptr.hpp"
 
-void	ft_cast_chaos_armor(SharedPtr<t_char> info)
+void	ft_cast_chaos_armor(ft_sharedptr<t_char> &info)
 {
 	ft_remove_concentration(info);
 	info->concentration.concentration = 1;

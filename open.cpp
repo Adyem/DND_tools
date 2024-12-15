@@ -19,7 +19,7 @@ int ft_open_file_write_only(const char *filename, ft_file &file)
     return (0);
 }
 
-void ft_dual_save_file(SharedPtr<t_char> info, SharedPtr<t_char> target)
+void ft_dual_save_file(ft_sharedptr<t_char> &info, ft_sharedptr<t_char> &target)
 {
     ft_file file_info;
     ft_file file_target;
@@ -52,7 +52,8 @@ int ft_check_write_permissions(const char *filepath)
     return (0);
 }
 
-void	ft_cast_concentration_save_files(SharedPtr<t_char> info, t_target_data *target_data, ft_file &file)
+void	ft_cast_concentration_save_files(ft_sharedptr<t_char> &info, t_target_data *target_data,
+											ft_file &file)
 {
 	int	i = 0;
 
@@ -65,7 +66,7 @@ void	ft_cast_concentration_save_files(SharedPtr<t_char> info, t_target_data *tar
 	ft_npc_write_file(info, &info->stats, &info->c_resistance, file);
 }
 
-static void	ft_revert_changes_info(SharedPtr<t_char> info, ft_file &file)
+static void	ft_revert_changes_info(ft_sharedptr<t_char> &info, ft_file &file)
 {
 	cma_free(info->concentration.targets[0]);
 	cma_free(info->concentration.targets);
@@ -79,7 +80,7 @@ static void	ft_revert_changes_info(SharedPtr<t_char> info, ft_file &file)
 	return ;
 }
 
-ft_file ft_check_and_open(t_target_data *target_data, SharedPtr<t_char> info)
+ft_file ft_check_and_open(t_target_data *target_data, ft_sharedptr<t_char> &info)
 {
     int target_index = 0;
     ft_file info_save_file;
@@ -104,7 +105,7 @@ ft_file ft_check_and_open(t_target_data *target_data, SharedPtr<t_char> info)
             {
                 if (target_data->target_copy[rollback_index])
                 {
-                    SharedPtr<t_char> target = target_data->target_copy[rollback_index];
+                    ft_sharedptr<t_char> target = target_data->target_copy[rollback_index];
                     ft_npc_write_file(target, &target->stats,
                             &target->c_resistance, target_data->file[rollback_index]);
                 }

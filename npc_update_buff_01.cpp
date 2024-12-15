@@ -2,7 +2,8 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 
-void ft_update_buff_status(SharedPtr<t_char> info, int current_dur, int duration, const char *buff_name)
+void ft_update_buff_status(ft_sharedptr<t_char> &info, int current_dur, int duration,
+							const char *buff_name)
 {
     if (duration == 0 && current_dur == 0)
         pf_printf("%s never had %s and still doesn't have it\n", info->name, buff_name);
@@ -23,7 +24,7 @@ void ft_update_buff_status(SharedPtr<t_char> info, int current_dur, int duration
     return ;
 }
 
-void ft_npc_update_buff(SharedPtr<t_char> info, const char **input, int *buff, const char *name)
+void ft_npc_update_buff(ft_sharedptr<t_char> &info, const char **input, int *buff, const char *name)
 {
     int number;
 

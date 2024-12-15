@@ -2,7 +2,7 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 
-static int ft_get_damage_reduction(SharedPtr<t_char> info, const char *type)
+static int ft_get_damage_reduction(ft_sharedptr<t_char> &info, const char *type)
 {
     if (ft_strcmp_dnd(type, "acid") == 0)
         return (ft_calculate_acid_dr(info));
@@ -33,7 +33,8 @@ static int ft_get_damage_reduction(SharedPtr<t_char> info, const char *type)
     return (ERROR_RESISTANCE);
 }
 
-void ft_deal_damage(SharedPtr<t_char> info, const char *input, const char *d_type, int resistance, int override)
+void ft_deal_damage(ft_sharedptr<t_char> &info, const char *input, const char *d_type,
+						int resistance, int override)
 {
     static int total;
     int temp;
@@ -67,15 +68,15 @@ void ft_deal_damage(SharedPtr<t_char> info, const char *input, const char *d_typ
         if (d_type && resistance > 0)
         {
             extra = (damage * resistance) / 100;
-            pf_printf("%s is resistant to %s damage and takes %d%% less damage for a total of %d less damage.\n",
-                      info->name, d_type, resistance, extra);
+            pf_printf("%s is resistant to %s damage and takes %d%% less damage for a " \
+					"total of %d less damage.\n", info->name, d_type, resistance, extra);
             damage = damage - extra;
         }
         else if (d_type && resistance < 0)
         {
             extra = damage * ((resistance * -1) / 100);
-            pf_printf("%s is vulnerable to %s damage and takes %d%% more damage for a total of %d more damage.\n",
-                      info->name, d_type, -resistance, extra);
+            pf_printf("%s is vulnerable to %s damage and takes %d%% more damage for a " \
+					"total of %d more damage.\n", info->name, d_type, -resistance, extra);
             damage = damage + extra;
         }
         else if (d_type && resistance == 100)

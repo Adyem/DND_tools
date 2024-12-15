@@ -1,7 +1,8 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/Template/shared_ptr.hpp"
 
-void print_meteor_strike(const SharedPtr<t_char> info)
+void print_meteor_strike(const ft_sharedptr<t_char> &info)
 {
 	const char *target;
 
@@ -21,7 +22,7 @@ void print_meteor_strike(const SharedPtr<t_char> info)
 	return ;
 }
 
-void print_lightning_strike(const SharedPtr<t_char> info)
+void print_lightning_strike(const ft_sharedptr<t_char> &info)
 {
     pf_printf("Lightning Strike: The boss's skin will flare with electricity at " \
 			"the start of the boss's next turn ");
@@ -31,7 +32,7 @@ void print_lightning_strike(const SharedPtr<t_char> info)
 	return ;
 }
 
-void print_flame_geyser(const SharedPtr<t_char> info)
+void print_flame_geyser(const ft_sharedptr<t_char> &info)
 {
     pf_printf("Flame Geyser: %d red towers spawn at random locations. If no one " \
 			"stands underneath a tower at the start of the boss's next turn, it " \
@@ -45,7 +46,7 @@ void print_flame_geyser(const SharedPtr<t_char> info)
 	return ;
 }
 
-void print_frost_breath(const SharedPtr<t_char> info)
+void print_frost_breath(const ft_sharedptr<t_char> &info)
 {
 	const char *target;
 
@@ -61,7 +62,7 @@ void print_frost_breath(const SharedPtr<t_char> info)
 	return ;
 }
 
-void print_lightning_strike_v2(const SharedPtr<t_char> info)
+void print_lightning_strike_v2(const ft_sharedptr<t_char> &info)
 {
     pf_printf("Lightning Strike V2: A marker appears at a random location, " \
 			"indicating where lightning will strike.\n");
@@ -75,7 +76,7 @@ void print_lightning_strike_v2(const SharedPtr<t_char> info)
 	return ;
 }
 
-void print_arcane_pounce(const SharedPtr<t_char> info)
+void print_arcane_pounce(const ft_sharedptr<t_char> &info)
 {
 	const char *target;
 
@@ -90,7 +91,7 @@ void print_arcane_pounce(const SharedPtr<t_char> info)
 	return ;
 }
 
-void print_earth_pounce(const SharedPtr<t_char> info)
+void print_earth_pounce(const ft_sharedptr<t_char> &info)
 {
 	const char *target;
 

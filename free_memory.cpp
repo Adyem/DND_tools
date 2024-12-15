@@ -48,12 +48,12 @@ void	ft_free_memory_cmt(t_target_data *target_data, int amount)
         if (target_data->target[j])
         {
             ft_free_info(target_data->target[j]);
-            target_data->target[j] = SharedPtr<t_char> ();
+            target_data->target[j] = ft_sharedptr<t_char>();
         }
 		if (target_data->target_copy[j])
 		{
 			ft_free_info(target_data->target_copy[j]);
-			target_data->target[j] = SharedPtr<t_char> ();
+			target_data->target[j] = ft_sharedptr<t_char>();
 		}
         if (target_data->Pchar_name[j])
         {

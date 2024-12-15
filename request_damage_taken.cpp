@@ -21,7 +21,7 @@ static int	ft_free_request_damage(char *line, char **input)
 	return (1);
 }
 
-int ft_get_resistance(SharedPtr<t_char> info, const char *type)
+int ft_get_resistance(ft_sharedptr<t_char> &info, const char *type)
 {
 	if (ft_strcmp_dnd(type, "acid") == 0)
 		return (ft_calculate_acid_resistance(info));
@@ -52,7 +52,7 @@ int ft_get_resistance(SharedPtr<t_char> info, const char *type)
 	return (-9999);
 }
 
-int ft_request_damage(SharedPtr<t_char> info)
+int ft_request_damage(ft_sharedptr<t_char> &info)
 {
     char	**input = ft_nullptr;
     char	*line = ft_nullptr;

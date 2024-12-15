@@ -1,7 +1,8 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 
-int ft_saving_throw(SharedPtr<t_char> info, const char *ability_score, int ability_mod, int save_mod)
+int ft_saving_throw(ft_sharedptr<t_char> &info, const char *ability_score, int ability_mod,
+						int save_mod)
 {
 	int mod;
 	int result;

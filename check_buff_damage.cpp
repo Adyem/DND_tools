@@ -2,7 +2,7 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 
-static void ft_check_buff_damage_hunters_mark(SharedPtr<t_char> info)
+static void ft_check_buff_damage_hunters_mark(ft_sharedptr<t_char> &info)
 {
     int result;
 
@@ -13,7 +13,7 @@ static void ft_check_buff_damage_hunters_mark(SharedPtr<t_char> info)
     return ;
 }
 
-int ft_check_buff_damage(SharedPtr<t_char> info)
+int ft_check_buff_damage(ft_sharedptr<t_char> &info)
 {
     int r_value;
 

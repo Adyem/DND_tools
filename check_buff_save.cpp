@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 
-int	ft_save_check_buff(SharedPtr<t_char> info, int *roll, const char *ability_score)
+int	ft_save_check_buff(ft_sharedptr<t_char> &info, int *roll, const char *ability_score)
 {
 	(void)ability_score;
 	int	return_value;

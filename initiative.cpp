@@ -1,7 +1,7 @@
 #include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
 
-void ft_check_initiative(SharedPtr<t_char> info)
+void ft_check_initiative(ft_sharedptr<t_char> &info)
 {
     if (info->initiative == -1)
         pf_printf("No initiative set for %s\n", info->name);
@@ -10,7 +10,7 @@ void ft_check_initiative(SharedPtr<t_char> info)
     return ;
 }
 
-void ft_roll_initiative(SharedPtr<t_char> info)
+void ft_roll_initiative(ft_sharedptr<t_char> &info)
 {
     int dex_mod;
     int result;

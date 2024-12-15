@@ -10,7 +10,7 @@
 typedef struct  s_name t_name;
 typedef struct  s_char t_char;
 
-void    ft_murna_claygrip_turn(SharedPtr<t_char> info);
+void    ft_murna_claygrip_turn(ft_sharedptr<t_char> &info);
 
 static const    t_stats MURNA_CLAYGRIP_DEFAULT_STATS =
 {

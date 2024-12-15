@@ -2,14 +2,14 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 
-static void ft_pc_specific(SharedPtr<t_char> info, int number)
+static void ft_pc_specific(ft_sharedptr<t_char> &info, int number)
 {
 	if (info->feats.crackback.active)
 		ft_crackback(info, number);
 	return ;
 }
 
-void ft_npc_check_ac(SharedPtr<t_char> info, const char **input)
+void ft_npc_check_ac(ft_sharedptr<t_char> &info, const char **input)
 {
 	int number;
 

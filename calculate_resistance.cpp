@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
+#include "libft/Template/shared_ptr.hpp"
 
-int	ft_calculate_acid_resistance(SharedPtr<t_char> info)
+int	ft_calculate_acid_resistance(ft_sharedptr<t_char> &info)
 {
 	int acid;
 
@@ -20,7 +21,7 @@ int	ft_calculate_acid_resistance(SharedPtr<t_char> info)
 	return (acid);
 }
 
-int	ft_calculate_bludgeoning_resistance(SharedPtr<t_char> info)
+int	ft_calculate_bludgeoning_resistance(ft_sharedptr<t_char> &info)
 {
 	int bludgeoning;
 
@@ -40,7 +41,7 @@ int	ft_calculate_bludgeoning_resistance(SharedPtr<t_char> info)
 	return (bludgeoning);
 }
 
-int	ft_calculate_cold_resistance(SharedPtr<t_char> info)
+int	ft_calculate_cold_resistance(ft_sharedptr<t_char> &info)
 {
 	int cold;
 
@@ -60,7 +61,7 @@ int	ft_calculate_cold_resistance(SharedPtr<t_char> info)
 	return (cold);
 }
 
-int	ft_calculate_fire_resistance(SharedPtr<t_char> info)
+int	ft_calculate_fire_resistance(ft_sharedptr<t_char> &info)
 {
 	int fire;
 
@@ -80,7 +81,7 @@ int	ft_calculate_fire_resistance(SharedPtr<t_char> info)
 	return (fire);
 }
 
-int	ft_calculate_force_resistance(SharedPtr<t_char> info)
+int	ft_calculate_force_resistance(ft_sharedptr<t_char> &info)
 {
 	int force;
 
@@ -100,7 +101,7 @@ int	ft_calculate_force_resistance(SharedPtr<t_char> info)
 	return (force);
 }
 
-int	ft_calculate_lightning_resistance(SharedPtr<t_char> info)
+int	ft_calculate_lightning_resistance(ft_sharedptr<t_char> &info)
 {
 	int lightning;
 
@@ -120,7 +121,7 @@ int	ft_calculate_lightning_resistance(SharedPtr<t_char> info)
 	return (lightning);
 }
 
-int	ft_calculate_necrotic_resistance(SharedPtr<t_char> info)
+int	ft_calculate_necrotic_resistance(ft_sharedptr<t_char> &info)
 {
 	int necrotic;
 
@@ -140,7 +141,7 @@ int	ft_calculate_necrotic_resistance(SharedPtr<t_char> info)
 	return (necrotic);
 }
 
-int	ft_calculate_piercing_resistance(SharedPtr<t_char> info)
+int	ft_calculate_piercing_resistance(ft_sharedptr<t_char> &info)
 {
 	int piercing;
 
@@ -160,7 +161,7 @@ int	ft_calculate_piercing_resistance(SharedPtr<t_char> info)
 	return (piercing);
 }
 
-int	ft_calculate_poison_resistance(SharedPtr<t_char> info)
+int	ft_calculate_poison_resistance(ft_sharedptr<t_char> &info)
 {
 	int poison;
 
@@ -180,7 +181,7 @@ int	ft_calculate_poison_resistance(SharedPtr<t_char> info)
 	return (poison);
 }
 
-int	ft_calculate_psychic_resistance(SharedPtr<t_char> info)
+int	ft_calculate_psychic_resistance(ft_sharedptr<t_char> &info)
 {
 	int psychic;
 
@@ -200,7 +201,7 @@ int	ft_calculate_psychic_resistance(SharedPtr<t_char> info)
 	return (psychic);
 }
 
-int	ft_calculate_radiant_resistance(SharedPtr<t_char> info)
+int	ft_calculate_radiant_resistance(ft_sharedptr<t_char> &info)
 {
 	int radiant;
 
@@ -220,7 +221,7 @@ int	ft_calculate_radiant_resistance(SharedPtr<t_char> info)
 	return (radiant);
 }
 
-int	ft_calculate_slashing_resistance(SharedPtr<t_char> info)
+int	ft_calculate_slashing_resistance(ft_sharedptr<t_char> &info)
 {
 	int slashing;
 
@@ -240,7 +241,7 @@ int	ft_calculate_slashing_resistance(SharedPtr<t_char> info)
 	return (slashing);
 }
 
-int	ft_calculate_thunder_resistance(SharedPtr<t_char> info)
+int	ft_calculate_thunder_resistance(ft_sharedptr<t_char> &info)
 {
 	int thunder;
 

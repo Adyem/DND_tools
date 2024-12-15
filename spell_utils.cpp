@@ -4,7 +4,7 @@
 #include "libft/Printf/printf.hpp"
 #include <cassert>
 
-static ft_string ft_check_availeble_spell_slots(SharedPtr<t_char> character, int base_level)
+static ft_string ft_check_availeble_spell_slots(ft_sharedptr<t_char> &character, int base_level)
 {
 	ft_string available_levels;
 
@@ -31,7 +31,7 @@ static ft_string ft_check_availeble_spell_slots(SharedPtr<t_char> character, int
 	return (available_levels);
 }
 
-int ft_prompt_spell_level(SharedPtr<t_char> character, int base_level)
+int ft_prompt_spell_level(ft_sharedptr<t_char> &character, int base_level)
 {
 	assert (base_level >= 0 && base_level <= 9);
 

@@ -33,7 +33,8 @@ static char *ft_read_target_name(int index)
     return (target_name);
 }
 
-void ft_cast_concentration_multi_target_01(SharedPtr<t_char> info, t_buff *buff, const char **input)
+void ft_cast_concentration_multi_target_01(ft_sharedptr<t_char> &info, t_buff *buff,
+											const char **input)
 {
     t_target_data	target_data;
     int				error = 0;

@@ -1,4 +1,5 @@
 #include "libft/Printf/printf.hpp"
+#include "libft/Template/shared_ptr.hpp"
 #include "dnd_tools.hpp"
 #include <climits>
 #include <cstdlib>
@@ -26,7 +27,7 @@ int ft_dice_roll(int number, int faces)
     return (result);
 }
 
-void ft_reroll(SharedPtr<t_char> info, int *result)
+void ft_reroll(ft_sharedptr<t_char> &info, int *result)
 {
     int second_roll;
 
