@@ -4,6 +4,7 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/file.hpp"
+#include "libft/Template/shared_ptr.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>

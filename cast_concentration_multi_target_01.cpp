@@ -3,6 +3,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CPP_class/nullptr.hpp"
+#include "libft/Template/shared_ptr.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>

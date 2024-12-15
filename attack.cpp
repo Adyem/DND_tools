@@ -2,6 +2,7 @@
 #include "identification.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/math.hpp"
+#include "libft/Template/shared_ptr.hpp"
 
 typedef struct s_damage_info
 {
