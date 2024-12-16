@@ -5,7 +5,13 @@
 #include <fcntl.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <utility>
 #include <sys/socket.h>
+
+ft_socket::ft_socket() : _socket_fd(-1), _error(ER_SUCCESS)
+{
+    std::memset(&_address, 0, sizeof(_address));
+}
 
 int ft_socket::send_data(const void *data, size_t size, int flags, int fd)
 {
@@ -97,7 +103,7 @@ int ft_socket::accept_connection()
         return (-1);
     }
     ft_socket new_socket(new_fd, client_addr);
-    this->_connected.push_back(new_socket);
+    this->_connected.push_back(std::move(new_socket));
 	if (this->_connected.getError())
 	{
 		ft_errno = VECTOR_ALLOC_FAIL;
@@ -194,4 +200,25 @@ bool ft_socket::close_socket()
 const char* ft_socket::get_error_message() const
 {
     return (ft_strerror(this->_error));
+}
+
+ft_socket::ft_socket(ft_socket &&other) noexcept
+    : _address(other._address), _socket_fd(other._socket_fd), _error(other._error),
+		_connected(std::move(other._connected))
+{
+    other._socket_fd = -1;
+}
+
+ft_socket &ft_socket::operator=(ft_socket &&other) noexcept
+{
+    if (this != &other)
+	{
+        close_socket();
+        this->_address = other._address;
+        this->_socket_fd = other._socket_fd;
+        this->_error = other._error;
+        this->_connected = std::move(other._connected);
+        other._socket_fd = -1;
+    }
+    return *this;
 }

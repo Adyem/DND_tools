@@ -9,7 +9,12 @@ class ft_socket
 {
 	public:
     	ft_socket(const SocketConfig &config);
+		ft_socket();
     	~ft_socket();
+
+		ft_socket(ft_socket &&other) noexcept;
+		ft_socket &operator=(ft_socket &&other) noexcept;
+
     	int send_data(const void *data, size_t size, int flags = 0);
     	int receive_data(void *buffer, size_t size, int flags = 0);
     	bool close_socket();
@@ -41,9 +46,7 @@ class ft_socket
 
 		ft_socket(int fd, const sockaddr_storage &addr);
 		ft_socket(const ft_socket &other) = delete;
-		ft_socket(ft_socket &&other) = delete;
     	ft_socket &operator=(const ft_socket &other) = delete;
-		ft_socket &operator=(ft_socket &&other) = delete;
 };
 
 #endif

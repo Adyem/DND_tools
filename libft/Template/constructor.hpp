@@ -1,31 +1,33 @@
 #ifndef CONSTRUCTOR_HPP
-# define CONSTRUCTOR_HPP
+#define CONSTRUCTOR_HPP
 
 #include <type_traits>
+#include <utility> // For std::forward
+#include <new>     // For placement new
 
-template <typename T>
-void construct_at(T* p, const T& value)
+template <typename Type, typename Arg>
+void construct_at(Type* destination, Arg&& source)
 {
-    if constexpr (!std::is_trivially_constructible_v<T>)
-        new (p) T(value);
+    if constexpr (!std::is_trivially_constructible_v<Type, Arg&&>)
+        new (destination) Type(std::forward<Arg>(source)); // Correctly recognized as placement new
     else
-        *p = value;
+        *destination = std::forward<Arg>(source);
 }
 
-template <typename T>
-void construct_default_at(T* p)
+template <typename Type>
+void construct_default_at(Type* destination)
 {
-    if constexpr (!std::is_trivially_constructible_v<T>)
-        new (p) T();
+    if constexpr (!std::is_trivially_constructible_v<Type>)
+        new (destination) Type(); // Correctly recognized as placement new
     else
-        *p = T();
+        *destination = Type();
 }
 
-template <typename T>
-void destroy_at(T* p)
+template <typename Type>
+void destroy_at(Type* object)
 {
-	if constexpr (!std::is_trivially_destructible_v<T>)
-        p->~T();
+    if constexpr (!std::is_trivially_destructible_v<Type>)
+        object->~Type();
 }
 
 #endif

@@ -11,11 +11,11 @@
 
 int ft_socket::create_socket(const SocketConfig &config)
 {
-    socket_fd = nw_socket(config.address_family, SOCK_STREAM, config.protocol);
-    if (socket_fd < 0)
+    this->_socket_fd = nw_socket(config.address_family, SOCK_STREAM, config.protocol);
+    if (this->_socket_fd < 0)
 	{
         handle_error(errno + ERRNO_OFFSET);
-        return (_error);
+        return (this->_error);
     }
     return (ER_SUCCESS);
 }
@@ -25,12 +25,12 @@ int ft_socket::set_reuse_address(const SocketConfig &config)
     if (!config.reuse_address)
         return (ER_SUCCESS);
     int opt = 1;
-    if (setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
+    if (setsockopt(this->_socket_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
 	{
         handle_error(errno + ERRNO_OFFSET);
-        close(socket_fd);
-        socket_fd = -1;
-        return (_error);
+        close(this->_socket_fd);
+        this->_socket_fd = -1;
+        return (this->_error);
     }
     return (ER_SUCCESS);
 }
@@ -39,21 +39,21 @@ int ft_socket::set_non_blocking(const SocketConfig &config)
 {
     if (!config.non_blocking)
         return (ER_SUCCESS);
-    int flags = fcntl(socket_fd, F_GETFL, 0);
+    int flags = fcntl(this->_socket_fd, F_GETFL, 0);
     if (flags == -1)
 	{
         handle_error(errno + ERRNO_OFFSET);
-        close(socket_fd);
-        socket_fd = -1;
-        return (_error);
+        close(this->_socket_fd);
+        this->_socket_fd = -1;
+        return (this->_error);
     }
 
-    if (fcntl(socket_fd, F_SETFL, flags | O_NONBLOCK) == -1)
+    if (fcntl(this->_socket_fd, F_SETFL, flags | O_NONBLOCK) == -1)
 	{
         handle_error(errno + ERRNO_OFFSET);
-        close(socket_fd);
-        socket_fd = -1;
-        return (_error);
+        close(this->_socket_fd);
+        this->_socket_fd = -1;
+        return (this->_error);
     }
 
     return (ER_SUCCESS);
@@ -66,24 +66,24 @@ int ft_socket::set_timeouts(const SocketConfig &config)
 	{
         tv.tv_sec = config.recv_timeout / 1000;
         tv.tv_usec = (config.recv_timeout % 1000) * 1000;
-        if (setsockopt(socket_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0)
+        if (setsockopt(this->_socket_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0)
 		{
             handle_error(errno + ERRNO_OFFSET);
-            close(socket_fd);
-            socket_fd = -1;
-            return (_error);
+            close(this->_socket_fd);
+            this->_socket_fd = -1;
+            return (this->_error);
         }
     }
     if (config.send_timeout > 0)
 	{
         tv.tv_sec = config.send_timeout / 1000;
         tv.tv_usec = (config.send_timeout % 1000) * 1000;
-        if (setsockopt(socket_fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv)) < 0)
+        if (setsockopt(this->_socket_fd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv)) < 0)
 		{
             handle_error(errno + ERRNO_OFFSET);
-            close(socket_fd);
-            socket_fd = -1;
-            return (_error);
+            close(this->_socket_fd);
+            this->_socket_fd = -1;
+            return (this->_error);
         }
     }
     return (ER_SUCCESS);
@@ -101,9 +101,9 @@ int ft_socket::configure_address(const SocketConfig &config)
         if (inet_pton(AF_INET, config.ip.c_str(), &addr_in->sin_addr) <= 0)
 		{
             handle_error(SOCKET_INVALID_CONFIGURATION);
-            close(socket_fd);
-            socket_fd = -1;
-            return (_error);
+            close(this->_socket_fd);
+            this->_socket_fd = -1;
+            return (this->_error);
         }
     }
     else if (config.address_family == AF_INET6)
@@ -114,17 +114,17 @@ int ft_socket::configure_address(const SocketConfig &config)
         if (inet_pton(AF_INET6, config.ip.c_str(), &addr_in6->sin6_addr) <= 0)
 		{
             handle_error(SOCKET_INVALID_CONFIGURATION);
-            close(socket_fd);
-            socket_fd = -1;
+            close(this->_socket_fd);
+            this->_socket_fd = -1;
             return (_error);
         }
     }
     else
 	{
         handle_error(SOCKET_INVALID_CONFIGURATION);
-        close(socket_fd);
-        socket_fd = -1;
-        return (_error);
+        close(this->_socket_fd);
+        this->_socket_fd = -1;
+        return (this->_error);
     }
     return (ER_SUCCESS);
 }
@@ -140,16 +140,16 @@ int ft_socket::bind_socket(const SocketConfig &config)
     else
     {
         handle_error(SOCKET_INVALID_CONFIGURATION);
-        close(socket_fd);
-        socket_fd = -1;
-        return (_error);
+        close(this->_socket_fd);
+        this->_socket_fd = -1;
+        return (this->_error);
     }
-    if (nw_bind(socket_fd, reinterpret_cast<const struct sockaddr*>(&this->_address), addr_len) < 0)
+    if (nw_bind(this->_socket_fd, reinterpret_cast<const struct sockaddr*>(&this->_address), addr_len) < 0)
     {
         handle_error(errno + ERRNO_OFFSET);
-        close(socket_fd);
-        socket_fd = -1;
-        return (_error);
+        close(this->_socket_fd);
+        this->_socket_fd = -1;
+        return (this->_error);
     }
     return (ER_SUCCESS);
 }
@@ -157,12 +157,12 @@ int ft_socket::bind_socket(const SocketConfig &config)
 
 int ft_socket::listen_socket(const SocketConfig &config)
 {
-    if (nw_listen(socket_fd, config.backlog) < 0)
+    if (nw_listen(this->_socket_fd, config.backlog) < 0)
 	{
         handle_error(errno + ERRNO_OFFSET);
-        close(socket_fd);
-        socket_fd = -1;
-        return (_error);
+        close(this->_socket_fd);
+        this->_socket_fd = -1;
+        return (this->_error);
     }
     return (ER_SUCCESS);
 }
@@ -170,29 +170,29 @@ int ft_socket::listen_socket(const SocketConfig &config)
 void ft_socket::handle_error(int error_code)
 {
     ft_errno = error_code;
-    _error = ft_errno;
+    this->_error = ft_errno;
 	return ;
 }
 
 int ft_socket::setup_server(const SocketConfig &config)
 {
     if (create_socket(config) != ER_SUCCESS)
-        return (_error);
+        return (this->_error);
     if (config.reuse_address)
         if (set_reuse_address(config) != ER_SUCCESS)
-            return (_error);
+            return (this->_error);
     if (config.non_blocking)
         if (set_non_blocking(config) != ER_SUCCESS)
-            return (_error);
+            return (this->_error);
     if (config.recv_timeout > 0 || config.send_timeout > 0)
         if (set_timeouts(config) != ER_SUCCESS)
-            return (_error);
+            return (this->_error);
     if (configure_address(config) != ER_SUCCESS)
-        return (_error);
+        return (this->_error);
     if (bind_socket(config) != ER_SUCCESS)
-        return (_error);
+        return (this->_error);
     if (listen_socket(config) != ER_SUCCESS)
-        return (_error);
-    _error = ER_SUCCESS;
-    return (_error);
+        return (this->_error);
+    this->_error = ER_SUCCESS;
+    return (this->_error);
 }

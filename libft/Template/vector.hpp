@@ -6,49 +6,56 @@
 #include "../CMA/CMA.hpp"
 #include "constructor.hpp"
 #include <cstddef>
+#include <utility>
+#include <type_traits>
 
 template <typename ElementType>
 class ft_vector
 {
-private:
-    ElementType	*_data;
-    size_t		_size;
-    size_t		_capacity;
-    bool		_errorCode;
-    bool		_critical;
+	private:
+    	ElementType	*_data;
+    	size_t		_size;
+    	size_t		_capacity;
+    	bool		_errorCode;
+    	bool		_critical;
 
-    void	destroy_elements(size_t from, size_t to);
-    void	setError(int errorCode);
+    	void	destroy_elements(size_t from, size_t to);
+    	void	setError(int errorCode);
 
-public:
-    using iterator = ElementType*;
-    using const_iterator = const ElementType*;
+	public:
+    	using iterator = ElementType*;
+    	using const_iterator = const ElementType*;
 
-    ft_vector(size_t initial_capacity = 0, bool criticality = false);
-    ~ft_vector();
-    ft_vector(const ft_vector&) = delete;
-    ft_vector& operator=(const ft_vector&) = delete;
+    	ft_vector(size_t initial_capacity = 0, bool criticality = false);
+    	~ft_vector();
 
-    size_t size() const;
-    size_t capacity() const;
-    int getError() const;
+    	ft_vector(const ft_vector&) = delete;
+    	ft_vector& operator=(const ft_vector&) = delete;
 
-    void push_back(const ElementType& value);
-    void pop_back();
+    	ft_vector(ft_vector&& other) noexcept;
+    	ft_vector& operator=(ft_vector&& other) noexcept;
 
-    ElementType& operator[](size_t index);
-    const ElementType& operator[](size_t index) const;
+    	size_t size() const;
+    	size_t capacity() const;
+    	int getError() const;
 
-    void clear();
-    void reserve(size_t new_capacity);
-    void resize(size_t new_size, const ElementType& value = ElementType());
+    	void push_back(const ElementType &value);
+    	void push_back(ElementType &&value);
+    	void pop_back();
 
-    iterator insert(iterator pos, const ElementType& value);
-    iterator erase(iterator pos);
-    iterator begin();
-    const_iterator begin() const;
-    iterator end();
-    const_iterator end() const;
+    	ElementType& operator[](size_t index);
+    	const ElementType& operator[](size_t index) const;
+
+    	void clear();
+    	void reserve(size_t new_capacity);
+    	void resize(size_t new_size, const ElementType& value = ElementType());
+
+    	iterator insert(iterator pos, const ElementType& value);
+    	iterator erase(iterator pos);
+    	iterator begin();
+    	const_iterator begin() const;
+    	iterator end();
+    	const_iterator end() const;
 };
 
 template <typename ElementType>
@@ -77,11 +84,46 @@ ft_vector<ElementType>::~ft_vector()
 }
 
 template <typename ElementType>
+ft_vector<ElementType>::ft_vector(ft_vector<ElementType>&& other) noexcept
+    : _data(other._data),
+      _size(other._size),
+      _capacity(other._capacity),
+      _errorCode(other._errorCode),
+      _critical(other._critical)
+{
+    other._data = nullptr;
+    other._size = 0;
+    other._capacity = 0;
+    other._errorCode = false;
+}
+
+template <typename ElementType>
+ft_vector<ElementType>& ft_vector<ElementType>::operator=(ft_vector<ElementType>&& other) noexcept
+{
+    if (this != &other)
+    {
+        destroy_elements(0, this->_size);
+        if (this->_data != nullptr)
+            cma_free(this->_data);
+        this->_data = other._data;
+        this->_size = other._size;
+        this->_capacity = other._capacity;
+        this->_errorCode = other._errorCode;
+        this->_critical = other._critical;
+        other._data = nullptr;
+        other._size = 0;
+        other._capacity = 0;
+        other._errorCode = false;
+    }
+    return (*this);
+}
+
+template <typename ElementType>
 void ft_vector<ElementType>::destroy_elements(size_t from, size_t to)
 {
     for (size_t index = from; index < to; index++)
         destroy_at(&this->_data[index]);
-    return;
+    return ;
 }
 
 template <typename ElementType>
@@ -101,7 +143,7 @@ void ft_vector<ElementType>::setError(int errorCode)
 {
     this->_errorCode = true;
     ft_errno = errorCode;
-    return;
+    return ;
 }
 
 template <typename ElementType>
@@ -111,7 +153,7 @@ int ft_vector<ElementType>::getError() const
 }
 
 template <typename ElementType>
-void ft_vector<ElementType>::push_back(const ElementType& value)
+void ft_vector<ElementType>::push_back(const ElementType &value)
 {
     if (this->_size >= this->_capacity)
     {
@@ -122,7 +164,20 @@ void ft_vector<ElementType>::push_back(const ElementType& value)
     }
     construct_at(&this->_data[this->_size], value);
     this->_size++;
-    return;
+}
+
+template <typename ElementType>
+void ft_vector<ElementType>::push_back(ElementType &&value)
+{
+    if (this->_size >= this->_capacity)
+    {
+        size_t newCapacity = (this->_capacity > 0) ? this->_capacity * 2 : 1;
+        reserve(newCapacity);
+        if (this->_errorCode)
+            return;
+    }
+    construct_at(&this->_data[this->_size], std::forward<ElementType>(value));
+    this->_size++;
 }
 
 template <typename ElementType>
@@ -242,7 +297,6 @@ typename ft_vector<ElementType>::iterator ft_vector<ElementType>::erase(iterator
         return (end()); 
     }
     destroy_at(&this->_data[index]);
-    // Shift elements left
     for (size_t i = index; i < this->_size - 1; i++)
     {
         construct_at(&this->_data[i], this->_data[i + 1]);
