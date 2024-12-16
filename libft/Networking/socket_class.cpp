@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 
-int ft_socket::broadcast_data(const void *data, size_t size, int flags, int fd)
+int ft_socket::send_data(const void *data, size_t size, int flags, int fd)
 {
 	size_t index = 0;
     while (index < this->_connected.size())
@@ -32,6 +32,31 @@ int ft_socket::broadcast_data(const void *data, size_t size, int flags, int fd)
 int	ft_socket::get_fd() const
 {
 	return (this->_socket_fd);
+}
+
+int ft_socket::broadcast_data(const void *data, size_t size, int flags, int exception)
+{
+    int total_bytes_sent = 0;
+	size_t index = 0;
+
+    while (index < this->_connected.size())
+    {
+		if (exception == this->_connected[index].get_fd())
+		{
+			index++;
+			continue ;
+		}
+        int bytes_sent = this->_connected[index].send_data(data, size, flags);
+        if (bytes_sent < 0)
+		{
+			ft_errno = errno + ERRNO_OFFSET;
+			_error = ft_errno;
+            continue ;
+		}
+        total_bytes_sent += bytes_sent;
+		index++;
+    }
+    return (total_bytes_sent);
 }
 
 int ft_socket::broadcast_data(const void *data, size_t size, int flags)

@@ -16,7 +16,8 @@ class ft_socket
     	int get_error() const;
     	const char* get_error_message() const;
 		int broadcast_data(const void *data, size_t size, int flags);
-		int broadcast_data(const void *data, size_t size, int flags, int fd);
+		int broadcast_data(const void *data, size_t size, int flags, int exception);
+		int send_data(const void *data, size_t size, int flags, int fd);
 		int	get_fd() const;
 
 	private:
