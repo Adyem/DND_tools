@@ -4,6 +4,31 @@
 #include "libft/Printf/printf.hpp"
 #include <cassert>
 
+static int ft_auto_cast(ft_sharedptr<t_char> &character, int base_level)
+{
+	if (character->spell_slots.level_1.available > 0 && base_level >= 1)
+        return (1);
+	if (character->spell_slots.level_2.available > 0 && base_level >= 2)
+        return (2);
+	if (character->spell_slots.level_3.available > 0 && base_level >= 3)
+        return (3);
+	if (character->spell_slots.level_4.available > 0 && base_level >= 4)
+        return (4);
+	if (character->spell_slots.level_5.available > 0 && base_level >= 5)
+        return (5);
+	if (character->spell_slots.level_6.available > 0 && base_level >= 6)
+        return (6);
+	if (character->spell_slots.level_7.available > 0 && base_level >= 7)
+        return (7);
+	if (character->spell_slots.level_8.available > 0 && base_level >= 8)
+        return (8);
+	if (character->spell_slots.level_9.available > 0 && base_level >= 9)
+        return (9);
+	pf_printf_fd(2, "Error: No available spell slots for %s to cast Divine Smite.\n",
+                character->name);
+    return (-1);
+}
+
 static ft_string ft_check_availeble_spell_slots(ft_sharedptr<t_char> &character, int base_level)
 {
 	ft_string available_levels;
@@ -35,6 +60,8 @@ int ft_prompt_spell_level(ft_sharedptr<t_char> &character, int base_level)
 {
 	assert (base_level >= 0 && base_level <= 9);
 
+	if (dnd_test)
+		return (ft_auto_cast(character, base_level));
 	ft_string available_slots = ft_check_availeble_spell_slots(character, base_level);
     if (available_slots.getError())
     {

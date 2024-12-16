@@ -64,6 +64,7 @@ void	ft_cast_concentration_save_files(ft_sharedptr<t_char> &info, t_target_data 
 		i++;
 	}
 	ft_npc_write_file(info, &info->stats, &info->c_resistance, file);
+	return ;
 }
 
 static void	ft_revert_changes_info(ft_sharedptr<t_char> &info, ft_file &file)
