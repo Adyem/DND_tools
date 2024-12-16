@@ -5,6 +5,8 @@
 #include <utility>
 #include <new>
 
+constexpr auto* placement_new_ref = static_cast<void* (*)(std::size_t, void*)>(&::operator new);
+
 template <typename Type, typename Arg>
 void construct_at(Type* destination, Arg&& source)
 {
