@@ -5,49 +5,75 @@
 #include "../Errno/errno.hpp"
 #include "../CMA/CMA.hpp"
 #include <cstddef>
+#include <type_traits>
+
+template <typename T>
+void construct_at(T* p, const T& value)
+{
+    if constexpr (!std::is_trivially_constructible_v<T>)
+        new (p) T(value);
+    else
+        *p = value;
+}
+
+template <typename T>
+void construct_default_at(T* p)
+{
+    if constexpr (!std::is_trivially_constructible_v<T>)
+        new (p) T();
+    else
+        *p = T();
+}
+
+template <typename T>
+void destroy_at(T* p)
+{
+	if constexpr (!std::is_trivially_destructible_v<T>)
+        p->~T();
+}
 
 template <typename ElementType>
 class ft_vector
 {
-    private:
-        ElementType	*_data;
-        size_t		_size;
-        size_t		_capacity;
-        bool		_errorCode;
-        bool		_critical;
+private:
+    ElementType	*_data;
+    size_t		_size;
+    size_t		_capacity;
+    bool		_errorCode;
+    bool		_critical;
 
-        void	destroy_elements(size_t from, size_t to);
-        void	setError(int errorCode);
+    void	destroy_elements(size_t from, size_t to);
+    void	setError(int errorCode);
 
-    public:
-        using iterator = ElementType*;
-        using const_iterator = const ElementType*;
+public:
+    using iterator = ElementType*;
+    using const_iterator = const ElementType*;
 
-        ft_vector(size_t initial_capacity = 0, bool criticality = false);
-        ~ft_vector();
-        ft_vector(const ft_vector&) = delete;
-        ft_vector& operator=(const ft_vector&) = delete;
+    ft_vector(size_t initial_capacity = 0, bool criticality = false);
+    ~ft_vector();
+    ft_vector(const ft_vector&) = delete;
+    ft_vector& operator=(const ft_vector&) = delete;
 
-        size_t size() const;
-        size_t capacity() const;
-        int getError() const;
+    size_t size() const;
+    size_t capacity() const;
+    int getError() const;
 
-        void push_back(const ElementType& value);
-        void pop_back();
+    void push_back(const ElementType& value);
+    void pop_back();
 
-        ElementType& operator[](size_t index);
-        const ElementType& operator[](size_t index) const;
+    ElementType& operator[](size_t index);
+    const ElementType& operator[](size_t index) const;
 
-        void clear();
-        void reserve(size_t new_capacity);
-        void resize(size_t new_size, const ElementType& value = ElementType());
+    void clear();
+    void reserve(size_t new_capacity);
+    void resize(size_t new_size, const ElementType& value = ElementType());
 
-        iterator insert(iterator pos, const ElementType& value);
-        iterator erase(iterator pos);
-        iterator begin();
-        const_iterator begin() const;
-        iterator end();
-        const_iterator end() const;
+    iterator insert(iterator pos, const ElementType& value);
+    iterator erase(iterator pos);
+    iterator begin();
+    const_iterator begin() const;
+    iterator end();
+    const_iterator end() const;
 };
 
 template <typename ElementType>
@@ -56,8 +82,8 @@ ft_vector<ElementType>::ft_vector(size_t initial_capacity, bool criticality)
 {
     if (initial_capacity > 0)
     {
-        this->_data = static_cast<ElementType*>(cma_malloc(initial_capacity
-                    * sizeof(ElementType), this->_critical));
+        this->_data = static_cast<ElementType*>(cma_malloc(initial_capacity * sizeof(ElementType),
+					this->_critical));
         if (this->_data == ft_nullptr)
             this->setError(VECTOR_ALLOC_FAIL);
         else
@@ -78,12 +104,8 @@ ft_vector<ElementType>::~ft_vector()
 template <typename ElementType>
 void ft_vector<ElementType>::destroy_elements(size_t from, size_t to)
 {
-    size_t index = from;
-    while (index < to)
-    {
-        this->_data[index].~ElementType();
-        index++;
-    }
+    for (size_t index = from; index < to; index++)
+        destroy_at(&this->_data[index]);
     return;
 }
 
@@ -123,7 +145,7 @@ void ft_vector<ElementType>::push_back(const ElementType& value)
         if (this->_errorCode)
             return;
     }
-    new (&this->_data[this->_size]) ElementType(value);
+    construct_at(&this->_data[this->_size], value);
     this->_size++;
     return;
 }
@@ -133,7 +155,7 @@ void ft_vector<ElementType>::pop_back()
 {
     if (this->_size > 0)
     {
-        this->_data[this->_size - 1].~ElementType();
+        destroy_at(&this->_data[this->_size - 1]);
         this->_size--;
     }
     else
@@ -158,7 +180,7 @@ const ElementType& ft_vector<ElementType>::operator[](size_t index) const
 {
     if (index >= this->_size)
     {
-        this->setError(VECTOR_OUT_OF_BOUNDS);
+        const_cast<ft_vector<ElementType>*>(this)->setError(VECTOR_OUT_OF_BOUNDS);
         static const ElementType defaultInstance = ElementType();
         return (defaultInstance);
     }
@@ -201,12 +223,8 @@ void ft_vector<ElementType>::resize(size_t new_size, const ElementType& value)
         reserve(new_size);
         if (this->_errorCode)
             return;
-        size_t index = this->_size;
-        while (index < new_size)
-        {
-            new (&this->_data[index]) ElementType(value);
-            index++;
-        }
+        for (size_t index = this->_size; index < new_size; index++)
+            construct_at(&this->_data[index], value);
     }
     this->_size = new_size;
     return;
@@ -225,15 +243,16 @@ typename ft_vector<ElementType>::iterator ft_vector<ElementType>::insert(iterato
         reserve(new_capacity);
         if (this->_errorCode)
             return (end());
+        pos = this->_data + index;
     }
-    size_t i = this->_size;
+	size_t i = this->_size;
     while (i > index)
     {
-        new (&this->_data[i]) ElementType(this->_data[i - 1]);
-        this->_data[i - 1].~ElementType();
-        --i;
+        construct_at(&this->_data[i], this->_data[i - 1]);
+        destroy_at(&this->_data[i - 1]);
+		i--;
     }
-    new (&this->_data[index]) ElementType(value);
+    construct_at(&this->_data[index], value);
     this->_size++;
     return (&this->_data[index]);
 }
@@ -247,13 +266,12 @@ typename ft_vector<ElementType>::iterator ft_vector<ElementType>::erase(iterator
         this->setError(VECTOR_INVALID_PTR);
         return (end()); 
     }
-    this->_data[index].~ElementType();
-    size_t i = index;
-    while (i < this->_size - 1)
+    destroy_at(&this->_data[index]);
+    // Shift elements left
+    for (size_t i = index; i < this->_size - 1; i++)
     {
-        new (&this->_data[i]) ElementType(this->_data[i + 1]);
-        this->_data[i + 1].~ElementType();
-        i++;
+        construct_at(&this->_data[i], this->_data[i + 1]);
+        destroy_at(&this->_data[i + 1]);
     }
     --this->_size;
     if (index == this->_size)
