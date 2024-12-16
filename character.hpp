@@ -401,8 +401,23 @@ typedef struct s_divine_smite
 	int		upcast_extra_damage;	
 }	t_divine_smite;
 
+typedef struct s_cure_wounds
+{
+	int		learned;
+	int		base_level;
+	int		casting_at_level;
+	int		duration;
+	int		dice_amount;
+	int		dice_faces;
+	int		extra_healing;
+	int		upcast_extra_dice_face;
+	int		upcast_extra_dice_amount;
+	int		upcast_extra_healing;	
+}	t_cure_wounds;
+
 typedef struct	s_spells
 {
+	t_cure_wounds			cure_wounds;
 	t_divine_smite			divine_smite;
 	t_spell_hunters_mark	hunters_mark;
 }	t_spells;

@@ -338,8 +338,23 @@ static const t_divine_smite INITIALIZE_DIVINE_SMITE =
 	.upcast_extra_damage = 0,
 };
 
+static const t_cure_wounds INITIALIZE_CURE_WOUNDS =
+{
+	.learned = 0,
+	.base_level = 0,
+	.casting_at_level = 0,
+	.duration = 0,
+	.dice_amount = 0,
+	.dice_faces = 0,
+	.extra_healing = 0,
+	.upcast_extra_dice_face = 0,
+	.upcast_extra_dice_amount = 0,
+	.upcast_extra_healing = 0,
+};
+
 static const t_spells INITIALIZE_SPELLS =
 {
+	.cure_wounds = INITIALIZE_CURE_WOUNDS,
 	.divine_smite = INITIALIZE_DIVINE_SMITE,
 	.hunters_mark = INITIALIZE_SPELL_HUNTERS_MARK,
 };
