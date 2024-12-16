@@ -2,14 +2,13 @@
 #define CONSTRUCTOR_HPP
 
 #include <type_traits>
-#include <utility> // For std::forward
-#include <new>     // For placement new
+#include <utility>
 
 template <typename Type, typename Arg>
 void construct_at(Type* destination, Arg&& source)
 {
     if constexpr (!std::is_trivially_constructible_v<Type, Arg&&>)
-        new (destination) Type(std::forward<Arg>(source)); // Correctly recognized as placement new
+        new (destination) Type(std::forward<Arg>(source));
     else
         *destination = std::forward<Arg>(source);
 }
@@ -18,7 +17,7 @@ template <typename Type>
 void construct_default_at(Type* destination)
 {
     if constexpr (!std::is_trivially_constructible_v<Type>)
-        new (destination) Type(); // Correctly recognized as placement new
+        new (destination) Type();
     else
         *destination = Type();
 }
