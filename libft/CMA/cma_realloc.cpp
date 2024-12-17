@@ -12,7 +12,15 @@
 void* cma_realloc(void* ptr, size_t new_size, bool critical)
 {
 	if (DEBUG == 1 || OFFSWITCH == 1)
-		return (realloc(ptr, new_size));
+	{
+		void *new_ptr = realloc(ptr, new_size);
+		if (!new_ptr)
+		{
+			cma_free(ptr);
+			return (ft_nullptr);
+		}
+		return (new_ptr);
+	}
     if (ptr == ft_nullptr)
         return cma_malloc(new_size, critical);
     if (new_size == 0)
