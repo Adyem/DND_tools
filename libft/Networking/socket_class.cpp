@@ -207,6 +207,7 @@ ft_socket::ft_socket(ft_socket &&other) noexcept
 		_connected(std::move(other._connected))
 {
     other._socket_fd = -1;
+	return ;
 }
 
 ft_socket &ft_socket::operator=(ft_socket &&other) noexcept
@@ -220,5 +221,5 @@ ft_socket &ft_socket::operator=(ft_socket &&other) noexcept
         this->_connected = std::move(other._connected);
         other._socket_fd = -1;
     }
-    return *this;
+    return (*this);
 }

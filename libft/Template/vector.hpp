@@ -7,7 +7,6 @@
 #include "constructor.hpp"
 #include <cstddef>
 #include <utility>
-#include <type_traits>
 
 template <typename ElementType>
 class ft_vector
