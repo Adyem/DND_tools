@@ -1,6 +1,8 @@
 #ifndef GRIZZ_HPP
 # define GRIZZ_HPP
 
+#include "armor.hpp"
+#include "identification.hpp"
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -100,7 +102,7 @@ static const	t_equipment GRIZZ_EQUIPMENT =
 	.weapon = STEEL_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WOODEN_BOW,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.armor = LEATHER_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,

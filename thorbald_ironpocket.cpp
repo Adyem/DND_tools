@@ -12,8 +12,8 @@ void ft_thorbald_ironpocket_turn(ft_sharedptr<t_char> &info)
         info->flags.prone = 0;
     }
     else
-        pf_printf("Gundren Rockseeker will try to make either a ranged or melee " \
-				"attack during his turn\n");
+        pf_printf("%s will try to make either a ranged or melee " \
+				"attack during his turn\n", info->name);
     pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
     return ;
 }
