@@ -144,7 +144,8 @@ int ft_socket::bind_socket(const SocketConfig &config)
         this->_socket_fd = -1;
         return (this->_error);
     }
-    if (nw_bind(this->_socket_fd, reinterpret_cast<const struct sockaddr*>(&this->_address), addr_len) < 0)
+    if (nw_bind(this->_socket_fd, reinterpret_cast<const struct sockaddr*>(&this->_address),
+				addr_len) < 0)
     {
         handle_error(errno + ERRNO_OFFSET);
         close(this->_socket_fd);

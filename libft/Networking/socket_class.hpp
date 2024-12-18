@@ -30,13 +30,14 @@ class ft_socket
     	ft_socket &operator=(const ft_socket &other) = delete;
 
 	public:
-    	ft_socket(const SocketConfig &config);
-		ft_socket();
+		ft_socket(const SocketConfig &config);
+    	ft_socket();
     	~ft_socket();
 
 		ft_socket(ft_socket &&other) noexcept;
 		ft_socket &operator=(ft_socket &&other) noexcept;
 
+		int			initialize(const SocketConfig &config);
     	int 		send_data(const void *data, size_t size, int flags = 0);
     	int 		receive_data(void *buffer, size_t size, int flags = 0);
     	bool		close_socket();

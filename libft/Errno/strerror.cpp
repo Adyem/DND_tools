@@ -74,6 +74,8 @@ const char* ft_strerror(int error_code)
 		return ("Socket invalid configuration");
 	else if (error_code == SOCKET_UNSUPPORTED_TYPE)
 		return ("Socket unsupported type");
+	else if (error_code == SOCKET_ALRDY_INITIALIZED)
+		return ("Socket cannot be initialized again");
 	else if (error_code > ERRNO_OFFSET)
 	{
         int standard_errno = error_code - ERRNO_OFFSET;

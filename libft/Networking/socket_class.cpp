@@ -1,4 +1,5 @@
 #include "socket_class.hpp"
+#include "../Libft/libft.hpp"
 #include "../Errno/errno.hpp"
 #include <cstring>
 #include <cerrno>
@@ -10,7 +11,7 @@
 
 ft_socket::ft_socket() : _socket_fd(-1), _error(ER_SUCCESS)
 {
-    std::memset(&_address, 0, sizeof(_address));
+	ft_bzero(&this->_address, sizeof(this->_address));
 }
 
 int ft_socket::send_data(const void *data, size_t size, int flags, int fd)
@@ -203,8 +204,8 @@ const char* ft_socket::get_error_message() const
 }
 
 ft_socket::ft_socket(ft_socket &&other) noexcept
-    : _address(other._address), _socket_fd(other._socket_fd), _error(other._error),
-		_connected(std::move(other._connected))
+    : _address(other._address), _connected(std::move(other._connected)),
+	_socket_fd(other._socket_fd), _error(other._error)
 {
     other._socket_fd = -1;
 	return ;
@@ -222,4 +223,24 @@ ft_socket &ft_socket::operator=(ft_socket &&other) noexcept
         other._socket_fd = -1;
     }
     return (*this);
+}
+
+int ft_socket::initialize(const SocketConfig &config)
+{
+	if (this->_socket_fd != -1)
+	{
+		this->_error = SOCKET_ALRDY_INITIALIZED;
+		ft_errno = SOCKET_ALRDY_INITIALIZED;
+		return (1);
+	}
+    if (config.type == SocketType::SERVER)
+        setup_server(config);
+    else if (config.type == SocketType::CLIENT)
+        setup_client(config);
+    else
+    {
+        ft_errno = SOCKET_UNSUPPORTED_TYPE;
+        this->_error = ft_errno;
+    }
+	return (0);
 }
