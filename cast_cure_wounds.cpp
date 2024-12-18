@@ -45,4 +45,3 @@ void ft_cast_cure_wounds(ft_sharedptr<t_char> &character)
     ft_remove_spell_slot(&character->spell_slots, cast_at_level);
 	return ;
 }
-
