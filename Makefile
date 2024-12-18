@@ -135,6 +135,7 @@ SRC         = name.cpp \
               crackback.cpp \
               frank.cpp \
 			  cast_divine_smite.cpp \
+			  cast_cure_wounds.cpp \
 			  spell_utils.cpp
 
 CC          = g++

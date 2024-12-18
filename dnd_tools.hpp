@@ -136,7 +136,8 @@ void		ft_turn_next(t_name *name);
 void		ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand);
 
 //buff update
-void		ft_npc_update_buff(ft_sharedptr<t_char> &info, const char **input, int *buff, const char *name);
+void		ft_npc_update_buff(ft_sharedptr<t_char> &info, const char **input, int *buff,
+				const char *name);
 void		ft_update_buff_status(ft_sharedptr<t_char> &info, int current_dur, int duration,
 				const char *buff_name);
 
@@ -154,10 +155,12 @@ void		ft_to_hit_check_buff(ft_sharedptr<t_char> &info);
 
 //cast spell
 void		ft_cast_divine_smite(ft_sharedptr<t_char> &character);
+void		ft_cast_cure_wounds(ft_sharedptr<t_char> &character);
 
 //spells utils
 int			ft_prompt_spell_level(ft_sharedptr<t_char> &character, int base_level);
 int			ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage);
+int			ft_calculate_spell_healing(int total_dice, int dice_faces, int extra_damage);
 void		ft_remove_spell_slot(t_spell_slots *spell_slots, int level_spell_used);
 
 //calculate stats

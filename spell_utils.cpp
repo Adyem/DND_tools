@@ -115,6 +115,14 @@ static int ft_perform_dice_roll(int total_dice, int dice_faces)
     return (result);
 }
 
+int ft_calculate_spell_healing(int total_dice, int dice_faces, int extra_damage)
+{
+    int dice_roll_result = ft_perform_dice_roll(total_dice, dice_faces);
+    if (dice_roll_result == -1)
+        return (-1);
+    return (dice_roll_result + extra_damage);
+}
+
 int ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage)
 {
     int dice_roll_result = ft_perform_dice_roll(total_dice, dice_faces);

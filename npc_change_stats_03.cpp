@@ -83,6 +83,8 @@ void ft_npc_set_stat(ft_sharedptr<t_char> &info, const char **input)
     {
 		if (ft_strcmp_dnd(input[2], "chaos_armor") == 0)
             ft_cast_chaos_armor(info);
+		else if (ft_strcmp_dnd(input[2], "cure_wounds") == 0)
+			ft_cast_cure_wounds(info);
 		else
             pf_printf("7-%s invalid command\n", info->name);
     }
