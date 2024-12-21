@@ -2,12 +2,12 @@
 #include "../Errno/errno.hpp"
 #include "../CMA/CMA.hpp"
 
-unsigned long ft_unordened_map::hash_str(const char *str)
+unsigned long ft_unordened_map::hash_str(const char *string)
 {
     unsigned long hash = 5381;
-    int c;
-    while ((c = (unsigned char)*str++))
-        hash = ((hash << 5) + hash) + c;
+    int count;
+    while ((count = (unsigned char)*string++))
+        hash = ((hash << 5) + hash) + count;
     return (hash);
 }
 
@@ -34,7 +34,7 @@ ft_unordened_map::~ft_unordened_map()
 	return ;
 }
 
-bool ft_unordened_map::insert(const char *key, const char *value, bool key_value_critical)
+bool ft_unordened_map::insert(const char *key, const char *value)
 {
     if (!this->_buckets || !key || !value)
 	{
@@ -44,14 +44,14 @@ bool ft_unordened_map::insert(const char *key, const char *value, bool key_value
     }
     ft_errno = ER_SUCCESS;
     this->_error = ER_SUCCESS;
-    unsigned long h = hash_str(key);
-    size_t index = h % this->_capacity;
+    unsigned long hash_value = hash_str(key);
+    size_t index = hash_value % this->_capacity;
     ft_map_node *node = this->_buckets[index];
     while (node)
 	{
         if (strcmp(node->_key, key) == 0)
 		{
-            char *new_value = cma_strdup(value, key_value_critical);
+            char *new_value = cma_strdup(value, this->_critical);
             if (!new_value)
 			{
                 ft_errno = UNORD_MAP_MEMORY;
@@ -71,7 +71,7 @@ bool ft_unordened_map::insert(const char *key, const char *value, bool key_value
         this->_error = UNORD_MAP_MEMORY;
         return (false);
     }
-    new_node->_key = cma_strdup(key, key_value_critical);
+    new_node->_key = cma_strdup(key, this->_critical);
     if (!new_node->_key)
 	{
         ft_errno = UNORD_MAP_MEMORY;
@@ -79,7 +79,7 @@ bool ft_unordened_map::insert(const char *key, const char *value, bool key_value
         cma_free(new_node);
         return (false);
     }
-    new_node->_value = cma_strdup(value, key_value_critical);
+    new_node->_value = cma_strdup(value, this->_critical);
     if (!new_node->_value)
 	{
         ft_errno = UNORD_MAP_MEMORY;
@@ -104,8 +104,8 @@ char* ft_unordened_map::find(const char *key)
     }
     ft_errno = ER_SUCCESS;
     this->_error = ER_SUCCESS;
-    unsigned long h = hash_str(key);
-    size_t index = h % this->_capacity;
+    unsigned long hash_value = hash_str(key);
+    size_t index = hash_value % this->_capacity;
     ft_map_node *node = this->_buckets[index];
     while (node)
 	{
@@ -128,8 +128,8 @@ bool ft_unordened_map::remove(const char *key)
     }
     ft_errno = ER_SUCCESS;
     _error = ER_SUCCESS;
-    unsigned long h = hash_str(key);
-    size_t index = h % this->_capacity;
+    unsigned long hash_value = hash_str(key);
+    size_t index = hash_value % this->_capacity;
     ft_map_node *prev = nullptr;
     ft_map_node *node = this->_buckets[index];
     while (node)
@@ -157,9 +157,10 @@ bool ft_unordened_map::remove(const char *key)
 void ft_unordened_map::clear()
 {
     if (!this->_buckets) return;
-    for (size_t i = 0; i < this->_capacity; i++)
+    size_t index = 0;
+	while (index < this->_capacity)
 	{
-        ft_map_node *node = this->_buckets[i];
+        ft_map_node *node = this->_buckets[index];
         while (node)
 		{
             ft_map_node *tmp = node->_next;
@@ -168,7 +169,8 @@ void ft_unordened_map::clear()
             cma_free(node);
             node = tmp;
         }
-        this->_buckets[i] = nullptr;
+        this->_buckets[index] = nullptr;
+		index++;
     }
     this->_size = 0;
     ft_errno = ER_SUCCESS;

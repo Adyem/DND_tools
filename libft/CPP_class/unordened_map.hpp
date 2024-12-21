@@ -10,24 +10,23 @@ class ft_unordened_map
 	private:
     	struct ft_map_node
 		{
-    	    char *_key;
-    	    char *_value;
+    	    char 		*_key;
+    	    char 		*_value;
     	    ft_map_node *_next;
     	};
-    	ft_map_node **_buckets;
-    	size_t _capacity;
-    	size_t _size;
-    	bool _critical;
+    	ft_map_node		**_buckets;
+    	size_t 			_capacity;
+    	size_t 			_size;
+    	bool 			_critical;
+		int 			_error;
 
-    	static unsigned long hash_str(const char *str);
-
-   		int _error;
+    	static unsigned long hash_str(const char *string);
 
 	public:
-    	ft_unordened_map(size_t initial_capacity, bool is_critical = true);
+    	ft_unordened_map(size_t initial_capacity, bool criticality = false);
     	~ft_unordened_map();
 
-    	bool insert(const char *key, const char *value, bool key_value_critical = false);
+    	bool insert(const char *key, const char *value);
     	char* find(const char *key);
     	bool remove(const char *key);
     	void clear();
