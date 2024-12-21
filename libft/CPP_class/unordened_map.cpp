@@ -1,6 +1,7 @@
 #include "unordened_map.hpp"
 #include "nullptr.hpp"
 #include "../Errno/errno.hpp"
+#include "../Printf/printf.hpp"
 #include "../CMA/CMA.hpp"
 
 unsigned long ft_unordened_map::hash_str(const char *string)
@@ -110,7 +111,11 @@ char* ft_unordened_map::find(const char *key, int num_bytes)
         while (node)
         {
             if (strncmp(node->_key, key, num_bytes) == 0)
-                return (node->_value);
+			{
+				if (DEBUG == 1)
+					pf_printf("found the value %s %s\n", node->_value, key);
+				return (node->_value);
+			}
             node = node->_next;
         }
         index++;

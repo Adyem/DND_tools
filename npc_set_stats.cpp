@@ -18,7 +18,7 @@ static int ft_set_stat_int(char *content, const char *key, int *field, int unset
 	if (DEBUG == 1)
 		pf_printf("checcking %s %s\n", key, content);
 	index = ft_strlen(key);
-    if (g_map->find(content, index) != ft_nullptr && (unset_value == -1 || *field == unset_value))
+    if (ft_strncmp(content, key, index) == 0 && (unset_value == -1 || *field == unset_value))
     {
         *field = ft_check_stat(info, content, index);
         return (1);
