@@ -1,77 +1,5 @@
-#include <cstdio>
-#include <cstring>
-#include <cerrno>
-
-/* Provided CMA functions (externally defined in C): 
-extern "C" {
-    void   *cma_malloc(int size, bool critical);
-    void    cma_free(void* ptr);
-    void    cma_cleanup_non_critical_memory();
-    void    cma_cleanup_all_memory();
-    bool    cma_add_page(bool critical);
-    char   *cma_strdup(const char *string, bool criticality);
-    void   *cma_calloc(int count, int size, bool criticality);
-    void   *cma_realloc(void* ptr, size_t new_size, bool critical);
-    char  **cma_split(char const *s, char c, bool critical);
-    char   *cma_itoa(int n, bool critical);
-    char   *cma_strjoin(char const *string_1, char const *string_2, bool critical);
-    void    cma_free_double(char **content);
-}
-
-static int ft_errno = 0;
-#define ERRNO_OFFSET 1000
-
-enum {
-    FT_ERR_NONE = 0,
-    FT_ERR_MEMORY = 1,
-    FT_ERR_NOT_FOUND = 2,
-    FT_ERR_UNKNOWN = 3
-};
-
-const char *ft_strerror(int errnum)
-{
-    switch (errnum) {
-        case FT_ERR_NONE:      return "No error";
-        case FT_ERR_MEMORY:    return "Memory allocation failed";
-        case FT_ERR_NOT_FOUND: return "Key not found";
-        case FT_ERR_UNKNOWN:   return "Unknown error";
-        default:               return "Undefined error code";
-    }
-}*/
-
-class ft_unordened_map {
-	private:
-    	struct ft_map_node {
-    	    char *key;
-    	    char *value;
-    	    ft_map_node *next;
-    	};
-
-    	ft_map_node **buckets;
-    	size_t capacity;
-    	size_t size;
-    	bool critical;
-
-    	static unsigned long hash_str(const char *str);
-
-   		int _error;
-
-	public:
-    	ft_unordened_map(size_t initial_capacity, bool is_critical = true);
-    	~ft_unordened_map();
-
-    	bool insert(const char *key, const char *value, bool key_value_critical = false);
-    	char* find(const char *key);
-    	bool remove(const char *key);
-    	void clear();
-
-    	size_t get_size() const;
-    	size_t get_capacity() const;
-    	bool is_critical() const;
-
-    	int get_error() const;
-    	const char* get_error_message() const;
-};
+#include "unordened_map.hpp"
+#include "../Errno/errno.hpp"
 
 unsigned long ft_unordened_map::hash_str(const char *str) {
     unsigned long hash = 5381;
@@ -83,8 +11,8 @@ unsigned long ft_unordened_map::hash_str(const char *str) {
 
 ft_unordened_map::ft_unordened_map(size_t initial_capacity, bool is_critical) 
     : buckets(nullptr), capacity(initial_capacity), size(0), critical(is_critical),
-		_error(FT_ERR_NONE) {
-    ft_errno = FT_ERR_NONE;
+		_error(ER_SUCCESS) {
+    ft_errno = ER_SUCCESS;
     buckets = (ft_map_node**)cma_calloc((int)initial_capacity, sizeof(ft_map_node*), critical);
     if (!buckets) {
         ft_errno = FT_ERR_MEMORY;

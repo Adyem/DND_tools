@@ -76,6 +76,12 @@ const char* ft_strerror(int error_code)
 		return ("Socket unsupported type");
 	else if (error_code == SOCKET_ALRDY_INITIALIZED)
 		return ("Socket cannot be initialized again");
+	else if (error_code == UNORD_MAP_MEMORY)
+		return ("Unordened map Memory allocation failed");
+	else if (error_code == UNORD_MAP_NOT_FOUND)
+		return ("Unordened map Key not found");
+	else if (error_code == UNORD_MAP_UNKNOWN)
+		return ("Unordened map Unknown error");
 	else if (error_code > ERRNO_OFFSET)
 	{
         int standard_errno = error_code - ERRNO_OFFSET;
