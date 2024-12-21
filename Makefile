@@ -136,7 +136,8 @@ SRC         = name.cpp \
               frank.cpp \
 			  cast_divine_smite.cpp \
 			  cast_cure_wounds.cpp \
-			  spell_utils.cpp
+			  spell_utils.cpp \
+			  initialize_keys.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations

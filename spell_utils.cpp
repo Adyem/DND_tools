@@ -60,7 +60,7 @@ int ft_prompt_spell_level(ft_sharedptr<t_char> &character, int base_level)
 {
 	assert (base_level >= 0 && base_level <= 9);
 
-	if (dnd_test)
+	if (g_dnd_test)
 		return (ft_auto_cast(character, base_level));
 	ft_string available_slots = ft_check_availeble_spell_slots(character, base_level);
     if (available_slots.getError())

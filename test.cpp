@@ -3,7 +3,7 @@
 
 void	ft_test(t_name *name)
 {
-	dnd_test = true;
+	g_dnd_test = true;
 	ft_excecute_test("fclean", name);
 	ft_excecute_test("veraak", "init", name);
 	ft_excecute_test("veraak", "attack", name);
@@ -20,6 +20,6 @@ void	ft_test(t_name *name)
 	ft_excecute_test("add", "player", "Adyem", name);
 	ft_excecute_test("add", "player", "Stormking", name);
 	ft_excecute_test("initiative", name);
-	dnd_test = false;
+	g_dnd_test = false;
 	return ;
 }

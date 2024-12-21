@@ -94,6 +94,39 @@ bool ft_unordened_map::insert(const char *key, const char *value)
     return (true);
 }
 
+char* ft_unordened_map::find(const char *key, int num_bytes)
+{
+    if (!this->_buckets || !key || num_bytes <= 0)
+    {
+        ft_errno = UNORD_MAP_UNKNOWN;
+        this->_error = UNORD_MAP_UNKNOWN;
+		return (nullptr);
+    }
+	size_t index = 0;
+	while (index < this->_capacity)
+    {
+        ft_map_node *node = this->_buckets[index];
+        while (node)
+        {
+            size_t key_len = strlen(node->_key);
+            size_t search_key_len = strlen(key);
+            if (key_len < static_cast<size_t>(num_bytes) || search_key_len
+					< static_cast<size_t>(num_bytes))
+            {
+                node = node->_next;
+                continue ;
+            }
+            if (strncmp(node->_key, key, num_bytes) == 0)
+                return (node->_value);
+            node = node->_next;
+        }
+		index++;
+    }
+    ft_errno = UNORD_MAP_NOT_FOUND;
+    this->_error = UNORD_MAP_NOT_FOUND;
+    return (nullptr);
+}
+
 char* ft_unordened_map::find(const char *key)
 {
     if (!this->_buckets || !key)

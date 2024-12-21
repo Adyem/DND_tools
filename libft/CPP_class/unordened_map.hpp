@@ -28,6 +28,7 @@ class ft_unordened_map
 
     	bool insert(const char *key, const char *value);
     	char* find(const char *key);
+		char* find(const char *key, int num_bytes);
     	bool remove(const char *key);
     	void clear();
 

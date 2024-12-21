@@ -16,7 +16,7 @@ static int ft_set_stat_int(char *content_i, const char *key, int *field, int uns
 	int	index;
 
 	index = ft_strlen(key);
-    if (ft_strncmp(content_i, key, index) == 0 && (unset_value == -1 || *field == unset_value))
+    if (g_map.find(content_i, index) == 0 && (unset_value == -1 || *field == unset_value))
     {
         *field = ft_check_stat(info, content_i, index);
         return (1);

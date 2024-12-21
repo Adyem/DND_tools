@@ -6,7 +6,7 @@
 #include <ctime>
 #include <cstdlib>
 
-bool dnd_test = 0;
+bool g_dnd_test = 0;
 
 int main(int argc, char **argv)
 {
@@ -16,7 +16,6 @@ int main(int argc, char **argv)
 	ft_errno = 0;
     if (DEBUG == 1)
         pf_printf("Size of t_char struct is %zu\n", sizeof(t_char));
-    
     if (argc > 1)
     {
         pf_printf_fd(2, "005-Error: expecting no arguments\n");
@@ -30,6 +29,8 @@ int main(int argc, char **argv)
     }
 	if (ft_create_data_dir())
 		return (1);
+	if (ft_initialize_global_map())
+		return (2);
 	ft_initialize_suggestions_readline();
     name = ft_allocate_memory_name();
     ft_request_input(name);

@@ -1,11 +1,11 @@
 #ifndef DND_TOOLS_H
 # define DND_TOOLS_H
 
-class ft_file;
-
 #include <cstdio>
 #include "character.hpp"
 #include "player_character.hpp"
+#include "libft/CPP_class/file.hpp"
+#include "libft/CPP_class/unordened_map.hpp"
 
 # ifndef DEBUG
 #  define DEBUG 0
@@ -16,7 +16,8 @@ class ft_file;
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
 
-extern bool dnd_test;
+extern ft_unordened_map g_map;
+extern bool g_dnd_test;
 
 //NPC
 void		ft_npc_change_stats(ft_sharedptr<t_char> &info, int index, const char **input);
@@ -26,7 +27,7 @@ void		ft_npc_init_stats(ft_sharedptr<t_char> &info);
 
 //Template
 ft_sharedptr<t_char> ft_template(const int index, const char **input, t_name *name,
-									int exception);
+				int exception);
 void		ft_template_turn(ft_sharedptr<t_char> &info);
 
 //Ghost
@@ -78,12 +79,12 @@ void		ft_goblin_turn(ft_sharedptr<t_char> &info);
 
 //Chaos Goblin
 ft_sharedptr<t_char> ft_chaos_crystal(const int index, const char **input, t_name *name,
-										int exception);
+				int exception);
 void		ft_chaos_crystal_turn(ft_sharedptr<t_char> &info);
 
 //Chaos Crystal
 ft_sharedptr<t_char> ft_chaos_goblin(const int index, const char **input, t_name *name,
-										int exception);
+				int exception);
 void		ft_chaos_goblin_turn(ft_sharedptr<t_char> &info);
 
 //Grizz
@@ -99,9 +100,9 @@ void		ft_veraak_turn(ft_sharedptr<t_char> &info);
 ft_sharedptr<t_char> ft_maverick(const int index, const char **input, t_name *name, int exception);
 void		ft_maverick_turn(ft_sharedptr<t_char> &info);
 void		ft_maverick_print_s(int first, int second, ft_sharedptr<t_char> &info,
-									char **player_list);
+				char **player_list);
 void		ft_maverick_print_f(int first, int second, ft_sharedptr<t_char> &info,
-									char **player_list);
+				char **player_list);
 
 //Commands
 void		ft_request_input(t_name *name);
@@ -223,8 +224,8 @@ int			ft_calculate_slashing_dr(ft_sharedptr<t_char> &info);
 int			ft_calculate_thunder_dr(ft_sharedptr<t_char> &info);
 
 //damage
-void		ft_deal_damage(ft_sharedptr<t_char> &info, const char *input, const char *d_type, int resistance,
-				int concentration);
+void		ft_deal_damage(ft_sharedptr<t_char> &info, const char *input, const char *d_type,
+				int resistance, int concentration);
 int			ft_request_damage(ft_sharedptr<t_char> &info);
 
 //skill roll buffs
@@ -290,7 +291,8 @@ int			ft_strcmp_dnd(const char *string1, const char *string2);
 int			ft_initialize_info(ft_sharedptr<t_char> &info, char **content);
 int			ft_check_value(const char *input);
 void		ft_print_character_status(ft_sharedptr<t_char> &info, int number, int temp);
-void		ft_skill_throw(ft_sharedptr<t_char> &info, const char *skill, int ability_mod, int save_mod);
+void		ft_skill_throw(ft_sharedptr<t_char> &info, const char *skill, int ability_mod,
+				int save_mod);
 int			ft_set_stats(ft_sharedptr<t_char> &info, char **content);
 int			ft_check_stat(ft_sharedptr<t_char> &info, const char *stat, const int index);
 char		**ft_set_stats_con_targets(char *content, int ofset, char **data,
@@ -313,6 +315,7 @@ int			ft_check_write_permissions(const char *filepath);
 ft_sharedptr<t_char> ft_validate_and_fetch_target(char *target_name, ft_sharedptr<t_char> &info,
 													int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
+int			ft_initialize_global_map();
 
 //check name
 int			ft_set_stats_check_name(const char *name);
