@@ -7,31 +7,31 @@
 
 constexpr auto* placement_new_ref = static_cast<void* (*)(std::size_t, void*)>(&::operator new);
 
-template <typename Type, typename Arg>
-void construct_at(Type* destination, Arg&& source)
+template <typename T, typename... Args>
+T* construct_at(T* destination, Args&&... args)
 {
-	if constexpr (!std::is_trivially_constructible_v<Type, Arg&&>)
-        ::new (destination) Type(std::forward<Arg>(source));
-	else
-        *destination = std::forward<Arg>(source);
-	return ;
+    if constexpr (std::is_trivially_constructible_v<T, Args...>)
+        *destination = T(std::forward<Args>(args)...);
+    else
+        ::new (static_cast<void*>(destination)) T(std::forward<Args>(args)...);
+    return (destination);
 }
 
-template <typename Type>
-void construct_default_at(Type* destination)
+template <typename T>
+T* construct_default_at(T* destination)
 {
-	if constexpr (!std::is_trivially_constructible_v<Type>)
-        ::new (destination) Type();
-	else
-        *destination = Type();
-	return ;
+    if constexpr (std::is_trivially_default_constructible_v<T>)
+        *destination = T();
+    else
+        ::new (static_cast<void*>(destination)) T();
+    return (destination);
 }
 
-template <typename Type>
-void destroy_at(Type* object)
+template <typename T>
+void destroy_at(T* object)
 {
-	if constexpr (!std::is_trivially_destructible_v<Type>)
-        object->~Type();
+	if constexpr (!std::is_trivially_destructible_v<T>)
+        object->~T();
 	return ;
 }
 

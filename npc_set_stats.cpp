@@ -10,15 +10,17 @@ typedef struct s_key_value_pair
     int *value;
 } t_key_value_pair;
 
-static int ft_set_stat_int(char *content_i, const char *key, int *field, int unset_value,
+static int ft_set_stat_int(char *content, const char *key, int *field, int unset_value,
 		ft_sharedptr<t_char> &info)
 {
 	int	index;
 
+	if (DEBUG == 1)
+		pf_printf("checcking %s %s\n", key, content);
 	index = ft_strlen(key);
-    if (g_map.find(content_i, index) == 0 && (unset_value == -1 || *field == unset_value))
+    if (g_map->find(content, index) != ft_nullptr && (unset_value == -1 || *field == unset_value))
     {
-        *field = ft_check_stat(info, content_i, index);
+        *field = ft_check_stat(info, content, index);
         return (1);
     }
     return (0);

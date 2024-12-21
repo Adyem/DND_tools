@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include "character.hpp"
+#include "libft/Template/shared_ptr.hpp"
 #include "player_character.hpp"
 #include "libft/CPP_class/file.hpp"
 #include "libft/CPP_class/unordened_map.hpp"
@@ -16,7 +17,7 @@
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
 
-extern ft_unordened_map g_map;
+extern ft_sharedptr<ft_unordened_map> g_map;
 extern bool g_dnd_test;
 
 //NPC

@@ -1,6 +1,7 @@
 #include "identification.hpp"
 #include "libft/CPP_class/unordened_map.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/Template/shared_ptr.hpp"
 #include "dnd_tools.hpp"
 
 static const char* keys[] =
@@ -121,33 +122,31 @@ static const char* keys[] =
 };
 
 constexpr std::size_t keys_size = sizeof(keys) / sizeof(keys[0]);
-ft_unordened_map g_map(keys_size, true);
+ft_sharedptr<ft_unordened_map> g_map(true, keys_size, true);
 
 int ft_initialize_global_map()
 {
-	if (g_map.get_error())
-	{
-		pf_printf_fd(2, "144-Error: %s\n", g_map.get_error_message());
-        return (-1);
+    if (g_map->get_error())
+    {
+        pf_printf_fd(2, "144-Error: %s\n", g_map->get_error_message());
+        g_map->~ft_unordened_map();
+        return -1;
     }
-    const size_t initial_capacity = 256;
-    g_map = ft_unordened_map(initial_capacity, true);
-    if (g_map.get_error())
-	{
-		pf_printf_fd(2, "144-Error: %s\n", g_map.get_error_message());
-        return (-1);
+    if (g_map->get_error())
+    {
+        pf_printf_fd(2, "144-Error: %s\n", g_map->get_error_message());
+        return -1;
     }
     const size_t num_keys = sizeof(keys) / sizeof(keys[0]);
-	size_t index = 0;
-    while (index < num_keys)
-	{
-        bool success = g_map.insert(keys[index], "");
+    for (size_t index = 0; index < num_keys; ++index)
+    {
+        bool success = g_map->insert(keys[index], "");
         if (!success)
-		{
-			pf_printf_fd(2, "145-Error failed to insert key: %s\n", g_map.get_error_message());
-			return (-1);
-		}
-		index++;
+        {
+            pf_printf_fd(2, "145-Error failed to insert key: %s\n", g_map->get_error_message());
+            return -1;
+        }
     }
-    return (0);
+    return 0;
 }
+

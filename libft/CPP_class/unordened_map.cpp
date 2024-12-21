@@ -1,4 +1,5 @@
 #include "unordened_map.hpp"
+#include "nullptr.hpp"
 #include "../Errno/errno.hpp"
 #include "../CMA/CMA.hpp"
 
@@ -100,31 +101,23 @@ char* ft_unordened_map::find(const char *key, int num_bytes)
     {
         ft_errno = UNORD_MAP_UNKNOWN;
         this->_error = UNORD_MAP_UNKNOWN;
-		return (nullptr);
+        return (ft_nullptr);
     }
-	size_t index = 0;
-	while (index < this->_capacity)
+    size_t index = 0;
+    while (index < this->_capacity)
     {
         ft_map_node *node = this->_buckets[index];
         while (node)
         {
-            size_t key_len = strlen(node->_key);
-            size_t search_key_len = strlen(key);
-            if (key_len < static_cast<size_t>(num_bytes) || search_key_len
-					< static_cast<size_t>(num_bytes))
-            {
-                node = node->_next;
-                continue ;
-            }
             if (strncmp(node->_key, key, num_bytes) == 0)
                 return (node->_value);
             node = node->_next;
         }
-		index++;
+        index++;
     }
     ft_errno = UNORD_MAP_NOT_FOUND;
     this->_error = UNORD_MAP_NOT_FOUND;
-    return (nullptr);
+    return (ft_nullptr);
 }
 
 char* ft_unordened_map::find(const char *key)
@@ -133,7 +126,7 @@ char* ft_unordened_map::find(const char *key)
 	{
         ft_errno = UNORD_MAP_UNKNOWN;
         _error = UNORD_MAP_UNKNOWN;
-		return (nullptr);
+		return (ft_nullptr);
     }
     ft_errno = ER_SUCCESS;
     this->_error = ER_SUCCESS;
@@ -148,7 +141,7 @@ char* ft_unordened_map::find(const char *key)
     }
     ft_errno = UNORD_MAP_UNKNOWN;
     this->_error = UNORD_MAP_UNKNOWN;
-    return (nullptr);
+    return (ft_nullptr);
 }
 
 bool ft_unordened_map::remove(const char *key)

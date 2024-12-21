@@ -4,7 +4,9 @@
 #include "../Errno/errno.hpp"
 #include "../CMA/CMA.hpp"
 #include "../CPP_class/nullptr.hpp"
+#include "constructor.hpp"
 #include <cstddef>
+#include <utility>
 #include <type_traits>
 
 template <typename ManagedType>
@@ -20,6 +22,9 @@ class ft_sharedptr
 	    void release();
 
 	public:
+		template <typename... Args>
+    	ft_sharedptr(bool critical, Args&&... args);
+
 	    ft_sharedptr();
 	    ft_sharedptr(size_t size, bool critical = false);
 	    ft_sharedptr(const ft_sharedptr<ManagedType>& other);
@@ -50,9 +55,37 @@ class ft_sharedptr
 };
 
 template <typename ManagedType>
+template <typename... Args>
+ft_sharedptr<ManagedType>::ft_sharedptr(bool critical, Args&&... args)
+    : managedPointer(nullptr),
+      referenceCount(static_cast<int*>(cma_malloc(sizeof(int), critical))),
+      arraySize(0),
+      isArrayType(false),
+      isCritical(critical),
+      errorCode(ER_SUCCESS)
+{
+    if (!referenceCount)
+    {
+        set_error(SHARED_PTR_ALLOCATION_FAILED);
+        return;
+    }
+    *referenceCount = 1;
+    managedPointer = static_cast<ManagedType*>(cma_malloc(sizeof(ManagedType), critical));
+    if (!managedPointer)
+    {
+        set_error(SHARED_PTR_ALLOCATION_FAILED);
+        cma_free(referenceCount);
+        referenceCount = ft_nullptr;
+        return;
+    }
+    construct_at(managedPointer, std::forward<Args>(args)...);
+	return ;
+}
+
+template <typename ManagedType>
 ft_sharedptr<ManagedType>::ft_sharedptr()
-    : managedPointer(ft_nullptr),
-      referenceCount(ft_nullptr),
+    : managedPointer(nullptr),
+      referenceCount(nullptr),
       arraySize(0),
       isArrayType(false),
       isCritical(false),
