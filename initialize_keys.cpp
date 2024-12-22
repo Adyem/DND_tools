@@ -149,4 +149,3 @@ int ft_initialize_global_map()
     }
     return 0;
 }
-
