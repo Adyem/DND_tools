@@ -76,7 +76,6 @@ static int ft_handle_string_fields(char *line, ft_sharedptr<t_char> &info)
 
 int ft_set_stats(ft_sharedptr<t_char> &info, char **content)
 {
-
     t_key_value_triplet arr[] =
     {
         {HEALTH_KEY, &info->stats.health, -1},
