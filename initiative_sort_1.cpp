@@ -53,7 +53,6 @@ t_pc *ft_initiative_players_am(char **content)
 {
     t_pc *players;
     t_pc *temp;
-    int i;
 
     players = (t_pc *)cma_malloc(sizeof(t_pc), false);
     if (!players)
@@ -66,8 +65,8 @@ t_pc *ft_initiative_players_am(char **content)
     if (ft_initiative_copy_v(players, players, content[0]))
         return (ft_nullptr);
     temp = players;
-    i = 1;
-    while (content[i])
+    int index = 1;
+    while (content[index])
     {
         temp->next = (t_pc *)cma_malloc(sizeof(t_pc), false);
         if (!temp->next)
@@ -77,10 +76,10 @@ t_pc *ft_initiative_players_am(char **content)
             return (ft_nullptr);
         }
         ft_initiative_players_init(temp->next);
-        if (ft_initiative_copy_v(players, temp->next, content[i]))
+        if (ft_initiative_copy_v(players, temp->next, content[index]))
             return (ft_nullptr);
         temp = temp->next;
-        i++;
+        index++;
     }
     return (players);
 }

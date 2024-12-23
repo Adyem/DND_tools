@@ -2,12 +2,12 @@
 
 int ft_strlen(const char *string)
 {
-	int	i;
+	int	index;
 
 	if (!string)
 		return (0);
-	i = 0;
-	while (string[i])
-		i++;
-	return (i);
+	index = 0;
+	while (string[index])
+		index++;
+	return (index);
 }

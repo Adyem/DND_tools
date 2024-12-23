@@ -3,19 +3,19 @@
 
 void	*ft_memchr(const void *pointer, int number, size_t size)
 {
-	size_t			i;
+	size_t			index;
 	unsigned char	*string;
 	unsigned char	character;
 
 	string = (unsigned char *)pointer;
 	character = (unsigned char)number;
-	i = 0;
-	while (i < size)
+	index = 0;
+	while (index < size)
 	{
 		if (*string == character)
 			return (string);
 		string++;
-		i++;
+		index++;
 	}
 	return (ft_nullptr);
 }

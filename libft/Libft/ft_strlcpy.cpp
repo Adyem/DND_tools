@@ -1,24 +1,23 @@
 #include "libft.hpp"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *destination, const char *source, size_t bufferSize)
 {
-	size_t	i;
+	size_t	sourceLength = 0;
 
-	i = 0;
-	if (size == 0)
+	if (bufferSize == 0)
 	{
-		while (src[i])
-			i++;
-		return (i);
+		while (source[sourceLength] != '\0')
+			sourceLength++;
+		return (sourceLength);
 	}
-	while (i < size - 1 && src[i] != '\0')
+	while (sourceLength < bufferSize - 1 && source[sourceLength] != '\0')
 	{
-		dst[i] = src[i];
-		i++;
+		destination[sourceLength] = source[sourceLength];
+		sourceLength++;
 	}
-	if (i < size)
-		dst[i] = '\0';
-	while (src[i] != '\0')
-		i++;
-	return (i);
+	if (sourceLength < bufferSize)
+		destination[sourceLength] = '\0';
+	while (source[sourceLength] != '\0')
+		sourceLength++;
+	return (sourceLength);
 }

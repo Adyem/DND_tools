@@ -1,26 +1,23 @@
 #include "libft.hpp"
 
-long	ft_atol(const char *str)
+long ft_atol(const char *string)
 {
-	long			i;
-	long			sign;
-	unsigned int	result;
+    long index = 0;
+    long sign = 1;
+    unsigned long result = 0;
 
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (str[i] == ' ' || ((str[i] >= '\t') && (str[i] <= '\r')))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while ((str[i] >= '0') && (str[i] <= '9'))
-	{
-		result = (result * 10) + (str[i] - '0');
-		i++;
-	}
-	return ((long)(result * sign));
+    while (string[index] == ' ' || (string[index] >= '\t' && string[index] <= '\r'))
+        index++;
+    if (string[index] == '+' || string[index] == '-')
+    {
+        if (string[index] == '-')
+            sign = -1;
+        index++;
+    }
+    while (string[index] >= '0' && string[index] <= '9')
+    {
+        result = (result * 10) + (string[index] - '0');
+        index++;
+    }
+    return (result * sign);
 }

@@ -13,7 +13,6 @@ void ft_initiative_remove(ft_sharedptr<t_char> &info)
     char    *temp;
     char    **content;
     int     turn_marker;
-    int     i;
 
     if (DEBUG == 1)
         pf_printf("removing initiative %s\n", info->name);
@@ -26,7 +25,6 @@ void ft_initiative_remove(ft_sharedptr<t_char> &info)
     content = ft_open_and_read_file("data/data--initiative");
     if (!content)
         return ;
-    i = 0;
     ft_file initiative_file("data/data--initiative", O_WRONLY | O_TRUNC);
     if (initiative_file.get_error_code())
     {
@@ -34,32 +32,32 @@ void ft_initiative_remove(ft_sharedptr<t_char> &info)
         cma_free_double(content);
         return ;
     }
-    i = 0;
+    int index = 0;
     turn_marker = 0;
-    while (content[i])
+    while (content[index])
     {
-        if (ft_strncmp(content[i], "--turn--", 8) == 0)
+        if (ft_strncmp(content[index], "--turn--", 8) == 0)
         {
             turn_marker = 1;
-            temp = &content[i][8];
+            temp = &content[index][8];
         }
         else
-            temp = content[i];
+            temp = content[index];
         if ((ft_strncmp(info->name, temp, ft_strlen(info->name)) == 0)
                 && (ft_strlen(temp) > ft_strlen(info->name))
                 && (temp[ft_strlen(info->name)] == '=')
                 && (ft_check_value(&temp[ft_strlen(info->name) + 1])))
         {
             if (DEBUG == 1)
-                pf_printf("found one %s and %c\n", content[i], content[i][ft_strlen(info->name)]);
-            i++;
+                pf_printf("found one %s and %c\n", content[index], content[index][ft_strlen(info->name)]);
+            index++;
             if (turn_marker)
                 pf_printf_fd(initiative_file, "--turn--");
             continue ;
         }
-        pf_printf_fd(initiative_file, "%s", content[i]);
+        pf_printf_fd(initiative_file, "%s", content[index]);
         turn_marker = 0;
-        i++;
+        index++;
     }
     cma_free_double(content);
     return ;
@@ -84,13 +82,13 @@ static int ft_initiative_check(ft_sharedptr<t_char> &info, char **content, int i
 
 static int ft_initiative_check_content(ft_sharedptr<t_char> &info, char **content)
 {
-    int i = 0;
+    int index = 0;
 
-    while (content[i])
+    while (content[index])
     {
-        if (ft_strncmp(content[i], info->name, ft_strlen(info->name)) == 0)
+        if (ft_strncmp(content[index], info->name, ft_strlen(info->name)) == 0)
             return (1);
-        i++;
+        index++;
     }
     return (0);
 }

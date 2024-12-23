@@ -83,15 +83,15 @@ static void ft_npc_write_file_1(ft_sharedptr<t_char> &info, t_stats *stats, ft_f
 static void ft_npc_write_file_double_char(const char *msg, char **targets, ft_file &file,
 											ft_sharedptr<t_char> &info)
 {
-    int i = 0;
+    int index = 0;
     if (targets)
     {
-        while (targets[i])
+        while (targets[index])
         {
             if (DEBUG == 1)
-                pf_printf_fd(1, "saving array %s %s%s\n", info->name, msg, targets[i]);
-            file.printf("%s%s\n", msg, targets[i]);
-            i++;
+                pf_printf_fd(1, "saving array %s %s%s\n", info->name, msg, targets[index]);
+            file.printf("%s%s\n", msg, targets[index]);
+            index++;
         }
     }
 	return ;

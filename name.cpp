@@ -76,15 +76,14 @@ static char *ft_new_name(const char *name, int index)
 static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char *base_name,
 								c_name function, int count)
 {
-    int i;
+    int index = 1;
     char *new_name;
 
-    i = 1;
-    while (i <= count)
+    while (index <= count)
     {
-        if (i > 50)
+        if (index > 50)
             break ;
-        new_name = ft_new_name(base_name, i);
+        new_name = ft_new_name(base_name, index);
         if (!new_name)
         {
             pf_printf_fd(2, "115-Error: Malloc failure in Name Struct\n");
@@ -94,7 +93,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char
             pf_printf("%s\n", new_name);
         ft_add_node(first_node, last_node, new_name, function);
         cma_free(new_name);
-        i++;
+        index++;
     }
 	return ;
 }

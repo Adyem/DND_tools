@@ -118,46 +118,43 @@ static int	ft_check_dice(char *string, int i)
 
 int ft_command_roll_validate(char *string)
 {
-    int open_braces;
-    int close_braces;
-    int i;
+    int open_braces = 0;
+    int close_braces = 0;
+    int index = 0;
 
-	i = 0;
-	open_braces = 0;
-	close_braces = 0;
 	if (ft_roll_check_arg(string))
         return (1);
-	while (string[i])
+	while (string[index])
 	{
-        while (string[i] >= '0' && string[i] <= '9')
-            i++;
-		if (string[i] == '(')
+        while (string[index] >= '0' && string[index] <= '9')
+            index++;
+		if (string[index] == '(')
 		{
-			if (ft_check_open_braces(string, i, &open_braces))
+			if (ft_check_open_braces(string, index, &open_braces))
 				return (1);
 		}
-		else if (string[i] == ')')
+		else if (string[index] == ')')
 		{
-			if (ft_check_close_braces(string, i, open_braces, &close_braces))
+			if (ft_check_close_braces(string, index, open_braces, &close_braces))
 				return (1);
 		}
-		else if (string[i] == '-' || string[i] == '+')
+		else if (string[index] == '-' || string[index] == '+')
 		{
-			if (ft_check_plus_minus(string, i))
+			if (ft_check_plus_minus(string, index))
 				return (1);
 		}
-		else if (string[i] == '/' || string[i] == '*')
+		else if (string[index] == '/' || string[index] == '*')
 		{
-			if (ft_check_divide_multiply(string, i))
+			if (ft_check_divide_multiply(string, index))
 				return (1);
 		}
-		else if (string[i] == 'd')
+		else if (string[index] == 'd')
 		{
-			if (ft_check_dice(string, i))
+			if (ft_check_dice(string, index))
 				return (1);
 		}
-		if (string[i])
-			i++;
+		if (string[index])
+			index++;
 	}
 	return (0);
 }

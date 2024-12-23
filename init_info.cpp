@@ -28,24 +28,24 @@ int ft_check_stat(ft_sharedptr<t_char> &info, const char *stat, int index)
     return (result);
 }
 
-int ft_initialize_info(ft_sharedptr<t_char> &info, char **content)
+int ft_initialize_info(ft_sharedptr<t_char> &character, char **content)
 {
-    int j;
-    int i;
-    int error = 0;
+    int line_index;
+    int char_index;
+    int error_code = 0;
 
-    i = 0;
-    while (content[i])
+    line_index = 0;
+    while (content[line_index])
     {
-        j = 0;
-        while (content[i][j])
+        char_index = 0;
+        while (content[line_index][char_index])
         {
-            if (content[i][j] == '\n')
-                content[i][j] = '\0';
-            j++;
+            if (content[line_index][char_index] == '\n')
+                content[line_index][char_index] = '\0';
+            char_index++;
         }
-        i++;
+        line_index++;
     }
-    error += ft_set_stats(info, content);
-    return (error);
+    error_code += ft_set_stats(character, content);
+    return error_code;
 }

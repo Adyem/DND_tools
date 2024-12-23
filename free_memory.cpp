@@ -6,13 +6,11 @@
 
 void	ft_free_input(char **input, char *input_string)
 {
-	int	i;
-
-	i = 0;
-	while (input[i])
+	int	index = 0;
+	while (input[index])
 	{
-		cma_free(input[i]);
-		i++;
+		cma_free(input[index]);
+		index++;
 	}
 	cma_free(input);
 	cma_free(input_string);
@@ -41,26 +39,26 @@ void	ft_free_pc(t_pc *player)
 
 void	ft_free_memory_cmt(t_target_data *target_data, int amount)
 {
-    int j = 0;
+    int index = 0;
 
-    while (j < amount)
+    while (index < amount)
     {
-        if (target_data->target[j])
+        if (target_data->target[index])
         {
-            ft_free_info(target_data->target[j]);
-            target_data->target[j] = ft_sharedptr<t_char>();
+            ft_free_info(target_data->target[index]);
+            target_data->target[index] = ft_sharedptr<t_char>();
         }
-		if (target_data->target_copy[j])
+		if (target_data->target_copy[index])
 		{
-			ft_free_info(target_data->target_copy[j]);
-			target_data->target[j] = ft_sharedptr<t_char>();
+			ft_free_info(target_data->target_copy[index]);
+			target_data->target[index] = ft_sharedptr<t_char>();
 		}
-        if (target_data->Pchar_name[j])
+        if (target_data->Pchar_name[index])
         {
-            cma_free(target_data->Pchar_name[j]);
-            target_data->Pchar_name[j] = ft_nullptr;
+            cma_free(target_data->Pchar_name[index]);
+            target_data->Pchar_name[index] = ft_nullptr;
         }
-        j++;
+        index++;
     }
 	return ;
 }

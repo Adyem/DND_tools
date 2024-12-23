@@ -1,21 +1,18 @@
 #include "libft.hpp"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *destination, const char *source, size_t bufferSize)
 {
-	size_t	i;
-	size_t	j;
+	size_t	destLength = 0;
+	size_t	sourceIndex = 0;
 
-	i = 0;
-	j = 0;
-	while (dst[i] && i < size)
-		i++;
-	while (src[j] && (i + j + 1) < size)
+	while (destination[destLength] && destLength < bufferSize)
+		destLength++;
+	while (source[sourceIndex] && (destLength + sourceIndex + 1) < bufferSize)
 	{
-		dst[i + j] = src[j];
-		j++;
+		destination[destLength + sourceIndex] = source[sourceIndex];
+		sourceIndex++;
 	}
-	if (i < size)
-		dst[i + j] = '\0';
-	i = i + ft_strlen(src);
-	return (i);
+	if (destLength < bufferSize)
+		destination[destLength + sourceIndex] = '\0';
+	return (destLength + ft_strlen(source));
 }

@@ -22,7 +22,7 @@ extern t_key_value_triplet *g_stat_key_value_pairs;
 extern bool g_dnd_test;
 
 //NPC
-void		ft_npc_change_stats(ft_sharedptr<t_char> &info, int index, const char **input);
+void		ft_npc_change_stats(ft_sharedptr<t_char> &info, int argument_count, const char **argument_vector);
 void		ft_npc_set_stat(ft_sharedptr<t_char> &info, const char **input);
 int			ft_npc_open_file(ft_sharedptr<t_char> &info);
 void		ft_npc_init_stats(ft_sharedptr<t_char> &info);
@@ -290,7 +290,7 @@ int			ft_open_file_write_only(const char *filename, ft_file &file);
 //utils
 int			ft_create_data_dir();
 int			ft_strcmp_dnd(const char *string1, const char *string2);
-int			ft_initialize_info(ft_sharedptr<t_char> &info, char **content);
+int			ft_initialize_info(ft_sharedptr<t_char> &character, char **content);
 int			ft_check_value(const char *input);
 void		ft_print_character_status(ft_sharedptr<t_char> &info, int number, int temp);
 void		ft_skill_throw(ft_sharedptr<t_char> &info, const char *skill, int ability_mod,
@@ -299,7 +299,6 @@ int			ft_set_stats(ft_sharedptr<t_char> &info, char **content);
 int			ft_check_stat(ft_sharedptr<t_char> &info, const char *stat, const int index);
 char		**ft_set_stats_con_targets(char *content, int ofset, char **data,
 										ft_sharedptr<t_char> &info);
-ft_sharedptr<t_char> ft_get_info(const char *tf_name, t_name *name);
 char		**ft_resize_double_char(char **double_string, const char *string, int size);
 int			ft_double_char_length(const char **double_char);
 void		ft_dual_save_file(ft_sharedptr<t_char> &info, ft_sharedptr<t_char> &target);
@@ -318,6 +317,7 @@ ft_sharedptr<t_char> ft_validate_and_fetch_target(char *target_name, ft_sharedpt
 													int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
 t_key_value_triplet *initialize_stat_key_value_pairs(ft_sharedptr<t_char> &info);
+ft_sharedptr<t_char> ft_get_info(const char *tf_name, t_name *name);
 
 //check name
 int			ft_set_stats_check_name(const char *name);

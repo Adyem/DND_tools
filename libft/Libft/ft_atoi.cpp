@@ -1,26 +1,25 @@
-#include <stdio.h>
+#include "libft.hpp"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *string)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int	index = 0;
+	int	sign = 1;
+	int	result = 0;
 
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (str[i] == ' ' || ((str[i] >= '\t') && (str[i] <= '\r')))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	while (string[index] == ' ' || ((string[index] >= '\t')
+				&& (string[index] <= '\r')))
+		index++;
+	if (string[index] == '+' || string[index] == '-')
 	{
-		if (str[i] == '-')
+		if (string[index] == '-')
 			sign = -1;
-		i++;
+		index++;
 	}
-	while (str[i] && ((str[i] >= '0') && (str[i] <= '9')))
+	while (string[index] && ((string[index] >= '0')
+				&& (string[index] <= '9')))
 	{
-		result = result * 10 + (str[i] - '0');
-		i++;
+		result = result * 10 + (string[index] - '0');
+		index++;
 	}
 	return (result * sign);
 }

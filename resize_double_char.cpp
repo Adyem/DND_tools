@@ -7,46 +7,46 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
 {
     if (!double_string)
         return (ft_nullptr);
-    int i = 0;
-    while (double_string[i])
-        i++;
-    char **return_v = (char **)cma_calloc(i + size + 1, sizeof(char *), false);
-    if (!return_v)
+    int current_count = 0;
+    while (double_string[current_count])
+        current_count++;
+    char **resized_array = (char **)cma_calloc(current_count + size + 1, sizeof(char *), false);
+    if (!resized_array)
         return (ft_nullptr);
-    int j = 0;
-    while (j < i)
+    int index = 0;
+    while (index < current_count)
     {
-        return_v[j] = cma_strdup(double_string[j], false);
-        if (!return_v[j])
+        resized_array[index] = cma_strdup(double_string[index], false);
+        if (!resized_array[index])
         {
-            j--;
-            while (j >= 0)
+            index--;
+            while (index >= 0)
             {
-                cma_free(return_v[j]);
-                j--;
+                cma_free(resized_array[index]);
+                index--;
             }
-            cma_free(return_v);
+            cma_free(resized_array);
             return (ft_nullptr);
         }
-        j++;
+        index++;
     }
-    return_v[i] = cma_strdup(string, false);
-    if (!return_v[i])
+    resized_array[current_count] = cma_strdup(string, false);
+    if (!resized_array[current_count])
     {
-        j = 0;
-        while (j < i)
+        index = 0;
+        while (index < current_count)
         {
-            cma_free(return_v[j]);
-            j++;
+            cma_free(resized_array[index]);
+            index++;
         }
-        cma_free(return_v);
+        cma_free(resized_array);
         return (ft_nullptr);
     }
-    j = i + 1;
-    while (j < i + size + 1)
+    int additional_index = current_count + 1;
+    while (additional_index < current_count + size + 1)
     {
-        return_v[j] = ft_nullptr;
-        j++;
+        resized_array[additional_index] = ft_nullptr;
+        additional_index++;
     }
-    return (return_v);
+    return (resized_array);
 }

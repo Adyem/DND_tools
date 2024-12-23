@@ -18,19 +18,19 @@ void ft_calculate_j(char *string, int *j)
 
 static int execute_roll_function(char *string, RollExecuteFunc func)
 {
-    int i = 0;
-    int j;
+    int currentIndex = 0;
+    int stringBoundary;
     int error;
 
     error = 0;
-    ft_calculate_j(string, &j);
-    while (i < j)
+    ft_calculate_j(string, &stringBoundary);
+    while (currentIndex < stringBoundary)
     {
-        error = func(string, &i, j);
+        error = func(string, &currentIndex, stringBoundary);
         if (error)
             return (error);
-        ft_calculate_j(string, &j);
-        i++;
+        ft_calculate_j(string, &stringBoundary);
+        currentIndex++;
     }
     return (0);
 }
@@ -38,13 +38,13 @@ static int execute_roll_function(char *string, RollExecuteFunc func)
 static int ft_command_roll_parse(char *string, int nested)
 {
     int error;
-    int i = nested;
+    int index = nested;
 
-    while (string[i] != '(' && string[i])
-        i++;
-    if (string[i] == '(')
+    while (string[index] != '(' && string[index])
+        index++;
+    if (string[index] == '(')
     {
-        error = ft_command_roll_parse(&string[i], 1);
+        error = ft_command_roll_parse(&string[index], 1);
         if (error)
             return (1);
     }
@@ -70,25 +70,25 @@ static int ft_command_roll_parse(char *string, int nested)
 void ft_command_roll(char **argv)
 {
     char	*result = ft_nullptr;
-    int		i = 0;
+    int		index = 0;
 
-    while (argv[i] && DEBUG == 1)
+    while (argv[index] && DEBUG == 1)
     {
-        pf_printf("%s\n", argv[i]);
-        i++;
+        pf_printf("%s\n", argv[index]);
+        index++;
     }
     if (!argv[1])
         return ;
-    i = 1;
-    while (argv[i])
+    index = 1;
+    while (argv[index])
     {
-        result = ft_strjoin_gnl(result, argv[i], false);
+        result = ft_strjoin_gnl(result, argv[index], false);
         if (!result)
         {
             pf_printf_fd(2, "168-Error: Malloc failed in ft_strjoin_gnl\n");
             return ;
         }
-        i++;
+        index++;
     }
     if (DEBUG == 1)
         pf_printf("%s\n", result);

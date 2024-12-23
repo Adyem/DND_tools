@@ -1,18 +1,18 @@
 #include "libft.hpp"
 #include "../CPP_class/nullptr.hpp"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *string, int char_to_find)
 {
-	int		i;
+	int		string_length;
 
-	i = ft_strlen(s);
-	while (i > 0)
+	string_length = ft_strlen(string);
+	while (string_length > 0)
 	{
-		if (s[i] == (char)c)
-			return ((char *)s + i);
-		i--;
+		if (string[string_length] == (char)char_to_find)
+			return ((char *)string + string_length);
+		string_length--;
 	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
+	if (string[string_length] == (char)char_to_find)
+		return ((char *)string + string_length);
 	return (ft_nullptr);
 }

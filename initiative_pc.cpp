@@ -44,36 +44,34 @@ static char *ft_check_string(char *content, int index)
 
 int ft_check_stat_pc(t_pc *player, char **content, char *filename)
 {
-    int i;
-    int j;
+    int line_index = 0;
 
     player->name = ft_nullptr;
     player->initiative = -1;
     player->next = ft_nullptr;
-    i = 0;
-    while (content[i])
+    while (content[line_index])
     {
-        j = 0;
-        while (content[i][j])
+        int char_index = 0;
+        while (content[line_index][char_index])
         {
-            if (content[i][j] == '\n')
-                content[i][j] = '\0';
-            j++;
+            if (content[line_index][char_index] == '\n')
+                content[line_index][char_index] = '\0';
+            char_index++;
         }
-        if (ft_strncmp(content[i], "INITIATIVE=", 11) == 0 && (player->initiative == -1))
-            player->initiative = ft_check_int(content[i], 11, filename);
-        else if (ft_strncmp(content[i], "NAME=", 5) == 0 && (player->name == ft_nullptr))
+        if (ft_strncmp(content[line_index], "INITIATIVE=", 11) == 0 && player->initiative == -1)
+            player->initiative = ft_check_int(content[line_index], 11, filename);
+        else if (ft_strncmp(content[line_index], "NAME=", 5) == 0 && player->name == ft_nullptr)
         {
-            player->name = ft_check_string(content[i], 5);
+            player->name = ft_check_string(content[line_index], 5);
             if (!player->name)
                 return (1);
         }
         else
         {
-            pf_printf_fd(2, "3-There is an error with the line: %s\n", content[i]);
+            pf_printf_fd(2, "3-There is an error with the line: %s\n", content[line_index]);
             return (1);
         }
-        i++;
+        line_index++;
     }
     if (!(player->initiative >= 0 && player->initiative <= 50))
     {

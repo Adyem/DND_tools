@@ -37,21 +37,20 @@ static void ft_veraak_initialize(ft_sharedptr<t_char> &info)
 {
     const char *input[3];
     t_name *name;
-    int i;
     const char *crystals[5] = {
         "chaos_crystal_01", "chaos_crystal_02", "chaos_crystal_03", "chaos_crystal_04",
 		ft_nullptr};
     if (DEBUG == 1)
         pf_printf("initializing chaos crystals\n");
-    i = 0;
-    while (crystals[i] != ft_nullptr)
+    int index = 0;
+    while (crystals[index] != ft_nullptr)
     {
         if (DEBUG == 1)
-            pf_printf("checking crystal: %s\n", crystals[i]);
+            pf_printf("checking crystal: %s\n", crystals[index]);
         name = info->struct_name;
         while (name != ft_nullptr)
         {
-            if (ft_strcmp_dnd(name->name, crystals[i]) == 0)
+            if (ft_strcmp_dnd(name->name, crystals[index]) == 0)
             {
                 input[0] = name->name;
                 input[1] = "init";
@@ -63,7 +62,7 @@ static void ft_veraak_initialize(ft_sharedptr<t_char> &info)
             }
             name = name->next;
         }
-        i++;
+        index++;
     }
 	return ;
 }

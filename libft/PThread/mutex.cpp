@@ -4,14 +4,14 @@
 
 pt_mutex::pt_mutex()
 {
-	int i = 0;
+	int index = 0;
 
 	this->_lock = false;
 	this->_thread_id = 0;
-	while (i < MAX_QUEUE)
+	while (index < MAX_QUEUE)
 	{
-		this->_wait_queue[i] = 0;
-		i++;
+		this->_wait_queue[index] = 0;
+		index++;
 	}
 	this->_wait_queue_start = 0;
 	this->_wait_queue_end = 0;

@@ -1,20 +1,20 @@
 #include "libft.hpp"
 #include "../CPP_class/nullptr.hpp"
 
-char	*ft_strchr(const char *s, int i)
+char	*ft_strchr(const char *string, int char_to_find)
 {
-	char	c;
+	char	target_char;
 
-	if (!s)
+	if (!string)
 		return (ft_nullptr);
-	c = (char)i;
-	while (*s)
+	target_char = (char)char_to_find;
+	while (*string)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		if (*string == target_char)
+			return ((char *)string);
+		string++;
 	}
-	if (c == '\0')
-		return ((char *)s);
+	if (target_char == '\0')
+		return ((char *)string);
 	return (ft_nullptr);
 }
