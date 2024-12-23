@@ -122,9 +122,9 @@ t_key_value_triplet* initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
             {FROST_BREATH_DAMAGE_KEY, &info->bufs.frost_breath.damage, 0},
             {REACTION_USED_KEY, &info->flags.reaction_used, 0},
             {NULL, NULL, 0}
-        };        size_t count = sizeof(temp) / sizeof(temp[0]);
+        };
 		if (g_stat_key_value_pairs == ft_nullptr)
-        	g_stat_key_value_pairs = (t_key_value_triplet*)cma_malloc(sizeof(t_key_value_triplet) * count, true);
+        	g_stat_key_value_pairs = (t_key_value_triplet*)cma_malloc(sizeof(temp), true);
 		ft_memcpy(g_stat_key_value_pairs, temp, sizeof(temp));
     }
     return g_stat_key_value_pairs;
