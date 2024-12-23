@@ -23,7 +23,8 @@ HEADER      = dnd_tools.hpp \
 			  dorgar_stoneguard.hpp \
 			  hilda_stormshield.hpp \
 			  murna_claygrip.hpp \
-			  thorbald_ironpocket.hpp
+			  thorbald_ironpocket.hpp \
+			  key_list.hpp \
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -137,7 +138,7 @@ SRC         = name.cpp \
 			  cast_divine_smite.cpp \
 			  cast_cure_wounds.cpp \
 			  spell_utils.cpp \
-			  initialize_keys.cpp
+			  initialize_key_value_pairs.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations

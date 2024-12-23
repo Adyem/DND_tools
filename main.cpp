@@ -29,8 +29,6 @@ int main(int argc, char **argv)
     }
 	if (ft_create_data_dir())
 		return (1);
-	if (ft_initialize_global_map())
-		return (2);
 	ft_initialize_suggestions_readline();
     name = ft_allocate_memory_name();
     ft_request_input(name);

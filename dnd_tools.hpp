@@ -18,6 +18,7 @@
 # define CRIT_FAIL -999
 
 extern ft_sharedptr<ft_unordened_map> g_map;
+extern t_key_value_triplet *g_stat_key_value_pairs;
 extern bool g_dnd_test;
 
 //NPC
@@ -316,7 +317,7 @@ int			ft_check_write_permissions(const char *filepath);
 ft_sharedptr<t_char> ft_validate_and_fetch_target(char *target_name, ft_sharedptr<t_char> &info,
 													int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
-int			ft_initialize_global_map();
+t_key_value_triplet *initialize_stat_key_value_pairs(ft_sharedptr<t_char> &info);
 
 //check name
 int			ft_set_stats_check_name(const char *name);

@@ -26,6 +26,12 @@ typedef struct s_target_data
 	t_buff	*buff_info;
 }	t_target_data;
 
+typedef struct s_key_value_triplet
+{
+    const char *key;
+    int *value;
+    int unset_value;
+} t_key_value_triplet;
 
 typedef struct s_buff
 {

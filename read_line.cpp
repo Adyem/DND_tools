@@ -73,6 +73,8 @@ void ft_request_input(t_name *name)
         if (found == -1)
 		{
 			rl_clear_history();
+			cma_free(g_stat_key_value_pairs);
+			g_stat_key_value_pairs = ft_nullptr;
             return ;
 		}
         else if (!found)
@@ -81,5 +83,7 @@ void ft_request_input(t_name *name)
 			pf_printf_fd(2, "007-Error unknown command: %s\n", input_string);
         ft_free_input(input, input_string);
     }
+	cma_free(g_stat_key_value_pairs);
+	g_stat_key_value_pairs = ft_nullptr;
 	return ;
 }
