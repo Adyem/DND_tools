@@ -21,7 +21,7 @@ void ft_cast_cure_wounds(ft_sharedptr<t_char> &character)
     int cast_at_level = ft_prompt_spell_level(character, base_level);
     if (cast_at_level == -1)
         return ;
-    t_cure_wounds *cure_wounds = &character->spells.cure_wounds;
+    t_spell_cure_wounds *cure_wounds = &character->spells.cure_wounds;
     int upcast_level = cast_at_level - base_level;
     if (upcast_level < 0)
     {

@@ -324,7 +324,7 @@ static const t_spell_hunters_mark INITIALIZE_SPELL_HUNTERS_MARK =
 	.upcast_extra_damage = 0,
 };
 
-static const t_divine_smite INITIALIZE_DIVINE_SMITE =
+static const t_spell_divine_smite INITIALIZE_SPELL_DIVINE_SMITE =
 {
 	.learned = 0,
 	.base_level = 0,
@@ -338,7 +338,7 @@ static const t_divine_smite INITIALIZE_DIVINE_SMITE =
 	.upcast_extra_damage = 0,
 };
 
-static const t_cure_wounds INITIALIZE_CURE_WOUNDS =
+static const t_spell_cure_wounds INITIALIZE_SPELL_CURE_WOUNDS =
 {
 	.learned = 0,
 	.base_level = 0,
@@ -352,11 +352,25 @@ static const t_cure_wounds INITIALIZE_CURE_WOUNDS =
 	.upcast_extra_healing = 0,
 };
 
+static const t_spell_bless INITIALIZE_SPELL_BLESS =
+{
+	.learned = 0,
+	.base_level = 0,
+	.casting_at_level = 0,
+	.duration = 0,
+	.target_amount = 0,
+	.roll_bonus_dice_faces = 0,
+	.roll_bonus_dice_amount = 0,
+	.upcast_extra_targets = 0,
+	.upcast_extra_duration = 0,
+};
+
 static const t_spells INITIALIZE_SPELLS =
 {
-	.cure_wounds = INITIALIZE_CURE_WOUNDS,
-	.divine_smite = INITIALIZE_DIVINE_SMITE,
+	.cure_wounds = INITIALIZE_SPELL_CURE_WOUNDS,
+	.divine_smite = INITIALIZE_SPELL_DIVINE_SMITE,
 	.hunters_mark = INITIALIZE_SPELL_HUNTERS_MARK,
+	.bless = INITIALIZE_SPELL_BLESS,
 };
 
 #endif

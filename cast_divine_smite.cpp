@@ -22,7 +22,7 @@ void ft_cast_divine_smite(ft_sharedptr<t_char> &character)
 	int cast_at_level = ft_prompt_spell_level(character, base_level);
     if (cast_at_level == -1)
         return ;
-    t_divine_smite *divine_smite = &character->spells.divine_smite;
+    t_spell_divine_smite *divine_smite = &character->spells.divine_smite;
 	int upcast_level = base_level - cast_at_level;
     int total_dice = divine_smite->dice_amount
                 	+ (divine_smite->upcast_extra_dice_amount * upcast_level);

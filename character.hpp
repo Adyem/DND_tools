@@ -393,7 +393,7 @@ typedef struct s_spell_hunters_mark
 	int		upcast_extra_damage;
 }	t_spell_hunters_mark;
 
-typedef struct s_divine_smite
+typedef struct s_spell_divine_smite
 {
 	int		learned;
 	int		base_level;
@@ -405,9 +405,9 @@ typedef struct s_divine_smite
 	int		upcast_extra_dice_face;
 	int		upcast_extra_dice_amount;
 	int		upcast_extra_damage;	
-}	t_divine_smite;
+}	t_spell_divine_smite;
 
-typedef struct s_cure_wounds
+typedef struct s_spell_cure_wounds
 {
 	int		learned;
 	int		base_level;
@@ -419,13 +419,27 @@ typedef struct s_cure_wounds
 	int		upcast_extra_dice_face;
 	int		upcast_extra_dice_amount;
 	int		upcast_extra_healing;	
-}	t_cure_wounds;
+}	t_spell_cure_wounds;
+
+typedef struct s_spell_bless
+{
+	int		learned;
+	int		base_level;
+	int		casting_at_level;
+	int		duration;
+	int		target_amount;
+	int		roll_bonus_dice_faces;
+	int		roll_bonus_dice_amount;
+	int		upcast_extra_targets;
+	int		upcast_extra_duration;
+}	t_spell_bless;
 
 typedef struct	s_spells
 {
-	t_cure_wounds			cure_wounds;
-	t_divine_smite			divine_smite;
+	t_spell_cure_wounds		cure_wounds;
+	t_spell_divine_smite	divine_smite;
 	t_spell_hunters_mark	hunters_mark;
+	t_spell_bless			bless;
 }	t_spells;
 
 typedef struct	s_char
