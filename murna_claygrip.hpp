@@ -26,7 +26,7 @@ static const    t_stats MURNA_CLAYGRIP_DEFAULT_STATS =
     .cha = 8,
 };
 
-static const    t_savem MURNA_CLAYGRIP_SAVE_MODS =
+static const    t_save MURNA_CLAYGRIP_SAVE_MODS =
 {
     .str = 2,
     .dex = 0,
@@ -36,7 +36,7 @@ static const    t_savem MURNA_CLAYGRIP_SAVE_MODS =
     .con = 2,
 };
 
-static const    t_skillsm MURNA_CLAYGRIP_SKILL_MODS =
+static const    t_skills MURNA_CLAYGRIP_SKILL_MODS =
 {
     .athletics = 3,
     .acrobatics = 0,

@@ -26,7 +26,7 @@ static const    t_stats DORGAR_STONEGUARD_DEFAULT_STATS =
     .cha = 8,
 };
 
-static const    t_savem DORGAR_STONEGUARD_SAVE_MODS =
+static const    t_save DORGAR_STONEGUARD_SAVE_MODS =
 {
     .str = 2,
     .dex = 0,
@@ -36,7 +36,7 @@ static const    t_savem DORGAR_STONEGUARD_SAVE_MODS =
     .con = 2,
 };
 
-static const    t_skillsm DORGAR_STONEGUARD_SKILL_MODS =
+static const    t_skills DORGAR_STONEGUARD_SKILL_MODS =
 {
     .athletics = 3,
     .acrobatics = 0,

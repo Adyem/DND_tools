@@ -28,7 +28,7 @@ static const	t_stats GOBLIN_DEFAULT_STATS =
 	.cha = 8,
 };
 
-static const	t_savem GOBLIN_SAVE_MODS =
+static const	t_save GOBLIN_SAVE_MODS =
 {
     .str = 0,
     .dex = 0,
@@ -38,7 +38,7 @@ static const	t_savem GOBLIN_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skillsm GOBLIN_SKILL_MODS =
+static const	t_skills GOBLIN_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,

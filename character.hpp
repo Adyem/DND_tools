@@ -70,7 +70,7 @@ typedef struct	s_stats
 	int cha;
 }	t_stats;
 
-typedef struct	s_skillsm
+typedef struct	s_skills
 {
 	int	athletics;
 	int	acrobatics;
@@ -90,9 +90,9 @@ typedef struct	s_skillsm
 	int	intimidation;
 	int	performance;
 	int	persuasion;
-}	t_skillsm;
+}	t_skills;
 
-typedef struct	s_savem
+typedef struct	s_save
 {
 	int	str;
 	int	dex;
@@ -100,7 +100,7 @@ typedef struct	s_savem
 	int	wis;
 	int	cha;
 	int	con;
-}	t_savem;
+}	t_save;
 
 typedef struct	s_attack
 {
@@ -299,10 +299,10 @@ typedef struct s_equipment_id
 	t_equipment_action	action_01;
 	t_equipment_action	action_02;
 	t_equipment_action	attack;
-	t_skillsm			skill_mod;
+	t_skills			skill_mod;
 	t_resistance		resistance;
 	t_resistance		flat_dr;
-	t_skillsm			skill_advantage;
+	t_skills			skill_advantage;
 	t_saves				save;
 	t_saves				save_advantage;
 	int					type;
@@ -432,6 +432,8 @@ typedef struct s_spell_bless
 	int		roll_bonus_dice_amount;
 	int		upcast_extra_targets;
 	int		upcast_extra_duration;
+	int		upcast_extra_dice_faces;
+	int		upcast_extra_dice_amount;
 }	t_spell_bless;
 
 typedef struct	s_spells
@@ -463,8 +465,8 @@ typedef struct	s_char
 	t_resistance	d_resistance;
 	t_resistance	c_resistance;
 	t_equipment		equipment;
-	t_skillsm		skill_mod;
-	t_savem			save_mod;
+	t_skills		skill_mod;
+	t_save			save_mod;
 	t_stats			stats;
 	t_stats			dstats;
 	t_feats			feats;

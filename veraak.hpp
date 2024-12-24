@@ -29,7 +29,7 @@ static const	t_stats VERAAK_DEFAULT_STATS =
 	.cha = 8,
 };
 
-static const	t_savem VERAAK_SAVE_MODS =
+static const	t_save VERAAK_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -39,7 +39,7 @@ static const	t_savem VERAAK_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skillsm VERAAK_SKILL_MODS =
+static const	t_skills VERAAK_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,

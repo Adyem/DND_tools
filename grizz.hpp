@@ -29,7 +29,7 @@ static const	t_stats GRIZZ_DEFAULT_STATS =
 	.cha = 8,
 };
 
-static const	t_savem GRIZZ_SAVE_MODS =
+static const	t_save GRIZZ_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -39,7 +39,7 @@ static const	t_savem GRIZZ_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skillsm GRIZZ_SKILL_MODS =
+static const	t_skills GRIZZ_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,

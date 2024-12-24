@@ -26,7 +26,7 @@ static const	t_stats GHOST_DEFAULT_STATS =
 	.cha = 10,
 };
 
-static const	t_savem GHOST_SAVE_MODS =
+static const	t_save GHOST_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -36,7 +36,7 @@ static const	t_savem GHOST_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skillsm GHOST_SKILL_MODS =
+static const	t_skills GHOST_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,

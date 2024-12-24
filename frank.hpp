@@ -27,7 +27,7 @@ static const	t_stats FRANK_DEFAULT_STATS =
 	.cha = 6,
 };
 
-static const	t_savem FRANK_SAVE_MODS =
+static const	t_save FRANK_SAVE_MODS =
 {
     .str = 2,
     .dex = 3,
@@ -37,7 +37,7 @@ static const	t_savem FRANK_SAVE_MODS =
 	.con = 2,
 };
 
-static const	t_skillsm FRANK_SKILL_MODS =
+static const	t_skills FRANK_SKILL_MODS =
 {
     .athletics = 5,
     .acrobatics = 5,

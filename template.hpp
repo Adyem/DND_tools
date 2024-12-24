@@ -27,7 +27,7 @@ static const	t_stats TEMPLATE_DEFAULT_STATS =
 	.cha = 8,
 };
 
-static const	t_savem TEMPLATE_SAVE_MODS =
+static const	t_save TEMPLATE_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -37,7 +37,7 @@ static const	t_savem TEMPLATE_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skillsm TEMPLATE_SKILL_MODS =
+static const	t_skills TEMPLATE_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,

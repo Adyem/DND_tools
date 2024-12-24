@@ -28,7 +28,7 @@ static const	t_stats WARM_DEFAULT_STATS =
 	.cha = 10,
 };
 
-static const	t_savem WARM_SAVE_MODS =
+static const	t_save WARM_SAVE_MODS =
 {
     .str = 3,
     .dex = 1,
@@ -38,7 +38,7 @@ static const	t_savem WARM_SAVE_MODS =
 	.con = 2,
 };
 
-static const	t_skillsm WARM_SKILL_MODS =
+static const	t_skills WARM_SKILL_MODS =
 {
     .athletics = 4,
     .acrobatics = 1,

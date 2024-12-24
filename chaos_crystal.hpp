@@ -25,7 +25,7 @@ static const	t_stats CHAOS_CRYSTAL_DEFAULT_STATS =
 	.cha = 20,
 };
 
-static const	t_savem CHAOS_CRYSTAL_SAVE_MODS =
+static const	t_save CHAOS_CRYSTAL_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -35,7 +35,7 @@ static const	t_savem CHAOS_CRYSTAL_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skillsm CHAOS_CRYSTAL_SKILL_MODS =
+static const	t_skills CHAOS_CRYSTAL_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,

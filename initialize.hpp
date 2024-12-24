@@ -30,7 +30,7 @@ static const	t_saves INITIALIZE_SAVES =
 	.cha = 0,
 };
 
-static const	t_skillsm INITIALIZE_SKILLSM =
+static const	t_skills INITIALIZE_SKILLS =
 {
 	.athletics = 0,
 	.acrobatics = 0,
@@ -107,10 +107,10 @@ static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
 	.attack = INITIALIZE_EQUIPMENT_ACTION,
-	.skill_mod = INITIALIZE_SKILLSM,
+	.skill_mod = INITIALIZE_SKILLS,
 	.resistance = INITIALIZE_RESISTANCE,
 	.flat_dr = INITIALIZE_RESISTANCE,
-	.skill_advantage = INITIALIZE_SKILLSM,
+	.skill_advantage = INITIALIZE_SKILLS,
 	.save = INITIALIZE_SAVES,
 	.save_advantage = INITIALIZE_SAVES,
 	.type = 0,
@@ -363,6 +363,8 @@ static const t_spell_bless INITIALIZE_SPELL_BLESS =
 	.roll_bonus_dice_amount = 0,
 	.upcast_extra_targets = 0,
 	.upcast_extra_duration = 0,
+	.upcast_extra_dice_faces = 0,
+	.upcast_extra_dice_amount = 0,
 };
 
 static const t_spells INITIALIZE_SPELLS =

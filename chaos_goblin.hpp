@@ -28,7 +28,7 @@ static const	t_stats CHAOS_GOBLIN_DEFAULT_STATS =
 	.cha = 8,
 };
 
-static const	t_savem CHAOS_GOBLIN_SAVE_MODS =
+static const	t_save CHAOS_GOBLIN_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -38,7 +38,7 @@ static const	t_savem CHAOS_GOBLIN_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skillsm CHAOS_GOBLIN_SKILL_MODS =
+static const	t_skills CHAOS_GOBLIN_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,

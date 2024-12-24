@@ -26,7 +26,7 @@ static const    t_stats THORBALD_IRONPOCKET_DEFAULT_STATS =
     .cha = 8,
 };
 
-static const    t_savem THORBALD_IRONPOCKET_SAVE_MODS =
+static const    t_save THORBALD_IRONPOCKET_SAVE_MODS =
 {
     .str = 2,
     .dex = 0,
@@ -36,7 +36,7 @@ static const    t_savem THORBALD_IRONPOCKET_SAVE_MODS =
     .con = 2,
 };
 
-static const    t_skillsm THORBALD_IRONPOCKET_SKILL_MODS =
+static const    t_skills THORBALD_IRONPOCKET_SKILL_MODS =
 {
     .athletics = 3,
     .acrobatics = 0,

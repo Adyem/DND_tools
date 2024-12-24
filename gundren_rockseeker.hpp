@@ -26,7 +26,7 @@ static const    t_stats GUNDREN_ROCKSEEKER_DEFAULT_STATS =
     .cha = 8,
 };
 
-static const    t_savem GUNDREN_ROCKSEEKER_SAVE_MODS =
+static const    t_save GUNDREN_ROCKSEEKER_SAVE_MODS =
 {
     .str = 2,
     .dex = 0,
@@ -36,7 +36,7 @@ static const    t_savem GUNDREN_ROCKSEEKER_SAVE_MODS =
     .con = 2,
 };
 
-static const    t_skillsm GUNDREN_ROCKSEEKER_SKILL_MODS =
+static const    t_skills GUNDREN_ROCKSEEKER_SKILL_MODS =
 {
     .athletics = 3,
     .acrobatics = 0,

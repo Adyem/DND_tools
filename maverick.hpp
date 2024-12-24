@@ -26,7 +26,7 @@ static const	t_stats MAVERICK_DEFAULT_STATS =
 	.cha = 8,
 };
 
-static const	t_savem MAVERICK_SAVE_MODS =
+static const	t_save MAVERICK_SAVE_MODS =
 {
     .str = 3,
     .dex = 3,
@@ -36,7 +36,7 @@ static const	t_savem MAVERICK_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skillsm MAVERICK_SKILL_MODS =
+static const	t_skills MAVERICK_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,

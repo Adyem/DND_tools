@@ -26,7 +26,7 @@ static const    t_stats HILDA_STORMSHIELD_DEFAULT_STATS =
     .cha = 8,
 };
 
-static const    t_savem HILDA_STORMSHIELD_SAVE_MODS =
+static const    t_save HILDA_STORMSHIELD_SAVE_MODS =
 {
     .str = 2,
     .dex = 0,
@@ -36,7 +36,7 @@ static const    t_savem HILDA_STORMSHIELD_SAVE_MODS =
     .con = 2,
 };
 
-static const    t_skillsm HILDA_STORMSHIELD_SKILL_MODS =
+static const    t_skills HILDA_STORMSHIELD_SKILL_MODS =
 {
     .athletics = 3,
     .acrobatics = 0,
