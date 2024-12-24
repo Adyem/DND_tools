@@ -51,8 +51,6 @@ void ft_npc_set_stat(ft_sharedptr<t_char> &info, const char **input)
         ft_set_debuf_blinded(info, input);
     else if (ft_strcmp_dnd(input[1], "hp") == 0)
         ft_npc_update_hp(info, input);
-    else if (ft_strcmp_dnd(input[1], "bless") == 0)
-        ft_npc_update_buff(info, input, &info->bufs.bless.duration, "bless");
     else if (ft_strcmp_dnd(input[1], "lightning_strike") == 0)
         ft_npc_update_lightning_strike(info, input);
     else if (ft_strcmp_dnd(input[1], "protective_winds") == 0)
