@@ -365,6 +365,7 @@ static const t_spell_bless INITIALIZE_SPELL_BLESS =
 	.upcast_extra_duration = 0,
 	.upcast_extra_dice_faces = 0,
 	.upcast_extra_dice_amount = 0,
+	.caster = ft_nullptr,
 };
 
 static const t_spells INITIALIZE_SPELLS =

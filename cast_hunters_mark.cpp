@@ -133,7 +133,6 @@ void	ft_concentration_remove_hunters_mark(ft_sharedptr<t_char> &character,
 	character->concentration.dice_faces_mod = 0;
 	character->concentration.base_mod = 0;
 	character->concentration.targets = ft_nullptr;
-	character->bufs.chaos_armor.duration = 0;
 	cma_free_double(character->concentration.targets);
 	return ;
 }

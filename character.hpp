@@ -434,6 +434,7 @@ typedef struct s_spell_bless
 	int		upcast_extra_duration;
 	int		upcast_extra_dice_faces;
 	int		upcast_extra_dice_amount;
+	char	**caster;
 }	t_spell_bless;
 
 typedef struct	s_spells

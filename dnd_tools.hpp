@@ -6,7 +6,6 @@
 #include "libft/Template/shared_ptr.hpp"
 #include "player_character.hpp"
 #include "libft/CPP_class/file.hpp"
-#include "libft/CPP_class/unordened_map.hpp"
 
 # ifndef DEBUG
 #  define DEBUG 0
@@ -17,7 +16,6 @@
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
 
-extern ft_sharedptr<ft_unordened_map> g_map;
 extern t_key_value_triplet *g_stat_key_value_pairs;
 extern bool g_dnd_test;
 
@@ -271,10 +269,17 @@ void		ft_cast_concentration_multi_target_02(ft_sharedptr<t_char> &info,
 				t_target_data *target_data, const char **input);
 
 //hunters mark
+void 		ft_cast_bless(ft_sharedptr<t_char> &info, const char **input);
 void		ft_concentration_remove_hunters_mark(ft_sharedptr<t_char> &character,
 				t_target_data *targets_data);
 int			ft_cast_hunters_mark_apply_debuf(ft_sharedptr<t_char> &target, const char **input,
 				t_buff *buff);
+
+//bless
+int 		ft_cast_bless_apply_debuf(ft_sharedptr<t_char> &target, const char **input,
+				t_buff *buff);
+void		ft_concentration_remove_bless(ft_sharedptr<t_char> &character,
+				t_target_data *targets_data);
 
 //resistance
 int			ft_get_resistance(ft_sharedptr<t_char> &info, const char *type);
