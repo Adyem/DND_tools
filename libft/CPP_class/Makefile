@@ -11,13 +11,11 @@ DEBUG_TARGET := CPP_class_debug.a
 SRCS :=  string_constructors.cpp \
 		 string_methods.cpp \
 		 nullptr.cpp \
-		 file.cpp \
-		 unordened_map.cpp
+		 file.cpp
 
 HEADERS := 	   string.hpp \
 		   nullptr.hpp \
-		   file.hpp \
-		   unordened_map.hpp
+		   file.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))
