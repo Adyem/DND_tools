@@ -13,8 +13,7 @@ typedef struct s_equipment_id t_equipment_id;
 
 typedef int		(*cast_buff_debuff)(ft_sharedptr<t_char> &, const char **, t_buff *);
 typedef void	(*c_action)(ft_sharedptr<t_char> &, t_equipment_id *, int);
-typedef void	(*c_turn)(ft_sharedptr<t_char> &);
-
+typedef void 	(*c_turn)(ft_sharedptr<t_char>&);
 typedef ft_sharedptr<t_char> (*c_name)(int, const char **, t_name *, int);
 
 typedef struct s_target_data
