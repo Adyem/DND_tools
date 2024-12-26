@@ -142,7 +142,8 @@ SRC         = name.cpp \
 			  cast_bless.cpp
 
 CC          = g++
-CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations
+CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \
+			  -fdiagnostics-show-option
 
 LIBFT_DIR   = ./libft
 

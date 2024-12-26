@@ -13,7 +13,7 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_veraak_turn(ft_sharedptr<t_char> info);
+void	ft_veraak_turn(ft_sharedptr<t_char> &info);
 
 static const	t_stats VERAAK_DEFAULT_STATS =
 {
