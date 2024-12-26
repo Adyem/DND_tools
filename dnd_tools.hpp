@@ -263,7 +263,7 @@ void		ft_check_concentration(ft_sharedptr<t_char> &info, int  damage);
 int			ft_remove_concentration(ft_sharedptr<t_char> &info);
 void		ft_cast_chaos_armor(ft_sharedptr<t_char> &info);
 int			ft_update_caster_name(char ***caster_name, const char *input_name);
-void		ft_cast_concentration_multi_target_01(ft_sharedptr<t_char> &info, t_buff *buff,
+int			ft_cast_concentration_multi_target_01(ft_sharedptr<t_char> &info, t_buff *buff,
 				const char **input);
 void		ft_cast_concentration_multi_target_02(ft_sharedptr<t_char> &info,
 				t_target_data *target_data, const char **input);

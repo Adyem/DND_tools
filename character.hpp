@@ -104,25 +104,25 @@ typedef struct	s_save
 
 typedef struct	s_attack
 {
-	int	attack_bonus;
-	int	ranged_bonus;
+	int		attack_bonus;
+	int		ranged_bonus;
 }	t_attack;
 
-typedef struct	s_bless
+typedef struct	s_buff_bless
 {
 	int		duration;
 	int		dice_amount_mod;
 	int		dice_faces_mod;
 	int		base_mod;
-	char	**target;
-}	t_bless;
+	char	**caster_name;
+}	t_buff_bless;
 
-typedef struct	s_protective_winds
+typedef struct	s_buff_protective_winds
 {
 	int	duration;
-}	t_protective_winds;
+}	t_buff_protective_winds;
 
-typedef struct	s_lightning_strike
+typedef struct	s_buff_lightning_strike
 {
 	int	duration;
 	int	amount;
@@ -130,17 +130,17 @@ typedef struct	s_lightning_strike
 	int	dice_amount;
 	int	dice_faces;
 	int	extra_damage;
-}	t_lightning_strike;
+}	t_buff_lightning_strike;
 
-typedef struct s_flame_geyser
+typedef struct s_buff_flame_geyser
 {
 	int	amount;
     int duration;
 	int	close_to_tower_d;
 	int	tower_explode_d;
-}	t_flame_geyser;
+}	t_buff_flame_geyser;
 
-typedef struct s_meteor_strike
+typedef struct s_buff_meteor_strike
 {
     int		duration;
 	int		one_target_d;
@@ -149,56 +149,56 @@ typedef struct s_meteor_strike
 	int		four_targets_d;
 	int		five_targets_d;
     char	*target_id;
-}	t_meteor_strike;
+}	t_buff_meteor_strike;
 
-typedef struct s_earth_pounce
+typedef struct s_buff_earth_pounce
 {
 	int		active;
 	int		base_damage;
 	char	*target_id;
-}	t_earth_pounce;
+}	t_buff_earth_pounce;
 
-typedef struct s_arcane_pounce
+typedef struct s_buff_arcane_pounce
 {	
 	int		active;
 	int		magic_damage;
 	int		erea_damage;
 	char	*target_id;
-}	t_arcane_pounce;
+}	t_buff_arcane_pounce;
 
-typedef struct s_frost_breath
+typedef struct s_buff_frost_breath
 {
 	int		active;
 	int		damage;
 	char	*target_id;
-}	t_frost_breath;
+}	t_buff_frost_breath;
 
-typedef struct	s_air_totem
+typedef struct	s_buff_air_totem
 {
 	char	*save_file;
 	int		health;
 	int		ac;
 	int		knock_back_distance;
 	int		erea_of_effect;
-}	t_air_totem;
+}	t_buff_air_totem;
 
-typedef struct	s_chaos_armor
+typedef struct	s_buff_chaos_armor
 {
 	int	duration;
-}	t_chaos_armor;
+}	t_buff_chaos_armor;
 
 typedef struct	s_bufs
 {
-	t_bless				bless;
-	t_protective_winds	protective_winds;
-	t_lightning_strike	lightning_strike;
-	t_lightning_strike	lightning_strikeV2;
-	t_flame_geyser		flame_geyser;
-	t_meteor_strike		meteor_strike;
-	t_chaos_armor		chaos_armor;
-	t_arcane_pounce		arcane_pounce;
-	t_earth_pounce		earth_pounce;
-	t_frost_breath		frost_breath;
+	t_buff_bless				bless;
+	t_buff_protective_winds		protective_winds;
+	t_buff_lightning_strike		lightning_strike;
+	t_buff_lightning_strike		lightning_strikeV2;
+	t_buff_flame_geyser			flame_geyser;
+	t_buff_meteor_strike		meteor_strike;
+	t_buff_chaos_armor			chaos_armor;
+	t_buff_arcane_pounce		arcane_pounce;
+	t_buff_earth_pounce			earth_pounce;
+	t_buff_frost_breath			frost_breath;
 }	t_bufs;
 
 typedef struct	s_hunters_mark
@@ -428,13 +428,12 @@ typedef struct s_spell_bless
 	int		casting_at_level;
 	int		duration;
 	int		target_amount;
-	int		roll_bonus_dice_faces;
-	int		roll_bonus_dice_amount;
+	int		dice_faces;
+	int		dice_amount;
 	int		upcast_extra_targets;
 	int		upcast_extra_duration;
 	int		upcast_extra_dice_faces;
 	int		upcast_extra_dice_amount;
-	char	**caster;
 }	t_spell_bless;
 
 typedef struct	s_spells

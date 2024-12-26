@@ -34,23 +34,20 @@ void ft_cast_bless(ft_sharedptr<t_char> &info, const char **input)
 		return ;
     t_buff	buff = BUFF_BLESS;
 	int		error = 0;
+	buff.target_amount = info->spells.bless.target_amount
+		+ info->spells.bless.upcast_extra_targets;
 	buff.dice_amount_mod = info->spells.bless.dice_amount;
-	buff.dice_faces_mod = info->spells.bless.dice_faces;
-	buff.extra_mod = info->spells.bless.extra_damage;
-	int upcast_level = cast_at_level - info->spells.bless.base_level;
-	if (upcast_level > 0)
-	{
-		buff.dice_amount_mod += info->spells.bless.upcast_extra_dice_amount * upcast_level;
-		buff.dice_faces_mod += info->spells.bless.upcast_extra_dice_face * upcast_level;
-		buff.extra_mod += info->spells.bless.upcast_extra_damage * upcast_level;
-	}
+	buff.dice_faces_mod = info->spells.bless.dice_faces + (info->spells.bless.upcast_extra_dice_faces
+		* (cast_at_level - info->spells.bless.base_level));
+	buff.extra_mod = info->spells.bless.dice_amount + (info->spells.bless.upcast_extra_dice_amount
+		* (cast_at_level - info->spells.bless.base_level));
 	buff.target = cma_strdup(input[3], false);
 	if (!buff.target)
 	{
 		pf_printf_fd(2, "121-Error allocating memory bless target");
 		return ;
 	}
-    error = ft_cast_concentration(info, input, &buff);
+    error = ft_cast_concentration_multi_target_01(info, &buff, input);
 	cma_free(buff.target);
 	if (error)
 		return ;
@@ -98,7 +95,6 @@ int ft_cast_bless_apply_debuf(ft_sharedptr<t_char> &target, const char **input, 
             index++;
         }
     }
-    target->debufs.bless.amount++;
     return (0);
 }
 
@@ -121,7 +117,6 @@ void	ft_concentration_remove_bless(ft_sharedptr<t_char> &character,
 						[caster_index]);
 				targets_data->target[target_index]->bufs.bless.caster_name[caster_index]
 					= ft_nullptr;
-				targets_data->target[target_index]->bufs.bless.amount--;
 			}
 			caster_index++;
 		}

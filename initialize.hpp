@@ -157,21 +157,21 @@ static const	t_concentration INITIALIZE_CONCENTRATION =
 };
 
 
-static const	t_bless INITIALIZE_BLESS =
+static const	t_buff_bless INITIALIZE_BLESS =
 {
 	.duration = 0,
 	.dice_amount_mod = 1,
 	.dice_faces_mod = 4,
 	.base_mod = 0,
-	.target = ft_nullptr,
+	.caster_name = ft_nullptr,
 };
 
-static const	t_protective_winds INITIALIZE_PROTECTIVE_WINDS =
+static const	t_buff_protective_winds INITIALIZE_PROTECTIVE_WINDS =
 {
 	.duration = 0,
 };
 
-static const	t_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
+static const	t_buff_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
 {
 	.duration = 0,
 	.amount = 0,
@@ -181,7 +181,7 @@ static const	t_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
 	.extra_damage = 0,
 };
 
-static const	t_air_totem INITIALIZE_AIR_TOTEM =
+static const	t_buff_air_totem INITIALIZE_AIR_TOTEM =
 {
 	.save_file = ft_nullptr,
 	.health = 0,
@@ -190,7 +190,7 @@ static const	t_air_totem INITIALIZE_AIR_TOTEM =
 	.erea_of_effect = 0,
 };
 
-static const	t_flame_geyser INITIALIZE_FLAME_GEYSER =
+static const	t_buff_flame_geyser INITIALIZE_FLAME_GEYSER =
 {
 	.amount = 0,
 	.duration = 0,
@@ -198,7 +198,7 @@ static const	t_flame_geyser INITIALIZE_FLAME_GEYSER =
 	.tower_explode_d = 0,
 };
 
-static const	t_meteor_strike INITIALIZE_METEOR_STRIKE =
+static const	t_buff_meteor_strike INITIALIZE_METEOR_STRIKE =
 {
 	.duration = 0,
 	.one_target_d = 0,
@@ -209,19 +209,19 @@ static const	t_meteor_strike INITIALIZE_METEOR_STRIKE =
 	.target_id = ft_nullptr,
 };
 
-static const	t_chaos_armor INITIALIZE_CHAOS_ARMOR =
+static const	t_buff_chaos_armor INITIALIZE_CHAOS_ARMOR =
 {
 	.duration = 0,
 };
 
-static const	t_earth_pounce INITIALIZE_EARTH_POUNCE =
+static const	t_buff_earth_pounce INITIALIZE_EARTH_POUNCE =
 {
 	.active = 0,
 	.base_damage = 0,
 	.target_id = ft_nullptr,
 };
 
-static const	t_arcane_pounce INITIALIZE_ARCANE_POUNCE =
+static const	t_buff_arcane_pounce INITIALIZE_ARCANE_POUNCE =
 {
 	.active = 0,
 	.magic_damage = 0,
@@ -229,7 +229,7 @@ static const	t_arcane_pounce INITIALIZE_ARCANE_POUNCE =
 	.target_id = ft_nullptr,
 };
 
-static const	t_frost_breath INITIALIZE_FROST_BREATH =
+static const	t_buff_frost_breath INITIALIZE_FROST_BREATH =
 {
 	.active = 0,
 	.damage = 0,
@@ -359,13 +359,12 @@ static const t_spell_bless INITIALIZE_SPELL_BLESS =
 	.casting_at_level = 0,
 	.duration = 0,
 	.target_amount = 0,
-	.roll_bonus_dice_faces = 0,
-	.roll_bonus_dice_amount = 0,
+	.dice_faces = 0,
+	.dice_amount = 0,
 	.upcast_extra_targets = 0,
 	.upcast_extra_duration = 0,
 	.upcast_extra_dice_faces = 0,
 	.upcast_extra_dice_amount = 0,
-	.caster = ft_nullptr,
 };
 
 static const t_spells INITIALIZE_SPELLS =

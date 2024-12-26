@@ -5,7 +5,7 @@
 #include "libft/Template/shared_ptr.hpp"
 #include "libft/CMA/CMA.hpp"
 
-static const	t_lightning_strike FRANK_LIGHTNING_STRIKE_V2 =
+static const	t_buff_lightning_strike FRANK_LIGHTNING_STRIKE_V2 =
 {
 	.duration = 1,
 	.amount = 1,
