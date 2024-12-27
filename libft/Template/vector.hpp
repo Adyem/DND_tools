@@ -148,7 +148,7 @@ void ft_vector<ElementType>::setError(int errorCode)
 template <typename ElementType>
 int ft_vector<ElementType>::getError() const
 {
-    return (this->_errorCode ? ft_errno : 0);
+    return (this->_errorCode);
 }
 
 template <typename ElementType>
@@ -156,13 +156,18 @@ void ft_vector<ElementType>::push_back(const ElementType &value)
 {
     if (this->_size >= this->_capacity)
     {
-        size_t newCapacity = (this->_capacity > 0) ? this->_capacity * 2 : 1;
+        size_t newCapacity;
+        if (this->_capacity > 0)
+            newCapacity = this->_capacity * 2;
+        else
+            newCapacity = 1;
         reserve(newCapacity);
         if (this->_errorCode)
-            return;
+            return ;
     }
     construct_at(&this->_data[this->_size], value);
     this->_size++;
+	return ;
 }
 
 template <typename ElementType>
@@ -170,13 +175,18 @@ void ft_vector<ElementType>::push_back(ElementType &&value)
 {
     if (this->_size >= this->_capacity)
     {
-        size_t newCapacity = (this->_capacity > 0) ? this->_capacity * 2 : 1;
+        size_t newCapacity;
+        if (this->_capacity > 0)
+            newCapacity = this->_capacity * 2;
+        else
+            newCapacity = 1;
         reserve(newCapacity);
         if (this->_errorCode)
             return;
     }
     construct_at(&this->_data[this->_size], std::forward<ElementType>(value));
     this->_size++;
+	return ;
 }
 
 template <typename ElementType>
@@ -260,26 +270,29 @@ void ft_vector<ElementType>::resize(size_t new_size, const ElementType& value)
 }
 
 template <typename ElementType>
-typename ft_vector<ElementType>::iterator ft_vector<ElementType>::insert(iterator pos,
-        const ElementType& value)
+typename ft_vector<ElementType>::iterator ft_vector<ElementType>::insert(iterator pos, const ElementType& value)
 {
     size_t index = pos - this->_data;
     if (index > this->_size)
         return (end());
     if (this->_size >= this->_capacity)
     {
-        size_t new_capacity = (this->_capacity > 0) ? this->_capacity * 2 : 1;
+        size_t new_capacity;
+        if (this->_capacity > 0)
+            new_capacity = this->_capacity * 2;
+        else
+            new_capacity = 1;
         reserve(new_capacity);
         if (this->_errorCode)
             return (end());
         pos = this->_data + index;
     }
-	size_t i = this->_size;
+    size_t i = this->_size;
     while (i > index)
     {
         construct_at(&this->_data[i], this->_data[i - 1]);
         destroy_at(&this->_data[i - 1]);
-		i--;
+        i--;
     }
     construct_at(&this->_data[index], value);
     this->_size++;

@@ -78,14 +78,20 @@ void ft_putunsigned_fd(unsigned long n, int fd, size_t *count)
 void ft_puthex_fd_recursive(unsigned long n, int fd, bool uppercase, size_t *count)
 {
     char c;
+
     if (n >= 16)
         ft_puthex_fd_recursive(n / 16, fd, uppercase, count);
     if ((n % 16) < 10)
         c = '0' + (n % 16);
     else
-        c = (uppercase ? 'A' : 'a') + ((n % 16) - 10);
+    {
+        if (uppercase)
+            c = 'A' + ((n % 16) - 10);
+        else
+            c = 'a' + ((n % 16) - 10);
+    }
     ft_putchar_fd(c, fd, count);
-    return ;
+    return;
 }
 
 void ft_puthex_fd(unsigned long n, int fd, bool uppercase, size_t *count)
