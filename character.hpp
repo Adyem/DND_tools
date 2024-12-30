@@ -200,21 +200,21 @@ typedef struct	s_bufs
 	t_buff_frost_breath			frost_breath;
 }	t_bufs;
 
-typedef struct	s_hunters_mark
+typedef struct	s_debuff_hunters_mark
 {
 	int		amount;
 	char	**caster_name;
-}	t_hunters_mark;
+}	t_debuff_hunters_mark;
 
-typedef struct	s_blinded
+typedef struct	s_debuff_blinded
 {
 	int	duration;
-}	t_blinded;
+}	t_debuff_blinded;
 
 typedef struct s_debufs
 {
-	t_hunters_mark	hunters_mark;
-	t_blinded		blinded;
+	t_debuff_hunters_mark	hunters_mark;
+	t_debuff_blinded		blinded;
 }	t_debufs;
 
 typedef struct s_crit_mod

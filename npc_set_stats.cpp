@@ -49,23 +49,26 @@ static int ft_handle_set_stat_double_char(char *content_i, size_t key_len, char 
 
 static int ft_handle_string_fields(char *line, ft_sharedptr<t_char> &info)
 {
-    if (ft_strncmp(line, CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
+	if (ft_strncmp(line, CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
         return (ft_handle_set_stat_double_char(line, ft_strlen(CONC_TARGETS_KEY),
 				&info->concentration.targets, info));
-    if (ft_strncmp(line, HUNTERS_MARK_CASTER_KEY, ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
+	if (ft_strncmp(line, HUNTERS_MARK_CASTER_KEY, ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
         return (ft_handle_set_stat_double_char(line, ft_strlen(HUNTERS_MARK_CASTER_KEY),
 				&info->debufs.hunters_mark.caster_name, info));
-    if (ft_strncmp(line, METEOR_STRIKE_TARGET_KEY, ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
+	if (ft_strncmp(line, METEOR_STRIKE_TARGET_KEY, ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
         return (ft_handle_set_stat_char_pointer(line, ft_strlen(METEOR_STRIKE_TARGET_KEY),
 				&info->bufs.meteor_strike.target_id));
-    if (ft_strncmp(line, FROST_BREATH_TARGET_ID_KEY, ft_strlen(FROST_BREATH_TARGET_ID_KEY)) == 0)
+	if (ft_strncmp(line, FROST_BREATH_TARGET_ID_KEY, ft_strlen(FROST_BREATH_TARGET_ID_KEY)) == 0)
         return (ft_handle_set_stat_char_pointer(line, ft_strlen(FROST_BREATH_TARGET_ID_KEY),
 				&info->bufs.frost_breath.target_id));
-    if (ft_strncmp(line, ARCANE_POUNCE_TARGET_ID_KEY, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
+	if (ft_strncmp(line, ARCANE_POUNCE_TARGET_ID_KEY, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
         return (ft_handle_set_stat_char_pointer(line, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY),
 				&info->bufs.arcane_pounce.target_id));
-    if (ft_strncmp(line, EARTH_POUNCE_TARGET_ID_KEY, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY)) == 0)
+	if (ft_strncmp(line, EARTH_POUNCE_TARGET_ID_KEY, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY)) == 0)
         return (ft_handle_set_stat_char_pointer(line, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY),
+				&info->bufs.earth_pounce.target_id));
+	if (ft_strncmp(line, BUFF_BLESS_CASTER_NAME_KEY, ft_strlen(BUFF_BLESS_CASTER_NAME_KEY)) == 0)
+        return (ft_handle_set_stat_char_pointer(line, ft_strlen(BUFF_BLESS_CASTER_NAME_KEY),
 				&info->bufs.earth_pounce.target_id));
     return (1);
 }

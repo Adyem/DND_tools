@@ -160,8 +160,8 @@ static const	t_concentration INITIALIZE_CONCENTRATION =
 static const	t_buff_bless INITIALIZE_BLESS =
 {
 	.duration = 0,
-	.dice_amount_mod = 1,
-	.dice_faces_mod = 4,
+	.dice_amount_mod = 0,
+	.dice_faces_mod = 0,
 	.base_mod = 0,
 	.caster_name = ft_nullptr,
 };
@@ -250,13 +250,13 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.frost_breath = INITIALIZE_FROST_BREATH,
 };
 
-static const	t_hunters_mark INITIALIZE_HUNTERS_MARK =
+static const	t_debuff_hunters_mark INITIALIZE_HUNTERS_MARK =
 {
 	.amount = 0,
 	.caster_name = ft_nullptr,
 };
 
-static const	t_blinded INITIALIZE_BLINDED =
+static const	t_debuff_blinded INITIALIZE_BLINDED =
 {
 	.duration = 0,
 };

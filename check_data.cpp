@@ -8,9 +8,9 @@ static int check_range(int value, int min, int max, const char *name, const char
     {
         pf_printf("%s: %s value (%d) out of bounds (%d to %d)\n", name, field_name,
 				value, min, max);
-        return 1;
+        return (1);
     }
-    return 0;
+    return (0);
 }
 
 static int check_flag(int value, const char *name, const char *field_name)
@@ -18,9 +18,9 @@ static int check_flag(int value, const char *name, const char *field_name)
     if (value != 0 && value != 1)
     {
         pf_printf("%s: %s flag value (%d) out of bounds (0 or 1)\n", name, field_name, value);
-        return 1;
+        return (1);
     }
-    return 0;
+    return (0);
 }
 
 static int check_stats(ft_sharedptr<t_char> &info)
@@ -36,7 +36,7 @@ static int check_stats(ft_sharedptr<t_char> &info)
     error += check_range(info->stats.cha, 0, 30, info->name, "charisma");
     error += check_range(info->stats.turn, 0, 30, info->name, "turn");
     error += check_range(info->stats.phase, 0, 30, info->name, "phase");
-    return error;
+    return (error);
 }
 
 static int check_resistances(ft_sharedptr<t_char> &info)
@@ -68,7 +68,7 @@ static int check_resistances(ft_sharedptr<t_char> &info)
 			"thunder resistance");
     error += check_range(info->c_resistance.acid, -500, 500, info->name,
 			"acid resistance");
-    return error;
+    return (error);
 }
 
 static int check_concentration(ft_sharedptr<t_char> &info)
@@ -89,7 +89,7 @@ static int check_concentration(ft_sharedptr<t_char> &info)
 				info->concentration.duration);
         error++;
     }
-    return error;
+    return (error);
 }
 
 static int check_flags(ft_sharedptr<t_char> &info)
@@ -97,7 +97,7 @@ static int check_flags(ft_sharedptr<t_char> &info)
     int error = 0;
     error += check_flag(info->flags.prone, info->name, "prone");
     error += check_flag(info->flags.reaction_used, info->name, "reaction_used");
-    return error;
+    return (error);
 }
 
 static int check_debuffs(ft_sharedptr<t_char> &info)
@@ -105,7 +105,7 @@ static int check_debuffs(ft_sharedptr<t_char> &info)
     int error = 0;
     error += check_range(info->debufs.blinded.duration, 0, 50, info->name,
 			"blinded debuff duration");
-    return error;
+    return (error);
 }
 
 static int check_buffs(ft_sharedptr<t_char> &info)
@@ -165,7 +165,15 @@ static int check_buffs(ft_sharedptr<t_char> &info)
 			"arcane pounce area_damage");
     error += check_range(info->bufs.arcane_pounce.magic_damage, 0, 1000, info->name,
 			"arcane pounce magic_damage");
-    return error;
+	error += check_range(info->bufs.bless.base_mod, 0, 1000, info->name,
+			"bless base mod");
+	error += check_range(info->bufs.bless.duration, 0, 50, info->name,
+			"bless duration");
+	error += check_range(info->bufs.bless.dice_faces_mod, 0, 100, info->name,
+			"bless dice faces");
+	error += check_range(info->bufs.bless.dice_amount_mod, 0, 100, info->name,
+			"bless dice amount");
+    return (error);
 }
 
 static int check_other_buffs_debuffs(ft_sharedptr<t_char> &info)
@@ -201,7 +209,7 @@ static int check_other_buffs_debuffs(ft_sharedptr<t_char> &info)
 				info->bufs.chaos_armor.duration);
         error++;
     }
-    return error;
+    return (error);
 }
 
 static int ft_npc_check_info_2(ft_sharedptr<t_char> &info)
@@ -212,7 +220,7 @@ static int ft_npc_check_info_2(ft_sharedptr<t_char> &info)
     error += check_flags(info);
     error += check_debuffs(info);
     error += check_buffs(info);
-    return error;
+    return (error);
 }
 
 static int check_spell_slot(ft_sharedptr<t_char> &info, const char *slot_name, t_spell_slot *slot)
@@ -246,7 +254,7 @@ static int check_spell_slot(ft_sharedptr<t_char> &info, const char *slot_name, t
         pf_printf("%s: Available slots (%d) for %s are out of range (0 to %d)\n",
 				info->name, slot->available, slot_name, slot->total);
     }
-    return error;
+    return (error);
 }
 
 static int check_spell_slots(ft_sharedptr<t_char> &info)

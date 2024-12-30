@@ -5,6 +5,23 @@
 #include <unistd.h>
 #include <cerrno>
 
+static void ft_npc_write_file_double_char(const char *msg, char **targets, ft_file &file,
+											ft_sharedptr<t_char> &info)
+{
+    int index = 0;
+    if (targets)
+    {
+        while (targets[index])
+        {
+            if (DEBUG == 1)
+                pf_printf_fd(1, "saving array %s %s%s\n", info->name, msg, targets[index]);
+            file.printf("%s%s\n", msg, targets[index]);
+            index++;
+        }
+    }
+	return ;
+}
+
 static void ft_npc_write_spell_slots(ft_sharedptr<t_char> &info, ft_file &file)
 {
     file.printf("%s%i\n", LEVEL_1_AVAILABLE_KEY, info->spell_slots.level_1.available);
@@ -57,6 +74,12 @@ static void ft_npc_write_spell_slots(ft_sharedptr<t_char> &info, ft_file &file)
     file.printf("%s%i\n", WARLOCK_LEVEL_KEY, info->spell_slots.warlock.level);
     file.printf("%s%i\n", WARLOCK_REPLENISHING_SLOT_KEY,
 			info->spell_slots.warlock.replenishing_slot);
+	file.printf("%s%i\n", BUFF_BLESS_BASE_MOD_KEY, info->bufs.bless.base_mod);
+	file.printf("%s%i\n", BUFF_BLESS_DURATION_KEY, info->bufs.bless.duration);
+	file.printf("%s%i\n", BUFF_BLESS_DICE_FACES_MOD_KEY, info->bufs.bless.dice_faces_mod);
+	file.printf("%s%i\n", BUFF_BLESS_DICE_AMOUNT_MOD_KEY, info->bufs.bless.dice_amount_mod);
+	ft_npc_write_file_double_char(BUFF_BLESS_CASTER_NAME_KEY,
+			info->bufs.bless.caster_name, file, info);
 	return ;
 }
 
@@ -77,23 +100,6 @@ static void ft_npc_write_file_1(ft_sharedptr<t_char> &info, t_stats *stats, ft_f
     file.printf("%s%i\n", BLESS_DUR_KEY, info->bufs.bless.duration);
     file.printf("%s%i\n", PROTECTIVE_WINDS_DUR_KEY,
 			info->bufs.protective_winds.duration);
-	return ;
-}
-
-static void ft_npc_write_file_double_char(const char *msg, char **targets, ft_file &file,
-											ft_sharedptr<t_char> &info)
-{
-    int index = 0;
-    if (targets)
-    {
-        while (targets[index])
-        {
-            if (DEBUG == 1)
-                pf_printf_fd(1, "saving array %s %s%s\n", info->name, msg, targets[index]);
-            file.printf("%s%s\n", msg, targets[index]);
-            index++;
-        }
-    }
 	return ;
 }
 

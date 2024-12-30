@@ -121,6 +121,10 @@ t_key_value_triplet* initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
             {FROST_BREATH_ACTIVE_KEY, &info->bufs.frost_breath.active, 0},
             {FROST_BREATH_DAMAGE_KEY, &info->bufs.frost_breath.damage, 0},
             {REACTION_USED_KEY, &info->flags.reaction_used, 0},
+			{BUFF_BLESS_BASE_MOD_KEY, &info->bufs.bless.base_mod, 0},
+			{BUFF_BLESS_DURATION_KEY, &info->bufs.bless.duration, 0},
+			{BUFF_BLESS_DICE_FACES_MOD_KEY, &info->bufs.bless.dice_faces_mod, 0},
+			{BUFF_BLESS_DICE_AMOUNT_MOD_KEY, &info->bufs.bless.dice_amount_mod, 0},
             {NULL, NULL, 0}
         };
 		if (g_stat_key_value_pairs == ft_nullptr)
