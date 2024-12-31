@@ -50,6 +50,12 @@ ft_sharedptr<t_char> ft_murna_claygrip(const int index, const char **input, t_na
         if (ft_strcmp_dnd(input[1], "init") == 0)
         {
             ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+			if (file.get_error_code())
+			{
+				pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
+					file.get_error_message());
+				return (ft_sharedptr<t_char>());
+			}
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
             pf_printf("Stats for %s written to a file\n", info->name);
             ft_free_info(info);

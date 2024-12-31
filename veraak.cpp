@@ -98,7 +98,8 @@ void ft_veraak_turn(ft_sharedptr<t_char> &info)
 
 static void ft_initialize_gear_and_feats(ft_sharedptr<t_char> &info)
 {
-	info->spells.hunters_mark = VERAAK_SPELLS_HUNTERS_MARK;
+	info->spells.hunters_mark = VERAAK_SPELL_HUNTERS_MARK;
+	info->spells.bless = VERAAK_SPELL_BLESS;
     return ;
 }
 
@@ -124,6 +125,12 @@ ft_sharedptr<t_char> ft_veraak(const int index, const char **input, t_name *name
     if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
     {
 		ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+		if (file.get_error_code())
+		{
+			pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
+				file.get_error_message());
+			return (ft_sharedptr<t_char>());
+		}
         ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
         pf_printf("Stats for %s written on a file\n", info->name);
         ft_veraak_initialize(info);

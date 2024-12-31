@@ -213,12 +213,6 @@ static void ft_npc_write_file_2(ft_sharedptr<t_char> &info, t_resistance *resist
 void ft_npc_write_file(ft_sharedptr<t_char> &info, t_stats *stats, t_resistance *resistance,
 		ft_file &file)
 {
-    if (file == -1)
-    {
-        pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
-				file.get_error_message());
-        return;
-    }
 	if (DEBUG == 1)
         pf_printf("fd = %i\n", file.get_fd());
 	if (info->flags.alreaddy_saved)

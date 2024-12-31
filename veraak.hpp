@@ -121,7 +121,7 @@ static const t_physical VERAAK_PHYSICAL =
     .speed = 30,
 };
 
-static const t_spell_hunters_mark VERAAK_SPELLS_HUNTERS_MARK =
+static const t_spell_hunters_mark VERAAK_SPELL_HUNTERS_MARK =
 {
 	.learned = 1,
 	.base_level = 1,
@@ -135,6 +135,20 @@ static const t_spell_hunters_mark VERAAK_SPELLS_HUNTERS_MARK =
 	.upcast_extra_damage = 0,
 };
 
+static const t_spell_bless VERAAK_SPELL_BLESS =
+{
+	.learned = 1,
+	.base_level = 1,
+	.casting_at_level = 0,
+	.duration = 5,
+	.target_amount = 4,
+	.dice_faces = 4,
+	.dice_amount = 4,
+	.upcast_extra_targets = 0,
+	.upcast_extra_duration = 0,
+	.upcast_extra_dice_faces = 0,
+	.upcast_extra_dice_amount = 0,
+};
 
 static const t_spell_slot VERAAK_SPELL_SLOT_LEVEL_1 =
 {
