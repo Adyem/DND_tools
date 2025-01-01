@@ -3,6 +3,9 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/math.hpp"
 #include "libft/Template/shared_ptr.hpp"
+#include "libft/ReadLine/readline.hpp"
+
+extern bool g_dnd_test;
 
 typedef struct s_damage_info
 {
@@ -12,7 +15,51 @@ typedef struct s_damage_info
     int stat_mod;
     int dice_amount;
     int dice_faces;
-}	t_damage_info;
+}   t_damage_info;
+
+static int ft_readline_prompt_hit_or_miss(void)
+{
+    char *input;
+    int invalid_attempts = 0;
+
+    while ((input = rl_readline("Does the attack [hit/miss/exit]? ")) != ft_nullptr)
+    {
+        if ((ft_strcmp_dnd(input, "y") == 0) || (ft_strcmp_dnd(input, "yes") == 0)
+            || (ft_strcmp_dnd(input, "hit") == 0))
+        {
+            cma_free(input);
+            return (0);
+        }
+        else if ((ft_strcmp_dnd(input, "n") == 0) || (ft_strcmp_dnd(input, "no") == 0)
+                 || (ft_strcmp_dnd(input, "miss") == 0))
+        {
+            cma_free(input);
+            return (1);
+        }
+        else if (ft_strcmp_dnd(input, "exit") == 0)
+        {
+            cma_free(input);
+            return (2);
+        }
+        else
+        {
+            invalid_attempts++;
+            if (invalid_attempts >= 5)
+            {
+                pf_printf("Too many invalid attempts. Exiting the prompt.\n");
+                cma_free(input);
+                return (2);
+            }
+            pf_printf("Invalid input. Please type 'hit', 'miss', or 'exit' (Attempt %d/5).\n",
+					invalid_attempts);
+        }
+        cma_free(input);
+    }
+
+    pf_printf_fd(2, "Error: read line memory allocation failed\n");
+    return (-1);
+}
+
 
 static int ft_weapon_find_stat(ft_sharedptr<t_char> &info, t_equipment_id *weapon)
 {
@@ -36,7 +83,7 @@ static int ft_weapon_find_stat(ft_sharedptr<t_char> &info, t_equipment_id *weapo
 }
 
 static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
-			int offhand, ft_sharedptr<t_char> &info)
+                                           int offhand, ft_sharedptr<t_char> &info)
 {
     d_info->dice_amount = weapon->attack.effect_dice_amount;
     d_info->dice_faces = weapon->attack.effect_dice_faces;
@@ -46,28 +93,12 @@ static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info
         d_info->dice_faces = weapon->attack.effect_secund_dice_faces;
     }
     else if (!offhand && weapon->slot == SLOT_WEAPON
-			&& info->equipment.offhand_weapon.equipment_id == 0)
+             && info->equipment.offhand_weapon.equipment_id == 0)
     {
         d_info->dice_amount = weapon->attack.effect_dice_amount;
         d_info->dice_faces = weapon->attack.effect_dice_faces;
     }
-	return ;
-}
-
-static void ft_print_attack_roll(ft_sharedptr<t_char> &info, t_equipment_id *weapon,
-									t_damage_info *d_info)
-{
-    if (weapon->projectile_name)
-        pf_printf("%s uses his/her %s to fire a %s and rolled ", info->name,
-				weapon->name, weapon->projectile_name);
-    else
-        pf_printf("%s attacks with his/her %s and rolled ", info->name, weapon->name);
-    if (d_info->result <= 1 + info->crit.attack_fail)
-    {
-        pf_printf("a critical fail (%d) and missed on his attack\n", d_info->result);
-        return ;
-    }
-	return ;
+    return ;
 }
 
 static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit)
@@ -78,37 +109,16 @@ static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, b
         multiplier = 2;
     else
         multiplier = 1;
-    d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces)
-        + d_info->stat_mod;
 
+    d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces)
+                     + d_info->stat_mod;
     pf_printf("deals %d %s damage\n", d_info->damage, weapon->attack.damage_type);
     return;
-}
-
-static void ft_handle_attack_result(ft_sharedptr<t_char> &info, t_equipment_id *weapon,
-										t_damage_info *d_info)
-{
-    if (d_info->result >= 20 - info->crit.attack)
-    {
-        ft_check_buff_damage(info);
-        pf_printf("a crit (%d) and ", d_info->result);
-        ft_calculate_damage(weapon, d_info, true);
-    }
-    else
-    {
-        ft_check_buff_damage(info);
-        pf_printf("(%d)+%d+%d+%d for a total of %d and ", d_info->result, d_info->stat_mod,
-				info->attack_bonus.attack_bonus, d_info->mod, (d_info->result +
-				d_info->stat_mod + d_info->mod + info->attack_bonus.attack_bonus));
-        ft_calculate_damage(weapon, d_info, false);
-    }
-	return ;
 }
 
 void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand)
 {
     t_damage_info d_info;
-
     d_info.stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;
     d_info.result = ft_dice_roll(1, 20);
     if (d_info.result == -1)
@@ -116,9 +126,52 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
         pf_printf_fd(2, "101-Error: dice rolling error in attack\n");
         return ;
     }
-    d_info.mod = ft_attack_roll_check_buffs(info, &d_info.result);
-    ft_print_attack_roll(info, weapon, &d_info);
+    pf_printf("%s attacks with his/her %s and rolled a %d on the die.\n",
+              info->name, weapon->name, d_info.result);
+    if (d_info.result <= 1 + info->crit.attack_fail)
+        pf_printf("A critical fail (%d)! That can't be good...\n", d_info.result);
+    bool is_hit = false;
+    if (g_dnd_test == true)
+    {
+        int test_roll = ft_dice_roll(1, 2);
+        if (test_roll == 1)
+            is_hit = true;
+        else
+            is_hit = false;
+
+        if (is_hit)
+            pf_printf("[TEST MODE] The attack is a HIT (random)!\n");
+        else
+        {
+            pf_printf("[TEST MODE] The attack is a MISS (random)!\n");
+            return;
+        }
+    }
+    else
+    {
+        int choice = ft_readline_prompt_hit_or_miss();
+        if (choice == -1)
+            return;
+        else if (choice == 2)
+        {
+            pf_printf("Exiting attack...\n");
+            return;
+        }
+        else if (choice == 1)
+        {
+            pf_printf("%s missed the attack.\n", info->name);
+            return;
+        }
+        else
+            is_hit = true;
+    }
+    bool is_crit = false;
+    if (d_info.result >= 20 - info->crit.attack)
+    {
+        is_crit = true;
+        pf_printf("A critical hit (%d)!\n", d_info.result);
+    }
     ft_check_dice_amount_and_faces(weapon, &d_info, offhand, info);
-    ft_handle_attack_result(info, weapon, &d_info);
-	return ;
+    ft_calculate_damage(weapon, &d_info, is_crit);
+    return ;
 }
