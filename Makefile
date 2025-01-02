@@ -139,7 +139,8 @@ SRC         = name.cpp \
 			  cast_cure_wounds.cpp \
 			  spell_utils.cpp \
 			  initialize_key_value_pairs.cpp \
-			  cast_bless.cpp
+			  cast_bless.cpp \
+			  attack_prompt_action.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \

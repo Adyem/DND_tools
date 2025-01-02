@@ -2,27 +2,24 @@
 
 int	ft_check_value(const char *input)
 {
-	long	check;
-	int		i;
-	int		sign;
+	long	number = 0;
+	int		index = 0;
+	int		sign = 1;
 
-	check = 0;
-	i = 0;
-	sign = 1;
-	if (input[i] == '+' || input[i] == '-')
-		i++;
-	if (!input[i])
+	if (input[index] == '+' || input[index] == '-')
+		index++;
+	if (!input[index])
 		return (1);
 	if (input[0] == '-')
 		sign = -1;
-	while (input[i])
+	while (input[index])
 	{
-		if (input[i] >= '0' && input[i] <= '9')
+		if (input[index] >= '0' && input[index] <= '9')
 		{
-			check = (check * 10) + input[i] - '0';
-			if (sign * check < -2147483648 || sign * check > 2147483647)
+			number = (number * 10) + input[index] - '0';
+			if (sign * number < -2147483648 || sign * number > 2147483647)
 				return (2);
-			i++;
+			index++;
 		}
 		else
 			return (3);

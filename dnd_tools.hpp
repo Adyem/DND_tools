@@ -354,6 +354,7 @@ void		ft_free_memory_name(t_name *name, int exit_failure);
 
 //attacking
 void		ft_npc_check_ac(ft_sharedptr<t_char> &info, const char **input);
+void		ft_prompt_smite_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike);
 
 //save file
 int			ft_npc_check_info(ft_sharedptr<t_char> &info);
