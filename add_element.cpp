@@ -19,7 +19,7 @@ void ft_add_element(const char ***array, const char *element, bool critical)
         new_array[0] = element;
         new_array[1] = NULL;
         *array = new_array;
-        return;
+        return ;
     }
     i = 0;
     while ((*array)[i] != NULL)

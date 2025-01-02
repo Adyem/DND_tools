@@ -61,7 +61,7 @@ void ft_initiative_sort_2(t_pc *players)
             temp = temp->next;
         }
         if (highest == ft_nullptr)
-            break;
+            break ;
 
         if (turn == 0)
         {

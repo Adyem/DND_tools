@@ -18,7 +18,7 @@ int pf_printf_fd_v(int fd, const char *format, va_list args)
 		{
             i++;
             if (format[i] == '\0')
-                break;
+                break ;
             LengthModifier len_mod = LEN_NONE;
 			if (format[i] == 'l')
 			{
@@ -32,7 +32,7 @@ int pf_printf_fd_v(int fd, const char *format, va_list args)
             }
             char spec = format[i];
             if (spec == '\0')
-                break;
+                break ;
 			if (spec == 'c')
 			{
                 char c = (char)va_arg(args, int);

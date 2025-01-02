@@ -62,7 +62,7 @@ int ft_roll_excecute_droll(char *string, int *i, int j)
     while (*i < j)
     {
         if (!string[*i] || string[*i] == ')')
-            break;
+            break ;
         if (string[*i] == 'd')
         {
             x = *i;

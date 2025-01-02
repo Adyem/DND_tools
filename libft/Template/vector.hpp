@@ -70,7 +70,7 @@ ft_vector<ElementType>::ft_vector(size_t initial_capacity, bool criticality)
         else
             this->_capacity = initial_capacity;
     }
-    return;
+    return ;
 }
 
 template <typename ElementType>
@@ -79,7 +79,7 @@ ft_vector<ElementType>::~ft_vector()
     destroy_elements(0, this->_size);
     if (this->_data != nullptr)
         cma_free(this->_data);
-    return;
+    return ;
 }
 
 template <typename ElementType>
@@ -182,7 +182,7 @@ void ft_vector<ElementType>::push_back(ElementType &&value)
             newCapacity = 1;
         reserve(newCapacity);
         if (this->_errorCode)
-            return;
+            return ;
     }
     construct_at(&this->_data[this->_size], std::forward<ElementType>(value));
     this->_size++;
@@ -199,7 +199,7 @@ void ft_vector<ElementType>::pop_back()
     }
     else
         this->setError(VECTOR_INVALID_OPERATION);
-    return;
+    return ;
 }
 
 template <typename ElementType>
@@ -231,7 +231,7 @@ void ft_vector<ElementType>::clear()
 {
     destroy_elements(0, this->_size);
     this->_size = 0;
-    return;
+    return ;
 }
 
 template <typename ElementType>
@@ -244,12 +244,12 @@ void ft_vector<ElementType>::reserve(size_t new_capacity)
         if (new_data == nullptr)
         {
             this->setError(VECTOR_ALLOC_FAIL);
-            return;
+            return ;
         }
         this->_data = new_data;
         this->_capacity = new_capacity;
     }
-    return;
+    return ;
 }
 
 template <typename ElementType>
@@ -261,12 +261,12 @@ void ft_vector<ElementType>::resize(size_t new_size, const ElementType& value)
     {
         reserve(new_size);
         if (this->_errorCode)
-            return;
+            return ;
         for (size_t index = this->_size; index < new_size; index++)
             construct_at(&this->_data[index], value);
     }
     this->_size = new_size;
-    return;
+    return ;
 }
 
 template <typename ElementType>

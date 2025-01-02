@@ -8,7 +8,7 @@
 ft_string::ft_string() noexcept 
     : _data(ft_nullptr), _length(0), _capacity(0), _errorCode(0), _criticality(false)
 {
-    return;
+    return ;
 }
 
 ft_string::ft_string(const char* init_str, bool crit) noexcept 
@@ -23,11 +23,11 @@ ft_string::ft_string(const char* init_str, bool crit) noexcept
         if (!this->_data)
         {
             this->setError(STRING_MEM_ALLOC_FAIL);
-            return;
+            return ;
         }
         ft_memcpy(this->_data, init_str, this->_length + 1);
     }
-    return;
+    return ;
 }
 
 ft_string::ft_string(const ft_string& other) noexcept 
@@ -41,11 +41,11 @@ ft_string::ft_string(const ft_string& other) noexcept
         if (!this->_data)
         {
             this->setError(STRING_MEM_ALLOC_FAIL);
-            return;
+            return ;
         }
         ft_memcpy(this->_data, other._data, this->_length + 1);
     }
-    return;
+    return ;
 }
 
 ft_string::ft_string(ft_string&& other) noexcept
@@ -131,5 +131,5 @@ ft_string& ft_string::operator=(ft_string&& other) noexcept
 ft_string::~ft_string()
 {
     cma_free(this->_data);
-    return;
+    return ;
 }

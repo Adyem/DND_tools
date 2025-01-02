@@ -60,7 +60,7 @@ void ft_update_flame_geyser(ft_sharedptr<t_char> &info)
     if (info->bufs.flame_geyser.duration <= 0 ||
         info->bufs.flame_geyser.close_to_tower_d <= 0 ||
         info->bufs.flame_geyser.tower_explode_d <= 0)
-        return;
+        return ;
     info->bufs.flame_geyser.duration--;
     if (info->bufs.flame_geyser.duration == 0)
     {
@@ -87,7 +87,7 @@ void ft_update_meteor_strike(ft_sharedptr<t_char> &info)
         info->bufs.meteor_strike.three_targets_d < 0 ||
         info->bufs.meteor_strike.four_targets_d < 0 ||
         info->bufs.meteor_strike.five_targets_d < 0)
-        return;
+        return ;
 	info->bufs.meteor_strike.duration--;
 	if (info->bufs.meteor_strike.target_id)
 		target = info->bufs.meteor_strike.target_id;
@@ -123,7 +123,7 @@ void ft_update_earth_pounce(ft_sharedptr<t_char> &info)
 
 	if (info->bufs.earth_pounce.active != 1 ||
         info->bufs.earth_pounce.base_damage < 0)
-        return;
+        return ;
 	if (info->bufs.earth_pounce.target_id)
 		target = info->bufs.earth_pounce.target_id;
 	else

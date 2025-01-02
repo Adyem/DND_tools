@@ -13,7 +13,7 @@ void print_block_info(Block* block)
     if (!block)
     {
         pf_printf_fd(2, "Block pointer is NULL.\n");
-        return;
+        return ;
     }
     const char* free_status;
     if (block->free)
@@ -90,7 +90,7 @@ void cma_free(void* ptr)
         UNPROTECT_METADATA(page, sizeof(Page));
         if ((char*)block >= (char*)page->start && 
             (char*)block <  (char*)page->start + page->size)
-            break;
+            break ;
         Page* next_page = page->next;
         PROTECT_METADATA(page, sizeof(Page));
         page = next_page;

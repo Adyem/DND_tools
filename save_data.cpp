@@ -216,7 +216,7 @@ void ft_npc_write_file(ft_sharedptr<t_char> &info, t_stats *stats, t_resistance 
 	if (DEBUG == 1)
         pf_printf("fd = %i\n", file.get_fd());
 	if (info->flags.alreaddy_saved)
-        return;
+        return ;
 	if (DEBUG == 1)
 		pf_printf("saving %s %i\n", info->name, stats->health);
     ft_npc_write_file_1(info, stats, file);

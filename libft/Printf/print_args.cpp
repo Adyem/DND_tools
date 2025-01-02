@@ -91,7 +91,7 @@ void ft_puthex_fd_recursive(unsigned long n, int fd, bool uppercase, size_t *cou
             c = 'a' + ((n % 16) - 10);
     }
     ft_putchar_fd(c, fd, count);
-    return;
+    return ;
 }
 
 void ft_puthex_fd(unsigned long n, int fd, bool uppercase, size_t *count)

@@ -123,17 +123,17 @@ void ft_open_all_files(t_name *name)
     if (dir == ft_nullptr)
     {
         pf_printf_fd(2, "Unable to open directory: %s\n", strerror(errno));
-        return;
+        return ;
     }
     while ((entry = readdir(dir)) != ft_nullptr)
     {
         if (ft_strcmp_dnd(entry->d_name, ".") == 0 || ft_strcmp_dnd(entry->d_name, "..") == 0)
-            continue;
+            continue ;
         snprintf(filepath, sizeof(filepath), "%s/%s", "data", entry->d_name);
         if (DEBUG == 1)
             pf_printf("%s\n", filepath);
         if (ft_strncmp(entry->d_name, "data--", 6) == 0)
-            continue;
+            continue ;
         if (entry->d_type == DT_REG)
         {
             ft_file file;
@@ -141,20 +141,20 @@ void ft_open_all_files(t_name *name)
             if (file.get_error_code())
             {
                 pf_printf_fd(2, "Unable to open file '%s': %s\n", filepath, strerror(errno));
-                continue;
+                continue ;
             }
             if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
             {
                 player = ft_read_pc_file(file, entry->d_name, filepath);
                 if (!player)
-                    continue;
+                    continue ;
                 ft_initiative_write(player->initiative, entry->d_name);
                 ft_free_pc(player);
-                continue;
+                continue ;
             }
             info = ft_read_all_files(file, name, filepath);
             if (!info)
-                continue;
+                continue ;
             if (DEBUG == 1)
                 pf_printf("2. Name of the save file is %s\n", filepath);
             ft_file write_file;
@@ -164,7 +164,7 @@ void ft_open_all_files(t_name *name)
                 pf_printf_fd(2, "Unable to open file '%s' for writing: %s\n", filepath,
 						strerror(errno));
                 ft_free_info(info);
-                continue;
+                continue ;
             }
             ft_npc_write_file(info, &info->stats, &info->c_resistance, write_file);
             if (error == 0)

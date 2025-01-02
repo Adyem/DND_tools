@@ -10,7 +10,7 @@ int ft_roll_excecute_md(char *string, int *i, int j)
         if (DEBUG == 1)
             pf_printf("MD i=%d and j=%d\n", *i, j);
         if (!string[*i] || string[*i] == ')')
-            break;
+            break ;
         if (string[*i] == '*' || string[*i] == '/')
         {
             if (ft_process_sign(string, i, j, &error))

@@ -27,7 +27,7 @@ void cma_cleanup_non_critical_memory()
                 {
                     all_free = false;
                     PROTECT_METADATA(blk, sizeof(Block));
-                    break;
+                    break ;
                 }
                 Block* next_blk = blk->next;
                 PROTECT_METADATA(blk, sizeof(Block));

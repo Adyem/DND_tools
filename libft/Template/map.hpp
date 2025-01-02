@@ -49,7 +49,7 @@ Map<Key, MappedType>::Map(size_t initialCapacity, bool criticality)
     {
         this->setError(SHARED_PTR_ALLOCATION_FAILED);
         this->_data = ft_nullptr;
-        return;
+        return ;
     }
     this->_data = static_cast<Pair<Key, MappedType>*>(rawMemory);
 }
@@ -67,7 +67,7 @@ Map<Key, MappedType>::Map(const Map<Key, MappedType>& other)
             this->_data = ft_nullptr;
             this->_size = 0;
             this->_capacity = 0;
-            return;
+            return ;
         }
         this->_data = static_cast<Pair<Key, MappedType>*>(rawMemory);
 		size_t index = 0;

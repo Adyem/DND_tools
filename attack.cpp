@@ -113,7 +113,7 @@ static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, b
     d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces)
                      + d_info->stat_mod;
     pf_printf("deals %d %s damage\n", d_info->damage, weapon->attack.damage_type);
-    return;
+    return ;
 }
 
 void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand)
@@ -144,23 +144,23 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
         else
         {
             pf_printf("[TEST MODE] The attack is a MISS (random)!\n");
-            return;
+            return ;
         }
     }
     else
     {
         int choice = ft_readline_prompt_hit_or_miss();
         if (choice == -1)
-            return;
+            return ;
         else if (choice == 2)
         {
             pf_printf("Exiting attack...\n");
-            return;
+            return ;
         }
         else if (choice == 1)
         {
             pf_printf("%s missed the attack.\n", info->name);
-            return;
+            return ;
         }
         else
             is_hit = true;

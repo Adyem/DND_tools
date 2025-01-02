@@ -31,7 +31,7 @@ void *cma_malloc(int size, bool critical)
 		{
             PROTECT_METADATA(page, sizeof(Page));
             page = page->next;
-            continue;
+            continue ;
         }
         Block* block = page->blocks;
         while (block)

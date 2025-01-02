@@ -37,9 +37,9 @@ int ft_set_stats_check_name(const char *name)
     {
         entry = readdir(dir);
         if (!entry)
-            break;
+            break ;
         if (ft_strncmp(entry->d_name, PREFIX_TO_SKIP, ft_strlen(PREFIX_TO_SKIP)) == 0)
-            continue;
+            continue ;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         remove_exclude_prefix(filename);
@@ -74,9 +74,9 @@ int ft_check_player_character(const char *name)
     {
         entry = readdir(dir);
         if (!entry)
-            break;
+            break ;
         if (ft_strncmp(entry->d_name, PC_PREFIX, ft_strlen(PC_PREFIX)) != 0)
-            continue;
+            continue ;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         if (DEBUG == 1)
