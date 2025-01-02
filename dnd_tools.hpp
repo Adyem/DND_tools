@@ -135,6 +135,8 @@ void		ft_turn_next(t_name *name);
 
 //attack
 void		ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand);
+int			ft_readline_prompt_hit_or_miss(void);
+void		ft_prompt_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike);
 
 //buff update
 void		ft_npc_update_buff(ft_sharedptr<t_char> &info, const char **input, int *buff,
@@ -354,7 +356,6 @@ void		ft_free_memory_name(t_name *name, int exit_failure);
 
 //attacking
 void		ft_npc_check_ac(ft_sharedptr<t_char> &info, const char **input);
-void		ft_prompt_smite_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike);
 
 //save file
 int			ft_npc_check_info(ft_sharedptr<t_char> &info);

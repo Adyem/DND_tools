@@ -12,7 +12,7 @@ typedef struct s_known_spell
     t_spellcast_func cast_func;
 }   t_known_spell;
 
-void ft_prompt_smite_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike)
+void ft_prompt_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike)
 {
     t_known_spell known_spells[] = {
         {
