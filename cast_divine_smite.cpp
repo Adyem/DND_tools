@@ -14,8 +14,11 @@ static int ft_check_divine_smite_learned(ft_sharedptr<t_char> &character)
     return (1);
 }
 
-void ft_cast_divine_smite(ft_sharedptr<t_char> &character)
+void ft_cast_divine_smite(ft_sharedptr<t_char> &character, bool critical_strike)
 {
+	int multiplyer = 1;
+	if (critical_strike)
+		multiplyer = 2;
 	if (!ft_check_divine_smite_learned(character))
 		return ;
     int base_level = character->spells.divine_smite.base_level;
@@ -24,8 +27,8 @@ void ft_cast_divine_smite(ft_sharedptr<t_char> &character)
         return ;
     t_spell_divine_smite *divine_smite = &character->spells.divine_smite;
 	int upcast_level = base_level - cast_at_level;
-    int total_dice = divine_smite->dice_amount
-                	+ (divine_smite->upcast_extra_dice_amount * upcast_level);
+    int total_dice = (divine_smite->dice_amount + (divine_smite->upcast_extra_dice_amount
+			* upcast_level)) * multiplyer;
     int dice_faces = divine_smite->dice_faces
                     + (divine_smite->upcast_extra_dice_face * upcast_level);
     int extra_damage = divine_smite->extra_damage

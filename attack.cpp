@@ -5,7 +5,14 @@
 #include "libft/Template/shared_ptr.hpp"
 #include "libft/ReadLine/readline.hpp"
 
-extern bool g_dnd_test;
+typedef void (*t_spellcast_func)(ft_sharedptr<t_char> &character, bool critical_strike);
+
+typedef struct s_known_spell
+{
+    const char      *cmd;
+    int             *learned;
+    t_spellcast_func cast_func;
+}   t_known_spell;
 
 typedef struct s_damage_info
 {
@@ -51,15 +58,13 @@ static int ft_readline_prompt_hit_or_miss(void)
                 return (2);
             }
             pf_printf("Invalid input. Please type 'hit', 'miss', or 'exit' (Attempt %d/5).\n",
-					invalid_attempts);
+    				invalid_attempts);
         }
         cma_free(input);
     }
-
     pf_printf_fd(2, "Error: read line memory allocation failed\n");
     return (-1);
 }
-
 
 static int ft_weapon_find_stat(ft_sharedptr<t_char> &info, t_equipment_id *weapon)
 {
@@ -116,6 +121,77 @@ static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, b
     return ;
 }
 
+static void ft_prompt_smite_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike)
+{
+    t_known_spell known_spells[] = {
+        {
+            "divine_smite",
+            &character->spells.divine_smite.learned,
+            ft_cast_divine_smite
+        },
+        { nullptr, nullptr, nullptr }
+    };
+    pf_printf("You have the following learned spells available:\n");
+	int i = 0;
+	int not_learned = 0;
+    while (known_spells[i].cmd != nullptr)
+    {
+		if (*(known_spells[i].learned) != 0)
+            pf_printf(" - %s\n", known_spells[i].cmd);
+		else
+			not_learned++;
+		i++;
+    }
+	if (not_learned == i)
+		return ;
+    pf_printf("Type the spell name to cast it, or type 'exit' to skip.\n");
+    int invalid_attempts = 0;
+    char *input = ft_nullptr;
+    while ((input = rl_readline("Cast a learned spell or type 'exit': ")) != ft_nullptr)
+    {
+        if (ft_strcmp_dnd(input, "exit") == 0)
+        {
+            pf_printf("Exiting spell prompt.\n");
+            cma_free(input);
+            break;
+        }
+        bool found_spell = false;
+		int i = 0;
+        while (known_spells[i].cmd != nullptr)
+        {
+            if (ft_strcmp_dnd(input, known_spells[i].cmd) == 0)
+            {
+                if (*(known_spells[i].learned) == 0)
+                {
+                    pf_printf("You have not learned %s.\n", known_spells[i].cmd);
+                    found_spell = true;
+                    break;
+                }
+                known_spells[i].cast_func(character, critical_strike);
+                found_spell = true;
+                break;
+            }
+			i++;
+        }
+        if (!found_spell)
+        {
+            invalid_attempts++;
+            if (invalid_attempts >= 5)
+            {
+                pf_printf("Too many invalid attempts. Exiting spell prompt.\n");
+                cma_free(input);
+                break;
+            }
+            pf_printf("Invalid input. Type a learned spell name or 'exit' (Attempt %d/5).\n",
+                      invalid_attempts);
+        }
+        cma_free(input);
+    }
+	if (input == ft_nullptr)
+        pf_printf_fd(2, "Error: read line memory allocation failed\n");
+	return ;
+}
+
 void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand)
 {
     t_damage_info d_info;
@@ -138,7 +214,6 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
             is_hit = true;
         else
             is_hit = false;
-
         if (is_hit)
             pf_printf("[TEST MODE] The attack is a HIT (random)!\n");
         else
@@ -173,5 +248,7 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
     }
     ft_check_dice_amount_and_faces(weapon, &d_info, offhand, info);
     ft_calculate_damage(weapon, &d_info, is_crit);
+    if (is_hit)
+        ft_prompt_smite_on_attack_success(info, is_crit);
     return ;
 }

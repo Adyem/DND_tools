@@ -155,7 +155,7 @@ int			ft_attack_roll_check_buffs(ft_sharedptr<t_char> &info, int *roll);
 void		ft_to_hit_check_buff(ft_sharedptr<t_char> &info);
 
 //cast spell
-void		ft_cast_divine_smite(ft_sharedptr<t_char> &character);
+void		ft_cast_divine_smite(ft_sharedptr<t_char> &character, bool critical_strike);
 void		ft_cast_cure_wounds(ft_sharedptr<t_char> &character);
 
 //spells utils
