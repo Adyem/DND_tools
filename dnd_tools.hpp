@@ -137,6 +137,10 @@ void		ft_turn_next(t_name *name);
 void		ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand);
 int			ft_readline_prompt_hit_or_miss(void);
 void		ft_prompt_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike);
+int			ft_weapon_find_stat(ft_sharedptr<t_char> &info, t_equipment_id *weapon);
+void 		ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
+                                           int offhand, ft_sharedptr<t_char> &info);
+void 		ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit);
 
 //buff update
 void		ft_npc_update_buff(ft_sharedptr<t_char> &info, const char **input, int *buff,

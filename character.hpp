@@ -16,6 +16,16 @@ typedef void	(*c_action)(ft_sharedptr<t_char> &, t_equipment_id *, int);
 typedef void 	(*c_turn)(ft_sharedptr<t_char>&);
 typedef ft_sharedptr<t_char> (*c_name)(int, const char **, t_name *, int);
 
+typedef struct s_damage_info
+{
+    int mod;
+    int result;
+    int damage;
+    int stat_mod;
+    int dice_amount;
+    int dice_faces;
+}   t_damage_info;
+
 typedef struct s_target_data
 {
 	ft_file	file[20];

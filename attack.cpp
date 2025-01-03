@@ -1,73 +1,6 @@
 #include "dnd_tools.hpp"
-#include "identification.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/math.hpp"
 #include "libft/Template/shared_ptr.hpp"
-
-typedef struct s_damage_info
-{
-    int mod;
-    int result;
-    int damage;
-    int stat_mod;
-    int dice_amount;
-    int dice_faces;
-}   t_damage_info;
-
-static int ft_weapon_find_stat(ft_sharedptr<t_char> &info, t_equipment_id *weapon)
-{
-    if (!weapon->attack.stat)
-        return (0);
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_STR) == 0)
-        return (ft_calculate_str(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_DEX) == 0)
-        return (ft_calculate_dex(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_CON) == 0)
-        return (ft_calculate_con(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_INT) == 0)
-        return (ft_calculate_inte(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_WIS) == 0)
-        return (ft_calculate_wis(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_CHA) == 0)
-        return (ft_calculate_cha(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, FINESSE) == 0)
-        return max(ft_calculate_str(info), ft_calculate_dex(info));
-    return (0);
-}
-
-static void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
-                                           int offhand, ft_sharedptr<t_char> &info)
-{
-    d_info->dice_amount = weapon->attack.effect_dice_amount;
-    d_info->dice_faces = weapon->attack.effect_dice_faces;
-    if (offhand && weapon->slot == (SLOT_WEAPON | SLOT_OFFHAND_WEAPON))
-    {
-        d_info->dice_amount = weapon->attack.effect_secund_dice_amount;
-        d_info->dice_faces = weapon->attack.effect_secund_dice_faces;
-    }
-    else if (!offhand && weapon->slot == SLOT_WEAPON
-             && info->equipment.offhand_weapon.equipment_id == 0)
-    {
-        d_info->dice_amount = weapon->attack.effect_dice_amount;
-        d_info->dice_faces = weapon->attack.effect_dice_faces;
-    }
-    return ;
-}
-
-static void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit)
-{
-    int multiplier;
-
-    if (is_crit)
-        multiplier = 2;
-    else
-        multiplier = 1;
-
-    d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces)
-                     + d_info->stat_mod;
-    pf_printf("deals %d %s damage\n", d_info->damage, weapon->attack.damage_type);
-    return ;
-}
 
 void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand)
 {
@@ -84,7 +17,14 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
     if (d_info.result <= 1 + info->crit.attack_fail)
         pf_printf("A critical fail (%d)! That can't be good...\n", d_info.result);
     bool is_hit = false;
-    if (g_dnd_test == true)
+	if (d_info.result >= 20 - info->crit.attack)
+	{
+		is_hit = true;
+		pf_printf("%s critical hit (%d)!\n", info->name, d_info.result);
+	}
+	else if (d_info.result <= 1 + info->crit.attack_fail)
+		pf_printf("%s Rolled a critical fail (%d)!\n", info->name, d_info.result);
+	else if (g_dnd_test == true)
     {
         int test_roll = ft_dice_roll(1, 2);
         if (test_roll == 1)
@@ -99,7 +39,7 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
             return ;
         }
     }
-    else
+	else
     {
         int choice = ft_readline_prompt_hit_or_miss();
         if (choice == -1)
@@ -118,11 +58,6 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
             is_hit = true;
     }
     bool is_crit = false;
-    if (d_info.result >= 20 - info->crit.attack)
-    {
-        is_crit = true;
-        pf_printf("A critical hit (%d)!\n", d_info.result);
-    }
     ft_check_dice_amount_and_faces(weapon, &d_info, offhand, info);
     ft_calculate_damage(weapon, &d_info, is_crit);
     if (is_hit)

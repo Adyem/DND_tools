@@ -141,7 +141,8 @@ SRC         = name.cpp \
 			  initialize_key_value_pairs.cpp \
 			  cast_bless.cpp \
 			  attack_prompt_action.cpp \
-			  attack_readline_prompt.cpp
+			  attack_readline_prompt.cpp \
+			  attack_utils.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \
