@@ -131,27 +131,34 @@ int ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage)
     return (dice_roll_result + extra_damage);
 }
 
+static void ft_set_slot_used(t_spell_slot *spell_slot)
+{
+	if (!spell_slot->replenishing_slot)
+		spell_slot->available--;
+	return ;
+}
+
 void ft_remove_spell_slot(t_spell_slots *spell_slots, int level_spell_used)
 {
 	assert(level_spell_used >= 1 && level_spell_used <= 9);
 
 	if (level_spell_used == 1 && spell_slots->level_1.available > 0)
-        spell_slots->level_1.available--;
+		ft_set_slot_used(&spell_slots->level_1);
 	else if (level_spell_used == 2 && spell_slots->level_2.available > 0)
-        spell_slots->level_2.available--;
+		ft_set_slot_used(&spell_slots->level_2);
 	else if (level_spell_used == 3 && spell_slots->level_3.available > 0)
-        spell_slots->level_3.available--;
+		ft_set_slot_used(&spell_slots->level_3);
 	else if (level_spell_used == 4 && spell_slots->level_4.available > 0)
-        spell_slots->level_4.available--;
+		ft_set_slot_used(&spell_slots->level_4);
 	else if (level_spell_used == 5 && spell_slots->level_5.available > 0)
-        spell_slots->level_5.available--;
+		ft_set_slot_used(&spell_slots->level_5);
 	else if (level_spell_used == 6 && spell_slots->level_6.available > 0)
-        spell_slots->level_6.available--;
+		ft_set_slot_used(&spell_slots->level_6);
 	else if (level_spell_used == 7 && spell_slots->level_7.available > 0)
-        spell_slots->level_7.available--;
+		ft_set_slot_used(&spell_slots->level_7);
 	else if (level_spell_used == 8 && spell_slots->level_8.available > 0)
-        spell_slots->level_8.available--;
+		ft_set_slot_used(&spell_slots->level_8);
 	else if (level_spell_used == 9 && spell_slots->level_9.available > 0)
-        spell_slots->level_9.available--;
+		ft_set_slot_used(&spell_slots->level_9);
 	return ;
 }
