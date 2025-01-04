@@ -407,7 +407,6 @@ typedef struct s_spell_divine_smite
 	int		learned;
 	int		base_level;
 	int		casting_at_level;
-	int		duration;
 	int		dice_amount;
 	int		dice_faces;
 	int		extra_damage;
@@ -421,7 +420,6 @@ typedef struct s_spell_cure_wounds
 	int		learned;
 	int		base_level;
 	int		casting_at_level;
-	int		duration;
 	int		dice_amount;
 	int		dice_faces;
 	int		extra_healing;

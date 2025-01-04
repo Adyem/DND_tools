@@ -96,6 +96,11 @@ ft_sharedptr<t_char> ft_veraak(const int index, const char **input, t_name *name
 void		ft_veraak_check_phase(ft_sharedptr<t_char> &info);
 void		ft_veraak_turn(ft_sharedptr<t_char> &info);
 
+//Dwarf Paladin
+ft_sharedptr<t_char> ft_dwarf_paladin(const int index, const char **input, t_name *name,
+										int exception);
+void		ft_dwarf_paladin_turn(ft_sharedptr<t_char> &info);
+
 //Maverick
 ft_sharedptr<t_char> ft_maverick(const int index, const char **input, t_name *name, int exception);
 void		ft_maverick_turn(ft_sharedptr<t_char> &info);

@@ -1,5 +1,5 @@
-#ifndef TEMPLATE_HPP
-# define TEMPLATE_HPP
+#ifndef DWARF_PALADIN_HPP
+# define DWARF_PALADIN_HPP
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
@@ -11,9 +11,9 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_template_turn(ft_sharedptr<t_char> &info);
+void	ft_dwarf_paladin_turn(ft_sharedptr<t_char> &info);
 
-static const	t_stats TEMPLATE_DEFAULT_STATS =
+static const	t_stats DWARF_PALADIN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
@@ -27,7 +27,7 @@ static const	t_stats TEMPLATE_DEFAULT_STATS =
 	.cha = 8,
 };
 
-static const	t_save TEMPLATE_SAVE_MODS =
+static const	t_save DWARF_PALADIN_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -37,7 +37,7 @@ static const	t_save TEMPLATE_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skills TEMPLATE_SKILL_MODS =
+static const	t_skills DWARF_PALADIN_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,
@@ -59,14 +59,14 @@ static const	t_skills TEMPLATE_SKILL_MODS =
     .persuasion = 0,
 };
 
-static const	t_attack TEMPLATE_ATTACK =
+static const	t_attack DWARF_PALADIN_ATTACK =
 {
 	.attack_bonus = 0,
 	.ranged_bonus = 0,
 };
 
 
-static const	t_crit_mod TEMPLATE_CRIT =
+static const	t_crit_mod DWARF_PALADIN_CRIT =
 {
 	.attack = 0,
 	.attack_d = 0,
@@ -77,7 +77,7 @@ static const	t_crit_mod TEMPLATE_CRIT =
 	.skill_fail = 0,
 };
 
-static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
+static const	t_resistance DWARF_PALADIN_DEFAULT_RESISTANCE =
 {
 	.acid = 0,
 	.bludgeoning = 0,
@@ -94,7 +94,7 @@ static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
 	.thunder = 0,
 };
 
-static const	t_equipment TEMPLATE_EQUIPMENT =
+static const	t_equipment DWARF_PALADIN_EQUIPMENT =
 {
 	.weapon = STEEL_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
@@ -110,18 +110,34 @@ static const	t_equipment TEMPLATE_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
-static const t_physical TEMPLATE_PHYSICAL =
+static const t_physical DWARF_PALADIN_PHYSICAL =
 {
-    .height = 0,
-    .weight = 0,
-    .age = 0,
-    .speed = 0,
+    .height = 48,
+    .weight = 150,
+    .age = 50,
+    .speed = 25,
 };
 
-static const t_spell_slots TEMPLATE_SPELL_SLOTS =
+static const t_spell_slot DWARF_PALADION_FIRST_LEVEL_SLOT =
 {
-	.level_1 = INITIALIZE_SPELL_SLOT,
-	.level_2 = INITIALIZE_SPELL_SLOT,
+	.available = 4,
+	.total = 4,
+	.level = 0,
+	.replenishing_slot = 0,
+};
+
+static const t_spell_slot DWARF_PALADION_SECOND_LEVEL_SLOT =
+{
+	.available = 1,
+	.total = 1,
+	.level = 0,
+	.replenishing_slot = 0,
+};
+
+static const t_spell_slots DWARF_PALADIN_SPELL_SLOTS =
+{
+	.level_1 = DWARF_PALADION_FIRST_LEVEL_SLOT,
+	.level_2 = DWARF_PALADION_SECOND_LEVEL_SLOT,
 	.level_3 = INITIALIZE_SPELL_SLOT,
 	.level_4 = INITIALIZE_SPELL_SLOT,
 	.level_5 = INITIALIZE_SPELL_SLOT,
@@ -132,7 +148,48 @@ static const t_spell_slots TEMPLATE_SPELL_SLOTS =
 	.warlock = INITIALIZE_SPELL_SLOT,
 };
 
-static const t_char TEMPLATE_INFO =
+static const t_spell_divine_smite DWARF_PALADIN_SPELL_DIVINE_SMITE =
+{
+	.learned = 1,
+	.base_level = 1,
+	.casting_at_level = 0,
+	.dice_amount = 2,
+	.dice_faces = 8,
+	.extra_damage = 0,
+	.upcast_extra_dice_face = 0,
+	.upcast_extra_dice_amount = 1,
+	.upcast_extra_damage = 0,
+};
+
+static const t_spell_cure_wounds DWARF_PALADIN_SPELL_CURE_WOUNDS =
+{
+	.learned = 1,
+	.base_level = 1,
+	.casting_at_level = 0,
+	.dice_amount = 1,
+	.dice_faces = 8,
+	.extra_healing = 2,
+	.upcast_extra_dice_face = 8,
+	.upcast_extra_dice_amount = 1,
+	.upcast_extra_healing = 0,
+};
+
+static const t_spell_bless DWARF_PALADIN_SPELL_BLESS =
+{
+	.learned = 1,
+	.base_level = 1,
+	.casting_at_level = 0,
+	.duration = 60,
+	.target_amount = 3,
+	.dice_faces = 4,
+	.dice_amount = 1,
+	.upcast_extra_targets = 1,
+	.upcast_extra_duration = 10,
+	.upcast_extra_dice_faces = 0,
+	.upcast_extra_dice_amount = 0,
+};
+
+static const t_char DWARF_PALADIN_INFO =
 {
 	.level = 0,
 	.mechanical = 0,
@@ -141,25 +198,25 @@ static const t_char TEMPLATE_INFO =
 	.version_number = 2,
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
-	.turn = ft_template_turn,
+	.turn = ft_dwarf_paladin_turn,
 	.spells = INITIALIZE_SPELLS,
-	.spell_slots = TEMPLATE_SPELL_SLOTS,
+	.spell_slots = DWARF_PALADIN_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
-	.crit = TEMPLATE_CRIT,
-	.attack_bonus = TEMPLATE_ATTACK,
+	.crit = DWARF_PALADIN_CRIT,
+	.attack_bonus = DWARF_PALADIN_ATTACK,
 	.bufs = INITIALIZE_BUFFS,
 	.debufs = INITIALIZE_DEBUFFS,
 	.concentration = INITIALIZE_CONCENTRATION,
-	.d_resistance = TEMPLATE_DEFAULT_RESISTANCE,
+	.d_resistance = DWARF_PALADIN_DEFAULT_RESISTANCE,
 	.c_resistance = INITIALIZE_CURRENT_RESISTANCE,
-	.equipment = TEMPLATE_EQUIPMENT,
-	.skill_mod = TEMPLATE_SKILL_MODS,
-	.save_mod = TEMPLATE_SAVE_MODS,
+	.equipment = DWARF_PALADIN_EQUIPMENT,
+	.skill_mod = DWARF_PALADIN_SKILL_MODS,
+	.save_mod = DWARF_PALADIN_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
-	.dstats = TEMPLATE_DEFAULT_STATS,
+	.dstats = DWARF_PALADIN_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
 	.struct_name = ft_nullptr,
-	.physical = TEMPLATE_PHYSICAL,
+	.physical = DWARF_PALADIN_PHYSICAL,
 };
 
 #endif

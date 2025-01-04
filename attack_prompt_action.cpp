@@ -44,7 +44,7 @@ void ft_prompt_on_attack_success(ft_sharedptr<t_char> &character, bool critical_
         {
             pf_printf("Exiting spell prompt.\n");
             cma_free(input);
-            break;
+            break ;
         }
         bool found_spell = false;
 		int index = 0;
@@ -56,11 +56,12 @@ void ft_prompt_on_attack_success(ft_sharedptr<t_char> &character, bool critical_
                 {
                     pf_printf("You have not learned %s.\n", known_spells[index].cmd);
                     found_spell = true;
-                    break;
+                    break ;
                 }
                 known_spells[index].cast_func(character, critical_strike);
                 found_spell = true;
-                break;
+				cma_free(input);
+                return ;
             }
 			index++;
         }
@@ -71,7 +72,7 @@ void ft_prompt_on_attack_success(ft_sharedptr<t_char> &character, bool critical_
             {
                 pf_printf("Too many invalid attempts. Exiting spell prompt.\n");
                 cma_free(input);
-                break;
+                break ;
             }
             pf_printf("Invalid input. Type a learned spell name or 'exit' (Attempt %d/5).\n",
                       invalid_attempts);

@@ -120,5 +120,6 @@ t_name *ft_allocate_memory_name()
     ft_add_node(first_node, &last_node, "grizz", ft_grizz);
     ft_add_node(first_node, &last_node, "frank", ft_frank);
 	ft_add_mob_series(first_node, &last_node, "ghost", ft_ghost, 10);
+	ft_add_mob_series(first_node, &last_node, "dwarf_paladin", ft_dwarf_paladin, 10);
     return (first_node);
 }

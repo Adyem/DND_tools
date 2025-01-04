@@ -25,6 +25,7 @@ HEADER      = dnd_tools.hpp \
 			  murna_claygrip.hpp \
 			  thorbald_ironpocket.hpp \
 			  key_list.hpp \
+			  dwarf_paladin.hpp
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -34,6 +35,7 @@ SRC         = name.cpp \
               maverick.cpp \
               maverick_turn.cpp \
               chaos_crystal.cpp \
+			  dwarf_paladin.cpp \
               gundren_rockseeker.cpp \
 			  dorgar_stoneguard.cpp \
 			  hilda_stormshield.cpp \
