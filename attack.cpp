@@ -2,6 +2,41 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/shared_ptr.hpp"
 
+static void	ft_test_mode(bool *is_hit)
+{
+	int test_roll = ft_dice_roll(1, 2);
+	if (test_roll == 1)
+		*is_hit = true;
+	else
+		*is_hit = false;
+	if (*is_hit)
+		pf_printf("[TEST MODE] The attack is a HIT (random)!\n");
+	else
+	{
+		pf_printf("[TEST MODE] The attack is a MISS (random)!\n");
+		return ;
+	}
+}
+
+static void ft_normal_mode(ft_sharedptr<t_char> &info, bool *is_hit)
+{
+	int choice = ft_readline_prompt_hit_or_miss();
+	if (choice == -1)
+		return ;
+	else if (choice == 2)
+	{
+		pf_printf("Exiting attack...\n");
+		return ;
+	}
+	else if (choice == 1)
+	{
+		pf_printf("%s missed the attack.\n", info->name);
+		return ;
+	}
+	else
+		*is_hit = true;
+}
+
 void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand)
 {
     t_damage_info d_info;
@@ -25,39 +60,10 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
 	else if (d_info.result <= 1 + info->crit.attack_fail)
 		pf_printf("%s Rolled a critical fail (%d)!\n", info->name, d_info.result);
 	else if (g_dnd_test == true)
-    {
-        int test_roll = ft_dice_roll(1, 2);
-        if (test_roll == 1)
-            is_hit = true;
-        else
-            is_hit = false;
-        if (is_hit)
-            pf_printf("[TEST MODE] The attack is a HIT (random)!\n");
-        else
-        {
-            pf_printf("[TEST MODE] The attack is a MISS (random)!\n");
-            return ;
-        }
-    }
+		ft_test_mode(&is_hit);
 	else
-    {
-        int choice = ft_readline_prompt_hit_or_miss();
-        if (choice == -1)
-            return ;
-        else if (choice == 2)
-        {
-            pf_printf("Exiting attack...\n");
-            return ;
-        }
-        else if (choice == 1)
-        {
-            pf_printf("%s missed the attack.\n", info->name);
-            return ;
-        }
-        else
-            is_hit = true;
-    }
-    bool is_crit = false;
+		ft_normal_mode(info, &is_hit);
+	bool is_crit = false;
     ft_check_dice_amount_and_faces(weapon, &d_info, offhand, info);
     ft_calculate_damage(weapon, &d_info, is_crit);
     if (is_hit)
