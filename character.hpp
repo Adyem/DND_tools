@@ -15,6 +15,14 @@ typedef int		(*cast_buff_debuff)(ft_sharedptr<t_char> &, const char **, t_buff *
 typedef void	(*c_action)(ft_sharedptr<t_char> &, t_equipment_id *, int);
 typedef void 	(*c_turn)(ft_sharedptr<t_char>&);
 typedef ft_sharedptr<t_char> (*c_name)(int, const char **, t_name *, int);
+typedef void (*t_spellcast_func)(ft_sharedptr<t_char> &character, bool critical_strike);
+
+typedef struct s_known_spell
+{
+    const char      *cmd;
+    int             *learned;
+    t_spellcast_func cast_func;
+}   t_known_spell;
 
 typedef struct s_damage_info
 {
@@ -324,6 +332,7 @@ typedef struct s_equipment_id
 	int					wis;
 	int					cha;
 	int					initiative;
+	int					effect_id;
 	int					effect_type;
 	int					effect_dice_amount;
 	int					effect_dice_faces;

@@ -21,7 +21,7 @@ int ft_weapon_find_stat(ft_sharedptr<t_char> &info, t_equipment_id *weapon)
     if (ft_strcmp_dnd(weapon->attack.stat, STAT_CHA) == 0)
         return (ft_calculate_cha(info));
     if (ft_strcmp_dnd(weapon->attack.stat, FINESSE) == 0)
-        return max(ft_calculate_str(info), ft_calculate_dex(info));
+        return ft_max(ft_calculate_str(info), ft_calculate_dex(info));
     return (0);
 }
 

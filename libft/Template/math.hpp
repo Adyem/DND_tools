@@ -2,7 +2,7 @@
 #define MATH_HPP
 
 template <typename T>
-const T& max(const T& a, const T& b)
+const T& ft_max(const T& a, const T& b)
 {
     if (a > b)
 		return (a);
@@ -10,12 +10,26 @@ const T& max(const T& a, const T& b)
 }
 
 template <typename T, typename Compare>
-const T& max(const T& a, const T& b, Compare comp)
+const T& ft_max(const T& a, const T& b, Compare comp)
 {
-    if (comp(a, b))
-	{
+	if (comp(a, b))
         return (b);
-	}
+	return (a);
+}
+
+template <typename T>
+const T& ft_min(const T& a, const T& b)
+{
+    if (a < b)
+		return (a);
+	return (b);
+}
+
+template <typename T, typename Compare>
+const T& ft_min(const T& a, const T& b, Compare comp)
+{
+	if (comp(a, b))
+        return (b);
 	return (a);
 }
 

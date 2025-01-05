@@ -3,6 +3,7 @@
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
+#include "armor.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
@@ -17,14 +18,14 @@ static const	t_stats DWARF_PALADIN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 50,
+	.health = 90,
 	.temp_hp = 0,
-	.str = 12,
-	.dex = 18,
-	.con = 10,
+	.str = 16,
+	.dex = 14,
+	.con = 14,
 	.inte = 10,
 	.wis = 10,
-	.cha = 8,
+	.cha = 14,
 };
 
 static const	t_save DWARF_PALADIN_SAVE_MODS =
@@ -99,7 +100,7 @@ static const	t_equipment DWARF_PALADIN_EQUIPMENT =
 	.weapon = STEEL_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WOODEN_BOW,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.armor = STEEL_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,
@@ -154,7 +155,7 @@ static const t_spell_divine_smite DWARF_PALADIN_SPELL_DIVINE_SMITE =
 	.base_level = 1,
 	.casting_at_level = 0,
 	.dice_amount = 2,
-	.dice_faces = 8,
+	.dice_faces = 6,
 	.extra_damage = 0,
 	.upcast_extra_dice_face = 0,
 	.upcast_extra_dice_amount = 1,

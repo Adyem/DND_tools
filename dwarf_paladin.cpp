@@ -20,6 +20,7 @@ void ft_dwarf_paladin_turn(ft_sharedptr<t_char> &info)
 
 static void ft_initialize_gear_and_feats(ft_sharedptr<t_char> &info)
 {
+	info->feats.crackback.active = 1;
 	info->spells.cure_wounds = DWARF_PALADIN_SPELL_CURE_WOUNDS;
 	info->spells.bless = DWARF_PALADIN_SPELL_BLESS;
 	info->spells.divine_smite = DWARF_PALADIN_SPELL_DIVINE_SMITE;

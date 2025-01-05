@@ -16,6 +16,7 @@ static void	ft_test_mode(bool *is_hit)
 		pf_printf("[TEST MODE] The attack is a MISS (random)!\n");
 		return ;
 	}
+	return ;
 }
 
 static void ft_normal_mode(ft_sharedptr<t_char> &info, bool *is_hit)
@@ -35,6 +36,7 @@ static void ft_normal_mode(ft_sharedptr<t_char> &info, bool *is_hit)
 	}
 	else
 		*is_hit = true;
+	return ;
 }
 
 void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand)
