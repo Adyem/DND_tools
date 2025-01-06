@@ -17,9 +17,9 @@ static const	t_stats FRANK_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 75,
+	.health = 110,
 	.temp_hp = 0,
-	.str = 14,
+	.str = 16,
 	.dex = 18,
 	.con = 14,
 	.inte = 6,
