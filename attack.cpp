@@ -67,8 +67,10 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
 		ft_normal_mode(info, &is_hit);
 	bool is_crit = false;
     ft_check_dice_amount_and_faces(weapon, &d_info, offhand, info);
-    ft_calculate_damage(weapon, &d_info, is_crit);
-    if (is_hit)
+	if (is_hit)
+	{
+    	ft_calculate_damage(weapon, &d_info, is_crit);
         ft_prompt_on_attack_success(info, is_crit);
+	}
     return ;
 }

@@ -18,7 +18,7 @@ static const	t_stats GOBLIN_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 0,
-	.health = 14,
+	.health = 26,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 14,

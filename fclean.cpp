@@ -8,6 +8,8 @@
 #include <cerrno>
 #include <cstring>
 
+#define EXIT_FAILURE 1
+
 void ft_fclean(void)
 {
     int         status; 
@@ -52,7 +54,8 @@ void ft_clean(void)
 
     command[0] = "/bin/sh";
     command[1] = "-c";
-    command[2] = "rm -rf ./logs/*";
+    command[2] = "find ./data -mindepth 1 -maxdepth 1 \\( ! -name 'data--*' !" \
+				  "-name 'pc--*' \\) -exec rm -rf {} +";
     command[3] = ft_nullptr;
     if (g_dnd_test == 0 && ft_readline_confirm("type yes to confirm or no to abort: "))
         return ;
@@ -78,5 +81,6 @@ void ft_clean(void)
                 pf_printf_fd(2, "143-Error: Command failed with exit status %d\n", exit_status);
         }
     }
-	return ;
+    return;
 }
+

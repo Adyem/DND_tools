@@ -212,6 +212,7 @@ static const t_char VERAAK_INFO =
 	"22->23 ac -> 2 " DAMAGE_TYPE_FORCE " damage\n" \
 	"24 ac and higher -> 0 damage\n"
 #define CHAOS_BREATH "annyone in a 90 degree cone in front of veraak needs to make a" \
-    " dc 12 dex save, on a failed save takes 10 " DAMAGE_TYPE_NECROTIC " damage and half on a succesfull one\n"
+    " dc 12 dex save, on a failed save takes 10 " DAMAGE_TYPE_NECROTIC " damage and" \
+	" half on a succesfull one\n"
 
 #endif
