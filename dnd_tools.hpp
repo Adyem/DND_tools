@@ -234,6 +234,10 @@ int			ft_calculate_radiant_dr(ft_sharedptr<t_char> &info);
 int			ft_calculate_slashing_dr(ft_sharedptr<t_char> &info);
 int			ft_calculate_thunder_dr(ft_sharedptr<t_char> &info);
 
+//calculate utility stats
+int 		ft_calculate_crit_attack_fail_bonus(ft_sharedptr<t_char> &info);
+int 		ft_calculate_crit_attack_success_bonus(ft_sharedptr<t_char> &info);
+
 //damage
 void		ft_deal_damage(ft_sharedptr<t_char> &info, const char *input, const char *d_type,
 				int resistance, int concentration);

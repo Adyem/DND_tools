@@ -322,6 +322,8 @@ typedef struct s_equipment_id
 	t_skills			skill_advantage;
 	t_saves				save;
 	t_saves				save_advantage;
+	int					crit_attack_fail_bonus;
+	int					crit_attack_succes_bonus;
 	int					type;
 	int					dex_ac_max_bonus;
 	int					ac;

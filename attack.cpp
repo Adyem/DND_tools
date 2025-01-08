@@ -51,7 +51,7 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
     }
     pf_printf("%s attacks with his/her %s and rolled a %d on the die.\n",
               info->name, weapon->name, d_info.result);
-    if (d_info.result <= 1 + info->crit.attack_fail)
+    if (d_info.result <= 1 + ft_calculate_crit_attack_fail_bonus(info))
         pf_printf("A critical fail (%d)! That can't be good...\n", d_info.result);
     bool is_hit = false;
 	if (d_info.result >= 20 - info->crit.attack)
@@ -59,7 +59,7 @@ void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int of
 		is_hit = true;
 		pf_printf("%s critical hit (%d)!\n", info->name, d_info.result);
 	}
-	else if (d_info.result <= 1 + info->crit.attack_fail)
+	else if (d_info.result <= 1 + ft_calculate_crit_attack_success_bonus(info))
 		pf_printf("%s Rolled a critical fail (%d)!\n", info->name, d_info.result);
 	else if (g_dnd_test == true)
 		ft_test_mode(&is_hit);
