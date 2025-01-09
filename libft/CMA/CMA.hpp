@@ -14,6 +14,4 @@ char	*cma_itoa(int n);
 char	*cma_strjoin(char const *string_1, char const *string_2);
 void	cma_free_double(char **content);
 
-size_t	align8(size_t size);
-
 #endif

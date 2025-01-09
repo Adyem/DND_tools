@@ -9,7 +9,7 @@
 #define BYPASS_ALLOC DEBUG
 #define MAGIC_NUMBER 0xDEADBEEF
 
-#define OFFSWITCH 1
+#define OFFSWITCH 0
 
 #ifndef DEBUG
 # define DEBUG 0
