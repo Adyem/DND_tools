@@ -8,6 +8,8 @@ extern Page *page_list;
 
 void cma_cleanup()
 {
+	if (OFFSWITCH)
+		return ;
     Page* current_page = page_list;
     while (current_page)
     {

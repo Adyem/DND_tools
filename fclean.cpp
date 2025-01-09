@@ -81,6 +81,6 @@ void ft_clean(void)
                 pf_printf_fd(2, "143-Error: Command failed with exit status %d\n", exit_status);
         }
     }
-    return;
+    return ;
 }
 
