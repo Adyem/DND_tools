@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <cstdlib>
 #include <cstring>
 #include <cstdio>
@@ -11,20 +12,20 @@
 
 void* cma_malloc(int size)
 {
-    if (DEBUG == 1 || OFFSWITCH == 1)
-        return malloc(size);
+    if (OFFSWITCH == 1)
+        return (malloc(size));
     if (size <= 0)
-        return ft_nullptr;
-    size_t aligned_size = align8((size_t)size);
-    Block* block = find_free_block(aligned_size);
+        return (ft_nullptr);
+    size_t	aligned_size = align8((size_t)size);
+    Block	*block = find_free_block(aligned_size);
     if (!block)
     {
         Page* page = create_page(aligned_size);
         if (!page)
-            return ft_nullptr;
+            return (ft_nullptr);
         block = page->blocks;
     }
     block = split_block(block, aligned_size);
     block->free = false;
-    return (char*)block + sizeof(Block);
+    return ((char*)block + sizeof(Block));
 }

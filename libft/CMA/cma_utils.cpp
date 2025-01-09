@@ -6,7 +6,6 @@
 #include <sys/mman.h>
 #include <valgrind/memcheck.h>
 #include <csignal>
-#include "CMA.hpp"
 #include "CMA_internal.hpp"
 #include "../CPP_class/nullptr.hpp"
 #include "../Printf/printf.hpp"
@@ -27,7 +26,7 @@ Block* split_block(Block* block, size_t size)
         new_block->next->prev = new_block;
     block->next = new_block;
     block->size = size;
-    return block;
+    return (block);
 }
 
 Page* create_page(size_t size)
@@ -37,12 +36,12 @@ Page* create_page(size_t size)
         page_size = size + sizeof(Block);
     void* ptr = mmap(ft_nullptr, page_size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
     if (ptr == MAP_FAILED)
-        return ft_nullptr;
+        return (ft_nullptr);
     Page* page = (Page*)malloc(sizeof(Page));
     if (!page)
     {
         munmap(ptr, page_size);
-        return ft_nullptr;
+        return (ft_nullptr);
     }
     page->start = ptr;
     page->size = page_size;
@@ -74,12 +73,12 @@ Block* find_free_block(size_t size)
         while (cur_block)
         {
             if (cur_block->free && cur_block->size >= size)
-                return cur_block;
+                return (cur_block);
             cur_block = cur_block->next;
         }
         cur_page = cur_page->next;
     }
-    return ft_nullptr;
+    return (ft_nullptr);
 }
 
 Block* merge_block(Block* block)
@@ -99,7 +98,7 @@ Block* merge_block(Block* block)
             block->next->prev = block->prev;
         block = block->prev;
     }
-    return block;
+    return (block);
 }
 
 size_t align8(size_t size)

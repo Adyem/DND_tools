@@ -10,7 +10,7 @@
 
 void cma_free(void* ptr)
 {
-    if (DEBUG == 1 || OFFSWITCH == 1)
+    if (OFFSWITCH == 1)
     {
         free(ptr);
         return ;
@@ -19,7 +19,7 @@ void cma_free(void* ptr)
         return ;
     Block* block = (Block*)((char*)ptr - sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
-        return ;
+        raise(SIGSEGV);
     block->free = true;
     merge_block(block);
 	return ;
