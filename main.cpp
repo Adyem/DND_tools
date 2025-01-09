@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -34,5 +35,6 @@ int main(int argc, char **argv)
     ft_request_input(name);
     ft_free_memory_name(name, 0);
 	rl_clear_suggestions();
+	cma_cleanup();
     return (0);
 }

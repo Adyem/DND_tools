@@ -13,5 +13,6 @@ char	**cma_split(char const *s, char c);
 char	*cma_itoa(int n);
 char	*cma_strjoin(char const *string_1, char const *string_2);
 void	cma_free_double(char **content);
+void	cma_cleanup();
 
 #endif

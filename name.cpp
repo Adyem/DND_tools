@@ -23,6 +23,7 @@ void ft_free_memory_name(t_name *name, int exit_failure)
     if (exit_failure)
 	{
 		rl_clear_suggestions();
+		cma_cleanup();
         exit(exit_failure);
 	}
     return ;
