@@ -13,7 +13,7 @@ int	ft_check_player_entry(const char *entry)
 {
 	char	*filename;
 
-	filename = cma_strjoin("data/pc--", entry, false);
+	filename = cma_strjoin("data/pc--", entry);
 	if (!filename)
 		return (1);
 	if (access(filename, R_OK | W_OK) == 0)
@@ -50,7 +50,7 @@ static bool ft_process_player_entry(char **player_list, char *line, const char *
 {
     if (ft_strncmp(entry_prefix, line, strlen(entry_prefix)) == 0)
     {
-        player_list[*player_count] = cma_strdup(line + strlen(entry_prefix), false);
+        player_list[*player_count] = cma_strdup(line + strlen(entry_prefix));
         if (!player_list[*player_count])
         {
             cma_free_double(player_list);
@@ -81,7 +81,7 @@ char **ft_get_pc_list()
     lines = ft_open_and_read_initiative();
     if (!lines)
         return (ft_nullptr);
-    player_list = (char **)cma_calloc(MAX_PLAYERS, sizeof(char *), false);
+    player_list = (char **)cma_calloc(MAX_PLAYERS, sizeof(char *));
     if (!player_list)
         return (ft_nullptr);
     line_index = 0;

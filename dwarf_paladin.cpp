@@ -41,7 +41,7 @@ ft_sharedptr<t_char> ft_dwarf_paladin(const int index, const char **input, t_nam
 	*info = DWARF_PALADIN_INFO;
 	info->name = input[0];
 	info->struct_name = name;
-	info->save_file = cma_strjoin("data/", input[0], false);
+	info->save_file = cma_strjoin("data/", input[0]);
 	if (!info->save_file)
 	{
 		ft_free_info(info);

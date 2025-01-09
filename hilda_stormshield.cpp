@@ -38,7 +38,7 @@ ft_sharedptr<t_char> ft_hilda_stormshield(const int index, const char **input, t
     *info = HILDA_STORMSHIELD_INFO;
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0], false);
+    info->save_file = cma_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         ft_free_info(info);

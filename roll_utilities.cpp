@@ -116,7 +116,7 @@ int	ft_roll_itoa(int result, int *i, char *string)
 
 	if (DEBUG == 1)
 		pf_printf("roll itoa: the value of i=%d\n", *i);
-	temp = cma_itoa(result, false);
+	temp = cma_itoa(result);
 	if (!temp)
 		return (1);
 	y = 0;

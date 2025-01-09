@@ -11,14 +11,13 @@ class ft_string
         size_t   _length;
         size_t   _capacity;
         int      _errorCode;
-        bool     _criticality;
 
         void    resize(size_t new_capacity) noexcept;
         void    setError(int errorCode) noexcept;
 
     public:
         ft_string() noexcept;
-        ft_string(const char *init_str, bool crit = false) noexcept;
+        ft_string(const char *init_str) noexcept;
         ft_string(const ft_string& other) noexcept;
         ft_string(ft_string&& other) noexcept;
         ft_string &operator=(const ft_string& other) noexcept;
@@ -40,7 +39,6 @@ class ft_string
         bool        empty() const noexcept;
         int         getError() const noexcept;
         const char* errorStr() const noexcept;
-        bool        isCritical() const noexcept;
         void        move(ft_string& other) noexcept;
         void        erase(size_t index, int count) noexcept;
 

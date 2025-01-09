@@ -16,7 +16,6 @@ class ft_vector
     	size_t		_size;
     	size_t		_capacity;
     	bool		_errorCode;
-    	bool		_critical;
 
     	void	destroy_elements(size_t from, size_t to);
     	void	setError(int errorCode);
@@ -25,7 +24,7 @@ class ft_vector
     	using iterator = ElementType*;
     	using const_iterator = const ElementType*;
 
-    	ft_vector(size_t initial_capacity = 0, bool criticality = false);
+    	ft_vector(size_t initial_capacity = 0);
     	~ft_vector();
 
     	ft_vector(const ft_vector&) = delete;
@@ -58,13 +57,13 @@ class ft_vector
 };
 
 template <typename ElementType>
-ft_vector<ElementType>::ft_vector(size_t initial_capacity, bool criticality)
-    : _data(nullptr), _size(0), _capacity(0), _errorCode(false), _critical(criticality)
+ft_vector<ElementType>::ft_vector(size_t initial_capacity)
+    : _data(nullptr), _size(0), _capacity(0), _errorCode(false)
 {
     if (initial_capacity > 0)
     {
-        this->_data = static_cast<ElementType*>(cma_malloc(initial_capacity * sizeof(ElementType),
-					this->_critical));
+        this->_data = static_cast<ElementType*>
+			(cma_malloc(initial_capacity * sizeof(ElementType)));
         if (this->_data == ft_nullptr)
             this->setError(VECTOR_ALLOC_FAIL);
         else
@@ -87,8 +86,7 @@ ft_vector<ElementType>::ft_vector(ft_vector<ElementType>&& other) noexcept
     : _data(other._data),
       _size(other._size),
       _capacity(other._capacity),
-      _errorCode(other._errorCode),
-      _critical(other._critical)
+      _errorCode(other._errorCode)
 {
     other._data = nullptr;
     other._size = 0;
@@ -108,7 +106,6 @@ ft_vector<ElementType>& ft_vector<ElementType>::operator=(ft_vector<ElementType>
         this->_size = other._size;
         this->_capacity = other._capacity;
         this->_errorCode = other._errorCode;
-        this->_critical = other._critical;
         other._data = nullptr;
         other._size = 0;
         other._capacity = 0;
@@ -240,7 +237,7 @@ void ft_vector<ElementType>::reserve(size_t new_capacity)
     if (new_capacity > this->_capacity)
     {
         ElementType* new_data = static_cast<ElementType*>(cma_realloc(this->_data,
-                    new_capacity * sizeof(ElementType), this->_critical));
+                    new_capacity * sizeof(ElementType)));
         if (new_data == nullptr)
         {
             this->setError(VECTOR_ALLOC_FAIL);

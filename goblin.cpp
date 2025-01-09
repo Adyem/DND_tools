@@ -1,3 +1,4 @@
+#include "character.hpp"
 #include "dnd_tools.hpp"
 #include "goblin.hpp"
 #include "libft/Printf/printf.hpp"
@@ -38,7 +39,7 @@ ft_sharedptr<t_char> ft_goblin(const int index, const char **input, t_name *name
     *info = GOBLIN_INFO;
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0], false);
+    info->save_file = cma_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         ft_free_info(info);

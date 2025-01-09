@@ -2,76 +2,22 @@
 # define CHARACTER_H
 
 #include "libft/CPP_class/file.hpp"
-#include "libft/Template/shared_ptr.hpp"
 
-# define ERROR_RESISTANCE 9999
+struct s_char;
+struct s_buff;
+struct s_name;
+struct s_equipment_id;
 
-typedef struct	s_buff t_buff;
-typedef struct	s_char t_char;
-typedef struct	s_name t_name;
+typedef struct s_char t_char;
+typedef struct s_buff t_buff;
+typedef struct s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 
-typedef int		(*cast_buff_debuff)(ft_sharedptr<t_char> &, const char **, t_buff *);
-typedef void	(*c_action)(ft_sharedptr<t_char> &, t_equipment_id *, int);
+template <typename T>
+class ft_sharedptr;
+
+typedef void (*c_action)(ft_sharedptr<s_char> &, s_equipment_id *, int);
 typedef void 	(*c_turn)(ft_sharedptr<t_char>&);
-typedef ft_sharedptr<t_char> (*c_name)(int, const char **, t_name *, int);
-typedef void (*t_spellcast_func)(ft_sharedptr<t_char> &character, bool critical_strike);
-
-typedef struct s_known_spell
-{
-    const char      *cmd;
-    int             *learned;
-    t_spellcast_func cast_func;
-}   t_known_spell;
-
-typedef struct s_damage_info
-{
-    int mod;
-    int result;
-    int damage;
-    int stat_mod;
-    int dice_amount;
-    int dice_faces;
-}   t_damage_info;
-
-typedef struct s_target_data
-{
-	ft_file	file[20];
-	char	*Pchar_name[20];
-	ft_sharedptr<t_char> target[20];
-	ft_sharedptr<t_char> target_copy[20];
-	t_buff	*buff_info;
-}	t_target_data;
-
-typedef struct s_key_value_triplet
-{
-    const char *key;
-    int *value;
-    int unset_value;
-} t_key_value_triplet;
-
-typedef struct s_buff
-{
-	int					target_amount;
-    char				*target;
-	const char			*spell_name;
-    int					spell_id;
-    int					dice_faces_mod;
-    int					dice_amount_mod;
-	int					extra_mod;
-    int					duration;
-	int					buff;
-	int					error;
-	cast_buff_debuff	cast_spell;
-}	t_buff;
-
-
-typedef struct s_name
-{
-	char	*name;
-	c_name	function;
-	t_name	*next;
-}	t_name;
 
 typedef struct	s_stats
 {
@@ -491,5 +437,76 @@ typedef struct	s_char
 	t_name			*struct_name;
     t_physical      physical;
 }	t_char;
+
+#include "libft/Template/shared_ptr.hpp"
+
+# define ERROR_RESISTANCE 9999
+
+typedef struct	s_buff t_buff;
+typedef struct	s_char t_char;
+typedef struct	s_name t_name;
+typedef struct s_equipment_id t_equipment_id;
+
+typedef int		(*cast_buff_debuff)(ft_sharedptr<t_char> &, const char **, t_buff *);
+typedef void	(*c_action)(ft_sharedptr<t_char> &, t_equipment_id *, int);
+typedef void 	(*c_turn)(ft_sharedptr<t_char>&);
+typedef ft_sharedptr<t_char> (*c_name)(int, const char **, t_name *, int);
+typedef void (*t_spellcast_func)(ft_sharedptr<t_char> &character, bool critical_strike);
+
+typedef struct s_known_spell
+{
+    const char      *cmd;
+    int             *learned;
+    t_spellcast_func cast_func;
+}   t_known_spell;
+
+typedef struct s_damage_info
+{
+    int mod;
+    int result;
+    int damage;
+    int stat_mod;
+    int dice_amount;
+    int dice_faces;
+}   t_damage_info;
+
+typedef struct s_target_data
+{
+	ft_file	file[20];
+	char	*Pchar_name[20];
+	ft_sharedptr<t_char> target[20];
+	ft_sharedptr<t_char> target_copy[20];
+	t_buff	*buff_info;
+}	t_target_data;
+
+typedef struct s_key_value_triplet
+{
+    const char *key;
+    int *value;
+    int unset_value;
+} t_key_value_triplet;
+
+typedef struct s_buff
+{
+	int					target_amount;
+    char				*target;
+	const char			*spell_name;
+    int					spell_id;
+    int					dice_faces_mod;
+    int					dice_amount_mod;
+	int					extra_mod;
+    int					duration;
+	int					buff;
+	int					error;
+	cast_buff_debuff	cast_spell;
+}	t_buff;
+
+
+typedef struct s_name
+{
+	char	*name;
+	c_name	function;
+	t_name	*next;
+}	t_name;
 
 #endif

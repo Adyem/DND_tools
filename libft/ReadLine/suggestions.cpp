@@ -17,7 +17,7 @@ void rl_add_suggestion(const char *word)
         index++;
     }
     if (suggestion_count < MAX_SUGGESTIONS)
-        suggestions[suggestion_count++] = cma_strdup(word, true);
+        suggestions[suggestion_count++] = cma_strdup(word);
     else
         pf_printf_fd(2, "Suggestion list full\n");
     return ;

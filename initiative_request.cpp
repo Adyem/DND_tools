@@ -17,13 +17,13 @@ int ft_request_initiative(t_pc *player)
 	if (g_dnd_test == true)
 		return (player->initiative = ft_dice_roll(1, 20));
 	message = NULL;
-    temp = cma_strjoin("Requesting initiative for ", player->name, false);
+    temp = cma_strjoin("Requesting initiative for ", player->name);
     if (!temp)
     {
         pf_printf_fd(2, "250 Error allocating memory: %s\n", strerror(errno));
         return (1);
     }
-    message = cma_strjoin(temp, ": ", false);
+    message = cma_strjoin(temp, ": ");
     cma_free(temp);
     if (!message)
     {

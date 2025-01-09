@@ -28,7 +28,7 @@ static void ft_handle_allocation_failure(char **lines)
 static char **ft_reallocate_lines(char **lines, int new_size)
 {
     int index = 0;
-    char **new_lines = (char **)cma_calloc(new_size + 1, sizeof(char *), false);
+    char **new_lines = (char **)cma_calloc(new_size + 1, sizeof(char *));
 
     if (!new_lines)
     {
@@ -56,7 +56,7 @@ char **ft_read_file_lines(ft_file &file)
 
     while (true)
     {
-        current_line = get_next_line(file, false);
+        current_line = get_next_line(file);
         if (!current_line)
             break ;
         if (DEBUG == 1)
@@ -66,7 +66,7 @@ char **ft_read_file_lines(ft_file &file)
         if (!lines)
         {
             cma_free(current_line);
-            get_next_line(file, false);
+            get_next_line(file);
             return (ft_nullptr);
         }
         lines[line_count - 1] = current_line;

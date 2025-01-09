@@ -26,10 +26,10 @@ static char **ft_allocate_initial_data(char *content, int ofset, ft_sharedptr<t_
 {
     char **data;
 
-    data = (char **)cma_malloc(sizeof(char *) * 2, false);
+    data = (char **)cma_malloc(sizeof(char *) * 2);
     if (!data)
         return (ft_handle_memory_error(info, ft_nullptr, 293));
-    data[0] = cma_strdup(&content[ofset], false);
+    data[0] = cma_strdup(&content[ofset]);
     if (!data[0])
         return (ft_handle_memory_error(info, data, 294));
     data[1] = ft_nullptr;
@@ -40,7 +40,7 @@ static char **ft_reallocate_data_array(char **data, int new_size, ft_sharedptr<t
 {
     char **temp;
 
-    temp = (char **)cma_malloc(new_size * sizeof(char *), false);
+    temp = (char **)cma_malloc(new_size * sizeof(char *));
     if (!temp)
         return (ft_handle_memory_error(info, data, 295));
     int index = 0;
@@ -63,7 +63,7 @@ static char **ft_append_target_to_data(char **data, char *content, int ofset,
     data = ft_reallocate_data_array(data, index + 2, info);
     if (!data)
         return (ft_nullptr);
-    data[index] = cma_strdup(&content[ofset], false);
+    data[index] = cma_strdup(&content[ofset]);
     if (!data[index])
         return ft_handle_memory_error(info, data, 296);
     data[index + 1] = ft_nullptr;

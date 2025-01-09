@@ -47,7 +47,7 @@ static int ft_turn_move_marker(t_pc *players)
 			temp->name = name;
 			if (temp->next)
 			{
-				name = cma_strjoin("--turn--", temp->next->name, false);
+				name = cma_strjoin("--turn--", temp->next->name);
 				if (!name)
 				{
 					pf_printf("245-Error allocating memory turn strjoin\n");
@@ -58,7 +58,7 @@ static int ft_turn_move_marker(t_pc *players)
 			}
 			else
 			{
-				name = cma_strjoin("--turn--", players->name, false);
+				name = cma_strjoin("--turn--", players->name);
 				if (!name)
 				{
 					pf_printf("246-Error allocating memory turn strjoin\n");

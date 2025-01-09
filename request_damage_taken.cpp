@@ -67,7 +67,7 @@ int ft_request_damage(ft_sharedptr<t_char> &info)
             cma_free(line);
             return (0);
         }
-        input = cma_split(line, ' ', false);
+        input = cma_split(line, ' ');
         if (!input)
         {
             if (!fail)

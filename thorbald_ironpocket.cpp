@@ -38,7 +38,7 @@ ft_sharedptr<t_char> ft_thorbald_ironpocket(const int index, const char **input,
     *info = THORBALD_IRONPOCKET_INFO;
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0], false);
+    info->save_file = cma_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         ft_free_info(info);

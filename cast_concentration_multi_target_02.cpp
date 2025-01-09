@@ -30,7 +30,7 @@ static int	ft_apply_concentration(t_target_data *target_data, ft_sharedptr<t_cha
 	int	index = 0;
 
 	info->concentration.targets = (char **)cma_calloc(target_data->buff_info->target_amount,
-			sizeof(char *), false);
+			sizeof(char *));
 	if (!info->concentration.targets)
 		return (FAILURE);
 	while (index < target_data->buff_info->target_amount)
@@ -40,7 +40,7 @@ static int	ft_apply_concentration(t_target_data *target_data, ft_sharedptr<t_cha
 			if (target_data->buff_info->cast_spell(target_data->target[index], input,
 						target_data->buff_info))
 				return (FAILURE);
-			info->concentration.targets[index] = cma_strdup(target_data->Pchar_name[index], false);
+			info->concentration.targets[index] = cma_strdup(target_data->Pchar_name[index]);
 			if (!info->concentration.targets[index])
 				return (FAILURE);
 		}
@@ -55,8 +55,8 @@ static int	ft_apply_concentration(t_target_data *target_data, ft_sharedptr<t_cha
     return (SUCCES);
 }
 
-void	ft_cast_concentration_multi_target_02(ft_sharedptr<t_char> &info, t_target_data *target_data,
-			const char **input)
+void	ft_cast_concentration_multi_target_02(ft_sharedptr<t_char> &info,
+		t_target_data *target_data, const char **input)
 {
 	ft_file info_save_file;
 

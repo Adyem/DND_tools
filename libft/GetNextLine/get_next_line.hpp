@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <stddef.h>
 
-char	*ft_strjoin_gnl(char *string_1, char *string_2, bool critical);
-char	*get_next_line(ft_file &file, bool critical);
+char	*ft_strjoin_gnl(char *string_1, char *string_2);
+char	*get_next_line(ft_file &file);
 
 #endif

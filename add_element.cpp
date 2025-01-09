@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 
-void ft_add_element(const char ***array, const char *element, bool critical)
+void ft_add_element(const char ***array, const char *element)
 {
     size_t i, current_size;
     const char **new_array;
@@ -13,7 +13,7 @@ void ft_add_element(const char ***array, const char *element, bool critical)
         return ;
     if (*array == NULL)
     {
-        new_array = (const char **)cma_malloc(2 * sizeof(char *), critical);
+        new_array = (const char **)cma_malloc(2 * sizeof(char *));
         if (!new_array)
             return ;
         new_array[0] = element;
@@ -29,7 +29,7 @@ void ft_add_element(const char ***array, const char *element, bool critical)
         i++;
     }
     current_size = (i + 2) * sizeof(char *);
-    new_array = (const char **)cma_realloc(*array, current_size, critical);
+    new_array = (const char **)cma_realloc(*array, current_size);
     if (!new_array)
         return ;
     new_array[i] = element;

@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "CMA.hpp"
 
-char	*cma_strdup(const char *string, bool criticality)
+char	*cma_strdup(const char *string)
 {
 	size_t	len;
 	char	*new_string;
@@ -14,7 +14,7 @@ char	*cma_strdup(const char *string, bool criticality)
 	while (string[len])
 		len++;
 	len++;
-	new_string = (char *)cma_malloc(len, criticality);
+	new_string = (char *)cma_malloc(len);
 	if (!new_string)
 		return (NULL);
 	i = 0;

@@ -14,7 +14,7 @@ static void ft_add_player(t_pc *player)
 {
 	char *filename;
 
-	filename = cma_strjoin("data/PC--", player->name, false);
+	filename = cma_strjoin("data/PC--", player->name);
 	if (!filename)
 	{
 		pf_printf("240-Error: Allocating memory for player string join\n");
@@ -61,13 +61,13 @@ void	ft_player(const char **input)
 	{
 		if (ft_strcmp_dnd(input[0], "add") == 0)
 		{
-			player = (t_pc *)cma_malloc(sizeof(t_pc), false);
+			player = (t_pc *)cma_malloc(sizeof(t_pc));
 			if (!player)
 			{
 				pf_printf("248-Error: Allocating memory for player\n");
 				return ;
 			}
-			player->name = cma_strdup(input[2], false);
+			player->name = cma_strdup(input[2]);
 			if (!player->name)
 			{
 				pf_printf("249-Error: Allocating memory for player name\n");

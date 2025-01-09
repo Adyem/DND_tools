@@ -33,13 +33,13 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *n
 {
     t_name *new_node;
 
-    new_node = (t_name *)cma_malloc(sizeof(t_name), true);
+    new_node = (t_name *)cma_malloc(sizeof(t_name));
     if (!new_node)
     {
         pf_printf_fd(2, "112-Error: Malloc failure in Name Struct\n");
         ft_free_memory_name(first_node, 1);
     }
-    new_node->name = cma_strdup(new_name, true);
+    new_node->name = cma_strdup(new_name);
     if (!new_node->name)
     {
         cma_free(new_node);
@@ -63,7 +63,7 @@ static char *ft_new_name(const char *name, int index)
     char *new_name;
 
     new_name_length = ft_strlen(name) + 4;
-    new_name = (char *)cma_calloc(new_name_length, sizeof(char), true);
+    new_name = (char *)cma_calloc(new_name_length, sizeof(char));
     if (!new_name)
     {
         pf_printf_fd(2, "114-Error: Malloc failure in Name Struct\n");

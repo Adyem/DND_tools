@@ -38,7 +38,7 @@ static char *ft_check_string(char *content, int index)
     char *result;
 
     content = content + index;
-    result = cma_strdup(content, false);
+    result = cma_strdup(content);
     return (result);
 }
 

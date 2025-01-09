@@ -53,7 +53,7 @@ ft_sharedptr<t_char> ft_chaos_crystal(const int index, const char **input, t_nam
     *info = CHAOS_CRYSTAL_INFO;
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0], false);
+    info->save_file = cma_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         pf_printf("106-Error: Failed to allocate memory save_file name %s\n", info->name);

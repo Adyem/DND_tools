@@ -25,7 +25,7 @@ int rl_initialize_state(readline_state_t *state)
 	if (rl_enable_raw_mode() == -1)
 		return (1);
 	state->bufsize = INITIAL_BUFFER_SIZE;
-    state->buffer = (char *)cma_calloc(state->bufsize, sizeof(char), true);
+    state->buffer = (char *)cma_calloc(state->bufsize, sizeof(char));
     if (!state->buffer)
     {
         rl_disable_raw_mode();

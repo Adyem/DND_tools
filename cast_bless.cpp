@@ -37,11 +37,12 @@ void ft_cast_bless(ft_sharedptr<t_char> &info, const char **input)
 	buff.target_amount = info->spells.bless.target_amount
 		+ info->spells.bless.upcast_extra_targets;
 	buff.dice_amount_mod = info->spells.bless.dice_amount;
-	buff.dice_faces_mod = info->spells.bless.dice_faces + (info->spells.bless.upcast_extra_dice_faces
+	buff.dice_faces_mod = info->spells.bless.dice_faces
+		+ (info->spells.bless.upcast_extra_dice_faces
 		* (cast_at_level - info->spells.bless.base_level));
 	buff.extra_mod = info->spells.bless.dice_amount + (info->spells.bless.upcast_extra_dice_amount
 		* (cast_at_level - info->spells.bless.base_level));
-	buff.target = cma_strdup(input[3], false);
+	buff.target = cma_strdup(input[3]);
 	if (!buff.target)
 	{
 		pf_printf_fd(2, "121-Error allocating memory bless target");

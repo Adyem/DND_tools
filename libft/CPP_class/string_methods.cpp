@@ -9,8 +9,7 @@ void ft_string::resize(size_t new_capacity) noexcept
 {
     if (new_capacity <= this->_capacity)
         return ;
-    char* new_data = static_cast<char*>(cma_realloc(this->_data, new_capacity,
-                this->_criticality));
+    char* new_data = static_cast<char*>(cma_realloc(this->_data, new_capacity));
     if (!new_data)
     {
         this->setError(STRING_MEM_ALLOC_FAIL);
@@ -130,11 +129,6 @@ int ft_string::getError() const noexcept
     return (this->_errorCode);
 }
 
-bool ft_string::isCritical() const noexcept
-{
-    return (this->_criticality);
-}
-
 const char* ft_string::errorStr() const noexcept
 {
     return (ft_strerror(this->_errorCode));
@@ -156,12 +150,10 @@ void ft_string::move(ft_string& other) noexcept
         _length = other._length;
         _capacity = other._capacity;
         _errorCode = other._errorCode;
-        _criticality = other._criticality;
         other._data = nullptr;
         other._length = 0;
         other._capacity = 0;
         other._errorCode = 0;
-        other._criticality = false;
     }
 	return ;
 }

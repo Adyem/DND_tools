@@ -2,7 +2,7 @@
 #include "../Libft/libft.hpp"
 #include "../CPP_class/nullptr.hpp"
 
-static char	*allocate_new_string(const char *string_1, const char *string_2, bool critical)
+static char	*allocate_new_string(const char *string_1, const char *string_2)
 {
 	int		total_len;
 	char	*new_str;
@@ -12,20 +12,20 @@ static char	*allocate_new_string(const char *string_1, const char *string_2, boo
 		total_len += ft_strlen(string_1);
 	if (string_2)
 		total_len += ft_strlen(string_2);
-	new_str = (char *)cma_malloc(total_len + 1, critical);
+	new_str = (char *)cma_malloc(total_len + 1);
 	if (!new_str)
 		return (ft_nullptr);
 	return (new_str);
 }
 
-char	*cma_strjoin(char const *string_1, char const *string_2, bool critical)
+char	*cma_strjoin(char const *string_1, char const *string_2)
 {
 	char	*result;
 	int		i;
 
 	if (!string_1 && !string_2)
 		return (ft_nullptr);
-	result = allocate_new_string(string_1, string_2, critical);
+	result = allocate_new_string(string_1, string_2);
 	if (!result)
 		return (ft_nullptr);
 	i = 0;

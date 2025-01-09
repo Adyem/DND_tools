@@ -27,14 +27,14 @@ char	*fill_digits(char *c, unsigned int num, int start_index)
 	return (c);
 }
 
-char	*convert_int(int n, int is_negative, bool critical)
+char	*convert_int(int n, int is_negative)
 {
 	int				i;
 	char			*c;
 	unsigned int	num;
 
 	i = itoa_len(n);
-	c = (char *)cma_malloc(i + 1 + is_negative, critical);
+	c = (char *)cma_malloc(i + 1 + is_negative);
 	if (!c)
 		return (ft_nullptr);
 	if (n < 0)
@@ -51,17 +51,17 @@ char	*convert_int(int n, int is_negative, bool critical)
 	return (c);
 }
 
-char	*cma_itoa(int n, bool critical)
+char	*cma_itoa(int n)
 {
 	int	is_negative;
 
 	if (n > 0)
 		is_negative = 0;
 	else if (n == -2147483648)
-		return (cma_strdup("-2147483648", critical));
+		return (cma_strdup("-2147483648"));
 	else if (n == 0)
-		return (cma_strdup("0", critical));
+		return (cma_strdup("0"));
 	else
 		is_negative = 1;
-	return (convert_int(n, is_negative, critical));
+	return (convert_int(n, is_negative));
 }

@@ -48,13 +48,13 @@ static int ft_apply_concentration_buff(ft_sharedptr<t_char> &info, ft_sharedptr<
 {
     char	**temp;
 
-    temp = (char **)cma_calloc(2, sizeof(char *), false);
+    temp = (char **)cma_calloc(2, sizeof(char *));
     if (!temp)
     {
 		ft_cast_concentration_cleanup(info, target, save_files, buff, 2);
         return (1);
     }
-    temp[0] = (char *)cma_malloc((ft_strlen(input[3]) + 1) * sizeof(char), false);
+    temp[0] = (char *)cma_malloc((ft_strlen(input[3]) + 1) * sizeof(char));
     if (!temp[0])
     {
 		ft_cast_concentration_cleanup(info, target, save_files, buff, 3);

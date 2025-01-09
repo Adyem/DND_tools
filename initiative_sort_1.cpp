@@ -24,7 +24,7 @@ static int ft_initiative_copy_v(t_pc *head, t_pc *players, char *content)
     }
     *temp = '\0';
     temp++;
-    players->name = cma_strdup(content, false);
+    players->name = cma_strdup(content);
     if (!players->name)
     {
         pf_printf("257 Error allocating memory\n");
@@ -54,7 +54,7 @@ t_pc *ft_initiative_players_am(char **content)
     t_pc *players;
     t_pc *temp;
 
-    players = (t_pc *)cma_malloc(sizeof(t_pc), false);
+    players = (t_pc *)cma_malloc(sizeof(t_pc));
     if (!players)
     {
         pf_printf("Error allocating memory: players\n");
@@ -68,7 +68,7 @@ t_pc *ft_initiative_players_am(char **content)
     int index = 1;
     while (content[index])
     {
-        temp->next = (t_pc *)cma_malloc(sizeof(t_pc), false);
+        temp->next = (t_pc *)cma_malloc(sizeof(t_pc));
         if (!temp->next)
         {
             pf_printf("Error allocating memory: players->next\n");

@@ -10,13 +10,13 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
     int current_count = 0;
     while (double_string[current_count])
         current_count++;
-    char **resized_array = (char **)cma_calloc(current_count + size + 1, sizeof(char *), false);
+    char **resized_array = (char **)cma_calloc(current_count + size + 1, sizeof(char *));
     if (!resized_array)
         return (ft_nullptr);
     int index = 0;
     while (index < current_count)
     {
-        resized_array[index] = cma_strdup(double_string[index], false);
+        resized_array[index] = cma_strdup(double_string[index]);
         if (!resized_array[index])
         {
             index--;
@@ -30,7 +30,7 @@ char **ft_resize_double_char(char **double_string, const char *string, int size)
         }
         index++;
     }
-    resized_array[current_count] = cma_strdup(string, false);
+    resized_array[current_count] = cma_strdup(string);
     if (!resized_array[current_count])
     {
         index = 0;

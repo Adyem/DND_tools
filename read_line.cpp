@@ -9,7 +9,7 @@ static char	**ft_parse_input(char *input_string)
 {
 	char **input;
 
-	input = cma_split(input_string, ' ', false);
+	input = cma_split(input_string, ' ');
 	if (!input)
 	{
 		cma_free(input_string);

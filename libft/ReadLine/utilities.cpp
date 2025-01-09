@@ -11,7 +11,7 @@
 
 char *rl_resize_buffer(char *old_buffer, int current_size, int new_size)
 {
-    char *new_buffer = (char *)cma_malloc(new_size, true);
+    char *new_buffer = (char *)cma_malloc(new_size);
 
     if (!new_buffer)
     {
@@ -65,12 +65,12 @@ int rl_read_key()
 void rl_update_history(const char *buffer)
 {
     if (history_count < MAX_HISTORY)
-        history[history_count++] = cma_strdup(buffer, true);
+        history[history_count++] = cma_strdup(buffer);
     else
     {
         cma_free(history[0]);
         memmove(&history[0], &history[1], sizeof(char *) * (MAX_HISTORY - 1));
-        history[MAX_HISTORY - 1] = cma_strdup(buffer, true);
+        history[MAX_HISTORY - 1] = cma_strdup(buffer);
     }
 	return ;
 }

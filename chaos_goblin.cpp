@@ -41,7 +41,7 @@ ft_sharedptr<t_char> ft_chaos_goblin(const int index, const char **input, t_name
     *info = CHAOS_GOBLIN_INFO;
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0], false);
+    info->save_file = cma_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         pf_printf_fd(2, "104-Error: Failed to allocate memory save_file name %s\n", info->name);

@@ -44,7 +44,7 @@ void ft_cast_hunters_mark(ft_sharedptr<t_char> &info, const char **input)
 		buff.dice_faces_mod += info->spells.hunters_mark.upcast_extra_dice_face * upcast_level;
 		buff.extra_mod += info->spells.hunters_mark.upcast_extra_damage * upcast_level;
 	}
-	buff.target = cma_strdup(input[3], false);
+	buff.target = cma_strdup(input[3]);
 	if (!buff.target)
 	{
 		pf_printf_fd(2, "121-Error allocating memory hunters mark target");

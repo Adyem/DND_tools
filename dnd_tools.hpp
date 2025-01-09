@@ -328,7 +328,7 @@ int			ft_check_equipment_slots(ft_sharedptr<t_char> &character);
 void		ft_initialize_suggestions_readline();
 char		**ft_get_pc_list();
 void		ft_remove_element(char **array, char *element, bool free_element);
-void		ft_add_element(const char ***array, const char *element, bool critical);
+void		ft_add_element(const char ***array, const char *element);
 void		ft_get_random_target(char **player_list, char **target_field);
 int			ft_check_player_entry(const char *entry);
 int			ft_set_stat_player(size_t key_len, const char **field, const char *content);

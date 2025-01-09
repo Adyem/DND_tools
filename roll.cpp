@@ -82,7 +82,7 @@ void ft_command_roll(char **argv)
     index = 1;
     while (argv[index])
     {
-        result = ft_strjoin_gnl(result, argv[index], false);
+        result = ft_strjoin_gnl(result, argv[index]);
         if (!result)
         {
             pf_printf_fd(2, "168-Error: Malloc failed in ft_strjoin_gnl\n");
