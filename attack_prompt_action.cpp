@@ -6,12 +6,19 @@
 
 static void list_learned_spells(t_known_spell known_spells[])
 {
-    pf_printf("You have the following learned spells available:\n");
     int index = 0;
+	int first_spell = 0;
     while (known_spells[index].cmd != nullptr)
     {
         if (*(known_spells[index].learned) != 0)
+		{
+			if (first_spell == 0)
+			{
+			    pf_printf("You have the following learned spells available:\n");
+				first_spell = 1;
+			}
             pf_printf(" - %s\n", known_spells[index].cmd);
+		}
         index++;
     }
 	return ;
