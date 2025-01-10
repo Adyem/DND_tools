@@ -15,7 +15,6 @@ class Map
         Pair<Key, MappedType>*  _data;
         size_t                  _capacity;
         size_t                  _size;
-        bool                    _critical;
         int                     _error;
 
         void    resize(size_t newCapacity);
@@ -23,7 +22,7 @@ class Map
         void    setError(int error);
 
     public:
-        Map(size_t initialCapacity = 10, bool criticality = false);
+        Map(size_t initialCapacity = 10);
         Map(const Map& other);
         Map& operator=(const Map& other);
         Map(Map&& other) noexcept;
@@ -41,10 +40,10 @@ class Map
 };
 
 template <typename Key, typename MappedType>
-Map<Key, MappedType>::Map(size_t initialCapacity, bool criticality)
-    : _capacity(initialCapacity), _size(0), _critical(criticality), _error(ER_SUCCESS)
+Map<Key, MappedType>::Map(size_t initialCapacity)
+    : _capacity(initialCapacity), _size(0), _error(ER_SUCCESS)
 {
-    void* rawMemory = cma_malloc(sizeof(Pair<Key, MappedType>) * this->_capacity, this->_critical);
+    void* rawMemory = cma_malloc(sizeof(Pair<Key, MappedType>) * this->_capacity);
     if (!rawMemory)
     {
         this->setError(SHARED_PTR_ALLOCATION_FAILED);
@@ -56,11 +55,11 @@ Map<Key, MappedType>::Map(size_t initialCapacity, bool criticality)
 
 template <typename Key, typename MappedType>
 Map<Key, MappedType>::Map(const Map<Key, MappedType>& other)
-    : _capacity(other._capacity), _size(other._size), _critical(other._critical), _error(other._error)
+    : _capacity(other._capacity), _size(other._size), _error(other._error)
 {
 	if (other._data != ft_nullptr && this->_size > 0)
     {
-        void* rawMemory = cma_malloc(sizeof(Pair<Key, MappedType>) * this->_capacity, this->_critical);
+        void* rawMemory = cma_malloc(sizeof(Pair<Key, MappedType>) * this->_capacity);
         if (!rawMemory)
         {
             this->setError(SHARED_PTR_ALLOCATION_FAILED);
@@ -99,11 +98,10 @@ Map<Key, MappedType>& Map<Key, MappedType>::operator=(const Map<Key, MappedType>
         }
         this->_capacity = other._capacity;
         this->_size = other._size;
-        this->_critical = other._critical;
         this->_error = other._error;
         if (other._data != ft_nullptr && other._size > 0)
         {
-            void* rawMemory = cma_malloc(sizeof(Pair<Key, MappedType>) * other._capacity, other._critical);
+            void* rawMemory = cma_malloc(sizeof(Pair<Key, MappedType>) * other._capacity);
             if (!rawMemory)
             {
                 this->setError(SHARED_PTR_ALLOCATION_FAILED);
@@ -128,12 +126,11 @@ Map<Key, MappedType>& Map<Key, MappedType>::operator=(const Map<Key, MappedType>
 template <typename Key, typename MappedType>
 Map<Key, MappedType>::Map(Map<Key, MappedType>&& other) noexcept
     : _data(other._data), _capacity(other._capacity), _size(other._size),
-      _critical(other._critical), _error(other._error)
+      _error(other._error)
 {
     other._data = ft_nullptr;
     other._capacity = 0;
     other._size = 0;
-    other._critical = false;
     other._error = ER_SUCCESS;
 	return ;
 }
@@ -156,12 +153,10 @@ Map<Key, MappedType>& Map<Key, MappedType>::operator=(Map<Key, MappedType>&& oth
         this->_data = other._data;
         this->_capacity = other._capacity;
         this->_size = other._size;
-        this->_critical = other._critical;
         this->_error = other._error;
         other._data = ft_nullptr;
         other._capacity = 0;
         other._size = 0;
-        other._critical = false;
         other._error = ER_SUCCESS;
     }
     return *this;
@@ -287,7 +282,7 @@ template <typename Key, typename MappedType>
 void Map<Key, MappedType>::resize(size_t newCapacity)
 {
     this->_error = ER_SUCCESS;
-    void* rawMemory = cma_malloc(sizeof(Pair<Key, MappedType>) * newCapacity, this->_critical);
+    void* rawMemory = cma_malloc(sizeof(Pair<Key, MappedType>) * newCapacity);
     if (!rawMemory)
     {
         this->setError(SHARED_PTR_ALLOCATION_FAILED);
