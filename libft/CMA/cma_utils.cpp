@@ -61,7 +61,7 @@ Page *create_page(size_t size)
         page_list->prev = page;
         page_list = page;
     }
-    return page;
+    return (page);
 }
 
 Block *find_free_block(size_t size)
