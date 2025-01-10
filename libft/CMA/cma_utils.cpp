@@ -34,7 +34,8 @@ Page *create_page(size_t size)
     size_t page_size = PAGE_SIZE;
     if (size + sizeof(Block) > PAGE_SIZE)
         page_size = size + sizeof(Block);
-    void* ptr = mmap(ft_nullptr, page_size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    void* ptr = mmap(ft_nullptr, page_size,
+			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
     if (ptr == MAP_FAILED)
         return (ft_nullptr);
     Page* page = (Page*)malloc(sizeof(Page));
@@ -101,11 +102,6 @@ Block *merge_block(Block *block)
     return (block);
 }
 
-size_t align8(size_t size)
-{
-    return ((size + 7) & ~7);
-}
-
 void print_block_info(Block *block)
 {
     if (!block)
@@ -127,4 +123,9 @@ void print_block_info(Block *block)
     pf_printf_fd(2, "Previous Block: %p\n", (void*)block->prev);
     pf_printf_fd(2, "---------------------------\n");
 	return ;
+}
+
+size_t align8(size_t size)
+{
+    return ((size + 7) & ~7);
 }
