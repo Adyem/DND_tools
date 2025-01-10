@@ -110,8 +110,8 @@ ft_sharedptr<ManagedType>::ft_sharedptr(size_t size)
       _isArrayType(true),
       _errorCode(ER_SUCCESS)
 {
-    if (this->_referenceCount)
-    {
+	if (this->_referenceCount)
+	{
         *(this->_referenceCount) = 1;
         this->_managedPointer = static_cast<ManagedType*>(cma_calloc(this->_arraySize,
 					sizeof(ManagedType)));
@@ -129,8 +129,8 @@ ft_sharedptr<ManagedType>::ft_sharedptr(size_t size)
                     new (&this->_managedPointer[index]) ManagedType();
             }
         }
-    }
-    else
+	}
+	else
         this->set_error(SHARED_PTR_ALLOCATION_FAILED);
 	return ;
 }
