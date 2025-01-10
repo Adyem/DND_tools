@@ -29,7 +29,7 @@ Block* split_block(Block* block, size_t size)
     return (block);
 }
 
-Page* create_page(size_t size)
+Page *create_page(size_t size)
 {
     size_t page_size = PAGE_SIZE;
     if (size + sizeof(Block) > PAGE_SIZE)
@@ -64,7 +64,7 @@ Page* create_page(size_t size)
     return page;
 }
 
-Block* find_free_block(size_t size)
+Block *find_free_block(size_t size)
 {
     Page* cur_page = page_list;
     while (cur_page)
@@ -81,7 +81,7 @@ Block* find_free_block(size_t size)
     return (ft_nullptr);
 }
 
-Block* merge_block(Block* block)
+Block *merge_block(Block *block)
 {
     if (block->next && block->next->free)
     {
@@ -106,7 +106,7 @@ size_t align8(size_t size)
     return ((size + 7) & ~7);
 }
 
-void print_block_info(Block* block)
+void print_block_info(Block *block)
 {
     if (!block)
     {
@@ -119,7 +119,7 @@ void print_block_info(Block* block)
     else
         free_status = "No";
     pf_printf_fd(2, "---- Block Information ----\n");
-    pf_printf_fd(2, "Address of Block: %p\n", (void*)block);
+    pf_printf_fd(2, "Address of Block: %p\n", (void *)block);
     pf_printf_fd(2, "Magic Number: 0x%X\n", block->magic);
     pf_printf_fd(2, "Size: %zu bytes\n", block->size);
     pf_printf_fd(2, "Free: %s\n", free_status);

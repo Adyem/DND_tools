@@ -38,11 +38,11 @@ struct Page
 
 extern Page *page_list;
 
-Block	*split_block(Block* block, size_t size);
+Block	*split_block(Block *block, size_t size);
 Page	*create_page(size_t size);
 Block	*find_free_block(size_t size);
-Block	*merge_block(Block* block);
-void	print_block_info(Block* block);
+Block	*merge_block(Block *block);
+void	print_block_info(Block *block);
 size_t	align8(size_t size);
 
 #endif
