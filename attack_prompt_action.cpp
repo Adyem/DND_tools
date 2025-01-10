@@ -94,12 +94,9 @@ static void prompt_user_for_spell(t_known_spell known_spells[], ft_sharedptr<t_c
 
 void ft_prompt_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike)
 {
-    t_known_spell known_spells[] = {
-        {
-            "divine_smite",
-            &character->spells.divine_smite.learned,
-            ft_cast_divine_smite
-        },
+    t_known_spell known_spells[] =
+	{
+        { "divine_smite", &character->spells.divine_smite.learned, ft_cast_divine_smite },
         { nullptr, nullptr, nullptr }
     };
     list_learned_spells(known_spells);
