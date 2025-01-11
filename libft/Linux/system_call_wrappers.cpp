@@ -2,6 +2,7 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+#include "linux_file.hpp"
 
 int ft_open(const char *pathname, int flags, mode_t mode)
 {

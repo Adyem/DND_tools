@@ -1,20 +1,25 @@
 #ifdef _WIN32
 
-#include "file.hpp"
+#include "windows_file.hpp"
 #include <windows.h>
 #include <stdio.h>
+#include <io.h>
+#include <fcntl.h>
+#include <cstdio>
 
 static HANDLE g_handles[1024];
 
 static int store_handle(HANDLE h)
 {
-    for (int i = 0; i < 1024; i++)
+	int index = 3;
+    while (index < 1024)
 	{
-        if (g_handles[i] == NULL)
+        if (g_handles[index] == NULL)
 		{
-            g_handles[i] = h;
-            return (i);
+            g_handles[index] = h;
+            return (index);
         }
+		index++;
     }
     return (-1);
 }
@@ -105,6 +110,35 @@ int ft_close(int fd)
 		return (-1);
     clear_handle(fd);
     return (0);
+}
+
+void ft_initialize_standard_file_descriptors()
+{
+    HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hStdError = GetStdHandle(STD_ERROR_HANDLE);
+
+    if (hStdInput != INVALID_HANDLE_VALUE)
+	{
+        int fdInput = _open_osfhandle(reinterpret_cast<intptr_t>(hStdInput), _O_RDONLY);
+        if (fdInput != -1)
+            _dup2(fdInput, 0);
+    }
+    if (hStdOutput != INVALID_HANDLE_VALUE)
+	{
+        int fdOutput = _open_osfhandle(reinterpret_cast<intptr_t>(hStdOutput), _O_WRONLY);
+        if (fdOutput != -1)
+            _dup2(fdOutput, 1);
+    }
+    if (hStdError != INVALID_HANDLE_VALUE)
+	{
+        int fdError = _open_osfhandle(reinterpret_cast<intptr_t>(hStdError), _O_WRONLY);
+        if (fdError != -1)
+            _dup2(fdError, 2);
+    }
+    _setmode(0, _O_BINARY);
+    _setmode(1, _O_BINARY);
+    _setmode(2, _O_BINARY);
 }
 
 #endif
