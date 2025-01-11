@@ -25,7 +25,7 @@ struct Block
     bool		free;
     Block		*next;
     Block		*prev;
-};
+} __attribute__((aligned(8)));
 
 struct Page
 {
@@ -34,7 +34,7 @@ struct Page
     Page	*next;
     Page	*prev;
     Block	*blocks;
-};
+} __attribute__((aligned(8)));
 
 extern Page *page_list;
 
