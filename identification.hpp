@@ -105,6 +105,20 @@ typedef enum e_equipment_slot
 # define DAMAGE_TYPE_THUNDER		"thunder"
 # define DAMAGE_TYPE_PSYCHIC		"psychic"
 
+# define DAMAGE_TYPE_BLUDGEONING_ID  0
+# define DAMAGE_TYPE_PIERCING_ID     1
+# define DAMAGE_TYPE_SLASHING_ID     2
+# define DAMAGE_TYPE_FIRE_ID         3
+# define DAMAGE_TYPE_COLD_ID         4
+# define DAMAGE_TYPE_LIGHTNING_ID    5
+# define DAMAGE_TYPE_ACID_ID         6
+# define DAMAGE_TYPE_POISON_ID       7
+# define DAMAGE_TYPE_FORCE_ID        8
+# define DAMAGE_TYPE_RADIANT_ID      9
+# define DAMAGE_TYPE_NECROTIC_ID    10
+# define DAMAGE_TYPE_THUNDER_ID     11
+# define DAMAGE_TYPE_PSYCHIC_ID     12
+
 # define STAT_STR "strength"
 # define STAT_DEX "dexterity"
 # define STAT_CON "constitution"

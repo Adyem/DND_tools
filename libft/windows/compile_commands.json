@@ -1,0 +1,7 @@
+[
+    {
+        "directory": "/home/adyem/DND_tools/l/windows",
+        "command": "clang++ -target x86_64-w64-mingw32 -I/usr/x86_64-w64-mingw32/include -I/usr/x86_64-w64-mingw32/include/c++/10.3.0 -std=c++17 -Wall -Wextra -Werror -c file.cpp -o objs/file.o",
+        "file": "file.cpp"
+    }
+]
