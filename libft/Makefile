@@ -12,7 +12,8 @@ SUBDIRS :=  CMA \
             CPP_class \
             Errno \
             Networking \
-			windows
+            Windows \
+            Linux
 
 LIB_BASES := \
   CMA/CustomMemoryAllocator \
@@ -24,7 +25,8 @@ LIB_BASES := \
   CPP_class/CPP_class \
   Errno/errno \
   Networking/networking \
-  windows/windows
+  Windows/Windows \
+  Linux/Linux
 
 LIBS       := $(addsuffix .a, $(LIB_BASES))
 DEBUG_LIBS := $(addsuffix _debug.a, $(LIB_BASES))
@@ -47,7 +49,6 @@ $(TARGET): $(LIBS)
 	  cd ..; \
 	done
 	$(AR) $(ARFLAGS) $@ temp_objs/*.o
-	rm -rf temp_objs
 
 $(DEBUG_TARGET): $(DEBUG_LIBS)
 	rm -f $@

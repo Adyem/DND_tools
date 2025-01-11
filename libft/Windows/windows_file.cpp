@@ -13,22 +13,25 @@ static int store_handle(HANDLE h)
         if (g_handles[i] == NULL)
 		{
             g_handles[i] = h;
-            return i;
+            return (i);
         }
     }
-    return -1;
+    return (-1);
 }
 
 static HANDLE retrieve_handle(int fd)
 {
-    if (fd < 0 || fd >= 1024) return INVALID_HANDLE_VALUE;
-    return g_handles[fd];
+    if (fd < 0 || fd >= 1024)
+		return (INVALID_HANDLE_VALUE);
+    return (g_handles[fd]);
 }
 
 static void clear_handle(int fd)
 {
-    if (fd < 0 || fd >= 1024) return;
+    if (fd < 0 || fd >= 1024)
+		return ;
     g_handles[fd] = NULL;
+	return ;
 }
 
 int ft_open(const char *pathname, int flags, int mode)
@@ -58,46 +61,50 @@ int ft_open(const char *pathname, int flags, int mode)
         desiredAccess |= FILE_APPEND_DATA;
     HANDLE hFile = CreateFileA(pathname, desiredAccess, FILE_SHARE_READ
 			| FILE_SHARE_WRITE, NULL, creationDisposition, fileAttributes, NULL);
-	if (hFile == INVALID_HANDLE_VALUE) return -1;
+	if (hFile == INVALID_HANDLE_VALUE)
+		return (-1);
     int fd = store_handle(hFile);
 	if (fd < 0)
 	{
         CloseHandle(hFile);
-        return -1;
+        return (-1);
     }
-    return fd;
+    return (fd);
 }
 
 int ft_read(int fd, void *buf, unsigned int count)
 {
     HANDLE hFile = retrieve_handle(fd);
-    if (hFile == INVALID_HANDLE_VALUE) return -1;
-
+    if (hFile == INVALID_HANDLE_VALUE)
+		return (-1);
     DWORD bytesRead = 0;
     BOOL ok = ReadFile(hFile, buf, count, &bytesRead, NULL);
-    if (!ok) return -1;
-    return (int)bytesRead;
+    if (!ok)
+		return (-1);
+    return ((int)bytesRead);
 }
 
 int ft_write(int fd, const void *buf, unsigned int count)
 {
     HANDLE hFile = retrieve_handle(fd);
-    if (hFile == INVALID_HANDLE_VALUE) return -1;
-
+    if (hFile == INVALID_HANDLE_VALUE)
+		return (-1);
     DWORD bytesWritten = 0;
     BOOL ok = WriteFile(hFile, buf, count, &bytesWritten, NULL);
-    if (!ok) return -1;
-    return (int)bytesWritten;
+    if (!ok)
+		return (-1);
+    return ((int)bytesWritten);
 }
 
 int ft_close(int fd)
 {
     HANDLE hFile = retrieve_handle(fd);
-    if (hFile == INVALID_HANDLE_VALUE) return -1;
-    if (!CloseHandle(hFile)) return -1;
-
+    if (hFile == INVALID_HANDLE_VALUE)
+		return (-1);
+    if (!CloseHandle(hFile))
+		return (-1);
     clear_handle(fd);
-    return 0;
+    return (0);
 }
 
 #endif

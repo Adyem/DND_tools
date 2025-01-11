@@ -5,12 +5,12 @@ ARFLAGS := rcs
 OBJDIR := objs
 DEBUG_OBJDIR := objs_debug
 
-TARGET := Windows.a
-DEBUG_TARGET := Windows_debug.a
+TARGET := Linux.a
+DEBUG_TARGET := Linux.a
 
-SRCS := file.cpp
+SRCS := system_call_wrappers.cpp
 
-HEADERS := file.hpp
+HEADERS := linux_file.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))
