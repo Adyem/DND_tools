@@ -49,6 +49,7 @@ $(TARGET): $(LIBS)
 	  cd ..; \
 	done
 	$(AR) $(ARFLAGS) $@ temp_objs/*.o
+	rm -rf temp_objs
 
 $(DEBUG_TARGET): $(DEBUG_LIBS)
 	rm -f $@
