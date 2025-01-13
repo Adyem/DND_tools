@@ -123,3 +123,32 @@ ft_string::~ft_string()
     cma_free(this->_data);
     return ;
 }
+
+void *ft_string::operator new(size_t size) noexcept
+{
+    void* ptr = cma_malloc(size);
+    if (!ptr)
+        return (ft_nullptr);
+    return (ptr);
+}
+
+void ft_string::operator delete(void* ptr) noexcept
+{
+    cma_free(ptr);
+	return ;
+}
+
+void *ft_string::operator new[](size_t size) noexcept
+{
+    void* ptr = cma_malloc(size);
+    if (!ptr)
+        return (ft_nullptr);
+    return (ptr);
+}
+
+void ft_string::operator delete[](void* ptr) noexcept
+{
+    cma_free(ptr);
+	return ;
+}
+

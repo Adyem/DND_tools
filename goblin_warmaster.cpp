@@ -16,7 +16,8 @@ void ft_goblin_warmaster_turn(ft_sharedptr<t_char> &info)
         pf_printf("The warmaster will attempt a strategic melee or ranged attack during his turn\n");
     pf_printf("Warmaster currently has %d/%d hp\n", info->stats.health, info->dstats.health);
     if (info->stats.health < info->dstats.health / 2)
-        pf_printf("The warmaster is on low health and may use the command ability as a bonus action\n");
+        pf_printf("The warmaster is on low health and may use the command ability as " \
+				"a bonus action\n");
 }
 
 static void ft_initialize_gear_and_feats(ft_sharedptr<t_char> &info)

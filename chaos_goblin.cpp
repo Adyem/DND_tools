@@ -28,7 +28,8 @@ static void ft_initialize_gear_and_feats(ft_sharedptr<t_char> &info)
     return ;
 }
 
-ft_sharedptr<t_char> ft_chaos_goblin(const int index, const char **input, t_name *name, int exception)
+ft_sharedptr<t_char> ft_chaos_goblin(const int index, const char **input, t_name *name,
+										int exception)
 {
     int error = 0;
     ft_sharedptr<t_char> info(1);
