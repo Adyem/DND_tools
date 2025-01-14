@@ -10,7 +10,6 @@ ft_sharedptr<t_char> ft_validate_and_fetch_target(char *target_name, ft_sharedpt
         *error_code = 1;
         return (ft_sharedptr<t_char>());
     }
-
     if (ft_check_player_character(target_name))
     {
         *error_code = 0;

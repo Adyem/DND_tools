@@ -15,7 +15,8 @@ static const t_equipment_id WOODEN_BOW =
 	.equipment_id = WOODEN_BOW_ID,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
-	.attack = {
+	.attack =
+	{
 		.function = ft_weapon_attack,
 		.damage_type = DAMAGE_TYPE_PIERCING,
 		.stat = STAT_DEX,
@@ -59,7 +60,8 @@ static const t_equipment_id CHAOS_WAND =
 	.equipment_id = CHAOS_WAND_ID,
 	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
-	.attack = {
+	.attack =
+	{
 		.function = ft_weapon_attack,
 		.damage_type = DAMAGE_TYPE_NECROTIC,
 		.stat = STAT_INT,

@@ -11,8 +11,8 @@ static const	t_buff_lightning_strike FRANK_LIGHTNING_STRIKE_V2 =
 	.amount = 1,
 	.distance = 15,
 	.dice_amount = 2,
-	.dice_faces = 8,
-	.extra_damage = 5,
+	.dice_faces = 6,
+	.extra_damage = 3,
 };
 
 void ft_frank_turn(ft_sharedptr<t_char> &info)
