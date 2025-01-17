@@ -5,7 +5,7 @@
 #include <cstddef>
 #include <valgrind/memcheck.h>
 
-#define PAGE_SIZE 65536
+#define PAGE_SIZE 131072
 #define BYPASS_ALLOC DEBUG
 #define MAGIC_NUMBER 0xDEADBEEF
 
@@ -34,6 +34,7 @@ struct Page
     Page	*next;
     Page	*prev;
     Block	*blocks;
+	bool	heap;
 } __attribute__((aligned(8)));
 
 extern Page *page_list;

@@ -12,6 +12,15 @@
 
 Page *page_list = ft_nullptr;
 
+static void *create_stack_block(void)
+{
+	static char	memory_block[PAGE_SIZE];
+
+	if (DEBUG == 1)
+		pf_printf("allocating stack memory for CMA\n");
+	return (memory_block);
+}
+
 Block* split_block(Block* block, size_t size)
 {
     if (block->size <= size + sizeof(Block))
@@ -32,18 +41,40 @@ Block* split_block(Block* block, size_t size)
 Page *create_page(size_t size)
 {
     size_t page_size = PAGE_SIZE;
-    if (size + sizeof(Block) > PAGE_SIZE)
-        page_size = size + sizeof(Block);
-    void* ptr = mmap(ft_nullptr, page_size,
-			PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    if (ptr == MAP_FAILED)
-        return (ft_nullptr);
+    bool use_heap = true;
+
+	if (page_list == ft_nullptr)
+	{
+        page_size = PAGE_SIZE;
+        use_heap = false;
+	}
+	else
+	{
+        if (size + sizeof(Block) > PAGE_SIZE)
+            page_size = size + sizeof(Block);
+	}
+    void* ptr;
+	if (use_heap)
+	{
+        ptr = mmap(ft_nullptr, page_size,
+                   PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+        if (ptr == MAP_FAILED)
+            return (ft_nullptr);
+	}
+	else
+	{
+        ptr = create_stack_block();
+        if (!ptr)
+            return (ft_nullptr);
+    }
     Page* page = (Page*)malloc(sizeof(Page));
     if (!page)
     {
-        munmap(ptr, page_size);
+        if (use_heap)
+            munmap(ptr, page_size);
         return (ft_nullptr);
     }
+    page->heap = use_heap;
     page->start = ptr;
     page->size = page_size;
     page->next = ft_nullptr;
@@ -54,8 +85,9 @@ Page *create_page(size_t size)
     page->blocks->free = true;
     page->blocks->next = ft_nullptr;
     page->blocks->prev = ft_nullptr;
-    if (!page_list)
+    if (!page_list) {
         page_list = page;
+    }
     else
     {
         page->next = page_list;
