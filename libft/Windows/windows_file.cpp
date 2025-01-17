@@ -1,6 +1,7 @@
 #ifdef _WIN32
 
 #include "windows_file.hpp"
+#include "../CPP_class/nullptr.hpp"
 #include <windows.h>
 #include <stdio.h>
 #include <io.h>
@@ -14,7 +15,7 @@ static int store_handle(HANDLE h)
 	int index = 3;
     while (index < 1024)
 	{
-        if (g_handles[index] == NULL)
+        if (g_handles[index] == ft_nullptr)
 		{
             g_handles[index] = h;
             return (index);
@@ -35,7 +36,7 @@ static void clear_handle(int fd)
 {
     if (fd < 0 || fd >= 1024)
 		return ;
-    g_handles[fd] = NULL;
+    g_handles[fd] = ft_nullptr;
 	return ;
 }
 
@@ -139,6 +140,7 @@ void ft_initialize_standard_file_descriptors()
     _setmode(0, _O_BINARY);
     _setmode(1, _O_BINARY);
     _setmode(2, _O_BINARY);
+	return ;
 }
 
 #endif
