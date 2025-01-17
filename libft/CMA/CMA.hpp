@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <valgrind/memcheck.h>
 
-void	*cma_malloc(int size) __attribute__((warn_unused_result, malloc));
+void	*cma_malloc(int size) __attribute__((warn_unused_result));
 void	cma_free(void* ptr);
 char	*cma_strdup(const char *string) __attribute__((warn_unused_result));
 void	*cma_calloc(int count, int size) __attribute__((warn_unused_result));
