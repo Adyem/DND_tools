@@ -144,7 +144,7 @@ char	*get_next_line(ft_file &file)
 
 	while (file == -1 && index < 4096)
 	{
-		free(readed_string[index]);
+		cma_free(readed_string[index]);
 		readed_string[index] = nullptr;
 		index++;
 	}
