@@ -32,7 +32,8 @@ int ft_create_data_dir()
     {
         if (access("data", R_OK | W_OK) == -1)
         {
-            pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n", strerror(errno));
+            pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
+					strerror(errno));
             return (1);
         }
         if (DEBUG == 1)
