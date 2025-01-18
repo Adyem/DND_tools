@@ -15,7 +15,7 @@ void cma_cleanup()
     {
         Page* next_page = current_page->next;
         if (current_page->start && current_page->heap == true)
-            munmap(current_page->start, current_page->size);
+            free(current_page->start);
         free(current_page);
         current_page = next_page;
     }

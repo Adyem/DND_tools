@@ -56,8 +56,7 @@ Page *create_page(size_t size)
     void* ptr;
 	if (use_heap)
 	{
-        ptr = mmap(ft_nullptr, page_size,
-                   PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+        ptr = malloc(page_size);
         if (ptr == MAP_FAILED)
             return (ft_nullptr);
 	}
