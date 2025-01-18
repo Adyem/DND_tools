@@ -24,7 +24,8 @@ SRCS := ft_atoi.cpp \
 	ft_strrchr.cpp \
 	ft_atol.cpp \
 	ft_isdigit.cpp \
-	ft_strcmp.cpp
+	ft_strcmp.cpp \
+	ft_opendir.cpp
 
 HEADERS := libft.hpp
 

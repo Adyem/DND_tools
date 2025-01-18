@@ -15,20 +15,11 @@
 #  define O_APPEND    0x0800
 # endif
 
-# ifdef __cplusplus
-extern "C"
-{
-# endif
-
 int		ft_open(const char *pathname, int flags, int mode); 
 int		ft_read(int fd, void *buf, unsigned int count);
 int		ft_write(int fd, const void *buf, unsigned int count);
 int		ft_close(int fd);
 
 void	ft_dummy(void);
-
-# ifdef __cplusplus
-}
-# endif
 
 #endif

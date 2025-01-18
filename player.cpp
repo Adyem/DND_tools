@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -8,7 +9,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <dirent.h>
-#include <stdio.h>
 
 static void ft_add_player(t_pc *player)
 {
@@ -32,26 +32,25 @@ static void ft_add_player(t_pc *player)
 	return ;
 }
 
-static void	ft_list_players(void)
+static void ft_list_players(void)
 {
-	DIR *dir;
-	struct dirent *entry;
+	FT_DIR *dir;
+	ft_dirent *entry;
 
-	dir = opendir("data");
-	if (dir == NULL)
+	dir = ft_opendir("data");
+	if (dir == ft_nullptr)
 	{
 		pf_printf("Unable to open data folder: %s", strerror(errno));
-		return ;
+		return;
 	}
-	while ((entry = readdir(dir)) != NULL)
+	while ((entry = ft_readdir(dir)) != ft_nullptr)
 	{
 		if (strncmp(entry->d_name, "pc--", 4) == 0)
 			pf_printf("%s\n", entry->d_name + 4);
 	}
-	closedir(dir);
+	ft_closedir(dir);
 	return ;
 }
-
 
 void	ft_player(const char **input)
 {

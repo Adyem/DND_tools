@@ -41,10 +41,7 @@ static ft_sharedptr<t_char> ft_read_all_files(ft_file &file, t_name *name, char 
         pf_printf("Printing file_name: %s\n", file_name);
     info = ft_check_name(name, file_name + 5);
     if (!info)
-    {
-        pf_printf_fd(2, "255 Error allocating memory\n");
         return (ft_sharedptr<t_char> ());
-    }
     if (DEBUG == 1)
         pf_printf("Initiative file descriptor is %d\n", file.get_fd());
     info->name = file_name + 5;
@@ -111,21 +108,21 @@ void ft_open_all_files(t_name *name)
     int error = 0;
     ft_sharedptr<t_char> info;
     t_pc *player = ft_nullptr;
-    DIR *dir = ft_nullptr;
-    struct dirent *entry = ft_nullptr;
+    FT_DIR *dir = ft_nullptr;
+    ft_dirent *entry = ft_nullptr;
     char filepath[1024];
     ft_file info_save_file;
 
     info_save_file.open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if (info_save_file.get_error_code())
         error = 1;
-    dir = opendir("data");
+    dir = ft_opendir("data");
     if (dir == ft_nullptr)
     {
         pf_printf_fd(2, "Unable to open directory: %s\n", strerror(errno));
         return ;
     }
-    while ((entry = readdir(dir)) != ft_nullptr)
+    while ((entry = ft_readdir(dir)) != ft_nullptr)
     {
         if (ft_strcmp_dnd(entry->d_name, ".") == 0 || ft_strcmp_dnd(entry->d_name, "..") == 0)
             continue ;
@@ -161,19 +158,21 @@ void ft_open_all_files(t_name *name)
             write_file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
             if (write_file.get_error_code())
             {
-                pf_printf_fd(2, "Unable to open file '%s' for writing: %s\n", filepath,
-						strerror(errno));
+                pf_printf_fd(2, "Unable to open file '%s' for writing: %s\n",
+                             filepath, strerror(errno));
                 ft_free_info(info);
                 continue ;
             }
             ft_npc_write_file(info, &info->stats, &info->c_resistance, write_file);
             if (error == 0)
                 ft_initiative_write(info->initiative, entry->d_name);
+
             ft_free_info(info);
         }
     }
-    closedir(dir);
+    ft_closedir(dir);
     ft_file initiative_file;
     initiative_file.open("data/data--initiative", O_RDONLY);
     ft_initiative_sort(initiative_file);
+	return ;
 }

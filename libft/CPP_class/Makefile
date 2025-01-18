@@ -13,7 +13,7 @@ SRCS :=  string_constructors.cpp \
 		 nullptr.cpp \
 		 file.cpp
 
-HEADERS := 	   string.hpp \
+HEADERS := string.hpp \
 		   nullptr.hpp \
 		   file.hpp
 

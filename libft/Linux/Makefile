@@ -6,9 +6,10 @@ OBJDIR := objs
 DEBUG_OBJDIR := objs_debug
 
 TARGET := Linux.a
-DEBUG_TARGET := Linux.a
+DEBUG_TARGET := Linux_debug.a
 
-SRCS := system_call_wrappers.cpp
+SRCS := system_call_wrappers.cpp \
+		initialize_fd.cpp
 
 HEADERS := linux_file.hpp
 

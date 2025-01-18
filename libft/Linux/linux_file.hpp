@@ -9,10 +9,12 @@
 # include <unistd.h>
 
 void	ft_initialize_standard_file_descriptors();
-int 	ft_open(const char *pathname, int flags, mode_t mode);
-ssize_t ft_write(int fd, const void *buf, size_t count);
+int 	ft_write(int file_descriptor, char *data, int bytes);
 ssize_t ft_read(int fd, void *buf, size_t count);
 int		ft_close(int fd);
+int		ft_open(const char* pathname);
+int 	ft_open(const char* pathname, int flags);
+int 	ft_open(const char* pathname, int flags, mode_t mode);
 
 static inline void use_dummy(void)
 {
