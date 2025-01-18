@@ -18,7 +18,7 @@ FT_DIR* ft_opendir(const char* path)
     FT_DIR* dirp = reinterpret_cast<FT_DIR*>(cma_malloc(sizeof(FT_DIR)));
     if (!dirp)
 	{
-        ::close(fd);
+        ft_close(fd);
         return (ft_nullptr);
     }
     memset(dirp, 0, sizeof(FT_DIR));
@@ -28,7 +28,7 @@ FT_DIR* ft_opendir(const char* path)
     if (!dirp->buffer)
 	{
         cma_free(dirp);
-        ::close(fd);
+        ft_close(fd);
         return (ft_nullptr);
     }
     dirp->buffer_used   = 0;
@@ -65,7 +65,7 @@ int ft_closedir(FT_DIR* dirp)
 {
     if (!dirp)
         return (-1);
-    ::close(dirp->fd);
+    ft_close(dirp->fd);
     cma_free(dirp->buffer);
     cma_free(dirp);
     return (0);
