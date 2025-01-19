@@ -9,13 +9,6 @@ static void	ft_test_mode(bool *is_hit)
 		*is_hit = true;
 	else
 		*is_hit = false;
-	if (*is_hit)
-		pf_printf("[TEST MODE] The attack is a HIT (random)!\n");
-	else
-	{
-		pf_printf("[TEST MODE] The attack is a MISS (random)!\n");
-		return ;
-	}
 	return ;
 }
 
