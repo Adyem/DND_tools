@@ -10,7 +10,7 @@ static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &in
     t_name *name;
 
     if (DEBUG == 1)
-        pf_printf("killing crystal: %s\n", crystal);
+        pf_printf("phase transition: killing crystal: %s\n", crystal);
     name = info->struct_name;
     while (name != ft_nullptr)
     {

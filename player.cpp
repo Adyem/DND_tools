@@ -41,7 +41,7 @@ static void ft_list_players(void)
 	if (dir == ft_nullptr)
 	{
 		pf_printf("Unable to open data folder: %s", strerror(errno));
-		return;
+		return ;
 	}
 	while ((entry = ft_readdir(dir)) != ft_nullptr)
 	{
