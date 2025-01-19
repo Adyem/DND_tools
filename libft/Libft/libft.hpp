@@ -55,8 +55,8 @@ int			ft_strncmp(const char *string_1, const char *string_2, size_t max_len);
 int			ft_isdigit(int character);
 long		ft_atol(const char *string);
 int			ft_strcmp(const char *string1, const char *string2);
-FT_DIR* 	ft_opendir(const char* path);
-int 		ft_closedir(FT_DIR* dirp);
-ft_dirent	*ft_readdir(FT_DIR* dirp);
+FT_DIR* 	ft_opendir(const char* directoryPath);
+int 		ft_closedir(FT_DIR* directoryStream);
+ft_dirent	*ft_readdir(FT_DIR* directoryStream);
 
 #endif

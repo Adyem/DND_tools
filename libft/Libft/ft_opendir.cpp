@@ -9,64 +9,65 @@
 #include <string.h>
 #include <stdint.h>
 
-FT_DIR* ft_opendir(const char* path)
+FT_DIR* ft_opendir(const char* directoryPath)
 {
-    int fd = ft_open(path, O_DIRECTORY | O_RDONLY);
-    if (fd < 0)
+    int fileDescriptor = ft_open(directoryPath, O_DIRECTORY | O_RDONLY);
+    if (fileDescriptor < 0)
         return (ft_nullptr);
-
-    FT_DIR* dirp = reinterpret_cast<FT_DIR*>(cma_malloc(sizeof(FT_DIR)));
-    if (!dirp)
-	{
-        ft_close(fd);
-        return (ft_nullptr);
-    }
-    memset(dirp, 0, sizeof(FT_DIR));
-    dirp->fd = fd;
-    dirp->buffer_size = 4096;
-    dirp->buffer = reinterpret_cast<char*>(cma_malloc(dirp->buffer_size));
-    if (!dirp->buffer)
-	{
-        cma_free(dirp);
-        ft_close(fd);
+    FT_DIR* directoryStream = reinterpret_cast<FT_DIR*>(cma_malloc(sizeof(FT_DIR)));
+    if (!directoryStream)
+    {
+        ft_close(fileDescriptor);
         return (ft_nullptr);
     }
-    dirp->buffer_used   = 0;
-    dirp->buffer_offset = 0;
-    return (dirp);
+    memset(directoryStream, 0, sizeof(FT_DIR));
+    directoryStream->fd = fileDescriptor;
+    directoryStream->buffer_size = 4096;
+    directoryStream->buffer = reinterpret_cast<char*>(cma_malloc(directoryStream->buffer_size));
+    if (!directoryStream->buffer)
+    {
+        cma_free(directoryStream);
+        ft_close(fileDescriptor);
+        return (ft_nullptr);
+    }
+    directoryStream->buffer_used   = 0;
+    directoryStream->buffer_offset = 0;
+    return (directoryStream);
 }
 
-ft_dirent* ft_readdir(FT_DIR* dirp)
+ft_dirent* ft_readdir(FT_DIR* directoryStream)
 {
-    if (!dirp)
+    if (!directoryStream)
         return (ft_nullptr);
-    if (dirp->buffer_offset >= static_cast<size_t>(dirp->buffer_used))
-	{
-        dirp->buffer_offset = 0;
-        long nread = syscall(SYS_getdents64, dirp->fd,
-				reinterpret_cast<linux_dirent64*>(dirp->buffer), dirp->buffer_size);
-        if (nread <= 0)
+    if (directoryStream->buffer_offset >= static_cast<size_t>(directoryStream->buffer_used))
+    {
+        directoryStream->buffer_offset = 0;
+        long bytesRead = syscall(SYS_getdents64, directoryStream->fd,
+                reinterpret_cast<linux_dirent64*>(directoryStream->buffer),
+				directoryStream->buffer_size);
+        if (bytesRead <= 0)
             return (ft_nullptr);
-        dirp->buffer_used = nread;
+        directoryStream->buffer_used = bytesRead;
     }
-    linux_dirent64* d = reinterpret_cast<linux_dirent64*>(dirp->buffer + dirp->buffer_offset);
-    if (d->d_reclen == 0)
+    linux_dirent64* rawDirent = reinterpret_cast<linux_dirent64*>
+		(directoryStream->buffer + directoryStream->buffer_offset);
+    if (rawDirent->d_reclen == 0)
         return (ft_nullptr);
-    static ft_dirent entry;
-    memset(&entry, 0, sizeof(entry));
-    entry.d_ino = d->d_ino;
-    entry.d_type = d->d_type;
-    strncpy(entry.d_name, d->d_name, sizeof(entry.d_name) - 1);
-    dirp->buffer_offset += d->d_reclen;
-    return (&entry);
+    static ft_dirent currentEntry;
+    memset(&currentEntry, 0, sizeof(currentEntry));
+    currentEntry.d_ino = rawDirent->d_ino;
+    currentEntry.d_type = rawDirent->d_type;
+    strncpy(currentEntry.d_name, rawDirent->d_name, sizeof(currentEntry.d_name) - 1);
+    directoryStream->buffer_offset += rawDirent->d_reclen;
+    return (&currentEntry);
 }
 
-int ft_closedir(FT_DIR* dirp)
+int ft_closedir(FT_DIR* directoryStream)
 {
-    if (!dirp)
+    if (!directoryStream)
         return (-1);
-    ft_close(dirp->fd);
-    cma_free(dirp->buffer);
-    cma_free(dirp);
+    ft_close(directoryStream->fd);
+    cma_free(directoryStream->buffer);
+    cma_free(directoryStream);
     return (0);
 }
