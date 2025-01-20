@@ -3,7 +3,6 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CPP_class/nullptr.hpp"
-#include "libft/Errno/errno.hpp"
 #include <ctime>
 #include <cstdlib>
 
@@ -14,7 +13,6 @@ int main(int argc, char **argv)
     t_name *name;
 
     (void)argv;
-	ft_errno = 0;
     if (DEBUG == 1)
         pf_printf("Size of t_char struct is %zu\n", sizeof(t_char));
     if (argc > 1)

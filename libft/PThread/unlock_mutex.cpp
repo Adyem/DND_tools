@@ -1,7 +1,7 @@
 #include "mutex.hpp"
 #include "../Errno/errno.hpp"
 
-thread_local int ft_errno;
+thread_local int ft_errno = 0;
 
 int pt_mutex::unlock(int thread_id)
 {

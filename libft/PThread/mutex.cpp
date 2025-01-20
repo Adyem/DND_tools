@@ -33,5 +33,5 @@ void	pt_mutex::set_error(int	error)
 
 const volatile bool	&pt_mutex::lockState() const
 {
-    return _lock;
+    return (this->_lock);
 }

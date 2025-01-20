@@ -1,6 +1,8 @@
 #ifndef ERRNO_HPP
 # define ERRNO_HPP
 
+extern thread_local int ft_errno;
+
 #define ERRNO_OFFSET 2000
 
 enum PTErrorCode
@@ -47,7 +49,5 @@ enum PTErrorCode
 };
 
 const char* ft_strerror(int error_code);
-
-extern thread_local int ft_errno;
 
 #endif

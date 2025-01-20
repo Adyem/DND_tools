@@ -3,6 +3,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cassert>
+#include <pthread.h>
 #include <sys/mman.h>
 #include <csignal>
 #include "CMA.hpp"
@@ -36,11 +37,16 @@ void* cma_realloc(void* ptr, size_t new_size)
         cma_free(ptr);
         return (ft_nullptr);
     }
+	g_malloc_mutex.lock(pthread_self());
     Block* old_block = (Block*)((char*)ptr - sizeof(Block));
     if (old_block->magic != MAGIC_NUMBER)
+	{
+		g_malloc_mutex.unlock(pthread_self());
         return (ft_nullptr);
+	}
     size_t copy_size = old_block->size < new_size ? old_block->size : new_size;
     memcpy(new_ptr, ptr, copy_size);
     cma_free(ptr);
+	g_malloc_mutex.unlock(pthread_self());
     return (new_ptr);
 }

@@ -5,8 +5,6 @@
 #define ALREADDY_LOCKED 1
 #define SUCCES 0
 
-thread_local int	ft_errno;
-
 int pt_mutex::try_lock(int thread_id)
 {
     this->set_error(ER_SUCCESS);

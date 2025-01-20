@@ -11,6 +11,12 @@
 #include "../Printf/printf.hpp"
 
 Page *page_list = ft_nullptr;
+pt_mutex g_malloc_mutex;
+
+inline size_t align8(size_t size)
+{
+    return ((size + 7) & ~7);
+}
 
 static void *create_stack_block(void)
 {
@@ -154,9 +160,4 @@ void print_block_info(Block *block)
     pf_printf_fd(2, "Previous Block: %p\n", (void*)block->prev);
     pf_printf_fd(2, "---------------------------\n");
 	return ;
-}
-
-size_t align8(size_t size)
-{
-    return ((size + 7) & ~7);
 }

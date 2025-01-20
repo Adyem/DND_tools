@@ -5,8 +5,10 @@
 #include <sys/mman.h>
 #include <valgrind/memcheck.h>
 #include <csignal>
+#include <pthread.h>
 #include "CMA.hpp"
 #include "CMA_internal.hpp"
+#include "../PThread/mutex.hpp"
 #include "../Printf/printf.hpp"
 
 void cma_free(void* ptr)
@@ -16,8 +18,9 @@ void cma_free(void* ptr)
         free(ptr);
         return ;
     }
-    if (!ptr)
+	if (!ptr)
         return ;
+	g_malloc_mutex.lock(pthread_self());
     Block* block = (Block*)((char*)ptr - sizeof(Block));
     if (block->magic != MAGIC_NUMBER)
 	{
@@ -27,5 +30,6 @@ void cma_free(void* ptr)
 	}
     block->free = true;
     merge_block(block);
+	g_malloc_mutex.unlock(pthread_self());
 	return ;
 }

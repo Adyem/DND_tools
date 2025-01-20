@@ -1,6 +1,7 @@
 #ifndef CMA_INTERNAL_HPP
 # define CMA_INTERNAL_HPP
 
+#include "../PThread/mutex.hpp"
 #include <cstdint>
 #include <cstddef>
 #include <valgrind/memcheck.h>
@@ -17,6 +18,8 @@
 
 #define PROTECT_METADATA(ptr, size) VALGRIND_MAKE_MEM_NOACCESS(ptr, size)
 #define UNPROTECT_METADATA(ptr, size) VALGRIND_MAKE_MEM_DEFINED(ptr, size)
+
+extern pt_mutex g_malloc_mutex;
 
 struct Block
 {
@@ -44,6 +47,7 @@ Page	*create_page(size_t size);
 Block	*find_free_block(size_t size);
 Block	*merge_block(Block *block);
 void	print_block_info(Block *block);
-size_t	align8(size_t size);
+
+inline size_t	align8(size_t size) __attribute__ ((always_inline, hot));
 
 #endif
