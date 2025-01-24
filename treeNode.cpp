@@ -5,6 +5,13 @@
 #include <csignal>
 #include <cassert>
 
+TreeNode::~TreeNode()
+{
+	for (auto& child : children)
+        delete child.second;
+	return ;
+}
+
 void* TreeNode::operator new(size_t size)
 {
     void* ptr = cma_malloc(size);
@@ -17,13 +24,6 @@ void TreeNode::operator delete(void* ptr) noexcept
 {
 	if (ptr)
         cma_free(ptr);
-	return ;
-}
-
-TreeNode::~TreeNode()
-{
-	for (auto& child : children)
-        delete child.second;
 	return ;
 }
 
@@ -48,7 +48,7 @@ int TreeNode::insert(const char *key, int *value)
         current = current->children[ch];
     }
     current->result = value;
-    return 0;
+    return (0);
 }
 
 int* TreeNode::search(const char *key) const

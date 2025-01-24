@@ -93,16 +93,23 @@ public:
 };
 
 template <typename Key, typename MappedType>
-ft_pair<Key, MappedType>::ft_pair() : first(), second() {}
+ft_pair<Key, MappedType>::ft_pair() : first(), second()
+{
+	return ;
+}
 
 template <typename Key, typename MappedType>
-ft_pair<Key, MappedType>::ft_pair(const Key& k, const MappedType& m) : first(k), second(m) {}
+ft_pair<Key, MappedType>::ft_pair(const Key& k, const MappedType& m) : first(k), second(m)
+{
+	return ;
+}
 
 template <typename Key, typename MappedType>
 ft_unord_map<Key, MappedType>::iterator::iterator(ft_pair<Key, MappedType>* data, bool* occ, size_t idx, size_t cap)
     : _data(data), _occupied(occ), _index(idx), _capacity(cap)
 {
     skipUnoccupied();
+	return ;
 }
 
 template <typename Key, typename MappedType>
@@ -110,18 +117,19 @@ void ft_unord_map<Key, MappedType>::iterator::skipUnoccupied()
 {
     while (_index < _capacity && !_occupied[_index])
         ++_index;
+	return ;
 }
 
 template <typename Key, typename MappedType>
 ft_pair<Key, MappedType>& ft_unord_map<Key, MappedType>::iterator::operator*() const
 {
-    return _data[_index];
+    return (_data[_index]);
 }
 
 template <typename Key, typename MappedType>
 ft_pair<Key, MappedType>* ft_unord_map<Key, MappedType>::iterator::operator->() const
 {
-    return &_data[_index];
+    return (&_data[_index]);
 }
 
 template <typename Key, typename MappedType>
@@ -129,7 +137,7 @@ typename ft_unord_map<Key, MappedType>::iterator& ft_unord_map<Key, MappedType>:
 {
     ++_index;
     skipUnoccupied();
-    return *this;
+    return (*this);
 }
 
 template <typename Key, typename MappedType>
@@ -149,6 +157,7 @@ ft_unord_map<Key, MappedType>::const_iterator::const_iterator(const ft_pair<Key,
     : _data(data), _occupied(occ), _index(idx), _capacity(cap)
 {
     skipUnoccupied();
+	return ;
 }
 
 template <typename Key, typename MappedType>
@@ -156,12 +165,13 @@ void ft_unord_map<Key, MappedType>::const_iterator::skipUnoccupied()
 {
     while (_index < _capacity && !_occupied[_index])
         ++_index;
+	return ;
 }
 
 template <typename Key, typename MappedType>
 const ft_pair<Key, MappedType>& ft_unord_map<Key, MappedType>::const_iterator::operator*() const
 {
-    return _data[_index];
+    return (_data[_index]);
 }
 
 template <typename Key, typename MappedType>
