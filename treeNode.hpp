@@ -10,7 +10,7 @@ class TreeNode
     	~TreeNode();
     	int		insert(const char *key, int *value);
     	int		*search(const char *key) const;
-	private:
+
 		void* operator new(size_t size);
 		void operator delete(void* ptr) noexcept;
 };
