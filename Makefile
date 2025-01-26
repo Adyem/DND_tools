@@ -25,6 +25,7 @@ HEADER      = dnd_tools.hpp \
 			  murna_claygrip.hpp \
 			  thorbald_ironpocket.hpp \
 			  key_list.hpp \
+			  treeNode.hpp \
 			  dwarf_paladin.hpp
 
 SRC         = name.cpp \
@@ -145,7 +146,8 @@ SRC         = name.cpp \
 			  attack_prompt_action.cpp \
 			  attack_readline_prompt.cpp \
 			  attack_utils.cpp \
-			  calculate_util_stats.cpp
+			  calculate_util_stats.cpp \
+			  treeNode.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \

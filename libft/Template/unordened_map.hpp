@@ -115,7 +115,7 @@ ft_unord_map<Key, MappedType>::iterator::iterator(ft_pair<Key, MappedType>* data
 template <typename Key, typename MappedType>
 void ft_unord_map<Key, MappedType>::iterator::skipUnoccupied()
 {
-    while (_index < _capacity && !_occupied[_index])
+	while (_index < _capacity && !_occupied[_index])
         ++_index;
 	return ;
 }
@@ -163,7 +163,7 @@ ft_unord_map<Key, MappedType>::const_iterator::const_iterator(const ft_pair<Key,
 template <typename Key, typename MappedType>
 void ft_unord_map<Key, MappedType>::const_iterator::skipUnoccupied()
 {
-    while (_index < _capacity && !_occupied[_index])
+	while (_index < _capacity && !_occupied[_index])
         ++_index;
 	return ;
 }
