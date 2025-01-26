@@ -1,6 +1,7 @@
 #include "key_list.hpp"
 #include "dnd_tools.hpp"
 #include "key_list.hpp"
+#include "treeNode.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Libft/libft.hpp"
@@ -130,6 +131,13 @@ t_key_value_triplet* initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
 		if (g_stat_key_value_pairs == ft_nullptr)
         	g_stat_key_value_pairs = (t_key_value_triplet*)cma_malloc(sizeof(temp));
 		ft_memcpy(g_stat_key_value_pairs, temp, sizeof(temp));
+		size_t index = 0;
+		while (g_stat_key_value_pairs[index].value)
+		{
+			TreeNode *node = *ft_return_main_treeNode();
+			node->insert(g_stat_key_value_pairs[index].key, g_stat_key_value_pairs[index].value);
+			index++;
+		}
     }
     return (g_stat_key_value_pairs);
 }

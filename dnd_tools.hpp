@@ -111,7 +111,7 @@ void		ft_maverick_print_f(int first, int second, ft_sharedptr<t_char> &info,
 				char **player_list);
 
 //treeNode
-TreeNode	*ft_return_main_treeNode(void);
+TreeNode	**ft_return_main_treeNode(void);
 void		ft_cleanup_treeNode(void);
 
 //Commands

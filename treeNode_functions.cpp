@@ -1,17 +1,19 @@
+#include "libft/CPP_class/nullptr.hpp"
 #include "treeNode.hpp"
 #include "dnd_tools.hpp"
 
-TreeNode *ft_return_main_treeNode(void)
+TreeNode **ft_return_main_treeNode(void)
 {
 	static TreeNode *treenode;
 
 	if (!treenode)
 		treenode = new TreeNode;
-	return (treenode);
+	return (&treenode);
 }
 
 void	ft_cleanup_treeNode(void)
 {
-	delete(ft_return_main_treeNode());
+	delete *ft_return_main_treeNode();
+	*ft_return_main_treeNode() = ft_nullptr;
 	return ;
 }
