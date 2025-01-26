@@ -1,6 +1,7 @@
 #include "key_list.hpp"
 #include "dnd_tools.hpp"
 #include "key_list.hpp"
+#include "libft/Printf/printf.hpp"
 #include "treeNode.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -135,6 +136,9 @@ t_key_value_triplet* initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
 		while (g_stat_key_value_pairs[index].value)
 		{
 			TreeNode *node = *ft_return_main_treeNode();
+			if (DEBUG == 1)
+				pf_printf("the field currently has the value %i\n",
+						*g_stat_key_value_pairs->value);
 			node->insert(g_stat_key_value_pairs[index].key, g_stat_key_value_pairs[index].value);
 			index++;
 		}

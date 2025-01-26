@@ -1,5 +1,7 @@
+#include "dnd_tools.hpp"
 #include "treeNode.hpp"
 #include "libft/CPP_class/nullptr.hpp"
+#include "libft/Printf/printf.hpp"
 #include "libft/Template/unordened_map.hpp"
 #include "libft/Libft/libft.hpp"
 #include <csignal>
@@ -34,6 +36,8 @@ int TreeNode::insert(const char *key, int *value)
     assert(length > 0 && "Key cannot be empty");
     assert(key[length - 1] == '=' && "Key must end with '='");
 	size_t index = 0;
+	if (DEBUG == 1)
+		pf_printf("adding %s\n", key);
     while (index < length - 1)
 	{
         assert(key[index] != '=' && "Key cannot contain '=' except at the end");
@@ -51,16 +55,30 @@ int TreeNode::insert(const char *key, int *value)
     return (0);
 }
 
-int* TreeNode::search(const char *key) const
+t_treeNode_returnValue TreeNode::search(const char *key) const
 {
+	size_t index = 0;
     const TreeNode* current = this;
-    while (*key)
+    while (*key != '=')
 	{
+		index++;
         auto it = current->children.find(*key);
         if (it == current->children.end())
-            return (ft_nullptr);
+            return {0, ft_nullptr};
         current = it->second;
         key++;
     }
-    return (current->result);
+	if (*key == '=')
+	{
+		index++;
+        auto it = current->children.find(*key);
+        if (it == current->children.end())
+            return {0, ft_nullptr};
+        current = it->second;
+        key++;
+    }
+	else
+		return {0, ft_nullptr};
+	t_treeNode_returnValue result = {static_cast<int>(index), current->result};
+    return (result);
 }
