@@ -147,7 +147,8 @@ SRC         = name.cpp \
 			  attack_readline_prompt.cpp \
 			  attack_utils.cpp \
 			  calculate_util_stats.cpp \
-			  treeNode.cpp
+			  treeNode.cpp \
+			  treeNode_functions.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \

@@ -6,6 +6,7 @@
 #include "libft/Template/shared_ptr.hpp"
 #include "player_character.hpp"
 #include "libft/CPP_class/file.hpp"
+#include "treeNode.hpp"
 
 # ifndef DEBUG
 #  define DEBUG 0
@@ -108,6 +109,10 @@ void		ft_maverick_print_s(int first, int second, ft_sharedptr<t_char> &info,
 				char **player_list);
 void		ft_maverick_print_f(int first, int second, ft_sharedptr<t_char> &info,
 				char **player_list);
+
+//treeNode
+TreeNode	*ft_return_main_treeNode(void);
+void		ft_cleanup_treeNode(void);
 
 //Commands
 void		ft_request_input(t_name *name);

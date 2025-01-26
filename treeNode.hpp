@@ -1,3 +1,6 @@
+#ifndef TREENODE_HPP
+# define TREENODE_HPP
+
 #include <csignal>
 #include "libft/Template/unordened_map.hpp"
 
@@ -14,3 +17,5 @@ class TreeNode
 		void* operator new(size_t size);
 		void operator delete(void* ptr) noexcept;
 };
+
+#endif
