@@ -9,9 +9,9 @@
 
 TreeNode::~TreeNode()
 {
-	for (auto& child : children)
+    for (auto& child : children)
         delete child.second;
-	return ;
+    return;
 }
 
 void* TreeNode::operator new(size_t size)

@@ -26,7 +26,6 @@ class TreeNode
 		void operator delete(void* ptr) noexcept;
 };
 
-//treeNode
 TreeNode	**ft_return_main_treeNode(void);
 void		ft_cleanup_treeNode(void);
 
