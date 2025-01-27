@@ -6,7 +6,6 @@
 #include "libft/Template/shared_ptr.hpp"
 #include "player_character.hpp"
 #include "libft/CPP_class/file.hpp"
-#include "treeNode.hpp"
 
 # ifndef DEBUG
 #  define DEBUG 0
@@ -17,8 +16,9 @@
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
 
-extern t_key_value_triplet *g_stat_key_value_pairs;
 extern bool g_dnd_test;
+
+extern t_key_value_triplet *g_stat_key_value_pairs;
 
 //NPC
 void		ft_npc_change_stats(ft_sharedptr<t_char> &info, int argument_count, const char **argument_vector);
@@ -109,10 +109,6 @@ void		ft_maverick_print_s(int first, int second, ft_sharedptr<t_char> &info,
 				char **player_list);
 void		ft_maverick_print_f(int first, int second, ft_sharedptr<t_char> &info,
 				char **player_list);
-
-//treeNode
-TreeNode	**ft_return_main_treeNode(void);
-void		ft_cleanup_treeNode(void);
 
 //Commands
 void		ft_request_input(t_name *name);
