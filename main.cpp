@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "treeNode.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
@@ -33,6 +34,7 @@ int main(int argc, char **argv)
     ft_request_input(name);
     ft_free_memory_name(name, 0);
 	rl_clear_suggestions();
+	ft_cleanup_treeNode();
 	cma_cleanup();
     return (0);
 }
