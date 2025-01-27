@@ -135,7 +135,8 @@ t_key_value_triplet* initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
         TreeNode* node = *ft_return_main_treeNode();
         if (DEBUG == 1)
             pf_printf("the field currently has the value %i\n", *g_stat_key_value_pairs->value);
-        node->insert(g_stat_key_value_pairs[index].key, g_stat_key_value_pairs[index].value);
+        node->insert(g_stat_key_value_pairs[index].key, g_stat_key_value_pairs[index].value,
+				g_stat_key_value_pairs[index].unset_value);
         index++;
     }
     return g_stat_key_value_pairs;

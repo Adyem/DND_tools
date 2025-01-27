@@ -29,20 +29,21 @@ void TreeNode::operator delete(void* ptr) noexcept
 	return ;
 }
 
-int TreeNode::insert(const char *key, int *value)
+int TreeNode::insert(const char *key, int *value, int unset_value)
 {
     size_t length = ft_strlen(key);
-	assert(key != ft_nullptr && "key cannot be ft_nullptr");
+    assert(key != ft_nullptr && "key cannot be ft_nullptr");
     assert(length > 0 && "Key cannot be empty");
     assert(key[length - 1] == '=' && "Key must end with '='");
-	size_t index = 0;
-	if (DEBUG == 1)
-		pf_printf("adding %s\n", key);
-    while (index < length - 1)
-	{
+
+    if (DEBUG == 1)
+        pf_printf("adding %s\n", key);
+
+    for (size_t index = 0; index < length - 1; ++index)
+    {
         assert(key[index] != '=' && "Key cannot contain '=' except at the end");
-		index++;
-	}
+    }
+
     TreeNode* current = this;
     while (*key)
     {
@@ -51,9 +52,11 @@ int TreeNode::insert(const char *key, int *value)
             current->children[ch] = new TreeNode();
         current = current->children[ch];
     }
+    current->unset_value = unset_value;
     current->result = value;
-    return (0);
+    return 0;
 }
+
 
 t_treeNode_returnValue TreeNode::search(const char *key) const
 {
@@ -64,7 +67,7 @@ t_treeNode_returnValue TreeNode::search(const char *key) const
 		index++;
         auto it = current->children.find(*key);
         if (it == current->children.end())
-            return {0, ft_nullptr};
+            return {0, 0, ft_nullptr};
         current = it->second;
         key++;
     }
@@ -73,12 +76,13 @@ t_treeNode_returnValue TreeNode::search(const char *key) const
 		index++;
         auto it = current->children.find(*key);
         if (it == current->children.end())
-            return {0, ft_nullptr};
+            return {0, 0, ft_nullptr};
         current = it->second;
         key++;
     }
 	else
-		return {0, ft_nullptr};
-	t_treeNode_returnValue result = {static_cast<int>(index), current->result};
+		return {0, 0, ft_nullptr};
+	t_treeNode_returnValue result = {static_cast<int>(index), current->unset_value,
+		current->result};
     return (result);
 }

@@ -3,30 +3,18 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
+#include "treeNode.hpp"
 
-static int ft_set_stat_int_internal(char *content, const char *key, int *field, int unset_value,
-		ft_sharedptr<t_char> &info)
+static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char> &info)
 {
-    int index = ft_strlen(key);
-    if (ft_strncmp(content, key, index) == 0 && (unset_value == -1 || *field == unset_value))
+	s_treeNode_returnValue return_value = (*(ft_return_main_treeNode()))->search(content[index]);
+    if ((return_value.key_length != 0 && return_value.return_field != ft_nullptr)
+				&& ((return_value.unset_value == -1
+				|| *(return_value.return_field) == return_value.unset_value)))
     {
-        *field = ft_check_stat(info, content, index);
-        return (1);
-    }
-    return (0);
-}
-
-static int ft_handle_int_mapping(char *line, const t_key_value_triplet *stat_key_value_pairs,
-		ft_sharedptr<t_char> &info)
-{
-    int index = 0;
-    while (stat_key_value_pairs[index].key)
-    {
-        if (ft_set_stat_int_internal(line, stat_key_value_pairs[index].key,
-				stat_key_value_pairs[index].value, stat_key_value_pairs[index].unset_value,
-				info) == 1)
-            return (0);
-        index++;
+        *(return_value.return_field) = ft_check_stat(info, content[index],
+				return_value.key_length);
+        return (0);
     }
     return (1);
 }
@@ -75,12 +63,11 @@ static int ft_handle_string_fields(char *line, ft_sharedptr<t_char> &info)
 
 int ft_set_stats(ft_sharedptr<t_char> &info, char **content)
 {
-    t_key_value_triplet *stat_key_value_pairs = initialize_stat_key_value_pairs(info);
-
+    initialize_stat_key_value_pairs(info);
     int index = 0;
     while (content[index])
 	{
-        if (ft_handle_int_mapping(content[index], stat_key_value_pairs, info) == 0)
+        if (ft_handle_int_mapping(content, index, info) == 0)
 		{
             index++;
             continue ;

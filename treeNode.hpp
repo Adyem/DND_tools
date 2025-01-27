@@ -7,6 +7,7 @@
 typedef struct s_treeNode_returnValue
 {
 	int		key_length;
+	int		unset_value;
 	int		*return_field;
 } t_treeNode_returnValue;
 
@@ -15,9 +16,10 @@ class TreeNode
 	public:
     	ft_unord_map<char, TreeNode*> children;
     	int		*result = nullptr;
+		int		unset_value;
 
     	~TreeNode();
-    	int		insert(const char *key, int *value);
+    	int		insert(const char *key, int *value, int unset_value);
     	t_treeNode_returnValue search(const char *key) const;
 
 		void* operator new(size_t size);
