@@ -41,7 +41,7 @@ static ft_sharedptr<t_char> ft_read_all_files(ft_file &file, t_name *name, char 
         pf_printf("Printing file_name: %s\n", file_name);
     info = ft_check_name(name, file_name + 5);
     if (!info)
-        return (ft_sharedptr<t_char> ());
+        return (ft_sharedptr<t_char>());
     if (DEBUG == 1)
         pf_printf("Initiative file descriptor is %d\n", file.get_fd());
     info->name = file_name + 5;
