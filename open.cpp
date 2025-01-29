@@ -2,6 +2,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/CPP_class/file.hpp"
+#include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -24,6 +25,7 @@ void ft_dual_save_file(ft_sharedptr<t_char> &info, ft_sharedptr<t_char> &target)
     ft_file file_info;
     ft_file file_target;
 
+	pf_printf("HELLO WORLD!!!\n");
 	ft_open_file_write_only(target->save_file, file_target);
     if (file_target.get_error_code())
     {

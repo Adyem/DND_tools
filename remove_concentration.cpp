@@ -1,6 +1,5 @@
 #include "character.hpp"
 #include "initialize.hpp"
-#include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -64,5 +63,6 @@ int ft_remove_concentration(ft_sharedptr<t_char> &info)
 		return (FAILURE);
 	ft_concentration_remove_buf(info, &targets);
 	ft_cast_concentration_save_files(info, &targets, info_save_file);
+	info->flags.alreaddy_saved = 0;
     return (SUCCES);
 }

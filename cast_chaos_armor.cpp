@@ -5,7 +5,8 @@
 
 void	ft_cast_chaos_armor(ft_sharedptr<t_char> &info)
 {
-	ft_remove_concentration(info);
+	if (ft_remove_concentration(info))
+		return ;
 	info->concentration.concentration = 1;
 	info->concentration.spell_id = CHAOS_ARMOR_ID;
 	info->concentration.duration = 3;

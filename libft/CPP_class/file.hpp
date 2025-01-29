@@ -1,6 +1,10 @@
 #ifndef FILE_HPP
 # define FILE_HPP
 
+#ifndef DEBUG
+# define DEBUG 0
+#endif
+
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>

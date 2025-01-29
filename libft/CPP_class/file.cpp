@@ -2,6 +2,7 @@
 #include "../Libft/libft.hpp"
 #include "../Errno/errno.hpp"
 #include "../Printf/printf_internal.hpp"
+#include "../Printf/printf.hpp"
 #include <cerrno>
 #include <cstdarg>
 #include <unistd.h>
@@ -16,6 +17,8 @@ ft_file::ft_file() noexcept
 ft_file::ft_file(const char* filename, int flags, mode_t mode) noexcept 
     : _fd(-1), _error_code(0)
 {
+	if (DEBUG == 1)
+		pf_printf("Opening %s\n", filename);
     this->_fd = ::open(filename, flags, mode);
 	if (_fd < 0)
 		this->set_error(errno + ERRNO_OFFSET);
@@ -83,6 +86,8 @@ void	ft_file::close() noexcept
 
 int	ft_file::open(const char* filename, int flags, mode_t mode) noexcept
 {
+	if (DEBUG == 1)
+		pf_printf("Opening %s\n", filename);
 	if (this->_fd != -1)
 		this->close();
 	_fd = ::open(filename, flags, mode);

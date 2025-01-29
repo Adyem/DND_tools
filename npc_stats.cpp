@@ -47,21 +47,23 @@ void ft_npc_change_stats(ft_sharedptr<t_char> &info, const int argument_count, c
         input_index++;
     }
     input_index = 0;
-    if (argument_count == 1)
+	if (argument_count == 1)
     {
         if (info->turn)
             info->turn(info);
         else
             pf_printf("%s doesn't take any actions on his/her turn\n", info->name);
     }
-    else if (argument_count == 2)
+	else if (argument_count == 2)
         ft_npc_sstuff(info, argument_vector);
-    else if (argument_count == 3)
+	else if (argument_count == 3)
         ft_npc_set_stat(info, argument_vector);
-    else if (argument_count == 4)
+	else if (argument_count == 4)
         ft_change_stats_04(info, argument_vector);
-    else
+	else
         pf_printf_fd(2, "Error: Too many arguments given\n");
+	if (info->flags.alreaddy_saved == 1)
+		return ;
     ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     ft_npc_write_file(info, &info->stats, &info->d_resistance, file);
     return ;
