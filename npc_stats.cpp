@@ -61,10 +61,15 @@ void ft_npc_change_stats(ft_sharedptr<t_char> &info, const int argument_count, c
 	else if (argument_count == 4)
         ft_change_stats_04(info, argument_vector);
 	else
-        pf_printf_fd(2, "Error: Too many arguments given\n");
+        pf_printf_fd(2, "146-Error Too many arguments given\n");
 	if (info->flags.alreaddy_saved == 1)
 		return ;
     ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	if (file.get_error_code())
+	{
+		pf_printf_fd(2, "145-Error opening file %s: %s\n", info->save_file,
+		file.get_error_message());
+	}
     ft_npc_write_file(info, &info->stats, &info->d_resistance, file);
     return ;
 }
