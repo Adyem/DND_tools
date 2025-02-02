@@ -18,8 +18,6 @@
 
 extern bool g_dnd_test;
 
-extern t_key_value_triplet *g_stat_key_value_pairs;
-
 //NPC
 void		ft_npc_change_stats(ft_sharedptr<t_char> &info, int argument_count, const char **argument_vector);
 void		ft_npc_set_stat(ft_sharedptr<t_char> &info, const char **input);
@@ -337,7 +335,7 @@ int			ft_check_write_permissions(const char *filepath);
 ft_sharedptr<t_char> ft_validate_and_fetch_target(char *target_name, ft_sharedptr<t_char> &info,
 													int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
-t_key_value_triplet *initialize_stat_key_value_pairs(ft_sharedptr<t_char> &info);
+void		initialize_stat_key_value_pairs(ft_sharedptr<t_char> &info);
 ft_sharedptr<t_char> ft_get_info(const char *tf_name, t_name *name);
 
 //check name
