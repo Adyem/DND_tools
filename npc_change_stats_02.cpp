@@ -77,6 +77,13 @@ void	ft_npc_sstuff(ft_sharedptr<t_char> &info, const char **input)
 		ft_kill(info);
 	else if (ft_strcmp_dnd(input[1], "damage") == 0)
 		ft_request_damage(info);
+	else if (ft_strcmp_dnd(input[1], "turn") == 0)
+	{
+        if (info->turn)
+            info->turn(info);
+        else
+            pf_printf("%s doesn't take any actions on his/her turn\n", info->name);
+    }
 	else if (ft_strcmp_dnd(input[1], "hp") == 0)
 		pf_printf("HP: %d\n", info->stats.health);
 	else if (ft_strcmp_dnd(input[1], "initiative") == 0)
