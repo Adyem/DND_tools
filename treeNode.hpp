@@ -4,6 +4,10 @@
 #include <csignal>
 #include "libft/Template/unordened_map.hpp"
 
+#ifndef DEBUG
+# define DEBUG 0
+#endif
+
 typedef struct s_treeNode_returnValue
 {
 	int		key_length;

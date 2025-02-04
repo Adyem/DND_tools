@@ -1,4 +1,3 @@
-#include "dnd_tools.hpp"
 #include "treeNode.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
@@ -35,15 +34,14 @@ int TreeNode::insert(const char *key, int *value, int unset_value)
     assert(key != ft_nullptr && "key cannot be ft_nullptr");
     assert(length > 0 && "Key cannot be empty");
     assert(key[length - 1] == '=' && "Key must end with '='");
-
-    if (DEBUG == 1)
+	if (DEBUG == 1)
         pf_printf("adding %s\n", key);
-
-    for (size_t index = 0; index < length - 1; ++index)
+	size_t index = 0;
+    while (index < length - 1)
     {
         assert(key[index] != '=' && "Key cannot contain '=' except at the end");
+		index++;
     }
-
     TreeNode* current = this;
     while (*key)
     {
@@ -56,7 +54,6 @@ int TreeNode::insert(const char *key, int *value, int unset_value)
     current->result = value;
     return 0;
 }
-
 
 t_treeNode_returnValue TreeNode::search(const char *key) const
 {
