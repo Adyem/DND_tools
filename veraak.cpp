@@ -10,7 +10,7 @@ static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &in
     t_name *name;
 
     if (DEBUG == 1)
-        pf_printf("phase transition: killing crystal: %s\n", crystal);
+        pf_printf("PHASE TRANSITION: killing crystal: %s\n", crystal);
     name = info->struct_name;
     while (name != ft_nullptr)
     {
@@ -28,8 +28,7 @@ static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &in
     }
     info->stats.phase = phase;
     info->stats.turn = 1;
-    pf_printf("veraak transitions to the next phase dropping 2 green orbs " \
-			"at random locations in the arena\n");
+    pf_printf("veraak transitions to the next phase\n");
 	return ;
 }
 
