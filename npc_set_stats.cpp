@@ -5,37 +5,40 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "treeNode.hpp"
 
-static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char> &info)
+static int ft_handle_int_mapping(const char **content, int index, ft_sharedptr<t_char> &info)
 {
-	t_treeNode_returnValue return_value = (*(ft_return_main_treeNode()))->search(content[index]);
-	if ((return_value.key_length != 0 && return_value.return_field != ft_nullptr)
-		&& ((return_value.unset_value == -1 || *(return_value.return_field)
-				== return_value.unset_value)))
+	t_treeNode_value *return_value = (*(ft_return_main_treeNode()))->search(content[index]);
+	if (!return_value)
+		return (1);
+	if ((return_value->key_length != 0 && return_value->return_field != ft_nullptr)
+		&& ((return_value->unset_value == -1 || *(return_value->return_field)
+				== return_value->unset_value)))
 	{
-		int val = ft_check_stat(info, content[index], return_value.key_length);
-		if (val < return_value.node->min_val || val > return_value.node->max_val)
+		int val = ft_check_stat(info, content[index], return_value->key_length);
+		if (val < return_value->min_value || val > return_value->max_value)
 		{
 			pf_printf("%s: %.*s value (%d) out of bounds (%d to %d)\n",
 			          info->name,
-			          return_value.key_length, content[index],
-			          val, return_value.node->min_val, return_value.node->max_val);
+			          return_value->key_length, content[index],
+			          val, return_value->min_value, return_value->max_value);
 			return (1);
 		}
-		*(return_value.return_field) = val;
+		*(return_value->return_field) = val;
 		return (0);
 	}
 	return (1);
 }
 
-static int ft_handle_set_stat_char_pointer(char *content_i, size_t key_len, char **target_field)
+static int ft_handle_set_stat_char_pointer(const char *content_i, size_t key_len,
+		char **target_field)
 {
 	if (ft_set_stat_player(key_len, const_cast<const char **>(target_field), content_i))
 		return (-1);
 	return (0);
 }
 
-static int ft_handle_set_stat_double_char(char *content_i, size_t key_len, char ***target_field,
-		ft_sharedptr<t_char> &info)
+static int ft_handle_set_stat_double_char(char *content_i, size_t key_len,
+		char ***target_field, ft_sharedptr<t_char> &info)
 {
 	*target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
 	if (*target_field == ft_nullptr)
@@ -75,7 +78,8 @@ int ft_set_stats(ft_sharedptr<t_char> &info, char **content)
 	int index = 0;
 	while (content[index])
 	{
-		if (ft_handle_int_mapping(content, index, info) == 0)
+		pf_printf("%s\n", content[index]);
+		if (ft_handle_int_mapping((const char **)content, index, info) == 0)
 		{
 			index++;
 			continue ;
