@@ -8,78 +8,81 @@
 
 TreeNode::~TreeNode()
 {
-    for (auto& child : children)
-        delete child.second;
-    return;
+	for (auto& child : children)
+		delete child.second;
+	return;
 }
 
 void* TreeNode::operator new(size_t size)
 {
-    void* ptr = cma_malloc(size);
-    if (!ptr)
-        std::raise(SIGABRT);
-    return (ptr);
+	void* ptr = cma_malloc(size);
+	if (!ptr)
+		std::raise(SIGABRT);
+	return ptr;
 }
 
 void TreeNode::operator delete(void* ptr) noexcept
 {
 	if (ptr)
-        cma_free(ptr);
-	return ;
+		cma_free(ptr);
+	return;
 }
 
-int TreeNode::insert(const char *key, int *value, int unset_value)
+int TreeNode::insert(const char *key, int *value, int unset_value, int min_val, int max_val)
 {
-    size_t length = ft_strlen(key);
-    assert(key != ft_nullptr && "key cannot be ft_nullptr");
-    assert(length > 0 && "Key cannot be empty");
-    assert(key[length - 1] == '=' && "Key must end with '='");
+	size_t length = ft_strlen(key);
+	assert(key != ft_nullptr && "key cannot be ft_nullptr");
+	assert(length > 0 && "Key cannot be empty");
+	assert(key[length - 1] == '=' && "Key must end with '='");
+
 	if (DEBUG == 1)
-        pf_printf("adding %s\n", key);
-	size_t index = 0;
-    while (index < length - 1)
-    {
-        assert(key[index] != '=' && "Key cannot contain '=' except at the end");
-		index++;
-    }
-    TreeNode* current = this;
-    while (*key)
-    {
-        char ch = *key++;
-        if (!current->children[ch])
-            current->children[ch] = new TreeNode();
-        current = current->children[ch];
-    }
-    current->unset_value = unset_value;
-    current->result = value;
-    return 0;
+		pf_printf("adding %s\n", key);
+
+	for (size_t index = 0; index < length - 1; ++index)
+	{
+		assert(key[index] != '=' && "Key cannot contain '=' except at the end");
+	}
+
+	TreeNode* current = this;
+	while (*key)
+	{
+		char ch = *key++;
+		if (!current->children[ch])
+			current->children[ch] = new TreeNode();
+		current = current->children[ch];
+	}
+	current->unset_value = unset_value;
+	current->result = value;
+	current->min_val = min_val;
+	current->max_val = max_val;
+	return 0;
 }
 
 t_treeNode_returnValue TreeNode::search(const char *key) const
 {
 	size_t index = 0;
-    const TreeNode* current = this;
-    while (*key != '=')
+	const TreeNode* current = this;
+	while (*key != '=')
 	{
 		index++;
-        auto it = current->children.find(*key);
-        if (it == current->children.end())
-            return {0, 0, ft_nullptr};
-        current = it->second;
-        key++;
-    }
+		auto it = current->children.find(*key);
+		if (it == current->children.end())
+			return {0, 0, ft_nullptr, nullptr};
+		current = it->second;
+		key++;
+	}
 	if (*key == '=')
 	{
 		index++;
-        auto it = current->children.find(*key);
-        if (it == current->children.end())
-            return {0, 0, ft_nullptr};
-        current = it->second;
-        key++;
-    }
+		auto it = current->children.find(*key);
+		if (it == current->children.end())
+			return {0, 0, ft_nullptr, nullptr};
+		current = it->second;
+		key++;
+	}
 	else
-		return {0, 0, ft_nullptr};
-	t_treeNode_returnValue result = {static_cast<int>(index), current->unset_value,
-		current->result};
-    return (result);
+		return {0, 0, ft_nullptr, nullptr};
+	t_treeNode_returnValue result = { static_cast<int>(index),
+		current->unset_value, current->result, const_cast<TreeNode*>(current) };
+	return result;
 }
