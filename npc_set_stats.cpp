@@ -5,95 +5,86 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "treeNode.hpp"
 
-static int ft_handle_int_mapping(const char **content, int index, ft_sharedptr<t_char> &info)
+static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char> &info)
 {
-	t_treeNode_value *return_value = (*(ft_return_main_treeNode()))->search(content[index]);
+	const t_treeNode_value *return_value
+		= (*(ft_return_main_treeNode()))->search(content[index]);
 	if (!return_value)
 		return (1);
-	if ((return_value->key_length != 0 && return_value->return_field != ft_nullptr)
-		&& ((return_value->unset_value == -1 || *(return_value->return_field)
-				== return_value->unset_value)))
-	{
-		int val = ft_check_stat(info, content[index], return_value->key_length);
-		if (val < return_value->min_value || val > return_value->max_value)
-		{
-			pf_printf("%s: %.*s value (%d) out of bounds (%d to %d)\n",
-			          info->name,
-			          return_value->key_length, content[index],
-			          val, return_value->min_value, return_value->max_value);
-			return (1);
-		}
-		*(return_value->return_field) = val;
-		return (0);
-	}
-	return (1);
+    if ((return_value->key_length != 0 && return_value->return_field_integer != ft_nullptr)
+				&& ((return_value->unset_value == -1
+				|| *(return_value->return_field_integer) == return_value->unset_value)))
+    {
+        *(return_value->return_field_integer) = ft_check_stat(info, content[index],
+				return_value->key_length);
+        return (0);
+    }
+    return (1);
 }
 
-static int ft_handle_set_stat_char_pointer(const char *content_i, size_t key_len,
-		char **target_field)
+static int ft_handle_set_stat_char_pointer(char *content_i, size_t key_len, char **target_field)
 {
-	if (ft_set_stat_player(key_len, const_cast<const char **>(target_field), content_i))
-		return (-1);
-	return (0);
+    if (ft_set_stat_player(key_len, const_cast<const char **>(target_field), content_i))
+        return (-1);
+    return (0);
 }
 
-static int ft_handle_set_stat_double_char(char *content_i, size_t key_len,
-		char ***target_field, ft_sharedptr<t_char> &info)
+static int ft_handle_set_stat_double_char(char *content_i, size_t key_len, char ***target_field,
+		ft_sharedptr<t_char> &info)
 {
-	*target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
-	if (*target_field == ft_nullptr)
-		return (-1);
-	return (0);
+    *target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
+    if (*target_field == ft_nullptr)
+        return (-1);
+    return (0);
 }
 
 static int ft_handle_string_fields(char *line, ft_sharedptr<t_char> &info)
 {
 	if (ft_strncmp(line, CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
-		return (ft_handle_set_stat_double_char(line, ft_strlen(CONC_TARGETS_KEY),
+        return (ft_handle_set_stat_double_char(line, ft_strlen(CONC_TARGETS_KEY),
 				&info->concentration.targets, info));
 	if (ft_strncmp(line, HUNTERS_MARK_CASTER_KEY, ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
-		return (ft_handle_set_stat_double_char(line, ft_strlen(HUNTERS_MARK_CASTER_KEY),
+        return (ft_handle_set_stat_double_char(line, ft_strlen(HUNTERS_MARK_CASTER_KEY),
 				&info->debufs.hunters_mark.caster_name, info));
 	if (ft_strncmp(line, METEOR_STRIKE_TARGET_KEY, ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(line, ft_strlen(METEOR_STRIKE_TARGET_KEY),
+        return (ft_handle_set_stat_char_pointer(line, ft_strlen(METEOR_STRIKE_TARGET_KEY),
 				&info->bufs.meteor_strike.target_id));
 	if (ft_strncmp(line, FROST_BREATH_TARGET_ID_KEY, ft_strlen(FROST_BREATH_TARGET_ID_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(line, ft_strlen(FROST_BREATH_TARGET_ID_KEY),
+        return (ft_handle_set_stat_char_pointer(line, ft_strlen(FROST_BREATH_TARGET_ID_KEY),
 				&info->bufs.frost_breath.target_id));
 	if (ft_strncmp(line, ARCANE_POUNCE_TARGET_ID_KEY, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(line, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY),
+        return (ft_handle_set_stat_char_pointer(line, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY),
 				&info->bufs.arcane_pounce.target_id));
 	if (ft_strncmp(line, EARTH_POUNCE_TARGET_ID_KEY, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(line, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY),
+        return (ft_handle_set_stat_char_pointer(line, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY),
 				&info->bufs.earth_pounce.target_id));
 	if (ft_strncmp(line, BUFF_BLESS_CASTER_NAME_KEY, ft_strlen(BUFF_BLESS_CASTER_NAME_KEY)) == 0)
-		return (ft_handle_set_stat_char_pointer(line, ft_strlen(BUFF_BLESS_CASTER_NAME_KEY),
+        return (ft_handle_set_stat_char_pointer(line, ft_strlen(BUFF_BLESS_CASTER_NAME_KEY),
 				&info->bufs.earth_pounce.target_id));
-	return 1;
+    return (1);
 }
 
 int ft_set_stats(ft_sharedptr<t_char> &info, char **content)
 {
-	initialize_stat_key_value_pairs(info);
-	int index = 0;
-	while (content[index])
+    initialize_stat_key_value_pairs(info);
+    int index = 0;
+    while (content[index])
 	{
-		pf_printf("%s\n", content[index]);
-		if (ft_handle_int_mapping((const char **)content, index, info) == 0)
+        if (ft_handle_int_mapping(content, index, info) == 0)
 		{
-			index++;
-			continue ;
-		}
-		int error_value = ft_handle_string_fields(content[index], info);
-		if (error_value == 0)
+            index++;
+            continue ;
+        }
+        int error_value = ft_handle_string_fields(content[index], info);
+        if (error_value == 0)
 		{
-			index++;
-			continue ;
-		}
-		pf_printf_fd(2, "1-Something is wrong with the save file for %s at the line: " \
-				"%s, please reinitialize the save\n", info->name, content[index]);
-		info->flags.error = 1;
-		return (1);
-	}
-	return (0);
+            index++;
+            continue ;
+        }
+        pf_printf_fd(2, "1-Something is wrong with the save file for %s at the line: %s"
+                         ", please reinitialize the save\n", info->name, content[index]);
+        info->flags.error = 1;
+        return (1);
+    }
+    return (0);
 }

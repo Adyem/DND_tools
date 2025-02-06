@@ -1,113 +1,105 @@
 #include "treeNode.hpp"
 #include "libft/CPP_class/nullptr.hpp"
-#include "libft/Libft/libft.hpp"
+#include "libft/Errno/errno.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/unordened_map.hpp"
+#include "libft/Libft/libft.hpp"
 #include <csignal>
 #include <cassert>
 
-TreeNode::TreeNode() : _error(0), _data(ft_nullptr)
+TreeNode::TreeNode() : _data(ft_nullptr), _error(0)
 {
 	return ;
 }
 
 TreeNode::~TreeNode()
 {
-	for (auto& child : children)
-		delete child.second;
-	if (this->_data)
-	{
-		cma_free (this->_data);
-		this->_data = ft_nullptr;
-	}
-	return;
+    for (auto& child : children)
+        delete child.second;
+    return;
 }
 
 void* TreeNode::operator new(size_t size)
 {
-	return (cma_malloc(size));
+    void* ptr = cma_malloc(size);
+    if (!ptr)
+        std::raise(SIGABRT);
+    return (ptr);
 }
 
 void TreeNode::operator delete(void* ptr) noexcept
 {
 	if (ptr)
-		cma_free(ptr);
-	return;
+        cma_free(ptr);
+	return ;
 }
 
-int TreeNode::get_error() const
+int TreeNode::insert_helper(const char *key, int unset_value, int *intVal, char *strVal,
+								char **dblVal)
 {
-	return (this->_error);
-}
-
-int TreeNode::insert(const char *key, int *value, int unset_value, int min_val, int max_val)
-{
-	if (DEBUG == 1)
-		pf_printf("adding %s\n", key);
-	if (this->_error)
-		return (1);
-	TreeNode* current = this;
-	while (*key)
-	{
-		char ch = *key++;
-		if (!current->children[ch])
-		{
-			current->children[ch] = new TreeNode();
-			if (!current->children[ch] || current->children[ch]->get_error())
-			{
-				this->_error = 1;
-				return (1);
-			}
-		}
-		current = current->children[ch];
-	}
+    size_t length = ft_strlen(key);
+    if (DEBUG == 1)
+        pf_printf("adding %s\n", key);
+    TreeNode* current = this;
+    const char* ptr = key;
+    while (*ptr)
+    {
+        char ch = *ptr++;
+        if (!current->children[ch])
+            current->children[ch] = new TreeNode();
+        current = current->children[ch];
+    }
+	if (!current->_data)
+        current->_data = (t_treeNode_value *)cma_malloc(sizeof(t_treeNode_value));
 	if (!current->_data)
 	{
-		current->_data = (s_treeNode_value *)cma_malloc(sizeof(s_treeNode_value));
-		if (!current->_data)
-		{
-			this->_error = 1;
-			return (1);
-		}
-		ft_bzero(current->_data, sizeof(s_treeNode_value));
+		this->_error = 1;
+		return (1);
 	}
-	current->_data->unset_value = unset_value;
-	current->_data->return_field = value;
-	current->_data->min_value = min_val;
-	current->_data->max_value = max_val;
-	current->_data->string_field = ft_nullptr;
-	return (0);
+    ft_bzero(current->_data, sizeof(t_treeNode_value));
+    current->_data->unset_value = unset_value;
+    current->_data->key_length = length;
+    current->_data->return_field_integer = intVal;
+    current->_data->return_field_string  = strVal;
+    current->_data->return_field_double  = dblVal;
+    return (0);
 }
 
-t_treeNode_value *TreeNode::search(const char *key) const
+int TreeNode::insert(const char *key, int *value, int unset_value)
 {
-	if (this->_error)
-		return (ft_nullptr);
-	int index = 0;
-	const TreeNode* current = this;
-	pf_printf("printing key %s\n going trough key", key);
-	while (*key != '=')
+    return (insert_helper(key, unset_value, value, ft_nullptr, ft_nullptr));
+}
+
+int TreeNode::insert(const char *key, char *value)
+{
+    return (insert_helper(key, 0, ft_nullptr, value, ft_nullptr));
+}
+
+int TreeNode::insert(const char *key, char **value)
+{
+    return (insert_helper(key, 0, ft_nullptr, ft_nullptr, value));
+}
+
+const t_treeNode_value *TreeNode::search(const char *key) const
+{
+    const TreeNode* current = this;
+    while (*key != '=')
 	{
-		index++;
-		pf_printf("%c", *key);
-		auto it = current->children.find(*key);
-		if (it == current->children.end())
-			return (ft_nullptr);
-		current = it->second;
-		key++;
-	}
+        auto it = current->children.find(*key);
+        if (it == current->children.end())
+            return (ft_nullptr);
+        current = it->second;
+        key++;
+    }
 	if (*key == '=')
 	{
-		index++;
-		pf_printf("%c\n", *key);
-		auto it = current->children.find(*key);
-		if (it == current->children.end())
-			return (ft_nullptr);
-		current = it->second;
-		key++;
-	}
-	if (!current->_data)
+        auto it = current->children.find(*key);
+        if (it == current->children.end())
+            return (ft_nullptr);
+        current = it->second;
+        key++;
+    }
+	else
 		return (ft_nullptr);
-	current->_data->key_length = index;
-	return (current->_data);
+    return (current->_data);
 }
