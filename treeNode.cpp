@@ -104,3 +104,8 @@ const t_treeNode_value *TreeNode::search(const char *key) const
 		return (ft_nullptr);
     return (current->_data);
 }
+
+int TreeNode::getError() const
+{
+	return (this->_error);
+}

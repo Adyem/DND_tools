@@ -36,6 +36,7 @@ class TreeNode
     	const t_treeNode_value *search(const char *key) const;
 		void* operator new(size_t size);
 		void operator delete(void* ptr) noexcept;
+		int getError() const;
 };
 
 TreeNode	**ft_return_main_treeNode(void);
