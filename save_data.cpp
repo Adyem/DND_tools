@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include <valgrind/valgrind.h>
 #include <valgrind/memcheck.h>
+#include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "key_list.hpp"
 #include <fcntl.h>
@@ -196,16 +197,16 @@ static void ft_npc_write_file_2(ft_sharedptr<t_char> &info, t_resistance *resist
 			info->bufs.frost_breath.active);
     file.printf("%s%i\n", FROST_BREATH_DAMAGE_KEY,
 			info->bufs.frost_breath.damage);
-    if (info->bufs.meteor_strike.target_id)
+	if (info->bufs.meteor_strike.target_id)
         file.printf("%s%s\n", METEOR_STRIKE_TARGET_KEY,
 				info->bufs.meteor_strike.target_id);
-    if (info->bufs.frost_breath.target_id)
+	if (info->bufs.frost_breath.target_id)
         file.printf("%s%s\n", FROST_BREATH_TARGET_ID_KEY,
 				info->bufs.frost_breath.target_id);
-    if (info->bufs.arcane_pounce.target_id)
+	if (info->bufs.arcane_pounce.target_id)
         file.printf("%s%s\n", ARCANE_POUNCE_TARGET_ID_KEY,
 				info->bufs.arcane_pounce.target_id);
-    if (info->bufs.earth_pounce.target_id)
+	if (info->bufs.earth_pounce.target_id != ft_nullptr)
         file.printf("%s%s\n", EARTH_POUNCE_TARGET_ID_KEY,
 				info->bufs.earth_pounce.target_id);
     file.printf("%s%i\n", REACTION_USED_KEY, info->flags.reaction_used);
