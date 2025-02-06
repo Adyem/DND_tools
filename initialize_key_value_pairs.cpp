@@ -132,5 +132,12 @@ void initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
     node->insert(BUFF_BLESS_DURATION_KEY, &info->bufs.bless.duration, 0);
     node->insert(BUFF_BLESS_DICE_FACES_MOD_KEY, &info->bufs.bless.dice_faces_mod, 0);
     node->insert(BUFF_BLESS_DICE_AMOUNT_MOD_KEY, &info->bufs.bless.dice_amount_mod, 0);
+	node->insert(CONC_TARGETS_KEY, &info->concentration.targets);
+	node->insert(HUNTERS_MARK_CASTER_KEY, &info->debufs.hunters_mark.caster_name);
+	node->insert(METEOR_STRIKE_TARGET_KEY, &info->bufs.meteor_strike.target_id);
+	node->insert(FROST_BREATH_TARGET_ID_KEY, &info->bufs.frost_breath.target_id);
+	node->insert(ARCANE_POUNCE_TARGET_ID_KEY, &info->bufs.arcane_pounce.target_id);
+	node->insert(EARTH_POUNCE_TARGET_ID_KEY, &info->bufs.earth_pounce.target_id);
+	node->insert(BUFF_BLESS_CASTER_NAME_KEY, &info->bufs.bless.caster_name);
 	return ;
 }

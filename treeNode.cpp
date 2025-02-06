@@ -1,6 +1,5 @@
 #include "treeNode.hpp"
 #include "libft/CPP_class/nullptr.hpp"
-#include "libft/Errno/errno.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/unordened_map.hpp"
 #include "libft/Libft/libft.hpp"
@@ -14,8 +13,10 @@ TreeNode::TreeNode() : _data(ft_nullptr), _error(0)
 
 TreeNode::~TreeNode()
 {
-    for (auto& child : children)
+	for (auto& child : children)
         delete child.second;
+	if (this->_data)
+		cma_free(this->_data);
     return;
 }
 
@@ -34,8 +35,8 @@ void TreeNode::operator delete(void* ptr) noexcept
 	return ;
 }
 
-int TreeNode::insert_helper(const char *key, int unset_value, int *intVal, char *strVal,
-								char **dblVal)
+int TreeNode::insert_helper(const char *key, int unset_value, int *intVal, char **strVal,
+								char ***dblVal)
 {
     size_t length = ft_strlen(key);
     if (DEBUG == 1)
@@ -70,12 +71,12 @@ int TreeNode::insert(const char *key, int *value, int unset_value)
     return (insert_helper(key, unset_value, value, ft_nullptr, ft_nullptr));
 }
 
-int TreeNode::insert(const char *key, char *value)
+int TreeNode::insert(const char *key, char **value)
 {
     return (insert_helper(key, 0, ft_nullptr, value, ft_nullptr));
 }
 
-int TreeNode::insert(const char *key, char **value)
+int TreeNode::insert(const char *key, char ***value)
 {
     return (insert_helper(key, 0, ft_nullptr, ft_nullptr, value));
 }

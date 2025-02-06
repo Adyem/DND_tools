@@ -1,5 +1,3 @@
-#include "libft/Libft/libft.hpp"
-#include "key_list.hpp"
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -11,7 +9,8 @@ static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char>
 		= (*(ft_return_main_treeNode()))->search(content[index]);
 	if (!return_value)
 		return (1);
-    if ((return_value->key_length != 0 && return_value->return_field_integer != ft_nullptr)
+	if (return_value->return_field_integer && (return_value->key_length != 0
+				&& return_value->return_field_integer != ft_nullptr)
 				&& ((return_value->unset_value == -1
 				|| *(return_value->return_field_integer) == return_value->unset_value)))
     {
@@ -19,48 +18,18 @@ static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char>
 				return_value->key_length);
         return (0);
     }
-    return (1);
-}
-
-static int ft_handle_set_stat_char_pointer(char *content_i, size_t key_len, char **target_field)
-{
-    if (ft_set_stat_player(key_len, const_cast<const char **>(target_field), content_i))
-        return (-1);
-    return (0);
-}
-
-static int ft_handle_set_stat_double_char(char *content_i, size_t key_len, char ***target_field,
-		ft_sharedptr<t_char> &info)
-{
-    *target_field = ft_set_stats_con_targets(content_i, key_len, *target_field, info);
-    if (*target_field == ft_nullptr)
-        return (-1);
-    return (0);
-}
-
-static int ft_handle_string_fields(char *line, ft_sharedptr<t_char> &info)
-{
-	if (ft_strncmp(line, CONC_TARGETS_KEY, ft_strlen(CONC_TARGETS_KEY)) == 0)
-        return (ft_handle_set_stat_double_char(line, ft_strlen(CONC_TARGETS_KEY),
-				&info->concentration.targets, info));
-	if (ft_strncmp(line, HUNTERS_MARK_CASTER_KEY, ft_strlen(HUNTERS_MARK_CASTER_KEY)) == 0)
-        return (ft_handle_set_stat_double_char(line, ft_strlen(HUNTERS_MARK_CASTER_KEY),
-				&info->debufs.hunters_mark.caster_name, info));
-	if (ft_strncmp(line, METEOR_STRIKE_TARGET_KEY, ft_strlen(METEOR_STRIKE_TARGET_KEY)) == 0)
-        return (ft_handle_set_stat_char_pointer(line, ft_strlen(METEOR_STRIKE_TARGET_KEY),
-				&info->bufs.meteor_strike.target_id));
-	if (ft_strncmp(line, FROST_BREATH_TARGET_ID_KEY, ft_strlen(FROST_BREATH_TARGET_ID_KEY)) == 0)
-        return (ft_handle_set_stat_char_pointer(line, ft_strlen(FROST_BREATH_TARGET_ID_KEY),
-				&info->bufs.frost_breath.target_id));
-	if (ft_strncmp(line, ARCANE_POUNCE_TARGET_ID_KEY, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY)) == 0)
-        return (ft_handle_set_stat_char_pointer(line, ft_strlen(ARCANE_POUNCE_TARGET_ID_KEY),
-				&info->bufs.arcane_pounce.target_id));
-	if (ft_strncmp(line, EARTH_POUNCE_TARGET_ID_KEY, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY)) == 0)
-        return (ft_handle_set_stat_char_pointer(line, ft_strlen(EARTH_POUNCE_TARGET_ID_KEY),
-				&info->bufs.earth_pounce.target_id));
-	if (ft_strncmp(line, BUFF_BLESS_CASTER_NAME_KEY, ft_strlen(BUFF_BLESS_CASTER_NAME_KEY)) == 0)
-        return (ft_handle_set_stat_char_pointer(line, ft_strlen(BUFF_BLESS_CASTER_NAME_KEY),
-				&info->bufs.earth_pounce.target_id));
+	else if (return_value->return_field_double)
+	{
+		*return_value->return_field_double = ft_set_stats_con_targets(content[index],
+				return_value->key_length, *return_value->return_field_double, info);
+		return (0);
+	}
+	else if (return_value->return_field_string)
+	{
+		ft_set_stat_player(return_value->key_length,
+				(const char **)return_value->return_field_string, content[index]);
+		return (0);
+	}
     return (1);
 }
 
@@ -71,12 +40,6 @@ int ft_set_stats(ft_sharedptr<t_char> &info, char **content)
     while (content[index])
 	{
         if (ft_handle_int_mapping(content, index, info) == 0)
-		{
-            index++;
-            continue ;
-        }
-        int error_value = ft_handle_string_fields(content[index], info);
-        if (error_value == 0)
 		{
             index++;
             continue ;
