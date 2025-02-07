@@ -28,7 +28,7 @@ static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &in
     }
     info->stats.phase = phase;
     info->stats.turn = 1;
-    pf_printf("veraak transitions to the next phase\n");
+    pf_printf("PHASE TRANSITION VERAAK\n");
 	return ;
 }
 
