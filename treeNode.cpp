@@ -38,6 +38,8 @@ void TreeNode::operator delete(void* ptr) noexcept
 int TreeNode::insert_helper(const char *key, int unset_value, int *intVal, char **strVal,
 								char ***dblVal)
 {
+	if (this->_error)
+		return (1);
     size_t length = ft_strlen(key);
     if (DEBUG == 1)
         pf_printf("adding %s\n", key);
@@ -48,6 +50,11 @@ int TreeNode::insert_helper(const char *key, int unset_value, int *intVal, char 
         char ch = *ptr++;
         if (!current->children[ch])
             current->children[ch] = new TreeNode();
+		if (!current->children[ch])
+		{
+			this->_error = 1;
+			return (1);
+		}
         current = current->children[ch];
     }
 	if (!current->_data)
@@ -83,6 +90,8 @@ int TreeNode::insert(const char *key, char ***value)
 
 const t_treeNode_value *TreeNode::search(const char *key) const
 {
+	if (this->_error)
+		return (ft_nullptr);
     const TreeNode* current = this;
     while (*key != '=')
 	{

@@ -6,7 +6,7 @@
 KEY_LIST
 #undef X
 
-void initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
+int initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
 {
     TreeNode* node = *ft_return_main_treeNode();
     node->insert(HEALTH_KEY, &info->stats.health, -1);
@@ -139,5 +139,7 @@ void initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
 	node->insert(ARCANE_POUNCE_TARGET_ID_KEY, &info->bufs.arcane_pounce.target_id);
 	node->insert(EARTH_POUNCE_TARGET_ID_KEY, &info->bufs.earth_pounce.target_id);
 	node->insert(BUFF_BLESS_CASTER_NAME_KEY, &info->bufs.bless.caster_name);
-	return ;
+	if (node->getError())
+		return (1);
+	return (0);
 }

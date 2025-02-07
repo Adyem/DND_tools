@@ -335,7 +335,7 @@ int			ft_check_write_permissions(const char *filepath);
 ft_sharedptr<t_char> ft_validate_and_fetch_target(char *target_name, ft_sharedptr<t_char> &info,
 													int *error_code);
 void		ft_initialize_variables(t_target_data *target_data);
-void		initialize_stat_key_value_pairs(ft_sharedptr<t_char> &info);
+int			initialize_stat_key_value_pairs(ft_sharedptr<t_char> &info);
 ft_sharedptr<t_char> ft_get_info(const char *tf_name, t_name *name);
 
 //check name

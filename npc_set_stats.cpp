@@ -35,7 +35,8 @@ static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char>
 
 int ft_set_stats(ft_sharedptr<t_char> &info, char **content)
 {
-    initialize_stat_key_value_pairs(info);
+    if (initialize_stat_key_value_pairs(info))
+		return (1);
     int index = 0;
     while (content[index])
 	{

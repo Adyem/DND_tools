@@ -6,6 +6,8 @@ const char* ft_strerror(int error_code)
 {
 	if (error_code == ER_SUCCESS)
         return ("Operation successful");
+	if (error_code == CMA_BAD_ALLOC)
+		return ("Bad allocation");
 	else if (error_code == PT_ERR_QUEUE_FULL)
         return ("Wait queue is full");
 	else if (error_code == PT_ERR_MUTEX_NULLPTR)
