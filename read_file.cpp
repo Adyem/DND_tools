@@ -79,9 +79,6 @@ char **ft_open_and_read_file(const char *file_name)
     ft_file file(file_name, O_RDONLY);
 
     if (file.get_error_code())
-    {
-        pf_printf_fd(2, "120-Error opening file %s: %s", file_name, file.get_error_message());
         return (ft_nullptr);
-    }
     return (ft_read_file_lines(file));
 }

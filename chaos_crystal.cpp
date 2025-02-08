@@ -17,7 +17,7 @@ static void ft_chaos_crystal_damage(ft_sharedptr<t_char> &info)
 	if (!player_list)
 		return ;
 	i = ft_double_char_length((const char **)player_list);
-	i = ft_dice_roll(1, i);
+	i = ft_dice_roll(1, i) - 1;
     pf_printf("%s shoots a magic missile at %s and he/she takes 1 force damage, " \
             " the target does not need to make a concentration save for this damage\n",
             info->name, player_list[i]);
