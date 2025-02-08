@@ -4,7 +4,8 @@
 #include "dnd_tools.hpp"
 #include "veraak.hpp"
 
-static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &info, int phase)
+static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &info,
+									int phase)
 {
     const char *input[3];
     t_name *name;
@@ -34,33 +35,23 @@ static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &in
 
 static void ft_veraak_initialize(ft_sharedptr<t_char> &info)
 {
-    const char *input[3];
-    t_name *name;
-    const char *crystals[5] = {
-        "chaos_crystal_01", "chaos_crystal_02", "chaos_crystal_03", "chaos_crystal_04",
-		ft_nullptr};
-    if (DEBUG == 1)
+    const char *crystals[5] =
+	{
+        "chaos_crystal_01", "chaos_crystal_02", "chaos_crystal_03",
+		"chaos_crystal_04", ft_nullptr
+	};
+	if (DEBUG == 1)
         pf_printf("initializing chaos crystals\n");
+	const char *input[3];
     int index = 0;
     while (crystals[index] != ft_nullptr)
     {
         if (DEBUG == 1)
             pf_printf("checking crystal: %s\n", crystals[index]);
-        name = info->struct_name;
-        while (name != ft_nullptr)
-        {
-            if (ft_strcmp_dnd(name->name, crystals[index]) == 0)
-            {
-                input[0] = name->name;
-                input[1] = "init";
-                input[2] = ft_nullptr;
-                if (DEBUG == 1)
-                    pf_printf("initializing: %s\n", name->name);
-                name->function(2, input, name, 0);
-                break ;
-            }
-            name = name->next;
-        }
+        input[0] = crystals[index];
+        input[1] = "init";
+        input[2] = ft_nullptr;
+        ft_chaos_crystal(2, input, info->struct_name, 0);
         index++;
     }
 	return ;
@@ -92,7 +83,8 @@ void ft_veraak_turn(ft_sharedptr<t_char> &info)
     else
         pf_printf("%s will try to make either a ranged or melee attack during his turn\n",
 				info->name);
-    pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
+    pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health,
+			info->dstats.health);
 	return ;
 }
 
