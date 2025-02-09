@@ -9,6 +9,8 @@ KEY_LIST
 int initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
 {
     TreeNode* node = *ft_return_main_treeNode();
+	if (!node)
+		return (1);
     node->insert(HEALTH_KEY, &info->stats.health, -1);
     node->insert(TEMP_HP_KEY, &info->stats.temp_hp, -1);
     node->insert(STR_KEY, &info->stats.str, -1);

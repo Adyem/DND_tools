@@ -1,6 +1,5 @@
 #include "treeNode.hpp"
 #include "libft/CPP_class/nullptr.hpp"
-#include "libft/Printf/printf.hpp"
 #include "libft/Template/unordened_map.hpp"
 #include "libft/Libft/libft.hpp"
 #include <csignal>
@@ -22,10 +21,7 @@ TreeNode::~TreeNode()
 
 void* TreeNode::operator new(size_t size)
 {
-    void* ptr = cma_malloc(size);
-    if (!ptr)
-        std::raise(SIGABRT);
-    return (ptr);
+    return (cma_malloc(size));
 }
 
 void TreeNode::operator delete(void* ptr) noexcept
@@ -41,8 +37,6 @@ int TreeNode::insert_helper(const char *key, int unset_value, int *intVal, char 
 	if (this->_error)
 		return (1);
     size_t length = ft_strlen(key);
-    if (DEBUG == 1)
-        pf_printf("adding %s\n", key);
     TreeNode* current = this;
     const char* ptr = key;
     while (*ptr)
