@@ -1,6 +1,7 @@
 #ifndef DORGAR_STONEGUARD_HPP
 # define DORGAR_STONEGUARD_HPP
 
+#include "libft/CPP_class/nullptr.hpp"
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "character.hpp"
@@ -126,6 +127,8 @@ static const    t_char DORGAR_STONEGUARD_INFO =
     .save_file = ft_nullptr,
     .name = ft_nullptr,
     .turn = ft_dorgar_stoneguard_turn,
+	.loot = ft_nullptr,
+	.inventory = INITIALIZE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,
     .flags = INITIALIZE_FLAGS,

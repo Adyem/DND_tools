@@ -2,7 +2,6 @@
 # define GRIZZ_HPP
 
 #include "armor.hpp"
-#include "identification.hpp"
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -131,6 +130,8 @@ static const t_char GRIZZ_INFO =
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
 	.turn = ft_grizz_turn,
+	.loot = ft_nullptr,
+	.inventory = INITIALIZE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,

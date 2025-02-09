@@ -376,4 +376,9 @@ static const t_spells INITIALIZE_SPELLS =
 	.bless = INITIALIZE_SPELL_BLESS,
 };
 
+static const	t_inventory INITIALIZE_INVENTORY =
+{
+	.gold = 0,
+};
+
 #endif

@@ -132,6 +132,11 @@ static const t_spell_slots TEMPLATE_SPELL_SLOTS =
 	.warlock = INITIALIZE_SPELL_SLOT,
 };
 
+static const t_inventory TEMPLATE_INVENTORY
+{
+	.gold = 0,
+};
+
 static const t_char TEMPLATE_INFO =
 {
 	.level = 0,
@@ -142,6 +147,8 @@ static const t_char TEMPLATE_INFO =
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
 	.turn = ft_template_turn,
+	.loot = ft_nullptr,
+	.inventory = TEMPLATE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = TEMPLATE_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,

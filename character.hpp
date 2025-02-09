@@ -18,6 +18,7 @@ class ft_sharedptr;
 
 typedef void (*c_action)(ft_sharedptr<s_char> &, s_equipment_id *, int);
 typedef void 	(*c_turn)(ft_sharedptr<t_char>&);
+typedef void 	(*c_loot)(ft_sharedptr<t_char>&);
 
 typedef struct	s_stats
 {
@@ -408,6 +409,11 @@ typedef struct	s_spells
 	t_spell_bless			bless;
 }	t_spells;
 
+typedef struct s_inventory
+{
+	int		gold;
+}	t_inventory;
+
 typedef struct	s_char
 {
 	int				level;
@@ -418,6 +424,8 @@ typedef struct	s_char
 	char			*save_file;
 	const char		*name;
 	c_turn			turn;
+	c_loot			loot;
+	t_inventory		inventory;
 	t_spells		spells;
 	t_spell_slots	spell_slots;
 	t_flags			flags;
