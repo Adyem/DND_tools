@@ -119,6 +119,14 @@ static const t_physical TEMPLATE_PHYSICAL =
     .speed = 0,
 };
 
+static const t_spell_slot TEMPLATE_SPELL_SLOT =
+{
+	.available = 0,
+	.total = 0,
+	.level = 0,
+	.replenishing_slot = 0,
+};
+
 static const t_spell_slots TEMPLATE_SPELL_SLOTS =
 {
 	.level_1 = INITIALIZE_SPELL_SLOT,
