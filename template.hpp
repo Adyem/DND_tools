@@ -12,6 +12,7 @@ typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
 void	ft_template_turn(ft_sharedptr<t_char> &info);
+void	ft_template_loot(ft_sharedptr<t_char> &info);
 
 static const	t_stats TEMPLATE_DEFAULT_STATS =
 {
@@ -147,7 +148,7 @@ static const t_char TEMPLATE_INFO =
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
 	.turn = ft_template_turn,
-	.loot = ft_nullptr,
+	.loot = ft_template_loot,
 	.inventory = TEMPLATE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = TEMPLATE_SPELL_SLOTS,

@@ -25,6 +25,11 @@ static void ft_initialize_gear_and_feats(ft_sharedptr<t_char> &info)
 	return ;
 }
 
+void	ft_template_loot(ft_sharedptr<t_char> &info)
+{
+	(void)info;
+}
+
 ft_sharedptr<t_char> ft_template(const int index, const char **input, t_name *name, int exception)
 {
 	int error = 0;

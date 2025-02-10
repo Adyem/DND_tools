@@ -28,6 +28,7 @@ void		ft_npc_init_stats(ft_sharedptr<t_char> &info);
 ft_sharedptr<t_char> ft_template(const int index, const char **input, t_name *name,
 				int exception);
 void		ft_template_turn(ft_sharedptr<t_char> &info);
+void		ft_template_loot(ft_sharedptr<t_char> info);
 
 //Ghost
 ft_sharedptr<t_char> ft_ghost(const int index, const char **input, t_name *name, int exception);
