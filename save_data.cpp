@@ -90,6 +90,7 @@ static void ft_npc_write_spell_slots(ft_sharedptr<t_char> &info, ft_file &file)
 static void ft_npc_write_file_1(ft_sharedptr<t_char> &info, t_stats *stats, ft_file &file)
 {
     file.printf("%s%i\n", HEALTH_KEY, stats->health);
+	file.printf("%s%i\n", MAX_HEALTH_KEY, info->dstats.health);
     file.printf("%s%i\n", TEMP_HP_KEY, stats->temp_hp);
     file.printf("%s%i\n", STR_KEY, stats->str);
     file.printf("%s%i\n", DEX_KEY, stats->dex);

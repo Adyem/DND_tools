@@ -19,6 +19,7 @@ constexpr bool is_valid_key(const char* str)
 
 #define KEY_LIST \
     X(HEALTH_KEY, "HEALTH=") \
+	X(MAX_HEALTH_KEY, "MAX_HEALTH=") \
     X(TEMP_HP_KEY, "TEMP_HP=") \
     X(STR_KEY, "STR=") \
     X(DEX_KEY, "DEX=") \
