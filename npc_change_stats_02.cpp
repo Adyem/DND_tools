@@ -57,6 +57,13 @@ void	ft_npc_sstuff(ft_sharedptr<t_char> &info, const char **input)
 		else
 			pf_printf_fd(2, "no weapon attack set for %s\n", info->name);
 	}
+	else if (ft_strcmp_dnd(input[1], "loot"))
+	{
+		if (info->loot)
+			info->loot(info);
+		else
+			pf_printf("This mob doesnt drop anny loot");
+	}
 	else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
 	{
 		if (info->equipment.ranged_weapon.attack.function)
