@@ -414,6 +414,12 @@ typedef struct s_inventory
 	int		gold;
 }	t_inventory;
 
+typedef struct s_hit_dice
+{
+	int	dice_amount;
+	int dice_faces;
+} t_hit_dice;
+
 typedef struct	s_char
 {
 	int				level;
@@ -425,6 +431,7 @@ typedef struct	s_char
 	const char		*name;
 	c_turn			turn;
 	c_loot			loot;
+	t_hit_dice		hit_dice;
 	t_inventory		inventory;
 	t_spells		spells;
 	t_spell_slots	spell_slots;

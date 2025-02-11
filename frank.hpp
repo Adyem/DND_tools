@@ -130,6 +130,7 @@ static const t_char FRANK_INFO =
 	.name = ft_nullptr,
 	.turn = ft_frank_turn,
 	.loot = ft_nullptr,
+	.hit_dice = INITIALIZ_HIT_DICE,
 	.inventory = INITIALIZE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,

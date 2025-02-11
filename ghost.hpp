@@ -143,6 +143,7 @@ static const t_char GHOST_INFO =
 	.name = ft_nullptr,
 	.turn = ft_ghost_turn,
 	.loot = ft_nullptr,
+	.hit_dice = INITIALIZ_HIT_DICE,
 	.inventory = INITIALIZE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = GHOST_SPELL_SLOTS,

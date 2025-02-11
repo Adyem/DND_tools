@@ -381,4 +381,10 @@ static const	t_inventory INITIALIZE_INVENTORY =
 	.gold = 0,
 };
 
+static const	t_hit_dice INITIALIZ_HIT_DICE =
+{
+	.dice_amount = 0,
+	.dice_faces = 0,
+};
+
 #endif

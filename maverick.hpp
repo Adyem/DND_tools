@@ -129,6 +129,7 @@ static const t_char MAVERICK_INFO =
 	.name = ft_nullptr,
 	.turn = ft_maverick_turn,
 	.loot = ft_nullptr,
+	.hit_dice = INITIALIZ_HIT_DICE,
 	.inventory = INITIALIZE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,

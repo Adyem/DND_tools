@@ -146,6 +146,12 @@ static const t_inventory TEMPLATE_INVENTORY
 	.gold = 0,
 };
 
+static const	t_hit_dice TEMPLATE_HIT_DICE =
+{
+	.dice_amount = 0,
+	.dice_faces = 0,
+};
+
 static const t_char TEMPLATE_INFO =
 {
 	.level = 0,
@@ -157,6 +163,7 @@ static const t_char TEMPLATE_INFO =
 	.name = ft_nullptr,
 	.turn = ft_template_turn,
 	.loot = ft_template_loot,
+	.hit_dice = TEMPLATE_HIT_DICE,
 	.inventory = TEMPLATE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = TEMPLATE_SPELL_SLOTS,

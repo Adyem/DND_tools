@@ -183,6 +183,7 @@ static const t_char VERAAK_INFO =
 	.name = ft_nullptr,
 	.turn = ft_veraak_turn,
 	.loot = ft_nullptr,
+	.hit_dice = INITIALIZ_HIT_DICE,
 	.inventory = INITIALIZE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = VERAAK_SPELL_SLOTS,

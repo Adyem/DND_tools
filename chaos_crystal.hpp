@@ -128,6 +128,7 @@ static const t_char CHAOS_CRYSTAL_INFO =
     .name = ft_nullptr,
     .turn = ft_chaos_crystal_turn,
 	.loot = ft_nullptr,
+	.hit_dice = INITIALIZ_HIT_DICE,
 	.inventory = INITIALIZE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,

@@ -128,6 +128,7 @@ static const    t_char GUNDREN_ROCKSEEKER_INFO =
     .name = ft_nullptr,
     .turn = ft_gundren_rockseeker_turn,
 	.loot = ft_nullptr,
+	.hit_dice = INITIALIZ_HIT_DICE,
 	.inventory = INITIALIZE_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,
