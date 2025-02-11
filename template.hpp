@@ -146,7 +146,7 @@ static const t_inventory TEMPLATE_INVENTORY
 	.gold = 0,
 };
 
-static const	t_hit_dice TEMPLATE_HIT_DICE =
+constexpr t_hit_dice TEMPLATE_HIT_DICE =
 {
 	.dice_amount = 0,
 	.dice_faces = 0,
@@ -184,5 +184,18 @@ static const t_char TEMPLATE_INFO =
 	.struct_name = ft_nullptr,
 	.physical = TEMPLATE_PHYSICAL,
 };
+
+template <int Amount, int Faces>
+struct ValidateHitDice
+{
+    static_assert
+	(
+        ((Amount == 0 && Faces == 0) || (Amount >= 1 && Faces >= 1)) &&
+        (Amount <= 50 && Faces <= 50),
+        "Invalid TEMPLATE_HIT_DICE values: Either both must be 0 or both at least 1, and they must not exceed 50."
+    );
+};
+
+inline ValidateHitDice<TEMPLATE_HIT_DICE.dice_amount, TEMPLATE_HIT_DICE.dice_faces> validation_instance;
 
 #endif

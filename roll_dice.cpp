@@ -7,6 +7,8 @@
 int ft_dice_roll(int number, int faces)
 {
 
+	if (faces == 0 && number == 0)
+		return (0);
     if (faces < 1 || number < 1)
         return (-1);
     if (faces == 1)
