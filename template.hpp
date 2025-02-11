@@ -191,8 +191,9 @@ struct ValidateHitDice
     static_assert
 	(
         ((Amount == 0 && Faces == 0) || (Amount >= 1 && Faces >= 1)) &&
-        (Amount <= 50 && Faces <= 50),
-        "Invalid TEMPLATE_HIT_DICE values: Either both must be 0 or both at least 1, and they must not exceed 50."
+        (Amount <= 40 && Faces <= 12),
+        "Invalid TEMPLATE_HIT_DICE values: Either both must be 0 or both at least 1, " \
+			"and the dice amount must not exceed 40, the dice faces must not exceed 12."
     );
 };
 
