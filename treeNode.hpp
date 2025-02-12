@@ -1,5 +1,5 @@
 #ifndef TREENODE_HPP
-# define TREENODE_HPP
+#define TREENODE_HPP
 
 #ifndef DEBUG
 # define DEBUG 0
@@ -10,36 +10,37 @@
 
 typedef struct s_treeNode_value
 {
-	int		key_length;
-	int		unset_value;
-	int		*return_field_integer;
-	char	**return_field_string;
-	char	***return_field_double;
+    int   key_length;
+    int   unset_value;
+    int   *return_field_integer;
+    char  **return_field_string;
+    char  ***return_field_double;
 } t_treeNode_value;
 
-class TreeNode
+typedef struct s_treeNode
 {
-	private:
-		t_treeNode_value *_data;
-		int _error;
-		int insert_helper(const char *key, int unset_value, int *intVal, char **strVal,
-							char ***dblVal);
+    t_treeNode_value *data;
+    int error;
+    ft_unord_map<char, struct s_treeNode*> children;
+} TreeNode;
 
-	public:
-    	ft_unord_map<char, TreeNode*> children;
-		
-		TreeNode();
-    	~TreeNode();
-    	int		insert(const char *key, int *value, int unset_value);
-		int		insert(const char *key, char **value);
-		int		insert(const char *key, char ***value);
-    	const t_treeNode_value *search(const char *key) const;
-		void* operator new(size_t size);
-		void operator delete(void* ptr) noexcept;
-		int getError() const;
-};
+// Function declarations for creating/destroying nodes:
+TreeNode *tree_node_new(void);
+void tree_node_delete(TreeNode *node);
 
-TreeNode	**ft_return_main_treeNode(void);
-void		ft_cleanup_treeNode(void);
+// Insertion functions:
+int tree_node_insert(TreeNode *node, const char *key, int *value, int unset_value);
+int tree_node_insert(TreeNode *node, const char *key, char **value);
+int tree_node_insert(TreeNode *node, const char *key, char ***value);
+
+// Search function:
+const t_treeNode_value *tree_node_search(const TreeNode *node, const char *key);
+
+// Accessor for the error flag:
+int tree_node_get_error(const TreeNode *node);
+
+// Main tree functions (used by other parts of your code):
+TreeNode **ft_return_main_treeNode(void);
+void ft_cleanup_treeNode(void);
 
 #endif

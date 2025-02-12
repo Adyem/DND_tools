@@ -3,16 +3,16 @@
 
 TreeNode **ft_return_main_treeNode(void)
 {
-	static TreeNode *treenode;
-
-	if (!treenode)
-		treenode = new TreeNode;
-	return (&treenode);
+    static TreeNode *treenode = ft_nullptr;
+    if (!treenode)
+        treenode = tree_node_new();
+    return (&treenode);
 }
 
-void	ft_cleanup_treeNode(void)
+void ft_cleanup_treeNode(void)
 {
-	delete *ft_return_main_treeNode();
-	*ft_return_main_treeNode() = ft_nullptr;
+    TreeNode **node = ft_return_main_treeNode();
+    tree_node_delete(*node);
+    *node = ft_nullptr;
 	return ;
 }

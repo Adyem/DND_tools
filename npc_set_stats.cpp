@@ -6,7 +6,7 @@
 static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char> &info)
 {
 	const t_treeNode_value *return_value
-		= (*(ft_return_main_treeNode()))->search(content[index]);
+		= tree_node_search(*(ft_return_main_treeNode()), content[index]);
 	if (!return_value)
 		return (1);
 	if (return_value->return_field_integer && (return_value->key_length != 0

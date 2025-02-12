@@ -1,114 +1,119 @@
 #include "treeNode.hpp"
 #include "libft/CPP_class/nullptr.hpp"
-#include "libft/Template/unordened_map.hpp"
 #include "libft/Libft/libft.hpp"
 #include <csignal>
 #include <cassert>
 
-TreeNode::TreeNode() : _data(ft_nullptr), _error(0)
+TreeNode *tree_node_new(void)
 {
+    TreeNode *node = (TreeNode *)cma_malloc(sizeof(TreeNode));
+    if (!node)
+        return (ft_nullptr);
+    new (&node->children) ft_unord_map<char, TreeNode*>();
+    node->data  = ft_nullptr;
+    node->error = 0;
+    return (node);
+}
+
+void tree_node_delete(TreeNode *node)
+{
+    if (!node)
+        return ;
+    for (auto &pair : node->children)
+    {
+        tree_node_delete(pair.second);
+    }
+    node->children.~ft_unord_map<char, TreeNode*>();
+    if (node->data)
+        cma_free(node->data);
+    cma_free(node);
 	return ;
 }
 
-TreeNode::~TreeNode()
+static int tree_node_insert_helper(TreeNode *node, const char *key, int unset_value,
+                              int *intVal, char **strVal, char ***dblVal)
 {
-	for (auto& child : children)
-        delete child.second;
-	if (this->_data)
-		cma_free(this->_data);
-    return;
-}
-
-void* TreeNode::operator new(size_t size)
-{
-    return (cma_malloc(size));
-}
-
-void TreeNode::operator delete(void* ptr) noexcept
-{
-	if (ptr)
-        cma_free(ptr);
-	return ;
-}
-
-int TreeNode::insert_helper(const char *key, int unset_value, int *intVal, char **strVal,
-								char ***dblVal)
-{
-	if (this->_error)
-		return (1);
+    if (node->error)
+        return (1);
     size_t length = ft_strlen(key);
-    TreeNode* current = this;
-    const char* ptr = key;
+    TreeNode *current = node;
+    const char *ptr = key;
     while (*ptr)
     {
         char ch = *ptr++;
         if (!current->children[ch])
-            current->children[ch] = new TreeNode();
-		if (!current->children[ch])
-		{
-			this->_error = 1;
-			return (1);
-		}
+        {
+            TreeNode *child = tree_node_new();
+            if (!child)
+            {
+                node->error = 1;
+                return (1);
+            }
+            current->children[ch] = child;
+        }
         current = current->children[ch];
     }
-	if (!current->_data)
-        current->_data = (t_treeNode_value *)cma_malloc(sizeof(t_treeNode_value));
-	if (!current->_data)
-	{
-		this->_error = 1;
-		return (1);
-	}
-    ft_bzero(current->_data, sizeof(t_treeNode_value));
-    current->_data->unset_value = unset_value;
-    current->_data->key_length = length;
-    current->_data->return_field_integer = intVal;
-    current->_data->return_field_string  = strVal;
-    current->_data->return_field_double  = dblVal;
+    if (!current->data)
+    {
+        current->data = (t_treeNode_value *)cma_malloc(sizeof(t_treeNode_value));
+        if (!current->data)
+        {
+            node->error = 1;
+            return (1);
+        }
+    }
+    ft_bzero(current->data, sizeof(t_treeNode_value));
+    current->data->unset_value           = unset_value;
+    current->data->key_length            = length;
+    current->data->return_field_integer  = intVal;
+    current->data->return_field_string   = strVal;
+    current->data->return_field_double   = dblVal;
     return (0);
 }
 
-int TreeNode::insert(const char *key, int *value, int unset_value)
+int tree_node_insert(TreeNode *node, const char *key, int *value, int unset_value)
 {
-    return (insert_helper(key, unset_value, value, ft_nullptr, ft_nullptr));
+    return (tree_node_insert_helper(node, key, unset_value, value, ft_nullptr, ft_nullptr));
 }
 
-int TreeNode::insert(const char *key, char **value)
+int tree_node_insert(TreeNode *node, const char *key, char **value)
 {
-    return (insert_helper(key, 0, ft_nullptr, value, ft_nullptr));
+    return (tree_node_insert_helper(node, key, 0, ft_nullptr, value, ft_nullptr));
 }
 
-int TreeNode::insert(const char *key, char ***value)
+int tree_node_insert(TreeNode *node, const char *key, char ***value)
 {
-    return (insert_helper(key, 0, ft_nullptr, ft_nullptr, value));
+    return (tree_node_insert_helper(node, key, 0, ft_nullptr, ft_nullptr, value));
 }
 
-const t_treeNode_value *TreeNode::search(const char *key) const
+const t_treeNode_value *tree_node_search(const TreeNode *node, const char *key)
 {
-	if (this->_error)
-		return (ft_nullptr);
-    const TreeNode* current = this;
+    if (node->error)
+        return (ft_nullptr);
+    const TreeNode *current = node;
     while (*key != '=')
-	{
+    {
         auto it = current->children.find(*key);
         if (it == current->children.end())
             return (ft_nullptr);
         current = it->second;
         key++;
     }
-	if (*key == '=')
-	{
+    if (*key == '=')
+    {
         auto it = current->children.find(*key);
         if (it == current->children.end())
             return (ft_nullptr);
         current = it->second;
         key++;
     }
-	else
-		return (ft_nullptr);
-    return (current->_data);
+    else
+        return (ft_nullptr);
+    return (current->data);
 }
 
-int TreeNode::getError() const
+int tree_node_get_error(const TreeNode *node)
 {
-	return (this->_error);
+    return (node->error);
 }
+
