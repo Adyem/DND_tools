@@ -1,6 +1,5 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 
 static void	ft_test_mode(bool *is_hit)
 {
@@ -12,7 +11,7 @@ static void	ft_test_mode(bool *is_hit)
 	return ;
 }
 
-static void ft_normal_mode(ft_sharedptr<t_char> &info, bool *is_hit)
+static void ft_normal_mode(t_char *info, bool *is_hit)
 {
 	int choice = ft_readline_prompt_hit_or_miss();
 	if (choice == -1)
@@ -32,7 +31,7 @@ static void ft_normal_mode(ft_sharedptr<t_char> &info, bool *is_hit)
 	return ;
 }
 
-void ft_weapon_attack(ft_sharedptr<t_char> &info, t_equipment_id *weapon, int offhand)
+void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
 {
     t_damage_info d_info;
     d_info.stat_mod = (ft_weapon_find_stat(info, weapon) - 10) / 2;

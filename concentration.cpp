@@ -6,7 +6,7 @@
 #include <cerrno>
 #include <cstring>
 
-void ft_check_concentration(ft_sharedptr<t_char> &info, int damage)
+void ft_check_concentration(t_char * info, int damage)
 {
     int difficulty;
     int result;

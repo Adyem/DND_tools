@@ -1,10 +1,11 @@
 #include "dnd_tools.hpp"
 #include "template.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/shared_ptr.hpp"
 #include "libft/CMA/CMA.hpp"
 
-void ft_template_turn(ft_sharedptr<t_char> &info)
+void ft_template_turn(t_char * info)
 {
 	ft_update_buf(info);
 	if (info->flags.prone)
@@ -19,26 +20,25 @@ void ft_template_turn(ft_sharedptr<t_char> &info)
 	return ;
 }
 
-static void ft_initialize_gear_and_feats(ft_sharedptr<t_char> &info)
+static void ft_initialize_gear_and_feats(t_char * info)
 {
 	(void)info;
 	return ;
 }
 
-void	ft_template_loot(ft_sharedptr<t_char> &info)
+void	ft_template_loot(t_char * info)
 {
 	(void)info;
 }
 
-ft_sharedptr<t_char> ft_template(const int index, const char **input, t_name *name, int exception)
+t_char *ft_template(const int index, const char **input, t_name *name, int exception)
 {
 	int error = 0;
-    ft_sharedptr<t_char> info(1);
-
+	t_char *info = (t_char *)cma_malloc(sizeof(t_char));
 	if (!info)
     {
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
 	*info = TEMPLATE_INFO;
 	info->name = input[0];
@@ -47,7 +47,7 @@ ft_sharedptr<t_char> ft_template(const int index, const char **input, t_name *na
 	if (!info->save_file)
 	{
 		ft_free_info(info);
-		return (ft_sharedptr<t_char>());
+		return (ft_nullptr);
 	}
 	if (index == 2)
 	{
@@ -58,7 +58,7 @@ ft_sharedptr<t_char> ft_template(const int index, const char **input, t_name *na
 			{
 				pf_printf("147-Error Invalid hit dice %s", info->name);
 				ft_free_info(info);
-				return (ft_sharedptr<t_char>());
+				return (ft_nullptr);
 			}
 			info->dstats.health = info->dstats.health + result;
 			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
@@ -66,30 +66,30 @@ ft_sharedptr<t_char> ft_template(const int index, const char **input, t_name *na
 			{
 				pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
 					file.get_error_message());
-				return (ft_sharedptr<t_char>());
+				return (ft_nullptr);
 			}
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
 			pf_printf("Stats for %s written on a file\n", info->name);
 			ft_free_info(info);
-			return (ft_sharedptr<t_char>());
+			return (ft_nullptr);
 		}
 	}
 	error = ft_npc_open_file(info);
 	if (error)
 	{
 		ft_free_info(info);
-		return (ft_sharedptr<t_char>());
+		return (ft_nullptr);
 	}
 	error = ft_npc_check_info(info);
 	if (error)
 	{
 		ft_free_info(info);
-		return (ft_sharedptr<t_char>());
+		return (ft_nullptr);
 	}
 	ft_initialize_gear_and_feats(info);
 	if (exception)
 		return (info);
 	ft_npc_change_stats(info, index, input);
 	ft_free_info(info);
-	return (ft_sharedptr<t_char>());
+	return (ft_nullptr);
 }

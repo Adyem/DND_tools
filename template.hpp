@@ -11,8 +11,8 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_template_turn(ft_sharedptr<t_char> &info);
-void	ft_template_loot(ft_sharedptr<t_char> &info);
+void	ft_template_turn(t_char * info);
+void	ft_template_loot(t_char * info);
 
 static const	t_stats TEMPLATE_DEFAULT_STATS =
 {

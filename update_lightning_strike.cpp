@@ -2,7 +2,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/Libft/libft.hpp"
 
-void ft_npc_update_lightning_strike(ft_sharedptr<t_char> &info, const char **input)
+void ft_npc_update_lightning_strike(t_char * info, const char **input)
 {
 	int number;
 

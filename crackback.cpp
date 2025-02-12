@@ -4,18 +4,18 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 
-inline static bool ft_is_crackback_possible(ft_sharedptr<t_char> &info, int number)
+inline static bool ft_is_crackback_possible(t_char * info, int number)
 {
     return (number < 10 && !info->flags.reaction_used);
 }
 
-inline static void ft_notify_no_weapon(ft_sharedptr<t_char> &info, const char *weapon_type)
+inline static void ft_notify_no_weapon(t_char * info, const char *weapon_type)
 {
     pf_printf_fd(2, "No %s set for %s\n", weapon_type, info->name);
 	return ;
 }
 
-static bool ft_handle_attack_choice(ft_sharedptr<t_char> &info, const char *choice)
+static bool ft_handle_attack_choice(t_char * info, const char *choice)
 {
     if (ft_strcmp_dnd(choice, "melee") == 0)
     {
@@ -48,7 +48,7 @@ static bool ft_handle_attack_choice(ft_sharedptr<t_char> &info, const char *choi
     return (false);
 }
 
-static void ft_execute_crackback(ft_sharedptr<t_char> &info)
+static void ft_execute_crackback(t_char * info)
 {
     char *line;
     int max_tries = 0;
@@ -93,7 +93,7 @@ static void ft_execute_crackback(ft_sharedptr<t_char> &info)
 	return ;
 }
 
-void ft_crackback(ft_sharedptr<t_char> &info, int number)
+void ft_crackback(t_char * info, int number)
 {
     if (!ft_is_crackback_possible(info, number))
         return ;

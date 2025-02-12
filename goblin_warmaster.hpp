@@ -12,9 +12,9 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_goblin_warmaster_turn(ft_sharedptr<t_char> &info);
+void	ft_goblin_warmaster_turn(t_char * info);
 
-static const	t_stats WARM_DEFAULT_STATS =
+static const	t_stats GOBLIN_WARMASTER_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 0,
@@ -28,7 +28,7 @@ static const	t_stats WARM_DEFAULT_STATS =
 	.cha = 10,
 };
 
-static const	t_save WARM_SAVE_MODS =
+static const	t_save GOBLIN_WARMASTER_SAVE_MODS =
 {
     .str = 3,
     .dex = 1,
@@ -38,7 +38,7 @@ static const	t_save WARM_SAVE_MODS =
 	.con = 2,
 };
 
-static const	t_skills WARM_SKILL_MODS =
+static const	t_skills GOBLIN_WARMASTER_SKILL_MODS =
 {
     .athletics = 4,
     .acrobatics = 1,
@@ -60,13 +60,13 @@ static const	t_skills WARM_SKILL_MODS =
     .persuasion = 0,
 };
 
-static const	t_attack WARM_ATTACK =
+static const	t_attack GOBLIN_WARMASTER_ATTACK =
 {
 	.attack_bonus = 4,
 	.ranged_bonus = 2,
 };
 
-static const	t_crit_mod WARM_CRIT =
+static const	t_crit_mod GOBLIN_WARMASTER_CRIT =
 {
 	.attack = 1,
 	.attack_d = 1,
@@ -77,7 +77,7 @@ static const	t_crit_mod WARM_CRIT =
 	.skill_fail = 0,
 };
 
-static const	t_resistance WARM_DEFAULT_RESISTANCE =
+static const	t_resistance GOBLIN_WARMASTER_DEFAULT_RESISTANCE =
 {
 	.acid = 0,
 	.bludgeoning = 0,
@@ -94,7 +94,7 @@ static const	t_resistance WARM_DEFAULT_RESISTANCE =
 	.thunder = 0,
 };
 
-static const	t_equipment WARM_EQUIPMENT =
+static const	t_equipment GOBLIN_WARMASTER_EQUIPMENT =
 {
 	.weapon = WOODEN_CLUB,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
@@ -110,7 +110,7 @@ static const	t_equipment WARM_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
-static const t_physical WARM_PHYSICAL =
+static const t_physical GOBLIN_WARMASTER_PHYSICAL =
 {
 	.height = 52,
 	.weight = 50,
@@ -118,7 +118,7 @@ static const t_physical WARM_PHYSICAL =
 	.speed = 25,
 };
 
-static const t_char WARM_INFO =
+static const t_char GOBLIN_WARMASTER_INFO =
 {
 	.level = 4,
 	.mechanical = 0,
@@ -134,21 +134,21 @@ static const t_char WARM_INFO =
 	.spells = INITIALIZE_SPELLS,
 	.spell_slots = INITIALIZE_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
-	.crit = WARM_CRIT,
-	.attack_bonus = WARM_ATTACK,
+	.crit = GOBLIN_WARMASTER_CRIT,
+	.attack_bonus = GOBLIN_WARMASTER_ATTACK,
 	.bufs = INITIALIZE_BUFFS,
 	.debufs = INITIALIZE_DEBUFFS,
 	.concentration = INITIALIZE_CONCENTRATION,
-	.d_resistance = WARM_DEFAULT_RESISTANCE,
+	.d_resistance = GOBLIN_WARMASTER_DEFAULT_RESISTANCE,
 	.c_resistance = INITIALIZE_CURRENT_RESISTANCE,
-	.equipment = WARM_EQUIPMENT,
-	.skill_mod = WARM_SKILL_MODS,
-	.save_mod = WARM_SAVE_MODS,
+	.equipment = GOBLIN_WARMASTER_EQUIPMENT,
+	.skill_mod = GOBLIN_WARMASTER_SKILL_MODS,
+	.save_mod = GOBLIN_WARMASTER_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
-	.dstats = WARM_DEFAULT_STATS,
+	.dstats = GOBLIN_WARMASTER_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
 	.struct_name = ft_nullptr,
-	.physical = WARM_PHYSICAL,
+	.physical = GOBLIN_WARMASTER_PHYSICAL,
 };
 
 #endif

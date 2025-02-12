@@ -12,7 +12,7 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_grizz_turn(ft_sharedptr<t_char> &info);
+void	ft_grizz_turn(t_char * info);
 
 static const	t_stats GRIZZ_DEFAULT_STATS =
 {

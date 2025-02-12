@@ -3,7 +3,7 @@
 #include "identification.hpp"
 #include "libft/Printf/printf.hpp"
 
-static int	ft_check_mainhand(ft_sharedptr<t_char> &info)
+static int	ft_check_mainhand(t_char * info)
 {
 	if (info->equipment.offhand_weapon.slot == SLOT_TWO_HANDED_WEAPON)
 	{
@@ -40,7 +40,7 @@ static int	ft_check_slot(t_equipment_id equipment_slot, int slot_type,
 	return (0);
 }
 
-int	ft_check_equipment_slots(ft_sharedptr<t_char> &info)
+int	ft_check_equipment_slots(t_char * info)
 {
 	int	error;
 

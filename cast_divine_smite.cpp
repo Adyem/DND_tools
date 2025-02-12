@@ -4,7 +4,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/shared_ptr.hpp"
 
-static int ft_check_divine_smite_learned(ft_sharedptr<t_char> &character)
+static int ft_check_divine_smite_learned(t_char * character)
 {
     if (character->spells.divine_smite.learned == 0)
     {
@@ -14,7 +14,7 @@ static int ft_check_divine_smite_learned(ft_sharedptr<t_char> &character)
     return (1);
 }
 
-void ft_cast_divine_smite(ft_sharedptr<t_char> &character, bool critical_strike)
+void ft_cast_divine_smite(t_char * character, bool critical_strike)
 {
 	int multiplyer = 1;
 	if (critical_strike)

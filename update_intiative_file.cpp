@@ -8,7 +8,7 @@
 #include <cerrno>
 #include <cstring>
 
-void ft_initiative_remove(ft_sharedptr<t_char> &info)
+void ft_initiative_remove(t_char * info)
 {
     char    *temp;
     char    **content;
@@ -63,7 +63,7 @@ void ft_initiative_remove(ft_sharedptr<t_char> &info)
     return ;
 }
 
-static int ft_initiative_check(ft_sharedptr<t_char> &info, char **content, int i)
+static int ft_initiative_check(t_char * info, char **content, int i)
 {
     char    *mark;
     int     initiative;
@@ -80,7 +80,7 @@ static int ft_initiative_check(ft_sharedptr<t_char> &info, char **content, int i
     return (1);
 }
 
-static int ft_initiative_check_content(ft_sharedptr<t_char> &info, char **content)
+static int ft_initiative_check_content(t_char * info, char **content)
 {
     int index = 0;
 
@@ -93,7 +93,7 @@ static int ft_initiative_check_content(ft_sharedptr<t_char> &info, char **conten
     return (0);
 }
 
-void ft_initiative_add(ft_sharedptr<t_char> &info)
+void ft_initiative_add(t_char * info)
 {
     char    *n_line;
     char    **content;

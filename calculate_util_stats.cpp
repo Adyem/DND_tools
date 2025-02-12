@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Template/shared_ptr.hpp"
 
-int ft_calculate_crit_attack_fail_bonus(ft_sharedptr<t_char> &info)
+int ft_calculate_crit_attack_fail_bonus(t_char * info)
 {
     int fail_bonus = 0;
 
@@ -21,7 +21,7 @@ int ft_calculate_crit_attack_fail_bonus(ft_sharedptr<t_char> &info)
     return (fail_bonus);
 }
 
-int ft_calculate_crit_attack_success_bonus(ft_sharedptr<t_char> &info)
+int ft_calculate_crit_attack_success_bonus(t_char * info)
 {
     int success_bonus = 0;
 

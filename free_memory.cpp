@@ -46,12 +46,12 @@ void	ft_free_memory_cmt(t_target_data *target_data, int amount)
         if (target_data->target[index])
         {
             ft_free_info(target_data->target[index]);
-            target_data->target[index] = ft_sharedptr<t_char>();
+            target_data->target[index] = ft_nullptr;
         }
 		if (target_data->target_copy[index])
 		{
 			ft_free_info(target_data->target_copy[index]);
-			target_data->target[index] = ft_sharedptr<t_char>();
+			target_data->target[index] = ft_nullptr;
 		}
         if (target_data->Pchar_name[index])
         {

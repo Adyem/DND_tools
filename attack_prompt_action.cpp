@@ -37,7 +37,7 @@ static bool all_spells_not_learned(t_known_spell known_spells[])
     return (not_learned == index);
 }
 
-static bool handle_spell_cast(ft_sharedptr<t_char> &character, t_known_spell known_spells[],
+static bool handle_spell_cast(t_char * character, t_known_spell known_spells[],
 								char *input, bool critical_strike)
 {
     int index = 0;
@@ -59,7 +59,7 @@ static bool handle_spell_cast(ft_sharedptr<t_char> &character, t_known_spell kno
     return (false);
 }
 
-static void prompt_user_for_spell(t_known_spell known_spells[], ft_sharedptr<t_char> &character,
+static void prompt_user_for_spell(t_known_spell known_spells[], t_char * character,
 							bool critical_strike)
 {
     pf_printf("Type the spell name to cast it, or type 'exit' to skip.\n");
@@ -92,7 +92,7 @@ static void prompt_user_for_spell(t_known_spell known_spells[], ft_sharedptr<t_c
 	return ;
 }
 
-void ft_prompt_on_attack_success(ft_sharedptr<t_char> &character, bool critical_strike)
+void ft_prompt_on_attack_success(t_char * character, bool critical_strike)
 {
     t_known_spell known_spells[] =
 	{

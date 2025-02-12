@@ -11,7 +11,7 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_frank_turn(ft_sharedptr<t_char> &info);
+void	ft_frank_turn(t_char * info);
 
 static const	t_stats FRANK_DEFAULT_STATS =
 {

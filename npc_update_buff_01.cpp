@@ -2,7 +2,7 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 
-void ft_update_buff_status(ft_sharedptr<t_char> &info, int current_dur, int duration,
+void ft_update_buff_status(t_char * info, int current_dur, int duration,
 							const char *buff_name)
 {
     if (duration == 0 && current_dur == 0)
@@ -24,7 +24,7 @@ void ft_update_buff_status(ft_sharedptr<t_char> &info, int current_dur, int dura
     return ;
 }
 
-void ft_npc_update_buff(ft_sharedptr<t_char> &info, const char **input, int *buff, const char *name)
+void ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name)
 {
     int number;
 

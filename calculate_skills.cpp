@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Template/shared_ptr.hpp"
 
-int ft_calculate_athletics(ft_sharedptr<t_char> &info)
+int ft_calculate_athletics(t_char * info)
 {
     int athletics;
 
@@ -21,7 +21,7 @@ int ft_calculate_athletics(ft_sharedptr<t_char> &info)
     return (athletics);
 }
 
-int ft_calculate_acrobatics(ft_sharedptr<t_char> &info)
+int ft_calculate_acrobatics(t_char * info)
 {
     int acrobatics;
 
@@ -41,7 +41,7 @@ int ft_calculate_acrobatics(ft_sharedptr<t_char> &info)
     return (acrobatics);
 }
 
-int ft_calculate_sleight_of_hand(ft_sharedptr<t_char> &info)
+int ft_calculate_sleight_of_hand(t_char * info)
 {
     int sleight_of_hand;
 
@@ -61,7 +61,7 @@ int ft_calculate_sleight_of_hand(ft_sharedptr<t_char> &info)
     return (sleight_of_hand);
 }
 
-int ft_calculate_stealth(ft_sharedptr<t_char> &info)
+int ft_calculate_stealth(t_char * info)
 {
     int stealth;
 
@@ -81,7 +81,7 @@ int ft_calculate_stealth(ft_sharedptr<t_char> &info)
     return (stealth);
 }
 
-int ft_calculate_arcana(ft_sharedptr<t_char> &info)
+int ft_calculate_arcana(t_char * info)
 {
     int arcana;
 
@@ -101,7 +101,7 @@ int ft_calculate_arcana(ft_sharedptr<t_char> &info)
     return (arcana);
 }
 
-int ft_calculate_history(ft_sharedptr<t_char> &info)
+int ft_calculate_history(t_char * info)
 {
     int history;
 
@@ -121,7 +121,7 @@ int ft_calculate_history(ft_sharedptr<t_char> &info)
     return (history);
 }
 
-int ft_calculate_investigation(ft_sharedptr<t_char> &info)
+int ft_calculate_investigation(t_char * info)
 {
     int investigation;
 
@@ -141,7 +141,7 @@ int ft_calculate_investigation(ft_sharedptr<t_char> &info)
     return (investigation);
 }
 
-int ft_calculate_nature(ft_sharedptr<t_char> &info)
+int ft_calculate_nature(t_char * info)
 {
     int nature;
 
@@ -161,7 +161,7 @@ int ft_calculate_nature(ft_sharedptr<t_char> &info)
     return (nature);
 }
 
-int ft_calculate_religion(ft_sharedptr<t_char> &info)
+int ft_calculate_religion(t_char * info)
 {
     int religion;
 
@@ -181,7 +181,7 @@ int ft_calculate_religion(ft_sharedptr<t_char> &info)
     return (religion);
 }
 
-int ft_calculate_animal_handling(ft_sharedptr<t_char> &info)
+int ft_calculate_animal_handling(t_char * info)
 {
     int animal_handling;
 
@@ -201,7 +201,7 @@ int ft_calculate_animal_handling(ft_sharedptr<t_char> &info)
     return (animal_handling);
 }
 
-int ft_calculate_insight(ft_sharedptr<t_char> &info)
+int ft_calculate_insight(t_char * info)
 {
     int insight;
 
@@ -221,7 +221,7 @@ int ft_calculate_insight(ft_sharedptr<t_char> &info)
     return (insight);
 }
 
-int ft_calculate_medicine(ft_sharedptr<t_char> &info)
+int ft_calculate_medicine(t_char * info)
 {
     int medicine;
 
@@ -241,7 +241,7 @@ int ft_calculate_medicine(ft_sharedptr<t_char> &info)
     return (medicine);
 }
 
-int ft_calculate_perception(ft_sharedptr<t_char> &info)
+int ft_calculate_perception(t_char * info)
 {
     int perception;
 
@@ -261,7 +261,7 @@ int ft_calculate_perception(ft_sharedptr<t_char> &info)
     return (perception);
 }
 
-int ft_calculate_survival(ft_sharedptr<t_char> &info)
+int ft_calculate_survival(t_char * info)
 {
     int survival;
 
@@ -281,7 +281,7 @@ int ft_calculate_survival(ft_sharedptr<t_char> &info)
     return (survival);
 }
 
-int ft_calculate_deception(ft_sharedptr<t_char> &info)
+int ft_calculate_deception(t_char * info)
 {
     int deception;
 
@@ -301,7 +301,7 @@ int ft_calculate_deception(ft_sharedptr<t_char> &info)
     return (deception);
 }
 
-int ft_calculate_intimidation(ft_sharedptr<t_char> &info)
+int ft_calculate_intimidation(t_char * info)
 {
     int intimidation;
 
@@ -321,7 +321,7 @@ int ft_calculate_intimidation(ft_sharedptr<t_char> &info)
     return (intimidation);
 }
 
-int ft_calculate_performance(ft_sharedptr<t_char> &info)
+int ft_calculate_performance(t_char * info)
 {
     int performance;
 
@@ -341,7 +341,7 @@ int ft_calculate_performance(ft_sharedptr<t_char> &info)
     return (performance);
 }
 
-int ft_calculate_persuasion(ft_sharedptr<t_char> &info)
+int ft_calculate_persuasion(t_char * info)
 {
     int persuasion;
 

@@ -3,7 +3,7 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "treeNode.hpp"
 
-static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char> &info)
+static int ft_handle_int_mapping(char **content, int index, t_char * info)
 {
 	const t_treeNode_value *return_value
 		= tree_node_search(*(ft_return_main_treeNode()), content[index]);
@@ -33,7 +33,7 @@ static int ft_handle_int_mapping(char **content, int index, ft_sharedptr<t_char>
     return (1);
 }
 
-int ft_set_stats(ft_sharedptr<t_char> &info, char **content)
+int ft_set_stats(t_char * info, char **content)
 {
     if (initialize_stat_key_value_pairs(info))
 		return (1);

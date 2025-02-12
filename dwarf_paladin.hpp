@@ -12,7 +12,7 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_dwarf_paladin_turn(ft_sharedptr<t_char> &info);
+void	ft_dwarf_paladin_turn(t_char * info);
 
 static const	t_stats DWARF_PALADIN_DEFAULT_STATS =
 {

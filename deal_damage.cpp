@@ -2,7 +2,7 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 
-static int ft_get_damage_reduction(ft_sharedptr<t_char> &info, const char *type)
+static int ft_get_damage_reduction(t_char * info, const char *type)
 {
     if (ft_strcmp_dnd(type, "acid") == 0)
         return (ft_calculate_acid_dr(info));
@@ -33,7 +33,7 @@ static int ft_get_damage_reduction(ft_sharedptr<t_char> &info, const char *type)
     return (ERROR_RESISTANCE);
 }
 
-void ft_deal_damage(ft_sharedptr<t_char> &info, const char *input, const char *d_type,
+void ft_deal_damage(t_char * info, const char *input, const char *d_type,
 						int resistance, int override)
 {
     static int total;

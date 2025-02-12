@@ -3,12 +3,13 @@
 #include "chaos_crystal.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "veraak.hpp"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
-static void ft_chaos_crystal_damage(ft_sharedptr<t_char> &info)
+static void ft_chaos_crystal_damage(t_char * info)
 {
 	char	**player_list;
 	int		i;
@@ -25,7 +26,7 @@ static void ft_chaos_crystal_damage(ft_sharedptr<t_char> &info)
     return ;
 }
 
-void ft_chaos_crystal_turn(ft_sharedptr<t_char> &info)
+void ft_chaos_crystal_turn(t_char * info)
 {
     ft_update_buf(info);
     ft_chaos_crystal_damage(info);
@@ -34,66 +35,65 @@ void ft_chaos_crystal_turn(ft_sharedptr<t_char> &info)
 	return ;
 }
 
-static void ft_initialize_gear_and_feats(ft_sharedptr<t_char> &info)
+static void ft_initialize_gear_and_feats(t_char * info)
 {
     (void)info;
     return ;
 }
 
-ft_sharedptr<t_char> ft_chaos_crystal(const int index, const char **input, t_name *name,
+t_char *ft_chaos_crystal(const int index, const char **input, t_name *name,
 										int exception)
 {
     int error = 0;
-    ft_sharedptr<t_char> info(1);
+    t_char *info = (t_char *)cma_malloc(sizeof(t_char));
 
 	if (!info)
     {
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
-    *info = CHAOS_CRYSTAL_INFO;
+    *info = VERAAK_INFO;
     info->name = input[0];
     info->struct_name = name;
     info->save_file = cma_strjoin("data/", input[0]);
     if (!info->save_file)
     {
-        pf_printf("106-Error: Failed to allocate memory save_file name %s\n", info->name);
         ft_free_info(info);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
     if (index == 2)
     {
         if (ft_strcmp_dnd(input[1], "init") == 0)
         {
-            ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 			if (file.get_error_code())
 			{
 				pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
 					file.get_error_message());
-				return (ft_sharedptr<t_char>());
+				return (ft_nullptr);
 			}
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
             pf_printf("Stats for %s written on a file\n", info->name);
             ft_free_info(info);
-            return (ft_sharedptr<t_char>());
+            return (ft_nullptr);
         }
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
         return (info);
     ft_npc_change_stats(info, index, input);
-    ft_free_info(info);
-    return (ft_sharedptr<t_char>());
+	ft_free_info(info);
+    return (ft_nullptr);
 }

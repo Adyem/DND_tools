@@ -3,7 +3,7 @@
 #include "dnd_tools.hpp"
 #include <cstdlib>
 
-void	ft_free_info(ft_sharedptr<t_char> &info)
+void	ft_free_info(t_char * info)
 {
 	if (info && DEBUG == 1)
 		pf_printf("freeing info %s\n", info->name);
@@ -14,5 +14,6 @@ void	ft_free_info(ft_sharedptr<t_char> &info)
 	cma_free(info->bufs.arcane_pounce.target_id);
 	cma_free(info->bufs.earth_pounce.target_id);
 	cma_free(info->save_file);
+	cma_free(info);
 	return ;
 }

@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 
-static void	ft_update_buff_duration(ft_sharedptr<t_char> &info, const char *buff_name, int duration)
+static void	ft_update_buff_duration(t_char * info, const char *buff_name, int duration)
 {
 	if (duration == 0)
 		pf_printf("%s just lost his %s buff\n", info->name, buff_name);
@@ -12,13 +12,13 @@ static void	ft_update_buff_duration(ft_sharedptr<t_char> &info, const char *buff
 	return ;
 }
 
-static void	ft_update_buf_duration(ft_sharedptr<t_char> &info, const char *buf_name, int *duration)
+static void	ft_update_buf_duration(t_char * info, const char *buf_name, int *duration)
 {
 	(*duration)--;
 	ft_update_buff_duration(info, buf_name, *duration);
 }
 
-void	ft_update_buf(ft_sharedptr<t_char> &info)
+void	ft_update_buf(t_char * info)
 {
 	if (info->bufs.bless.duration > 0)
 		ft_update_buf_duration(info, "bless", &info->bufs.bless.duration);

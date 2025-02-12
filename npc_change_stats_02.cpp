@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 
-static int	ft_skill_roll(ft_sharedptr<t_char> &info, const char **input)
+static int	ft_skill_roll(t_char * info, const char **input)
 {
 	if (ft_strcmp_dnd(input[1], "athletics") == 0)
 		ft_skill_throw(info, "athletics", ft_calculate_str(info), ft_calculate_athletics(info));
@@ -48,7 +48,7 @@ static int	ft_skill_roll(ft_sharedptr<t_char> &info, const char **input)
 	return (0);
 }	
 
-void	ft_npc_sstuff(ft_sharedptr<t_char> &info, const char **input)
+void	ft_npc_sstuff(t_char * info, const char **input)
 {
 	if (ft_strcmp_dnd(input[1], "attack") == 0)
 	{

@@ -3,7 +3,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/shared_ptr.hpp"
 
-void	ft_cast_chaos_armor(ft_sharedptr<t_char> &info)
+void	ft_cast_chaos_armor(t_char * info)
 {
 	if (ft_remove_concentration(info))
 		return ;

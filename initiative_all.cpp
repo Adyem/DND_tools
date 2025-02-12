@@ -10,10 +10,10 @@
 #include <cerrno>
 #include <dirent.h>
 
-static ft_sharedptr<t_char> ft_check_name(t_name *name, char *file_name)
+static t_char *ft_check_name(t_name *name, char *file_name)
 {
     const char *input[2];
-    ft_sharedptr<t_char> info;
+    t_char *info = ft_nullptr;
 
     if (DEBUG == 1)
         pf_printf("Printing file name again: %s\n", file_name);
@@ -33,15 +33,15 @@ static ft_sharedptr<t_char> ft_check_name(t_name *name, char *file_name)
     return (info);
 }
 
-static ft_sharedptr<t_char> ft_read_all_files(ft_file &file, t_name *name, char *file_name)
+static t_char *ft_read_all_files(ft_file &file, t_name *name, char *file_name)
 {
-    ft_sharedptr<t_char> info;
+	t_char *info;
 
     if (DEBUG == 1)
         pf_printf("Printing file_name: %s\n", file_name);
     info = ft_check_name(name, file_name + 5);
     if (!info)
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     if (DEBUG == 1)
         pf_printf("Initiative file descriptor is %d\n", file.get_fd());
     info->name = file_name + 5;
@@ -106,7 +106,7 @@ static void ft_initiative_write(int initiative, char *name)
 void ft_open_all_files(t_name *name)
 {
     int error = 0;
-    ft_sharedptr<t_char> info;
+    t_char *info;
     t_pc *player = ft_nullptr;
     FT_DIR *dir = ft_nullptr;
     ft_dirent *entry = ft_nullptr;

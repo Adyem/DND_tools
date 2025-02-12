@@ -3,7 +3,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/Template/shared_ptr.hpp"
 
-static int ft_check_cure_wounds_learned(ft_sharedptr<t_char> &character)
+static int ft_check_cure_wounds_learned(t_char * character)
 {
     if (character->spells.cure_wounds.learned == 0)
     {
@@ -13,7 +13,7 @@ static int ft_check_cure_wounds_learned(ft_sharedptr<t_char> &character)
     return (1);
 }
 
-void ft_cast_cure_wounds(ft_sharedptr<t_char> &character)
+void ft_cast_cure_wounds(t_char * character)
 {
     if (!ft_check_cure_wounds_learned(character))
         return ;

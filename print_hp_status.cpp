@@ -1,7 +1,7 @@
 #include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
 
-void ft_print_character_status(ft_sharedptr<t_char> &info, int number, int temp)
+void ft_print_character_status(t_char * info, int number, int temp)
 {
     if (number == 0 && temp == 0)
         pf_printf("%s remains unchanged and is dead\n", info->name);

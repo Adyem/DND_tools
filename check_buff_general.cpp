@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 
-int ft_check_bless(ft_sharedptr<t_char> &info)
+int ft_check_bless(t_char * info)
 {
 	int result = 0;
 	if (info->bufs.bless.duration > 0)

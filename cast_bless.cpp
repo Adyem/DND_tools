@@ -22,7 +22,7 @@ static const	t_buff BUFF_BLESS =
 	.cast_spell = ft_cast_bless_apply_debuf,
 };
 
-void ft_cast_bless(ft_sharedptr<t_char> &info, const char **input)
+void ft_cast_bless(t_char * info, const char **input)
 {
 	if (info->spells.bless.learned != 1)
 	{
@@ -71,7 +71,7 @@ static int ft_is_caster_name_present(char **caster_name_list, const char *name)
     return (0);
 }
 
-int ft_cast_bless_apply_debuf(ft_sharedptr<t_char> &target, const char **input, t_buff *buff)
+int ft_cast_bless_apply_debuf(t_char * target, const char **input, t_buff *buff)
 {
 
     (void)buff;
@@ -99,7 +99,7 @@ int ft_cast_bless_apply_debuf(ft_sharedptr<t_char> &target, const char **input, 
     return (0);
 }
 
-void	ft_concentration_remove_bless(ft_sharedptr<t_char> &character,
+void	ft_concentration_remove_bless(t_char * character,
 			t_target_data *targets_data)
 {
 	int target_index = 0;

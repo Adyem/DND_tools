@@ -4,7 +4,7 @@
 #include "dnd_tools.hpp"
 #include "veraak.hpp"
 
-static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &info,
+static void ft_veraak_kill_crystal(const char *crystal, t_char *info,
 									int phase)
 {
     const char *input[3];
@@ -33,7 +33,7 @@ static void ft_veraak_kill_crystal(const char *crystal, ft_sharedptr<t_char> &in
 	return ;
 }
 
-static void ft_veraak_initialize(ft_sharedptr<t_char> &info)
+static void ft_veraak_initialize(t_char *info)
 {
     const char *crystals[5] =
 	{
@@ -57,7 +57,7 @@ static void ft_veraak_initialize(ft_sharedptr<t_char> &info)
 	return ;
 }
 
-static void ft_veraak_phase_transition(ft_sharedptr<t_char> &info)
+static void ft_veraak_phase_transition(t_char *info)
 {
 	if (info->stats.health <= 200 && info->stats.phase == 1)
 		ft_veraak_kill_crystal("chaos_crystal_01", info, 2);
@@ -70,7 +70,7 @@ static void ft_veraak_phase_transition(ft_sharedptr<t_char> &info)
 	return ;
 }
 
-void ft_veraak_turn(ft_sharedptr<t_char> &info)
+void ft_veraak_turn(t_char *info)
 {
     ft_update_buf(info);
     ft_veraak_phase_transition(info);
@@ -88,23 +88,23 @@ void ft_veraak_turn(ft_sharedptr<t_char> &info)
 	return ;
 }
 
-static void ft_initialize_gear_and_feats(ft_sharedptr<t_char> &info)
+static void ft_initialize_gear_and_feats(t_char *info)
 {
 	info->spells.hunters_mark = VERAAK_SPELL_HUNTERS_MARK;
 	info->spells.bless = VERAAK_SPELL_BLESS;
     return ;
 }
 
-ft_sharedptr<t_char> ft_veraak(const int index, const char **input, t_name *name,
+t_char *ft_veraak(const int index, const char **input, t_name *name,
 								int exception)
 {
     int error = 0;
-    ft_sharedptr<t_char> info(1);
+    t_char *info = (t_char *)cma_malloc(sizeof(t_char));
 
 	if (!info)
     {
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
     *info = VERAAK_INFO;
     info->name = input[0];
@@ -113,7 +113,7 @@ ft_sharedptr<t_char> ft_veraak(const int index, const char **input, t_name *name
     if (!info->save_file)
     {
         ft_free_info(info);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
     if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
     {
@@ -122,30 +122,30 @@ ft_sharedptr<t_char> ft_veraak(const int index, const char **input, t_name *name
 		{
 			pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
 				file.get_error_message());
-			return (ft_sharedptr<t_char>());
+			return (ft_nullptr);
 		}
         ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);
         pf_printf("Stats for %s written on a file\n", info->name);
         ft_veraak_initialize(info);
         ft_free_info(info);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
     error = ft_npc_open_file(info);
     if (error)
     {
         ft_free_info(info);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
     error = ft_npc_check_info(info);
     if (error)
     {
         ft_free_info(info);
-        return (ft_sharedptr<t_char>());
+        return (ft_nullptr);
     }
     ft_initialize_gear_and_feats(info);
     if (exception)
         return (info);
     ft_npc_change_stats(info, index, input);
     ft_free_info(info);
-    return (ft_sharedptr<t_char>());
+    return (ft_nullptr);
 }

@@ -16,9 +16,9 @@ typedef struct s_equipment_id t_equipment_id;
 template <typename T>
 class ft_sharedptr;
 
-typedef void (*c_action)(ft_sharedptr<s_char> &, s_equipment_id *, int);
-typedef void 	(*c_turn)(ft_sharedptr<t_char>&);
-typedef void 	(*c_loot)(ft_sharedptr<t_char>&);
+typedef void (*c_action)(t_char *, s_equipment_id *, int);
+typedef void 	(*c_turn)(t_char *);
+typedef void 	(*c_loot)(t_char *);
 
 typedef struct	s_stats
 {
@@ -462,11 +462,9 @@ typedef struct	s_char t_char;
 typedef struct	s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 
-typedef int		(*cast_buff_debuff)(ft_sharedptr<t_char> &, const char **, t_buff *);
-typedef void	(*c_action)(ft_sharedptr<t_char> &, t_equipment_id *, int);
-typedef void 	(*c_turn)(ft_sharedptr<t_char>&);
-typedef ft_sharedptr<t_char> (*c_name)(int, const char **, t_name *, int);
-typedef void (*t_spellcast_func)(ft_sharedptr<t_char> &character, bool critical_strike);
+typedef int		(*cast_buff_debuff)(t_char * , const char **, t_buff *);
+typedef t_char *(*c_name)(int, const char **, t_name *, int);
+typedef void (*t_spellcast_func)(t_char * character, bool critical_strike);
 
 typedef struct s_known_spell
 {
@@ -489,8 +487,8 @@ typedef struct s_target_data
 {
 	ft_file	file[20];
 	char	*Pchar_name[20];
-	ft_sharedptr<t_char> target[20];
-	ft_sharedptr<t_char> target_copy[20];
+	t_char 	*target[20];
+	t_char	*target_copy[20];
 	t_buff	*buff_info;
 }	t_target_data;
 

@@ -4,7 +4,7 @@
 #include "libft/Template/math.hpp"
 #include "libft/Template/shared_ptr.hpp"
 
-int ft_weapon_find_stat(ft_sharedptr<t_char> &info, t_equipment_id *weapon)
+int ft_weapon_find_stat(t_char * info, t_equipment_id *weapon)
 {
     if (!weapon->attack.stat)
         return (0);
@@ -26,7 +26,7 @@ int ft_weapon_find_stat(ft_sharedptr<t_char> &info, t_equipment_id *weapon)
 }
 
 void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
-                                           int offhand, ft_sharedptr<t_char> &info)
+                                           int offhand, t_char * info)
 {
     d_info->dice_amount = weapon->attack.effect_dice_amount;
     d_info->dice_faces = weapon->attack.effect_dice_faces;

@@ -6,7 +6,7 @@
 KEY_LIST
 #undef X
 
-int initialize_stat_key_value_pairs(ft_sharedptr<t_char>& info)
+int initialize_stat_key_value_pairs(t_char *info)
 {
     TreeNode* node = *ft_return_main_treeNode();
     if (!node)

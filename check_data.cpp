@@ -23,7 +23,7 @@ static int check_flag(int value, const char *name, const char *field_name)
     return (0);
 }
 
-static int check_stats(ft_sharedptr<t_char> &info)
+static int check_stats(t_char * info)
 {
     int error = 0;
     error += check_range(info->stats.health, 0, info->dstats.health, info->name, "health");
@@ -39,7 +39,7 @@ static int check_stats(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-static int check_resistances(ft_sharedptr<t_char> &info)
+static int check_resistances(t_char * info)
 {
     int error = 0;
     error += check_range(info->c_resistance.bludgeoning, -500, 500, info->name,
@@ -71,7 +71,7 @@ static int check_resistances(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-static int check_concentration(ft_sharedptr<t_char> &info)
+static int check_concentration(t_char * info)
 {
     int error = 0;
     error += check_range(info->concentration.concentration, 0, INT_MAX, info->name,
@@ -92,7 +92,7 @@ static int check_concentration(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-static int check_flags(ft_sharedptr<t_char> &info)
+static int check_flags(t_char * info)
 {
     int error = 0;
     error += check_flag(info->flags.prone, info->name, "prone");
@@ -100,7 +100,7 @@ static int check_flags(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-static int check_debuffs(ft_sharedptr<t_char> &info)
+static int check_debuffs(t_char * info)
 {
     int error = 0;
     error += check_range(info->debufs.blinded.duration, 0, 50, info->name,
@@ -108,7 +108,7 @@ static int check_debuffs(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-static int check_buffs(ft_sharedptr<t_char> &info)
+static int check_buffs(t_char * info)
 {
     int error = 0;
     error += check_range(info->bufs.flame_geyser.duration, 0, 100, info->name,
@@ -176,7 +176,7 @@ static int check_buffs(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-static int check_other_buffs_debuffs(ft_sharedptr<t_char> &info)
+static int check_other_buffs_debuffs(t_char * info)
 {
     int error = 0;
     error += check_range(info->bufs.bless.duration, 0, 50, info->name, "bless duration");
@@ -212,7 +212,7 @@ static int check_other_buffs_debuffs(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-static int ft_npc_check_info_2(ft_sharedptr<t_char> &info)
+static int ft_npc_check_info_2(t_char * info)
 {
     int error = 0;
     error += check_resistances(info);
@@ -223,7 +223,7 @@ static int ft_npc_check_info_2(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-static int check_spell_slot(ft_sharedptr<t_char> &info, const char *slot_name, t_spell_slot *slot)
+static int check_spell_slot(t_char * info, const char *slot_name, t_spell_slot *slot)
 {
     int error = 0;
 
@@ -257,7 +257,7 @@ static int check_spell_slot(ft_sharedptr<t_char> &info, const char *slot_name, t
     return (error);
 }
 
-static int check_spell_slots(ft_sharedptr<t_char> &info)
+static int check_spell_slots(t_char * info)
 {
     int error = 0;
     error += check_spell_slot(info, "level_1", &info->spell_slots.level_1);
@@ -273,7 +273,7 @@ static int check_spell_slots(ft_sharedptr<t_char> &info)
     return (error);
 }
 
-int ft_npc_check_info(ft_sharedptr<t_char> &info)
+int ft_npc_check_info(t_char * info)
 {
     int error = 0;
     error += check_stats(info);
