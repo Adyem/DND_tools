@@ -453,8 +453,6 @@ typedef struct	s_char
     t_physical      physical;
 }	t_char;
 
-#include "libft/Template/shared_ptr.hpp"
-
 # define ERROR_RESISTANCE 9999
 
 typedef struct	s_buff t_buff;
