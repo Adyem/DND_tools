@@ -2,12 +2,12 @@
 #include "../CPP_class/nullptr.hpp"
 #include <exception>
 
-sf::RenderWindow* createWindow(unsigned int width, unsigned int height, const std::string& title)
+sf::RenderWindow* create_window(unsigned int width, unsigned int height, const std::string& title)
 {
     try
 	{
         sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(width, height), title);
-        return window;
+        return (window);
     }
 	catch (const std::exception& ex)
 	{
