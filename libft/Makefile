@@ -13,7 +13,8 @@ SUBDIRS :=  CMA \
             Errno \
             Networking \
             Windows \
-            Linux
+            Linux \
+			SFML
 
 LIB_BASES := \
   CMA/CustomMemoryAllocator \
@@ -26,7 +27,8 @@ LIB_BASES := \
   Errno/errno \
   Networking/networking \
   Windows/Windows \
-  Linux/Linux
+  Linux/Linux \
+  SFML/SFML
 
 LIBS       := $(addsuffix .a, $(LIB_BASES))
 DEBUG_LIBS := $(addsuffix _debug.a, $(LIB_BASES))
