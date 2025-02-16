@@ -30,6 +30,8 @@ class ft_sharedptr
     	          >>
     	ft_sharedptr(Args&&... args);
 
+    	ft_sharedptr(ManagedType* pointer, bool isArray = false, size_t arraySize = 1);
+
     	ft_sharedptr();
 		ft_sharedptr(size_t size);
     	ft_sharedptr(const ft_sharedptr<ManagedType>& other);
@@ -76,7 +78,7 @@ ft_sharedptr<ManagedType>::ft_sharedptr(Args&&... args)
     if (!this->_referenceCount)
     {
         this->set_error(SHARED_PTR_ALLOCATION_FAILED);
-        return ;
+        return;
     }
     *(this->_referenceCount) = 1;
     this->_managedPointer = static_cast<ManagedType*>(cma_malloc(sizeof(ManagedType)));
@@ -85,10 +87,25 @@ ft_sharedptr<ManagedType>::ft_sharedptr(Args&&... args)
         this->set_error(SHARED_PTR_ALLOCATION_FAILED);
         cma_free(this->_referenceCount);
         this->_referenceCount = ft_nullptr;
-        return ;
+        return;
     }
     construct_at(this->_managedPointer, std::forward<Args>(args)...);
-	return ;
+    return;
+}
+
+template <typename ManagedType>
+ft_sharedptr<ManagedType>::ft_sharedptr(ManagedType* pointer, bool isArray, size_t arraySize)
+    : _managedPointer(pointer),
+      _referenceCount(pointer ? static_cast<int*>(cma_malloc(sizeof(int))) : nullptr),
+      _arraySize(arraySize),
+      _isArrayType(isArray),
+      _errorCode(ER_SUCCESS)
+{
+    if (_referenceCount)
+        *(_referenceCount) = 1;
+    else if (pointer)
+        this->set_error(SHARED_PTR_ALLOCATION_FAILED);
+    return;
 }
 
 template <typename ManagedType>
@@ -99,7 +116,7 @@ ft_sharedptr<ManagedType>::ft_sharedptr()
       _isArrayType(false),
       _errorCode(ER_SUCCESS)
 {
-	return ;
+    return;
 }
 
 template <typename ManagedType>
@@ -110,11 +127,10 @@ ft_sharedptr<ManagedType>::ft_sharedptr(size_t size)
       _isArrayType(true),
       _errorCode(ER_SUCCESS)
 {
-	if (this->_referenceCount)
-	{
+    if (this->_referenceCount)
+    {
         *(this->_referenceCount) = 1;
-        this->_managedPointer = static_cast<ManagedType*>(cma_calloc(this->_arraySize,
-					sizeof(ManagedType)));
+        this->_managedPointer = static_cast<ManagedType*>(cma_calloc(this->_arraySize, sizeof(ManagedType)));
         if (!this->_managedPointer)
         {
             this->set_error(SHARED_PTR_ALLOCATION_FAILED);
@@ -129,10 +145,12 @@ ft_sharedptr<ManagedType>::ft_sharedptr(size_t size)
                     new (&this->_managedPointer[index]) ManagedType();
             }
         }
-	}
-	else
+    }
+    else
+    {
         this->set_error(SHARED_PTR_ALLOCATION_FAILED);
-	return ;
+    }
+    return;
 }
 
 template <typename ManagedType>
@@ -147,7 +165,7 @@ ft_sharedptr<ManagedType>::ft_sharedptr(const ft_sharedptr<ManagedType>& other)
     {
         (*(this->_referenceCount))++;
     }
-	return ;
+    return;
 }
 
 template <typename ManagedType>
@@ -169,7 +187,7 @@ template <typename ManagedType>
 ft_sharedptr<ManagedType>::~ft_sharedptr()
 {
     release();
-	return ;
+    return;
 }
 
 template <typename ManagedType>
@@ -185,9 +203,7 @@ void ft_sharedptr<ManagedType>::release()
                 if (this->_isArrayType)
                 {
                     for (size_t index = 0; index < this->_arraySize; ++index)
-                    {
                         this->_managedPointer[index].~ManagedType();
-                    }
                 }
                 else
                 {
@@ -200,7 +216,7 @@ void ft_sharedptr<ManagedType>::release()
     }
     this->_managedPointer = ft_nullptr;
     this->_referenceCount = ft_nullptr;
-	return ;
+    return;
 }
 
 template <typename ManagedType>
@@ -235,9 +251,7 @@ ft_sharedptr<ManagedType>& ft_sharedptr<ManagedType>::operator=(const ft_sharedp
         this->_isArrayType = other._isArrayType;
         this->_errorCode = other._errorCode;
         if (this->_referenceCount && this->_errorCode == ER_SUCCESS)
-        {
             (*(this->_referenceCount))++;
-        }
     }
     return (*this);
 }
@@ -387,7 +401,7 @@ void ft_sharedptr<ManagedType>::set_error(int error) const
 {
     ft_errno = error;
     this->_errorCode = error;
-	return ;
+    return;
 }
 
 template <typename ManagedType>
@@ -429,7 +443,7 @@ void ft_sharedptr<ManagedType>::reset(ManagedType* pointer, size_t size, bool ar
         }
         this->_managedPointer = ft_nullptr;
     }
-	return ;
+    return;
 }
 
 template <typename ManagedType>
@@ -440,7 +454,7 @@ void ft_sharedptr<ManagedType>::swap(ft_sharedptr<ManagedType>& other)
     std::swap(this->_arraySize, other._arraySize);
     std::swap(this->_isArrayType, other._isArrayType);
     std::swap(this->_errorCode, other._errorCode);
-	return ;
+    return;
 }
 
 template <typename ManagedType>
@@ -449,7 +463,7 @@ void ft_sharedptr<ManagedType>::add(const ManagedType& element)
     if (!this->_isArrayType)
     {
         this->set_error(SHARED_PTR_INVALID_OPERATION);
-        return ;
+        return;
     }
     if (!this->_managedPointer)
     {
@@ -457,18 +471,18 @@ void ft_sharedptr<ManagedType>::add(const ManagedType& element)
         if (!this->_managedPointer)
         {
             this->set_error(SHARED_PTR_ALLOCATION_FAILED);
-            return ;
+            return;
         }
         new (this->_managedPointer) ManagedType(element);
         this->_arraySize = 1;
-        return ;
+        return;
     }
     for (size_t i = 0; i < this->_arraySize; ++i)
     {
         if (&this->_managedPointer[i] == &element)
         {
             this->set_error(SHARED_PTR_ELEMENT_ALREADDY_ADDED);
-            return ;
+            return;
         }
     }
     ManagedType* newArray = static_cast<ManagedType*>(cma_realloc(this->_managedPointer,
@@ -476,12 +490,12 @@ void ft_sharedptr<ManagedType>::add(const ManagedType& element)
     if (!newArray)
     {
         this->set_error(SHARED_PTR_ALLOCATION_FAILED);
-        return ;
+        return;
     }
     this->_managedPointer = newArray;
     new (&(this->_managedPointer[this->_arraySize])) ManagedType(element);
     this->_arraySize += 1;
-	return ;
+    return;
 }
 
 template <typename ManagedType>
@@ -490,12 +504,12 @@ void ft_sharedptr<ManagedType>::remove(int index)
     if (!this->_isArrayType)
     {
         this->set_error(SHARED_PTR_INVALID_OPERATION);
-        return ;
+        return;
     }
     if (!this->_managedPointer || static_cast<size_t>(index) >= this->_arraySize || index < 0)
     {
         this->set_error(SHARED_PTR_OUT_OF_BOUNDS);
-        return ;
+        return;
     }
     this->_managedPointer[index].~ManagedType();
     for (size_t i = index; i < this->_arraySize - 1; ++i)
@@ -517,11 +531,11 @@ void ft_sharedptr<ManagedType>::remove(int index)
         if (!newArray)
         {
             this->set_error(SHARED_PTR_ALLOCATION_FAILED);
-            return ;
+            return;
         }
         this->_managedPointer = newArray;
     }
-	return ;
+    return;
 }
 
 #endif

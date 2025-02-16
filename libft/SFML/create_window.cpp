@@ -5,15 +5,14 @@
 
 GraphicsData::GraphicsData(unsigned int width, unsigned int height, const char* title)
     : _window(ft_nullptr),
-	_object(ft_nullptr),
 	_error(0),
 	_window_size{0.0f, 0.0f} 
 {
     try
 	{
         this->_window = new sf::RenderWindow(sf::VideoMode(width, height), title);
-        this->_window_size.width = width;
-        this->_window_size.height = height;
+        this->_window_size.x = width;
+        this->_window_size.y = height;
     }
     catch (const std::exception& ex)
 	{

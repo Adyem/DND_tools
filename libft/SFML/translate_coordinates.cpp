@@ -4,7 +4,7 @@
 t_coordinate GraphicsData::translateCoordinates(const t_coordinate& customCoord) const
 {
     t_coordinate screenCoord;
-    screenCoord.width = (customCoord.width / 1000.0f) * _window_size.width;
-    screenCoord.height = (customCoord.height / 1000.0f) * _window_size.height;
-    return screenCoord;
+    screenCoord.x = (customCoord.x / 1000.0f) * _window_size.x;
+    screenCoord.y = (customCoord.y / 1000.0f) * _window_size.y;
+    return (screenCoord);
 }
