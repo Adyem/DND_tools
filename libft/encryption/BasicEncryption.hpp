@@ -3,9 +3,10 @@
 
 #include <string>
 
-void ft_encrypt(std::string &data, const std::string &key);
-bool saveGame(const std::string &filename, const std::string &data, const std::string &key);
-bool loadGame(const std::string &filename, std::string &data, const std::string &key);
-const char *getEncryptionKey();
+void		ft_encrypt(std::string &data, const std::string &key);
+int			saveGame(const std::string &filename, const std::string &data,
+						const std::string &key);
+char		**DecryptData(char **data);
+const char	*getEncryptionKey();
 
 #endif
