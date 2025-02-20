@@ -14,7 +14,8 @@ SUBDIRS :=  CMA \
             Networking \
             Windows \
             Linux \
-			SFML
+			SFML \
+			encryption
 
 LIB_BASES := \
   CMA/CustomMemoryAllocator \
@@ -28,7 +29,8 @@ LIB_BASES := \
   Networking/networking \
   Windows/Windows \
   Linux/Linux \
-  SFML/SFML
+  SFML/SFML \
+  encryption/encryption
 
 LIBS       := $(addsuffix .a, $(LIB_BASES))
 DEBUG_LIBS := $(addsuffix _debug.a, $(LIB_BASES))
