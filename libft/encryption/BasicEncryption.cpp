@@ -19,8 +19,9 @@ void ft_encrypt(char *data, size_t data_len, const char *key)
 	return ;
 }
 
-int saveGame(const char *filename, const char *data, size_t data_len, const char *key)
+int saveGame(const char *filename, const char *data, const char *key)
 {
+    size_t data_len = ft_strlen(data);
     char *encryptedData = (char *)cma_malloc(data_len);
     if (!encryptedData)
         return (1);
@@ -29,24 +30,21 @@ int saveGame(const char *filename, const char *data, size_t data_len, const char
     int fd = ft_open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (fd < 0)
     {
-        fprintf(stderr, "Error opening file for writing: %s\n", filename);
         free(encryptedData);
         return (1);
     }
     ssize_t written = ft_write(fd, encryptedData, data_len);
     ft_close(fd);
     free(encryptedData);
-    
     if (written == (ssize_t)data_len)
         return (0);
     return (1);
 }
 
-char **DecryptData(char **data)
+char **DecryptData(char **data, const char *key)
 {
     if (!data || !*data)
         return (ft_nullptr);
-    const char *key = getEncryptionKey();
     size_t len = ft_strlen(*data);
     ft_encrypt(*data, len, key);
     return (data);
