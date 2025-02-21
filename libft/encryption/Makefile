@@ -8,7 +8,8 @@ DEBUG_OBJDIR := objs_debug
 TARGET := encryption.a
 DEBUG_TARGET := encryption_debug.a
 
-SRCS := BasicEncryption.cpp
+SRCS := BasicEncryption.cpp \
+		encryption_key.cpp
 
 HEADERS := BasicEncryption.hpp
 

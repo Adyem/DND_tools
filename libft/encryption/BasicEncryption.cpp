@@ -30,12 +30,12 @@ int be_saveGame(const char *filename, const char *data, const char *key)
     int fd = ft_open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (fd < 0)
     {
-        free(encryptedData);
+        cma_free(encryptedData);
         return (1);
     }
     ssize_t written = ft_write(fd, encryptedData, data_len);
     ft_close(fd);
-    free(encryptedData);
+    cma_free(encryptedData);
     if (written == (ssize_t)data_len)
         return (0);
     return (1);
@@ -48,10 +48,4 @@ char **be_DecryptData(char **data, const char *key)
     size_t len = ft_strlen(*data);
     be_encrypt(*data, len, key);
     return (data);
-}
-
-const char *be_getEncryptionKey(void)
-{
-    const char *key = "SecretSalt_8yt4b9zliw7u3th";
-    return (key);
 }

@@ -40,6 +40,11 @@ class GraphicsData
         void addSpriteFromFile(const char *fileName, const t_coordinate &position);
         void addSprite(const sf::Texture &texture, const t_coordinate &position);
 
+		ft_sharedptr<t_graphics_object> createButton(const std::string &label,
+				const t_coordinate &virtualPos, const t_coordinate &virtualSize,
+				const sf::Font &font, sf::Color buttonColor = sf::Color::White,
+				sf::Color textColor = sf::Color::Black, const sf::Texture *spriteTexture = nullptr);
+
         sf::RenderWindow *_window;
         ft_vector<ft_sharedptr<t_graphics_object>> _object;
         int _error;

@@ -10,9 +10,11 @@ DEBUG_TARGET := SFML_debug.a
 
 SRCS := create_window.cpp \
 		translate_coordinates.cpp \
-		add_sprite.cpp
+		add_sprite.cpp \
+		button.cpp
 
-HEADERS := SFML.hpp
+HEADERS := SFML.hpp \
+		   button.hpp
 
 OBJS := $(patsubst %.cpp,$(OBJDIR)/%.o,$(SRCS))
 DEBUG_OBJS := $(patsubst %.cpp,$(DEBUG_OBJDIR)/%.o,$(SRCS))
