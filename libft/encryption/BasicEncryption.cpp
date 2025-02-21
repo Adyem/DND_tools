@@ -8,7 +8,7 @@
 #include "../CPP_class/nullptr.hpp"
 #include "BasicEncryption.hpp"
 
-void ft_encrypt(char *data, size_t data_len, const char *key)
+void be_encrypt(char *data, size_t data_len, const char *key)
 {
     uint32_t hash = 5381;
     size_t key_len = ft_strlen(key);
@@ -19,14 +19,14 @@ void ft_encrypt(char *data, size_t data_len, const char *key)
 	return ;
 }
 
-int saveGame(const char *filename, const char *data, const char *key)
+int be_saveGame(const char *filename, const char *data, const char *key)
 {
     size_t data_len = ft_strlen(data);
     char *encryptedData = (char *)cma_malloc(data_len);
     if (!encryptedData)
         return (1);
     ft_memcpy(encryptedData, data, data_len);
-    ft_encrypt(encryptedData, data_len, key);
+    be_encrypt(encryptedData, data_len, key);
     int fd = ft_open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (fd < 0)
     {
@@ -41,16 +41,16 @@ int saveGame(const char *filename, const char *data, const char *key)
     return (1);
 }
 
-char **DecryptData(char **data, const char *key)
+char **be_DecryptData(char **data, const char *key)
 {
     if (!data || !*data)
         return (ft_nullptr);
     size_t len = ft_strlen(*data);
-    ft_encrypt(*data, len, key);
+    be_encrypt(*data, len, key);
     return (data);
 }
 
-const char *getEncryptionKey(void)
+const char *be_getEncryptionKey(void)
 {
     const char *key = "SecretSalt_8yt4b9zliw7u3th";
     return (key);
