@@ -1,9 +1,8 @@
-#include "dnd_tools.hpp"
-#include "libft/CPP_class/file.hpp"
-#include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "../CPP_class/file.hpp"
+#include "../Printf/printf.hpp"
+#include "../CMA/CMA.hpp"
+#include "../CPP_class/nullptr.hpp"
+#include "get_next_line.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>

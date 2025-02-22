@@ -3,7 +3,6 @@
 
 #include <cstdio>
 #include "character.hpp"
-#include "libft/Template/shared_ptr.hpp"
 #include "player_character.hpp"
 #include "libft/CPP_class/file.hpp"
 
@@ -287,8 +286,6 @@ int			ft_get_resistance(t_char * info, const char *type);
 void		ft_reroll(t_char * info, int *result);
 
 // Open and read
-char		**ft_read_file_lines(ft_file &file);
-char		**ft_open_and_read_file(const char *file_name);
 int			ft_open_file_write_only(const char *filename, ft_file &file);
 
 // Utils

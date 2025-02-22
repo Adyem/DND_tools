@@ -1,6 +1,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/file.hpp"
+#include "libft/GetNextLine/get_next_line.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
 #include <fcntl.h>

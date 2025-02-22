@@ -69,7 +69,6 @@ SRC         = name.cpp \
               initiative_sort_2.cpp \
               initiative.cpp \
               free_memory.cpp \
-              read_file.cpp \
               init_info.cpp \
               save_data.cpp \
               save_player.cpp \

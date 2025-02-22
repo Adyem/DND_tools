@@ -8,7 +8,8 @@ DEBUG_OBJDIR := debug_objs
 TARGET := GetNextLine.a
 DEBUG_TARGET := GetNextLine_debug.a
 
-SRCS := get_next_line.cpp
+SRCS := get_next_line.cpp \
+		read_file.cpp
 
 HEADERS := get_next_line.hpp
 

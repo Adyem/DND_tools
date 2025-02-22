@@ -4,6 +4,7 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
+#include "libft/GetNextLine/get_next_line.hpp"
 #include <cstdlib>
 #include <cstring>
 #include <cerrno>

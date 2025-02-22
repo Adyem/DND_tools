@@ -1,3 +1,4 @@
+#include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"

@@ -1,6 +1,8 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
+#include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 
 int ft_readline_prompt_hit_or_miss(void)
 {
