@@ -1,19 +1,12 @@
 #include <climits>
-#include <cstdlib>
-#include <ctime>
 #include "dice_roll.hpp"
 #include "../Printf/printf.hpp"
-#include "../CPP_class/nullptr.hpp"
+
+bool g_srand_init = false;
 
 int ft_dice_roll(int number, int faces)
 {
-	static bool srand_init_check = false;
-
-	if (srand_init_check == false)
-	{
-		srand((unsigned)time(ft_nullptr));
-		srand_init_check = true;
-	}
+	ft_init_srand();
 	if (faces == 0 && number == 0)
 		return (0);
     if (faces < 1 || number < 1)
