@@ -2,7 +2,7 @@
 #include "chaos_goblin.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/Template/shared_ptr.hpp"
+#include "libft/RNG/dice_roll.hpp"
 
 void ft_chaos_goblin_turn(t_char *info)
 {

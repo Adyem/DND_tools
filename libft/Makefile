@@ -15,7 +15,8 @@ SUBDIRS :=  CMA \
             Windows \
             Linux \
 			SFML \
-			encryption
+			encryption \
+			RNG
 
 LIB_BASES := \
   CMA/CustomMemoryAllocator \
@@ -30,7 +31,8 @@ LIB_BASES := \
   Windows/Windows \
   Linux/Linux \
   SFML/SFML \
-  encryption/encryption
+  encryption/encryption \
+  RNG/RNG
 
 LIBS       := $(addsuffix .a, $(LIB_BASES))
 DEBUG_LIBS := $(addsuffix _debug.a, $(LIB_BASES))

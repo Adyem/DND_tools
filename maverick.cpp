@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
 #include "maverick.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/RNG/dice_roll.hpp"
 
 void	ft_maverick_turn(t_char * info)
 {

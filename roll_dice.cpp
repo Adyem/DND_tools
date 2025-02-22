@@ -1,33 +1,8 @@
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
+#include "libft/RNG/dice_roll.hpp"
 #include "dnd_tools.hpp"
 #include <climits>
 #include <cstdlib>
-
-int ft_dice_roll(int number, int faces)
-{
-
-	if (faces == 0 && number == 0)
-		return (0);
-    if (faces < 1 || number < 1)
-        return (-1);
-    if (faces == 1)
-        return (number);
-    int result = 0;
-    int index = 0;
-    int roll = 0;
-    while (index < number)
-    {
-        roll = rand();
-        if (result > INT_MAX - ((roll % faces) + 1))
-            return -1;
-        result += (roll % faces) + 1;
-        index++;
-    }
-    if (DEBUG == 1)
-        pf_printf_fd(2, "The dice rolled %d on %d faces with %d amount of dice\n", result, faces, number);
-    return (result);
-}
 
 void ft_reroll(t_char * info, int *result)
 {

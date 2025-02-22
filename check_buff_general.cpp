@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/RNG/dice_roll.hpp"
 
 int ft_check_bless(t_char * info)
 {

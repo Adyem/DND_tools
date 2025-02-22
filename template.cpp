@@ -2,7 +2,7 @@
 #include "template.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
+#include "libft/RNG/dice_roll.hpp"
 #include "libft/CMA/CMA.hpp"
 
 void ft_template_turn(t_char * info)

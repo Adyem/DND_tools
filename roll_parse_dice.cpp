@@ -1,4 +1,5 @@
 #include "libft/Printf/printf.hpp"
+#include "libft/RNG/dice_roll.hpp"
 #include "dnd_tools.hpp"
 #include <climits>
 

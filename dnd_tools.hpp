@@ -328,7 +328,6 @@ int			ft_readline_spell_level(const char *message, t_char * character,
 
 // Dice rolling
 int			ft_saving_throw(t_char * info, const char *ability_score, int ability_mod, int save_mod);
-int			ft_dice_roll(int number, int faces);
 
 // Free memory
 void		ft_free_pc(t_pc *player);

@@ -3,6 +3,7 @@
 #include "libft/ReadLine/readline.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/RNG/dice_roll.hpp"
 #include <cstdlib>
 #include <cstring>
 #include <cerrno>
