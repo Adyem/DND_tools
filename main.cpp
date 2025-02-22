@@ -3,8 +3,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
-#include "libft/CPP_class/nullptr.hpp"
-#include <ctime>
 #include <cstdlib>
 
 bool g_dnd_test = 0;
@@ -21,7 +19,6 @@ int main(int argc, char **argv)
         pf_printf_fd(2, "005-Error: expecting no arguments\n");
         return (1);
     }
-    srand((unsigned)time(ft_nullptr));
     if (DEBUG == 1)
     {
         pf_printf("DEBUGGING\n");
