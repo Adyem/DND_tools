@@ -6,7 +6,7 @@ OBJDIR := objs
 DEBUG_OBJDIR := objs_debug
 
 TARGET := RNG.a
-DEBUG_TARGET := RNG.a
+DEBUG_TARGET := RNG_debug.a
 
 SRCS := dice_roll.cpp
 
