@@ -8,7 +8,7 @@ GraphicsData::GraphicsData(unsigned int width, unsigned int height, const char* 
       _window_size{0.0f, 0.0f} 
 {
     this->_window = new(std::nothrow) sf::RenderWindow(sf::VideoMode(width, height), title);
-    if (!this->_window && !this->_window->isOpen())
+    if (!this->_window || !this->_window->isOpen())
     {
         this->_error = SFML_WINDOW_CREATE_FAIL;
 		ft_errno = SFML_WINDOW_CREATE_FAIL;
