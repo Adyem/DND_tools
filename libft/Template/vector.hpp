@@ -18,7 +18,9 @@ class ft_vector
     	bool		_errorCode;
 
     	void	destroy_elements(size_t from, size_t to);
-    	void	setError(int errorCode);
+
+	protected:
+		void	setError(int errorCode);
 
 	public:
     	using iterator = ElementType*;

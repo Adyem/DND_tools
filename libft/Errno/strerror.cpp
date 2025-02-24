@@ -84,12 +84,16 @@ const char* ft_strerror(int error_code)
 		return ("Unordened map Key not found");
 	else if (error_code == UNORD_MAP_UNKNOWN)
 		return ("Unordened map Unknown error");
+	else if (error_code == DECK_EMPTY)
+		return ("Deck is empty");
+	else if (error_code == DECK_ALLOC_FAIL)
+		return ("Deck memory allocation");
 	else if (error_code > ERRNO_OFFSET)
 	{
         int standard_errno = error_code - ERRNO_OFFSET;
         const char *message = strerror(standard_errno);
         if (message)
-            return message;
+            return (message);
         return ("Unrecognized error code");
 	}
 	else

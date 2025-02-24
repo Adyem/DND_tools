@@ -23,12 +23,10 @@ class ft_sharedptr
     	void release();
 
 	public:
-    	template <typename... Args,
-    	          typename = std::enable_if_t<
-    	              !(is_single_convertible_to_size_t<Args...>::value) &&
-    	              std::is_constructible_v<ManagedType, Args&&...>
-    	          >>
-    	ft_sharedptr(Args&&... args);
+    	template <typename... Args, typename = std::enable_if_t<
+    	    !(is_single_convertible_to_size_t<Args...>::value) &&
+    	    std::is_constructible_v<ManagedType, Args&&...>
+    	    >> ft_sharedptr(Args&&... args);
 
     	ft_sharedptr(ManagedType* pointer, bool isArray = false, size_t arraySize = 1);
 

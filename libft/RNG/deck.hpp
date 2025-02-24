@@ -1,48 +1,57 @@
 #ifndef DECK_HPP
 #define DECK_HPP
 
+#include "../Template/shared_ptr.hpp"
 #include "../Template/vector.hpp"
-#include <cstdlib>
-#include <ctime>
+#include "dice_roll.hpp"
+#include <climits>
 
 template<typename ElementType>
-class deck : public ft_vector<ElementType>
+class deck : public ft_vector<ft_sharedptr<ElementType>>
 {
-public:
-    deck();
+	public:
+    	deck();
     
-    ElementType getRandomElement();
-    ElementType popRandomElement();
+    	ft_sharedptr<ElementType> getRandomElement();
+    	ft_sharedptr<ElementType> popRandomElement();
 };
 
 template<typename ElementType>
-deck<ElementType>::deck() : ft_vector<ElementType>()
+deck<ElementType>::deck() : ft_vector<ft_sharedptr<ElementType>>()
 {
-    std::srand(static_cast<unsigned>(std::time(nullptr)));
+	return ;
 }
 
 template<typename ElementType>
-ElementType deck<ElementType>::getRandomElement()
+ft_sharedptr<ElementType> deck<ElementType>::getRandomElement()
 {
     if (this->empty())
 	{
-        this->setError(VECTOR_INVALID_OPERATION);
+		ft_errno = DECK_EMPTY;
+        this->setError(DECK_EMPTY);
 		return (ft_nullptr);
 	}
-    size_t index = std::rand() % this->size();
+    size_t index = static_cast<size_t>(ft_dice_roll(1, static_cast<int>(this->size())) - 1);
     return ((*this)[index]);
 }
 
 template<typename ElementType>
-ElementType deck<ElementType>::popRandomElement()
+ft_sharedptr<ElementType> deck<ElementType>::popRandomElement()
 {
     if (this->empty())
 	{
-		this->setError(VECTOR_INVALID_OPERATION);
+		ft_errno = DECK_EMPTY;
+		this->setError(DECK_EMPTY);
 		return (ft_nullptr);
 	}
-    size_t index = std::rand() % this->size();
-    ElementType elem = (*this)[index];
+    size_t index = static_cast<size_t>(ft_dice_roll(1, static_cast<int>(this->size())) - 1);
+	ft_sharedptr<ElementType> elem = (*this)[index];
+	if (elem.getErrorCode())
+	{
+		ft_errno = DECK_ALLOC_FAIL;
+		this->setError(DECK_ALLOC_FAIL);
+		return (ft_nullptr);
+	}
     this->erase(this->begin() + index);
     return (elem);
 }

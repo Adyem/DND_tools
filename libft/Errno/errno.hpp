@@ -47,6 +47,9 @@ enum PTErrorCode
 	UNORD_MAP_MEMORY,
 	UNORD_MAP_NOT_FOUND,
 	UNORD_MAP_UNKNOWN,
+	DECK_EMPTY,
+	DECK_ALLOC_FAIL,
+	BUTTON_ALLOC_FAIL,
 };
 
 const char* ft_strerror(int error_code);

@@ -3,6 +3,8 @@
 
 #include "libft/CPP_class/file.hpp"
 
+# define ERROR_RESISTANCE 9999
+
 struct s_char;
 struct s_buff;
 struct s_name;
@@ -12,9 +14,6 @@ typedef struct s_char t_char;
 typedef struct s_buff t_buff;
 typedef struct s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
-
-template <typename T>
-class ft_sharedptr;
 
 typedef void (*c_action)(t_char *, s_equipment_id *, int);
 typedef void 	(*c_turn)(t_char *);
@@ -452,13 +451,6 @@ typedef struct	s_char
 	t_name			*struct_name;
     t_physical      physical;
 }	t_char;
-
-# define ERROR_RESISTANCE 9999
-
-typedef struct	s_buff t_buff;
-typedef struct	s_char t_char;
-typedef struct	s_name t_name;
-typedef struct s_equipment_id t_equipment_id;
 
 typedef int		(*cast_buff_debuff)(t_char * , const char **, t_buff *);
 typedef t_char *(*c_name)(int, const char **, t_name *, int);

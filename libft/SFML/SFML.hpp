@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include "../Template/shared_ptr.hpp"
 #include "../Template/vector.hpp"
+#include "../CPP_class/string.hpp"
 #include <unordered_map>
-#include <string>
 
 #ifndef DEBUG
  #define DEBUG 0
@@ -40,7 +40,7 @@ class GraphicsData
         void addSpriteFromFile(const char *fileName, const t_coordinate &position);
         void addSprite(const sf::Texture &texture, const t_coordinate &position);
 
-		ft_sharedptr<t_graphics_object> createButton(const std::string &label,
+		ft_sharedptr<t_graphics_object> createButton(const ft_string &label,
 				const t_coordinate &virtualPos, const t_coordinate &virtualSize,
 				const sf::Font &font, sf::Color buttonColor = sf::Color::White,
 				sf::Color textColor = sf::Color::Black, const sf::Texture *spriteTexture = nullptr);
@@ -51,7 +51,7 @@ class GraphicsData
 
     private:
         t_coordinate _window_size;
-        std::unordered_map<std::string, ft_sharedptr<sf::Texture>> _textureCache;
+        std::unordered_map<ft_string, ft_sharedptr<sf::Texture>> _textureCache;
 
         t_coordinate translateCoordinates(const t_coordinate& customCoord) const;
 
