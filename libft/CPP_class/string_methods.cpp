@@ -253,7 +253,17 @@ ft_string operator+(char lhs, const ft_string &rhs) noexcept
     return (result);
 }
 
-/*ft_string::operator const char*() const noexcept
+bool operator==(const ft_string &lhs, const ft_string &rhs) noexcept
 {
-    return (_data);
-}*/
+    return (ft_strcmp(lhs.c_str(), rhs.c_str()) == 0);
+}
+
+bool operator==(const ft_string &lhs, const char* rhs) noexcept
+{
+    return (ft_strcmp(lhs.c_str(), rhs) == 0);
+}
+
+bool operator==(const char* lhs, const ft_string &rhs) noexcept
+{
+    return (ft_strcmp(lhs, rhs.c_str()) == 0);
+}

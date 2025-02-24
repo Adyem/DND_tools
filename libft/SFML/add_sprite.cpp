@@ -3,14 +3,13 @@
 #include <SFML/Graphics.hpp>
 #include <new>
 #include <string>
-#include <unordered_map>
 
 sf::Texture* GraphicsData::loadTexture(const char* fileName)
 {
     ft_string fname(fileName);
-    auto it = _textureCache.find(fname);
-    if (it != _textureCache.end())
-        return (it->second.get());
+    auto it = this->_textureCache.find(fname);
+    if (it != this->_textureCache.end())
+        return (it->value.get());
     sf::Texture* newTexture = new(std::nothrow) sf::Texture();
     if (!newTexture)
     {
@@ -33,7 +32,14 @@ sf::Texture* GraphicsData::loadTexture(const char* fileName)
         delete newTexture;
         return (ft_nullptr);
     }
-    _textureCache[fname] = texturePtr;
+    this->_textureCache.insert(fname, texturePtr);
+	if (this->_textureCache.getError())
+	{
+		this->_error = 1;
+        sf::err() << "ft_sharedptr error for texture: " << fileName << std::endl;
+        delete newTexture;
+        return (ft_nullptr);
+	}
     return (newTexture);
 }
 

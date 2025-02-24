@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Template/shared_ptr.hpp"
 #include "../Template/vector.hpp"
+#include "../Template/map.hpp"
 #include "../CPP_class/string.hpp"
 #include <unordered_map>
 
@@ -51,7 +52,7 @@ class GraphicsData
 
     private:
         t_coordinate _window_size;
-        std::unordered_map<ft_string, ft_sharedptr<sf::Texture>> _textureCache;
+        ft_map<ft_string, ft_sharedptr<sf::Texture>> _textureCache;
 
         t_coordinate translateCoordinates(const t_coordinate& customCoord) const;
 

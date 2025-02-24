@@ -24,4 +24,3 @@ class Button : public sf::Drawable {
 };
 
 #endif
-

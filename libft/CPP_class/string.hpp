@@ -37,17 +37,15 @@ class ft_string
         void        append(const char *string) noexcept;
         void        append(const ft_string &string) noexcept;
         void        clear() noexcept;
-        const char* at(size_t index) const noexcept;
-        const char* c_str() const noexcept;
+        const char	*at(size_t index) const noexcept;
+        const char	*c_str() const noexcept;
         char*       print() noexcept;
         size_t      size() const noexcept;
         bool        empty() const noexcept;
         int         getError() const noexcept;
-        const char* errorStr() const noexcept;
+        const char	*errorStr() const noexcept;
         void        move(ft_string& other) noexcept;
         void        erase(size_t index, int count) noexcept;
-
-		//operator const char*() const noexcept;
 
         friend ft_string operator+(const ft_string &lhs, const ft_string &rhs) noexcept;
         friend ft_string operator+(const ft_string &lhs, const char *rhs) noexcept;
@@ -55,5 +53,9 @@ class ft_string
 		friend ft_string operator+(const ft_string &lhs, char rhs) noexcept;
 		friend ft_string operator+(char lhs, const ft_string &rhs) noexcept;
 };
+
+bool operator==(const ft_string &lhs, const ft_string &rhs) noexcept;
+bool operator==(const ft_string &lhs, const char* rhs) noexcept;
+bool operator==(const char* lhs, const ft_string &rhs) noexcept;
 
 #endif

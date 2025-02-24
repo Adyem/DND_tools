@@ -88,6 +88,8 @@ const char* ft_strerror(int error_code)
 		return ("Deck is empty");
 	else if (error_code == DECK_ALLOC_FAIL)
 		return ("Deck memory allocation");
+	else if (error_code == SFML_WINDOW_CREATE_FAIL)
+		return ("Failed to create window");
 	else if (error_code > ERRNO_OFFSET)
 	{
         int standard_errno = error_code - ERRNO_OFFSET;
