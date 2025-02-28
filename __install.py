@@ -45,10 +45,22 @@ def install_dependencies_macos():
 
 def install_dependencies_windows():
     print("Detected Windows 11.")
-    # Check for Chocolatey
+    # Check for Chocolatey and install it if missing.
     if shutil.which("choco") is None:
-        print("Chocolatey is not found. Please install Chocolatey from https://chocolatey.org/install and re-run this script.")
-        sys.exit(1)
+        print("Chocolatey not found. Installing Chocolatey...")
+        try:
+            subprocess.run([
+                "powershell",
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-Command",
+                "Set-ExecutionPolicy Bypass -Scope Process -Force; "
+                "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; "
+                "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+            ], shell=True, check=True)
+        except subprocess.CalledProcessError:
+            print("Failed to install Chocolatey. Please install it manually from https://chocolatey.org/install and re-run this script.")
+            sys.exit(1)
     # Upgrade all packages first (optional)
     print("Upgrading all Chocolatey packages...")
     try:
@@ -84,6 +96,17 @@ def main():
         install_dependencies_macos()
         compile_source()
     elif current_os == "Windows":
+        # Check for admin privileges; if not, relaunch as administrator.
+        try:
+            import ctypes
+            is_admin = ctypes.windll.shell32.IsUserAnAdmin()
+        except Exception:
+            is_admin = False
+        if not is_admin:
+            print("Re-launching script as administrator...")
+            params = " ".join(sys.argv)
+            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
+            sys.exit(0)
         install_dependencies_windows()
         compile_source()
     else:

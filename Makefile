@@ -193,6 +193,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME) $(NAME_DEBUG)
+	rm -rf data/*
 
 re: fclean all
 
