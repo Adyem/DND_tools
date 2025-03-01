@@ -18,6 +18,7 @@ ft_sharedptr<t_graphics_object> GraphicsData::createButton(const ft_string &labe
     );
     if (buttonShape.getErrorCode())
     {
+		this->_error = 1;
         sf::err() << "Error allocating button shape." << std::endl;
         return (ft_sharedptr<t_graphics_object>());
     }
@@ -31,8 +32,8 @@ ft_sharedptr<t_graphics_object> GraphicsData::createButton(const ft_string &labe
         );
         if (buttonSprite.getErrorCode())
         {
-            sf::err() << "Error allocating button sprite." << std::endl;
-            return (ft_sharedptr<t_graphics_object>());
+            this->_error = 1;
+			return (ft_sharedptr<t_graphics_object>());
         }
         sf::Vector2u texSize = spriteTexture->getSize();
         buttonSprite->setScale(size.x / texSize.x, size.y / texSize.y);
@@ -41,7 +42,7 @@ ft_sharedptr<t_graphics_object> GraphicsData::createButton(const ft_string &labe
     ft_sharedptr<sf::Text> buttonText(new(std::nothrow) sf::Text());
     if (buttonText.getErrorCode())
     {
-        sf::err() << "Error allocating button text." << std::endl;
+        this->_error = 1;
         return (ft_sharedptr<t_graphics_object>());
     }
     buttonText->setFont(font);
@@ -54,13 +55,12 @@ ft_sharedptr<t_graphics_object> GraphicsData::createButton(const ft_string &labe
                           textRect.top + textRect.height / 2.0f);
     buttonText->setPosition(sf::Vector2f(pos.x + size.x / 2.0f,
                                          pos.y + size.y / 2.0f));
-
     ft_sharedptr<t_graphics_object> buttonObject(
         new(std::nothrow) t_graphics_object()
     );
     if (buttonObject.getErrorCode())
     {
-        sf::err() << "Error allocating button graphics object." << std::endl;
+        this->_error = 1;
         return (ft_sharedptr<t_graphics_object>());
     }
     ft_sharedptr<sf::Drawable> compositeButton(
@@ -68,7 +68,7 @@ ft_sharedptr<t_graphics_object> GraphicsData::createButton(const ft_string &labe
     );
     if (compositeButton.getErrorCode())
     {
-        sf::err() << "Error allocating composite button." << std::endl;
+        this->_error = 1;
         return (ft_sharedptr<t_graphics_object>());
     }
     buttonObject->drawable = compositeButton;
@@ -78,14 +78,14 @@ ft_sharedptr<t_graphics_object> GraphicsData::createButton(const ft_string &labe
     );
     if (coords.getErrorCode())
     {
-        sf::err() << "Error allocating object coordinates." << std::endl;
+        this->_error = 1;
         return (ft_sharedptr<t_graphics_object>());
     }
     coords->virtual_location = virtualPos;
     buttonObject->coordinates.push_back(coords);
     if (buttonObject->coordinates.getError())
     {
-        sf::err() << "Error pushing coordinates into button object." << std::endl;
+        this->_error = 1;
         return (ft_sharedptr<t_graphics_object>());
     }
     return (buttonObject);

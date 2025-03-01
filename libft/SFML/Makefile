@@ -11,7 +11,8 @@ DEBUG_TARGET := SFML_debug.a
 SRCS := create_window.cpp \
 		translate_coordinates.cpp \
 		add_sprite.cpp \
-		button.cpp
+		button.cpp \
+		collision.cpp
 
 HEADERS := SFML.hpp \
 		   button.hpp

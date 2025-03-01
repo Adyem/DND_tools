@@ -3,6 +3,7 @@ import platform
 import subprocess
 import sys
 import shutil
+import ctypes  # Moved import to the top
 
 def install_dependencies_ubuntu():
     packages = ['libsfml-dev', 'clang', 'make']
@@ -22,11 +23,9 @@ def install_dependencies_ubuntu():
 
 def install_dependencies_macos():
     print("Detected macOS.")
-    # Check for Homebrew
     if shutil.which("brew") is None:
         print("Homebrew not found. Please install Homebrew from https://brew.sh/ and re-run this script.")
         sys.exit(1)
-    # Check for clang and make (typically available via Xcode command line tools)
     if shutil.which("clang") is None or shutil.which("make") is None:
         print("clang or make not found. Please install Xcode command line tools by running 'xcode-select --install'.")
         sys.exit(1)
@@ -45,7 +44,6 @@ def install_dependencies_macos():
 
 def install_dependencies_windows():
     print("Detected Windows 11.")
-    # Check for Chocolatey and install it if missing.
     if shutil.which("choco") is None:
         print("Chocolatey not found. Installing Chocolatey...")
         try:
@@ -61,13 +59,11 @@ def install_dependencies_windows():
         except subprocess.CalledProcessError:
             print("Failed to install Chocolatey. Please install it manually from https://chocolatey.org/install and re-run this script.")
             sys.exit(1)
-    # Upgrade all packages first (optional)
     print("Upgrading all Chocolatey packages...")
     try:
         subprocess.run(["choco", "upgrade", "all", "-y"], shell=True, check=True)
     except subprocess.CalledProcessError:
         print("Failed to upgrade packages with Chocolatey. Continuing...")
-    # Install SFML, LLVM (for clang), and make via Chocolatey
     packages = [("sfml", "SFML"), ("llvm", "LLVM (includes clang)"), ("make", "Make")]
     for pkg, desc in packages:
         print(f"Installing {desc} with Chocolatey...")
@@ -96,9 +92,7 @@ def main():
         install_dependencies_macos()
         compile_source()
     elif current_os == "Windows":
-        # Check for admin privileges; if not, relaunch as administrator.
         try:
-            import ctypes
             is_admin = ctypes.windll.shell32.IsUserAnAdmin()
         except Exception:
             is_admin = False

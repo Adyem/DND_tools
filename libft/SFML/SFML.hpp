@@ -6,7 +6,6 @@
 #include "../Template/vector.hpp"
 #include "../Template/map.hpp"
 #include "../CPP_class/string.hpp"
-#include <unordered_map>
 
 #ifndef DEBUG
  #define DEBUG 0
@@ -41,6 +40,9 @@ class GraphicsData
         void addSpriteFromFile(const char *fileName, const t_coordinate &position);
         void addSprite(const sf::Texture &texture, const t_coordinate &position);
 
+		ft_vector<ft_sharedptr<t_graphics_object>> getCollisionsForObject(
+    			const ft_sharedptr<t_graphics_object>& target) const;
+
 		ft_sharedptr<t_graphics_object> createButton(const ft_string &label,
 				const t_coordinate &virtualPos, const t_coordinate &virtualSize,
 				const sf::Font &font, sf::Color buttonColor = sf::Color::White,
@@ -48,7 +50,7 @@ class GraphicsData
 
         sf::RenderWindow *_window;
         ft_vector<ft_sharedptr<t_graphics_object>> _object;
-        int _error;
+        mutable int _error;
 
     private:
         t_coordinate _window_size;
