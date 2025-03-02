@@ -2,6 +2,8 @@
 #define SFML_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include "../Template/shared_ptr.hpp"
 #include "../Template/vector.hpp"
 #include "../Template/map.hpp"

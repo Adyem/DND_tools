@@ -14,7 +14,7 @@ class Button : public sf::Drawable {
 
 		ft_sharedptr<sf::RectangleShape> buttonShape;
 		ft_sharedptr<sf::Text> buttonText;
-		ft_sharedptr<sf::Sprite> buttonSprite;
+		ft_sharedptr<sf::Drawable> buttonSprite;
 
 		void	set_error(int error) const;
 		int		get_error(void) const;

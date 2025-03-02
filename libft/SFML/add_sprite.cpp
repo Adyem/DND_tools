@@ -68,7 +68,7 @@ void GraphicsData::addSpriteHelper(sf::Texture* texture, const t_coordinate* pos
         sf::err() << "ft_sharedptr error for t_graphics_object." << std::endl;
         return ;
     }
-    gfxObj->drawable = ft_sharedptr<sf::Drawable>(newSprite);
+    gfxObj->drawable = ft_sharedptr<sf::Sprite>(newSprite);
     if (gfxObj->drawable.getErrorCode())
     {
         this->_error = 1;
