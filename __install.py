@@ -6,7 +6,7 @@ import shutil
 import ctypes  # Moved import to the top
 
 def install_dependencies_ubuntu():
-    packages = ['libsfml-dev', 'clang', 'make']
+    packages = ['clang', 'make']  # Removed 'libsfml-dev'
     print("Updating package lists (Ubuntu)...")
     try:
         subprocess.run(["sudo", "apt-get", "update"], check=True)
@@ -35,12 +35,7 @@ def install_dependencies_macos():
     except subprocess.CalledProcessError:
         print("Failed to update Homebrew. Exiting.")
         sys.exit(1)
-    print("Installing SFML with Homebrew...")
-    try:
-        subprocess.run(["brew", "install", "sfml"], check=True)
-    except subprocess.CalledProcessError:
-        print("Failed to install SFML with Homebrew. Exiting.")
-        sys.exit(1)
+    # SFML installation removed
 
 def install_dependencies_windows():
     print("Detected Windows 11.")
@@ -64,7 +59,8 @@ def install_dependencies_windows():
         subprocess.run(["choco", "upgrade", "all", "-y"], shell=True, check=True)
     except subprocess.CalledProcessError:
         print("Failed to upgrade packages with Chocolatey. Continuing...")
-    packages = [("sfml", "SFML"), ("llvm", "LLVM (includes clang)"), ("make", "Make")]
+    # Removed SFML from the installation list
+    packages = [("llvm", "LLVM (includes clang)"), ("make", "Make")]
     for pkg, desc in packages:
         print(f"Installing {desc} with Chocolatey...")
         try:
