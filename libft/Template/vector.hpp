@@ -21,6 +21,7 @@ class ft_vector
 
 	protected:
 		void	setError(int errorCode);
+		ElementType release_at(size_t index);
 
 	public:
     	using iterator = ElementType*;
@@ -317,6 +318,21 @@ typename ft_vector<ElementType>::iterator ft_vector<ElementType>::erase(iterator
     if (index == this->_size)
         return (end());
     return (&this->_data[index]);
+}
+
+template <typename ElementType>
+ElementType ft_vector<ElementType>::release_at(size_t index)
+{
+    if (index >= this->_size)
+	{
+        this->setError(VECTOR_INVALID_PTR);
+        return ElementType();
+    }
+    ElementType detached = std::move(this->_data[index]);
+    for (size_t i = index; i < this->_size - 1; i++)
+        this->_data[i] = std::move(this->_data[i + 1]);
+    --this->_size;
+    return detached;
 }
 
 template <typename ElementType>

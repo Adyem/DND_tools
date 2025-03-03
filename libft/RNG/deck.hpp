@@ -52,7 +52,7 @@ ft_sharedptr<ElementType> deck<ElementType>::popRandomElement()
 		this->setError(DECK_ALLOC_FAIL);
 		return (ft_nullptr);
 	}
-    this->erase(this->begin() + index);
+    this->release_at(index);
     return (elem);
 }
 
