@@ -68,7 +68,11 @@ $(DEBUG_TARGET): $(DEBUG_LIBS)
 	$(AR) $(ARFLAGS) $@ temp_objs/*.o
 	rm -rf temp_objs
 
-SFML_LIBS := $(shell pkg-config --libs sfml-graphics sfml-window sfml-system)
+%.a:
+	$(MAKE) -C $(dir $@)
+
+%_debug.a:
+	$(MAKE) -C $(dir $@) debug
 
 clean:
 	@for dir in $(SUBDIRS); do \
