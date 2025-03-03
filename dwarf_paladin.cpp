@@ -1,7 +1,6 @@
 #include "dnd_tools.hpp"
 #include "dwarf_paladin.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 #include "libft/CMA/CMA.hpp"
 
 void ft_dwarf_paladin_turn(t_char * info)

@@ -1,6 +1,5 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 
 void print_meteor_strike(const t_char * info)
 {

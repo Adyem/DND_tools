@@ -2,7 +2,6 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 
 static int ft_check_divine_smite_learned(t_char * character)
 {

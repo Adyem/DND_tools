@@ -2,7 +2,6 @@
 #include "dnd_tools.hpp"
 #include "frank.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 #include "libft/CMA/CMA.hpp"
 
 static const	t_buff_lightning_strike FRANK_LIGHTNING_STRIKE_V2 =

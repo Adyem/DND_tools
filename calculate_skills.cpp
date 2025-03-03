@@ -1,5 +1,4 @@
 #include "dnd_tools.hpp"
-#include "libft/Template/shared_ptr.hpp"
 
 int ft_calculate_athletics(t_char * info)
 {

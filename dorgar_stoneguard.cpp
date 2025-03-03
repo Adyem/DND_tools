@@ -1,7 +1,6 @@
 #include "dnd_tools.hpp"
 #include "dorgar_stoneguard.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 #include "libft/CMA/CMA.hpp"
 
 void ft_dorgar_stoneguard_turn(t_char * info)

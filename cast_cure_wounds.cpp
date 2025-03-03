@@ -1,7 +1,6 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 
 static int ft_check_cure_wounds_learned(t_char * character)
 {

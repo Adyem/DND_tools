@@ -1,7 +1,6 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 
 void	ft_cast_chaos_armor(t_char * info)
 {

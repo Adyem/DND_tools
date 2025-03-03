@@ -1,6 +1,5 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/Template/shared_ptr.hpp"
 #include "dnd_tools.hpp"
 #include "veraak.hpp"
 
