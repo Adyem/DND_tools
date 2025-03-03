@@ -9,9 +9,9 @@ int ft_dice_roll(int number, int faces)
 	ft_init_srand();
 	if (faces == 0 && number == 0)
 		return (0);
-    if (faces < 1 || number < 1)
+	else if (faces < 1 || number < 1)
         return (-1);
-    if (faces == 1)
+	else if (faces == 1)
         return (number);
     int result = 0;
     int index = 0;
