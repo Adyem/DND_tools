@@ -1,7 +1,8 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/Template/shared_ptr.hpp"
 #include "libft/ReadLine/readline.hpp"
+#include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 
 static void list_learned_spells(t_known_spell known_spells[])
