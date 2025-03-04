@@ -11,6 +11,7 @@ class deck : public ft_vector<ElementType*>
 {
 	public:
     	deck();
+		~deck();
     
     	ElementType *getRandomElement();
     	ElementType *popRandomElement();
@@ -19,6 +20,12 @@ class deck : public ft_vector<ElementType*>
 
 template<typename ElementType>
 deck<ElementType>::deck() : ft_vector<ElementType*>()
+{
+	return ;
+}
+
+template<typename ElementType>
+deck<ElementType>::~deck()
 {
 	return ;
 }
