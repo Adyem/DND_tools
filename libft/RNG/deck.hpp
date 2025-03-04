@@ -7,7 +7,7 @@
 #include <climits>
 
 template<typename ElementType>
-class deck : public ft_vector<ElementType*>
+class ft_deck : public ft_vector<ElementType*>
 {
 	public:
     	ElementType *popRandomElement();
@@ -18,7 +18,7 @@ class deck : public ft_vector<ElementType*>
 };
 
 template<typename ElementType>
-ElementType *deck<ElementType>::popRandomElement()
+ElementType *ft_deck<ElementType>::popRandomElement()
 {
     if (this->empty())
 	{
@@ -33,7 +33,7 @@ ElementType *deck<ElementType>::popRandomElement()
 }
 
 template<typename ElementType>
-ElementType *deck<ElementType>::getRandomElement() const
+ElementType *ft_deck<ElementType>::getRandomElement() const
 {
     if (this->empty())
 	{
@@ -46,7 +46,7 @@ ElementType *deck<ElementType>::getRandomElement() const
 }
 
 template<typename ElementType>
-ElementType *deck<ElementType>::drawTopElement()
+ElementType *ft_deck<ElementType>::drawTopElement()
 {
     if (this->empty())
 	{
@@ -61,7 +61,7 @@ ElementType *deck<ElementType>::drawTopElement()
 }
 
 template<typename ElementType>
-ElementType *deck<ElementType>::peekTopElement() const
+ElementType *ft_deck<ElementType>::peekTopElement() const
 {
     if (this->empty())
 	{
@@ -75,7 +75,7 @@ ElementType *deck<ElementType>::peekTopElement() const
 }
 
 template<typename ElementType>
-void deck<ElementType>::shuffle()
+void ft_deck<ElementType>::shuffle()
 {
     if (this->empty())
 	{

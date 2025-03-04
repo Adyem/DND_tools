@@ -328,9 +328,9 @@ ElementType ft_vector<ElementType>::release_at(size_t index)
         this->setError(VECTOR_INVALID_PTR);
         return ElementType();
     }
-    ElementType detached = std::move(this->_data[index]);
+    ElementType detached = ft_move(this->_data[index]);
     for (size_t i = index; i < this->_size - 1; i++)
-        this->_data[i] = std::move(this->_data[i + 1]);
+        this->_data[i] = ft_move(this->_data[i + 1]);
     --this->_size;
     return detached;
 }
