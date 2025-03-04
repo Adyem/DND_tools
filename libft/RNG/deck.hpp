@@ -16,6 +16,7 @@ class deck : public ft_vector<ElementType*>
     	ElementType *getRandomElement();
     	ElementType *popRandomElement();
 		void shuffle();
+		ElementType *drawTopElement();
 };
 
 template<typename ElementType>
@@ -55,6 +56,21 @@ ElementType *deck<ElementType>::popRandomElement()
     size_t index = static_cast<size_t>(ft_dice_roll(1, static_cast<int>(this->size())) - 1);
     ElementType* elem = (*this)[index];
     this->release_at(index);
+    return (elem);
+}
+
+template<typename ElementType>
+ElementType *deck<ElementType>::drawTopElement()
+{
+    if (this->empty())
+	{
+		ft_errno = DECK_EMPTY;
+		this->setError(DECK_EMPTY);
+		return (ft_nullptr);
+	}
+	size_t index = this->size() - 1;
+    ElementType* elem = (*this)[index];
+	this->release_at(index);
     return (elem);
 }
 
