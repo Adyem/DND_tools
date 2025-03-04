@@ -54,10 +54,18 @@ ElementType *deck<ElementType>::popRandomElement()
 template<typename ElementType>
 void deck<ElementType>::shuffle()
 {
-    for (size_t i = this->size() - 1; i > 0; --i)
+    if (this->empty())
+	{
+		ft_errno = DECK_EMPTY;
+        this->setError(DECK_EMPTY);
+		return ;
+	}
+	size_t index = this->size - 1;
+    while (index > 0)
     {
-        size_t j = static_cast<size_t>(ft_dice_roll(1, static_cast<int>(i + 1)) - 1);
-        ft_swap((*this)[i], (*this)[j]);
+        size_t randomIndex = static_cast<size_t>(ft_dice_roll(1, static_cast<int>(index + 1)) - 1);
+        ft_swap((*this)[index], (*this)[randomIndex]);
+		index--;
     }
 	return ;
 }
