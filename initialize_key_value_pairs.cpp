@@ -157,6 +157,10 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, ARCANE_POUNCE_TARGET_ID_KEY, &info->bufs.arcane_pounce.target_id);
     tree_node_insert(node, EARTH_POUNCE_TARGET_ID_KEY, &info->bufs.earth_pounce.target_id);
     tree_node_insert(node, BUFF_BLESS_CASTER_NAME_KEY, &info->bufs.bless.caster_name);
+	tree_node_insert(node, BUFF_MAGIC_DRAIN_TARGET_KEY, &info->bufs.magic_drain.target);
+	tree_node_insert(node, BUFF_MAGIC_DRAIN_DAMAGE_KEY, &info->bufs.magic_drain.damage, -1);
+	tree_node_insert(node, BUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
+			&info->bufs.magic_drain.spell_slot_total_level_drain, -1);
     if (tree_node_get_error(node))
         return (1);
     return (0);

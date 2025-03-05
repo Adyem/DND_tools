@@ -29,6 +29,7 @@ static void ft_initialize_gear_and_feats(t_char * info)
 void	ft_template_loot(t_char * info)
 {
 	(void)info;
+	return ;
 }
 
 t_char *ft_template(const int index, const char **input, t_name *name, int exception)

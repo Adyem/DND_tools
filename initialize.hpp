@@ -239,6 +239,13 @@ static const	t_buff_frost_breath INITIALIZE_FROST_BREATH =
 	.target_id = ft_nullptr,
 };
 
+static const	t_buff_magic_drain INITIALIZE_MAGIC_DRAIN =
+{
+	.target = ft_nullptr,
+	.damage = 0,
+	.spell_slot_total_level_drain = 0,
+};
+
 static const	t_bufs INITIALIZE_BUFFS =
 {
 	.bless = INITIALIZE_BLESS,
@@ -251,6 +258,7 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.arcane_pounce = INITIALIZE_ARCANE_POUNCE,
 	.earth_pounce = INITIALIZE_EARTH_POUNCE,
 	.frost_breath = INITIALIZE_FROST_BREATH,
+	.magic_drain = INITIALIZE_MAGIC_DRAIN,
 };
 
 static const	t_debuff_hunters_mark INITIALIZE_HUNTERS_MARK =

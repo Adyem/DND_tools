@@ -1,25 +1,48 @@
 #ifndef KEY_LIST_HPP
-#define KEY_LIST_HPP
+# define KEY_LIST_HPP
 
 #include <cstddef>
+
+constexpr std::size_t constexpr_strlen(const char* str)
+{
+    std::size_t len = 0;
+    while (str[len] != '\0')
+        ++len;
+    return len;
+}
+
+constexpr bool ends_with(const char* str, const char* suffix)
+{
+    std::size_t str_len = constexpr_strlen(str);
+    std::size_t suffix_len = constexpr_strlen(suffix);
+    if (suffix_len > str_len)
+        return false;
+    for (std::size_t i = 0; i < suffix_len; ++i)
+    {
+        if (str[str_len - suffix_len + i] != suffix[i])
+            return false;
+    }
+    return true;
+}
 
 constexpr bool is_valid_key_impl(const char* str, std::size_t i)
 {
     if (str[i] == '=')
         return (i > 0 && str[i + 1] == '\0');
-    if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] == '_') || (str[i] >= '0' && str[i] <= '9'))
-        return (is_valid_key_impl(str, i + 1));
-    return (false);
+    if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] == '_') ||
+        (str[i] >= '0' && str[i] <= '9'))
+        return is_valid_key_impl(str, i + 1);
+    return false;
 }
 
 constexpr bool is_valid_key(const char* str)
 {
-    return (is_valid_key_impl(str, 0));
+    return is_valid_key_impl(str, 0);
 }
 
 #define KEY_LIST \
     X(HEALTH_KEY, "HEALTH=") \
-	X(MAX_HEALTH_KEY, "MAX_HEALTH=") \
+    X(MAX_HEALTH_KEY, "MAX_HEALTH=") \
     X(TEMP_HP_KEY, "TEMP_HP=") \
     X(STR_KEY, "STR=") \
     X(DEX_KEY, "DEX=") \
@@ -136,9 +159,14 @@ constexpr bool is_valid_key(const char* str)
     X(BUFF_BLESS_DICE_AMOUNT_MOD_KEY, "BUFF_BLESS_DICE_AMOUNT_MOD=") \
     X(BUFF_BLESS_DICE_FACES_MOD_KEY, "BUFF_BLESS_DICE_FACES_MOD=") \
     X(BUFF_BLESS_BASE_MOD_KEY, "BUFF_BLESS_BASE_MOD=") \
-    X(BUFF_BLESS_CASTER_NAME_KEY, "BUFF_BLESS_CASTER_NAME=")
+    X(BUFF_BLESS_CASTER_NAME_KEY, "BUFF_BLESS_CASTER_NAME=") \
+	X(BUFF_MAGIC_DRAIN_TARGET_KEY, "BUFF_MAGIC_DRAIN=") \
+	X(BUFF_MAGIC_DRAIN_DAMAGE_KEY, "BUFF_MAGIC_DRAIN_DAMAGE=") \
+	X(BUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY, \
+			"BUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN=")
 
 #define X(name, value) \
+    static_assert(ends_with(#name, "_KEY"), "Macro name must end with _KEY"); \
     static_assert(is_valid_key(value), "Invalid key: " value); \
     extern const char* name; \
     extern const int name##_LEN;
