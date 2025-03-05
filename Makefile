@@ -26,7 +26,8 @@ HEADER      = dnd_tools.hpp \
 			  thorbald_ironpocket.hpp \
 			  key_list.hpp \
 			  treeNode.hpp \
-			  dwarf_paladin.hpp
+			  dwarf_paladin.hpp \
+			  felbeast.hpp
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -147,7 +148,8 @@ SRC         = name.cpp \
 			  attack_utils.cpp \
 			  calculate_util_stats.cpp \
 			  treeNode.cpp \
-			  treeNode_functions.cpp
+			  treeNode_functions.cpp \
+			  felbeast.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \

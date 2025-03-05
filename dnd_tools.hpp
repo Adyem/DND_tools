@@ -33,6 +33,10 @@ t_char *	ft_ghost(const int index, const char **input, t_name *name, int excepti
 void		ft_ghost(t_char * info);
 
 // Frank
+t_char *	ft_felbeast(const int index, const char **input, t_name *name, int exception);
+void		ft_felbeast_turn(t_char * info);
+
+// Frank
 t_char *	ft_frank(const int index, const char **input, t_name *name, int exception);
 void		ft_frank_turn(t_char * info);
 
