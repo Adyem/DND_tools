@@ -150,13 +150,6 @@ typedef struct	s_buff_chaos_armor
 	int	duration;
 }	t_buff_chaos_armor;
 
-typedef struct	s_buff_magic_drain
-{
-	char	*target;
-	int		damage;
-	int		spell_slot_total_level_drain;
-}	t_buff_magic_drain;
-
 typedef struct	s_bufs
 {
 	t_buff_bless				bless;
@@ -169,7 +162,6 @@ typedef struct	s_bufs
 	t_buff_arcane_pounce		arcane_pounce;
 	t_buff_earth_pounce			earth_pounce;
 	t_buff_frost_breath			frost_breath;
-	t_buff_magic_drain			magic_drain;
 }	t_bufs;
 
 typedef struct	s_debuff_hunters_mark
@@ -353,6 +345,17 @@ typedef struct	s_spell_slots
 	t_spell_slot	warlock;
 }	t_spell_slots;
 
+
+typedef struct	s_spell_magic_drain
+{
+	char	*target;
+	int		damage_flat;
+	int		damage_dice_amount;
+	int		damage_dice_faces;
+	int		spell_slot_total_level_drain;
+	int		dex_save;
+}	t_spell_magic_drain;
+
 typedef struct s_spell_hunters_mark
 {
 	int		learned;
@@ -414,6 +417,7 @@ typedef struct	s_spells
 	t_spell_divine_smite	divine_smite;
 	t_spell_hunters_mark	hunters_mark;
 	t_spell_bless			bless;
+	t_spell_magic_drain		magic_drain;
 }	t_spells;
 
 typedef struct s_inventory

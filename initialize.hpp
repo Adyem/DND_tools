@@ -239,13 +239,6 @@ static const	t_buff_frost_breath INITIALIZE_FROST_BREATH =
 	.target_id = ft_nullptr,
 };
 
-static const	t_buff_magic_drain INITIALIZE_MAGIC_DRAIN =
-{
-	.target = ft_nullptr,
-	.damage = 0,
-	.spell_slot_total_level_drain = 0,
-};
-
 static const	t_bufs INITIALIZE_BUFFS =
 {
 	.bless = INITIALIZE_BLESS,
@@ -258,7 +251,6 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.arcane_pounce = INITIALIZE_ARCANE_POUNCE,
 	.earth_pounce = INITIALIZE_EARTH_POUNCE,
 	.frost_breath = INITIALIZE_FROST_BREATH,
-	.magic_drain = INITIALIZE_MAGIC_DRAIN,
 };
 
 static const	t_debuff_hunters_mark INITIALIZE_HUNTERS_MARK =
@@ -319,6 +311,16 @@ static const t_spell_slots INITIALIZE_SPELL_SLOTS =
 	.level_8 = INITIALIZE_SPELL_SLOT,
 	.level_9 = INITIALIZE_SPELL_SLOT,
 	.warlock = INITIALIZE_SPELL_SLOT,
+};
+
+static const	t_spell_magic_drain INITIALIZE_SPELL_MAGIC_DRAIN =
+{
+	.target = ft_nullptr,
+	.damage_flat = 0,
+	.damage_dice_amount = 0,
+	.damage_dice_faces = 0,
+	.spell_slot_total_level_drain = 0,
+	.dex_save = 0,
 };
 
 static const t_spell_hunters_mark INITIALIZE_SPELL_HUNTERS_MARK =
@@ -382,6 +384,7 @@ static const t_spells INITIALIZE_SPELLS =
 	.divine_smite = INITIALIZE_SPELL_DIVINE_SMITE,
 	.hunters_mark = INITIALIZE_SPELL_HUNTERS_MARK,
 	.bless = INITIALIZE_SPELL_BLESS,
+	.magic_drain = INITIALIZE_SPELL_MAGIC_DRAIN,
 };
 
 static const	t_inventory INITIALIZE_INVENTORY =
