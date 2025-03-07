@@ -11,7 +11,6 @@ static const	t_buff BUFF_BLESS =
 {
 	.target_amount = 1,
 	.target = ft_nullptr,
-	.spell_name = "bless",
 	.spell_id = BLESS_ID,
 	.dice_faces_mod = 6,
 	.dice_amount_mod = 1,
@@ -20,6 +19,7 @@ static const	t_buff BUFF_BLESS =
 	.buff = 0,
 	.error = 0,
 	.cast_spell = ft_cast_bless_apply_debuf,
+	.spell_name = "bless",
 };
 
 void ft_cast_bless(t_char * info, const char **input)

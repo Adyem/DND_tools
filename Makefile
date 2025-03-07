@@ -149,7 +149,8 @@ SRC         = name.cpp \
 			  calculate_util_stats.cpp \
 			  treeNode.cpp \
 			  treeNode_functions.cpp \
-			  felbeast.cpp
+			  felbeast.cpp \
+			  cast_magic_drain.cpp
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \

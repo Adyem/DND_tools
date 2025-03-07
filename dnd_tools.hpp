@@ -264,24 +264,27 @@ void		ft_crackback(t_char * info, int number);
 int			ft_check_bless(t_char * info);
 
 // Concentration
-void		ft_cast_hunters_mark(t_char * info, const char **input);
-int			ft_cast_concentration(t_char * info, const char **input, t_buff *buff);
-void		ft_check_concentration(t_char * info, int  damage);
-int			ft_remove_concentration(t_char * info);
-void		ft_cast_chaos_armor(t_char * info);
+void		ft_cast_hunters_mark(t_char *info, const char **input);
+int			ft_cast_concentration(t_char *info, const char **input, t_buff *buff);
+void		ft_check_concentration(t_char *info, int  damage);
+int			ft_remove_concentration(t_char *info);
+void		ft_cast_chaos_armor(t_char *info);
 int			ft_update_caster_name(char ***caster_name, const char *input_name);
-int			ft_cast_concentration_multi_target_01(t_char * info, t_buff *buff, const char **input);
-void		ft_cast_concentration_multi_target_02(t_char * info, t_target_data *target_data,
+int			ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff, const char **input);
+void		ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
 				const char **input);
 
 // Hunters mark
-void 		ft_cast_bless(t_char * info, const char **input);
-void		ft_concentration_remove_hunters_mark(t_char * character, t_target_data *targets_data);
-int			ft_cast_hunters_mark_apply_debuf(t_char * target, const char **input, t_buff *buff);
+void		ft_concentration_remove_hunters_mark(t_char *character, t_target_data *targets_data);
+int			ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff *buff);
 
 // Bless
-int 		ft_cast_bless_apply_debuf(t_char * target, const char **input, t_buff *buff);
-void		ft_concentration_remove_bless(t_char * character, t_target_data *targets_data);
+void 		ft_cast_bless(t_char *info, const char **input);
+int 		ft_cast_bless_apply_debuf(t_char *target, const char **input, t_buff *buff);
+void		ft_concentration_remove_bless(t_char *character, t_target_data *targets_data);
+
+//Magic Drain
+void		ft_cast_magic_drain(t_char *info);
 
 // Resistance
 int			ft_get_resistance(t_char * info, const char *type);

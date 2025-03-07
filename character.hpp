@@ -494,7 +494,6 @@ typedef struct s_buff
 {
 	int					target_amount;
     char				*target;
-	const char			*spell_name;
     int					spell_id;
     int					dice_faces_mod;
     int					dice_amount_mod;
@@ -503,6 +502,7 @@ typedef struct s_buff
 	int					buff;
 	int					error;
 	cast_buff_debuff	cast_spell;
+	const char			*spell_name;
 }	t_buff;
 
 

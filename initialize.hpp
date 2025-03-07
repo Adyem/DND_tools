@@ -9,7 +9,6 @@ static const	t_buff INITIALIZE_T_BUFF =
 {
 	.target_amount = 0,
 	.target = ft_nullptr,
-	.spell_name = ft_nullptr,
 	.spell_id = 0,
 	.dice_faces_mod = 0,
 	.dice_amount_mod = 0,
@@ -18,6 +17,7 @@ static const	t_buff INITIALIZE_T_BUFF =
 	.buff = 0,
 	.error = 0,
 	.cast_spell = ft_nullptr,
+	.spell_name = ft_nullptr,
 };
 
 static const	t_saves INITIALIZE_SAVES =
