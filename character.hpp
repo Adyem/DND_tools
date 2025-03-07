@@ -164,6 +164,16 @@ typedef struct	s_bufs
 	t_buff_frost_breath			frost_breath;
 }	t_bufs;
 
+typedef struct	s_debuff_magic_drain
+{
+	char	*target;
+	int		damage_flat;
+	int		damage_dice_amount;
+	int		damage_dice_faces;
+	int		spell_slot_total_level_drain;
+	int		dex_save;
+}	t_debuff_magic_drain;
+
 typedef struct	s_debuff_hunters_mark
 {
 	int		amount;
@@ -179,6 +189,7 @@ typedef struct s_debufs
 {
 	t_debuff_hunters_mark	hunters_mark;
 	t_debuff_blinded		blinded;
+	t_debuff_magic_drain	magic_drain;
 }	t_debufs;
 
 typedef struct s_crit_mod

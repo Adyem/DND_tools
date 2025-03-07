@@ -89,7 +89,9 @@ typedef enum e_equipment_slot
 # define BLESS_ID 2
 # define BLESS_NAME "bless"
 # define CHAOS_ARMOR_ID 3
-# define CHAOS_ARMOR_NAME "chaos_armor"
+# define CHAOS_ARMOR_NAME "chaos armor"
+# define MAGIC_DRAIN_ID 4
+# define MAGIC_DRAIN_NAME "magic drain"
 
 # define DAMAGE_TYPE_BLUDGEONING	"bludgeoning"
 # define DAMAGE_TYPE_PIERCING		"piercing"
