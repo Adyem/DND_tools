@@ -2,7 +2,8 @@
 #include "dnd_tools.hpp"
 #include <climits>
 
-static int check_range(int value, int min, int max, const char *name, const char *field_name)
+static int check_range(const int &value, const int &min, const int &max, const char *name,
+		const char *field_name)
 {
     if (value < min || value > max)
     {
@@ -173,6 +174,16 @@ static int check_buffs(t_char * info)
 			"bless dice faces");
 	error += check_range(info->bufs.bless.dice_amount_mod, 0, 100, info->name,
 			"bless dice amount");
+	error += check_range(info->spells.magic_drain.dex_save, 0, 50, info->name,
+			"magic drain dex save");
+	error += check_range(info->spells.magic_drain.damage_flat, 0, 50, info->name,
+			"magic drain flat damage");
+	error += check_range(info->spells.magic_drain.damage_dice_faces, 0, 50, info->name,
+			"magic drain dice faces");
+	error += check_range(info->spells.magic_drain.damage_dice_amount, 0, 50, info->name,
+			"magic drain dice amount");
+	error += check_range(info->spells.magic_drain.spell_slot_total_level_drain, 0, 50, info->name,
+			"magic drain spell slot total level drain");
     return (error);
 }
 

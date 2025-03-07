@@ -211,6 +211,14 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
         file.printf("%s%s\n", EARTH_POUNCE_TARGET_ID_KEY,
 				info->bufs.earth_pounce.target_id);
     file.printf("%s%i\n", REACTION_USED_KEY, info->flags.reaction_used);
+	file.printf("%s%i\n", BUFF_MAGIC_DRAIN_DAMAGE_FLAT_KEY, info->spells.magic_drain.damage_flat);
+	file.printf("%s%i\n", BUFF_MAGIC_DRAIN_DICE_AMOUNT_KEY,
+			info->spells.magic_drain.damage_dice_amount);
+	file.printf("%s%i\n", BUFF_MAGIC_DRAIN_DICE_FACES_KEY,
+			info->spells.magic_drain.damage_dice_faces);
+	file.printf("%s%i\n", BUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
+			info->spells.magic_drain.spell_slot_total_level_drain);
+	file.printf("%s%s\n", BUFF_MAGIC_DRAIN_TARGET_KEY, info->spells.magic_drain.target);
 	return ;
 }
 
