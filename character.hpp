@@ -166,7 +166,7 @@ typedef struct	s_bufs
 
 typedef struct	s_debuff_magic_drain
 {
-	char	*target;
+	char	*caster;
 	int		damage_flat;
 	int		damage_dice_amount;
 	int		damage_dice_faces;

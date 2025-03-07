@@ -264,10 +264,21 @@ static const	t_debuff_blinded INITIALIZE_BLINDED =
 	.duration = 0,
 };
 
+static const	t_debuff_magic_drain INITIALIZE_DEBUFF_MAGIC_DRAIN =
+{
+	.caster = ft_nullptr,
+	.damage_flat = 0,
+	.damage_dice_amount = 0,
+	.damage_dice_faces = 0,
+	.spell_slot_total_level_drain = 0,
+	.dex_save = 0,
+};
+
 static const	t_debufs INITIALIZE_DEBUFFS =
 {
 	.hunters_mark = INITIALIZE_HUNTERS_MARK,
 	.blinded = INITIALIZE_BLINDED,
+	.magic_drain = INITIALIZE_DEBUFF_MAGIC_DRAIN,
 };
 
 static const	t_flags INITIALIZE_FLAGS =
