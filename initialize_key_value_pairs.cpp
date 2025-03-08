@@ -157,17 +157,16 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, ARCANE_POUNCE_TARGET_ID_KEY, &info->bufs.arcane_pounce.target_id);
     tree_node_insert(node, EARTH_POUNCE_TARGET_ID_KEY, &info->bufs.earth_pounce.target_id);
     tree_node_insert(node, BUFF_BLESS_CASTER_NAME_KEY, &info->bufs.bless.caster_name);
-	tree_node_insert(node, BUFF_MAGIC_DRAIN_TARGET_KEY, &info->spells.magic_drain.target);
-	tree_node_insert(node, BUFF_MAGIC_DRAIN_DAMAGE_FLAT_KEY,
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_TARGET_KEY, &info->spells.magic_drain.target);
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_DAMAGE_FLAT_KEY,
 			&info->spells.magic_drain.damage_flat, -1);
-	tree_node_insert(node, BUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
 			&info->spells.magic_drain.spell_slot_total_level_drain, -1);
-	tree_node_insert(node, BUFF_MAGIC_DRAIN_DICE_AMOUNT_KEY,
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_DICE_AMOUNT_KEY,
 			&info->spells.magic_drain.damage_dice_amount, -1);
-	tree_node_insert(node, BUFF_MAGIC_DRAIN_DICE_FACES_KEY,
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_DICE_FACES_KEY,
 			&info->spells.magic_drain.damage_dice_faces, -1);
     if (tree_node_get_error(node))
         return (1);
     return (0);
 }
-
