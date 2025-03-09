@@ -12,5 +12,6 @@ void	ft_cast_magic_drain(t_char *info)
 	buff_info.extra_mod = info->spells.magic_drain.damage_flat;
 	buff_info.dice_amount_mod = info->spells.magic_drain.damage_dice_amount;
 	buff_info.dice_faces_mod = info->spells.magic_drain.damage_dice_faces;
+	(void)buff_info;
 	(void)info;
 }

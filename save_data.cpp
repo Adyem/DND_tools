@@ -219,6 +219,7 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
 	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
 			info->spells.magic_drain.spell_slot_total_level_drain);
 	file.printf("%s%s\n", SPELL_MAGIC_DRAIN_TARGET_KEY, info->spells.magic_drain.target);
+	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_DEX_SAVE_KEY, info->spells.magic_drain.dex_save);
 	return ;
 }
 

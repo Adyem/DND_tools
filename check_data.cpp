@@ -184,6 +184,8 @@ static int check_buffs(t_char * info)
 			"magic drain dice amount");
 	error += check_range(info->spells.magic_drain.spell_slot_total_level_drain, 0, 50, info->name,
 			"magic drain spell slot total level drain");
+	error += check_range(info->spells.magic_drain.dex_save, 0, 50, info->name,
+			"magic drain dex save");
     return (error);
 }
 
