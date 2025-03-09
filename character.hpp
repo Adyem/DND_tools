@@ -171,7 +171,7 @@ typedef struct	s_debuff_magic_drain
 	int		damage_dice_amount;
 	int		damage_dice_faces;
 	int		spell_slot_total_level_drain;
-	int		dex_save;
+	int		con_save;
 }	t_debuff_magic_drain;
 
 typedef struct	s_debuff_hunters_mark
