@@ -28,7 +28,7 @@ static void ft_initialize_gear_and_feats(t_char * info)
 
 void	ft_felbeast_loot(t_char * info)
 {
-	(void)info;
+	info->spells.magic_drain = FELBEAST_SPELL_MAGIC_DRAIN;
 	return ;
 }
 

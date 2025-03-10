@@ -332,6 +332,8 @@ static const	t_spell_magic_drain INITIALIZE_SPELL_MAGIC_DRAIN =
 	.damage_dice_faces = 0,
 	.spell_slot_total_level_drain = 0,
 	.dex_save = 0,
+	.turns_passed_fron_last_cast = 0,
+	.cooldown = 0,
 };
 
 static const t_spell_hunters_mark INITIALIZE_SPELL_HUNTERS_MARK =

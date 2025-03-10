@@ -167,6 +167,8 @@ int initialize_stat_key_value_pairs(t_char *info)
 	tree_node_insert(node, SPELL_MAGIC_DRAIN_DICE_FACES_KEY,
 			&info->spells.magic_drain.damage_dice_faces, -1);
 	tree_node_insert(node, SPELL_MAGIC_DRAIN_DEX_SAVE_KEY, &info->spells.magic_drain.dex_save, -1);
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_TURNS_PASSED_FROM_LAST_CAST_KEY,
+			&info->spells.magic_drain.turns_passed_fron_last_cast, -1);
 	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_CASTER_KEY, &info->debufs.magic_drain.caster);
 	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_DAMAGE_FLAT_KEY,
 			&info->debufs.magic_drain.damage_flat, -1);

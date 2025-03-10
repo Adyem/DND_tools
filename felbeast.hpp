@@ -197,6 +197,19 @@ struct ValidateHitDice
     );
 };
 
+
+static const	t_spell_magic_drain FELBEAST_SPELL_MAGIC_DRAIN =
+{
+	.target = ft_nullptr,
+	.damage_flat = 4,
+	.damage_dice_amount = 1,
+	.damage_dice_faces = 8,
+	.spell_slot_total_level_drain = 1,
+	.dex_save = 12,
+	.turns_passed_fron_last_cast = 0,
+	.cooldown = 2,
+};
+
 inline ValidateHitDice<FELBEAST_HIT_DICE.dice_amount, FELBEAST_HIT_DICE.dice_faces> validation_instance;
 
 #endif
