@@ -170,6 +170,9 @@ typedef struct	s_debuff_magic_drain
 	int		damage_flat;
 	int		damage_dice_amount;
 	int		damage_dice_faces;
+	int		extra_damage_flat;
+	int		extra_dice_amount;
+	int		extra_dice_faces;
 	int		spell_slot_total_level_drain;
 	int		con_save;
 }	t_debuff_magic_drain;
@@ -363,6 +366,9 @@ typedef struct	s_spell_magic_drain
 	int		damage_flat;
 	int		damage_dice_amount;
 	int		damage_dice_faces;
+	int		extra_damage_flat;
+	int		extra_dice_amount;
+	int		extra_dice_faces;
 	int		spell_slot_total_level_drain;
 	int		dex_save;
 	int		turns_passed_fron_last_cast;
