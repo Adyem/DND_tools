@@ -15,7 +15,7 @@ typedef struct s_buff t_buff;
 typedef struct s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 
-typedef void (*c_action)(t_char *, s_equipment_id *, int);
+typedef void	(*c_action)(t_char *, s_equipment_id *, int);
 typedef void 	(*c_turn)(t_char *);
 typedef void 	(*c_loot)(t_char *);
 
