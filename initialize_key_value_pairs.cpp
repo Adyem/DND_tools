@@ -166,10 +166,20 @@ int initialize_stat_key_value_pairs(t_char *info)
 			&info->spells.magic_drain.damage_dice_amount, -1);
 	tree_node_insert(node, SPELL_MAGIC_DRAIN_DICE_FACES_KEY,
 			&info->spells.magic_drain.damage_dice_faces, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_DEX_SAVE_KEY, &info->spells.magic_drain.dex_save, -1);
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_DEX_SAVE_KEY, 
+			&info->spells.magic_drain.dex_save, -1);
 	tree_node_insert(node, SPELL_MAGIC_DRAIN_TURNS_PASSED_FROM_LAST_CAST_KEY,
 			&info->spells.magic_drain.turns_passed_fron_last_cast, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_CASTER_KEY, &info->debufs.magic_drain.caster);
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
+			&info->spells.magic_drain.extra_damage_flat, -1);
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DICE_AMOUNT_KEY,
+			&info->spells.magic_drain.extra_dice_amount, -1);
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DICE_FACES_KEY,
+			&info->spells.magic_drain.extra_dice_faces, -1);
+	tree_node_insert(node, SPELL_MAGIC_DRAIN_COOLDOWN_KEY,
+			&info->spells.magic_drain.cooldown, -1);
+	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_CASTER_KEY, 
+			&info->debufs.magic_drain.caster);
 	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_DAMAGE_FLAT_KEY,
 			&info->debufs.magic_drain.damage_flat, -1);
 	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
@@ -180,6 +190,12 @@ int initialize_stat_key_value_pairs(t_char *info)
 			&info->debufs.magic_drain.damage_dice_faces, -1);
 	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_CON_SAVE_KEY,
 			&info->debufs.magic_drain.con_save, -1);
+	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
+			&info->debufs.magic_drain.extra_damage_flat, -1);
+	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DICE_AMOUNT_KEY,
+			&info->debufs.magic_drain.extra_dice_amount, -1);
+	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DICE_FACES_KEY,
+			&info->debufs.magic_drain.extra_dice_faces, -1);
     if (tree_node_get_error(node))
         return (1);
     return (0);

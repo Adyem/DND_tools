@@ -1,6 +1,8 @@
 #ifndef IDENTIFICATION_H
 # define IDENTIFICATION_H
 
+#include <cstddef>
+
 typedef enum {
     WTYPE_CLUB = 1,
     WTYPE_DAGGER,
@@ -84,14 +86,46 @@ typedef enum e_equipment_slot
 	SLOT_TWO_HANDED_WEAPON	= 1 << 12,
 }	t_equipment_slot;
 
-# define HUNTERS_MARK_ID 1
-# define HUNTERS_MARK_NAME "hunters mark"
-# define BLESS_ID 2
-# define BLESS_NAME "bless"
-# define CHAOS_ARMOR_ID 3
-# define CHAOS_ARMOR_NAME "chaos armor"
-# define MAGIC_DRAIN_ID 4
-# define MAGIC_DRAIN_NAME "magic drain"
+#define HUNTERS_MARK_ID 1
+#define HUNTERS_MARK_NAME "hunters mark"
+#define BLESS_ID 2
+#define BLESS_NAME "bless"
+#define CHAOS_ARMOR_ID 3
+#define CHAOS_ARMOR_NAME "chaos armor"
+#define MAGIC_DRAIN_ID 4
+#define MAGIC_DRAIN_NAME "magic drain"
+
+constexpr bool check_transformation(const char* macro, const char* expected) {
+    std::size_t i = 0;
+    while (macro[i] != '\0' || expected[i] != '\0')
+	{
+        char c = macro[i];
+        char transformed = 0;
+		if (c == '_')
+            transformed = ' ';
+		else if (c >= 'A' && c <= 'Z')
+            transformed = c - 'A' + 'a';
+		else
+            transformed = c;
+        if (transformed != expected[i])
+            return false;
+        ++i;
+    }
+    return true;
+}
+
+static_assert(check_transformation("HUNTERS_MARK", HUNTERS_MARK_NAME),
+              "HUNTERS_MARK_NAME does not match the expected transformation");
+static_assert(check_transformation("BLESS", BLESS_NAME),
+              "BLESS_NAME does not match the expected transformation");
+static_assert(check_transformation("CHAOS_ARMOR", CHAOS_ARMOR_NAME),
+              "CHAOS_ARMOR_NAME does not match the expected transformation");
+static_assert(check_transformation("MAGIC_DRAIN", MAGIC_DRAIN_NAME),
+              "MAGIC_DRAIN_NAME does not match the expected transformation");
+
+static_assert(BLESS_ID == HUNTERS_MARK_ID + 1, "ID values are not sequential");
+static_assert(CHAOS_ARMOR_ID == BLESS_ID + 1, "ID values are not sequential");
+static_assert(MAGIC_DRAIN_ID == CHAOS_ARMOR_ID + 1, "ID values are not sequential");
 
 # define DAMAGE_TYPE_BLUDGEONING	"bludgeoning"
 # define DAMAGE_TYPE_PIERCING		"piercing"
