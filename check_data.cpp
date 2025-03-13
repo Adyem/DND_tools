@@ -174,33 +174,44 @@ static int check_buffs(t_char * info)
 			"bless dice faces");
 	error += check_range(info->bufs.bless.dice_amount_mod, 0, 100, info->name,
 			"bless dice amount");
-	error += check_range(info->spells.magic_drain.dex_save, 0, 50, info->name,
-			"magic drain dex save");
 	error += check_range(info->spells.magic_drain.damage_flat, 0, 50, info->name,
 			"magic drain flat damage");
-	error += check_range(info->spells.magic_drain.damage_dice_faces, 0, 50, info->name,
-			"magic drain dice faces");
 	error += check_range(info->spells.magic_drain.damage_dice_amount, 0, 50, info->name,
 			"magic drain dice amount");
+	error += check_range(info->spells.magic_drain.damage_dice_faces, 0, 50, info->name,
+			"magic drain dice faces");
 	error += check_range(info->spells.magic_drain.spell_slot_total_level_drain, 0, 50, info->name,
 			"magic drain spell slot total level drain");
 	error += check_range(info->spells.magic_drain.dex_save, 0, 50, info->name,
 			"magic drain dex save");
-	error += check_range(info->spells.magic_drain.turns_passed_fron_last_cast, 0,
-			info->spells.magic_drain.cooldown, info->name, "magic drain turns since last cast");
-	error += check_range(info->debufs.magic_drain.con_save, 0, 50, info->name,
-			"magic drain con save");
+	error += check_range(info->spells.magic_drain.turns_passed_fron_last_cast, 0, 50, info->name,
+			"magic drain turns passed from last cast");
+	error += check_range(info->spells.magic_drain.extra_damage_flat, 0, 50, info->name,
+			"magic drain extra flat damage");
+	error += check_range(info->spells.magic_drain.extra_dice_amount, 0, 50, info->name,
+			"magic drain extra dice amount");
+	error += check_range(info->spells.magic_drain.extra_dice_faces, 0, 50, info->name,
+			"magic drain extra dice faces");
+	error += check_range(info->spells.magic_drain.cooldown, 0, 50, info->name,
+			"magic drain cooldown");
 	error += check_range(info->debufs.magic_drain.damage_flat, 0, 50, info->name,
-			"magic drain flat damage");
-	error += check_range(info->debufs.magic_drain.damage_dice_faces, 0, 50, info->name,
-			"magic drain dice faces");
+			"magic drain flat damage (debuff)");
 	error += check_range(info->debufs.magic_drain.damage_dice_amount, 0, 50, info->name,
-			"magic drain dice amount");
+			"magic drain dice amount (debuff)");
+	error += check_range(info->debufs.magic_drain.damage_dice_faces, 0, 50, info->name,
+			"magic drain dice faces (debuff)");
 	error += check_range(info->debufs.magic_drain.spell_slot_total_level_drain, 0, 50, info->name,
-			"magic drain spell slot total level drain");
+			"magic drain spell slot total level drain (debuff)");
 	error += check_range(info->debufs.magic_drain.con_save, 0, 50, info->name,
-			"magic drain con save");
-    return (error);
+			"magic drain con save (debuff)");
+	error += check_range(info->debufs.magic_drain.extra_damage_flat, 0, 50, info->name,
+			"magic drain extra flat damage (debuff)");
+	error += check_range(info->debufs.magic_drain.extra_dice_amount, 0, 50, info->name,
+			"magic drain extra dice amount (debuff)");
+	error += check_range(info->debufs.magic_drain.extra_dice_faces, 0, 50, info->name,
+			"magic drain extra dice faces (debuff)");
+	return (error);
+
 }
 
 static int check_other_buffs_debuffs(t_char * info)
