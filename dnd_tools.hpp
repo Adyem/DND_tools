@@ -1,6 +1,8 @@
 #ifndef DND_TOOLS_H
 # define DND_TOOLS_H
 
+static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
+
 #include <cstdio>
 #include "character.hpp"
 #include "player_character.hpp"

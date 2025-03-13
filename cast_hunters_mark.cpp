@@ -19,7 +19,7 @@ static const	t_buff BUFF_HUNTERS_MARK =
 	.buff = 0,
 	.error = 0,
 	.cast_spell = ft_cast_hunters_mark_apply_debuf,
-	.spell_name = "hunters_mark",
+	.spell_name = HUNTERS_MARK_NAME,
 };
 
 void ft_cast_hunters_mark(t_char * info, const char **input)

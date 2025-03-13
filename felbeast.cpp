@@ -1,9 +1,12 @@
 #include "dnd_tools.hpp"
 #include "felbeast.hpp"
+#include "identification.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/dice_roll.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "melee_weapons.hpp"
+#include "armor.hpp"
 
 void ft_felbeast_turn(t_char * info)
 {
@@ -22,13 +25,16 @@ void ft_felbeast_turn(t_char * info)
 
 static void ft_initialize_gear_and_feats(t_char * info)
 {
-	(void)info;
+	info->spells.magic_drain = FELBEAST_SPELL_MAGIC_DRAIN;
+	info->equipment.armor = FELBEAST_HIDE;
+	info->equipment.weapon = FELBEAST_CLAW;
+	info->equipment.offhand_weapon = FELBEAST_CLAW_OH;
 	return ;
 }
 
 void	ft_felbeast_loot(t_char * info)
 {
-	info->spells.magic_drain = FELBEAST_SPELL_MAGIC_DRAIN;
+	(void)info;
 	return ;
 }
 
