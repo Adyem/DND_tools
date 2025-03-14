@@ -210,6 +210,8 @@ static int check_buffs(t_char * info)
 			"magic drain extra dice amount (debuff)");
 	error += check_range(info->debufs.magic_drain.extra_dice_faces, 0, 50, info->name,
 			"magic drain extra dice faces (debuff)");
+	error += check_range(info->spells.magic_drain.learned, 0, 1, info->name,
+			"magic drain learned (spell)");
 	return (error);
 
 }

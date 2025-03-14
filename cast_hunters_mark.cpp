@@ -33,7 +33,7 @@
 
 void ft_cast_hunters_mark(t_char * info, const char **input)
 {
-	if (info->spells.hunters_mark.learned != 1)
+	if (info->spells.hunters_mark.learned == 1)
 	{
 		pf_printf_fd(2, "%s hasn't learned the spell hunters mark\n", info->name);
 		return ;

@@ -40,9 +40,12 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 
 int	ft_magic_drain_apply_debuff(t_char *target, const char **input, t_buff *buff)
 {
+	t_debuff_magic_drain *debuff_magic_drain = &target->debufs.magic_drain;
+
 	(void)target;
 	(void)input;
 	(void)buff;
+	(void)debuff_magic_drain;
 	return (0);
 }
 
@@ -50,4 +53,5 @@ void	ft_concentration_remove_magic_drain(t_char *character, t_target_data *targe
 {
 	(void)character;
 	(void)targets_data;
+	return ;
 }

@@ -217,7 +217,8 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
 	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_DICE_FACES_KEY, info->spells.magic_drain.damage_dice_faces);
 	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
 			info->spells.magic_drain.spell_slot_total_level_drain);
-	file.printf("%s%s\n", SPELL_MAGIC_DRAIN_TARGET_KEY, info->spells.magic_drain.target);
+	if (info->spells.magic_drain.target)
+		file.printf("%s%s\n", SPELL_MAGIC_DRAIN_TARGET_KEY, info->spells.magic_drain.target);
 	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_DEX_SAVE_KEY, info->spells.magic_drain.dex_save);
 	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_TURNS_PASSED_FROM_LAST_CAST_KEY,
 			info->spells.magic_drain.turns_passed_fron_last_cast);
@@ -236,7 +237,8 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
 			info->debufs.magic_drain.damage_dice_faces);
 	file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
 			info->debufs.magic_drain.spell_slot_total_level_drain);
-	file.printf("%s%s\n", DEBUFF_MAGIC_DRAIN_CASTER_KEY, info->debufs.magic_drain.caster);
+	if (info->debufs.magic_drain.caster)
+		file.printf("%s%s\n", DEBUFF_MAGIC_DRAIN_CASTER_KEY, info->debufs.magic_drain.caster);
 	file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_CON_SAVE_KEY, info->debufs.magic_drain.con_save);
 	file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
 			info->debufs.magic_drain.extra_damage_flat);
@@ -244,6 +246,7 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
 			info->debufs.magic_drain.extra_dice_amount);
 	file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_EXTRA_DICE_FACES_KEY,
 			info->debufs.magic_drain.extra_dice_faces);
+	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_LEARNED_KEY, info->spells.magic_drain.learned);
 	return ;
 }
 

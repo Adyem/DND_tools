@@ -93,9 +93,9 @@ typedef enum e_equipment_slot
 
 #define ABILITY_LIST \
     X(HUNTERS_MARK, 1, "hunters mark") \
-    X(BLESS,        2, "bless")        \
-    X(CHAOS_ARMOR,  3, "chaos armor")  \
-    X(MAGIC_DRAIN,  4, "magic drain")
+    X(BLESS, 2, "bless") \
+    X(CHAOS_ARMOR, 3, "chaos armor") \
+    X(MAGIC_DRAIN, 4, "magic drain")
 
 #define X(name, id, str)  enum { name##_ID = id };
 ABILITY_LIST
@@ -142,9 +142,9 @@ ABILITY_LIST
 
 # define FINESSE "finesse"
 
-#define DATA_FOLDER "data"
-#define PREFIX_TO_SKIP "data--"
-#define EXCLUDE_PREFIX "pc--"
-#define PC_PREFIX "pc--"
+# define DATA_FOLDER "data"
+# define PREFIX_TO_SKIP "data--"
+# define EXCLUDE_PREFIX "pc--"
+# define PC_PREFIX "pc--"
 
 #endif
