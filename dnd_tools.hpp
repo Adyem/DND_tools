@@ -287,6 +287,8 @@ void		ft_concentration_remove_bless(t_char *character, t_target_data *targets_da
 
 //Magic Drain
 void		ft_cast_magic_drain(t_char *info, const char **input);
+int			ft_magic_drain_apply_debuff(t_char *target, const char **input, t_buff *buff);
+void		ft_concentration_remove_magic_drain(t_char *character, t_target_data *targets_data);
 
 // Resistance
 int			ft_get_resistance(t_char * info, const char *type);

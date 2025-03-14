@@ -18,7 +18,7 @@
 		.duration = 10, \
 		.buff = 0, \
 		.error = 0, \
-		.cast_spell = NULL, \
+		.cast_spell = ft_magic_drain_apply_debuff, \
 		.spell_name = MAGIC_DRAIN_NAME \
 	}
 
@@ -36,4 +36,18 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 		return ;
 	info->spells.magic_drain.cooldown = 2;
 	return ;
+}
+
+int	ft_magic_drain_apply_debuff(t_char *target, const char **input, t_buff *buff)
+{
+	(void)target;
+	(void)input;
+	(void)buff;
+	return (0);
+}
+
+void	ft_concentration_remove_magic_drain(t_char *character, t_target_data *targets_data)
+{
+	(void)character;
+	(void)targets_data;
 }
