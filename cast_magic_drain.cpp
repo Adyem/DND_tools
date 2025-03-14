@@ -15,7 +15,7 @@
 		.extra_dice_faces = (magic_drain).extra_dice_faces, \
 		.extra_dice_amount = (magic_drain).extra_dice_amount, \
 		.extra_mod = (magic_drain).extra_damage_flat, \
-		.duration = 10, \
+		.duration = 0, \
 		.buff = 0, \
 		.error = 0, \
 		.cast_spell = ft_magic_drain_apply_debuff, \
