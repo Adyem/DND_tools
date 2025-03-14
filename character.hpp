@@ -362,6 +362,7 @@ typedef struct	s_spell_slots
 
 typedef struct	s_spell_magic_drain
 {
+	int		learned;
 	char	*target;
 	int		damage_flat;
 	int		damage_dice_amount;
@@ -520,6 +521,9 @@ typedef struct s_buff
     int					spell_id;
     int					dice_faces_mod;
     int					dice_amount_mod;
+	int					mod;
+	int					extra_dice_faces;
+	int					extra_dice_amount;
 	int					extra_mod;
     int					duration;
 	int					buff;

@@ -7,20 +7,29 @@
 #include <cstdlib>
 #include <cstring>
 
-static const	t_buff BUFF_HUNTERS_MARK =
-{
-	.target_amount = 1,
-	.target = ft_nullptr,
-	.spell_id = HUNTERS_MARK_ID,
-	.dice_faces_mod = 6,
-	.dice_amount_mod = 1,
-	.extra_mod = 0,
-	.duration = 10,
-	.buff = 0,
-	.error = 0,
-	.cast_spell = ft_cast_hunters_mark_apply_debuf,
-	.spell_name = HUNTERS_MARK_NAME,
-};
+#define MAKE_BUFF_HUNTERS_MARK(hunters_mark, level, target_str) \
+	(t_buff){ \
+		.target_amount = 1, \
+		.target = cma_strdup(target_str), \
+		.spell_id = HUNTERS_MARK_ID, \
+		.dice_faces_mod = (hunters_mark).dice_faces + ((hunters_mark).upcast_extra_dice_face \
+				* ((((level) - (hunters_mark).base_level) + abs((level) \
+				- (hunters_mark).base_level)) / 2)), \
+		.dice_amount_mod = (hunters_mark).dice_amount + ((hunters_mark).upcast_extra_dice_amount \
+				* ((((level) - (hunters_mark).base_level) + abs((level) \
+				- (hunters_mark).base_level)) / 2)), \
+		.mod = (hunters_mark).extra_damage + ((hunters_mark).upcast_extra_damage * ((((level) \
+				- (hunters_mark).base_level) + abs((level) \
+				- (hunters_mark).base_level)) / 2)), \
+		.extra_dice_faces = 0, \
+		.extra_dice_amount = 0, \
+		.extra_mod = 0, \
+		.duration = 10, \
+		.buff = 0, \
+		.error = 0, \
+		.cast_spell = ft_cast_hunters_mark_apply_debuf, \
+		.spell_name = HUNTERS_MARK_NAME \
+	}
 
 void ft_cast_hunters_mark(t_char * info, const char **input)
 {
@@ -32,31 +41,19 @@ void ft_cast_hunters_mark(t_char * info, const char **input)
 	int cast_at_level = ft_prompt_spell_level(info, info->spells.hunters_mark.base_level);
 	if (cast_at_level == -1)
 		return ;
-    t_buff	buff = BUFF_HUNTERS_MARK;
-	int		error = 0;
-	buff.dice_amount_mod = info->spells.hunters_mark.dice_amount;
-	buff.dice_faces_mod = info->spells.hunters_mark.dice_faces;
-	buff.extra_mod = info->spells.hunters_mark.extra_damage;
-	int upcast_level = cast_at_level - info->spells.hunters_mark.base_level;
-	if (upcast_level > 0)
-	{
-		buff.dice_amount_mod += info->spells.hunters_mark.upcast_extra_dice_amount * upcast_level;
-		buff.dice_faces_mod += info->spells.hunters_mark.upcast_extra_dice_face * upcast_level;
-		buff.extra_mod += info->spells.hunters_mark.upcast_extra_damage * upcast_level;
-	}
-	buff.target = cma_strdup(input[3]);
+	t_buff buff = MAKE_BUFF_HUNTERS_MARK(info->spells.hunters_mark, cast_at_level, input[3]);
 	if (!buff.target)
 	{
 		pf_printf_fd(2, "121-Error allocating memory hunters mark target");
 		return ;
 	}
-    error = ft_cast_concentration(info, input, &buff);
+	int error = ft_cast_concentration(info, input, &buff);
 	cma_free(buff.target);
 	if (error)
 		return ;
 	pf_printf("%s cast hunters mark on %s\n", info->name, input[3]);
 	ft_remove_spell_slot(&info->spell_slots, cast_at_level);
-    return ;
+	return ;
 }
 
 static int ft_is_caster_name_present(char **caster_name_list, const char *name)

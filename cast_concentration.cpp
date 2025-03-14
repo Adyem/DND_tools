@@ -66,7 +66,7 @@ static int ft_apply_concentration_buff(t_char * info, t_char * target,
         info->concentration.targets[0][index] = input[3][index];
         index++;
     }
-	info->concentration.extra = buff->extra_mod;
+	info->concentration.extra = buff->mod;
     info->concentration.targets[0][index] = '\0';
     info->concentration.concentration = 1;
     info->concentration.spell_id = buff->spell_id;

@@ -7,22 +7,27 @@
 #include <cstdlib>
 #include <cstring>
 
-static const	t_buff BUFF_BLESS =
-{
-	.target_amount = 1,
-	.target = ft_nullptr,
-	.spell_id = BLESS_ID,
-	.dice_faces_mod = 6,
-	.dice_amount_mod = 1,
-	.extra_mod = 0,
-	.duration = 10,
-	.buff = 0,
-	.error = 0,
-	.cast_spell = ft_cast_bless_apply_debuf,
-	.spell_name = "bless",
-};
+#define MAKE_BUFF_BLESS(bless, level, target_str) \
+	(t_buff){ \
+		.target_amount = (bless).target_amount + (bless).upcast_extra_targets, \
+		.target = cma_strdup(target_str), \
+		.spell_id = BLESS_ID, \
+		.dice_faces_mod = (bless).dice_faces + ((bless).upcast_extra_dice_faces \
+				* ((level) - (bless).base_level)), \
+		.dice_amount_mod = (bless).dice_amount, \
+		.mod = (bless).dice_amount + ((bless).upcast_extra_dice_amount * ((level) \
+					- (bless).base_level)), \
+		.extra_dice_faces = 0, \
+		.extra_dice_amount = 0, \
+		.extra_mod = 0, \
+		.duration = 10, \
+		.buff = 0, \
+		.error = 0, \
+		.cast_spell = ft_cast_bless_apply_debuf, \
+		.spell_name = BLESS_NAME \
+	}
 
-void ft_cast_bless(t_char * info, const char **input)
+void ft_cast_bless(t_char *info, const char **input)
 {
 	if (info->spells.bless.learned != 1)
 	{
@@ -32,29 +37,19 @@ void ft_cast_bless(t_char * info, const char **input)
 	int cast_at_level = ft_prompt_spell_level(info, info->spells.bless.base_level);
 	if (cast_at_level == -1)
 		return ;
-    t_buff	buff = BUFF_BLESS;
-	int		error = 0;
-	buff.target_amount = info->spells.bless.target_amount
-		+ info->spells.bless.upcast_extra_targets;
-	buff.dice_amount_mod = info->spells.bless.dice_amount;
-	buff.dice_faces_mod = info->spells.bless.dice_faces
-		+ (info->spells.bless.upcast_extra_dice_faces
-		* (cast_at_level - info->spells.bless.base_level));
-	buff.extra_mod = info->spells.bless.dice_amount + (info->spells.bless.upcast_extra_dice_amount
-		* (cast_at_level - info->spells.bless.base_level));
-	buff.target = cma_strdup(input[3]);
+	t_buff buff = MAKE_BUFF_BLESS(info->spells.bless, cast_at_level, input[3]);
 	if (!buff.target)
 	{
 		pf_printf_fd(2, "121-Error allocating memory bless target");
 		return ;
 	}
-    error = ft_cast_concentration_multi_target_01(info, &buff, input);
+	int error = ft_cast_concentration_multi_target_01(info, &buff, input);
 	cma_free(buff.target);
 	if (error)
 		return ;
 	pf_printf("%s cast bless on %s\n", info->name, input[3]);
 	ft_remove_spell_slot(&info->spell_slots, cast_at_level);
-    return ;
+	return ;
 }
 
 static int ft_is_caster_name_present(char **caster_name_list, const char *name)

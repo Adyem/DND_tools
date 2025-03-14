@@ -46,7 +46,7 @@ static int	ft_apply_concentration(t_target_data *target_data, t_char * info, con
 		index++;
 	}
     info->concentration.concentration = 1;
-	info->concentration.extra = target_data->buff_info->extra_mod;
+	info->concentration.extra = target_data->buff_info->mod;
     info->concentration.spell_id = target_data->buff_info->spell_id;
     info->concentration.dice_faces_mod = target_data->buff_info->dice_faces_mod;
     info->concentration.dice_amount_mod = target_data->buff_info->dice_amount_mod;

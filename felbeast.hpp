@@ -200,6 +200,7 @@ struct ValidateHitDice
 
 static const	t_spell_magic_drain FELBEAST_SPELL_MAGIC_DRAIN =
 {
+	.learned = 1,
 	.target = ft_nullptr,
 	.damage_flat = 4,
 	.damage_dice_amount = 1,

@@ -12,6 +12,9 @@ static const	t_buff INITIALIZE_T_BUFF =
 	.spell_id = 0,
 	.dice_faces_mod = 0,
 	.dice_amount_mod = 0,
+	.mod = 0,
+	.extra_dice_faces = 0,
+	.extra_dice_amount = 0,
 	.extra_mod = 0,
 	.duration = 0,
 	.buff = 0,
@@ -329,6 +332,7 @@ static const t_spell_slots INITIALIZE_SPELL_SLOTS =
 
 static const	t_spell_magic_drain INITIALIZE_SPELL_MAGIC_DRAIN =
 {
+	.learned = 0,
 	.target = ft_nullptr,
 	.damage_flat = 0,
 	.damage_dice_amount = 0,
