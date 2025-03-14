@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
+#include "initialize.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 
@@ -51,7 +52,8 @@ int	ft_magic_drain_apply_debuff(t_char *target, const char **input, t_buff *buff
 
 void	ft_concentration_remove_magic_drain(t_char *character, t_target_data *targets_data)
 {
-	(void)character;
 	(void)targets_data;
+	cma_free(character->debufs.magic_drain.caster);
+	character->debufs.magic_drain = INITIALIZE_DEBUFF_MAGIC_DRAIN;
 	return ;
 }
