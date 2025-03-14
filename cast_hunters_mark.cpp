@@ -84,7 +84,6 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
         if (ft_update_caster_name(&target->debufs.hunters_mark.caster_name, input[0]))
             return (2);
     }
-
     if (DEBUG == 1 && target)
     {
         int index = 0;
