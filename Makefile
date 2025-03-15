@@ -154,21 +154,44 @@ SRC         = name.cpp \
 
 CC          = g++
 CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \
-			  -fdiagnostics-show-option
+              -fdiagnostics-show-option
+
+ifeq ($(OS),Windows_NT)
+    MKDIR   = mkdir
+    RMDIR   = rmdir /S /Q
+    RM      = del /F /Q
+else
+    MKDIR   = mkdir -p
+    RMDIR   = rm -rf
+    RM      = rm -f
+endif
 
 LIBFT_DIR   = ./libft
 
-OBJ_DIR     = ./objs
-OBJ_DIR_DEBUG = ./objs_debug
+OBJ_DIR         = ./objs
+OBJ_DIR_DEBUG   = ./objs_debug
+
+ENABLE_LTO  ?= 0
+ENABLE_PGO  ?= 0
+export ENABLE_LTO ENABLE_PGO
+
+ifeq ($(ENABLE_LTO),1)
+    CFLAGS   += -flto
+    LDFLAGS  += -flto
+endif
+
+ifeq ($(ENABLE_PGO),1)
+    CFLAGS   += -fprofile-generate
+endif
 
 ifeq ($(DEBUG),1)
-    CFLAGS += -DDEBUG=1
-    OBJ_DIR = $(OBJ_DIR_DEBUG)
-    TARGET = $(NAME_DEBUG)
-    LIBFT = $(LIBFT_DIR)/Full_Libft_debug.a
+    CFLAGS    += -DDEBUG=1
+    OBJ_DIR    = $(OBJ_DIR_DEBUG)
+    TARGET     = $(NAME_DEBUG)
+    LIBFT      = $(LIBFT_DIR)/Full_Libft_debug.a
 else
-    TARGET = $(NAME)
-    LIBFT = $(LIBFT_DIR)/Full_Libft.a
+    TARGET     = $(NAME)
+    LIBFT      = $(LIBFT_DIR)/Full_Libft.a
 endif
 
 LDFLAGS     = $(LIBFT) -lreadline
@@ -187,16 +210,16 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR) $(if $(DEBUG), debug)
 
 $(OBJ_DIR)/%.o: %.cpp $(HEADER)
-	@mkdir -p $(OBJ_DIR)
+	$(MKDIR) $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR) $(OBJ_DIR_DEBUG)
+	$(RMDIR) $(OBJ_DIR) $(OBJ_DIR_DEBUG)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 fclean: clean
-	rm -f $(NAME) $(NAME_DEBUG)
-	rm -rf data/*
+	$(RM) $(NAME) $(NAME_DEBUG)
+	$(RMDIR) data/*
 
 re: fclean all
 
