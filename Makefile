@@ -153,8 +153,9 @@ SRC         = name.cpp \
 			  cast_magic_drain.cpp
 
 CC          = g++
-CFLAGS      = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \
-              -fdiagnostics-show-option
+COMPILE_FLAGS = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations
+
+CFLAGS = $(COMPILE_FLAGS)
 
 ifeq ($(OS),Windows_NT)
     MKDIR   = mkdir
@@ -166,9 +167,6 @@ else
     RM      = rm -f
 endif
 
-CONPILE_FLAGS = CFLAGS
-
-export CONPILE_FLAGS
 
 LIBFT_DIR   = ./libft
 
@@ -180,12 +178,12 @@ ENABLE_PGO  ?= 1
 export ENABLE_LTO ENABLE_PGO
 
 ifeq ($(ENABLE_LTO),1)
-    CFLAGS   += -flto
+    COMPILE_FLAGS   += -flto
     LDFLAGS  += -flto
 endif
 
 ifeq ($(ENABLE_PGO),1)
-    CFLAGS   += -fprofile-generate
+    COMPILE_FLAGS  += -fprofile-generate
 endif
 
 ifeq ($(DEBUG),1)
@@ -197,6 +195,8 @@ else
     TARGET     = $(NAME)
     LIBFT      = $(LIBFT_DIR)/Full_Libft.a
 endif
+
+export COMPILE_FLAGS
 
 LDFLAGS     = $(LIBFT) -lreadline
 
@@ -211,7 +211,7 @@ $(TARGET): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR) $(if $(DEBUG), debug)
+		$(MAKE) -C $(LIBFT_DIR) $(if $(DEBUG), debug)
 
 $(OBJ_DIR)/%.o: %.cpp $(HEADER)
 	$(MKDIR) $(OBJ_DIR)
