@@ -166,6 +166,10 @@ else
     RM      = rm -f
 endif
 
+CONPILE_FLAGS = CFLAGS
+
+export CONPILE_FLAGS
+
 LIBFT_DIR   = ./libft
 
 OBJ_DIR         = ./objs
