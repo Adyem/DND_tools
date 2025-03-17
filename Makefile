@@ -173,7 +173,7 @@ OBJ_DIR         = ./objs
 OBJ_DIR_DEBUG   = ./objs_debug
 
 ENABLE_LTO  ?= 0
-ENABLE_PGO  ?= 1
+ENABLE_PGO  ?= 0
 export ENABLE_LTO ENABLE_PGO
 
 ifeq ($(ENABLE_LTO),1)
