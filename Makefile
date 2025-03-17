@@ -167,7 +167,6 @@ else
     RM      = rm -f
 endif
 
-
 LIBFT_DIR   = ./libft
 
 OBJ_DIR         = ./objs
@@ -202,7 +201,11 @@ LDFLAGS     = $(LIBFT) -lreadline
 
 OBJS        = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
-all: $(TARGET)
+all: dirs $(TARGET)
+
+dirs:
+	$(MKDIR) $(OBJ_DIR)
+	$(MKDIR) $(OBJ_DIR_DEBUG)
 
 debug:
 	$(MAKE) all DEBUG=1
@@ -211,14 +214,13 @@ $(TARGET): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
 
 $(LIBFT):
-		$(MAKE) -C $(LIBFT_DIR) $(if $(DEBUG), debug)
+	$(MAKE) -C $(LIBFT_DIR) $(if $(DEBUG), debug)
 
 $(OBJ_DIR)/%.o: %.cpp $(HEADER)
-	$(MKDIR) $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RMDIR) $(OBJ_DIR) $(OBJ_DIR_DEBUG)
+	$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR_DEBUG)/*.o
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 fclean: clean
@@ -231,4 +233,4 @@ both: all debug
 
 re_both: re both
 
-.PHONY: all clean fclean re debug both re_both
+.PHONY: all dirs clean fclean re debug both re_both
