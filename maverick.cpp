@@ -13,9 +13,9 @@ void	ft_maverick_turn(t_char * info)
 	ft_update_buf(info);
 	pf_printf("\n\n");
 	player_list = ft_get_pc_list();
-	if (ft_double_char_length((const char **)player_list) < 2)
+		if (ft_double_char_length(const_cast<const char **>(player_list)) < 2)
 	{
-		if (ft_double_char_length((const char **)player_list) > 0)
+		if (ft_double_char_length(const_cast<const char **>(player_list)) > 0)
 			pf_printf_fd(2, "283-Error not enough targets for %s\n", info->name);
 		cma_free_double(player_list);
 		return ;
@@ -43,7 +43,7 @@ static void ft_initialize_gear_and_feats(t_char * info)
 t_char *ft_maverick(const int index, const char **input, t_name *name, int exception)
 {
     int error = 0;
-    t_char *info = (t_char *)cma_malloc(sizeof(t_char));
+    t_char *info = static_cast<t_char *>(cma_malloc(sizeof(t_char)));
 	if (!info)
     {
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
