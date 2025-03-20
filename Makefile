@@ -153,7 +153,7 @@ SRC         = name.cpp \
 			  cast_magic_drain.cpp
 
 CC          = g++
-COMPILE_FLAGS = -Wall -Werror -Wextra -g -O0 -std=gnu++17 -Wmissing-declarations \
+COMPILE_FLAGS = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \
 				-Wold-style-cast -Wshadow -Wconversion -Wformat=2 -Wundef \
 				-Wfloat-equal -Wconversion
 
