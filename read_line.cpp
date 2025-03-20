@@ -27,7 +27,7 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
 	{
 		if (argc > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
 		{
-			temp->function(argc, (const char **)input, name, 0);
+			temp->function(argc, const_cast<const char **>(input), name, 0);
 			return (1);
 		}
 		temp = temp->next;
@@ -52,7 +52,7 @@ static int ft_handle_builtins(char **input, int i, t_name *name, char *input_str
 	else if (i == 1 && ft_strcmp_dnd(input[0], "test") == 0)
 		ft_test(name);
 	else if (i == 3 && ft_strcmp_dnd(input[1], "player") == 0)
-		ft_player((const char **)input);
+		ft_player(const_cast<const char **>(input));
 	else
 		return (0);
 	return (1);
@@ -68,7 +68,7 @@ void ft_request_input(t_name *name)
         input = ft_parse_input(input_string);
         if (!input)
             continue ;
-        int index = ft_double_char_length((const char **)input);
+        int index = ft_double_char_length(const_cast<const char **>(input));
         int found = ft_handle_builtins(input, index, name, input_string);
         if (found == -1)
 		{

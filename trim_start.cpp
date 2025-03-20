@@ -16,7 +16,7 @@ static size_t str_len(const char *str)
 
 static char *str_new(size_t n)
 {
-    char *str = (char *)cma_malloc(sizeof(char) * (n + 1));
+    char *str = static_cast<char *>(cma_malloc(sizeof(char) * (n + 1)));
 
 	if (!str)
 		return (ft_nullptr);

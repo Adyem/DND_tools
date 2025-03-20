@@ -155,7 +155,7 @@ SRC         = name.cpp \
 CC          = g++
 COMPILE_FLAGS = -Wall -Werror -Wextra -g -O0 -std=gnu++17 -Wmissing-declarations \
 				-Wold-style-cast -Wshadow -Wconversion -Wformat=2 -Wundef \
-				-Wfloat-equal
+				-Wfloat-equal -Wconversion
 
 CFLAGS = $(COMPILE_FLAGS)
 

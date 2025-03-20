@@ -6,7 +6,7 @@
 
 TreeNode *tree_node_new(void)
 {
-    TreeNode *node = (TreeNode *)cma_malloc(sizeof(TreeNode));
+    TreeNode *node = static_cast<TreeNode *>(cma_malloc(sizeof(TreeNode)));
     if (!node)
         return (ft_nullptr);
     new (&node->children) ft_unord_map<char, TreeNode*>();
@@ -35,7 +35,7 @@ static int tree_node_insert_helper(TreeNode *node, const char *key, int unset_va
 {
     if (node->error)
         return (1);
-    size_t length = ft_strlen(key);
+    size_t length = ft_strlen_size_t(key);
     TreeNode *current = node;
     const char *ptr = key;
     while (*ptr)
@@ -55,7 +55,7 @@ static int tree_node_insert_helper(TreeNode *node, const char *key, int unset_va
     }
     if (!current->data)
     {
-        current->data = (t_treeNode_value *)cma_malloc(sizeof(t_treeNode_value));
+        current->data = static_cast<t_treeNode_value *>(cma_malloc(sizeof(t_treeNode_value)));
         if (!current->data)
         {
             node->error = 1;

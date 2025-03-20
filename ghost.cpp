@@ -34,7 +34,7 @@ static void ft_initialize_gear_and_feats(t_char * info)
 t_char *ft_ghost(const int index, const char **input, t_name *name, int exception)
 {
     int error = 0;
-    t_char *info = (t_char *)cma_malloc(sizeof(t_char));
+    t_char *info = static_cast<t_char *>(cma_malloc(sizeof(t_char)));
 	if (!info)
     {
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);

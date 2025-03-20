@@ -30,7 +30,7 @@ void ft_fclean(void)
     }
     else if (pid == 0)
     {
-        execvp(command[0], (char* const*)command);
+        execvp(command[0], const_cast<char* const*>(command));
         pf_printf_fd(2, "139-Error: Execvp failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
@@ -67,7 +67,7 @@ void ft_clean(void)
     }
     else if (pid == 0)
     {
-        execvp(command[0], (char* const*)command);
+        execvp(command[0], const_cast<char* const*>(command));
         pf_printf_fd(2, "142-Error: Execvp failed: %s\n", strerror(errno));
         exit(EXIT_FAILURE);
     }

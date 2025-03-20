@@ -10,7 +10,7 @@ int ft_update_caster_name(char ***caster_name, const char *input_name)
         pf_printf("adding the new caster name to the target struct %s\n", input_name);
     if (!(*caster_name))
     {
-        *caster_name = (char **)cma_calloc(2, sizeof(char *));
+        *caster_name = static_cast<char **>(cma_calloc(2, sizeof(char *)));
         if (!(*caster_name))
         {
             pf_printf_fd(2, "165-Error allocating memory for caster name\n");

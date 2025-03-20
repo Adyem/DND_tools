@@ -60,7 +60,7 @@ void	ft_player(const char **input)
 	{
 		if (ft_strcmp_dnd(input[0], "add") == 0)
 		{
-			player = (t_pc *)cma_malloc(sizeof(t_pc));
+			player = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
 			if (!player)
 			{
 				pf_printf("248-Error: Allocating memory for player\n");

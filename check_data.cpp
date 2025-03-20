@@ -232,7 +232,7 @@ static int check_other_buffs_debuffs(t_char * info)
         error++;
     }
     if (info->debufs.hunters_mark.amount < 0 || info->debufs.hunters_mark.amount
-			!= ft_double_char_length((const char **)info->debufs.hunters_mark.caster_name))
+			!= ft_double_char_length(const_cast<const char **>(info->debufs.hunters_mark.caster_name)))
     {
         pf_printf("%s: hunters mark data is not correct\n", info->name);
         error++;

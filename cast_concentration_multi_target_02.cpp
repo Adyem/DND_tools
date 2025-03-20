@@ -28,8 +28,9 @@ static int	ft_apply_concentration(t_target_data *target_data, t_char * info, con
 {
 	int	index = 0;
 
-	info->concentration.targets = (char **)cma_calloc(target_data->buff_info->target_amount,
-			sizeof(char *));
+	info->concentration.targets =
+		static_cast<char **>(cma_calloc(static_cast<size_t>(target_data->buff_info->target_amount),
+			sizeof(char *)));
 	if (!info->concentration.targets)
 		return (FAILURE);
 	while (index < target_data->buff_info->target_amount)

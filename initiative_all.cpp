@@ -64,12 +64,12 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
 
     content = ft_read_file_lines(file);
     if (!content)
-        return (t_pc *)ft_initiative_pc_error("253 Error allocating memory");
-    player = (t_pc *)cma_malloc(sizeof(t_pc));
+        return (static_cast<t_pc *>(ft_initiative_pc_error("253 Error allocating memory")));
+    player = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
     if (!player)
     {
         cma_free(content);
-        return (t_pc *)ft_initiative_pc_error("252 Error allocating memory");
+        return (static_cast<t_pc *>(ft_initiative_pc_error("252 Error allocating memory")));
     }
     error = ft_check_stat_pc(player, content, filename);
     cma_free_double(content);

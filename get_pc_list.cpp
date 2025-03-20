@@ -25,7 +25,7 @@ char **ft_get_pc_list()
     FT_DIR *dir = ft_opendir("data");
     if (!dir)
         return (ft_nullptr);
-    char **player_list = (char **)cma_calloc(MAX_PLAYERS, sizeof(char *));
+    char **player_list = static_cast<char **>(cma_calloc(MAX_PLAYERS, sizeof(char *)));
     if (!player_list)
     {
         ft_closedir(dir);

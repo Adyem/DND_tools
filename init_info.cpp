@@ -2,9 +2,9 @@
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
 
-int ft_check_stat(t_char * info, const char *stat, int index)
+int ft_check_stat(t_char * info, const char *stat, size_t index)
 {
-    int temp;
+    size_t temp;
     int result;
 
     temp = index;

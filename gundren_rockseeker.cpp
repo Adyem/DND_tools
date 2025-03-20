@@ -29,7 +29,7 @@ t_char *ft_gundren_rockseeker(const int index, const char **input, t_name *name,
 											int exception)
 {
     int error = 0;
-    t_char *info = (t_char *)cma_malloc(sizeof(t_char));
+    t_char *info = static_cast<t_char *>(cma_malloc(sizeof(t_char)));
 
 	if (!info)
     {

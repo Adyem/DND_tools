@@ -13,7 +13,7 @@ void ft_add_element(const char ***array, const char *element)
         return ;
     if (*array == NULL)
     {
-        new_array = (const char **)cma_malloc(2 * sizeof(char *));
+        new_array = static_cast<const char **>(cma_malloc(2 * sizeof(char *)));
         if (!new_array)
             return ;
         new_array[0] = element;
@@ -29,7 +29,7 @@ void ft_add_element(const char ***array, const char *element)
         i++;
     }
     current_size = (i + 2) * sizeof(char *);
-    new_array = (const char **)cma_realloc(*array, current_size);
+    new_array = static_cast<const char **>(cma_realloc(*array, current_size));
     if (!new_array)
         return ;
     new_array[i] = element;

@@ -1,6 +1,5 @@
 #include "dnd_tools.hpp"
 #include "felbeast.hpp"
-#include "identification.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/dice_roll.hpp"
@@ -41,7 +40,7 @@ void	ft_felbeast_loot(t_char * info)
 t_char *ft_felbeast(const int index, const char **input, t_name *name, int exception)
 {
 	int error = 0;
-	t_char *info = (t_char *)cma_malloc(sizeof(t_char));
+	t_char *info = static_cast<t_char *>(cma_malloc(sizeof(t_char)));
 	if (!info)
     {
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);

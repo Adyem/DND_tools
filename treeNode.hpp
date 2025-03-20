@@ -10,11 +10,11 @@
 
 typedef struct s_treeNode_value
 {
-    int   key_length;
-    int   unset_value;
-    int   *return_field_integer;
-    char  **return_field_string;
-    char  ***return_field_double;
+    size_t   key_length;
+    int   	unset_value;
+    int   	*return_field_integer;
+    char  	**return_field_string;
+    char  	***return_field_double;
 } t_treeNode_value;
 
 typedef struct s_treeNode

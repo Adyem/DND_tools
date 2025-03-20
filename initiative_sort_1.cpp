@@ -55,7 +55,7 @@ t_pc *ft_initiative_players_am(char **content)
     t_pc *players;
     t_pc *temp;
 
-    players = (t_pc *)cma_malloc(sizeof(t_pc));
+    players = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
     if (!players)
     {
         pf_printf("Error allocating memory: players\n");
@@ -69,7 +69,7 @@ t_pc *ft_initiative_players_am(char **content)
     int index = 1;
     while (content[index])
     {
-        temp->next = (t_pc *)cma_malloc(sizeof(t_pc));
+        temp->next = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
         if (!temp->next)
         {
             pf_printf("Error allocating memory: players->next\n");

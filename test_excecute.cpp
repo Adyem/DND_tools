@@ -11,7 +11,7 @@ static int ft_handle_custom_commands(const char **input, int argc, t_name *name)
 	{
 		if (argc > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
 		{
-			temp->function(argc, (const char **)input, name, 0);
+			temp->function(argc, const_cast<const char **>(input), name, 0);
 			return (1);
 		}
 		temp = temp->next;
@@ -34,7 +34,7 @@ static int ft_handle_builtins(const char **input, int index, t_name *name)
 	else if (index == 1 && ft_strcmp_dnd(input[0], "test") == 0)
 		ft_test(name);
 	else if (index == 3 && ft_strcmp_dnd(input[1], "player") == 0)
-		ft_player((const char **)input);
+		ft_player(const_cast<const char **>(input));
 	else
 		return (0);
 	return (1);
