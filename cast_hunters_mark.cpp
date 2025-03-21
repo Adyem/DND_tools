@@ -56,20 +56,6 @@ void ft_cast_hunters_mark(t_char * info, const char **input)
 	return ;
 }
 
-static int ft_is_caster_name_present(char **caster_name_list, const char *name)
-{
-    if (!caster_name_list || !name)
-        return (0);
-    int index = 0;
-    while (caster_name_list[index])
-    {
-        if (ft_strcmp_dnd(caster_name_list[index], name) == 0)
-            return (1);
-        index++;
-    }
-    return (0);
-}
-
 int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff *buff)
 {
 
@@ -98,8 +84,7 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
     return (0);
 }
 
-void	ft_concentration_remove_hunters_mark(t_char *character,
-			t_target_data *targets_data)
+void	ft_concentration_remove_hunters_mark(t_char *character, t_target_data *targets_data)
 {
 	int target_index = 0;
 	int caster_index;

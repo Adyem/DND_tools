@@ -1,9 +1,9 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include "initialize.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 
 #define MAKE_BUFF_MAGIC_DRAIN(magic_drain, target_str) \
 	(t_buff){ \
@@ -30,6 +30,8 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 		pf_printf_fd(2, "%s Magic Drain is on cooldown", info->name);
 		return ;
 	}
+	if (ft_readline_confirm("did the target succeed on his/her dex save"))
+		return ;
 	t_buff buff_info = MAKE_BUFF_MAGIC_DRAIN(info->spells.magic_drain, input[3]);
 	int error = ft_cast_concentration(info, input, &buff_info);
 	cma_free(buff_info.target);
@@ -41,19 +43,61 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 
 int	ft_magic_drain_apply_debuff(t_char *target, const char **input, t_buff *buff)
 {
-	t_debuff_magic_drain *debuff_magic_drain = &target->debufs.magic_drain;
-
-	(void)target;
-	(void)input;
-	(void)buff;
-	(void)debuff_magic_drain;
-	return (0);
+    (void)buff;
+    if (target)
+    {
+        if (ft_is_caster_name_present(target->debufs.magic_drain.caster, input[0]))
+        {
+            pf_printf_fd(2, "102-Error: Caster name already present\n");
+            return (1);
+        }
+        if (ft_update_caster_name(&target->debufs.magic_drain.caster, input[0]))
+            return (2);
+    }
+    if (DEBUG == 1 && target)
+    {
+        int index = 0;
+        while (target->debufs.magic_drain.caster
+				&& target->debufs.magic_drain.caster[index])
+        {
+            pf_printf("%s has cast magic drain\n", target->debufs.magic_drain.caster[index]);
+            index++;
+        }
+    }
+    target->debufs.magic_drain.amount++;
+    return (0);
 }
 
 void	ft_concentration_remove_magic_drain(t_char *character, t_target_data *targets_data)
 {
-	(void)targets_data;
-	cma_free(character->debufs.magic_drain.caster);
-	character->debufs.magic_drain = INITIALIZE_DEBUFF_MAGIC_DRAIN;
+	int target_index = 0;
+	int caster_index;
+
+	while (targets_data->target[target_index])
+	{
+		caster_index = 0;
+		while (targets_data->target[target_index]->debufs.magic_drain.caster[caster_index])
+		{
+			if (ft_strcmp_dnd(targets_data->target[target_index]->debufs.magic_drain.caster
+						[caster_index],
+					character->name) == 0)
+			{
+				cma_free(targets_data->target[target_index]->debufs.magic_drain.caster
+						[caster_index]);
+				targets_data->target[target_index]->debufs.magic_drain.caster[caster_index]
+					= ft_nullptr;
+				targets_data->target[target_index]->debufs.magic_drain.amount--;
+			}
+			caster_index++;
+		}
+		target_index++;
+	}
+	character->concentration.concentration = 0;
+	character->concentration.spell_id = 0;
+	character->concentration.dice_amount_mod = 0;
+	character->concentration.dice_faces_mod = 0;
+	character->concentration.base_mod = 0;
+	character->concentration.targets = ft_nullptr;
+	cma_free_double(character->concentration.targets);
 	return ;
 }

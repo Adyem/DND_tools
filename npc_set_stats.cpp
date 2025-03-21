@@ -26,8 +26,8 @@ static int ft_handle_int_mapping(char **content, int index, t_char * info)
 	}
 	else if (return_value->return_field_string)
 	{
-		ft_set_stat_player(return_value->key_length, const_cast<const char **>(return_value->return_field_string),
-				content[index]);
+		ft_set_stat_player(return_value->key_length,
+				const_cast<const char **>(return_value->return_field_string), content[index]);
 		return (0);
 	}
     return (1);

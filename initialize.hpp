@@ -270,6 +270,7 @@ static const	t_debuff_blinded INITIALIZE_BLINDED =
 static const	t_debuff_magic_drain INITIALIZE_DEBUFF_MAGIC_DRAIN =
 {
 	.caster = ft_nullptr,
+	.amount = 0,
 	.damage_flat = 0,
 	.damage_dice_amount = 0,
 	.damage_dice_faces = 0,

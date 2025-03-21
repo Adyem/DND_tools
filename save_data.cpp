@@ -9,7 +9,7 @@
 #include <cerrno>
 
 static void ft_npc_write_file_double_char(const char *msg, char **targets, ft_file &file,
-											t_char * info)
+											t_char *info)
 {
     int index = 0;
     if (targets)
@@ -237,8 +237,8 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
 			info->debufs.magic_drain.damage_dice_faces);
 	file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
 			info->debufs.magic_drain.spell_slot_total_level_drain);
-	if (info->debufs.magic_drain.caster)
-		file.printf("%s%s\n", DEBUFF_MAGIC_DRAIN_CASTER_KEY, info->debufs.magic_drain.caster);
+	ft_npc_write_file_double_char(DEBUFF_MAGIC_DRAIN_CASTER_KEY, info->debufs.magic_drain.caster,
+			file, info);
 	file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_CON_SAVE_KEY, info->debufs.magic_drain.con_save);
 	file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
 			info->debufs.magic_drain.extra_damage_flat);

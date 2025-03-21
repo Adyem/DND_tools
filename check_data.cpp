@@ -237,6 +237,12 @@ static int check_other_buffs_debuffs(t_char * info)
         pf_printf("%s: hunters mark data is not correct\n", info->name);
         error++;
     }
+	if (info->debufs.magic_drain.amount < 0 || info->debufs.magic_drain.amount
+			!= ft_double_char_length(const_cast<const char **>(info->debufs.magic_drain.caster)))
+    {
+        pf_printf("%s: magic drain data is not correct\n", info->name);
+        error++;
+    }
     if (info->bufs.protective_winds.duration < 0)
     {
         pf_printf("%s: protective winds duration (%d) is negative\n", info->name,

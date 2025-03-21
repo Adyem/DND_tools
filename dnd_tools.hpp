@@ -275,6 +275,7 @@ int			ft_update_caster_name(char ***caster_name, const char *input_name);
 int			ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff, const char **input);
 void		ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
 				const char **input);
+int 		ft_is_caster_name_present(char **caster_name_list, const char *name);
 
 // Hunters mark
 void		ft_concentration_remove_hunters_mark(t_char *character, t_target_data *targets_data);

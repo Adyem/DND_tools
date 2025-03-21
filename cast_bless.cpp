@@ -52,20 +52,6 @@ void ft_cast_bless(t_char *info, const char **input)
 	return ;
 }
 
-static int ft_is_caster_name_present(char **caster_name_list, const char *name)
-{
-    if (!caster_name_list || !name)
-        return (0);
-    int index = 0;
-    while (caster_name_list[index])
-    {
-        if (ft_strcmp_dnd(caster_name_list[index], name) == 0)
-            return (1);
-        index++;
-    }
-    return (0);
-}
-
 int ft_cast_bless_apply_debuf(t_char * target, const char **input, t_buff *buff)
 {
 
