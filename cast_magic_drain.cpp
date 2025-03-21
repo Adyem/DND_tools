@@ -4,6 +4,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/string.hpp"
 
 #define MAKE_BUFF_MAGIC_DRAIN(magic_drain, target_str) \
 	(t_buff){ \
@@ -30,7 +31,17 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 		pf_printf_fd(2, "%s Magic Drain is on cooldown", info->name);
 		return ;
 	}
-	if (ft_readline_confirm("did the target succeed on his/her dex save"))
+	char *dex_save = cma_itoa(info->spells.magic_drain.dex_save);
+	if (!dex_save)
+		return ;
+	ft_string temp = "the target needs to succeed on a DC ";
+	if (temp.getError())
+		return ;
+	ft_string message = temp + dex_save + " to avoid the spell";
+	if (message.getError())
+		return ;
+	cma_free(dex_save);
+	if (ft_readline_confirm(message.c_str()))
 		return ;
 	t_buff buff_info = MAKE_BUFF_MAGIC_DRAIN(info->spells.magic_drain, input[3]);
 	int error = ft_cast_concentration(info, input, &buff_info);
