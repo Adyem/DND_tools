@@ -4,6 +4,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/string.hpp"
 #include "libft/Errno/errno.hpp"
+#include "libft/RNG/dice_roll.hpp"
 
 static ft_string ft_felbeast_attack_effect_construct_message(t_char *info)
 {
@@ -32,10 +33,16 @@ static ft_string ft_felbeast_attack_effect_construct_message(t_char *info)
 
 void	ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon, int is_crit)
 {
+	(void)is_crit;
 	ft_string message = ft_felbeast_attack_effect_construct_message(info);
 	if (message.getError())
 		return ;
-	ft_readline_confirm(message);
-	(void)weapon;
-	(void)is_crit;
+	if (ft_readline_confirm(message))
+	{
+		int result = ft_dice_roll(weapon->action_01.effect_dice_amount,
+				weapon->action_01.effect_dice_faces) + weapon->action_01.bonus_mod;
+		pf_printf("The target is poisoned by fell poison, taking %i damage and " \
+				"suffering disadvantage on their attacks for the next 2 turns.", result);
+	}
+	return ;
 }
