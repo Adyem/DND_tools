@@ -29,13 +29,13 @@ void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_inf
                                            int offhand, t_char * info)
 {
     d_info->dice_amount = weapon->attack.effect_dice_amount;
-    d_info->dice_faces = weapon->attack.effect_dice_faces;
-    if (offhand && weapon->slot == (SLOT_WEAPON | SLOT_OFFHAND_WEAPON))
+    d_info->dice_faces  = weapon->attack.effect_dice_faces;
+    if (offhand && (weapon->slot & SLOT_OFFHAND_WEAPON))
     {
         d_info->dice_amount = weapon->attack.effect_secund_dice_amount;
-        d_info->dice_faces = weapon->attack.effect_secund_dice_faces;
+        d_info->dice_faces  = weapon->attack.effect_secund_dice_faces;
     }
-    else if (!offhand && weapon->slot == SLOT_WEAPON
+    else if (!offhand && weapon->slot == SLOT_WEAPON 
              && info->equipment.offhand_weapon.equipment_id == 0)
     {
         d_info->dice_amount = weapon->attack.effect_dice_amount;

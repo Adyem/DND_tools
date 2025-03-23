@@ -150,7 +150,9 @@ SRC         = name.cpp \
 			  treeNode.cpp \
 			  treeNode_functions.cpp \
 			  felbeast.cpp \
-			  cast_magic_drain.cpp
+			  cast_magic_drain.cpp \
+			  attack_additional_effects.cpp \
+			  felbeast_weapon_effects.cpp
 
 CC          = g++
 COMPILE_FLAGS = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \

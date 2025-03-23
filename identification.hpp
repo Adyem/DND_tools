@@ -71,6 +71,8 @@ typedef enum
 	GHOST_ARNOR_ID,
 	FELBEAST_HIDE_ID,
 	WOLF_PELT_ID,
+
+	ETYPE_FEL_POISON = 40001,
 } ItemID;
 
 typedef enum e_equipment_slot

@@ -1,6 +1,7 @@
 #ifndef MELEE_WEAPONS_H
 # define MELEE_WEAPONS_H
 
+#include "dnd_tools.hpp"
 #include <stddef.h>
 #include "character.hpp"
 #include "identification.hpp"
@@ -199,7 +200,7 @@ static const t_equipment_id CLAW_OH =
 	.attack =
 	{
 		.function = ft_weapon_attack,
-		.damage_type = DAMAGE_TYPE_SLASHING,
+		.damage_type = DAMAGE_TYPE_NECROTIC,
 		.stat = STAT_DEX,
 		.effect_type = 0,
 		.effect_dice_amount = 1,
@@ -284,7 +285,18 @@ static const t_equipment_id FELBEAST_CLAW =
 	.name = "felbeast claw",
 	.projectile_name = ft_nullptr,
 	.equipment_id = FELBEAST_CLAW_ID,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 =
+	{
+		.function = ft_felbeast_attack_effects,
+		.damage_type = DAMAGE_TYPE_NECROTIC,
+		.stat = STAT_CON,
+		.effect_type = ETYPE_FEL_POISON,
+		.effect_dice_amount = 2,
+		.effect_dice_faces = 6,
+		.effect_secund_dice_amount = 0,
+		.effect_secund_dice_faces = 0,
+		.bonus_mod = 4,
+	},
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
 	.attack =
 	{
@@ -329,7 +341,18 @@ static const t_equipment_id FELBEAST_CLAW_OH =
 	.name = "felbeast claw oh",
 	.projectile_name = ft_nullptr,
 	.equipment_id = FELBEAST_CLAW_OH_ID,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 =
+	{
+		.function = ft_felbeast_attack_effects,
+		.damage_type = DAMAGE_TYPE_NECROTIC,
+		.stat = STAT_CON,
+		.effect_type = ETYPE_FEL_POISON,
+		.effect_dice_amount = 2,
+		.effect_dice_faces = 6,
+		.effect_secund_dice_amount = 0,
+		.effect_secund_dice_faces = 0,
+		.bonus_mod = 4,
+	},
 	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
 	.attack =
 	{

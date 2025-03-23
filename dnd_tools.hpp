@@ -134,6 +134,8 @@ void		ft_excecute_test(const char *string1, const char *string2, const char *str
 void		ft_turn_next(t_name *name);
 
 // Attack
+void		ft_attack_additional_effects(t_char *info, t_equipment_id *weapon, bool is_hit,
+				int is_crit, int offhand);
 void		ft_weapon_attack(t_char * info, t_equipment_id *weapon, int offhand);
 int			ft_readline_prompt_hit_or_miss(void);
 void		ft_prompt_on_attack_success(t_char * character, bool critical_strike);
@@ -141,6 +143,9 @@ int			ft_weapon_find_stat(t_char * info, t_equipment_id *weapon);
 void 		ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
 				int offhand, t_char * info);
 void 		ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit);
+
+// Attack effects
+void		ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon, int is_crit);
 
 // Buff update
 void		ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name);

@@ -41,7 +41,7 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 	if (message.getError())
 		return ;
 	cma_free(dex_save);
-	if (ft_readline_confirm(message.c_str()))
+	if (ft_readline_confirm(message))
 		return ;
 	t_buff buff_info = MAKE_BUFF_MAGIC_DRAIN(info->spells.magic_drain, input[3]);
 	int error = ft_cast_concentration(info, input, &buff_info);
