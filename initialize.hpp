@@ -281,11 +281,17 @@ static const	t_debuff_magic_drain INITIALIZE_DEBUFF_MAGIC_DRAIN =
 	.con_save = 0,
 };
 
+static const	t_debuff_fell_poison INITIALIZE_FELL_POISON =
+{
+	.duration = 0,
+};
+
 static const	t_debufs INITIALIZE_DEBUFFS =
 {
 	.hunters_mark = INITIALIZE_HUNTERS_MARK,
 	.blinded = INITIALIZE_BLINDED,
 	.magic_drain = INITIALIZE_DEBUFF_MAGIC_DRAIN,
+	.fell_poison = INITIALIZE_FELL_POISON,
 };
 
 static const	t_flags INITIALIZE_FLAGS =

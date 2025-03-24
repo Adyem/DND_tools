@@ -8,7 +8,7 @@
 #include <cstring>
 
 #define MAKE_BUFF_BLESS(bless, level, target_str) \
-	(t_buff){ \
+	(t_buff) { \
 		.target_amount = (bless).target_amount + (bless).upcast_extra_targets, \
 		.target = cma_strdup(target_str), \
 		.spell_id = BLESS_ID, \
@@ -40,13 +40,16 @@ void ft_cast_bless(t_char *info, const char **input)
 	t_buff buff = MAKE_BUFF_BLESS(info->spells.bless, cast_at_level, input[3]);
 	if (!buff.target)
 	{
-		pf_printf_fd(2, "121-Error allocating memory bless target");
+		pf_printf_fd(2, "121-Error: %s allocating memory bless target\n", info->name);
 		return ;
 	}
 	int error = ft_cast_concentration_multi_target_01(info, &buff, input);
 	cma_free(buff.target);
 	if (error)
+	{
+		pf_printf_fd(2, "154-Error: %s allocating memory bless target\n", info->name);
 		return ;
+	}
 	pf_printf("%s cast bless on %s\n", info->name, input[3]);
 	ft_remove_spell_slot(&info->spell_slots, cast_at_level);
 	return ;

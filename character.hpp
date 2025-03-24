@@ -189,11 +189,17 @@ typedef struct	s_debuff_blinded
 	int	duration;
 }	t_debuff_blinded;
 
+typedef struct	s_debuff_fell_poison
+{
+	int duration;
+}	t_debuff_fell_poison;
+
 typedef struct s_debufs
 {
 	t_debuff_hunters_mark	hunters_mark;
 	t_debuff_blinded		blinded;
 	t_debuff_magic_drain	magic_drain;
+	t_debuff_fell_poison	fell_poison;
 }	t_debufs;
 
 typedef struct s_crit_mod

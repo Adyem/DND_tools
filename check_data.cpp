@@ -212,6 +212,8 @@ static int check_buffs(t_char * info)
 			"magic drain extra dice faces (debuff)");
 	error += check_range(info->spells.magic_drain.learned, 0, 1, info->name,
 			"magic drain learned (spell)");
+	error += check_range(info->debufs.fell_poison.duration, 0, 50, info->name,
+			"fell poison debuff duration");
 	return (error);
 
 }
