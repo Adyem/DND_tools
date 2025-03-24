@@ -28,18 +28,27 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 {
 	if (info->spells.magic_drain.cooldown != 0)
 	{
-		pf_printf_fd(2, "%s Magic Drain is on cooldown", info->name);
+		pf_printf("%s Magic Drain is on cooldown", info->name);
 		return ;
 	}
 	char *dex_save = cma_itoa(info->spells.magic_drain.dex_save);
 	if (!dex_save)
+	{
+		pf_printf_fd(2, "151-Error: %s Magic Drain allocation failure", info->name);
 		return ;
+	}
 	ft_string temp = "the target needs to succeed on a DC ";
 	if (temp.getError())
+	{
+		pf_printf_fd(2, "152-Error: %s Magic Drain allocation failure", info->name);
 		return ;
+	}
 	ft_string message = temp + dex_save + " to avoid the spell";
 	if (message.getError())
+	{
+		pf_printf_fd(2, "153-Error: %s Magic Drain allocation failure", info->name);
 		return ;
+	}
 	cma_free(dex_save);
 	if (ft_readline_confirm(message))
 		return ;
