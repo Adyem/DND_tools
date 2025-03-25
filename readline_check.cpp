@@ -3,6 +3,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
+#include "libft/RNG/dice_roll.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
 
@@ -10,6 +11,8 @@ int	ft_readline_confirm(const char *message)
 {
 	char	*input;
 
+	if (g_dnd_test == true)
+		return (ft_dice_roll(1, 2) - 1);
 	while ((input = rl_readline(message)) != ft_nullptr)
 	{
 		if ((ft_strcmp_dnd(input, "y") == 0) || (ft_strcmp_dnd(input, "Y") == 0) ||
