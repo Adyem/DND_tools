@@ -27,7 +27,8 @@ HEADER      = dnd_tools.hpp \
 			  key_list.hpp \
 			  treeNode.hpp \
 			  dwarf_paladin.hpp \
-			  felbeast.hpp
+			  felbeast.hpp \
+			  ancient_predatory_beast.hpp
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -44,6 +45,7 @@ SRC         = name.cpp \
 			  murna_claygrip.cpp \
 			  thorbald_ironpocket.cpp \
               goblin_warmaster.cpp \
+			  ancient_predatory_beast.cpp \
               grizz.cpp \
 			  ghost.cpp \
               main.cpp \

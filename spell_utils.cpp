@@ -92,7 +92,7 @@ int ft_prompt_spell_level(t_char * character, int base_level)
             pf_printf_fd(2, "Error: Too many invalid attempts to select spell level.\n");
             return (-1);
         }
-        level = ft_readline_spell_level(message.c_str(), character, &invalid_input_amount);
+        level = ft_readline_spell_level(message, character, &invalid_input_amount);
         if (level == -1)
             return (-1);
         if (level < base_level)

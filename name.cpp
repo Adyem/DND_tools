@@ -122,5 +122,6 @@ t_name *ft_allocate_memory_name()
 	ft_add_mob_series(first_node, &last_node, "dwarf_paladin", ft_dwarf_paladin, 10);
 	ft_add_mob_series(first_node, &last_node, "felbeast", ft_felbeast, 10);
 	ft_add_node(first_node, &last_node, "veraak", ft_veraak);
+	ft_add_node(first_node, &last_node, "ancient predatory beast", ft_ancient_predatory_beast);
     return (first_node);
 }

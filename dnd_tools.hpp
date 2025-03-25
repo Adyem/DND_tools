@@ -98,6 +98,11 @@ void		ft_veraak_turn(t_char * info);
 t_char *	ft_dwarf_paladin(const int index, const char **input, t_name *name, int exception);
 void		ft_dwarf_paladin_turn(t_char * info);
 
+// Ancient Predatory Beast
+t_char *	ft_ancient_predatory_beast(const int index, const char **input, t_name *name,
+				int exception);
+void		ft_ancient_predatory_beast_turn(t_char * info);
+
 // Maverick
 t_char *	ft_maverick(const int index, const char **input, t_name *name, int exception);
 void		ft_maverick_turn(t_char * info);

@@ -1,6 +1,8 @@
 #ifndef IDENTIFICATION_H
 # define IDENTIFICATION_H
 
+#define NONE 0
+
 typedef enum
 {
     WTYPE_CLUB = 1,
@@ -73,6 +75,7 @@ typedef enum
 	WOLF_PELT_ID,
 
 	ETYPE_FEL_POISON = 40001,
+	ETYPE_ANCIENT_PREDATORY_BEAST_MULTI_ATTACK,
 } ItemID;
 
 typedef enum e_equipment_slot
