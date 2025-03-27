@@ -18,7 +18,7 @@ static const	t_stats ANCIENT_PREDATORY_BEAST_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 180,
+	.health = 450,
 	.temp_hp = 0,
 	.str = 21,
 	.dex = 14,
