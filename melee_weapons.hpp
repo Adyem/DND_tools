@@ -396,7 +396,7 @@ static const t_equipment_id ANCIENT_PREDATORY_BEAST_CLAW =
 {
 	.name = "ancient predatory beast claw",
 	.projectile_name = ft_nullptr,
-	.equipment_id = FELBEAST_CLAW_ID,
+	.equipment_id = ANCIENT_PREDATORY_BEAST_CLAW_ID,
 	.action_01 =
 	{
 		.function = ft_ancient_predatory_beast_attack_effects,
