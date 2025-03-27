@@ -1,8 +1,8 @@
 #ifndef ANCIENT_PREDATORY_BEAST_HPP
 # define ANCIENT_PREDATORY_BEAST_HPP
 
-#include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
+#include "armor.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
@@ -97,10 +97,10 @@ static const	t_resistance ANCIENT_PREDATORY_BEAST_DEFAULT_RESISTANCE =
 
 static const	t_equipment ANCIENT_PREDATORY_BEAST_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = ANCIENT_PREDATORY_BEAST_CLAW,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
+	.armor = ANCIENT_REDATORY_BEAST_HIDE,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,
