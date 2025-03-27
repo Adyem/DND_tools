@@ -151,6 +151,8 @@ void 		ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool i
 
 // Attack effects
 void		ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon, int is_crit);
+void 		ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *weapon,
+				int is_crit);
 
 // Buff update
 void		ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name);

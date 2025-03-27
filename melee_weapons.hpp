@@ -399,7 +399,7 @@ static const t_equipment_id ANCIENT_PREDATORY_BEAST_CLAW =
 	.equipment_id = FELBEAST_CLAW_ID,
 	.action_01 =
 	{
-		.function = ft_felbeast_attack_effects,
+		.function = ft_ancient_predatory_beast_attack_effects,
 		.damage_type = DAMAGE_TYPE_SLASHING,
 		.stat = ft_nullptr,
 		.effect_type = ETYPE_ANCIENT_PREDATORY_BEAST_MULTI_ATTACK,
