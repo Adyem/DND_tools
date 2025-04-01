@@ -30,6 +30,11 @@ t_char *	ft_template(const int index, const char **input, t_name *name, int exce
 void		ft_template_turn(t_char * info);
 void		ft_template_loot(t_char * info);
 
+// Snow Goblin
+t_char *	ft_snow_goblin(const int index, const char **input, t_name *name, int exception);
+void		ft_snow_goblin(t_char * info);
+void		ft_snow_goblin(t_char * info);
+
 // Ghost
 t_char *	ft_ghost(const int index, const char **input, t_name *name, int exception);
 void		ft_ghost(t_char * info);

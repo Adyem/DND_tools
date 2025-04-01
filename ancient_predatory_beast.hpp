@@ -115,8 +115,8 @@ static const t_physical ANCIENT_PREDATORY_BEAST_PHYSICAL =
 {
     .height = 0,
     .weight = 0,
-    .age = 0,
-    .speed = 0,
+    .age = 200,
+    .speed = 45,
 };
 
 static const t_spell_slot ANCIENT_PREDATORY_BEAST_SPELL_SLOT =

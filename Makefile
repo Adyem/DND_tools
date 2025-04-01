@@ -28,7 +28,8 @@ HEADER      = dnd_tools.hpp \
 			  treeNode.hpp \
 			  dwarf_paladin.hpp \
 			  felbeast.hpp \
-			  ancient_predatory_beast.hpp
+			  ancient_predatory_beast.hpp \
+			  snow_goblin.hpp
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -36,6 +37,7 @@ SRC         = name.cpp \
               veraak.cpp \
               veraak_turn.cpp \
               maverick.cpp \
+			  snow_goblin.cpp \
               maverick_turn.cpp \
               chaos_crystal.cpp \
 			  dwarf_paladin.cpp \
