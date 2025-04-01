@@ -1,12 +1,14 @@
 #ifndef SNOW_GOBLIN_HPP
 # define SNOW_GOBLIN_HPP
 
+#include "identification.hpp"
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "armor.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
+#include <cstddef>
 #include <stddef.h>
 
 typedef struct	s_name t_name;
@@ -94,6 +96,62 @@ static const	t_resistance SNOW_GOBLIN_DEFAULT_RESISTANCE =
 	.radiant = 0,
 	.slashing = 0,
 	.thunder = 0,
+};
+
+static const t_equipment_id SNOWBALL_WAND =
+{
+	.name = "snow ball wand",
+	.projectile_name = "snow ball",
+	.equipment_id = SNOWBALL_WAND_ID,
+	.action_01 =
+	{
+		.function = NULL,
+		.damage_type = DAMAGE_TYPE_COLD,
+		.stat = STAT_CON,
+		.effect_type = ETYPE_SNOWBALL_WAND_SLOW,
+		.effect_dice_amount = 0,
+		.effect_dice_faces = 0,
+		.effect_secund_dice_amount = 0,
+		.effect_secund_dice_faces = 0,
+		.bonus_mod = 5,
+	},
+	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.attack =
+	{
+		.function = ft_weapon_attack,
+		.damage_type = DAMAGE_TYPE_COLD,
+		.stat = STAT_DEX,
+		.effect_type = NONE,
+		.effect_dice_amount = 1,
+		.effect_dice_faces = 4,
+		.effect_secund_dice_amount = 0,
+		.effect_secund_dice_faces = 0,
+		.bonus_mod = 0,
+	},
+	.skill_mod = INITIALIZE_SKILLS,
+	.resistance = INITIALIZE_RESISTANCE,
+	.flat_dr = INITIALIZE_RESISTANCE,
+	.skill_advantage = INITIALIZE_SKILLS,
+	.save = INITIALIZE_SAVES,
+	.save_advantage = INITIALIZE_SAVES,
+	.crit_attack_fail_bonus = 0,
+	.crit_attack_succes_bonus = 0,
+	.type = WTYPE_WAND,
+	.dex_ac_max_bonus = 0,
+	.ac = 0,
+	.str = 0,
+	.dex = 0,
+	.con = 0,
+	.inte = 0,
+	.wis = 0,
+	.cha = 0,
+	.initiative = 0,
+	.effect_id = 0,
+	.effect_type = 0,
+	.effect_dice_amount = 0,
+	.effect_dice_faces = 0,
+	.bonus_mod = 0,
+	.slot = SLOT_RANGED_WEAPON,
 };
 
 static const	t_equipment SNOW_GOBLIN_EQUIPMENT =
