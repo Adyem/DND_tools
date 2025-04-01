@@ -1,6 +1,7 @@
 #ifndef SNOW_GOBLIN_HPP
 # define SNOW_GOBLIN_HPP
 
+#include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
@@ -105,7 +106,7 @@ static const t_equipment_id SNOWBALL_WAND =
 	.equipment_id = SNOWBALL_WAND_ID,
 	.action_01 =
 	{
-		.function = NULL,
+		.function = ft_snow_goblin_attack_effects,
 		.damage_type = DAMAGE_TYPE_COLD,
 		.stat = STAT_CON,
 		.effect_type = ETYPE_SNOWBALL_WAND_SLOW,
