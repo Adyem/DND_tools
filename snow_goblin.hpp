@@ -9,8 +9,6 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
-#include <cstddef>
-#include <stddef.h>
 
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;

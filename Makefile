@@ -157,7 +157,8 @@ SRC         = name.cpp \
 			  cast_magic_drain.cpp \
 			  attack_additional_effects.cpp \
 			  felbeast_weapon_effects.cpp \
-			  ancient_predatory_beast_weapon_effects.cpp
+			  ancient_predatory_beast_weapon_effects.cpp \
+			  snow_goblin_slow_effect.cpp
 
 CC          = g++
 COMPILE_FLAGS = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \
