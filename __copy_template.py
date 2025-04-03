@@ -22,7 +22,7 @@ def replace_in_file(filename, replacements):
         with open(filename, 'r') as f:
             content = f.read()
         pattern = r'template\s*<\s*int\s+Amount\s*,\s*int\s+Faces\s*>'
-        placeholder = "__TEMPLATE_INT_AMOUNT_INT_FACES__"
+        placeholder = "__PLACEHOLDER_INT_AMOUNT_INT_FACES__"
         content = re.sub(pattern, placeholder, content)
         for old, new in replacements.items():
             content = content.replace(old, new)
