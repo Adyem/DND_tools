@@ -178,7 +178,8 @@ endif
 
 COMPILE_FLAGS = -Wall -Werror -Wextra -std=c++17 -Wmissing-declarations \
 				-Wold-style-cast -Wshadow -Wconversion -Wformat=2 -Wundef \
-				-Wfloat-equal -Wconversion -Wodr $(OPT_FLAGS)
+				-Wfloat-equal -Wconversion -Wodr -Wuseless-cast \
+				-Wzero-as-null-pointer-constant -Wmaybe-uninitialized $(OPT_FLAGS)
 
 CFLAGS = $(COMPILE_FLAGS)
 
