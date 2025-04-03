@@ -4,9 +4,9 @@
 
 void ft_skill_throw(t_char * info, const char *skill, int ability_mod, int skill_mod)
 {
-	int mod;
-	int result;
-	int roll;
+	int mod = 0;
+	int result = 0;
+	int roll = 0;
 
 	roll = ft_dice_roll(1, 20);
 	mod = ft_skill_check_buff(info, &result, skill);
