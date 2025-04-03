@@ -161,9 +161,24 @@ SRC         = name.cpp \
 			  snow_goblin_slow_effect.cpp
 
 CC          = g++
-COMPILE_FLAGS = -Wall -Werror -Wextra -g -O0 -std=c++17 -Wmissing-declarations \
+
+OPT_LEVEL ?= 0
+
+ifeq ($(OPT_LEVEL),0)
+	OPT_FLAGS = -O0 -g
+else ifeq ($(OPT_LEVEL),1)
+	OPT_FLAGS = -O1 -flto
+else ifeq ($(OPT_LEVEL),2)
+	OPT_FLAGS = -O2 -flto
+else ifeq ($(OPT_LEVEL),3)
+	OPT_FLAGS = -O3 -flto
+else
+	$(error Unsupported OPT_LEVEL=$(OPT_LEVEL))
+endif
+
+COMPILE_FLAGS = -Wall -Werror -Wextra -std=c++17 -Wmissing-declarations \
 				-Wold-style-cast -Wshadow -Wconversion -Wformat=2 -Wundef \
-				-Wfloat-equal -Wconversion
+				-Wfloat-equal -Wconversion $(OPT_FLAGS)
 
 CFLAGS = $(COMPILE_FLAGS)
 

@@ -4,15 +4,10 @@
 
 t_char *ft_get_info(const char *tf_name, t_name *name)
 {
-	t_name		*temp;
-	t_char		*info;
-	int			found;
-	const char	*input[2];
-
-	found = 0;
-	temp = name;
-	input[0] = tf_name;
-	input[1] = ft_nullptr;
+	t_name		*temp = name;
+	t_char		*info = ft_nullptr;
+	int			found = 0;
+	const char	*input[2] = {tf_name, ft_nullptr};
 	while (temp != ft_nullptr && !found)
 	{
 		if (ft_strcmp_dnd(tf_name, temp->name) == 0)

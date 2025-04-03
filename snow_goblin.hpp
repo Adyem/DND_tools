@@ -118,7 +118,7 @@ static const t_equipment_id ICY_BLADE =
 	.attack =
 	{
 		.function = ft_weapon_attack,
-		.damage_type = DAMAGE_TYPE_SLASHING,
+		.damage_type = DAMAGE_TYPE_COLD,
 		.stat = FINESSE,
 		.effect_type = NONE,
 		.effect_dice_amount = 1,
@@ -211,7 +211,7 @@ static const t_equipment_id SNOWBALL_WAND =
 
 static const	t_equipment SNOW_GOBLIN_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = ICY_BLADE,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = SNOWBALL_WAND,
 	.armor = LEATHER_ARMOR,
