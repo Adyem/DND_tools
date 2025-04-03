@@ -5,14 +5,13 @@
 
 void ft_snow_goblin_attack_effects(t_char *info, t_equipment_id *weapon, int is_crit)
 {
-    (void)info;
-    (void)weapon;
+	(void)info;
 	if (weapon->action_01.effect_type == ETYPE_SNOWBALL_WAND_SLOW)
 	{
 		if (is_crit)
-    	    pf_printf("The target is slowed down by 20 feet\n");
+			pf_printf("The target is slowed down by 20 feet\n");
 		else
-    	    pf_printf("The target is slowed down by 10 feet\n");
+			pf_printf("The target is slowed down by 10 feet\n");
 	}
 	return ;
 }
