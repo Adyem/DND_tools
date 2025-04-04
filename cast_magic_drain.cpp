@@ -24,6 +24,32 @@
 		.spell_name = MAGIC_DRAIN_NAME \
 	}
 
+static bool generate_magic_drain_message(const t_char *info, ft_string &out_message)
+{
+	char *dex_save = cma_itoa(info->spells.magic_drain.dex_save);
+	if (!dex_save)
+	{
+		pf_printf_fd(2, "151-Error: %s Magic Drain allocation failure", info->name);
+		return (true);
+	}
+	ft_string temp = "the target needs to succeed on a DC ";
+	if (temp.getError())
+	{
+		pf_printf_fd(2, "152-Error: %s Magic Drain allocation failure", info->name);
+		cma_free(dex_save);
+		return (true);
+	}
+	out_message = temp + dex_save + " to avoid the spell";
+	cma_free(dex_save);
+
+	if (out_message.getError())
+	{
+		pf_printf_fd(2, "153-Error: %s Magic Drain allocation failure", info->name);
+		return (true);
+	}
+	return (false);
+}
+
 void	ft_cast_magic_drain(t_char *info, const char **input)
 {
 	if (info->spells.magic_drain.cooldown != 0)
@@ -31,25 +57,9 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 		pf_printf("%s Magic Drain is on cooldown", info->name);
 		return ;
 	}
-	char *dex_save = cma_itoa(info->spells.magic_drain.dex_save);
-	if (!dex_save)
-	{
-		pf_printf_fd(2, "151-Error: %s Magic Drain allocation failure", info->name);
+	ft_string message;
+	if (generate_magic_drain_message(info, message))
 		return ;
-	}
-	ft_string temp = "the target needs to succeed on a DC ";
-	if (temp.getError())
-	{
-		pf_printf_fd(2, "152-Error: %s Magic Drain allocation failure", info->name);
-		return ;
-	}
-	ft_string message = temp + dex_save + " to avoid the spell";
-	if (message.getError())
-	{
-		pf_printf_fd(2, "153-Error: %s Magic Drain allocation failure", info->name);
-		return ;
-	}
-	cma_free(dex_save);
 	if (ft_readline_confirm(message))
 		return ;
 	t_buff buff_info = MAKE_BUFF_MAGIC_DRAIN(info->spells.magic_drain, input[3]);
@@ -58,7 +68,6 @@ void	ft_cast_magic_drain(t_char *info, const char **input)
 	if (error)
 		return ;
 	info->spells.magic_drain.cooldown = 2;
-	return ;
 }
 
 int	ft_magic_drain_apply_debuff(t_char *target, const char **input, t_buff *buff)
