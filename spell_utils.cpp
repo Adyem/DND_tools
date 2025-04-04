@@ -1,6 +1,6 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
-#include "libft/CPP_class/string.hpp"
+#include "libft/CPP_class/string_class.hpp"
 #include "libft/RNG/dice_roll.hpp"
 #include "libft/Printf/printf.hpp"
 #include <cassert>

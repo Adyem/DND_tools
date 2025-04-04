@@ -4,7 +4,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/nullptr.hpp"
-#include "libft/CPP_class/string.hpp"
+#include "libft/CPP_class/string_class.hpp"
 
 #define MAKE_BUFF_MAGIC_DRAIN(magic_drain, target_str) \
 	(t_buff){ \
