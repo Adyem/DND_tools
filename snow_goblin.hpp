@@ -114,7 +114,7 @@ static const t_equipment_id ICY_BLADE =
 		.effect_secund_dice_faces = 0,
 		.bonus_mod = 10,
 	},
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -170,7 +170,7 @@ static const t_equipment_id SNOWBALL_WAND =
 		.effect_secund_dice_faces = 0,
 		.bonus_mod = 10,
 	},
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,

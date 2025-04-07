@@ -102,13 +102,26 @@ static const t_equipment_action INITIALIZE_EQUIPMENT_ACTION =
 	.bonus_mod = 0,
 };
 
+static const t_equipment_effect INITIALIZE_EQUIPMENT_EFFECT =
+{
+	.function = ft_nullptr,
+	.damage_type = ft_nullptr,
+	.stat = ft_nullptr,
+	.effect_type = 0,
+	.effect_dice_amount = 0,
+	.effect_dice_faces = 0,
+	.effect_secund_dice_amount = 0,
+	.effect_secund_dice_faces = 0,
+	.bonus_mod = 0,
+};
+
 static const t_equipment_id INITIALIZE_EQUIPMENT_ID =
 {
 	.name = ft_nullptr,
 	.projectile_name = ft_nullptr,
 	.equipment_id = 0,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack = INITIALIZE_EQUIPMENT_ACTION,
 	.skill_mod = INITIALIZE_SKILLS,
 	.resistance = INITIALIZE_RESISTANCE,

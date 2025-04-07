@@ -14,8 +14,10 @@ typedef struct s_char t_char;
 typedef struct s_buff t_buff;
 typedef struct s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
+typedef struct s_equipment_effect t_equipment_effect;
 
-typedef void	(*c_action)(t_char *, s_equipment_id *, int);
+typedef void	(*c_action)(t_char *, t_equipment_id *, int);
+typedef void	(*c_effect)(t_char *, t_equipment_id *, t_equipment_effect *, int, int);
 typedef void 	(*c_turn)(t_char *);
 typedef void 	(*c_loot)(t_char *);
 
@@ -265,6 +267,19 @@ typedef struct s_equipment_action
 	int			bonus_mod;
 }	t_equipment_action;
 
+typedef struct s_equipment_effect
+{
+	c_effect	function;
+	const char	*damage_type;
+	const char	*stat;
+	int			effect_type;
+	int			effect_dice_amount;
+	int			effect_dice_faces;
+	int			effect_secund_dice_amount;
+	int			effect_secund_dice_faces;
+	int			bonus_mod;
+}	t_equipment_effect;
+
 typedef struct	s_saves
 {
 	int	str;
@@ -280,8 +295,8 @@ typedef struct s_equipment_id
 	const char			*name;
 	const char			*projectile_name;
 	int					equipment_id;
-	t_equipment_action	action_01;
-	t_equipment_action	action_02;
+	t_equipment_effect	action_01;
+	t_equipment_effect	action_02;
 	t_equipment_action	attack;
 	t_skills			skill_mod;
 	t_resistance		resistance;

@@ -15,8 +15,8 @@ static const t_equipment_id STEEL_SWORD =
 	.name = "steel sword",
 	.projectile_name = ft_nullptr,
 	.equipment_id = STEEL_SWORD_ID,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -60,8 +60,8 @@ static const t_equipment_id STEEL_BATTLE_AXE =
 	.name = "steel battle axe",
 	.projectile_name = ft_nullptr,
 	.equipment_id = STEEL_BATTLE_AXE_ID,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -105,8 +105,8 @@ static const t_equipment_id WOODEN_CLUB =
 	.name = "wooden club",
 	.projectile_name = ft_nullptr,
 	.equipment_id = WOODEN_CLUB_ID,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -150,8 +150,8 @@ static const t_equipment_id CLAW =
 	.name = "claw",
 	.projectile_name = ft_nullptr,
 	.equipment_id = CLAW_ID,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -195,8 +195,8 @@ static const t_equipment_id CLAW_OH =
 	.name = "claw",
 	.projectile_name = ft_nullptr,
 	.equipment_id = CLAW_ID,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -240,8 +240,8 @@ static const t_equipment_id GHOSTLY_SWORD =
 	.name = "ghostly sword",
 	.projectile_name = ft_nullptr,
 	.equipment_id = STEEL_SWORD_ID,
-	.action_01 = INITIALIZE_EQUIPMENT_ACTION,
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -297,7 +297,7 @@ static const t_equipment_id FELBEAST_CLAW =
 		.effect_secund_dice_faces = 0,
 		.bonus_mod = 4,
 	},
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -353,7 +353,7 @@ static const t_equipment_id FELBEAST_CLAW_OH =
 		.effect_secund_dice_faces = 0,
 		.bonus_mod = 4,
 	},
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,
@@ -409,7 +409,7 @@ static const t_equipment_id ANCIENT_PREDATORY_BEAST_CLAW =
 		.effect_secund_dice_faces = 0,
 		.bonus_mod = 4,
 	},
-	.action_02 = INITIALIZE_EQUIPMENT_ACTION,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
 	{
 		.function = ft_weapon_attack,

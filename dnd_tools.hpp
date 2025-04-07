@@ -155,10 +155,12 @@ void 		ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_i
 void 		ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit);
 
 // Attack effects
-void		ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon, int is_crit);
+void		ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon,
+				t_equipment_effect *effect, int is_crit, int is_hit);
 void 		ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *weapon,
-				int is_crit);
-void 		ft_snow_goblin_attack_effects(t_char *info, t_equipment_id *weapon, int is_crit);
+				t_equipment_effect *effect, int is_crit, int is_hit);
+void 		ft_snow_goblin_attack_effects(t_char *info, t_equipment_id *weapon,
+				t_equipment_effect *effect, int is_crit, int is_hit);
 
 // Buff update
 void		ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name);

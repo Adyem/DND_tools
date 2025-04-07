@@ -3,9 +3,12 @@
 #include "ancient_predatory_beast.hpp"
 #include "libft/Printf/printf.hpp"
 
-void ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *weapon, int is_crit)
+void ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *weapon,
+			t_equipment_effect *effect, int is_crit, int is_hit)
 {
+	(void)effect;
 	(void)is_crit;
+	(void)is_hit;
 	(void)weapon;
 	if (DEBUG == 1)
 		pf_printf("going for a multi attack %s", info->name);
