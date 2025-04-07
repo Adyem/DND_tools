@@ -43,8 +43,9 @@ void ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon, t_equipmen
 		int is_crit, int is_hit)
 {
 	(void)effect;
-	(void)is_hit;
     (void)is_crit;
+	if (!is_hit)
+		return ;
     char *message = ft_felbeast_attack_effect_construct_message(info);
     if (!message)
         return ;

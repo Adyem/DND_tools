@@ -8,7 +8,8 @@ void ft_snow_goblin_attack_effects(t_char *info, t_equipment_id *weapon,
 {
 	(void)effect;
 	(void)info;
-	(void)is_hit;
+	if (!is_hit)
+		return ;
 	if (weapon->action_01.effect_type == ETYPE_SNOWBALL_WAND_SLOW)
 	{
 		if (is_crit)
