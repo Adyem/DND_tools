@@ -158,7 +158,7 @@ SRC         = name.cpp \
 			  attack_additional_effects.cpp \
 			  felbeast_weapon_effects.cpp \
 			  ancient_predatory_beast_weapon_effects.cpp \
-			  snow_goblin_slow_effect.cpp
+			  slow_weapon_effect.cpp
 
 CC          = g++
 
