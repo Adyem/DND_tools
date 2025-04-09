@@ -15,9 +15,10 @@ typedef struct s_buff t_buff;
 typedef struct s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 typedef struct s_equipment_effect t_equipment_effect;
+typedef struct s_attack_info t_attack_info;
 
 typedef void	(*c_action)(t_char *, t_equipment_id *, int);
-typedef void	(*c_effect)(t_char *, t_equipment_id *, t_equipment_effect *, int, int);
+typedef void	(*c_effect)(t_char *, t_equipment_id *, t_equipment_effect *, t_attack_info *);
 typedef void 	(*c_turn)(t_char *);
 typedef void 	(*c_loot)(t_char *);
 
@@ -561,5 +562,12 @@ typedef struct s_name
 	c_name	function;
 	t_name	*next;
 }	t_name;
+
+typedef struct s_attack_info
+{
+	int	is_hit;
+	int	is_crit;
+	int	offhand;
+}	t_attack_info;
 
 #endif

@@ -40,11 +40,10 @@ static char *ft_felbeast_attack_effect_construct_message(t_char *info)
 }
 
 void ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon, t_equipment_effect *effect,
-		int is_crit, int is_hit)
+		t_attack_info *attack_info)
 {
 	(void)effect;
-    (void)is_crit;
-	if (!is_hit)
+	if (!attack_info->is_hit)
 		return ;
     char *message = ft_felbeast_attack_effect_construct_message(info);
     if (!message)

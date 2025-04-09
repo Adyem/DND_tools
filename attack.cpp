@@ -65,6 +65,10 @@ void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
     	ft_calculate_damage(weapon, &d_info, is_crit);
         ft_prompt_on_attack_success(info, is_crit);
 	}
-	ft_attack_additional_effects(info, weapon, is_hit, is_crit, offhand);
+	t_attack_info attack_info;
+	attack_info.is_hit = is_hit;
+	attack_info.is_crit = is_crit;
+	attack_info.offhand = offhand;
+	ft_attack_additional_effects(info, weapon, &attack_info);
     return ;
 }
