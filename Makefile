@@ -162,16 +162,16 @@ SRC         = name.cpp \
 
 CC          = g++
 
-OPT_LEVEL ?= 0
+OPT_LEVEL ?= 1
 
 ifeq ($(OPT_LEVEL),0)
 	OPT_FLAGS = -O0 -g
 else ifeq ($(OPT_LEVEL),1)
-	OPT_FLAGS = -O1 -flto -s
+	OPT_FLAGS = -O1 -flto -s -ffunction-sections -fdata-sections -Wl,--gc-sections
 else ifeq ($(OPT_LEVEL),2)
-	OPT_FLAGS = -O2 -flto -s 
+	OPT_FLAGS = -O2 -flto -s -ffunction-sections -fdata-sections -Wl,--gc-sections
 else ifeq ($(OPT_LEVEL),3)
-	OPT_FLAGS = -O3 -flto -s
+	OPT_FLAGS = -O3 -flto -s -ffunction-sections -fdata-sections -Wl,--gc-sections
 else
 	$(error Unsupported OPT_LEVEL=$(OPT_LEVEL))
 endif
