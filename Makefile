@@ -162,7 +162,7 @@ SRC         = name.cpp \
 
 CC          = g++
 
-OPT_LEVEL ?= 1
+OPT_LEVEL ?= 0
 
 ifeq ($(OPT_LEVEL),0)
 	OPT_FLAGS = -O0 -g
