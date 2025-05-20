@@ -3,6 +3,7 @@
 
 # include <stddef.h>
 # include "character.hpp"
+#include "dnd_tools.hpp"
 # include "identification.hpp"
 # include "initialize.hpp"
 #include "libft/CPP_class/nullptr.hpp"
@@ -106,7 +107,7 @@ static const t_equipment_id WAND_OF_DRAINING =
 	.equipment_id = WAND_OF_DRAINING_ID,
 	.action_01 =
 	{
-		.function = ft_nullptr,
+		.function = ft_strength_drain,
 		.damage_type = DAMAGE_TYPE_NECROTIC,
 		.stat = STAT_INT,
 		.effect_type = NONE,
