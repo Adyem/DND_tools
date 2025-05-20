@@ -155,6 +155,8 @@ void 		ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_i
 void 		ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit);
 
 // Attack effects
+void 		ft_strength_drain(t_char *info, t_equipment_id *weapon,
+				t_equipment_effect *effect, t_attack_info *attack_info);
 void		ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
 void 		ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *weapon,
