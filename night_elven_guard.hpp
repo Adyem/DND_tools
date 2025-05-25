@@ -3,6 +3,7 @@
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
+#include "armor.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
@@ -100,7 +101,7 @@ static const	t_equipment NIGHT_ELVEN_GUARD_EQUIPMENT =
 	.weapon = STEEL_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WAND_OF_DRAINING,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.armor = STEEL_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,
