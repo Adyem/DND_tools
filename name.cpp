@@ -124,5 +124,6 @@ t_name *ft_allocate_memory_name()
 	ft_add_node(first_node, &last_node, "veraak", ft_veraak);
 	ft_add_node(first_node, &last_node, "ancient predatory beast", ft_ancient_predatory_beast);
 	ft_add_mob_series(first_node, &last_node, "snow_goblin", ft_snow_goblin, 10);
+	ft_add_mob_series(first_node, &last_node, "night_elven_guard", ft_night_elven_guard, 10);
     return (first_node);
 }

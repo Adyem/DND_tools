@@ -29,7 +29,8 @@ HEADER      = dnd_tools.hpp \
 			  dwarf_paladin.hpp \
 			  felbeast.hpp \
 			  ancient_predatory_beast.hpp \
-			  snow_goblin.hpp
+			  snow_goblin.hpp \
+			  night_elven_guard.hpp
 
 SRC         = name.cpp \
               goblin.cpp \
@@ -48,6 +49,7 @@ SRC         = name.cpp \
 			  thorbald_ironpocket.cpp \
               goblin_warmaster.cpp \
 			  ancient_predatory_beast.cpp \
+			  night_elven_guard.cpp \
               grizz.cpp \
 			  ghost.cpp \
               main.cpp \

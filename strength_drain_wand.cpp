@@ -23,7 +23,7 @@ void ft_strength_drain(t_char *info, t_equipment_id *weapon,
 					"They must then make a Strength saving throw (DC %i). On a failure, they " \
 					"fall unconscious. If this reduction would bring their Strength to 1 or " \
 					"lower, it is set to 1 and the saving throw automatically fails.",
-					point_to_drain, weapon->action_02.bonus_mod);
+					point_to_drain, weapon->attack.bonus_mod);
 		}
 	}
 	return ;

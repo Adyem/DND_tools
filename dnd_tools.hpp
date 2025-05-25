@@ -26,90 +26,95 @@ int			ft_npc_open_file(t_char * info);
 void		ft_npc_init_stats(t_char * info);
 
 // Template
-t_char *	ft_template(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_template(const int index, const char **input, t_name *name, int exception);
 void		ft_template_turn(t_char * info);
 void		ft_template_loot(t_char * info);
 
+// Night Elven Guard
+t_char 		*ft_night_elven_guard(const int index, const char **input, t_name *name, int exception);
+void		ft_night_elven_guard_turn(t_char * info);
+void		ft_night_elven_guard_loot(t_char * info);
+
 // Snow Goblin
-t_char *	ft_snow_goblin(const int index, const char **input, t_name *name, int exception);
+t_char		*ft_snow_goblin(const int index, const char **input, t_name *name, int exception);
 void		ft_snow_goblin(t_char * info);
 void		ft_snow_goblin(t_char * info);
 
 // Ghost
-t_char *	ft_ghost(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_ghost(const int index, const char **input, t_name *name, int exception);
 void		ft_ghost(t_char * info);
 
 // Frank
-t_char *	ft_felbeast(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_felbeast(const int index, const char **input, t_name *name, int exception);
 void		ft_felbeast_turn(t_char * info);
 
 // Frank
-t_char *	ft_frank(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_frank(const int index, const char **input, t_name *name, int exception);
 void		ft_frank_turn(t_char * info);
 
 // Goblin Warmaster
-t_char *	ft_goblin_warmaster(const int index, const char **input, t_name *name,
+t_char 		*ft_goblin_warmaster(const int index, const char **input, t_name *name,
 				int exception);
 void		ft_goblin_warmaster_turn(t_char * info);
 
 // Gundren Rockseeker
-t_char *	ft_gundren_rockseeker(const int index, const char **input, t_name *name,
+t_char 		*ft_gundren_rockseeker(const int index, const char **input, t_name *name,
 				int exception);
 void		ft_gundren_rockseeker_turn(t_char * info);
 
 // Thorbald Ironpocket
-t_char *	ft_thorbald_ironpocket(const int index, const char **input, t_name *name,
+t_char 		*ft_thorbald_ironpocket(const int index, const char **input, t_name *name,
 				int exception);
 void		ft_thorbald_ironpocket_turn(t_char * info);
 
 // Murna Claygrip
-t_char *	ft_murna_claygrip(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_murna_claygrip(const int index, const char **input, t_name *name, int exception);
 void		ft_murna_claygrip_turn(t_char * info);
 
 // Dorgar Stoneguard
-t_char *	ft_dorgar_stoneguard(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_dorgar_stoneguard(const int index, const char **input, t_name *name, int exception);
 void		ft_dorgar_stoneguard_turn(t_char * info);
 
 // Hilda Stormshield
-t_char *	ft_hilda_stormshield(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_hilda_stormshield(const int index, const char **input, t_name *name, int exception);
 void		ft_hilda_stormshield_turn(t_char * info);
 
 // Gundren Rockseeker (duplicate declaration)
-t_char *	ft_gundren_rockseeker(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_gundren_rockseeker(const int index, const char **input, t_name *name, int exception);
 void		ft_gundren_rockseeker_turn(t_char * info);
 
 // Goblin
-t_char *	ft_goblin(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_goblin(const int index, const char **input, t_name *name, int exception);
 void		ft_goblin_turn(t_char * info);
 
 // Chaos Crystal
-t_char *	ft_chaos_crystal(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_chaos_crystal(const int index, const char **input, t_name *name, int exception);
 void		ft_chaos_crystal_turn(t_char * info);
 
 // Chaos Goblin
-t_char *	ft_chaos_goblin(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_chaos_goblin(const int index, const char **input, t_name *name, int exception);
 void		ft_chaos_goblin_turn(t_char * info);
 
 // Grizz
-t_char *	ft_grizz(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_grizz(const int index, const char **input, t_name *name, int exception);
 void		ft_grizz_turn(t_char * info);
 
 // Veraak
-t_char *	ft_veraak(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_veraak(const int index, const char **input, t_name *name, int exception);
 void		ft_veraak_check_phase(t_char * info);
 void		ft_veraak_turn(t_char * info);
 
 // Dwarf Paladin
-t_char *	ft_dwarf_paladin(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_dwarf_paladin(const int index, const char **input, t_name *name, int exception);
 void		ft_dwarf_paladin_turn(t_char * info);
 
 // Ancient Predatory Beast
-t_char *	ft_ancient_predatory_beast(const int index, const char **input, t_name *name,
+t_char 		*ft_ancient_predatory_beast(const int index, const char **input, t_name *name,
 				int exception);
 void		ft_ancient_predatory_beast_turn(t_char * info);
 
 // Maverick
-t_char *	ft_maverick(const int index, const char **input, t_name *name, int exception);
+t_char 		*ft_maverick(const int index, const char **input, t_name *name, int exception);
 void		ft_maverick_turn(t_char * info);
 void		ft_maverick_print_s(int first, int second, t_char * info, char **player_list);
 void		ft_maverick_print_f(int first, int second, t_char * info, char **player_list);

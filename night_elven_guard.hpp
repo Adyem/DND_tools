@@ -1,5 +1,5 @@
-#ifndef TEMPLATE_HPP
-# define TEMPLATE_HPP
+#ifndef NIGHT_ELVEN_GUARD_HPP
+# define NIGHT_ELVEN_GUARD_HPP
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
@@ -11,24 +11,24 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_template_turn(t_char * info);
-void	ft_template_loot(t_char * info);
+void	ft_night_elven_guard_turn(t_char * info);
+void	ft_night_elven_guard_loot(t_char * info);
 
-static const	t_stats TEMPLATE_DEFAULT_STATS =
+static const	t_stats NIGHT_ELVEN_GUARD_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 50,
+	.health = 88,
 	.temp_hp = 0,
-	.str = 12,
+	.str = 16,
 	.dex = 18,
-	.con = 10,
-	.inte = 10,
-	.wis = 10,
-	.cha = 8,
+	.con = 16,
+	.inte = 16,
+	.wis = 14,
+	.cha = 14,
 };
 
-static const	t_save TEMPLATE_SAVE_MODS =
+static const	t_save NIGHT_ELVEN_GUARD_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -38,36 +38,36 @@ static const	t_save TEMPLATE_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skills TEMPLATE_SKILL_MODS =
+static const	t_skills NIGHT_ELVEN_GUARD_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,
     .sleight_of_hand = 3,
     .stealth = 3,
-    .arcana = 0,
+    .arcana = 5,
     .history = 0,
-    .investigation = 0,
+    .investigation = 5,
     .nature = 0,
-    .religion = 0,
+    .religion = 3,
     .animal_handling = 0,
-    .insight = 0,
-    .medicine = 0,
+    .insight = 5,
+    .medicine = 2,
     .perception = 0,
-    .survival = 0,
+    .survival = 2,
     .deception = 0,
-    .intimidation = 0,
+    .intimidation = 5,
     .performance = 0,
     .persuasion = 0,
 };
 
-static const	t_attack TEMPLATE_ATTACK =
+static const	t_attack NIGHT_ELVEN_GUARD_ATTACK =
 {
-	.attack_bonus = 0,
-	.ranged_bonus = 0,
+	.attack_bonus = 3,
+	.ranged_bonus = 3,
 };
 
 
-static const	t_crit_mod TEMPLATE_CRIT =
+static const	t_crit_mod NIGHT_ELVEN_GUARD_CRIT =
 {
 	.attack = 0,
 	.attack_d = 0,
@@ -78,7 +78,7 @@ static const	t_crit_mod TEMPLATE_CRIT =
 	.skill_fail = 0,
 };
 
-static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
+static const	t_resistance NIGHT_ELVEN_GUARD_DEFAULT_RESISTANCE =
 {
 	.acid = 0,
 	.bludgeoning = 0,
@@ -95,11 +95,11 @@ static const	t_resistance TEMPLATE_DEFAULT_RESISTANCE =
 	.thunder = 0,
 };
 
-static const	t_equipment TEMPLATE_EQUIPMENT =
+static const	t_equipment NIGHT_ELVEN_GUARD_EQUIPMENT =
 {
 	.weapon = STEEL_SWORD,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
+	.ranged_weapon = WAND_OF_DRAINING,
 	.armor = INITIALIZE_EQUIPMENT_ID,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
@@ -111,7 +111,7 @@ static const	t_equipment TEMPLATE_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
-static const t_physical TEMPLATE_PHYSICAL =
+static const t_physical NIGHT_ELVEN_GUARD_PHYSICAL =
 {
     .height = 0,
     .weight = 0,
@@ -119,7 +119,7 @@ static const t_physical TEMPLATE_PHYSICAL =
     .speed = 0,
 };
 
-static const t_spell_slot TEMPLATE_SPELL_SLOT =
+static const t_spell_slot NIGHT_ELVEN_GUARD_SPELL_SLOT =
 {
 	.available = 0,
 	.total = 0,
@@ -127,7 +127,7 @@ static const t_spell_slot TEMPLATE_SPELL_SLOT =
 	.replenishing_slot = 0,
 };
 
-static const t_spell_slots TEMPLATE_SPELL_SLOTS =
+static const t_spell_slots NIGHT_ELVEN_GUARD_SPELL_SLOTS =
 {
 	.level_1 = INITIALIZE_SPELL_SLOT,
 	.level_2 = INITIALIZE_SPELL_SLOT,
@@ -141,18 +141,18 @@ static const t_spell_slots TEMPLATE_SPELL_SLOTS =
 	.warlock = INITIALIZE_SPELL_SLOT,
 };
 
-static const t_inventory TEMPLATE_INVENTORY
+static const t_inventory NIGHT_ELVEN_GUARD_INVENTORY
 {
 	.gold = 0,
 };
 
-constexpr t_hit_dice TEMPLATE_HIT_DICE =
+constexpr t_hit_dice NIGHT_ELVEN_GUARD_HIT_DICE =
 {
 	.dice_amount = 0,
 	.dice_faces = 0,
 };
 
-static const t_char TEMPLATE_INFO =
+static const t_char NIGHT_ELVEN_GUARD_INFO =
 {
 	.level = 0,
 	.mechanical = 0,
@@ -161,28 +161,28 @@ static const t_char TEMPLATE_INFO =
 	.version_number = 2,
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
-	.turn = ft_template_turn,
-	.loot = ft_template_loot,
-	.hit_dice = TEMPLATE_HIT_DICE,
-	.inventory = TEMPLATE_INVENTORY,
+	.turn = ft_night_elven_guard_turn,
+	.loot = ft_night_elven_guard_loot,
+	.hit_dice = NIGHT_ELVEN_GUARD_HIT_DICE,
+	.inventory = NIGHT_ELVEN_GUARD_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
-	.spell_slots = TEMPLATE_SPELL_SLOTS,
+	.spell_slots = NIGHT_ELVEN_GUARD_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
-	.crit = TEMPLATE_CRIT,
-	.attack_bonus = TEMPLATE_ATTACK,
+	.crit = NIGHT_ELVEN_GUARD_CRIT,
+	.attack_bonus = NIGHT_ELVEN_GUARD_ATTACK,
 	.bufs = INITIALIZE_BUFFS,
 	.debufs = INITIALIZE_DEBUFFS,
 	.concentration = INITIALIZE_CONCENTRATION,
-	.d_resistance = TEMPLATE_DEFAULT_RESISTANCE,
+	.d_resistance = NIGHT_ELVEN_GUARD_DEFAULT_RESISTANCE,
 	.c_resistance = INITIALIZE_CURRENT_RESISTANCE,
-	.equipment = TEMPLATE_EQUIPMENT,
-	.skill_mod = TEMPLATE_SKILL_MODS,
-	.save_mod = TEMPLATE_SAVE_MODS,
+	.equipment = NIGHT_ELVEN_GUARD_EQUIPMENT,
+	.skill_mod = NIGHT_ELVEN_GUARD_SKILL_MODS,
+	.save_mod = NIGHT_ELVEN_GUARD_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
-	.dstats = TEMPLATE_DEFAULT_STATS,
+	.dstats = NIGHT_ELVEN_GUARD_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
 	.struct_name = ft_nullptr,
-	.physical = TEMPLATE_PHYSICAL,
+	.physical = NIGHT_ELVEN_GUARD_PHYSICAL,
 };
 
 template <int Amount, int Faces>
@@ -192,12 +192,12 @@ struct ValidateHitDice
 	(
         ((Amount == 0 && Faces == 0) || (Amount >= 1 && Faces >= 1)) &&
         (Amount <= 40 && Faces <= 12),
-        "Invalid TEMPLATE_HIT_DICE values: Either both must be 0 or both at least 1, " \
+        "Invalid NIGHT_ELVEN_GUARD_HIT_DICE values: Either both must be 0 or both at least 1, " \
 			"and the dice amount must not exceed 40, the dice faces must not exceed 12."
     );
 };
 
-inline ValidateHitDice<TEMPLATE_HIT_DICE.dice_amount,
-	   					TEMPLATE_HIT_DICE.dice_faces> validation_instance;
+inline ValidateHitDice<NIGHT_ELVEN_GUARD_HIT_DICE.dice_amount,
+	   					NIGHT_ELVEN_GUARD_HIT_DICE.dice_faces> validation_instance;
 
 #endif

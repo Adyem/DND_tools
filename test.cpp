@@ -24,6 +24,8 @@ void	ft_test(t_name *name)
 	ft_excecute_test("ancient predatory beast", "attack", name);
 	ft_excecute_test("snow_goblin_01", "init", name);
 	ft_excecute_test("snow_goblin_01", "ranged_attack", name);
+	ft_excecute_test("night_elven_guard_01", "init", name);
+	ft_excecute_test("night_elven_guard_01", "ranged_attack", name);
 	g_dnd_test = false;
 	return ;
 }

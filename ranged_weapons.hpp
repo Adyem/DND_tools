@@ -117,9 +117,10 @@ static const t_equipment_id WAND_OF_DRAINING =
 		.effect_secund_dice_faces = 0,
 		.bonus_mod = 4,
 	},
-	.action_02 =
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
+	.attack =
 	{
-		.function = ft_nullptr,
+		.function = ft_weapon_attack,
 		.damage_type = DAMAGE_TYPE_NECROTIC,
 		.stat = STAT_INT,
 		.effect_type = NONE,
@@ -128,18 +129,6 @@ static const t_equipment_id WAND_OF_DRAINING =
 		.effect_secund_dice_amount = 0,
 		.effect_secund_dice_faces = 0,
 		.bonus_mod = 15,
-	},
-	.attack =
-	{
-		.function = ft_weapon_attack,
-		.damage_type = DAMAGE_TYPE_NECROTIC,
-		.stat = STAT_INT,
-		.effect_type = NONE,
-		.effect_dice_amount = 2,
-		.effect_dice_faces = 4,
-		.effect_secund_dice_amount = 0,
-		.effect_secund_dice_faces = 0,
-		.bonus_mod = 0,
 	},
 	.skill_mod = INITIALIZE_SKILLS,
 	.resistance = INITIALIZE_RESISTANCE,
