@@ -107,7 +107,7 @@ static const t_equipment_id WAND_OF_DRAINING =
 	.action_01 =
 	{
 		.function = ft_strength_drain,
-		.damage_type = DAMAGE_TYPE_NECROTIC,
+		.damage_type = DAMAGE_TYPE_THUNDER,
 		.stat = STAT_INT,
 		.effect_type = NONE,
 		.effect_dice_amount = 0,
@@ -120,7 +120,7 @@ static const t_equipment_id WAND_OF_DRAINING =
 	.attack =
 	{
 		.function = ft_weapon_attack,
-		.damage_type = DAMAGE_TYPE_NECROTIC,
+		.damage_type = DAMAGE_TYPE_THUNDER,
 		.stat = STAT_INT,
 		.effect_type = NONE,
 		.effect_dice_amount = 0,
