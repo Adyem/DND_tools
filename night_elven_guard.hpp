@@ -157,7 +157,7 @@ static const t_char NIGHT_ELVEN_GUARD_INFO =
 {
 	.level = 0,
 	.mechanical = 0,
-	.passive_perception = 15,
+	.passive_perception = 17,
 	.initiative = -1,
 	.version_number = 2,
 	.save_file = ft_nullptr,
