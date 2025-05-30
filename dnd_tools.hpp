@@ -30,6 +30,26 @@ t_char 		*ft_template(const int index, const char **input, t_name *name, int exc
 void		ft_template_turn(t_char * info);
 void		ft_template_loot(t_char * info);
 
+// Shield_spell_a
+t_char 		*ft_shield_spell_a(const int index, const char **input, t_name *name, int exception);
+void		ft_shield_spell_a_turn(t_char * info);
+void		ft_shield_spell_a_loot(t_char * info);
+
+// Demonic_portal_a
+t_char 		*ft_demonic_portal_a(const int index, const char **input, t_name *name, int exception);
+void		ft_demonic_portal_a_turn(t_char * info);
+void		ft_demonic_portal_a_loot(t_char * info);
+
+// Malfurion
+t_char 		*ft_malfurion(const int index, const char **input, t_name *name, int exception);
+void		ft_malfurion_turn(t_char * info);
+void		ft_malfurion_loot(t_char * info);
+
+// Xavius
+t_char 		*ft_xavius(const int index, const char **input, t_name *name, int exception);
+void		ft_xavius_turn(t_char * info);
+void		ft_xavius_loot(t_char * info);
+
 // Night Elven Guard
 t_char 		*ft_night_elven_guard(const int index, const char **input, t_name *name, int exception);
 void		ft_night_elven_guard_turn(t_char * info);
@@ -173,6 +193,9 @@ void 		ft_snow_goblin_attack_effects(t_char *info, t_equipment_id *weapon,
 void		ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name);
 void		ft_update_buff_status(t_char * info, int current_dur, int duration,
 				const char *buff_name);
+
+// Init Encounter
+void		ft_encounter(const char *encounter_name, t_name *name);
 
 // Damage buffs
 int			ft_check_buff_damage(t_char * info);
