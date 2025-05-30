@@ -80,19 +80,19 @@ static const	t_crit_mod SHIELD_SPELL_A_CRIT =
 
 static const	t_resistance SHIELD_SPELL_A_DEFAULT_RESISTANCE =
 {
-	.acid = 0,
-	.bludgeoning = 0,
-	.cold = 0,
-	.fire = 0,
-	.force = 0,
-	.lightning = 0,
-	.necrotic = 0,
-	.piercing = 0,
-	.poison = 0,
-	.psychic = 0,
-	.radiant = 0,
-	.slashing = 0,
-	.thunder = 0,
+	.acid = 100,
+	.bludgeoning = 100,
+	.cold = 100,
+	.fire = 100,
+	.force = 100,
+	.lightning = 100,
+	.necrotic = 100,
+	.piercing = 100,
+	.poison = 100,
+	.psychic = 100,
+	.radiant = 100,
+	.slashing = 100,
+	.thunder = 100,
 };
 
 static const	t_equipment SHIELD_SPELL_A_EQUIPMENT =
