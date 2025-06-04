@@ -199,7 +199,13 @@ int initialize_stat_key_value_pairs(t_char *info)
 	tree_node_insert(node, SPELL_MAGIC_DRAIN_LEARNED_KEY, &info->spells.magic_drain.learned, -1);
 	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_AMOUNT_KEY, &info->debufs.magic_drain.amount, -1);
 	tree_node_insert(node, DEBUFF_FELL_POISON_DURATION_KEY, &info->debufs.fell_poison.duration, -1);
-    if (tree_node_get_error(node))
+	tree_node_insert(node, BUFF_REJUVENATION_DURATION_KEY, &info->bufs.rejuvenation.duration, -1);
+	tree_node_insert(node, BUFF_REJUVENATION_DICE_AMOUNT_KEY,
+			&info->bufs.rejuvenation.healing_dice_faces, -1);
+	tree_node_insert(node, BUFF_REJUVENATION_DICE_FACES_KEY,
+			&info->bufs.rejuvenation.healing_dice_amount, -1);
+	tree_node_insert(node, BUFF_REJUVENATION_EXTRA_KEY, &info->bufs.rejuvenation.healing_extra, -1);
+	if (tree_node_get_error(node))
         return (1);
     return (0);
 }

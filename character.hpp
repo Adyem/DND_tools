@@ -153,6 +153,14 @@ typedef struct	s_buff_chaos_armor
 	int	duration;
 }	t_buff_chaos_armor;
 
+typedef struct	s_buff_rejuvenation
+{
+	int	duration;
+	int	healing_dice_amount;
+	int	healing_dice_faces;
+	int	healing_extra;
+}	t_buff_rejuvenation;
+
 typedef struct	s_bufs
 {
 	t_buff_bless				bless;
@@ -165,6 +173,7 @@ typedef struct	s_bufs
 	t_buff_arcane_pounce		arcane_pounce;
 	t_buff_earth_pounce			earth_pounce;
 	t_buff_frost_breath			frost_breath;
+	t_buff_rejuvenation			rejuvenation;
 }	t_bufs;
 
 typedef struct	s_debuff_magic_drain

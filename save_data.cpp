@@ -83,9 +83,14 @@ static void ft_npc_write_spell_slots(t_char * info, ft_file &file)
 	file.printf("%s%i\n", BUFF_BLESS_DICE_AMOUNT_MOD_KEY, info->bufs.bless.dice_amount_mod);
 	ft_npc_write_file_double_char(BUFF_BLESS_CASTER_NAME_KEY,
 			info->bufs.bless.caster_name, file, info);
+	file.printf("%s%i\n", BUFF_REJUVENATION_DURATION_KEY, info->bufs.rejuvenation.duration);
+	file.printf("%s%i\n", BUFF_REJUVENATION_DICE_AMOUNT_KEY,
+			info->bufs.rejuvenation.healing_dice_amount);
+	file.printf("%s%i\n", BUFF_REJUVENATION_DICE_FACES_KEY,
+			info->bufs.rejuvenation.healing_dice_faces);
+	file.printf("%s%i\n",BUFF_REJUVENATION_EXTRA_KEY, info->bufs.rejuvenation.healing_extra);
 	return ;
 }
-
 
 static void ft_npc_write_file_1(t_char * info, t_stats *stats, ft_file &file)
 {

@@ -174,6 +174,14 @@ static int check_buffs(t_char * info)
 			"bless dice faces");
 	error += check_range(info->bufs.bless.dice_amount_mod, 0, 100, info->name,
 			"bless dice amount");
+	error += check_range(info->bufs.rejuvenation.duration, 0, 50, info->name,
+			"rejuvenation duration");
+	error += check_range(info->bufs.rejuvenation.healing_dice_amount, 0, 20, info->name,
+			"rejuvenation dice amount");
+	error += check_range(info->bufs.rejuvenation.healing_dice_faces, 0, 12, info->name,
+			"rejuvenation dice faces");
+	error += check_range(info->bufs.rejuvenation.healing_extra, 0, 20, info->name,
+			"rejuvenation healing extra");
 	error += check_range(info->spells.magic_drain.damage_flat, 0, 50, info->name,
 			"magic drain flat damage");
 	error += check_range(info->spells.magic_drain.damage_dice_amount, 0, 50, info->name,
