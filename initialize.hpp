@@ -176,7 +176,7 @@ static const	t_concentration INITIALIZE_CONCENTRATION =
 };
 
 
-static const	t_buff_bless INITIALIZE_BLESS =
+static const	t_buff_bless INITIALIZE_BUFF_BLESS =
 {
 	.duration = 0,
 	.dice_amount_mod = 0,
@@ -185,12 +185,12 @@ static const	t_buff_bless INITIALIZE_BLESS =
 	.caster_name = ft_nullptr,
 };
 
-static const	t_buff_protective_winds INITIALIZE_PROTECTIVE_WINDS =
+static const	t_buff_protective_winds INITIALIZE_BUFF_PROTECTIVE_WINDS =
 {
 	.duration = 0,
 };
 
-static const	t_buff_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
+static const	t_buff_lightning_strike INITIALIZE_BUFF_LIGHTNING_STRIKE =
 {
 	.duration = 0,
 	.amount = 0,
@@ -200,7 +200,7 @@ static const	t_buff_lightning_strike INITIALIZE_LIGHTNING_STRIKE =
 	.extra_damage = 0,
 };
 
-static const	t_buff_air_totem INITIALIZE_AIR_TOTEM =
+static const	t_buff_air_totem INITIALIZE_BUFF_AIR_TOTEM =
 {
 	.save_file = ft_nullptr,
 	.health = 0,
@@ -209,7 +209,7 @@ static const	t_buff_air_totem INITIALIZE_AIR_TOTEM =
 	.erea_of_effect = 0,
 };
 
-static const	t_buff_flame_geyser INITIALIZE_FLAME_GEYSER =
+static const	t_buff_flame_geyser INITIALIZE_BUFF_FLAME_GEYSER =
 {
 	.amount = 0,
 	.duration = 0,
@@ -217,7 +217,7 @@ static const	t_buff_flame_geyser INITIALIZE_FLAME_GEYSER =
 	.tower_explode_d = 0,
 };
 
-static const	t_buff_meteor_strike INITIALIZE_METEOR_STRIKE =
+static const	t_buff_meteor_strike INITIALIZE_BUFF_METEOR_STRIKE =
 {
 	.duration = 0,
 	.one_target_d = 0,
@@ -228,19 +228,19 @@ static const	t_buff_meteor_strike INITIALIZE_METEOR_STRIKE =
 	.target_id = ft_nullptr,
 };
 
-static const	t_buff_chaos_armor INITIALIZE_CHAOS_ARMOR =
+static const	t_buff_chaos_armor INITIALIZE_BUFF_CHAOS_ARMOR =
 {
 	.duration = 0,
 };
 
-static const	t_buff_earth_pounce INITIALIZE_EARTH_POUNCE =
+static const	t_buff_earth_pounce INITIALIZE_BUFF_EARTH_POUNCE =
 {
 	.active = 0,
 	.base_damage = 0,
 	.target_id = ft_nullptr,
 };
 
-static const	t_buff_arcane_pounce INITIALIZE_ARCANE_POUNCE =
+static const	t_buff_arcane_pounce INITIALIZE_BUFF_ARCANE_POUNCE =
 {
 	.active = 0,
 	.magic_damage = 0,
@@ -248,25 +248,34 @@ static const	t_buff_arcane_pounce INITIALIZE_ARCANE_POUNCE =
 	.target_id = ft_nullptr,
 };
 
-static const	t_buff_frost_breath INITIALIZE_FROST_BREATH =
+static const	t_buff_frost_breath INITIALIZE_BUFF_FROST_BREATH =
 {
 	.active = 0,
 	.damage = 0,
 	.target_id = ft_nullptr,
 };
 
+static const	t_buff_rejuvenation INITIALIZE_BUFF_REJUVENATION =
+{
+	.duration = 0,
+	.healing_dice_amount = 0,
+	.healing_dice_faces = 0,
+	.healing_extra = 0,
+};
+
 static const	t_bufs INITIALIZE_BUFFS =
 {
-	.bless = INITIALIZE_BLESS,
-	.protective_winds = INITIALIZE_PROTECTIVE_WINDS,
-	.lightning_strike = INITIALIZE_LIGHTNING_STRIKE,
-	.lightning_strikeV2 = INITIALIZE_LIGHTNING_STRIKE,
-	.flame_geyser = INITIALIZE_FLAME_GEYSER,
-	.meteor_strike = INITIALIZE_METEOR_STRIKE,
-	.chaos_armor = INITIALIZE_CHAOS_ARMOR,
-	.arcane_pounce = INITIALIZE_ARCANE_POUNCE,
-	.earth_pounce = INITIALIZE_EARTH_POUNCE,
-	.frost_breath = INITIALIZE_FROST_BREATH,
+	.bless = INITIALIZE_BUFF_BLESS,
+	.protective_winds = INITIALIZE_BUFF_PROTECTIVE_WINDS,
+	.lightning_strike = INITIALIZE_BUFF_LIGHTNING_STRIKE,
+	.lightning_strikeV2 = INITIALIZE_BUFF_LIGHTNING_STRIKE,
+	.flame_geyser = INITIALIZE_BUFF_FLAME_GEYSER,
+	.meteor_strike = INITIALIZE_BUFF_METEOR_STRIKE,
+	.chaos_armor = INITIALIZE_BUFF_CHAOS_ARMOR,
+	.arcane_pounce = INITIALIZE_BUFF_ARCANE_POUNCE,
+	.earth_pounce = INITIALIZE_BUFF_EARTH_POUNCE,
+	.frost_breath = INITIALIZE_BUFF_FROST_BREATH,
+	.rejuvenation = INITIALIZE_BUFF_REJUVENATION,
 };
 
 static const	t_debuff_hunters_mark INITIALIZE_HUNTERS_MARK =
@@ -421,6 +430,14 @@ static const t_spell_bless INITIALIZE_SPELL_BLESS =
 	.upcast_extra_dice_amount = 0,
 };
 
+static const t_spell_rejuvenation INTIAILIZE_SPELL_REJUVENATION =
+{
+	.duration = 0,
+	.healing_dice_amount = 0,
+	.healing_dice_faces = 0,
+	.healing_extra = 0,
+};
+
 static const t_spells INITIALIZE_SPELLS =
 {
 	.cure_wounds = INITIALIZE_SPELL_CURE_WOUNDS,
@@ -428,6 +445,7 @@ static const t_spells INITIALIZE_SPELLS =
 	.hunters_mark = INITIALIZE_SPELL_HUNTERS_MARK,
 	.bless = INITIALIZE_SPELL_BLESS,
 	.magic_drain = INITIALIZE_SPELL_MAGIC_DRAIN,
+	.rejuvenation = INTIAILIZE_SPELL_REJUVENATION,
 };
 
 static const	t_inventory INITIALIZE_INVENTORY =

@@ -463,6 +463,14 @@ typedef struct s_spell_bless
 	int		upcast_extra_dice_amount;
 }	t_spell_bless;
 
+typedef struct s_spell_rejuvenation
+{
+	int	duration;
+	int	healing_dice_amount;
+	int	healing_dice_faces;
+	int	healing_extra;
+}	t_spell_rejuvenation;
+
 typedef struct	s_spells
 {
 	t_spell_cure_wounds		cure_wounds;
@@ -470,6 +478,7 @@ typedef struct	s_spells
 	t_spell_hunters_mark	hunters_mark;
 	t_spell_bless			bless;
 	t_spell_magic_drain		magic_drain;
+	t_spell_rejuvenation	rejuvenation;
 }	t_spells;
 
 typedef struct s_inventory
