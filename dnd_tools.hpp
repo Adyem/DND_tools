@@ -308,6 +308,7 @@ void		ft_update_meteor_strike(t_char * info);
 void		ft_update_earth_pounce(t_char * info);
 void		ft_update_arcane_pounce(t_char * info);
 void		ft_update_frost_breath(t_char * info);
+void		ft_update_buff_rejuvenation(t_char *info);
 
 // Feats
 void		ft_crackback(t_char * info, int number);
