@@ -12,7 +12,7 @@
 #include <cstring>
 
 
-static void ft_cast_concentration_cleanup(t_char * info, t_char * target,
+static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
 											ft_file save_files[2], t_buff *buff, int error)
 {
 	if (info)
@@ -42,7 +42,7 @@ static void ft_cast_concentration_cleanup(t_char * info, t_char * target,
 	return ;
 }
 
-static int ft_apply_concentration_buff(t_char * info, t_char * target,
+static int ft_apply_concentration_buff(t_char *info, t_char *target,
 								ft_file save_files[2], const char **input, t_buff *buff)
 {
     char	**temp;
@@ -76,7 +76,7 @@ static int ft_apply_concentration_buff(t_char * info, t_char * target,
     return (0);
 }
 
-static int ft_cast_concentration_open_file(ft_file save_files[2], t_char * info,
+static int ft_cast_concentration_open_file(ft_file save_files[2], t_char *info,
 		t_char * target)
 {
     if (ft_open_file_write_only(info->save_file, save_files[0]))
@@ -103,7 +103,7 @@ static int ft_cast_concentration_open_file(ft_file save_files[2], t_char * info,
     return (0);
 }
 
-int	ft_cast_concentration(t_char * info, const char **input, t_buff *buff)
+int	ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
 {
     ft_file	save_files[2];
 	t_char 	*target = ft_nullptr;
@@ -123,7 +123,6 @@ int	ft_cast_concentration(t_char * info, const char **input, t_buff *buff)
         if (!target)
 			return (pf_printf("297-Error getting info %s\n", input[2]), 1);
     }
-
     if (ft_strcmp_dnd(target->name, info->name) == 0)
     {
 		ft_cast_concentration_cleanup(info, target, save_files, buff, 1);
