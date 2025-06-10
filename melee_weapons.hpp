@@ -448,4 +448,60 @@ static const t_equipment_id ANCIENT_PREDATORY_BEAST_CLAW =
 	.slot = SLOT_WEAPON | SLOT_OFFHAND_WEAPON,
 };
 
+static const t_equipment_id SHADOW_CLAW =
+{
+	.name = "shadow claw",
+	.projectile_name = ft_nullptr,
+	.equipment_id = SHADOW_CLAW_ID,
+	.action_01 =
+	{
+		.function = ft_ancient_predatory_beast_attack_effects,
+		.damage_type = DAMAGE_TYPE_NECROTIC,
+		.stat = ft_nullptr,
+		.effect_type = ETYPE_ANCIENT_PREDATORY_BEAST_MULTI_ATTACK,
+		.effect_dice_amount = 1,
+		.effect_dice_faces = 6,
+		.effect_secund_dice_amount = 0,
+		.effect_secund_dice_faces = 0,
+		.bonus_mod = 2,
+	},
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
+	.attack =
+	{
+		.function = ft_weapon_attack,
+		.damage_type = DAMAGE_TYPE_SLASHING,
+		.stat = FINESSE,
+		.effect_type = NONE,
+		.effect_dice_amount = 0,
+		.effect_dice_faces = 0,
+		.effect_secund_dice_amount = 0,
+		.effect_secund_dice_faces = 0,
+		.bonus_mod = 1,
+	},
+	.skill_mod = INITIALIZE_SKILLS,
+	.resistance = INITIALIZE_RESISTANCE,
+	.flat_dr = INITIALIZE_RESISTANCE,
+	.skill_advantage = INITIALIZE_SKILLS,
+	.save = INITIALIZE_SAVES,
+	.save_advantage = INITIALIZE_SAVES,
+	.crit_attack_fail_bonus = 2,
+	.crit_attack_succes_bonus = 5,
+	.type = WTYPE_CLAW,
+	.dex_ac_max_bonus = 0,
+	.ac = 0,
+	.str = 0,
+	.dex = 0,
+	.con = 0,
+	.inte = 0,
+	.wis = 0,
+	.cha = 0,
+	.initiative = 0,
+	.effect_id = 0,
+	.effect_type = 0,
+	.effect_dice_amount = 0,
+	.effect_dice_faces = 0,
+	.bonus_mod = 0,
+	.slot = SLOT_WEAPON | SLOT_OFFHAND_WEAPON,
+};
+
 #endif
