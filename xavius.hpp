@@ -97,7 +97,7 @@ static const	t_resistance XAVIUS_DEFAULT_RESISTANCE =
 
 static const	t_equipment XAVIUS_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = SHADOW_CLAW,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = WOODEN_BOW,
 	.armor = INITIALIZE_EQUIPMENT_ID,
