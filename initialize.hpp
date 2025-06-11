@@ -308,12 +308,20 @@ static const	t_debuff_fell_poison INITIALIZE_FELL_POISON =
 	.duration = 0,
 };
 
+static const	t_debuff_shadow_touched INITIALIZE_SHADOW_TOUCHED =
+{
+	.duration = 0,
+	.stacks = 0,
+	.armor_reduction_amount = 0,
+};
+
 static const	t_debufs INITIALIZE_DEBUFFS =
 {
 	.hunters_mark = INITIALIZE_HUNTERS_MARK,
 	.blinded = INITIALIZE_BLINDED,
 	.magic_drain = INITIALIZE_DEBUFF_MAGIC_DRAIN,
 	.fell_poison = INITIALIZE_FELL_POISON,
+	.shadow_touched = INITIALIZE_SHADOW_TOUCHED,
 };
 
 static const	t_flags INITIALIZE_FLAGS =

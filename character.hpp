@@ -206,12 +206,20 @@ typedef struct	s_debuff_fell_poison
 	int duration;
 }	t_debuff_fell_poison;
 
+typedef struct s_debuff_shadow_touched
+{
+	int	duration;
+	int	stacks;
+	int	armor_reduction_amount;
+}	t_debuff_shadow_touched;
+
 typedef struct s_debufs
 {
 	t_debuff_hunters_mark	hunters_mark;
 	t_debuff_blinded		blinded;
 	t_debuff_magic_drain	magic_drain;
 	t_debuff_fell_poison	fell_poison;
+	t_debuff_shadow_touched	shadow_touched;
 }	t_debufs;
 
 typedef struct s_crit_mod

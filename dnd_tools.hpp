@@ -188,6 +188,8 @@ void 		ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *w
 				t_equipment_effect *effect, t_attack_info *attack_info);
 void 		ft_snow_goblin_attack_effects(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
+void		ft_shadow_claw_effect(t_char *info, t_equipment_id *weapon,
+				t_equipment_effect *effect, t_attack_info *attack_info);
 
 // Buff update
 void		ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name);
