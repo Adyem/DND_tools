@@ -97,9 +97,9 @@ static const	t_resistance MALFURION_DEFAULT_RESISTANCE =
 
 static const	t_equipment MALFURION_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = WOODEN_STAFF,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
+	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
 	.armor = INITIALIZE_EQUIPMENT_ID,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,

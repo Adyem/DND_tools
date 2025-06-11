@@ -99,7 +99,7 @@ static const	t_equipment XAVIUS_EQUIPMENT =
 {
 	.weapon = SHADOW_CLAW,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
+	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
 	.armor = INITIALIZE_EQUIPMENT_ID,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
