@@ -5,6 +5,16 @@
 #include "libft/RNG/dice_roll.hpp"
 #include "libft/CMA/CMA.hpp"
 
+static void	ft_xavius_lightningV2_strike(t_char *info)
+{
+	info->bufs.lightning_strikeV2.duration = 1;
+	info->bufs.lightning_strikeV2.dice_amount = 2;
+	info->bufs.lightning_strikeV2.dice_faces = 8;
+	info->bufs.lightning_strikeV2.distance = 5;
+	print_lightning_strike_v2(info);
+	return ;
+}
+
 void ft_xavius_turn(t_char * info)
 {
 	ft_update_buf(info);
@@ -16,6 +26,12 @@ void ft_xavius_turn(t_char * info)
 	else
 		pf_printf("The %s will try to make either a ranged or melee attack during his turn\n",
 				info->name);
+	if (info->stats.turn == 2)
+		ft_xavius_lightningV2_strike(info);
+	if (info->stats.turn == 5)
+		info->stats.turn = 0;
+	else
+		info->stats.turn++;
 	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
 	return ;
 }
