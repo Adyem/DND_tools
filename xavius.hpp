@@ -1,11 +1,11 @@
 #ifndef XAVIUS_HPP
 # define XAVIUS_HPP
 
-#include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
+#include "ranged_weapons.hpp"
 #include <stddef.h>
 
 typedef struct	s_name t_name;
@@ -99,7 +99,7 @@ static const	t_equipment XAVIUS_EQUIPMENT =
 {
 	.weapon = SHADOW_CLAW,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
+	.ranged_weapon = SHADOW_WAND,
 	.armor = INITIALIZE_EQUIPMENT_ID,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,

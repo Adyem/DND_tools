@@ -1,7 +1,6 @@
 #ifndef MALFURION_HPP
 # define MALFURION_HPP
 
-#include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"

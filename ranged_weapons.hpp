@@ -6,6 +6,7 @@
 # include "dnd_tools.hpp"
 # include "identification.hpp"
 # include "initialize.hpp"
+#include "libft/CPP_class/nullptr.hpp"
 
 void	ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand);
 
@@ -110,7 +111,7 @@ static const t_equipment_id WAND_OF_DRAINING =
 		.damage_type = DAMAGE_TYPE_THUNDER,
 		.stat = STAT_INT,
 		.effect_type = NONE,
-		.effect_dice_amount = 0,
+		.effect_dice_amount = 15,
 		.effect_dice_faces = 0,
 		.effect_secund_dice_amount = 0,
 		.effect_secund_dice_faces = 0,
@@ -127,7 +128,7 @@ static const t_equipment_id WAND_OF_DRAINING =
 		.effect_dice_faces = 0,
 		.effect_secund_dice_amount = 0,
 		.effect_secund_dice_faces = 0,
-		.bonus_mod = 15,
+		.bonus_mod = 0,
 	},
 	.skill_mod = INITIALIZE_SKILLS,
 	.resistance = INITIALIZE_RESISTANCE,
@@ -155,5 +156,60 @@ static const t_equipment_id WAND_OF_DRAINING =
 	.slot = SLOT_RANGED_WEAPON,
 };
 
+static const t_equipment_id SHADOW_WAND =
+{
+	.name = "shadow wand",
+	.projectile_name = "shadow bolt",
+	.equipment_id = SHADOW_WAND_ID,
+	.action_01 =
+	{
+		.function = ft_nullptr,
+		.damage_type = DAMAGE_TYPE_THUNDER,
+		.stat = STAT_INT,
+		.effect_type = NONE,
+		.effect_dice_amount = 0,
+		.effect_dice_faces = 0,
+		.effect_secund_dice_amount = 0,
+		.effect_secund_dice_faces = 0,
+		.bonus_mod = 4,
+	},
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
+	.attack =
+	{
+		.function = ft_weapon_attack,
+		.damage_type = DAMAGE_TYPE_THUNDER,
+		.stat = STAT_INT,
+		.effect_type = NONE,
+		.effect_dice_amount = 2,
+		.effect_dice_faces = 6,
+		.effect_secund_dice_amount = 0,
+		.effect_secund_dice_faces = 0,
+		.bonus_mod = 5,
+	},
+	.skill_mod = INITIALIZE_SKILLS,
+	.resistance = INITIALIZE_RESISTANCE,
+	.flat_dr = INITIALIZE_RESISTANCE,
+	.skill_advantage = INITIALIZE_SKILLS,
+	.save = INITIALIZE_SAVES,
+	.save_advantage = INITIALIZE_SAVES,
+	.crit_attack_fail_bonus = 0,
+	.crit_attack_succes_bonus = 0,
+	.type = WTYPE_WAND,
+	.dex_ac_max_bonus = 0,
+	.ac = 0,
+	.str = 0,
+	.dex = 0,
+	.con = 0,
+	.inte = 0,
+	.wis = 0,
+	.cha = 0,
+	.initiative = 0,
+	.effect_id = 0,
+	.effect_type = 0,
+	.effect_dice_amount = 0,
+	.effect_dice_faces = 0,
+	.bonus_mod = 0,
+	.slot = SLOT_RANGED_WEAPON,
+};
 
 #endif
