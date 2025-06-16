@@ -1,7 +1,7 @@
 #ifndef FELGUARD_HPP
 # define FELGUARD_HPP
 
-#include "ranged_weapons.hpp"
+#include "armor.hpp"
 #include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
@@ -18,11 +18,11 @@ static const	t_stats FELGUARD_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 50,
+	.health = 75,
 	.temp_hp = 0,
-	.str = 12,
-	.dex = 18,
-	.con = 10,
+	.str = 18,
+	.dex = 14,
+	.con = 18,
 	.inte = 10,
 	.wis = 10,
 	.cha = 8,
@@ -41,9 +41,9 @@ static const	t_save FELGUARD_SAVE_MODS =
 static const	t_skills FELGUARD_SKILL_MODS =
 {
     .athletics = 2,
-    .acrobatics = 2,
-    .sleight_of_hand = 3,
-    .stealth = 3,
+    .acrobatics = -2,
+    .sleight_of_hand = -2,
+    .stealth = -2,
     .arcana = 0,
     .history = 0,
     .investigation = 0,
@@ -55,7 +55,7 @@ static const	t_skills FELGUARD_SKILL_MODS =
     .perception = 0,
     .survival = 0,
     .deception = 0,
-    .intimidation = 0,
+    .intimidation = 5,
     .performance = 0,
     .persuasion = 0,
 };
@@ -97,10 +97,10 @@ static const	t_resistance FELGUARD_DEFAULT_RESISTANCE =
 
 static const	t_equipment FELGUARD_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = FELGUARD_POSIONED_AXE,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
+	.armor = FELGUARD_PLATE_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,
