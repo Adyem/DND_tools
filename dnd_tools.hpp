@@ -30,6 +30,11 @@ t_char 		*ft_template(const int index, const char **input, t_name *name, int exc
 void		ft_template_turn(t_char * info);
 void		ft_template_loot(t_char * info);
 
+// Felguard
+t_char 		*ft_felguard(const int index, const char **input, t_name *name, int exception);
+void		ft_felguard_turn(t_char * info);
+void		ft_felguard_loot(t_char * info);
+
 // Shield_spell_a
 t_char 		*ft_shield_spell_a(const int index, const char **input, t_name *name, int exception);
 void		ft_shield_spell_a_turn(t_char * info);
@@ -64,7 +69,7 @@ void		ft_snow_goblin(t_char * info);
 t_char 		*ft_ghost(const int index, const char **input, t_name *name, int exception);
 void		ft_ghost(t_char * info);
 
-// Frank
+// Felbeast
 t_char 		*ft_felbeast(const int index, const char **input, t_name *name, int exception);
 void		ft_felbeast_turn(t_char * info);
 
@@ -182,7 +187,7 @@ void 		ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool i
 // Attack effects
 void 		ft_strength_drain(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
-void		ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon,
+void		ft_fel_poison_attack_effects(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
 void 		ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);

@@ -34,9 +34,11 @@ HEADER      = dnd_tools.hpp \
 			  xavius.hpp \
 			  malfurion.hpp \
 			  demonic_portal_a.hpp \
-			  shield_spell_a.hpp
+			  shield_spell_a.hpp \
+			  felguard.hpp
 
 SRC         = name.cpp \
+			  felguard.cpp \
               goblin.cpp \
               chaos_goblin.cpp \
               veraak.cpp \
@@ -163,7 +165,7 @@ SRC         = name.cpp \
 			  felbeast.cpp \
 			  cast_magic_drain.cpp \
 			  attack_additional_effects.cpp \
-			  felbeast_weapon_effects.cpp \
+			  fel_poison_weapon_effects.cpp \
 			  ancient_predatory_beast_weapon_effects.cpp \
 			  slow_weapon_effect.cpp \
 			  strength_drain_wand.cpp \

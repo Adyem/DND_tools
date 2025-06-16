@@ -5,7 +5,7 @@
 #include "libft/RNG/dice_roll.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 
-static char *ft_felbeast_attack_effect_construct_message(t_char *info)
+static char *ft_fel_poison_attack_effect_construct_message(t_char *info)
 {
     char *string_constitution = cma_itoa(ft_calculate_dex(info));
     if (!string_constitution)
@@ -13,7 +13,7 @@ static char *ft_felbeast_attack_effect_construct_message(t_char *info)
         pf_printf_fd(2, "148-Error: Allocation failure %s poison effect\n", info->name);
         return (ft_nullptr);
     }
-    char *prefix = cma_strdup("the target needs to succeed on a ");
+    char *prefix = cma_strdup("the target needs to succeed on a DC15");
     if (!prefix)
     {
         pf_printf_fd(2, "149-Error: Allocation failure %s poison effect\n", info->name);
@@ -39,13 +39,13 @@ static char *ft_felbeast_attack_effect_construct_message(t_char *info)
     return (message);
 }
 
-void ft_felbeast_attack_effects(t_char *info, t_equipment_id *weapon, t_equipment_effect *effect,
+void ft_fel_poison_attack_effects(t_char *info, t_equipment_id *weapon, t_equipment_effect *effect,
 		t_attack_info *attack_info)
 {
 	(void)effect;
 	if (!attack_info->is_hit)
 		return ;
-    char *message = ft_felbeast_attack_effect_construct_message(info);
+    char *message = ft_fel_poison_attack_effect_construct_message(info);
     if (!message)
         return ;
     if (ft_readline_confirm(message))
