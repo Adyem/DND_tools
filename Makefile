@@ -35,9 +35,11 @@ HEADER      = dnd_tools.hpp \
 			  malfurion.hpp \
 			  demonic_portal_a.hpp \
 			  shield_spell_a.hpp \
-			  felguard.hpp
+			  felguard.hpp \
+			  snow_goblin_shaman.hpp
 
 SRC         = name.cpp \
+			  snow_goblin_shaman.cpp \
 			  felguard.cpp \
               goblin.cpp \
               chaos_goblin.cpp \

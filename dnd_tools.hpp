@@ -60,6 +60,11 @@ t_char 		*ft_night_elven_guard(const int index, const char **input, t_name *name
 void		ft_night_elven_guard_turn(t_char * info);
 void		ft_night_elven_guard_loot(t_char * info);
 
+// Snow Goblin Shaman
+t_char		*ft_snow_goblin_shaman(const int index, const char **input, t_name *name, int exception);
+void		ft_snow_goblin_shaman(t_char * info);
+void		ft_snow_goblin_shaman(t_char * info);
+
 // Snow Goblin
 t_char		*ft_snow_goblin(const int index, const char **input, t_name *name, int exception);
 void		ft_snow_goblin(t_char * info);
