@@ -55,6 +55,40 @@ static const t_equipment_id STEEL_SWORD =
 	.slot = SLOT_WEAPON | SLOT_OFFHAND_WEAPON,
 };
 
+static const t_equipment_id WOODEN_SHIELD =
+{
+	.name = "wooden shield",
+	.projectile_name = ft_nullptr,
+	.equipment_id = STEEL_SWORD_ID,
+	.action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
+	.attack = INITIALIZE_EQUIPMENT_ACTION,
+	.skill_mod = INITIALIZE_SKILLS,
+	.resistance = INITIALIZE_RESISTANCE,
+	.flat_dr = INITIALIZE_RESISTANCE,
+	.skill_advantage = INITIALIZE_SKILLS,
+	.save = INITIALIZE_SAVES,
+	.save_advantage = INITIALIZE_SAVES,
+	.crit_attack_fail_bonus = 0,
+	.crit_attack_succes_bonus = 0,
+	.type = WTYPE_SHORTSWORD,
+	.dex_ac_max_bonus = 0,
+	.ac = 2,
+	.str = 0,
+	.dex = 0,
+	.con = 0,
+	.inte = 0,
+	.wis = 0,
+	.cha = 0,
+	.initiative = 0,
+	.effect_id = 0,
+	.effect_type = 0,
+	.effect_dice_amount = 0,
+	.effect_dice_faces = 0,
+	.bonus_mod = 0,
+	.slot = SLOT_OFFHAND_WEAPON,
+};
+
 static const t_equipment_id STEEL_BATTLE_AXE =
 {
 	.name = "steel battle axe",

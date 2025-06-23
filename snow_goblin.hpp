@@ -150,14 +150,13 @@ static const t_equipment_id ICY_BLADE =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
-	.slot = SLOT_WEAPON | SLOT_OFFHAND_WEAPON,
+	.slot = SLOT_WEAPON,
 };
-
 
 static const	t_equipment SNOW_GOBLIN_EQUIPMENT =
 {
 	.weapon = ICY_BLADE,
-	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
+	.offhand_weapon = WOODEN_SHIELD,
 	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
 	.armor = LEATHER_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
