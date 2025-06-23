@@ -1,10 +1,7 @@
 #ifndef SNOW_GOBLIN_SHAMAN_HPP
 # define SNOW_GOBLIN_SHAMAN_HPP
 
-#include "dnd_tools.hpp"
-#include "identification.hpp"
 #include "ranged_weapons.hpp"
-#include "melee_weapons.hpp"
 #include "armor.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"

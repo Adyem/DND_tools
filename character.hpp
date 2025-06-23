@@ -399,7 +399,6 @@ typedef struct	s_spell_slots
 	t_spell_slot	warlock;
 }	t_spell_slots;
 
-
 typedef struct	s_spell_magic_drain
 {
 	int		learned;
