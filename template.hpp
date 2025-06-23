@@ -198,6 +198,6 @@ struct ValidateHitDice
 };
 
 inline ValidateHitDice<TEMPLATE_HIT_DICE.dice_amount,
-	   					TEMPLATE_HIT_DICE.dice_faces> validation_instance;
+	   					TEMPLATE_HIT_DICE.dice_faces > validation_instance;
 
 #endif

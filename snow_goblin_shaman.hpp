@@ -3,6 +3,7 @@
 
 #include "ranged_weapons.hpp"
 #include "armor.hpp"
+#include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
@@ -97,7 +98,7 @@ static const	t_resistance SNOW_GOBLIN_SHAMAN_DEFAULT_RESISTANCE =
 
 static const	t_equipment SNOW_GOBLIN_SHAMAN_EQUIPMENT =
 {
-	.weapon = INITIALIZE_EQUIPMENT_ID,
+	.weapon = WOODEN_STAFF,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = SNOWBALL_WAND,
 	.armor = LEATHER_ARMOR,
@@ -198,6 +199,6 @@ struct ValidateHitDice
 };
 
 inline ValidateHitDice<SNOW_GOBLIN_SHAMAN_HIT_DICE.dice_amount,
-	   					SNOW_GOBLIN_SHAMAN_HIT_DICE.dice_faces> validation_instance;
+	   					SNOW_GOBLIN_SHAMAN_HIT_DICE.dice_faces > validation_instance;
 
 #endif
