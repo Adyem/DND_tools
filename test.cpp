@@ -8,6 +8,7 @@ void	ft_test(t_name *name)
 	ft_excecute_test("veraak", "init", name);
 	ft_excecute_test("veraak", "attack", name);
 	ft_excecute_test("veraak", "20", "poison", "damage", name);
+	ft_excecute_test("veraak", name);
 	ft_excecute_test("veraak", "20", "poison", "damage", name);
 	ft_excecute_test("veraak", "prone", name);
 	ft_excecute_test("veraak", name);

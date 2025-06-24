@@ -20,11 +20,11 @@ static const	t_stats ANCIENT_PREDATORY_BEAST_DEFAULT_STATS =
 	.turn = 1,
 	.health = 450,
 	.temp_hp = 0,
-	.str = 21,
+	.str = 16,
 	.dex = 14,
-	.con = 15,
-	.inte = 3,
-	.wis = 12,
+	.con = 14,
+	.inte = 2,
+	.wis = 10,
 	.cha = 6,
 };
 
@@ -62,7 +62,7 @@ static const	t_skills ANCIENT_PREDATORY_BEAST_SKILL_MODS =
 
 static const	t_attack ANCIENT_PREDATORY_BEAST_ATTACK =
 {
-	.attack_bonus = 2,
+	.attack_bonus = 0,
 	.ranged_bonus = 0,
 };
 
