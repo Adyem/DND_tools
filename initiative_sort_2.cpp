@@ -38,41 +38,92 @@ void ft_initiative_print(void)
     cma_free_double(content);
 }
 
+
+static t_pc *ft_merge_lists(t_pc *a, t_pc *b)
+{
+    t_pc *result = ft_nullptr;
+
+    if (!a)
+        return (b);
+    if (!b)
+        return (a);
+    if (a->initiative >= b->initiative)
+    {
+        result = a;
+        result->next = ft_merge_lists(a->next, b);
+    }
+    else
+    {
+        result = b;
+        result->next = ft_merge_lists(a, b->next);
+    }
+    return (result);
+}
+
+static void ft_split_list(t_pc *source, t_pc **front, t_pc **back)
+{
+    t_pc *slow;
+    t_pc *fast;
+
+    if (!source || !source->next)
+    {
+        *front = source;
+        *back = ft_nullptr;
+        return ;
+    }
+    slow = source;
+    fast = source->next;
+    while (fast)
+    {
+        fast = fast->next;
+        if (fast)
+        {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+    *front = source;
+    *back = slow->next;
+    slow->next = ft_nullptr;
+}
+
+static void ft_merge_sort(t_pc **head)
+{
+    t_pc *h = *head;
+    t_pc *a;
+    t_pc *b;
+
+    if (!h || !h->next)
+        return ;
+    ft_split_list(h, &a, &b);
+    ft_merge_sort(&a);
+    ft_merge_sort(&b);
+    *head = ft_merge_lists(a, b);
+}
+
 void ft_initiative_sort_2(t_pc *players)
 {
-    int		turn = 0;
-    t_pc	*temp;
-    t_pc	*highest;
+    int         turn = 0;
+    t_pc        *temp;
 
-	ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    ft_merge_sort(&players);
+
+    ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (initiative_file.get_error_code())
     {
         pf_printf("262-Error opening file: %s\n", initiative_file.get_error_message());
         return ;
     }
-    while (1)
+    temp = players;
+    while (temp)
     {
-        temp = players;
-        highest = ft_nullptr;
-        while (temp)
-        {
-            if ((highest == ft_nullptr || temp->initiative > highest->initiative)
-					&& temp->initiative != -1)
-                highest = temp;
-            temp = temp->next;
-        }
-        if (highest == ft_nullptr)
-            break ;
-
         if (turn == 0)
         {
-            pf_printf_fd(initiative_file.get_fd(), "--turn--%s=%d\n", highest->name,
-					highest->initiative);
+            pf_printf_fd(initiative_file.get_fd(), "--turn--%s=%d\n", temp->name, temp->initiative);
             turn = 1;
         }
         else
-            pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", highest->name, highest->initiative);
-
-        highest->initiative = -1;
+            pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", temp->name, temp->initiative);
+        temp = temp->next;
     }
 }
