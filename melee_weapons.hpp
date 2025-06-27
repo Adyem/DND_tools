@@ -636,7 +636,7 @@ static const t_equipment_id FELGUARD_POSIONED_AXE =
 	.effect_dice_amount = 0,
 	.effect_dice_faces = 0,
 	.bonus_mod = 0,
-        .slot = SLOT_WEAPON | SLOT_OFFHAND_WEAPON,
+    .slot = SLOT_WEAPON | SLOT_OFFHAND_WEAPON,
 };
 
 static const t_equipment_id MITHRIL_AXE =
