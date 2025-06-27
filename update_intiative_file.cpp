@@ -83,11 +83,18 @@ static int ft_initiative_check(t_char * info, char **content, int i)
 
 static int ft_initiative_check_content(t_char * info, char **content)
 {
-    int index = 0;
+    int     index = 0;
+    size_t  name_len = 0;
 
+    while (info->name[name_len])
+        name_len++;
     while (content[index])
     {
-        if (ft_strncmp(content[index], info->name, ft_strlen(info->name)) == 0)
+        size_t j = 0;
+        while (j < name_len && content[index][j] &&
+               content[index][j] == info->name[j])
+            j++;
+        if (j == name_len)
             return (1);
         index++;
     }
