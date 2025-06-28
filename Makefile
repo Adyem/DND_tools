@@ -30,9 +30,10 @@ HEADER      = dnd_tools.hpp \
 			  felbeast.hpp \
 			  ancient_predatory_beast.hpp \
 			  snow_goblin.hpp \
-			  night_elven_guard.hpp \
-			  xavius.hpp \
-			  malfurion.hpp \
+                          night_elven_guard.hpp \
+                          xavius.hpp \
+                          shadow_illusion.hpp \
+                          malfurion.hpp \
 			  demonic_portal_a.hpp \
 			  shield_spell_a.hpp \
 			  felguard.hpp \
@@ -170,9 +171,10 @@ SRC         = name.cpp \
 			  fel_poison_weapon_effects.cpp \
 			  ancient_predatory_beast_weapon_effects.cpp \
 			  slow_weapon_effect.cpp \
-			  strength_drain_wand.cpp \
-			  xavius.cpp \
-			  malfurion.cpp \
+                          strength_drain_wand.cpp \
+                          xavius.cpp \
+                          shadow_illusion.cpp \
+                          malfurion.cpp \
 			  demonic_portal_a.cpp \
               shield_spell_a.cpp \
               encounter.cpp \
