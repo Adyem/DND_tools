@@ -125,9 +125,9 @@ t_name *ft_allocate_memory_name()
 	ft_add_node(first_node, &last_node, "ancient_predatory_beast", ft_ancient_predatory_beast);
 	ft_add_mob_series(first_node, &last_node, "snow_goblin", ft_snow_goblin, 10);
 	ft_add_mob_series(first_node, &last_node, "night_elven_guard", ft_night_elven_guard, 10);
-        ft_add_node(first_node, &last_node, "xavius", ft_xavius);
-        ft_add_mob_series(first_node, &last_node, "shadow_illusion", ft_shadow_illusion, 9);
-        ft_add_node(first_node, &last_node, "malfurion", ft_malfurion);
+	ft_add_node(first_node, &last_node, "xavius", ft_xavius);
+    ft_add_mob_series(first_node, &last_node, "shadow_illusion", ft_shadow_illusion, 9);
+    ft_add_node(first_node, &last_node, "malfurion", ft_malfurion);
 	ft_add_node(first_node, &last_node, "shield_spell_a", ft_shield_spell_a);
 	ft_add_node(first_node, &last_node, "demonic_portal_a", ft_demonic_portal_a);
 	ft_add_mob_series(first_node, &last_node, "felguard", ft_felguard, 10);

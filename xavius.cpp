@@ -18,7 +18,7 @@ static void	ft_xavius_lightningV2_strike(t_char *info)
 }
 static char    *ft_shadow_clone_name(int index)
 {
-    size_t  len = ft_strlen("shadow_illusion") + 4;
+    size_t len = ft_strlen_size_t("shadow_illusion") + static_cast<size_t>(4);
     char    *name = static_cast<char *>(cma_calloc(len, sizeof(char)));
 
     if (!name)

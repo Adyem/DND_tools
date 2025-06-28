@@ -26,6 +26,11 @@ int			ft_npc_open_file(t_char * info);
 void		ft_npc_init_stats(t_char * info);
 
 // Template
+t_char 		*ft_shadow_illusion(const int index, const char **input, t_name *name, int exception);
+void		ft_shadow_illusion_turn(t_char * info);
+void		ft_shadow_illusion_loot(t_char * info);
+
+// Shadow Illusion
 t_char 		*ft_template(const int index, const char **input, t_name *name, int exception);
 void		ft_template_turn(t_char * info);
 void		ft_template_loot(t_char * info);

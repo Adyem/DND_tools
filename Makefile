@@ -30,10 +30,10 @@ HEADER      = dnd_tools.hpp \
 			  felbeast.hpp \
 			  ancient_predatory_beast.hpp \
 			  snow_goblin.hpp \
-                          night_elven_guard.hpp \
-                          xavius.hpp \
-                          shadow_illusion.hpp \
-                          malfurion.hpp \
+              night_elven_guard.hpp \
+              xavius.hpp \
+              shadow_illusion.hpp \
+              malfurion.hpp \
 			  demonic_portal_a.hpp \
 			  shield_spell_a.hpp \
 			  felguard.hpp \
