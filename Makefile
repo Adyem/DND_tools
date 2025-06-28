@@ -174,9 +174,10 @@ SRC         = name.cpp \
 			  xavius.cpp \
 			  malfurion.cpp \
 			  demonic_portal_a.cpp \
-			  shield_spell_a.cpp \
-			  encounter.cpp \
-			  update_buff_healing.cpp
+                          shield_spell_a.cpp \
+                          encounter.cpp \
+                          update_buff_healing.cpp \
+                          help.cpp
 
 CC          = g++
 

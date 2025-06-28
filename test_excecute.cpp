@@ -29,12 +29,14 @@ static int ft_handle_builtins(const char **input, int index, t_name *name)
 		ft_clean();
 	else if (index == 1 && ft_strcmp_dnd(input[0], "initiative") == 0)
 		ft_open_all_files(name);
-	else if (index == 1 && ft_strcmp_dnd(input[0], "turn") == 0)
-		ft_turn_next(name);
-	else if (index == 1 && ft_strcmp_dnd(input[0], "test") == 0)
-		ft_test(name);
-	else if (index == 3 && ft_strcmp_dnd(input[1], "player") == 0)
-		ft_player(input);
+        else if (index == 1 && ft_strcmp_dnd(input[0], "turn") == 0)
+                ft_turn_next(name);
+        else if (index == 1 && ft_strcmp_dnd(input[0], "test") == 0)
+                ft_test(name);
+        else if (index == 1 && ft_strcmp_dnd(input[0], "help") == 0)
+                ft_print_help(name);
+        else if (index == 3 && ft_strcmp_dnd(input[1], "player") == 0)
+                ft_player(input);
 	else if (index == 2 && ft_strcmp_dnd(input[0], "encounter") == 0)
 		ft_encounter(input[1], name);
 	else
