@@ -1,76 +1,11 @@
 #include "dnd_tools.hpp"
-#include "xavius.hpp"
+#include "shadow_illusion.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/dice_roll.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
-#include <unistd.h>
 
-static void	ft_xavius_lightningV2_strike(t_char *info)
-{
-	info->bufs.lightning_strikeV2.duration = 1;
-	info->bufs.lightning_strikeV2.dice_amount = 2;
-	info->bufs.lightning_strikeV2.dice_faces = 8;
-	info->bufs.lightning_strikeV2.distance = 5;
-	print_lightning_strike_v2(info);
-	return ;
-}
-static char    *ft_shadow_clone_name(int index)
-{
-    size_t  len = ft_strlen("shadow_illusion") + 4;
-    char    *name = static_cast<char *>(cma_calloc(len, sizeof(char)));
-
-    if (!name)
-        return (ft_nullptr);
-    snprintf(name, len, "shadow_illusion_%02d", index);
-    return (name);
-}
-
-static void     ft_spawn_shadow_clone(t_char *info)
-{
-    int     index = 1;
-
-    while (index <= 9)
-    {
-        char    *name = ft_shadow_clone_name(index);
-        char    *path = ft_nullptr;
-
-        if (!name)
-            return ;
-        path = cma_strjoin("data/", name);
-        if (!path)
-        {
-            cma_free(name);
-            return ;
-        }
-        if (access(path, F_OK) != 0)
-        {
-            const char      *input[3];
-
-            input[0] = name;
-            input[1] = "init";
-            input[2] = ft_nullptr;
-            ft_shadow_illusion(2, input, info->struct_name, 0);
-            cma_free(path);
-            cma_free(const_cast<char *>(input[0]));
-            print_shadow_illusion(info);
-            return ;
-        }
-        cma_free(path);
-        cma_free(name);
-        index++;
-    }
-    pf_printf("All shadow illusions already exist.\n");
-    return ;
-}
-
-static void     ft_xavius_shadow_illusion(t_char *info)
-{
-    ft_spawn_shadow_clone(info);
-}
-
-void ft_xavius_turn(t_char * info)
+void ft_shadow_illusion_turn(t_char * info)
 {
 	ft_update_buf(info);
 	if (info->flags.prone)
@@ -81,14 +16,6 @@ void ft_xavius_turn(t_char * info)
 	else
 		pf_printf("The %s will try to make either a ranged or melee attack during his turn\n",
 				info->name);
-	if (info->stats.turn == 2)
-        ft_xavius_lightningV2_strike(info);
-	if (info->stats.turn == 3)
-        ft_xavius_shadow_illusion(info);
-	if (info->stats.turn == 5)
-		info->stats.turn = 0;
-	else
-		info->stats.turn++;
 	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
 	return ;
 }
@@ -99,13 +26,13 @@ static void ft_initialize_gear_and_feats(t_char * info)
 	return ;
 }
 
-void	ft_xavius_loot(t_char * info)
+void	ft_shadow_illusion_loot(t_char * info)
 {
 	(void)info;
 	return ;
 }
 
-t_char *ft_xavius(const int index, const char **input, t_name *name, int exception)
+t_char *ft_shadow_illusion(const int index, const char **input, t_name *name, int exception)
 {
 	int error = 0;
 	t_char *info = static_cast<t_char *>(cma_malloc(sizeof(t_char)));
@@ -114,7 +41,7 @@ t_char *ft_xavius(const int index, const char **input, t_name *name, int excepti
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
         return (ft_nullptr);
     }
-	*info = XAVIUS_INFO;
+	*info = SHADOW_ILLUSION_INFO;
 	info->name = input[0];
 	info->struct_name = name;
 	info->save_file = cma_strjoin("data/", input[0]);
