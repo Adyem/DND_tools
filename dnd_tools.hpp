@@ -160,7 +160,7 @@ void		print_frost_breath(const t_char * info);
 void		print_lightning_strike_v2(const t_char * info);
 void		print_arcane_pounce(const t_char * info);
 void		print_earth_pounce(const t_char * info);
-void            print_shadow_illusion(const t_char * info);
+void		print_shadow_illusion(const t_char * info);
 
 // Tester
 void		ft_test(t_name *name);

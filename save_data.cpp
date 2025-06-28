@@ -204,11 +204,11 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
     file.printf("%s%i\n", FROST_BREATH_DAMAGE_KEY,
 			info->bufs.frost_breath.damage);
     file.printf("%s%i\n", SHADOW_ILLUSION_ACTIVE_KEY,
-                        info->bufs.shadow_illusion.active);
+            info->bufs.shadow_illusion.active);
     file.printf("%s%i\n", SHADOW_ILLUSION_DURATION_KEY,
-                        info->bufs.shadow_illusion.duration);
-        file.printf("%s%s\n", METEOR_STRIKE_TARGET_KEY,
-				info->bufs.meteor_strike.target_id);
+            info->bufs.shadow_illusion.duration);
+	file.printf("%s%s\n", METEOR_STRIKE_TARGET_KEY,
+			info->bufs.meteor_strike.target_id);
 	if (info->bufs.frost_breath.target_id)
         file.printf("%s%s\n", FROST_BREATH_TARGET_ID_KEY,
 				info->bufs.frost_breath.target_id);
@@ -222,7 +222,8 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
 	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_DAMAGE_FLAT_KEY, info->spells.magic_drain.damage_flat);
 	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_DICE_AMOUNT_KEY,
 			info->spells.magic_drain.damage_dice_amount);
-	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_DICE_FACES_KEY, info->spells.magic_drain.damage_dice_faces);
+	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_DICE_FACES_KEY,
+			info->spells.magic_drain.damage_dice_faces);
 	file.printf("%s%i\n", SPELL_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
 			info->spells.magic_drain.spell_slot_total_level_drain);
 	if (info->spells.magic_drain.target)

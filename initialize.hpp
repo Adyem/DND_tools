@@ -257,8 +257,8 @@ static const	t_buff_frost_breath INITIALIZE_BUFF_FROST_BREATH =
 
 static const    t_buff_shadow_illusion INITIALIZE_BUFF_SHADOW_ILLUSION =
 {
-        .active = 0,
-        .duration = 0,
+    .active = 0,
+    .duration = 0,
 };
 
 static const	t_buff_rejuvenation INITIALIZE_BUFF_REJUVENATION =
@@ -281,7 +281,7 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.arcane_pounce = INITIALIZE_BUFF_ARCANE_POUNCE,
 	.earth_pounce = INITIALIZE_BUFF_EARTH_POUNCE,
 	.frost_breath = INITIALIZE_BUFF_FROST_BREATH,
-        .shadow_illusion = INITIALIZE_BUFF_SHADOW_ILLUSION,
+    .shadow_illusion = INITIALIZE_BUFF_SHADOW_ILLUSION,
 	.rejuvenation = INITIALIZE_BUFF_REJUVENATION,
 };
 
