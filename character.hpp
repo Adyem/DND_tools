@@ -139,6 +139,13 @@ typedef struct s_buff_frost_breath
 	char	*target_id;
 }	t_buff_frost_breath;
 
+typedef struct s_buff_shadow_illusion
+{
+    int     active;
+    int     duration;
+}	 t_buff_shadow_illusion;
+
+
 typedef struct	s_buff_air_totem
 {
 	char	*save_file;
@@ -173,6 +180,7 @@ typedef struct	s_bufs
 	t_buff_arcane_pounce		arcane_pounce;
 	t_buff_earth_pounce			earth_pounce;
 	t_buff_frost_breath			frost_breath;
+        t_buff_shadow_illusion           shadow_illusion;
 	t_buff_rejuvenation			rejuvenation;
 }	t_bufs;
 

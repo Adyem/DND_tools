@@ -14,6 +14,14 @@ static void	ft_xavius_lightningV2_strike(t_char *info)
 	print_lightning_strike_v2(info);
 	return ;
 }
+static void     ft_xavius_shadow_illusion(t_char *info)
+{
+        info->bufs.shadow_illusion.active = 1;
+        info->bufs.shadow_illusion.duration = 2;
+        print_shadow_illusion(info);
+        return ;
+}
+
 
 void ft_xavius_turn(t_char * info)
 {
@@ -26,8 +34,10 @@ void ft_xavius_turn(t_char * info)
 	else
 		pf_printf("The %s will try to make either a ranged or melee attack during his turn\n",
 				info->name);
-	if (info->stats.turn == 2)
-		ft_xavius_lightningV2_strike(info);
+        if (info->stats.turn == 2)
+                ft_xavius_lightningV2_strike(info);
+        if (info->stats.turn == 3)
+                ft_xavius_shadow_illusion(info);
 	if (info->stats.turn == 5)
 		info->stats.turn = 0;
 	else

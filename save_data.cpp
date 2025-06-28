@@ -203,7 +203,10 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
 			info->bufs.frost_breath.active);
     file.printf("%s%i\n", FROST_BREATH_DAMAGE_KEY,
 			info->bufs.frost_breath.damage);
-	if (info->bufs.meteor_strike.target_id)
+    file.printf("%s%i\n", SHADOW_ILLUSION_ACTIVE_KEY,
+                        info->bufs.shadow_illusion.active);
+    file.printf("%s%i\n", SHADOW_ILLUSION_DURATION_KEY,
+                        info->bufs.shadow_illusion.duration);
         file.printf("%s%s\n", METEOR_STRIKE_TARGET_KEY,
 				info->bufs.meteor_strike.target_id);
 	if (info->bufs.frost_breath.target_id)

@@ -169,6 +169,25 @@ void ft_update_frost_breath(t_char * info)
 	info->bufs.frost_breath.active = 0;
 	info->bufs.frost_breath.damage = 0;
 	cma_free(info->bufs.frost_breath.target_id);
-	info->bufs.frost_breath.target_id = ft_nullptr;
+        info->bufs.frost_breath.target_id = ft_nullptr;
+    return ;
+}
+
+void ft_update_shadow_illusion(t_char * info)
+{
+    if (info->bufs.shadow_illusion.active != 1)
+        return ;
+    info->bufs.shadow_illusion.duration--;
+    if (info->bufs.shadow_illusion.duration <= 0)
+    {
+        info->bufs.shadow_illusion.active = 0;
+        pf_printf("%s's shadow illusion fades away.\n", info->name);
+    }
+    else if (info->bufs.shadow_illusion.duration == 1)
+        pf_printf("%s's shadow illusion will fade on the next turn.\n",
+                  info->name);
+    else
+        pf_printf("%s's shadow illusion will last for %d more turns.\n",
+                  info->name, info->bufs.shadow_illusion.duration);
     return ;
 }

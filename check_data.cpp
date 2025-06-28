@@ -166,6 +166,10 @@ static int check_buffs(t_char * info)
 			"arcane pounce area_damage");
     error += check_range(info->bufs.arcane_pounce.magic_damage, 0, 1000, info->name,
 			"arcane pounce magic_damage");
+    error += check_flag(info->bufs.shadow_illusion.active, info->name,
+                        "shadow illusion active");
+    error += check_range(info->bufs.shadow_illusion.duration, 0, 10, info->name,
+                        "shadow illusion duration");
 	error += check_range(info->bufs.bless.base_mod, 0, 1000, info->name,
 			"bless base mod");
 	error += check_range(info->bufs.bless.duration, 0, 50, info->name,
