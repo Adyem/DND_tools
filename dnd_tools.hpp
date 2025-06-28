@@ -160,6 +160,7 @@ void		print_frost_breath(const t_char * info);
 void		print_lightning_strike_v2(const t_char * info);
 void		print_arcane_pounce(const t_char * info);
 void		print_earth_pounce(const t_char * info);
+void            print_shadow_illusion(const t_char * info);
 
 // Tester
 void		ft_test(t_name *name);
@@ -321,6 +322,7 @@ void		ft_update_meteor_strike(t_char * info);
 void		ft_update_earth_pounce(t_char * info);
 void		ft_update_arcane_pounce(t_char * info);
 void		ft_update_frost_breath(t_char * info);
+void            ft_update_shadow_illusion(t_char * info);
 void		ft_update_buff_rejuvenation(t_char *info);
 
 // Feats

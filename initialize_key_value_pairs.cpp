@@ -154,6 +154,8 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, HUNTERS_MARK_CASTER_KEY, &info->debufs.hunters_mark.caster_name);
     tree_node_insert(node, METEOR_STRIKE_TARGET_KEY, &info->bufs.meteor_strike.target_id);
     tree_node_insert(node, FROST_BREATH_TARGET_ID_KEY, &info->bufs.frost_breath.target_id);
+    tree_node_insert(node, SHADOW_ILLUSION_ACTIVE_KEY, &info->bufs.shadow_illusion.active, 0);
+    tree_node_insert(node, SHADOW_ILLUSION_DURATION_KEY, &info->bufs.shadow_illusion.duration, 0);
     tree_node_insert(node, ARCANE_POUNCE_TARGET_ID_KEY, &info->bufs.arcane_pounce.target_id);
     tree_node_insert(node, EARTH_POUNCE_TARGET_ID_KEY, &info->bufs.earth_pounce.target_id);
     tree_node_insert(node, BUFF_BLESS_CASTER_NAME_KEY, &info->bufs.bless.caster_name);

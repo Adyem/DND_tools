@@ -98,9 +98,17 @@ void print_earth_pounce(const t_char * info)
 		target = info->bufs.earth_pounce.target_id;
 	else
 		target = "the target";
-    pf_printf("Earth Pounce: Targets the player with the highest Armor Class (AC). ");
+        pf_printf("Earth Pounce: Targets the player with the highest Armor Class (AC). ");
     pf_printf("At the start of the boss's next turn, jumps towards the %s " \
-			"and deals %d bludgeoning damage reduced by 1 for each AC the %s has.\n",
+                        "and deals %d bludgeoning damage reduced by 1 for each AC the %s has.\n",
             target, info->bufs.earth_pounce.base_damage, target);
-	return ;
+        return ;
+}
+
+void print_shadow_illusion(const t_char * info)
+{
+    pf_printf("Shadow Illusion: Xavius creates an illusory copy of himself for %d turn(s).\n",
+              info->bufs.shadow_illusion.duration);
+    pf_printf("The next attack against him has a 50%% chance to strike the illusion instead.\n");
+    return ;
 }
