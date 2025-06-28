@@ -475,5 +475,6 @@ int			ft_roll_convert_next(char *string, int i, int *error);
 // Player
 void		ft_player(const char **input);
 char		**retrieve_player_list();
+void		ft_print_help(t_name *name);
 
 #endif
