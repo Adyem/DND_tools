@@ -1,5 +1,11 @@
-NAME        = dnd_tools
-NAME_DEBUG  = dnd_tools_debug
+ifeq ($(OS),Windows_NT)
+    EXE_EXT := .exe
+else
+    EXE_EXT :=
+endif
+
+NAME        = dnd_tools$(EXE_EXT)
+NAME_DEBUG  = dnd_tools_debug$(EXE_EXT)
 
 HEADER      = dnd_tools.hpp \
               character.hpp \
@@ -244,15 +250,19 @@ endif
 
 export COMPILE_FLAGS
 
-LDFLAGS     = $(LIBFT) -lreadline
+ifeq ($(OS),Windows_NT)
+    LDFLAGS     = $(LIBFT)
+else
+    LDFLAGS     = $(LIBFT) -lreadline
+endif
 
 OBJS        = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 all: dirs $(TARGET)
 
 dirs:
-	$(MKDIR) $(OBJ_DIR)
-	$(MKDIR) $(OBJ_DIR_DEBUG)
+	-$(MKDIR) $(OBJ_DIR)
+	-$(MKDIR) $(OBJ_DIR_DEBUG)
 
 debug:
 	$(MAKE) all DEBUG=1
@@ -267,12 +277,12 @@ $(OBJ_DIR)/%.o: %.cpp $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR_DEBUG)/*.o
+	-$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR_DEBUG)/*.o
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 fclean: clean
-	$(RM) $(NAME) $(NAME_DEBUG)
-	$(RMDIR) data/*
+	-$(RM) $(NAME) $(NAME_DEBUG)
+	-$(RMDIR) $(OBJ_DIR) $(OBJ_DIR_DEBUG) data
 
 re: fclean all
 
