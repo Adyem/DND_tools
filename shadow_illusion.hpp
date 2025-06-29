@@ -18,7 +18,7 @@ static const	t_stats SHADOW_ILLUSION_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 50,
+	.health = 5,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 18,
