@@ -3,7 +3,26 @@
 #include <sys/stat.h>
 #include <cstring>
 #include <cerrno>
-#include <unistd.h>
+#if defined(_WIN32)
+# include <direct.h>
+# include <io.h>
+# ifndef R_OK
+#  define R_OK 4
+# endif
+# ifndef W_OK
+#  define W_OK 2
+# endif
+#else
+# include <unistd.h>
+#endif
+
+#if defined(_WIN32)
+# define FT_MKDIR(path, mode) _mkdir(path)
+# define FT_ACCESS(path, mode) _access(path, mode)
+#else
+# define FT_MKDIR(path, mode) mkdir(path, mode)
+# define FT_ACCESS(path, mode) access(path, mode)
+#endif
 
 int ft_create_data_dir()
 {
@@ -14,7 +33,7 @@ int ft_create_data_dir()
     {
         if (errno == ENOENT)
         {
-            if (mkdir("data", 0700) == -1)
+            if (FT_MKDIR("data", 0700) == -1)
             {
                 pf_printf_fd(2, "001-Error failed to create directory: %s\n", strerror(errno));
                 return (1);
@@ -30,7 +49,7 @@ int ft_create_data_dir()
     }
     else if (S_ISDIR(st.st_mode))
     {
-        if (access("data", R_OK | W_OK) == -1)
+        if (FT_ACCESS("data", R_OK | W_OK) == -1)
         {
             pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
 					strerror(errno));
