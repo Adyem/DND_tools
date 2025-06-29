@@ -12,8 +12,6 @@ int main(int argc, char **argv)
     t_name *name;
 
     (void)argv;
-    if (DEBUG == 1)
-        pf_printf("Size of t_char struct is %zu\n", sizeof(t_char));
     if (argc > 1)
     {
         pf_printf_fd(2, "005-Error: expecting no arguments\n");
