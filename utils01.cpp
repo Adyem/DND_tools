@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include <limits>
 
 int	ft_check_value(const char *input)
 {
@@ -17,7 +18,9 @@ int	ft_check_value(const char *input)
 		if (input[index] >= '0' && input[index] <= '9')
 		{
 			number = (number * 10) + input[index] - '0';
-			if (sign * number < -2147483648 || sign * number > 2147483647)
+			long signed_number = sign * number;
+			if (signed_number < std::numeric_limits<int>::min()
+					|| signed_number > std::numeric_limits<int>::max())
 				return (2);
 			index++;
 		}

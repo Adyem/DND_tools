@@ -1,6 +1,4 @@
 #include "dnd_tools.hpp"
-#include <valgrind/valgrind.h>
-#include <valgrind/memcheck.h>
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "key_list.hpp"
