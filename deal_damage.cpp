@@ -84,6 +84,12 @@ void ft_deal_damage(t_char * info, const char *input, const char *d_type,
             pf_printf("%s is immune to %s damage.\n", info->name, d_type);
             damage = 0;
         }
+        if (info->bufs.growth.stacks > 0) {
+            damage -= info->bufs.growth.stacks;
+            if (damage < 0)
+                damage = 0;
+            pf_printf("growth reduces damage by %d.\n", info->bufs.growth.stacks);
+        }
         temp = info->stats.health;
         info->stats.health = info->stats.health - damage;
         if (info->stats.health < 0)

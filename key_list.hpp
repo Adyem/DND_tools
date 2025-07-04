@@ -193,6 +193,8 @@ constexpr bool is_valid_key(const char* str)
 	X(BUFF_REJUVENATION_DICE_FACES_KEY, "BUFF_REJUVENATION_DICE_FACES=") \
 	X(BUFF_REJUVENATION_EXTRA_KEY, "BUFF_REJUVENATION_EXTRA=")
 
+	X(BUFF_GROWTH_STACKS_KEY, "BUFF_GROWTH_STACKS=") 
+
 #define X(name, value) \
     static_assert(ends_with(#name, "_KEY"), "Macro name must end with _KEY"); \
     static_assert(is_valid_key(value), "Invalid key: " value); \

@@ -112,7 +112,8 @@ typedef enum e_equipment_slot
     X(HUNTERS_MARK, 1, "hunters mark") \
     X(BLESS, 2, "bless") \
     X(CHAOS_ARMOR, 3, "chaos armor") \
-    X(MAGIC_DRAIN, 4, "magic drain")
+    X(MAGIC_DRAIN, 4, "magic drain") \
+    X(GROWTH, 5, "growth")
 
 #define X(name, id, str)  enum { name##_ID = id };
 ABILITY_LIST

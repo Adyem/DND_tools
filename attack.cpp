@@ -62,7 +62,7 @@ void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
     ft_check_dice_amount_and_faces(weapon, &d_info, offhand, info);
 	if (is_hit)
 	{
-    	ft_calculate_damage(weapon, &d_info, is_crit);
+    	ft_calculate_damage(info, weapon, &d_info, is_crit);
         ft_prompt_on_attack_success(info, is_crit);
 	}
 	t_attack_info attack_info = { .is_hit = is_hit, .is_crit = is_crit, .offhand = offhand };

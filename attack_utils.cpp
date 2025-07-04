@@ -44,7 +44,7 @@ void ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_inf
     return ;
 }
 
-void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_crit)
+void ft_calculate_damage(t_char *info, t_equipment_id *weapon, t_damage_info *d_info, bool is_crit)
 {
     int multiplier;
 
@@ -54,6 +54,14 @@ void ft_calculate_damage(t_equipment_id *weapon, t_damage_info *d_info, bool is_
         multiplier = 1;
     d_info->damage = ft_dice_roll(d_info->dice_amount * multiplier, d_info->dice_faces)
                      + d_info->stat_mod;
+    int reduction = info->bufs.growth.stacks;
+    if (reduction > 0)
+    {
+        d_info->damage -= reduction;
+        if (d_info->damage < 0)
+            d_info->damage = 0;
+        pf_printf("growth reduces damage by %d\n", reduction);
+    }
     pf_printf("deals %d %s damage\n", d_info->damage, weapon->attack.damage_type);
     return ;
 }

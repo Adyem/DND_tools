@@ -205,6 +205,7 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
             info->bufs.shadow_illusion.active);
     file.printf("%s%i\n", SHADOW_ILLUSION_DURATION_KEY,
             info->bufs.shadow_illusion.duration);
+    file.printf("%s%i\n", BUFF_GROWTH_STACKS_KEY, info->bufs.growth.stacks);
 	file.printf("%s%s\n", METEOR_STRIKE_TARGET_KEY,
 			info->bufs.meteor_strike.target_id);
 	if (info->bufs.frost_breath.target_id)

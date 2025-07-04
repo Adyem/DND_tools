@@ -268,6 +268,11 @@ static const	t_buff_rejuvenation INITIALIZE_BUFF_REJUVENATION =
 	.healing_dice_faces = 0,
 	.healing_extra = 0,
 };
+static const    t_buff_growth INITIALIZE_BUFF_GROWTH =
+{
+        .stacks = 0,
+};
+
 
 static const	t_bufs INITIALIZE_BUFFS =
 {
@@ -283,6 +288,7 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.frost_breath = INITIALIZE_BUFF_FROST_BREATH,
     .shadow_illusion = INITIALIZE_BUFF_SHADOW_ILLUSION,
 	.rejuvenation = INITIALIZE_BUFF_REJUVENATION,
+        .growth = INITIALIZE_BUFF_GROWTH,
 };
 
 static const	t_debuff_hunters_mark INITIALIZE_HUNTERS_MARK =

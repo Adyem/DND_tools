@@ -75,6 +75,7 @@ SRC         = name.cpp \
               npc_change_stats_03.cpp \
               npc_change_stats_04.cpp \
               npc_update_buff_01.cpp \
+              growth_stack.cpp \
               utils01.cpp \
               utils02.cpp \
               debug.cpp \
