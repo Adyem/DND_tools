@@ -184,8 +184,8 @@ typedef struct	s_bufs
 	t_buff_arcane_pounce		arcane_pounce;
 	t_buff_earth_pounce			earth_pounce;
 	t_buff_frost_breath			frost_breath;
-    t_buff_shadow_illusion           shadow_illusion;
-        t_buff_growth				growth;
+    t_buff_shadow_illusion      shadow_illusion;
+    t_buff_growth				growth;
 	t_buff_rejuvenation			rejuvenation;
 }	t_bufs;
 

@@ -327,9 +327,9 @@ void		ft_update_meteor_strike(t_char * info);
 void		ft_update_earth_pounce(t_char * info);
 void		ft_update_arcane_pounce(t_char * info);
 void		ft_update_frost_breath(t_char * info);
-void            ft_update_shadow_illusion(t_char * info);
+void        ft_update_shadow_illusion(t_char * info);
 void		ft_update_buff_rejuvenation(t_char *info);
-void            ft_growth_stack(t_char * info, const char **input, int argc);
+void        ft_growth_stack(t_char * info, const char **input, int argc);
 
 // Feats
 void		ft_crackback(t_char * info, int number);
@@ -345,8 +345,8 @@ int			ft_remove_concentration(t_char *info);
 void		ft_cast_chaos_armor(t_char *info);
 int			ft_update_caster_name(char ***caster_name, const char *input_name);
 int			ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff, const char **input);
-void		ft_cast_concentration_multi_target_02(t_char *info, t_target_data *target_data,
-				const char **input);
+void		ft_cast_concentration_multi_target_02(t_char *info,
+				t_target_data *target_data, const char **input);
 int 		ft_is_caster_name_present(char **caster_name_list, const char *name);
 
 // Hunters mark

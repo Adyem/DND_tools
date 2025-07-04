@@ -186,8 +186,8 @@ static int check_buffs(t_char * info)
 			"rejuvenation dice faces");
 	error += check_range(info->bufs.rejuvenation.healing_extra, 0, 20, info->name,
 			"rejuvenation healing extra");
-        error += check_range(info->bufs.growth.stacks, 0, 10, info->name,
-                        "growth stacks");
+    error += check_range(info->bufs.growth.stacks, 0, 10, info->name,
+            "growth stacks");
 	error += check_range(info->spells.magic_drain.damage_flat, 0, 50, info->name,
 			"magic drain flat damage");
 	error += check_range(info->spells.magic_drain.damage_dice_amount, 0, 50, info->name,

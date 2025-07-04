@@ -287,8 +287,8 @@ static const	t_bufs INITIALIZE_BUFFS =
 	.earth_pounce = INITIALIZE_BUFF_EARTH_POUNCE,
 	.frost_breath = INITIALIZE_BUFF_FROST_BREATH,
     .shadow_illusion = INITIALIZE_BUFF_SHADOW_ILLUSION,
+	.growth = INITIALIZE_BUFF_GROWTH,
 	.rejuvenation = INITIALIZE_BUFF_REJUVENATION,
-        .growth = INITIALIZE_BUFF_GROWTH,
 };
 
 static const	t_debuff_hunters_mark INITIALIZE_HUNTERS_MARK =
