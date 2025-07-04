@@ -166,6 +166,11 @@ typedef struct	s_buff_rejuvenation
 	int	healing_dice_faces;
 	int	healing_extra;
 }	t_buff_rejuvenation;
+typedef struct  s_buff_growth
+{
+	int     stacks;
+}       t_buff_growth;
+
 
 typedef struct	s_bufs
 {
@@ -180,6 +185,7 @@ typedef struct	s_bufs
 	t_buff_earth_pounce			earth_pounce;
 	t_buff_frost_breath			frost_breath;
     t_buff_shadow_illusion           shadow_illusion;
+        t_buff_growth				growth;
 	t_buff_rejuvenation			rejuvenation;
 }	t_bufs;
 

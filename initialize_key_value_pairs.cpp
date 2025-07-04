@@ -207,6 +207,7 @@ int initialize_stat_key_value_pairs(t_char *info)
 	tree_node_insert(node, BUFF_REJUVENATION_DICE_FACES_KEY,
 			&info->bufs.rejuvenation.healing_dice_amount, -1);
 	tree_node_insert(node, BUFF_REJUVENATION_EXTRA_KEY, &info->bufs.rejuvenation.healing_extra, -1);
+	tree_node_insert(node, BUFF_GROWTH_STACKS_KEY, &info->bufs.growth.stacks, -1);
 	if (tree_node_get_error(node))
         return (1);
     return (0);
