@@ -22,6 +22,7 @@ static void ft_initialize_gear_and_feats(t_char * info)
 {
 	info->feats.crackback.active = 1;
 	info->spells.cure_wounds = DWARF_PALADIN_SPELL_CURE_WOUNDS;
+        info->spells.lightning_bolt = DWARF_PALADIN_SPELL_LIGHTNING_BOLT;
 	info->spells.bless = DWARF_PALADIN_SPELL_BLESS;
 	info->spells.divine_smite = DWARF_PALADIN_SPELL_DIVINE_SMITE;
 	return ;
