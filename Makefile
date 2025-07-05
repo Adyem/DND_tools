@@ -163,6 +163,7 @@ SRC         = name.cpp \
               frank.cpp \
 			  cast_divine_smite.cpp \
 			  cast_cure_wounds.cpp \
+                          cast_lightning_bolt.cpp \
 			  spell_utils.cpp \
 			  initialize_key_value_pairs.cpp \
 			  cast_bless.cpp \

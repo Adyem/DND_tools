@@ -455,6 +455,20 @@ typedef struct s_spell_divine_smite
 	int		upcast_extra_damage;	
 }	t_spell_divine_smite;
 
+typedef struct s_spell_lightning_bolt
+{
+        int             learned;
+        int             base_level;
+        int             casting_at_level;
+        int             dice_amount;
+        int             dice_faces;
+        int             extra_damage;
+        int             upcast_extra_dice_face;
+        int             upcast_extra_dice_amount;
+        int             upcast_extra_damage;
+}       t_spell_lightning_bolt;
+
+
 typedef struct s_spell_cure_wounds
 {
 	int		learned;
@@ -497,6 +511,7 @@ typedef struct	s_spells
 	t_spell_divine_smite	divine_smite;
 	t_spell_hunters_mark	hunters_mark;
 	t_spell_bless			bless;
+        t_spell_lightning_bolt    lightning_bolt;
 	t_spell_magic_drain		magic_drain;
 	t_spell_rejuvenation	rejuvenation;
 }	t_spells;
