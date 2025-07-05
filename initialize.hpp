@@ -435,19 +435,19 @@ static const t_spell_cure_wounds INITIALIZE_SPELL_CURE_WOUNDS =
 	.upcast_extra_dice_amount = 0,
 	.upcast_extra_healing = 0,
 };
+
 static const t_spell_lightning_bolt INITIALIZE_SPELL_LIGHTNING_BOLT =
 {
-        .learned = 0,
-        .base_level = 0,
-        .casting_at_level = 0,
-        .dice_amount = 0,
-        .dice_faces = 0,
-        .extra_damage = 0,
-        .upcast_extra_dice_face = 0,
-        .upcast_extra_dice_amount = 0,
-        .upcast_extra_damage = 0,
+    .learned = 0,
+    .base_level = 0,
+    .casting_at_level = 0,
+    .dice_amount = 0,
+    .dice_faces = 0,
+    .extra_damage = 0,
+    .upcast_extra_dice_face = 0,
+    .upcast_extra_dice_amount = 0,
+    .upcast_extra_damage = 0,
 };
-
 
 static const t_spell_bless INITIALIZE_SPELL_BLESS =
 {
@@ -477,7 +477,7 @@ static const t_spells INITIALIZE_SPELLS =
 	.cure_wounds = INITIALIZE_SPELL_CURE_WOUNDS,
 	.divine_smite = INITIALIZE_SPELL_DIVINE_SMITE,
 	.hunters_mark = INITIALIZE_SPELL_HUNTERS_MARK,
-        .lightning_bolt = INITIALIZE_SPELL_LIGHTNING_BOLT,
+    .lightning_bolt = INITIALIZE_SPELL_LIGHTNING_BOLT,
 	.bless = INITIALIZE_SPELL_BLESS,
 	.magic_drain = INITIALIZE_SPELL_MAGIC_DRAIN,
 	.rejuvenation = INTIAILIZE_SPELL_REJUVENATION,

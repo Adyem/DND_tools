@@ -18,7 +18,8 @@ typedef struct s_equipment_effect t_equipment_effect;
 typedef struct s_attack_info t_attack_info;
 
 typedef void	(*c_action)(t_char *, t_equipment_id *, int);
-typedef void	(*c_effect)(t_char *, t_equipment_id *, t_equipment_effect *, t_attack_info *);
+typedef void	(*c_effect)(t_char *, t_equipment_id *,
+					t_equipment_effect *, t_attack_info *);
 typedef void 	(*c_turn)(t_char *);
 typedef void 	(*c_loot)(t_char *);
 
@@ -166,11 +167,11 @@ typedef struct	s_buff_rejuvenation
 	int	healing_dice_faces;
 	int	healing_extra;
 }	t_buff_rejuvenation;
+
 typedef struct  s_buff_growth
 {
 	int     stacks;
-}       t_buff_growth;
-
+}   t_buff_growth;
 
 typedef struct	s_bufs
 {
@@ -457,16 +458,16 @@ typedef struct s_spell_divine_smite
 
 typedef struct s_spell_lightning_bolt
 {
-        int             learned;
-        int             base_level;
-        int             casting_at_level;
-        int             dice_amount;
-        int             dice_faces;
-        int             extra_damage;
-        int             upcast_extra_dice_face;
-        int             upcast_extra_dice_amount;
-        int             upcast_extra_damage;
-}       t_spell_lightning_bolt;
+    int	learned;
+    int	base_level;
+    int	casting_at_level;
+    int	dice_amount;
+    int	dice_faces;
+    int	extra_damage;
+    int	upcast_extra_dice_face;
+    int	upcast_extra_dice_amount;
+    int	upcast_extra_damage;
+}   t_spell_lightning_bolt;
 
 
 typedef struct s_spell_cure_wounds
@@ -511,7 +512,7 @@ typedef struct	s_spells
 	t_spell_divine_smite	divine_smite;
 	t_spell_hunters_mark	hunters_mark;
 	t_spell_bless			bless;
-        t_spell_lightning_bolt    lightning_bolt;
+    t_spell_lightning_bolt  lightning_bolt;
 	t_spell_magic_drain		magic_drain;
 	t_spell_rejuvenation	rejuvenation;
 }	t_spells;

@@ -175,18 +175,6 @@ static const t_spell_cure_wounds DWARF_PALADIN_SPELL_CURE_WOUNDS =
 	.upcast_extra_healing = 0,
 };
 
-static const t_spell_lightning_bolt DWARF_PALADIN_SPELL_LIGHTNING_BOLT =
-{
-        .learned = 1,
-        .base_level = 3,
-        .casting_at_level = 0,
-        .dice_amount = 8,
-        .dice_faces = 6,
-        .extra_damage = 0,
-        .upcast_extra_dice_face = 0,
-        .upcast_extra_dice_amount = 1,
-        .upcast_extra_damage = 0,
-};
 static const t_spell_bless DWARF_PALADIN_SPELL_BLESS =
 {
 	.learned = 1,

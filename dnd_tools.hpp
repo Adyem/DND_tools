@@ -230,7 +230,7 @@ void		ft_to_hit_check_buff(t_char * info);
 // Cast spell
 void		ft_cast_divine_smite(t_char * character, bool critical_strike);
 void		ft_cast_cure_wounds(t_char * character);
-void            ft_cast_lightning_bolt(t_char * character);
+void        ft_cast_lightning_bolt(t_char * character);
 void		ft_cast_rejuvenation(const char **input, t_char *info);
 
 // Spells utils

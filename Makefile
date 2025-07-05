@@ -163,7 +163,7 @@ SRC         = name.cpp \
               frank.cpp \
 			  cast_divine_smite.cpp \
 			  cast_cure_wounds.cpp \
-                          cast_lightning_bolt.cpp \
+              cast_lightning_bolt.cpp \
 			  spell_utils.cpp \
 			  initialize_key_value_pairs.cpp \
 			  cast_bless.cpp \
@@ -179,10 +179,10 @@ SRC         = name.cpp \
 			  fel_poison_weapon_effects.cpp \
 			  ancient_predatory_beast_weapon_effects.cpp \
 			  slow_weapon_effect.cpp \
-                          strength_drain_wand.cpp \
-                          xavius.cpp \
-                          shadow_illusion.cpp \
-                          malfurion.cpp \
+              strength_drain_wand.cpp \
+              xavius.cpp \
+              shadow_illusion.cpp \
+              malfurion.cpp \
 			  demonic_portal_a.cpp \
               shield_spell_a.cpp \
               encounter.cpp \
