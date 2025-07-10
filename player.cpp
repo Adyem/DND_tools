@@ -81,7 +81,10 @@ void	ft_player(const char **input)
 	}
 	else
 		pf_printf("243-Error: Invalid input for player\n");
-	cma_free(player->name);
-	cma_free(player);
+    if (player)
+    {
+        cma_free(player->name);
+        cma_free(player);
+    }
 	return ;
 }
