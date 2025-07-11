@@ -3,11 +3,11 @@
 
 void	ft_get_random_target(char **player_list, char **target_field)
 {
-	int	i;
+	int     length;
 
-	i = ft_double_char_length(const_cast<const char **>(player_list));
-	i = ft_dice_roll(1, i);
-	*target_field = player_list[i];
-	ft_remove_element(player_list, player_list[i], false);
+	length = ft_double_char_length(const_cast<const char **>(player_list));
+	int index = ft_dice_roll(1, length) - 1;
+	*target_field = player_list[index];
+	ft_remove_element(player_list, player_list[index], false);
 	return ;
 }
