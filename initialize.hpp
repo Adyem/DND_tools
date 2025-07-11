@@ -477,11 +477,11 @@ static const t_spells INITIALIZE_SPELLS =
 	.cure_wounds = INITIALIZE_SPELL_CURE_WOUNDS,
 	.divine_smite = INITIALIZE_SPELL_DIVINE_SMITE,
 	.hunters_mark = INITIALIZE_SPELL_HUNTERS_MARK,
-    .lightning_bolt = INITIALIZE_SPELL_LIGHTNING_BOLT,
 	.bless = INITIALIZE_SPELL_BLESS,
+	.lightning_bolt = INITIALIZE_SPELL_LIGHTNING_BOLT,
 	.magic_drain = INITIALIZE_SPELL_MAGIC_DRAIN,
 	.rejuvenation = INTIAILIZE_SPELL_REJUVENATION,
-};
+	};
 
 static const	t_inventory INITIALIZE_INVENTORY =
 {

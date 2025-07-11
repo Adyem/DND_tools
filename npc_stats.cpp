@@ -14,10 +14,10 @@ int ft_npc_open_file(t_char * info)
     char **content;
 
     ft_file info_file(info->save_file, O_RDONLY);
-    if (info_file.get_error_code())
+    if (info_file.get_error())
     {
         pf_printf_fd(2, "1-Error opening file %s: %s\n", info->save_file,
-				info_file.get_error_message());
+				info_file.get_error_str());
         return (1);
     }
 	if (DEBUG == 1)
@@ -72,10 +72,10 @@ void ft_npc_change_stats(t_char * info, const int argument_count, const char **a
 	if (info->flags.alreaddy_saved == 1)
 		return ;
     ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-	if (file.get_error_code())
+	if (file.get_error())
 	{
 		pf_printf_fd(2, "145-Error opening file %s: %s\n", info->save_file,
-		file.get_error_message());
+		file.get_error_str());
 	}
     ft_npc_write_file(info, &info->stats, &info->d_resistance, file);
     return ;

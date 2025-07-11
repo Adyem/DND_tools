@@ -59,7 +59,7 @@ int ft_remove_concentration(t_char * info)
 	buff.target_amount = ft_double_char_length(const_cast<const char **>(info->concentration.targets));
 	targets.buff_info = &buff;
 	ft_file info_save_file(ft_check_and_open(&targets, info));
-	if (info_save_file.get_error_code())
+	if (info_save_file.get_error())
 		return (FAILURE);
 	ft_concentration_remove_buf(info, &targets);
 	ft_cast_concentration_save_files(info, &targets, info_save_file);

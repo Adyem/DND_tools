@@ -27,9 +27,9 @@ void ft_initiative_remove(t_char * info)
     if (!content)
         return ;
     ft_file initiative_file("data/data--initiative", O_WRONLY | O_TRUNC);
-    if (initiative_file.get_error_code())
+    if (initiative_file.get_error())
     {
-        pf_printf("Error opening file: %s\n", initiative_file.get_error_message());
+        pf_printf("Error opening file: %s\n", initiative_file.get_error_str());
         cma_free_double(content);
         return ;
     }
@@ -44,7 +44,7 @@ void ft_initiative_remove(t_char * info)
         }
         else
             temp = content[index];
-        if ((ft_strncmp(info->name, temp, ft_strlen(info->name)) == 0)
+        if ((ft_strncmp(info->name, temp, ft_strlen_size_t(info->name)) == 0)
                 && (ft_strlen(temp) > ft_strlen(info->name))
                 && (temp[ft_strlen(info->name)] == '=')
                 && (ft_check_value(&temp[ft_strlen(info->name) + 1])))
@@ -125,7 +125,7 @@ void ft_initiative_add(t_char * info)
     ft_file initiative_file("data/data--initiative", O_WRONLY | O_TRUNC);
     if (initiative_file == -1)
     {
-        pf_printf("Error opening file: %s\n", initiative_file.get_error_message());
+        pf_printf("Error opening file: %s\n", initiative_file.get_error_str());
         cma_free_double(content);
         return ;
     }

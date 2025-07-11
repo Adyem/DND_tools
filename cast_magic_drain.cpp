@@ -33,7 +33,7 @@ static bool generate_magic_drain_message(const t_char *info, ft_string &out_mess
 		return (true);
 	}
 	ft_string temp = "the target needs to succeed on a DC ";
-	if (temp.getError())
+	if (temp.get_error())
 	{
 		pf_printf_fd(2, "152-Error: %s Magic Drain allocation failure", info->name);
 		cma_free(dex_save);
@@ -42,7 +42,7 @@ static bool generate_magic_drain_message(const t_char *info, ft_string &out_mess
 	out_message = temp + dex_save + " to avoid the spell";
 	cma_free(dex_save);
 
-	if (out_message.getError())
+	if (out_message.get_error())
 	{
 		pf_printf_fd(2, "153-Error: %s Magic Drain allocation failure", info->name);
 		return (true);

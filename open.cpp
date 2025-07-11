@@ -12,9 +12,9 @@
 int ft_open_file_write_only(const char *filename, ft_file &file)
 {
     file.open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    if (file.get_error_code())
+    if (file.get_error())
 	{
-        pf_printf_fd(2, "Error opening file %s: %s\n", filename, file.get_error_message());
+        pf_printf_fd(2, "Error opening file %s: %s\n", filename, file.get_error_str());
 		return (1);
 	}
     return (0);
@@ -27,13 +27,13 @@ void ft_dual_save_file(t_char * info, t_char * target)
 
 	pf_printf("HELLO WORLD!!!\n");
 	ft_open_file_write_only(target->save_file, file_target);
-    if (file_target.get_error_code())
+    if (file_target.get_error())
     {
         info->flags.alreaddy_saved = 1;
         return ;
     }
 	ft_open_file_write_only(info->save_file, file_info);
-    if (file_target.get_error_code() || file_info.get_error_code())
+    if (file_target.get_error() || file_info.get_error())
     {
         info->flags.alreaddy_saved = 1;
         ft_free_info(target);
@@ -88,9 +88,9 @@ ft_file ft_check_and_open(t_target_data *target_data, t_char * info)
     int target_index = 0;
     ft_file info_save_file;
 	ft_open_file_write_only(info->save_file, info_save_file);
-    if (info_save_file.get_error_code())
+    if (info_save_file.get_error())
     {
-        pf_printf_fd(2, "122-Error opening file: %s", info_save_file.get_error_message());
+        pf_printf_fd(2, "122-Error opening file: %s", info_save_file.get_error_str());
         return (-1);
     }
 	if (DEBUG == 1)
@@ -99,7 +99,7 @@ ft_file ft_check_and_open(t_target_data *target_data, t_char * info)
     {
         ft_open_file_write_only(target_data->target[target_index]->save_file,
 			target_data->file[target_index]);
-        if (target_data->file[target_index].get_error_code())
+        if (target_data->file[target_index].get_error())
         {
             pf_printf_fd(2, "119-Error opening file: %s", strerror(errno));
             ft_revert_changes_info(info, info_save_file);

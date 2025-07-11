@@ -64,7 +64,7 @@ int ft_prompt_spell_level(t_char * character, int base_level)
 	if (g_dnd_test)
 		return (ft_auto_cast(character, base_level));
 	ft_string available_slots = ft_check_availeble_spell_slots(character, base_level);
-    if (available_slots.getError())
+    if (available_slots.get_error())
     {
         pf_printf_fd(2, "Error: Failed to retrieve available spell slots for %s.\n",
                 character->name);
@@ -78,9 +78,9 @@ int ft_prompt_spell_level(t_char * character, int base_level)
     }
     ft_string message = "Select the level you want to cast the spell at: "
         + available_slots + ": ";
-    if (message.getError())
+    if (message.get_error())
     {
-        pf_printf_fd(2, "Error: Failed to initialize message string %s\n", message.errorStr());
+        pf_printf_fd(2, "Error: Failed to initialize message string %s\n", message.get_error_str());
         return (-1);
     }
     int level = 0;

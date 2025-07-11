@@ -17,9 +17,9 @@ void ft_initiative_print(void)
     char **content;
 
     ft_file file("data/data--initiative", O_RDONLY);
-    if (file.get_error_code())
+    if (file.get_error())
     {
-        pf_printf("Error opening file: %s\n", file.get_error_message());
+        pf_printf("Error opening file: %s\n", file.get_error_str());
         return ;
     }
     content = ft_read_file_lines(file);
@@ -109,9 +109,9 @@ void ft_initiative_sort_2(t_pc *players)
     ft_merge_sort(&players);
 
     ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (initiative_file.get_error_code())
+    if (initiative_file.get_error())
     {
-        pf_printf("262-Error opening file: %s\n", initiative_file.get_error_message());
+        pf_printf("262-Error opening file: %s\n", initiative_file.get_error_str());
         return ;
     }
     temp = players;

@@ -81,9 +81,9 @@ static int ft_turn_write(t_pc *players)
 
 	ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR);
-	if (initiative_file.get_error_code())
+	if (initiative_file.get_error())
 	{
-		pf_printf("263-Error opening file %s\n", initiative_file.get_error_message());
+		pf_printf("263-Error opening file %s\n", initiative_file.get_error_str());
 		return (1);
 	}
 	temp = players;
@@ -143,9 +143,9 @@ void ft_turn_next(t_name *name)
 	char **content;
 
 	ft_file initiative_file("data/data--initiative", O_RDONLY);
-	if (initiative_file.get_error_code())
+	if (initiative_file.get_error())
 	{
-		pf_printf("Error opening data initiative file %s\n", initiative_file.get_error_message());
+		pf_printf("Error opening data initiative file %s\n", initiative_file.get_error_str());
 		return ;
 	}
 	content = ft_read_file_lines(initiative_file);

@@ -63,10 +63,10 @@ t_char *ft_malfurion(const int index, const char **input, t_name *name, int exce
 			}
 			info->dstats.health = info->dstats.health + result;
 			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-			if (file.get_error_code())
+			if (file.get_error())
 			{
 				pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
-					file.get_error_message());
+					file.get_error_str());
 				return (ft_nullptr);
 			}
             ft_npc_write_file(info, &info->dstats, &info->d_resistance, file);

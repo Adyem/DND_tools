@@ -1,5 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/Libft/libft.hpp"
 
 void    ft_growth_stack(t_char *info, const char **input, int argc)
 {

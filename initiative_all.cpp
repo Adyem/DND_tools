@@ -83,7 +83,7 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
     if (!error)
     {
         file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-		if (file.get_error_code())
+		if (file.get_error())
 			return (ft_nullptr);
         ft_save_pc(player, file);
     }
@@ -95,9 +95,9 @@ static void ft_initiative_write(int initiative, char *name)
     if (DEBUG == 1)
         pf_printf("Printing initiative to data file\n");
     ft_file file("data/data--initiative", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-    if (file.get_error_code())
+    if (file.get_error())
     {
-        pf_printf_fd(2, "Error opening data--initiative: %s\n", file.get_error_message());
+        pf_printf_fd(2, "Error opening data--initiative: %s\n", file.get_error_str());
         return ;
     }
     if (DEBUG == 1)
@@ -116,7 +116,7 @@ void ft_open_all_files(t_name *name)
     ft_file info_save_file;
 
     info_save_file.open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    if (info_save_file.get_error_code())
+    if (info_save_file.get_error())
         error = 1;
     dir = ft_opendir("data");
     if (dir == ft_nullptr)
@@ -137,7 +137,7 @@ void ft_open_all_files(t_name *name)
         {
             ft_file file;
             file.open(filepath, O_RDONLY);
-            if (file.get_error_code())
+            if (file.get_error())
             {
                 pf_printf_fd(2, "Unable to open file '%s': %s\n", filepath, strerror(errno));
                 continue ;
@@ -158,7 +158,7 @@ void ft_open_all_files(t_name *name)
                 pf_printf("2. Name of the save file is %s\n", filepath);
             ft_file write_file;
             write_file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-            if (write_file.get_error_code())
+            if (write_file.get_error())
             {
                 pf_printf_fd(2, "Unable to open file '%s' for writing: %s\n",
                              filepath, strerror(errno));

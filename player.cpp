@@ -22,9 +22,9 @@ static void ft_add_player(t_pc *player)
 	}
 	ft_file pc_file(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	cma_free(filename);
-	if (pc_file.get_error_code())
+	if (pc_file.get_error())
 	{
-		pf_printf("Error opening file: %s\n", pc_file.get_error_message());
+		pf_printf("Error opening file: %s\n", pc_file.get_error_str());
 		return ;
 	}
 	pf_printf("Adding player %s\n", player->name);
