@@ -57,11 +57,11 @@ void	ft_free_parse(char **to_parse)
 
 	if (to_parse)
 	{
-		while (to_parse[index])
-		{
-			cma_free(to_parse[1]);
-			index++;
-		}
+               while (to_parse[index])
+               {
+                        cma_free(to_parse[index]);
+                        index++;
+               }
 		cma_free(to_parse);
 	}
 	return ;
