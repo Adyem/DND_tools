@@ -13,7 +13,7 @@ static int ft_check_value_roll(const char *str)
 
 	sign = 1;
 	result = 0;
-	limit = (unsigned long long)INT_MAX + 1;
+	limit = static_cast<unsigned long long>(INT_MAX) + 1;
     while (*str == ' ' || (*str >= 9 && *str <= 13))
         str++;
     if (*str == '-' || *str == '+')
@@ -24,7 +24,7 @@ static int ft_check_value_roll(const char *str)
     }
     while (*str && ft_isdigit(*str))
     {
-        result = result * 10 + (*str - '0');
+        result = result * 10 + (static_cast<unsigned long long>(*str) - '0');
         str++;
         if ((sign == 1 && result > INT_MAX) || (sign == -1 && result > limit))
             return (1);
@@ -57,11 +57,11 @@ void	ft_free_parse(char **to_parse)
 
 	if (to_parse)
 	{
-               while (to_parse[index])
-               {
-                        cma_free(to_parse[index]);
-                        index++;
-               }
+		while (to_parse[index])
+		{
+			cma_free(to_parse[index]);
+			index++;
+		}
 		cma_free(to_parse);
 	}
 	return ;
