@@ -16,6 +16,10 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 # define MAX_PLAYERS 8
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
+# define RL_CRIT_SUCCES 1
+# define RL_SUCCES 2
+# define RL_FAIL 3
+# define RL_CRIT_FAIL 4
 
 extern bool g_dnd_test;
 
@@ -408,6 +412,7 @@ int			ft_check_player_character(const char *name);
 
 // Readline checks
 int			ft_readline_confirm(const char *mesage);
+int                     ft_readline_check_succes_or_fail(const char *message);
 int			ft_readline_spell_level(const char *message, t_char * character,
 				int *invalid_input_amount);
 
