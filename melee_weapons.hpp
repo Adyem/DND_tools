@@ -329,7 +329,7 @@ static const t_equipment_id FELBEAST_CLAW =
 		.effect_dice_faces = 6,
 		.effect_secund_dice_amount = 0,
 		.effect_secund_dice_faces = 0,
-		.bonus_mod = 4,
+		.bonus_mod = 15,
 	},
 	.action_02 = INITIALIZE_EQUIPMENT_EFFECT,
 	.attack =
