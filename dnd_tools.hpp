@@ -461,7 +461,7 @@ void		ft_initiative_print(void);
 t_pc		*ft_initiative_players_am(char **content);
  
 // Initiative update file
-void		ft_initiative_remove(t_char * info);
+int             ft_initiative_remove(t_char * info);
 void		ft_initiative_add(t_char * info);
 
 // Command roll

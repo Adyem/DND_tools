@@ -9,11 +9,12 @@
 #include <cerrno>
 #include <cstring>
 
-void ft_initiative_remove(t_char * info)
+int ft_initiative_remove(t_char * info)
 {
     char    *temp;
     char    **content;
     int     turn_marker;
+    int     removed_turn;
 
     if (DEBUG == 1)
         pf_printf("removing initiative %s\n", info->name);
@@ -21,20 +22,21 @@ void ft_initiative_remove(t_char * info)
     {
         if (DEBUG == 1)
             pf_printf("File does not exist: data/data--initiative\n");
-        return ;
+        return (0);
     }
     content = ft_open_and_read_file("data/data--initiative");
     if (!content)
-        return ;
+        return (0);
     ft_file initiative_file("data/data--initiative", O_WRONLY | O_TRUNC);
     if (initiative_file.get_error())
     {
         pf_printf("Error opening file: %s\n", initiative_file.get_error_str());
         cma_free_double(content);
-        return ;
+        return (0);
     }
     int index = 0;
     turn_marker = 0;
+    removed_turn = 0;
     while (content[index])
     {
         if (ft_strncmp(content[index], "--turn--", 8) == 0)
@@ -53,6 +55,8 @@ void ft_initiative_remove(t_char * info)
                 pf_printf("found one %s and %c\n", content[index], content[index][ft_strlen(info->name)]);
             index++;
             if (turn_marker)
+                removed_turn = 1;
+            if (turn_marker)
                 pf_printf_fd(initiative_file, "--turn--");
             continue ;
         }
@@ -61,7 +65,7 @@ void ft_initiative_remove(t_char * info)
         index++;
     }
     cma_free_double(content);
-    return ;
+    return (removed_turn);
 }
 
 static int ft_initiative_check(t_char * info, char **content, int i)
