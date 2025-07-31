@@ -23,25 +23,29 @@ void ft_print_character_status(t_char * info, int number, int temp)
         }
         else if (info->stats.health == info->dstats.health)
         {
-            pf_printf("%s has been fully revived from 0 to full %d health with %d surplus " \
-					"recovery\n", info->name, info->stats.health, number - info->dstats.health);
+            pf_printf("%s has been fully revived from 0 to full %d health with %d " \
+					"surplus recovery\n", info->name, info->stats.health, number -
+					info->dstats.health);
             ft_initiative_add(info);
         }
         else if (info->stats.health > 0)
         {
-            pf_printf("%s has been revived with %d health\n", info->name, info->stats.health);
+            pf_printf("%s has been revived with %d health\n", info->name,
+					info->stats.health);
             ft_initiative_add(info);
         }
         else
         {
-            pf_printf("Efforts on %s were redundant, %d damage was unnecessary\n", info->name, -number);
+            pf_printf("Efforts on %s were redundant, %d damage was unnecessary\n",
+					info->name, -number);
         }
     }
     else if (temp == info->dstats.health && info->stats.health == info->dstats.health)
-        pf_printf("%s is already at peak condition %d, with %d surplus recovery\n", info->name,
-				info->stats.health, number);
+        pf_printf("%s is already at peak condition %d, with %d surplus recovery\n",
+				info->name, info->stats.health, number);
     else if (info->stats.health + number > info->dstats.health)
-        pf_printf("%s has been fully healed to peak condition %d with %d surplus recovery\n",
+        pf_printf("%s has been fully healed to peak condition %d with %d surplus " \
+				"recovery\n",
 				info->name, info->stats.health, temp + number - info->dstats.health);
     else
     {
@@ -65,7 +69,8 @@ void ft_print_character_status(t_char * info, int number, int temp)
             }
         }
         else if (number < 0)
-            pf_printf("%s has received %d damage and now has %d health remaining\n", info->name,
+            pf_printf("%s has received %d damage and now has %d health remaining\n",
+					info->name,
 					-number, info->stats.health);
         else if (number > 0)
             pf_printf("%s's health was enhanced by %d, reaching %d\n", info->name, number,
