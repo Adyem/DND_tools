@@ -3,6 +3,20 @@
 #include "libft/Libft/libft.hpp"
 #include <unistd.h>
 
+static void ft_remove_dead_shadow_illusion(t_char *info, int had_turn)
+{
+    if (ft_strncmp(info->name, "shadow_illusion_", 15) == 0)
+    {
+        if (info->save_file)
+        {
+            if (unlink(info->save_file) == 0 && DEBUG == 1)
+                pf_printf("Deleted save file for %s\n", info->name);
+        }
+        if (had_turn)
+            ft_turn_next(info->struct_name);
+    }
+}
+
 void ft_print_character_status(t_char * info, int number, int temp)
 {
     if (number == 0 && temp == 0)
@@ -57,16 +71,7 @@ void ft_print_character_status(t_char * info, int number, int temp)
                 pf_printf("%s encountered a setback with %d excess damage\n", info->name,
 						(-number - temp));
             int had_turn = ft_initiative_remove(info);
-            if (ft_strncmp(info->name, "shadow_illusion_", 15) == 0)
-            {
-                if (info->save_file)
-                {
-                    if (unlink(info->save_file) == 0 && DEBUG == 1)
-                        pf_printf("Deleted save file for %s\n", info->name);
-                }
-                if (had_turn)
-                    ft_turn_next(info->struct_name);
-            }
+            ft_remove_dead_shadow_illusion(info, had_turn);
         }
         else if (number < 0)
             pf_printf("%s has received %d damage and now has %d health remaining\n",
