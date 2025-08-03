@@ -5,14 +5,55 @@
 #include "libft/RNG/dice_roll.hpp"
 #include "libft/CMA/CMA.hpp"
 
+static void ft_portal_surge(t_char *info)
+{
+    (void)info;
+    int roll = ft_dice_roll(1, 5);
+    if (roll == -1)
+        return ;
+    if (roll == 1)
+    {
+        pf_printf("Portal Surge: Psychic shriek - DC15 Con save for all nearby or be stunned\n");
+    }
+    else if (roll == 2)
+    {
+        pf_printf("Portal Surge: Demonic tentacles - DC15 Dex save or be grappled\n");
+    }
+    else if (roll == 3)
+    {
+        pf_printf("Portal Surge: Vision flash - DC15 Wis save or suffer disadvantage on attacks\n");
+    }
+    else if (roll == 4)
+    {
+        char    **player_list;
+        int             i;
+        int             damage;
+
+        player_list = ft_get_pc_list();
+        if (!player_list)
+            return ;
+        i = ft_double_char_length(const_cast<const char **>(player_list));
+        i = ft_dice_roll(1, i) - 1;
+        damage = ft_dice_roll(2, 6);
+        pf_printf("Portal Surge: Arcane backlash hits %s for %d force damage\n", player_list[i], damage);
+        cma_free_double(player_list);
+    }
+    else
+    {
+        pf_printf("Portal Surge: Calm moment - no effect\n");
+    }
+    return ;
+}
+
 void ft_demonic_portal_a_turn(t_char * info)
 {
-	ft_update_buf(info);
-	if (info->flags.prone)
-	{
-		pf_printf("%s will use his/her action to stand up\n", info->name);
-		info->flags.prone = 0;
-	}
+        ft_update_buf(info);
+        ft_portal_surge(info);
+        if (info->flags.prone)
+        {
+                pf_printf("%s will use his/her action to stand up\n", info->name);
+                info->flags.prone = 0;
+        }
 	else
 		pf_printf("The %s will try to make either a ranged or melee attack during his turn\n",
 				info->name);
