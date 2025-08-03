@@ -197,24 +197,27 @@ void		ft_prompt_on_attack_success(t_char * character, bool critical_strike);
 int			ft_weapon_find_stat(t_char * info, t_equipment_id *weapon);
 void 		ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
 				int offhand, t_char * info);
-void            ft_calculate_damage(t_char *info, t_equipment_id *weapon, t_damage_info *d_info, bool is_crit);
+void        ft_calculate_damage(t_char *info, t_equipment_id *weapon,
+				t_damage_info *d_info, bool is_crit);
 
 // Attack effects
 void 		ft_strength_drain(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
 void		ft_fel_poison_attack_effects(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
-void 		ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *weapon,
-				t_equipment_effect *effect, t_attack_info *attack_info);
+void 		ft_ancient_predatory_beast_attack_effects(t_char *info,
+				t_equipment_id *weapon, t_equipment_effect *effect,
+				t_attack_info *attack_info);
 void 		ft_snow_goblin_attack_effects(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
 void		ft_shadow_claw_effect(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
-void            ft_nightmare_claw_effect(t_char *info, t_equipment_id *weapon,
-                                t_equipment_effect *effect, t_attack_info *attack_info);
+void        ft_nightmare_claw_effect(t_char *info, t_equipment_id *weapon,
+                t_equipment_effect *effect, t_attack_info *attack_info);
 
 // Buff update
-void		ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name);
+void		ft_npc_update_buff(t_char * info, const char **input, int *buff,
+				const char *name);
 void		ft_update_buff_status(t_char * info, int current_dur, int duration,
 				const char *buff_name);
 

@@ -96,8 +96,8 @@ SRC         = name.cpp \
               save_data.cpp \
               save_player.cpp \
               check_data.cpp \
-                          shadow_claw_effect.cpp \
-                         nightmare_claw_effect.cpp \
+              shadow_claw_effect.cpp \
+              nightmare_claw_effect.cpp \
               check_buff_attack.cpp \
               check_buff_save.cpp \
               check_buff_skill.cpp \
