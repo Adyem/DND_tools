@@ -12,17 +12,13 @@ static void ft_portal_surge(t_char *info)
     if (roll == -1)
         return ;
     if (roll == 1)
-    {
-        pf_printf("Portal Surge: Psychic shriek - DC15 Con save for all nearby or be stunned\n");
-    }
+        pf_printf("Portal Surge: Psychic shriek - DC15 Con save for all nearby or " \
+				"be stunned\n");
     else if (roll == 2)
-    {
         pf_printf("Portal Surge: Demonic tentacles - DC15 Dex save or be grappled\n");
-    }
     else if (roll == 3)
-    {
-        pf_printf("Portal Surge: Vision flash - DC15 Wis save or suffer disadvantage on attacks\n");
-    }
+        pf_printf("Portal Surge: Vision flash - DC15 Wis save or suffer disadvantage " \
+				"on attacks\n");
     else if (roll == 4)
     {
         char    **player_list;
@@ -35,29 +31,21 @@ static void ft_portal_surge(t_char *info)
         i = ft_double_char_length(const_cast<const char **>(player_list));
         i = ft_dice_roll(1, i) - 1;
         damage = ft_dice_roll(2, 6);
-        pf_printf("Portal Surge: Arcane backlash hits %s for %d force damage\n", player_list[i], damage);
+        pf_printf("Portal Surge: Arcane backlash hits %s for %d force damage\n",
+				player_list[i], damage);
         cma_free_double(player_list);
     }
     else
-    {
         pf_printf("Portal Surge: Calm moment - no effect\n");
-    }
     return ;
 }
 
 void ft_demonic_portal_a_turn(t_char * info)
 {
-        ft_update_buf(info);
-        ft_portal_surge(info);
-        if (info->flags.prone)
-        {
-                pf_printf("%s will use his/her action to stand up\n", info->name);
-                info->flags.prone = 0;
-        }
-	else
-		pf_printf("The %s will try to make either a ranged or melee attack during his turn\n",
-				info->name);
-	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
+    ft_update_buf(info);
+    ft_portal_surge(info);
+	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health,
+			info->dstats.health);
 	return ;
 }
 
@@ -95,7 +83,8 @@ t_char *ft_demonic_portal_a(const int index, const char **input, t_name *name, i
 	{
 		if (ft_strcmp_dnd(input[1], "init") == 0)
 		{
-			int result = ft_dice_roll(info->hit_dice.dice_amount, info->hit_dice.dice_faces);
+			int result = ft_dice_roll(info->hit_dice.dice_amount,
+					info->hit_dice.dice_faces);
 			if (result == -1)
 			{
 				pf_printf("147-Error Invalid hit dice %s", info->name);
@@ -103,7 +92,8 @@ t_char *ft_demonic_portal_a(const int index, const char **input, t_name *name, i
 				return (ft_nullptr);
 			}
 			info->dstats.health = info->dstats.health + result;
-			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |
+					S_IWUSR);
 			if (file.get_error())
 			{
 				pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
