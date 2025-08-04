@@ -66,6 +66,8 @@ static void     ft_spawn_shadow_clone(t_char *info)
             ft_shadow_illusion(2, input, info->struct_name, 0);
             cma_free(path);
             cma_free(const_cast<char *>(input[0]));
+            info->bufs.shadow_illusion.active = 1;
+            info->bufs.shadow_illusion.duration = 1;
             print_shadow_illusion(info);
             return ;
         }
