@@ -4,7 +4,6 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/dice_roll.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
 #include <unistd.h>
 
 static void	ft_xavius_lightningV2_strike(t_char *info)
@@ -67,7 +66,7 @@ static void     ft_spawn_shadow_clone(t_char *info)
             cma_free(path);
             cma_free(const_cast<char *>(input[0]));
             info->bufs.shadow_illusion.active = 1;
-            info->bufs.shadow_illusion.duration = 1;
+            info->bufs.shadow_illusion.duration = 5;
             print_shadow_illusion(info);
             return ;
         }
