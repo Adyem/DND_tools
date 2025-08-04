@@ -43,11 +43,13 @@ HEADER      = dnd_tools.hpp \
 			  demonic_portal_a.hpp \
 			  shield_spell_a.hpp \
 			  felguard.hpp \
-			  snow_goblin_shaman.hpp
+			  snow_goblin_shaman.hpp \
+			  mannoroth.hpp
 
 SRC         = name.cpp \
 			  snow_goblin_shaman.cpp \
 			  felguard.cpp \
+			  mannoroth.cpp \
               goblin.cpp \
               chaos_goblin.cpp \
               veraak.cpp \
