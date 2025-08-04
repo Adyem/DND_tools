@@ -18,12 +18,24 @@ static void	ft_xavius_lightningV2_strike(t_char *info)
 }
 static char    *ft_shadow_clone_name(int index)
 {
-    size_t len = ft_strlen_size_t("shadow_illusion") + static_cast<size_t>(4);
-    char    *name = static_cast<char *>(cma_calloc(len, sizeof(char)));
+    char    *id = cma_itoa(index);
+    char    *name;
 
+    if (!id)
+        return (ft_nullptr);
+    if (index < 10)
+    {
+        char    *tmp = cma_strjoin("0", id);
+
+        cma_free(id);
+        if (!tmp)
+            return (ft_nullptr);
+        id = tmp;
+    }
+    name = cma_strjoin("shadow_illusion_", id);
+    cma_free(id);
     if (!name)
         return (ft_nullptr);
-    snprintf(name, len, "shadow_illusion_%02d", index);
     return (name);
 }
 
