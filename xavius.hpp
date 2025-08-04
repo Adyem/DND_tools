@@ -1,6 +1,7 @@
 #ifndef XAVIUS_HPP
 # define XAVIUS_HPP
 
+#include "armor.hpp"
 #include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
@@ -100,7 +101,7 @@ static const	t_equipment XAVIUS_EQUIPMENT =
 	.weapon = NIGHTMARE_CLAW,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = SHADOW_WAND,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.armor = XAVIUS_MAGE_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,

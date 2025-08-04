@@ -79,8 +79,8 @@ void ft_xavius_turn(t_char * info)
 		info->flags.prone = 0;
 	}
 	else
-		pf_printf("The %s will try to make either a ranged or melee attack during his turn\n",
-				info->name);
+		pf_printf("The %s will try to make either a ranged or melee attack during " \
+				"his turn\n", info->name);
 	if (info->stats.turn == 2)
         ft_xavius_lightningV2_strike(info);
 	if (info->stats.turn == 3)
@@ -89,7 +89,8 @@ void ft_xavius_turn(t_char * info)
 		info->stats.turn = 0;
 	else
 		info->stats.turn++;
-	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
+	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health,
+			info->dstats.health);
 	return ;
 }
 
@@ -127,7 +128,8 @@ t_char *ft_xavius(const int index, const char **input, t_name *name, int excepti
 	{
 		if (ft_strcmp_dnd(input[1], "init") == 0)
 		{
-			int result = ft_dice_roll(info->hit_dice.dice_amount, info->hit_dice.dice_faces);
+			int result = ft_dice_roll(info->hit_dice.dice_amount,
+					info->hit_dice.dice_faces);
 			if (result == -1)
 			{
 				pf_printf("147-Error Invalid hit dice %s", info->name);
@@ -135,7 +137,8 @@ t_char *ft_xavius(const int index, const char **input, t_name *name, int excepti
 				return (ft_nullptr);
 			}
 			info->dstats.health = info->dstats.health + result;
-			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |
+					S_IWUSR);
 			if (file.get_error())
 			{
 				pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,
