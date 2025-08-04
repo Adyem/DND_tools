@@ -71,8 +71,8 @@ void print_lightning_strike_v2(const t_char * info)
               info->bufs.lightning_strikeV2.dice_amount * 6,
               info->bufs.lightning_strikeV2.distance);
     pf_printf("(Be careful with placement on Lightning Strike V2 so it isn’t " \
-			"on top of flame geysers)\n");
-	return ;
+                        "on top of flame geysers)\n");
+        return ;
 }
 
 void print_arcane_pounce(const t_char * info)
