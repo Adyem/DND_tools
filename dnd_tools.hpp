@@ -44,6 +44,11 @@ t_char 		*ft_felguard(const int index, const char **input, t_name *name, int exc
 void		ft_felguard_turn(t_char * info);
 void		ft_felguard_loot(t_char * info);
 
+// Mannoroth
+	t_char          *ft_mannoroth(const int index, const char **input, t_name *name, int exception);
+	void            ft_mannoroth_turn(t_char * info);
+	void            ft_mannoroth_loot(t_char * info);
+
 // Shield_spell_a
 t_char 		*ft_shield_spell_a(const int index, const char **input, t_name *name, int exception);
 void		ft_shield_spell_a_turn(t_char * info);

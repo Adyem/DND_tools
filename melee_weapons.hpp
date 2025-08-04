@@ -740,4 +740,49 @@ static const t_equipment_id MITHRIL_AXE =
     .slot = SLOT_TWO_HANDED_WEAPON,
 };
 
+static const t_equipment_id MANNOROTH_GLAIVE =
+{
+        .name = "mannoroth glaive",
+        .projectile_name = ft_nullptr,
+        .equipment_id = MANNOROTH_GLAIVE_ID,
+        .action_01 = INITIALIZE_EQUIPMENT_EFFECT,
+        .action_02 = INITIALIZE_EQUIPMENT_EFFECT,
+        .attack =
+        {
+                .function = ft_weapon_attack,
+                .damage_type = DAMAGE_TYPE_SLASHING,
+                .stat = STAT_STR,
+                .effect_type = NONE,
+                .effect_dice_amount = 2,
+                .effect_dice_faces = 10,
+                .effect_secund_dice_amount = 0,
+                .effect_secund_dice_faces = 0,
+                .bonus_mod = 0,
+        },
+        .skill_mod = INITIALIZE_SKILLS,
+        .resistance = INITIALIZE_RESISTANCE,
+        .flat_dr = INITIALIZE_RESISTANCE,
+        .skill_advantage = INITIALIZE_SKILLS,
+        .save = INITIALIZE_SAVES,
+        .save_advantage = INITIALIZE_SAVES,
+        .crit_attack_fail_bonus = 0,
+        .crit_attack_succes_bonus = 0,
+        .type = WTYPE_GLAIVE,
+        .dex_ac_max_bonus = 0,
+        .ac = 0,
+        .str = 0,
+        .dex = 0,
+        .con = 0,
+        .inte = 0,
+        .wis = 0,
+        .cha = 0,
+        .initiative = 0,
+        .effect_id = 0,
+        .effect_type = 0,
+        .effect_dice_amount = 0,
+        .effect_dice_faces = 0,
+        .bonus_mod = 0,
+        .slot = SLOT_TWO_HANDED_WEAPON,
+};
+
 #endif
