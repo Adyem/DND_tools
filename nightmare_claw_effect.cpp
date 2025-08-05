@@ -10,8 +10,8 @@ void    ft_nightmare_claw_effect(t_char *info, t_equipment_id *weapon,
     (void)effect;
     if (!attack_info->is_hit)
         return ;
-    const char *message = "The target must succeed on a Charisma saving throw. Enter "
-		"\"crit succes\", \"succes\", \"fail\" or \"crit fail\": ";
+    const char *message = "The target must succeed on a DC20 Charisma saving throw. Enter "
+                "\"crit succes\", \"succes\", \"fail\" or \"crit fail\": ";
     int result_check = ft_readline_check_succes_or_fail(message);
     if (result_check == RL_FAIL || result_check == RL_CRIT_FAIL)
         pf_printf("The target is frightened and has disadvantage on their next turn.\n");
