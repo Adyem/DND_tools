@@ -228,7 +228,7 @@ void		ft_update_buff_status(t_char * info, int current_dur, int duration,
 				const char *buff_name);
 
 // Init Encounter
-void		ft_encounter(const char *encounter_name, t_name *name);
+void            ft_encounter(int argument_count, const char **argument_vector, t_name *name);
 
 // Damage buffs
 int			ft_check_buff_damage(t_char * info);
