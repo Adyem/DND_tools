@@ -21,7 +21,7 @@ void ft_cast_divine_smite(t_char * character, bool critical_strike)
 	if (!ft_check_divine_smite_learned(character))
 		return ;
     int base_level = character->spells.divine_smite.base_level;
-	int cast_at_level = ft_prompt_spell_level(character, base_level);
+        int cast_at_level = ft_prompt_spell_level(character, base_level, "Divine Smite");
     if (cast_at_level == -1)
         return ;
     t_spell_divine_smite *divine_smite = &character->spells.divine_smite;
