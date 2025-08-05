@@ -19,7 +19,7 @@ static const	t_stats XAVIUS_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 150,
+	.health = 250,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 18,
