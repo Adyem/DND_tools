@@ -18,7 +18,8 @@ static const	t_stats DEMONIC_PORTAL_A_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 4,
+        // Demonic portal can only be damaged via encounter triggers
+        .health = 4,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 18,
