@@ -5,7 +5,7 @@
 #include "libft/Printf/printf.hpp"
 #include <cassert>
 
-static int ft_auto_cast(t_char * character, int base_level)
+static int ft_auto_cast(t_char *character, int base_level)
 {
 	if (character->spell_slots.level_1.available > 0 && base_level >= 1)
         return (1);
@@ -30,7 +30,7 @@ static int ft_auto_cast(t_char * character, int base_level)
     return (-1);
 }
 
-static ft_string ft_check_availeble_spell_slots(t_char * character, int base_level)
+static ft_string ft_check_availeble_spell_slots(t_char *character, int base_level)
 {
 	ft_string available_levels;
 
@@ -57,7 +57,7 @@ static ft_string ft_check_availeble_spell_slots(t_char * character, int base_lev
 	return (available_levels);
 }
 
-int ft_prompt_spell_level(t_char * character, int base_level)
+int ft_prompt_spell_level(t_char *character, int base_level)
 {
 	assert (base_level >= 0 && base_level <= 9);
 
@@ -80,7 +80,8 @@ int ft_prompt_spell_level(t_char * character, int base_level)
         + available_slots + ": ";
     if (message.get_error())
     {
-        pf_printf_fd(2, "Error: Failed to initialize message string %s\n", message.get_error_str());
+        pf_printf_fd(2, "Error: Failed to initialize message string %s\n",
+				message.get_error_str());
         return (-1);
     }
     int level = 0;
