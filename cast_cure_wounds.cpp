@@ -17,7 +17,7 @@ void ft_cast_cure_wounds(t_char * character)
     if (!ft_check_cure_wounds_learned(character))
         return ;
     int base_level = character->spells.cure_wounds.base_level;
-    int cast_at_level = ft_prompt_spell_level(character, base_level);
+    int cast_at_level = ft_prompt_spell_level(character, base_level, "Cure Wounds");
     if (cast_at_level == -1)
         return ;
     t_spell_cure_wounds *cure_wounds = &character->spells.cure_wounds;

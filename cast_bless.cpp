@@ -34,7 +34,8 @@ void ft_cast_bless(t_char *info, const char **input)
 		pf_printf_fd(2, "%s hasn't learned the spell bless\n", info->name);
 		return ;
 	}
-	int cast_at_level = ft_prompt_spell_level(info, info->spells.bless.base_level);
+        int cast_at_level = ft_prompt_spell_level(info, info->spells.bless.base_level,
+                                BLESS_NAME);
 	if (cast_at_level == -1)
 		return ;
 	t_buff buff = MAKE_BUFF_BLESS(info->spells.bless, cast_at_level, input[3]);

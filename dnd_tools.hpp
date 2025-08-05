@@ -249,7 +249,7 @@ void        ft_cast_lightning_bolt(t_char * character);
 void		ft_cast_rejuvenation(const char **input, t_char *info);
 
 // Spells utils
-int			ft_prompt_spell_level(t_char * character, int base_level);
+int			ft_prompt_spell_level(t_char * character, int base_level, const char *spell_name);
 int			ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage);
 int			ft_calculate_spell_healing(int total_dice, int dice_faces, int extra_damage);
 void		ft_remove_spell_slot(t_spell_slots *spell_slots, int level_spell_used);
