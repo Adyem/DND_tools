@@ -2,7 +2,7 @@
 #include "demonic_portal_a.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/dice_roll.hpp"
+#include "libft/RNG/RNG.hpp"
 #include "libft/CMA/CMA.hpp"
 
 static void ft_portal_surge(t_char *info)

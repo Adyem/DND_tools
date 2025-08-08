@@ -1,5 +1,5 @@
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/dice_roll.hpp"
+#include "libft/RNG/RNG.hpp"
 #include "dnd_tools.hpp"
 
 void ft_skill_throw(t_char * info, const char *skill, int ability_mod, int skill_mod)
