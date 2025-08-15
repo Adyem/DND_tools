@@ -2,9 +2,8 @@
 #include "xavius.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/dice_roll.hpp"
+#include "libft/RNG/RNG.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
 #include <unistd.h>
 
 static void	ft_xavius_lightningV2_strike(t_char *info)
@@ -18,12 +17,24 @@ static void	ft_xavius_lightningV2_strike(t_char *info)
 }
 static char    *ft_shadow_clone_name(int index)
 {
-    size_t len = ft_strlen_size_t("shadow_illusion") + static_cast<size_t>(4);
-    char    *name = static_cast<char *>(cma_calloc(len, sizeof(char)));
+    char    *id = cma_itoa(index);
+    char    *name;
 
+    if (!id)
+        return (ft_nullptr);
+    if (index < 10)
+    {
+        char    *tmp = cma_strjoin("0", id);
+
+        cma_free(id);
+        if (!tmp)
+            return (ft_nullptr);
+        id = tmp;
+    }
+    name = cma_strjoin("shadow_illusion_", id);
+    cma_free(id);
     if (!name)
         return (ft_nullptr);
-    snprintf(name, len, "shadow_illusion_%02d", index);
     return (name);
 }
 
@@ -54,6 +65,8 @@ static void     ft_spawn_shadow_clone(t_char *info)
             ft_shadow_illusion(2, input, info->struct_name, 0);
             cma_free(path);
             cma_free(const_cast<char *>(input[0]));
+            info->bufs.shadow_illusion.active = 1;
+            info->bufs.shadow_illusion.duration = 5;
             print_shadow_illusion(info);
             return ;
         }
@@ -79,8 +92,8 @@ void ft_xavius_turn(t_char * info)
 		info->flags.prone = 0;
 	}
 	else
-		pf_printf("The %s will try to make either a ranged or melee attack during his turn\n",
-				info->name);
+		pf_printf("The %s will try to make either a ranged or melee attack during " \
+				"his turn\n", info->name);
 	if (info->stats.turn == 2)
         ft_xavius_lightningV2_strike(info);
 	if (info->stats.turn == 3)
@@ -89,7 +102,8 @@ void ft_xavius_turn(t_char * info)
 		info->stats.turn = 0;
 	else
 		info->stats.turn++;
-	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
+	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health,
+			info->dstats.health);
 	return ;
 }
 
@@ -127,7 +141,8 @@ t_char *ft_xavius(const int index, const char **input, t_name *name, int excepti
 	{
 		if (ft_strcmp_dnd(input[1], "init") == 0)
 		{
-			int result = ft_dice_roll(info->hit_dice.dice_amount, info->hit_dice.dice_faces);
+			int result = ft_dice_roll(info->hit_dice.dice_amount,
+					info->hit_dice.dice_faces);
 			if (result == -1)
 			{
 				pf_printf("147-Error Invalid hit dice %s", info->name);
@@ -135,7 +150,8 @@ t_char *ft_xavius(const int index, const char **input, t_name *name, int excepti
 				return (ft_nullptr);
 			}
 			info->dstats.health = info->dstats.health + result;
-			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+			ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR |
+					S_IWUSR);
 			if (file.get_error())
 			{
 				pf_printf_fd(2, "123-Error opening file %s: %s\n", info->save_file,

@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/dice_roll.hpp"
+#include "libft/RNG/RNG.hpp"
 
 int ft_saving_throw(t_char *info, const char *ability_score, int ability_mod, int save_mod)
 {

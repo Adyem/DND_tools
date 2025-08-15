@@ -38,7 +38,8 @@ void ft_cast_hunters_mark(t_char * info, const char **input)
 		pf_printf_fd(2, "%s hasn't learned the spell hunters mark\n", info->name);
 		return ;
 	}
-	int cast_at_level = ft_prompt_spell_level(info, info->spells.hunters_mark.base_level);
+        int cast_at_level = ft_prompt_spell_level(info, info->spells.hunters_mark.base_level,
+                                HUNTERS_MARK_NAME);
 	if (cast_at_level == -1)
 		return ;
 	t_buff buff = MAKE_BUFF_HUNTERS_MARK(info->spells.hunters_mark, cast_at_level, input[3]);

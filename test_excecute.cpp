@@ -35,10 +35,10 @@ static int ft_handle_builtins(const char **input, int index, t_name *name)
         ft_test(name);
 	else if (index == 1 && ft_strcmp_dnd(input[0], "help") == 0)
         ft_print_help();
-	else if (index == 3 && ft_strcmp_dnd(input[1], "player") == 0)
+        else if (index == 3 && ft_strcmp_dnd(input[1], "player") == 0)
         ft_player(input);
-	else if (index == 2 && ft_strcmp_dnd(input[0], "encounter") == 0)
-		ft_encounter(input[1], name);
+        else if (index >= 2 && ft_strcmp_dnd(input[0], "encounter") == 0)
+                ft_encounter(index - 1, input + 1, name);
 	else
 		return (0);
 	return (1);

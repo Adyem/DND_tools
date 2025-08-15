@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/dice_roll.hpp"
+#include "libft/RNG/RNG.hpp"
 
 void	ft_update_buff_rejuvenation(t_char *info)
 {

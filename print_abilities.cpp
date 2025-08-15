@@ -15,9 +15,12 @@ void print_meteor_strike(const t_char * info)
 			"damage dependent on the number of targets hit.\n");
     pf_printf("(Cannot be the same target as Arcane Pounce or Earth Pounce)\n");
     pf_printf("1 target\t\t%d fire damage\n", info->bufs.meteor_strike.one_target_d);
-    pf_printf("2 targets\t\t%d fire damage each\n", info->bufs.meteor_strike.two_targets_d);
-    pf_printf("3 targets\t\t%d fire damage each\n", info->bufs.meteor_strike.three_targets_d);
-    pf_printf("4 or more targets\t%d fire damage each\n", info->bufs.meteor_strike.four_targets_d);
+    pf_printf("2 targets\t\t%d fire damage each\n",
+			info->bufs.meteor_strike.two_targets_d);
+    pf_printf("3 targets\t\t%d fire damage each\n",
+			info->bufs.meteor_strike.three_targets_d);
+    pf_printf("4 or more targets\t%d fire damage each\n",
+			info->bufs.meteor_strike.four_targets_d);
 	return ;
 }
 
@@ -71,8 +74,8 @@ void print_lightning_strike_v2(const t_char * info)
               info->bufs.lightning_strikeV2.dice_amount * 6,
               info->bufs.lightning_strikeV2.distance);
     pf_printf("(Be careful with placement on Lightning Strike V2 so it isn’t " \
-			"on top of flame geysers)\n");
-	return ;
+            "on top of flame geysers)\n");
+        return ;
 }
 
 void print_arcane_pounce(const t_char * info)
@@ -83,10 +86,12 @@ void print_arcane_pounce(const t_char * info)
 		target = info->bufs.arcane_pounce.target_id;
 	else
 		target = "the target";
-    pf_printf("Arcane Pounce: Targets a random player. At the start of the boss's next turn, ");
+    pf_printf("Arcane Pounce: Targets a random player. At the start of the boss's " \
+			"next turn, ");
     pf_printf("leaps to %s, landing in front of him/her and pounces, " \
 			"dealing %d magic damage and %d magic damage to anyone within 5ft.\n",
-            target, info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
+            target, info->bufs.arcane_pounce.magic_damage,
+			info->bufs.arcane_pounce.erea_damage);
 	return ;
 }
 
@@ -98,17 +103,20 @@ void print_earth_pounce(const t_char * info)
 		target = info->bufs.earth_pounce.target_id;
 	else
 		target = "the target";
-        pf_printf("Earth Pounce: Targets the player with the highest Armor Class (AC). ");
+        pf_printf("Earth Pounce: Targets the player with the highest Armor Class " \
+				"(AC). ");
     pf_printf("At the start of the boss's next turn, jumps towards the %s " \
-                        "and deals %d bludgeoning damage reduced by 1 for each AC the %s has.\n",
+            "and deals %d bludgeoning damage reduced by 1 for each AC the %s has.\n",
             target, info->bufs.earth_pounce.base_damage, target);
         return ;
 }
 
 void print_shadow_illusion(const t_char * info)
 {
-    pf_printf("Shadow Illusion: Xavius creates an illusory copy of himself for %d turn(s).\n",
+    pf_printf("Shadow Illusion: Xavius creates an illusory copy of himself for " \
+			"%d turn(s).\n",
               info->bufs.shadow_illusion.duration);
-    pf_printf("The next attack against him has a 50%% chance to strike the illusion instead.\n");
+    pf_printf("The next attack against him has a 50%% chance to strike the illusion " \
+			"instead.\n");
     return ;
 }

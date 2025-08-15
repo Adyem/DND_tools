@@ -1,6 +1,7 @@
 #ifndef XAVIUS_HPP
 # define XAVIUS_HPP
 
+#include "armor.hpp"
 #include "melee_weapons.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
@@ -18,7 +19,7 @@ static const	t_stats XAVIUS_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-	.health = 50,
+	.health = 250,
 	.temp_hp = 0,
 	.str = 12,
 	.dex = 18,
@@ -97,10 +98,10 @@ static const	t_resistance XAVIUS_DEFAULT_RESISTANCE =
 
 static const	t_equipment XAVIUS_EQUIPMENT =
 {
-	.weapon = SHADOW_CLAW,
+	.weapon = NIGHTMARE_CLAW,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
 	.ranged_weapon = SHADOW_WAND,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.armor = XAVIUS_MAGE_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,

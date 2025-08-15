@@ -16,6 +16,10 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 # define MAX_PLAYERS 8
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
+# define RL_CRIT_SUCCES 1
+# define RL_SUCCES 2
+# define RL_FAIL 3
+# define RL_CRIT_FAIL 4
 
 extern bool g_dnd_test;
 
@@ -39,6 +43,12 @@ void		ft_template_loot(t_char * info);
 t_char 		*ft_felguard(const int index, const char **input, t_name *name, int exception);
 void		ft_felguard_turn(t_char * info);
 void		ft_felguard_loot(t_char * info);
+
+// Mannoroth
+	t_char	*ft_mannoroth(const int index, const char **input, t_name *name,
+				int exception);
+	void	ft_mannoroth_turn(t_char * info);
+	void    ft_mannoroth_loot(t_char * info);
 
 // Shield_spell_a
 t_char 		*ft_shield_spell_a(const int index, const char **input, t_name *name, int exception);
@@ -193,27 +203,32 @@ void		ft_prompt_on_attack_success(t_char * character, bool critical_strike);
 int			ft_weapon_find_stat(t_char * info, t_equipment_id *weapon);
 void 		ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
 				int offhand, t_char * info);
-void            ft_calculate_damage(t_char *info, t_equipment_id *weapon, t_damage_info *d_info, bool is_crit);
+void        ft_calculate_damage(t_char *info, t_equipment_id *weapon,
+				t_damage_info *d_info, bool is_crit);
 
 // Attack effects
 void 		ft_strength_drain(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
 void		ft_fel_poison_attack_effects(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
-void 		ft_ancient_predatory_beast_attack_effects(t_char *info, t_equipment_id *weapon,
-				t_equipment_effect *effect, t_attack_info *attack_info);
+void 		ft_ancient_predatory_beast_attack_effects(t_char *info,
+				t_equipment_id *weapon, t_equipment_effect *effect,
+				t_attack_info *attack_info);
 void 		ft_snow_goblin_attack_effects(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
 void		ft_shadow_claw_effect(t_char *info, t_equipment_id *weapon,
 				t_equipment_effect *effect, t_attack_info *attack_info);
+void        ft_nightmare_claw_effect(t_char *info, t_equipment_id *weapon,
+                t_equipment_effect *effect, t_attack_info *attack_info);
 
 // Buff update
-void		ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name);
+void		ft_npc_update_buff(t_char * info, const char **input, int *buff,
+				const char *name);
 void		ft_update_buff_status(t_char * info, int current_dur, int duration,
 				const char *buff_name);
 
 // Init Encounter
-void		ft_encounter(const char *encounter_name, t_name *name);
+void            ft_encounter(int argument_count, const char **argument_vector, t_name *name);
 
 // Damage buffs
 int			ft_check_buff_damage(t_char * info);
@@ -234,7 +249,7 @@ void        ft_cast_lightning_bolt(t_char * character);
 void		ft_cast_rejuvenation(const char **input, t_char *info);
 
 // Spells utils
-int			ft_prompt_spell_level(t_char * character, int base_level);
+int			ft_prompt_spell_level(t_char * character, int base_level, const char *spell_name);
 int			ft_calculate_spell_damage(int total_dice, int dice_faces, int extra_damage);
 int			ft_calculate_spell_healing(int total_dice, int dice_faces, int extra_damage);
 void		ft_remove_spell_slot(t_spell_slots *spell_slots, int level_spell_used);
@@ -408,6 +423,7 @@ int			ft_check_player_character(const char *name);
 
 // Readline checks
 int			ft_readline_confirm(const char *mesage);
+int                     ft_readline_check_succes_or_fail(const char *message);
 int			ft_readline_spell_level(const char *message, t_char * character,
 				int *invalid_input_amount);
 
@@ -456,7 +472,7 @@ void		ft_initiative_print(void);
 t_pc		*ft_initiative_players_am(char **content);
  
 // Initiative update file
-void		ft_initiative_remove(t_char * info);
+int         ft_initiative_remove(t_char * info);
 void		ft_initiative_add(t_char * info);
 
 // Command roll

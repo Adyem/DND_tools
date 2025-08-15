@@ -2,7 +2,7 @@
 #include "felguard.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/dice_roll.hpp"
+#include "libft/RNG/RNG.hpp"
 #include "libft/CMA/CMA.hpp"
 
 void ft_felguard_turn(t_char * info)

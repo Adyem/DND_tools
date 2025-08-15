@@ -1,5 +1,5 @@
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/dice_roll.hpp"
+#include "libft/RNG/RNG.hpp"
 #include "dnd_tools.hpp"
 
 void ft_check_initiative(t_char * info)

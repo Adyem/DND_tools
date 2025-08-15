@@ -3,7 +3,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/nullptr.hpp"
-#include "libft/RNG/dice_roll.hpp"
+#include "libft/RNG/RNG.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
 
@@ -28,8 +28,45 @@ int	ft_readline_confirm(const char *message)
 			return (1);
 		}
 	}
-	pf_printf_fd(2, "116-Error: read line memory allocation failed\n");
-	return (-1);
+        pf_printf_fd(2, "116-Error: read line memory allocation failed\n");
+        return (-1);
+}
+
+int     ft_readline_check_succes_or_fail(const char *message)
+{
+        char    *input;
+
+        if (g_dnd_test == true)
+                return (ft_dice_roll(1, 4));
+        while ((input = rl_readline(message)) != ft_nullptr)
+        {
+                if ((ft_strcmp_dnd(input, "crit succes") == 0)
+                        || (ft_strcmp_dnd(input, "crit success") == 0))
+                {
+                        cma_free(input);
+                        return (RL_CRIT_SUCCES);
+                }
+                else if ((ft_strcmp_dnd(input, "succes") == 0)
+                        || (ft_strcmp_dnd(input, "success") == 0))
+                {
+                        cma_free(input);
+                        return (RL_SUCCES);
+                }
+                else if ((ft_strcmp_dnd(input, "crit fail") == 0)
+                        || (ft_strcmp_dnd(input, "critical fail") == 0))
+                {
+                        cma_free(input);
+                        return (RL_CRIT_FAIL);
+                }
+                else if ((ft_strcmp_dnd(input, "fail") == 0)
+                        || (ft_strcmp_dnd(input, "failure") == 0))
+                {
+                        cma_free(input);
+                        return (RL_FAIL);
+                }
+        }
+        pf_printf_fd(2, "116-Error: read line memory allocation failed\n");
+        return (-1);
 }
 
 static int ft_check_spell_slots(int spell_level, t_char * character)

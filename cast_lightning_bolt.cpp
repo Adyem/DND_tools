@@ -18,7 +18,7 @@ void ft_cast_lightning_bolt(t_char * character)
     if (!ft_check_lightning_bolt_learned(character))
         return ;
     int base_level = character->spells.lightning_bolt.base_level;
-    int cast_at_level = ft_prompt_spell_level(character, base_level);
+    int cast_at_level = ft_prompt_spell_level(character, base_level, "Lightning Bolt");
     if (cast_at_level == -1)
         return ;
     t_spell_lightning_bolt *lightning_bolt = &character->spells.lightning_bolt;

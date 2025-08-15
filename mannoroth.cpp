@@ -1,11 +1,11 @@
 #include "dnd_tools.hpp"
-#include "ancient_predatory_beast.hpp"
+#include "mannoroth.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/RNG.hpp"
 #include "libft/CMA/CMA.hpp"
 
-void ft_ancient_predatory_beast_turn(t_char * info)
+void ft_mannoroth_turn(t_char * info)
 {
 	ft_update_buf(info);
 	if (info->flags.prone)
@@ -14,7 +14,7 @@ void ft_ancient_predatory_beast_turn(t_char * info)
 		info->flags.prone = 0;
 	}
 	else
-		pf_printf("The %s will try to make either a ranged or melee attack during his turn\n",
+		pf_printf("The %s brandishes his massive glaive and seeks a foe to cleave\n",
 				info->name);
 	pf_printf("%s currently has %d/%d hp\n", info->name, info->stats.health, info->dstats.health);
 	return ;
@@ -26,13 +26,13 @@ static void ft_initialize_gear_and_feats(t_char * info)
 	return ;
 }
 
-void	ft_ancient_predatory_beast_loot(t_char * info)
+void	ft_mannoroth_loot(t_char * info)
 {
 	(void)info;
 	return ;
 }
 
-t_char *ft_ancient_predatory_beast(const int index, const char **input, t_name *name, int exception)
+t_char *ft_mannoroth(const int index, const char **input, t_name *name, int exception)
 {
 	int error = 0;
 	t_char *info = static_cast<t_char *>(cma_malloc(sizeof(t_char)));
@@ -41,7 +41,7 @@ t_char *ft_ancient_predatory_beast(const int index, const char **input, t_name *
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
         return (ft_nullptr);
     }
-	*info = ANCIENT_PREDATORY_BEAST_INFO;
+	*info = MANNOROTH_INFO;
 	info->name = input[0];
 	info->struct_name = name;
 	info->save_file = cma_strjoin("data/", input[0]);

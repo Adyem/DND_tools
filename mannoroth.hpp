@@ -1,8 +1,9 @@
-#ifndef DEMONIC_PORTAL_A_HPP
-# define DEMONIC_PORTAL_A_HPP
+#ifndef MANNOROTH_HPP
+# define MANNOROTH_HPP
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
+#include "armor.hpp"
 #include "libft/CPP_class/nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
@@ -11,24 +12,24 @@
 typedef struct	s_name t_name;
 typedef struct	s_char t_char;
 
-void	ft_demonic_portal_a_turn(t_char * info);
-void	ft_demonic_portal_a_loot(t_char * info);
+void	ft_mannoroth_turn(t_char * info);
+void	ft_mannoroth_loot(t_char * info);
 
-static const	t_stats DEMONIC_PORTAL_A_DEFAULT_STATS =
+static const	t_stats MANNOROTH_DEFAULT_STATS =
 {
 	.phase = 0,
 	.turn = 1,
-    .health = 4,
+	.health = 300,
 	.temp_hp = 0,
-	.str = 12,
-	.dex = 18,
-	.con = 10,
-	.inte = 10,
-	.wis = 10,
-	.cha = 8,
+	.str = 24,
+	.dex = 10,
+	.con = 22,
+	.inte = 12,
+	.wis = 14,
+	.cha = 18,
 };
 
-static const	t_save DEMONIC_PORTAL_A_SAVE_MODS =
+static const	t_save MANNOROTH_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
@@ -38,7 +39,7 @@ static const	t_save DEMONIC_PORTAL_A_SAVE_MODS =
 	.con = 0,
 };
 
-static const	t_skills DEMONIC_PORTAL_A_SKILL_MODS =
+static const	t_skills MANNOROTH_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,
@@ -60,14 +61,14 @@ static const	t_skills DEMONIC_PORTAL_A_SKILL_MODS =
     .persuasion = 0,
 };
 
-static const	t_attack DEMONIC_PORTAL_A_ATTACK =
+static const	t_attack MANNOROTH_ATTACK =
 {
 	.attack_bonus = 0,
 	.ranged_bonus = 0,
 };
 
 
-static const	t_crit_mod DEMONIC_PORTAL_A_CRIT =
+static const	t_crit_mod MANNOROTH_CRIT =
 {
 	.attack = 0,
 	.attack_d = 0,
@@ -78,29 +79,29 @@ static const	t_crit_mod DEMONIC_PORTAL_A_CRIT =
 	.skill_fail = 0,
 };
 
-static const	t_resistance DEMONIC_PORTAL_A_DEFAULT_RESISTANCE =
+static const	t_resistance MANNOROTH_DEFAULT_RESISTANCE =
 {
-	.acid = 100,
-	.bludgeoning = 100,
-	.cold = 100,
-	.fire = 100,
-	.force = 100,
-	.lightning = 100,
-	.necrotic = 100,
-	.piercing = 100,
-	.poison = 100,
-	.psychic = 100,
-	.radiant = 100,
-	.slashing = 100,
-	.thunder = 100,
+	.acid = 0,
+	.bludgeoning = 0,
+	.cold = 0,
+	.fire = 0,
+	.force = 0,
+	.lightning = 0,
+	.necrotic = 0,
+	.piercing = 0,
+	.poison = 0,
+	.psychic = 0,
+	.radiant = 0,
+	.slashing = 0,
+	.thunder = 0,
 };
 
-static const	t_equipment DEMONIC_PORTAL_A_EQUIPMENT =
+static const	t_equipment MANNOROTH_EQUIPMENT =
 {
-	.weapon = STEEL_SWORD,
+	.weapon = MANNOROTH_GLAIVE,
 	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = WOODEN_BOW,
-	.armor = INITIALIZE_EQUIPMENT_ID,
+	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
+	.armor = MANNOROTH_PLATE_ARMOR,
 	.helmet = INITIALIZE_EQUIPMENT_ID,
 	.shield = INITIALIZE_EQUIPMENT_ID,
 	.boots = INITIALIZE_EQUIPMENT_ID,
@@ -111,7 +112,7 @@ static const	t_equipment DEMONIC_PORTAL_A_EQUIPMENT =
 	.belt = INITIALIZE_EQUIPMENT_ID,
 };
 
-static const t_physical DEMONIC_PORTAL_A_PHYSICAL =
+static const t_physical MANNOROTH_PHYSICAL =
 {
     .height = 0,
     .weight = 0,
@@ -119,7 +120,7 @@ static const t_physical DEMONIC_PORTAL_A_PHYSICAL =
     .speed = 0,
 };
 
-static const t_spell_slot DEMONIC_PORTAL_A_SPELL_SLOT =
+static const t_spell_slot MANNOROTH_SPELL_SLOT =
 {
 	.available = 0,
 	.total = 0,
@@ -127,7 +128,7 @@ static const t_spell_slot DEMONIC_PORTAL_A_SPELL_SLOT =
 	.replenishing_slot = 0,
 };
 
-static const t_spell_slots DEMONIC_PORTAL_A_SPELL_SLOTS =
+static const t_spell_slots MANNOROTH_SPELL_SLOTS =
 {
 	.level_1 = INITIALIZE_SPELL_SLOT,
 	.level_2 = INITIALIZE_SPELL_SLOT,
@@ -141,18 +142,18 @@ static const t_spell_slots DEMONIC_PORTAL_A_SPELL_SLOTS =
 	.warlock = INITIALIZE_SPELL_SLOT,
 };
 
-static const t_inventory DEMONIC_PORTAL_A_INVENTORY
+static const t_inventory MANNOROTH_INVENTORY
 {
 	.gold = 0,
 };
 
-constexpr t_hit_dice DEMONIC_PORTAL_A_HIT_DICE =
+constexpr t_hit_dice MANNOROTH_HIT_DICE =
 {
 	.dice_amount = 0,
 	.dice_faces = 0,
 };
 
-static const t_char DEMONIC_PORTAL_A_INFO =
+static const t_char MANNOROTH_INFO =
 {
 	.level = 0,
 	.mechanical = 0,
@@ -161,28 +162,28 @@ static const t_char DEMONIC_PORTAL_A_INFO =
 	.version_number = 2,
 	.save_file = ft_nullptr,
 	.name = ft_nullptr,
-	.turn = ft_demonic_portal_a_turn,
-	.loot = ft_demonic_portal_a_loot,
-	.hit_dice = DEMONIC_PORTAL_A_HIT_DICE,
-	.inventory = DEMONIC_PORTAL_A_INVENTORY,
+	.turn = ft_mannoroth_turn,
+	.loot = ft_mannoroth_loot,
+	.hit_dice = MANNOROTH_HIT_DICE,
+	.inventory = MANNOROTH_INVENTORY,
 	.spells = INITIALIZE_SPELLS,
-	.spell_slots = DEMONIC_PORTAL_A_SPELL_SLOTS,
+	.spell_slots = MANNOROTH_SPELL_SLOTS,
 	.flags = INITIALIZE_FLAGS,
-	.crit = DEMONIC_PORTAL_A_CRIT,
-	.attack_bonus = DEMONIC_PORTAL_A_ATTACK,
+	.crit = MANNOROTH_CRIT,
+	.attack_bonus = MANNOROTH_ATTACK,
 	.bufs = INITIALIZE_BUFFS,
 	.debufs = INITIALIZE_DEBUFFS,
 	.concentration = INITIALIZE_CONCENTRATION,
-	.d_resistance = DEMONIC_PORTAL_A_DEFAULT_RESISTANCE,
+	.d_resistance = MANNOROTH_DEFAULT_RESISTANCE,
 	.c_resistance = INITIALIZE_CURRENT_RESISTANCE,
-	.equipment = DEMONIC_PORTAL_A_EQUIPMENT,
-	.skill_mod = DEMONIC_PORTAL_A_SKILL_MODS,
-	.save_mod = DEMONIC_PORTAL_A_SAVE_MODS,
+	.equipment = MANNOROTH_EQUIPMENT,
+	.skill_mod = MANNOROTH_SKILL_MODS,
+	.save_mod = MANNOROTH_SAVE_MODS,
 	.stats = INITIALIZE_STATS,
-	.dstats = DEMONIC_PORTAL_A_DEFAULT_STATS,
+	.dstats = MANNOROTH_DEFAULT_STATS,
 	.feats = INITIALIZE_FEATS,
 	.struct_name = ft_nullptr,
-	.physical = DEMONIC_PORTAL_A_PHYSICAL,
+	.physical = MANNOROTH_PHYSICAL,
 };
 
 template <int Amount, int Faces>
@@ -192,12 +193,12 @@ struct ValidateHitDice
 	(
         ((Amount == 0 && Faces == 0) || (Amount >= 1 && Faces >= 1)) &&
         (Amount <= 40 && Faces <= 12),
-        "Invalid DEMONIC_PORTAL_A_HIT_DICE values: Either both must be 0 or both at least 1, " \
+        "Invalid MANNOROTH_HIT_DICE values: Either both must be 0 or both at least 1, " \
 			"and the dice amount must not exceed 40, the dice faces must not exceed 12."
     );
 };
 
-inline ValidateHitDice<DEMONIC_PORTAL_A_HIT_DICE.dice_amount,
-	   					DEMONIC_PORTAL_A_HIT_DICE.dice_faces> validation_instance;
+inline ValidateHitDice<MANNOROTH_HIT_DICE.dice_amount,
+	   					MANNOROTH_HIT_DICE.dice_faces > validation_instance;
 
 #endif
