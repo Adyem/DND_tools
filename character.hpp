@@ -5,23 +5,28 @@
 
 # define ERROR_RESISTANCE 9999
 
+
 struct s_char;
 struct s_buff;
 struct s_name;
 struct s_equipment_id;
+struct s_loot;
+struct s_loot_item;
 
 typedef struct s_char t_char;
 typedef struct s_buff t_buff;
 typedef struct s_name t_name;
 typedef struct s_equipment_id t_equipment_id;
 typedef struct s_equipment_effect t_equipment_effect;
+typedef struct s_loot t_loot;
+typedef struct s_loot_item t_loot_item;
 typedef struct s_attack_info t_attack_info;
 
 typedef void	(*c_action)(t_char *, t_equipment_id *, int);
 typedef void	(*c_effect)(t_char *, t_equipment_id *,
 					t_equipment_effect *, t_attack_info *);
-typedef void 	(*c_turn)(t_char *);
-typedef void 	(*c_loot)(t_char *);
+typedef void	(*c_turn)(t_char *);
+typedef void	(*c_loot)(t_char *);
 
 typedef struct	s_stats
 {
@@ -372,6 +377,21 @@ typedef struct s_equipment
 	t_equipment_id	belt;
 }	t_equipment;
 
+struct s_loot_item
+{
+	int		item_id;
+	int		value;
+	t_equipment_effect	effect;
+};
+
+struct s_loot
+{
+	t_equipment_id		**equipment;
+	t_loot_item		**items;
+	int		gold;
+};
+
+
 typedef struct s_flags
 {
 	int				alreaddy_saved;
@@ -538,7 +558,8 @@ typedef struct	s_char
 	char			*save_file;
 	const char		*name;
 	c_turn			turn;
-	c_loot			loot;
+	c_loot			drop_loot;
+	t_loot			loot;
 	t_hit_dice		hit_dice;
 	t_inventory		inventory;
 	t_spells		spells;

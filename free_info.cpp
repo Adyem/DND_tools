@@ -14,6 +14,8 @@ void	ft_free_info(t_char * info)
 	cma_free(info->bufs.frost_breath.target_id);
 	cma_free(info->bufs.arcane_pounce.target_id);
 	cma_free(info->bufs.earth_pounce.target_id);
+	cma_free(info->loot.equipment);
+	cma_free(info->loot.items);
 	cma_free(info->spells.magic_drain.target);
 	cma_free(info->save_file);
 	cma_free(info);

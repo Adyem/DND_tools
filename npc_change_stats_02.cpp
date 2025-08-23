@@ -57,13 +57,13 @@ void	ft_npc_sstuff(t_char * info, const char **input)
 		else
 			pf_printf_fd(2, "no weapon attack set for %s\n", info->name);
 	}
-	else if (ft_strcmp_dnd(input[1], "loot") == 0)
-	{
-		if (info->loot)
-			info->loot(info);
-		else
-			pf_printf("This mob doesnt drop anny loot");
-	}
+		else if (ft_strcmp_dnd(input[1], "loot") == 0)
+		{
+				if (info->drop_loot)
+						info->drop_loot(info);
+				else
+						pf_printf("This mob doesnt drop anny loot");
+		}
 	else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
 	{
 		if (info->equipment.ranged_weapon.attack.function)
@@ -86,11 +86,11 @@ void	ft_npc_sstuff(t_char * info, const char **input)
 		ft_request_damage(info);
 	else if (ft_strcmp_dnd(input[1], "turn") == 0)
 	{
-        if (info->turn)
-            info->turn(info);
-        else
-            pf_printf("%s doesn't take any actions on his/her turn\n", info->name);
-    }
+		if (info->turn)
+			info->turn(info);
+		else
+			pf_printf("%s doesn't take any actions on his/her turn\n", info->name);
+	}
 	else if (ft_strcmp_dnd(input[1], "hp") == 0)
 		pf_printf("HP: %d\n", info->stats.health);
 	else if (ft_strcmp_dnd(input[1], "initiative") == 0)
