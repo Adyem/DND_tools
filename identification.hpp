@@ -42,7 +42,7 @@ typedef enum
     WTYPE_LONGBOW,
     WTYPE_NET,
     WTYPE_WAND,
-	WTYPE_CLAW,
+    WTYPE_CLAW,
     
     ATYPE_PADDED = 10001,
     ATYPE_LEATHER,
@@ -59,58 +59,59 @@ typedef enum
     ATYPE_SHIELD,
 
     STEEL_SWORD_ID = 20001,
-	STEEL_BATTLE_AXE_ID,
+    STEEL_BATTLE_AXE_ID,
     WOODEN_BOW_ID,
-	WOODEN_CLUB_ID,
+    WOODEN_CLUB_ID,
     CHAOS_WAND_ID,
-	WAND_OF_DRAINING_ID,
-	CLAW_ID,
-	FELBEAST_CLAW_ID,
-	FELBEAST_CLAW_OH_ID,
-	ANCIENT_PREDATORY_BEAST_CLAW_ID,
-	SNOWBALL_WAND_ID,
-	ICY_BLADE_ID,
-	SHADOW_CLAW_ID,
-	WOODEN_STAFF_ID,
+    WAND_OF_DRAINING_ID,
+    CLAW_ID,
+    FELBEAST_CLAW_ID,
+    FELBEAST_CLAW_OH_ID,
+    ANCIENT_PREDATORY_BEAST_CLAW_ID,
+    SNOWBALL_WAND_ID,
+    ICY_BLADE_ID,
+    SHADOW_CLAW_ID,
+    WOODEN_STAFF_ID,
     SHADOW_WAND_ID,
     FELGUARD_POSIONED_AXE_ID,
     MITHRIL_AXE_ID,
+    LONGSWORD_ID,
     WOODEN_SHIELD_ID,
     NIGHTMARE_CLAW_ID,
     MANNOROTH_GLAIVE_ID,
 
     LEATHER_ARMOR_ID = 30001,
     STEEL_ARMOR_ID,
-	GHOST_ARNOR_ID,
-	FELBEAST_HIDE_ID,
-	WOLF_PELT_ID,
-	MAGIC_STEEL_ARMOR_ID,
-	FELGUARD_PLATE_ARMOR_ID,
+    GHOST_ARNOR_ID,
+    FELBEAST_HIDE_ID,
+    WOLF_PELT_ID,
+    MAGIC_STEEL_ARMOR_ID,
+    FELGUARD_PLATE_ARMOR_ID,
     MANNOROTH_PLATE_ARMOR_ID,
-	XAVIUS_MAGE_ARMOR_ID,
+    XAVIUS_MAGE_ARMOR_ID,
 
-	ETYPE_FEL_POISON = 40001,
-	ETYPE_ANCIENT_PREDATORY_BEAST_MULTI_ATTACK,
-	ETYPE_SNOWBALL_WAND_SLOW,
+    ETYPE_FEL_POISON = 40001,
+    ETYPE_ANCIENT_PREDATORY_BEAST_MULTI_ATTACK,
+    ETYPE_SNOWBALL_WAND_SLOW,
 } ItemID;
 
 typedef enum e_equipment_slot
 {
-	SLOT_NONE				= 0,
-	SLOT_WEAPON				= 1 << 0,
-	SLOT_OFFHAND_WEAPON		= 1 << 1,
-	SLOT_RANGED_WEAPON		= 1 << 2,
-	SLOT_ARMOR				= 1 << 3,
-	SLOT_HELMET				= 1 << 4,
-	SLOT_SHIELD				= 1 << 5,
-	SLOT_BOOTS				= 1 << 6,
-	SLOT_GLOVES				= 1 << 7,
-	SLOT_AMULET				= 1 << 8,
-	SLOT_RING_01			= 1 << 9,
-	SLOT_RING_02			= 1 << 10,
-	SLOT_BELT				= 1 << 11,
-	SLOT_TWO_HANDED_WEAPON	= 1 << 12,
-}	t_equipment_slot;
+    SLOT_NONE               = 0,
+    SLOT_WEAPON             = 1 << 0,
+    SLOT_OFFHAND_WEAPON     = 1 << 1,
+    SLOT_RANGED_WEAPON      = 1 << 2,
+    SLOT_ARMOR              = 1 << 3,
+    SLOT_HELMET             = 1 << 4,
+    SLOT_SHIELD             = 1 << 5,
+    SLOT_BOOTS              = 1 << 6,
+    SLOT_GLOVES             = 1 << 7,
+    SLOT_AMULET             = 1 << 8,
+    SLOT_RING_01            = 1 << 9,
+    SLOT_RING_02            = 1 << 10,
+    SLOT_BELT               = 1 << 11,
+    SLOT_TWO_HANDED_WEAPON  = 1 << 12,
+}   t_equipment_slot;
 
 #define ABILITY_LIST \
     X(HUNTERS_MARK, 1, "hunters mark") \
@@ -127,19 +128,19 @@ ABILITY_LIST
 ABILITY_LIST
 #undef X
 
-# define DAMAGE_TYPE_BLUDGEONING	"bludgeoning"
-# define DAMAGE_TYPE_PIERCING		"piercing"
-# define DAMAGE_TYPE_SLASHING		"slashing"
-# define DAMAGE_TYPE_FIRE			"fire"
-# define DAMAGE_TYPE_COLD			"cold"
-# define DAMAGE_TYPE_LIGHTNING		"lightning"
-# define DAMAGE_TYPE_ACID			"acid"
-# define DAMAGE_TYPE_POISON			"poison"
-# define DAMAGE_TYPE_FORCE			"force"
-# define DAMAGE_TYPE_RADIANT		"radiant"
-# define DAMAGE_TYPE_NECROTIC		"necrotic"
-# define DAMAGE_TYPE_THUNDER		"thunder"
-# define DAMAGE_TYPE_PSYCHIC		"psychic"
+# define DAMAGE_TYPE_BLUDGEONING    "bludgeoning"
+# define DAMAGE_TYPE_PIERCING       "piercing"
+# define DAMAGE_TYPE_SLASHING       "slashing"
+# define DAMAGE_TYPE_FIRE           "fire"
+# define DAMAGE_TYPE_COLD           "cold"
+# define DAMAGE_TYPE_LIGHTNING      "lightning"
+# define DAMAGE_TYPE_ACID           "acid"
+# define DAMAGE_TYPE_POISON         "poison"
+# define DAMAGE_TYPE_FORCE          "force"
+# define DAMAGE_TYPE_RADIANT        "radiant"
+# define DAMAGE_TYPE_NECROTIC       "necrotic"
+# define DAMAGE_TYPE_THUNDER        "thunder"
+# define DAMAGE_TYPE_PSYCHIC        "psychic"
 
 # define DAMAGE_TYPE_BLUDGEONING_ID  0
 # define DAMAGE_TYPE_PIERCING_ID     1
