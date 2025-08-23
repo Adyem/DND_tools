@@ -506,6 +506,40 @@ void        ft_print_help(void);
 
 // Item printing
 void        print_weapon_info(const t_equipment_id *weapon);
+void        print_steel_sword(void);
+void        print_steel_battle_axe(void);
+void        print_longsword(void);
+void        print_wooden_club(void);
+void        print_claw(void);
+void        print_claw_oh(void);
+void        print_ghostly_sword(void);
+void        print_felbeast_claw(void);
+void        print_felbeast_claw_oh(void);
+void        print_ancient_predatory_beast_claw(void);
+void        print_shadow_claw(void);
+void        print_nightmare_claw(void);
+void        print_wooden_staff(void);
+void        print_felguard_posioned_axe(void);
+void        print_mithril_axe(void);
+void        print_mannoroth_glaive(void);
+void        print_wooden_bow(void);
+void        print_chaos_wand(void);
+void        print_wand_of_draining(void);
+void        print_shadow_wand(void);
+void        print_snowball_wand(void);
 void        print_basic_weapons(void);
+void        print_basic_ranged_weapons(void);
+void        print_armor_info(const t_equipment_id *armor);
+void        print_leather_armor(void);
+void        print_wolf_pelt(void);
+void        print_ghost_armor(void);
+void        print_steel_armor(void);
+void        print_felbeast_hide(void);
+void        print_ancient_predatory_beast_hide(void);
+void        print_magic_steel_armor(void);
+void        print_felguard_plate_armor(void);
+void        print_mannoroth_plate_armor(void);
+void        print_xavius_mage_armor(void);
+void        print_basic_armors(void);
 
 #endif
