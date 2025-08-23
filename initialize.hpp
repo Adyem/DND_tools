@@ -483,6 +483,13 @@ static const t_spells INITIALIZE_SPELLS =
 	.rejuvenation = INTIAILIZE_SPELL_REJUVENATION,
 	};
 
+static const	t_loot INITIALIZE_LOOT =
+{
+	.equipment = ft_nullptr,
+	.items = ft_nullptr,
+	.gold = 0,
+};
+
 static const	t_inventory INITIALIZE_INVENTORY =
 {
 	.gold = 0,
