@@ -348,14 +348,20 @@ static const	t_flags INITIALIZE_FLAGS =
 	.dont_save = 0,
 };
 
-static const	t_crackback INITIALIZE_CRACKBACK =
+static const	 t_crackback INITIALIZE_CRACKBACK =
 {
 	.active = 0,
 };
 
-static const	t_feats INITIALIZE_FEATS =
+static const	 t_mighty_resilience INITIALIZE_MIGHTY_RESILIENCE =
+{
+	.active = 0,
+};
+
+static const	 t_feats INITIALIZE_FEATS =
 {
 	.crackback = INITIALIZE_CRACKBACK,
+	.mighty_resilience = INITIALIZE_MIGHTY_RESILIENCE,
 };
 
 static const t_spell_slot INITIALIZE_SPELL_SLOT =
