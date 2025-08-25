@@ -286,9 +286,15 @@ typedef struct s_crackback
 	int	active;
 }	t_crackback;
 
+typedef struct s_mighty_resilience
+{
+	int	active;
+}	t_mighty_resilience;
+
 typedef struct s_feats
 {
 	t_crackback	crackback;
+	t_mighty_resilience	mighty_resilience;
 }	t_feats;
 
 typedef struct s_equipment_action
