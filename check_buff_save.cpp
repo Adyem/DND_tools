@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 
-int	ft_save_check_buff(t_char * info, int *roll, const char *ability_score)
+int	ft_save_check_buff(t_char *info, int *roll, const char *ability_score)
 {
 	int	return_value;
 
