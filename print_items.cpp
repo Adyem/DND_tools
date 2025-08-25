@@ -124,8 +124,8 @@ void print_felguard_posioned_axe(void)
 {
     print_weapon_info(&FELGUARD_POSIONED_AXE);
     pf_printf("  On hit: target must succeed on a DC15 constitution save "
-              "or take %dd%d+%d poison damage and suffer disadvantage on "
-              "attacks for 2 turns.\n",
+              "or take %dd%d+%d poison damage only on application and "
+              "suffer disadvantage on attacks for 2 turns.\n",
               FELGUARD_POSIONED_AXE.action_01.effect_dice_amount,
               FELGUARD_POSIONED_AXE.action_01.effect_dice_faces,
               FELGUARD_POSIONED_AXE.action_01.bonus_mod);
@@ -253,7 +253,7 @@ void print_steel_armor(void)
 void print_felbeast_hide(void)
 {
     print_armor_info(&FELBEAST_HIDE);
-    pf_printf("  Grants 50%% resistance to piercing and slashing damage.\n");
+    pf_printf("  Provides no damage resistances.\n");
     return ;
 }
 
@@ -275,6 +275,7 @@ void print_magic_steel_armor(void)
 void print_felguard_plate_armor(void)
 {
     print_armor_info(&FELGUARD_PLATE_ARMOR);
+    pf_printf("  Reduces bludgeoning and slashing damage by 3.\n");
     return ;
 }
 
