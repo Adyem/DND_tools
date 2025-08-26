@@ -37,7 +37,7 @@ static t_char *ft_check_name(t_name *name, char *file_name)
 
 static t_char *ft_read_all_files(ft_file &file, t_name *name, char *file_name)
 {
-	t_char *info;
+    t_char *info;
 
     if (DEBUG == 1)
         pf_printf("Printing file_name: %s\n", file_name);
@@ -83,8 +83,8 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
     if (!error)
     {
         file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-		if (file.get_error())
-			return (ft_nullptr);
+        if (file.get_error())
+            return (ft_nullptr);
         ft_save_pc(player, file);
     }
     return (player);
@@ -176,5 +176,5 @@ void ft_open_all_files(t_name *name)
     ft_file initiative_file;
     initiative_file.open("data/data--initiative", O_RDONLY);
     ft_initiative_sort(initiative_file);
-	return ;
+    return ;
 }

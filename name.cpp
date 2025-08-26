@@ -21,16 +21,16 @@ void ft_free_memory_name(t_name *name, int exit_failure)
         current = next_node;
     }
     if (exit_failure)
-	{
-		rl_clear_suggestions();
-		cma_cleanup();
+    {
+        rl_clear_suggestions();
+        cma_cleanup();
         exit(exit_failure);
-	}
+    }
     return ;
 }
 
 static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *new_name,
-							c_name new_function)
+                            c_name new_function)
 {
     t_name *new_node;
 
@@ -54,7 +54,7 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *n
     else
         first_node = new_node;
     *last_node = new_node;
-	rl_add_suggestion(new_node->name);
+    rl_add_suggestion(new_node->name);
     return (new_node);
 }
 
@@ -74,7 +74,7 @@ static char *ft_new_name(const char *name, int index)
 }
 
 static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char *base_name,
-								c_name function, int count)
+                                c_name function, int count)
 {
     int index = 1;
     char *new_name;
@@ -95,7 +95,7 @@ static void ft_add_mob_series(t_name *first_node, t_name **last_node, const char
         cma_free(new_name);
         index++;
     }
-	return ;
+    return ;
 }
 
 t_name *ft_allocate_memory_name()
@@ -118,17 +118,17 @@ t_name *ft_allocate_memory_name()
     ft_add_node(first_node, &last_node, "maverick", ft_maverick);
     ft_add_node(first_node, &last_node, "grizz", ft_grizz);
     ft_add_node(first_node, &last_node, "frank", ft_frank);
-	ft_add_mob_series(first_node, &last_node, "ghost", ft_ghost, 10);
-	ft_add_mob_series(first_node, &last_node, "dwarf_paladin", ft_dwarf_paladin, 10);
-	ft_add_mob_series(first_node, &last_node, "felbeast", ft_felbeast, 10);
-	ft_add_node(first_node, &last_node, "veraak", ft_veraak);
-	ft_add_node(first_node, &last_node, "ancient_predatory_beast", ft_ancient_predatory_beast);
-	ft_add_mob_series(first_node, &last_node, "snow_goblin", ft_snow_goblin, 10);
-	ft_add_mob_series(first_node, &last_node, "night_elven_guard", ft_night_elven_guard, 10);
-	ft_add_node(first_node, &last_node, "xavius", ft_xavius);
+    ft_add_mob_series(first_node, &last_node, "ghost", ft_ghost, 10);
+    ft_add_mob_series(first_node, &last_node, "dwarf_paladin", ft_dwarf_paladin, 10);
+    ft_add_mob_series(first_node, &last_node, "felbeast", ft_felbeast, 10);
+    ft_add_node(first_node, &last_node, "veraak", ft_veraak);
+    ft_add_node(first_node, &last_node, "ancient_predatory_beast", ft_ancient_predatory_beast);
+    ft_add_mob_series(first_node, &last_node, "snow_goblin", ft_snow_goblin, 10);
+    ft_add_mob_series(first_node, &last_node, "night_elven_guard", ft_night_elven_guard, 10);
+    ft_add_node(first_node, &last_node, "xavius", ft_xavius);
     ft_add_mob_series(first_node, &last_node, "shadow_illusion", ft_shadow_illusion, 9);
     ft_add_node(first_node, &last_node, "malfurion", ft_malfurion);
-	ft_add_node(first_node, &last_node, "shield_spell_a", ft_shield_spell_a);
+    ft_add_node(first_node, &last_node, "shield_spell_a", ft_shield_spell_a);
         ft_add_node(first_node, &last_node, "demonic_portal_a", ft_demonic_portal_a);
         ft_add_mob_series(first_node, &last_node, "felguard", ft_felguard, 10);
         ft_add_node(first_node, &last_node, "mannoroth", ft_mannoroth);

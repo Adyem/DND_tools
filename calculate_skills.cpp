@@ -4,7 +4,7 @@ int ft_calculate_athletics(t_char * info)
 {
     int athletics;
 
-	athletics = info->skill_mod.athletics;
+    athletics = info->skill_mod.athletics;
     athletics += info->equipment.weapon.skill_mod.athletics;
     athletics += info->equipment.offhand_weapon.skill_mod.athletics;
     athletics += info->equipment.ranged_weapon.skill_mod.athletics;
@@ -24,7 +24,7 @@ int ft_calculate_acrobatics(t_char * info)
 {
     int acrobatics;
 
-	acrobatics = info->skill_mod.acrobatics;
+    acrobatics = info->skill_mod.acrobatics;
     acrobatics += info->equipment.weapon.skill_mod.acrobatics;
     acrobatics += info->equipment.offhand_weapon.skill_mod.acrobatics;
     acrobatics += info->equipment.ranged_weapon.skill_mod.acrobatics;
@@ -44,7 +44,7 @@ int ft_calculate_sleight_of_hand(t_char * info)
 {
     int sleight_of_hand;
 
-	sleight_of_hand = info->skill_mod.sleight_of_hand;
+    sleight_of_hand = info->skill_mod.sleight_of_hand;
     sleight_of_hand += info->equipment.weapon.skill_mod.sleight_of_hand;
     sleight_of_hand += info->equipment.offhand_weapon.skill_mod.sleight_of_hand;
     sleight_of_hand += info->equipment.ranged_weapon.skill_mod.sleight_of_hand;
@@ -64,7 +64,7 @@ int ft_calculate_stealth(t_char * info)
 {
     int stealth;
 
-	stealth = info->skill_mod.stealth;
+    stealth = info->skill_mod.stealth;
     stealth += info->equipment.weapon.skill_mod.stealth;
     stealth += info->equipment.offhand_weapon.skill_mod.stealth;
     stealth += info->equipment.ranged_weapon.skill_mod.stealth;
@@ -84,7 +84,7 @@ int ft_calculate_arcana(t_char * info)
 {
     int arcana;
 
-	arcana = info->skill_mod.arcana;
+    arcana = info->skill_mod.arcana;
     arcana += info->equipment.weapon.skill_mod.arcana;
     arcana += info->equipment.offhand_weapon.skill_mod.arcana;
     arcana += info->equipment.ranged_weapon.skill_mod.arcana;
@@ -104,7 +104,7 @@ int ft_calculate_history(t_char * info)
 {
     int history;
 
-	history = info->skill_mod.history;
+    history = info->skill_mod.history;
     history += info->equipment.weapon.skill_mod.history;
     history += info->equipment.offhand_weapon.skill_mod.history;
     history += info->equipment.ranged_weapon.skill_mod.history;
@@ -124,7 +124,7 @@ int ft_calculate_investigation(t_char * info)
 {
     int investigation;
 
-	investigation = info->skill_mod.investigation;
+    investigation = info->skill_mod.investigation;
     investigation += info->equipment.weapon.skill_mod.investigation;
     investigation += info->equipment.offhand_weapon.skill_mod.investigation;
     investigation += info->equipment.ranged_weapon.skill_mod.investigation;
@@ -144,7 +144,7 @@ int ft_calculate_nature(t_char * info)
 {
     int nature;
 
-	nature = info->skill_mod.nature;
+    nature = info->skill_mod.nature;
     nature += info->equipment.weapon.skill_mod.nature;
     nature += info->equipment.offhand_weapon.skill_mod.nature;
     nature += info->equipment.ranged_weapon.skill_mod.nature;
@@ -164,7 +164,7 @@ int ft_calculate_religion(t_char * info)
 {
     int religion;
 
-	religion = info->skill_mod.religion;
+    religion = info->skill_mod.religion;
     religion += info->equipment.weapon.skill_mod.religion;
     religion += info->equipment.offhand_weapon.skill_mod.religion;
     religion += info->equipment.ranged_weapon.skill_mod.religion;
@@ -184,7 +184,7 @@ int ft_calculate_animal_handling(t_char * info)
 {
     int animal_handling;
 
-	animal_handling = info->skill_mod.animal_handling;
+    animal_handling = info->skill_mod.animal_handling;
     animal_handling += info->equipment.weapon.skill_mod.animal_handling;
     animal_handling += info->equipment.offhand_weapon.skill_mod.animal_handling;
     animal_handling += info->equipment.ranged_weapon.skill_mod.animal_handling;
@@ -204,7 +204,7 @@ int ft_calculate_insight(t_char * info)
 {
     int insight;
 
-	insight = info->skill_mod.insight;
+    insight = info->skill_mod.insight;
     insight += info->equipment.weapon.skill_mod.insight;
     insight += info->equipment.offhand_weapon.skill_mod.insight;
     insight += info->equipment.ranged_weapon.skill_mod.insight;
@@ -224,7 +224,7 @@ int ft_calculate_medicine(t_char * info)
 {
     int medicine;
 
-	medicine = info->skill_mod.medicine;
+    medicine = info->skill_mod.medicine;
     medicine += info->equipment.weapon.skill_mod.medicine;
     medicine += info->equipment.offhand_weapon.skill_mod.medicine;
     medicine += info->equipment.ranged_weapon.skill_mod.medicine;
@@ -244,7 +244,7 @@ int ft_calculate_perception(t_char * info)
 {
     int perception;
 
-	perception = info->skill_mod.perception;
+    perception = info->skill_mod.perception;
     perception += info->equipment.weapon.skill_mod.perception;
     perception += info->equipment.offhand_weapon.skill_mod.perception;
     perception += info->equipment.ranged_weapon.skill_mod.perception;
@@ -264,7 +264,7 @@ int ft_calculate_survival(t_char * info)
 {
     int survival;
 
-	survival = info->skill_mod.survival;
+    survival = info->skill_mod.survival;
     survival += info->equipment.weapon.skill_mod.survival;
     survival += info->equipment.offhand_weapon.skill_mod.survival;
     survival += info->equipment.ranged_weapon.skill_mod.survival;
@@ -284,7 +284,7 @@ int ft_calculate_deception(t_char * info)
 {
     int deception;
 
-	deception = info->skill_mod.deception;
+    deception = info->skill_mod.deception;
     deception += info->equipment.weapon.skill_mod.deception;
     deception += info->equipment.offhand_weapon.skill_mod.deception;
     deception += info->equipment.ranged_weapon.skill_mod.deception;
@@ -304,7 +304,7 @@ int ft_calculate_intimidation(t_char * info)
 {
     int intimidation;
 
-	intimidation = info->skill_mod.intimidation;
+    intimidation = info->skill_mod.intimidation;
     intimidation += info->equipment.weapon.skill_mod.intimidation;
     intimidation += info->equipment.offhand_weapon.skill_mod.intimidation;
     intimidation += info->equipment.ranged_weapon.skill_mod.intimidation;
@@ -324,7 +324,7 @@ int ft_calculate_performance(t_char * info)
 {
     int performance;
 
-	performance = info->skill_mod.performance;
+    performance = info->skill_mod.performance;
     performance += info->equipment.weapon.skill_mod.performance;
     performance += info->equipment.offhand_weapon.skill_mod.performance;
     performance += info->equipment.ranged_weapon.skill_mod.performance;
@@ -344,7 +344,7 @@ int ft_calculate_persuasion(t_char * info)
 {
     int persuasion;
 
-	persuasion = info->skill_mod.persuasion;
+    persuasion = info->skill_mod.persuasion;
     persuasion += info->equipment.weapon.skill_mod.persuasion;
     persuasion += info->equipment.offhand_weapon.skill_mod.persuasion;
     persuasion += info->equipment.ranged_weapon.skill_mod.persuasion;

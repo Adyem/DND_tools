@@ -3,7 +3,7 @@
 #include "libft/Printf/printf.hpp"
 
 void ft_update_buff_status(t_char * info, int current_dur, int duration,
-							const char *buff_name)
+                            const char *buff_name)
 {
     if (duration == 0 && current_dur == 0)
         pf_printf("%s never had %s and still doesn't have it\n", info->name, buff_name);

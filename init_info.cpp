@@ -21,7 +21,7 @@ int ft_check_stat(t_char * info, const char *stat, size_t index)
             temp--;
         }
         pf_printf_fd(2, "2-Something is wrong with the save file from %s at the line: %s\n",
-				info->name, stat);
+                info->name, stat);
         return (-99999);
     }
     result = ft_atoi(stat);

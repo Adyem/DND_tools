@@ -43,5 +43,5 @@ void ft_cast_lightning_bolt(t_char * character)
     pf_printf("%s cast Lightning Bolt at level %i and dealt %i %s damage\n",
               character->name, cast_at_level, damage, DAMAGE_TYPE_LIGHTNING);
     ft_remove_spell_slot(&character->spell_slots, cast_at_level);
-	return ;
+    return ;
 }

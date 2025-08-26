@@ -54,7 +54,7 @@ static char **ft_reallocate_data_array(char **data, size_t new_size, t_char *inf
 }
 
 static char **ft_append_target_to_data(char **data, char *content, size_t ofset,
-		t_char * info)
+        t_char * info)
 {
     size_t index = 0;
 

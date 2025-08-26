@@ -8,9 +8,9 @@ static void ft_check_buff_damage_hunters_mark(t_char * info)
     int result;
 
     result = ft_dice_roll(info->concentration.dice_amount_mod, info->concentration.dice_faces_mod)
-		+ info->concentration.extra;
+        + info->concentration.extra;
     pf_printf("%s deals %d extra damage if the target is %s\n",
-			info->name, result, info->concentration.targets[0]);
+            info->name, result, info->concentration.targets[0]);
     return ;
 }
 

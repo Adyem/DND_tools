@@ -5,8 +5,8 @@
 void    ft_nightmare_claw_effect(t_char *info, t_equipment_id *weapon,
                                 t_equipment_effect *effect, t_attack_info *attack_info)
 {
-	(void)info;
-	(void)weapon;
+    (void)info;
+    (void)weapon;
     (void)effect;
     if (!attack_info->is_hit)
         return ;

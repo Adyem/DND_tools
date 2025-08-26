@@ -12,10 +12,10 @@
 
 static void remove_exclude_prefix(char* filename)
 {
-	if (ft_strncmp(filename, EXCLUDE_PREFIX, ft_strlen(EXCLUDE_PREFIX)) == 0)
+    if (ft_strncmp(filename, EXCLUDE_PREFIX, ft_strlen(EXCLUDE_PREFIX)) == 0)
         ft_memmove(filename, filename + ft_strlen(EXCLUDE_PREFIX),
             ft_strlen(filename) - ft_strlen(EXCLUDE_PREFIX) + 1);
-	return ;
+    return ;
 }
 
 int ft_set_stats_check_name(const char *name)

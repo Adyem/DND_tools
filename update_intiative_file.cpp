@@ -53,7 +53,7 @@ int ft_initiative_remove(t_char * info)
         {
             if (DEBUG == 1)
                 pf_printf("found one %s and %c\n", content[index],
-						content[index][ft_strlen(info->name)]);
+                        content[index][ft_strlen(info->name)]);
             index++;
             if (turn_marker)
                 removed_turn = 1;

@@ -27,7 +27,7 @@ void tree_node_delete(TreeNode *node)
     if (node->data)
         cma_free(node->data);
     cma_free(node);
-	return ;
+    return ;
 }
 
 static int tree_node_insert_helper(TreeNode *node, const char *key, int unset_value,

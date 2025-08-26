@@ -34,7 +34,7 @@ static int ft_get_damage_reduction(t_char * info, const char *type)
 }
 
 void ft_deal_damage(t_char * info, const char *input, const char *d_type,
-						int resistance, int override)
+                        int resistance, int override)
 {
     static int total;
     int temp;
@@ -69,14 +69,14 @@ void ft_deal_damage(t_char * info, const char *input, const char *d_type,
         {
             extra = (damage * resistance) / 100;
             pf_printf("%s is resistant to %s damage and takes %d%% less damage for a " \
-					"total of %d less damage.\n", info->name, d_type, resistance, extra);
+                    "total of %d less damage.\n", info->name, d_type, resistance, extra);
             damage = damage - extra;
         }
         else if (d_type && resistance < 0)
         {
             extra = damage * ((resistance * -1) / 100);
             pf_printf("%s is vulnerable to %s damage and takes %d%% more damage for a " \
-					"total of %d more damage.\n", info->name, d_type, -resistance, extra);
+                    "total of %d more damage.\n", info->name, d_type, -resistance, extra);
             damage = damage + extra;
         }
         else if (d_type && resistance == 100)

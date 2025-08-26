@@ -14,5 +14,5 @@ void ft_cleanup_treeNode(void)
     TreeNode **node = ft_return_main_treeNode();
     tree_node_delete(*node);
     *node = ft_nullptr;
-	return ;
+    return ;
 }

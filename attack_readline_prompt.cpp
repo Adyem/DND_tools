@@ -38,7 +38,7 @@ int ft_readline_prompt_hit_or_miss(void)
                 return (2);
             }
             pf_printf("Invalid input. Please type 'hit', 'miss', or 'exit' (Attempt %d/5).\n",
-    				invalid_attempts);
+                    invalid_attempts);
         }
         cma_free(input);
     }

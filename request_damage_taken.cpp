@@ -6,58 +6,58 @@
 #include <cstdlib>
 #include <cstring>
 
-static int	ft_free_request_damage(char *line, char **input)
+static int    ft_free_request_damage(char *line, char **input)
 {
-	int	i;
+    int    i;
 
-	i = 0;
-	while (input && input[i])
-	{
-		cma_free(input[i]);
-		i++;
-	}
-	cma_free(input);
-	cma_free(line);
-	return (1);
+    i = 0;
+    while (input && input[i])
+    {
+        cma_free(input[i]);
+        i++;
+    }
+    cma_free(input);
+    cma_free(line);
+    return (1);
 }
 
 int ft_get_resistance(t_char * info, const char *type)
 {
-	if (ft_strcmp_dnd(type, "acid") == 0)
-		return (ft_calculate_acid_resistance(info));
-	else if (ft_strcmp_dnd(type, "bludgeoning") == 0)
-		return (ft_calculate_bludgeoning_resistance(info));
-	else if (ft_strcmp_dnd(type, "cold") == 0)
-		return (ft_calculate_cold_resistance(info));
-	else if (ft_strcmp_dnd(type, "fire") == 0)
-		return (ft_calculate_fire_resistance(info));
-	else if (ft_strcmp_dnd(type, "force") == 0)
-		return (ft_calculate_force_resistance(info));
-	else if (ft_strcmp_dnd(type, "lightning") == 0)
-		return (ft_calculate_lightning_resistance(info));
-	else if (ft_strcmp_dnd(type, "necrotic") == 0)
-		return (ft_calculate_necrotic_resistance(info));
-	else if (ft_strcmp_dnd(type, "piercing") == 0)
-		return (ft_calculate_piercing_resistance(info));
-	else if (ft_strcmp_dnd(type, "poison") == 0)
-		return (ft_calculate_poison_resistance(info));
-	else if (ft_strcmp_dnd(type, "psychic") == 0)
-		return (ft_calculate_psychic_resistance(info));
-	else if (ft_strcmp_dnd(type, "radiant") == 0)
-		return (ft_calculate_radiant_resistance(info));
-	else if (ft_strcmp_dnd(type, "slashing") == 0)
-		return (ft_calculate_slashing_resistance(info));
-	else if (ft_strcmp_dnd(type, "thunder") == 0)
-		return (ft_calculate_thunder_resistance(info));
-	return (-9999);
+    if (ft_strcmp_dnd(type, "acid") == 0)
+        return (ft_calculate_acid_resistance(info));
+    else if (ft_strcmp_dnd(type, "bludgeoning") == 0)
+        return (ft_calculate_bludgeoning_resistance(info));
+    else if (ft_strcmp_dnd(type, "cold") == 0)
+        return (ft_calculate_cold_resistance(info));
+    else if (ft_strcmp_dnd(type, "fire") == 0)
+        return (ft_calculate_fire_resistance(info));
+    else if (ft_strcmp_dnd(type, "force") == 0)
+        return (ft_calculate_force_resistance(info));
+    else if (ft_strcmp_dnd(type, "lightning") == 0)
+        return (ft_calculate_lightning_resistance(info));
+    else if (ft_strcmp_dnd(type, "necrotic") == 0)
+        return (ft_calculate_necrotic_resistance(info));
+    else if (ft_strcmp_dnd(type, "piercing") == 0)
+        return (ft_calculate_piercing_resistance(info));
+    else if (ft_strcmp_dnd(type, "poison") == 0)
+        return (ft_calculate_poison_resistance(info));
+    else if (ft_strcmp_dnd(type, "psychic") == 0)
+        return (ft_calculate_psychic_resistance(info));
+    else if (ft_strcmp_dnd(type, "radiant") == 0)
+        return (ft_calculate_radiant_resistance(info));
+    else if (ft_strcmp_dnd(type, "slashing") == 0)
+        return (ft_calculate_slashing_resistance(info));
+    else if (ft_strcmp_dnd(type, "thunder") == 0)
+        return (ft_calculate_thunder_resistance(info));
+    return (-9999);
 }
 
 int ft_request_damage(t_char * info)
 {
-    char	**input = ft_nullptr;
-    char	*line = ft_nullptr;
-    int		fail = 0;
-    int		resistance;
+    char    **input = ft_nullptr;
+    char    *line = ft_nullptr;
+    int        fail = 0;
+    int        resistance;
 
     while ((line = rl_readline("How much damage was dealt: ")))
     {

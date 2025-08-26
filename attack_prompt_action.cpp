@@ -8,21 +8,21 @@
 static void list_learned_spells(t_known_spell known_spells[])
 {
     int index = 0;
-	int first_spell = 0;
+    int first_spell = 0;
     while (known_spells[index].cmd != nullptr)
     {
         if (*(known_spells[index].learned) != 0)
-		{
-			if (first_spell == 0)
-			{
-			    pf_printf("You have the following learned spells available:\n");
-				first_spell = 1;
-			}
+        {
+            if (first_spell == 0)
+            {
+                pf_printf("You have the following learned spells available:\n");
+                first_spell = 1;
+            }
             pf_printf(" - %s\n", known_spells[index].cmd);
-		}
+        }
         index++;
     }
-	return ;
+    return ;
 }
 
 static bool all_spells_not_learned(t_known_spell known_spells[])
@@ -39,7 +39,7 @@ static bool all_spells_not_learned(t_known_spell known_spells[])
 }
 
 static bool handle_spell_cast(t_char * character, t_known_spell known_spells[],
-								char *input, bool critical_strike)
+                                char *input, bool critical_strike)
 {
     int index = 0;
     while (known_spells[index].cmd != nullptr)
@@ -61,13 +61,13 @@ static bool handle_spell_cast(t_char * character, t_known_spell known_spells[],
 }
 
 static void prompt_user_for_spell(t_known_spell known_spells[], t_char * character,
-							bool critical_strike)
+                            bool critical_strike)
 {
     pf_printf("Type the spell name to cast it, or type 'exit' to skip.\n");
     int invalid_attempts = 0;
     char *input = ft_nullptr;
-	while ((input = rl_readline("Cast a learned spell or type 'exit': ")) != ft_nullptr)
-	{
+    while ((input = rl_readline("Cast a learned spell or type 'exit': ")) != ft_nullptr)
+    {
         if (ft_strcmp_dnd(input, "exit") == 0)
         {
             pf_printf("Exiting spell prompt.\n");
@@ -85,18 +85,18 @@ static void prompt_user_for_spell(t_known_spell known_spells[], t_char * charact
             break ;
         }
         pf_printf("Invalid input. Type a learned spell name or 'exit' (Attempt %d/5).\n",
-				invalid_attempts);
+                invalid_attempts);
         cma_free(input);
-	}
-	if (input == ft_nullptr)
+    }
+    if (input == ft_nullptr)
         pf_printf_fd(2, "Error: read line memory allocation failed\n");
-	return ;
+    return ;
 }
 
 void ft_prompt_on_attack_success(t_char * character, bool critical_strike)
 {
     t_known_spell known_spells[] =
-	{
+    {
         { "divine_smite", &character->spells.divine_smite.learned, ft_cast_divine_smite },
         { nullptr, nullptr, nullptr }
     };
@@ -104,5 +104,5 @@ void ft_prompt_on_attack_success(t_char * character, bool critical_strike)
     if (all_spells_not_learned(known_spells))
         return ;
     prompt_user_for_spell(known_spells, character, critical_strike);
-	return ;
+    return ;
 }
