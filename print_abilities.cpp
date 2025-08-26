@@ -103,7 +103,7 @@ void print_earth_pounce(const t_char * info)
         target = info->bufs.earth_pounce.target_id;
     else
         target = "the target";
-        pf_printf("Earth Pounce: Targets the player with the highest Armor Class " \
+    pf_printf("Earth Pounce: Targets the player with the highest Armor Class " \
                 "(AC). ");
     pf_printf("At the start of the boss's next turn, jumps towards the %s " \
             "and deals %d bludgeoning damage reduced by 1 for each AC the %s has.\n",
