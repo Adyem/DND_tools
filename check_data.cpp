@@ -3,12 +3,12 @@
 #include <climits>
 
 static int check_range(const int &value, const int &min, const int &max, const char *name,
-		const char *field_name)
+        const char *field_name)
 {
     if (value < min || value > max)
     {
         pf_printf("%s: %s value (%d) out of bounds (%d to %d)\n", name, field_name,
-				value, min, max);
+                value, min, max);
         return (1);
     }
     return (0);
@@ -44,31 +44,31 @@ static int check_resistances(t_char * info)
 {
     int error = 0;
     error += check_range(info->c_resistance.bludgeoning, -500, 500, info->name,
-			"bludgeoning resistance");
+            "bludgeoning resistance");
     error += check_range(info->c_resistance.cold, -500, 500, info->name,
-			"cold resistance");
+            "cold resistance");
     error += check_range(info->c_resistance.fire, -500, 500, info->name,
-			"fire resistance");
+            "fire resistance");
     error += check_range(info->c_resistance.force, -500, 500, info->name,
-			"force resistance");
+            "force resistance");
     error += check_range(info->c_resistance.lightning, -500, 500, info->name,
-			"lightning resistance");
+            "lightning resistance");
     error += check_range(info->c_resistance.necrotic, -500, 500, info->name,
-			"necrotic resistance");
+            "necrotic resistance");
     error += check_range(info->c_resistance.piercing, -500, 500, info->name,
-			"piercing resistance");
+            "piercing resistance");
     error += check_range(info->c_resistance.poison, -500, 500, info->name,
-			"poison resistance");
+            "poison resistance");
     error += check_range(info->c_resistance.psychic, -500, 500, info->name,
-			"psychic resistance");
+            "psychic resistance");
     error += check_range(info->c_resistance.radiant, -500, 500, info->name,
-			"radiant resistance");
+            "radiant resistance");
     error += check_range(info->c_resistance.slashing, -500, 500, info->name,
-			"slashing resistance");
+            "slashing resistance");
     error += check_range(info->c_resistance.thunder, -500, 500, info->name,
-			"thunder resistance");
+            "thunder resistance");
     error += check_range(info->c_resistance.acid, -500, 500, info->name,
-			"acid resistance");
+            "acid resistance");
     return (error);
 }
 
@@ -76,18 +76,18 @@ static int check_concentration(t_char * info)
 {
     int error = 0;
     error += check_range(info->concentration.concentration, 0, INT_MAX, info->name,
-			"concentration");
+            "concentration");
     error += check_range(info->concentration.spell_id, 0, INT_MAX, info->name,
-			"spell_id");
+            "spell_id");
     error += check_range(info->concentration.dice_amount_mod, 0, INT_MAX, info->name,
-			"dice_amount_mod");
+            "dice_amount_mod");
     error += check_range(info->concentration.dice_faces_mod, 0, INT_MAX, info->name,
-			"dice_faces_mod");
+            "dice_faces_mod");
     error += check_range(info->concentration.base_mod, 0, INT_MAX, info->name, "base_mod");
     if (info->concentration.duration < -1)
     {
         pf_printf("%s: duration (%d) is less than -1\n", info->name,
-				info->concentration.duration);
+                info->concentration.duration);
         error++;
     }
     return (error);
@@ -105,7 +105,7 @@ static int check_debuffs(t_char * info)
 {
     int error = 0;
     error += check_range(info->debufs.blinded.duration, 0, 50, info->name,
-			"blinded debuff duration");
+            "blinded debuff duration");
     return (error);
 }
 
@@ -113,122 +113,122 @@ static int check_buffs(t_char * info)
 {
     int error = 0;
     error += check_range(info->bufs.flame_geyser.duration, 0, 100, info->name,
-			"flame geyser duration");
+            "flame geyser duration");
     error += check_range(info->bufs.flame_geyser.close_to_tower_d, 0, 100, info->name,
-			"flame geyser close_to_tower_d");
+            "flame geyser close_to_tower_d");
     error += check_range(info->bufs.flame_geyser.tower_explode_d, 0, 100, info->name,
-			"flame geyser tower_explode_d");
+            "flame geyser tower_explode_d");
     error += check_range(info->bufs.flame_geyser.amount, 0, 5, info->name,
-			"flame geyser amount");
+            "flame geyser amount");
     error += check_range(info->bufs.meteor_strike.duration, 0, 100, info->name,
-			"meteor strike duration");
+            "meteor strike duration");
     error += check_range(info->bufs.meteor_strike.one_target_d, 0, 100, info->name,
-			"meteor strike one_target_d");
+            "meteor strike one_target_d");
     error += check_range(info->bufs.meteor_strike.two_targets_d, 0, 100, info->name,
-			"meteor strike two_targets_d");
+            "meteor strike two_targets_d");
     error += check_range(info->bufs.meteor_strike.three_targets_d, 0, 100, info->name,
-			"meteor strike three_targets_d");
+            "meteor strike three_targets_d");
     error += check_range(info->bufs.meteor_strike.four_targets_d, 0, 100, info->name,
-			"meteor strike four_targets_d");
+            "meteor strike four_targets_d");
     error += check_range(info->bufs.meteor_strike.five_targets_d, 0, 100, info->name,
-			"meteor strike five_targets_d");
+            "meteor strike five_targets_d");
     error += check_range(info->bufs.lightning_strike.duration, 0, 100, info->name,
-			"lightning strike duration");
+            "lightning strike duration");
     error += check_range(info->bufs.lightning_strike.amount, 0, 100, info->name,
-			"lightning strike amount");
+            "lightning strike amount");
     error += check_range(info->bufs.lightning_strike.distance, 0, 1000, info->name,
-			"lightning strike distance");
+            "lightning strike distance");
     error += check_range(info->bufs.lightning_strike.dice_amount, 0, 100, info->name,
-			"lightning strike dice_amount");
+            "lightning strike dice_amount");
     error += check_range(info->bufs.lightning_strike.dice_faces, 0, 100, info->name,
-			"lightning strike dice_faces");
+            "lightning strike dice_faces");
     error += check_range(info->bufs.lightning_strike.extra_damage, 0, 1000, info->name,
-			"lightning strike extra_damage");
+            "lightning strike extra_damage");
     error += check_range(info->bufs.lightning_strikeV2.duration, 0, 100, info->name,
-			"lightning strike V2 duration");
+            "lightning strike V2 duration");
     error += check_range(info->bufs.lightning_strikeV2.amount, 0, 100, info->name,
-			"lightning strike V2 amount");
+            "lightning strike V2 amount");
     error += check_range(info->bufs.lightning_strikeV2.distance, 0, 1000, info->name,
-			"lightning strike V2 distance");
+            "lightning strike V2 distance");
     error += check_range(info->bufs.lightning_strikeV2.dice_amount, 0, 100, info->name,
-			"lightning strike V2 dice_amount");
+            "lightning strike V2 dice_amount");
     error += check_range(info->bufs.lightning_strikeV2.dice_faces, 0, 100, info->name,
-			"lightning strike V2 dice_faces");
+            "lightning strike V2 dice_faces");
     error += check_range(info->bufs.lightning_strikeV2.extra_damage, 0, 1000, info->name,
-			"lightning strike V2 extra_damage");
+            "lightning strike V2 extra_damage");
     error += check_flag(info->bufs.earth_pounce.active, info->name,
-			"earth pounce active");
+            "earth pounce active");
     error += check_range(info->bufs.earth_pounce.base_damage, 0, 1000, info->name,
-			"earth pounce base_damage");
+            "earth pounce base_damage");
     error += check_flag(info->bufs.arcane_pounce.active, info->name,
-			"arcane pounce active");
+            "arcane pounce active");
     error += check_range(info->bufs.arcane_pounce.erea_damage, 0, 1000, info->name,
-			"arcane pounce area_damage");
+            "arcane pounce area_damage");
     error += check_range(info->bufs.arcane_pounce.magic_damage, 0, 1000, info->name,
-			"arcane pounce magic_damage");
+            "arcane pounce magic_damage");
     error += check_flag(info->bufs.shadow_illusion.active, info->name,
             "shadow illusion active");
     error += check_range(info->bufs.shadow_illusion.duration, 0, 10, info->name,
             "shadow illusion duration");
-	error += check_range(info->bufs.bless.base_mod, 0, 1000, info->name,
-			"bless base mod");
-	error += check_range(info->bufs.bless.duration, 0, 50, info->name,
-			"bless duration");
-	error += check_range(info->bufs.bless.dice_faces_mod, 0, 100, info->name,
-			"bless dice faces");
-	error += check_range(info->bufs.bless.dice_amount_mod, 0, 100, info->name,
-			"bless dice amount");
-	error += check_range(info->bufs.rejuvenation.duration, 0, 50, info->name,
-			"rejuvenation duration");
-	error += check_range(info->bufs.rejuvenation.healing_dice_amount, 0, 20, info->name,
-			"rejuvenation dice amount");
-	error += check_range(info->bufs.rejuvenation.healing_dice_faces, 0, 12, info->name,
-			"rejuvenation dice faces");
-	error += check_range(info->bufs.rejuvenation.healing_extra, 0, 20, info->name,
-			"rejuvenation healing extra");
+    error += check_range(info->bufs.bless.base_mod, 0, 1000, info->name,
+            "bless base mod");
+    error += check_range(info->bufs.bless.duration, 0, 50, info->name,
+            "bless duration");
+    error += check_range(info->bufs.bless.dice_faces_mod, 0, 100, info->name,
+            "bless dice faces");
+    error += check_range(info->bufs.bless.dice_amount_mod, 0, 100, info->name,
+            "bless dice amount");
+    error += check_range(info->bufs.rejuvenation.duration, 0, 50, info->name,
+            "rejuvenation duration");
+    error += check_range(info->bufs.rejuvenation.healing_dice_amount, 0, 20, info->name,
+            "rejuvenation dice amount");
+    error += check_range(info->bufs.rejuvenation.healing_dice_faces, 0, 12, info->name,
+            "rejuvenation dice faces");
+    error += check_range(info->bufs.rejuvenation.healing_extra, 0, 20, info->name,
+            "rejuvenation healing extra");
     error += check_range(info->bufs.growth.stacks, 0, 10, info->name,
             "growth stacks");
-	error += check_range(info->spells.magic_drain.damage_flat, 0, 50, info->name,
-			"magic drain flat damage");
-	error += check_range(info->spells.magic_drain.damage_dice_amount, 0, 50, info->name,
-			"magic drain dice amount");
-	error += check_range(info->spells.magic_drain.damage_dice_faces, 0, 50, info->name,
-			"magic drain dice faces");
-	error += check_range(info->spells.magic_drain.spell_slot_total_level_drain, 0, 50, info->name,
-			"magic drain spell slot total level drain");
-	error += check_range(info->spells.magic_drain.dex_save, 0, 50, info->name,
-			"magic drain dex save");
-	error += check_range(info->spells.magic_drain.turns_passed_fron_last_cast, 0, 50, info->name,
-			"magic drain turns passed from last cast");
-	error += check_range(info->spells.magic_drain.extra_damage_flat, 0, 50, info->name,
-			"magic drain extra flat damage");
-	error += check_range(info->spells.magic_drain.extra_dice_amount, 0, 50, info->name,
-			"magic drain extra dice amount");
-	error += check_range(info->spells.magic_drain.extra_dice_faces, 0, 50, info->name,
-			"magic drain extra dice faces");
-	error += check_range(info->spells.magic_drain.cooldown, 0, 50, info->name,
-			"magic drain cooldown");
-	error += check_range(info->debufs.magic_drain.damage_flat, 0, 50, info->name,
-			"magic drain flat damage (debuff)");
-	error += check_range(info->debufs.magic_drain.damage_dice_amount, 0, 50, info->name,
-			"magic drain dice amount (debuff)");
-	error += check_range(info->debufs.magic_drain.damage_dice_faces, 0, 50, info->name,
-			"magic drain dice faces (debuff)");
-	error += check_range(info->debufs.magic_drain.spell_slot_total_level_drain, 0, 50, info->name,
-			"magic drain spell slot total level drain (debuff)");
-	error += check_range(info->debufs.magic_drain.con_save, 0, 50, info->name,
-			"magic drain con save (debuff)");
-	error += check_range(info->debufs.magic_drain.extra_damage_flat, 0, 50, info->name,
-			"magic drain extra flat damage (debuff)");
-	error += check_range(info->debufs.magic_drain.extra_dice_amount, 0, 50, info->name,
-			"magic drain extra dice amount (debuff)");
-	error += check_range(info->debufs.magic_drain.extra_dice_faces, 0, 50, info->name,
-			"magic drain extra dice faces (debuff)");
-	error += check_range(info->spells.magic_drain.learned, 0, 1, info->name,
-			"magic drain learned (spell)");
-	error += check_range(info->debufs.fell_poison.duration, 0, 50, info->name,
-			"fell poison debuff duration");
-	return (error);
+    error += check_range(info->spells.magic_drain.damage_flat, 0, 50, info->name,
+            "magic drain flat damage");
+    error += check_range(info->spells.magic_drain.damage_dice_amount, 0, 50, info->name,
+            "magic drain dice amount");
+    error += check_range(info->spells.magic_drain.damage_dice_faces, 0, 50, info->name,
+            "magic drain dice faces");
+    error += check_range(info->spells.magic_drain.spell_slot_total_level_drain, 0, 50, info->name,
+            "magic drain spell slot total level drain");
+    error += check_range(info->spells.magic_drain.dex_save, 0, 50, info->name,
+            "magic drain dex save");
+    error += check_range(info->spells.magic_drain.turns_passed_fron_last_cast, 0, 50, info->name,
+            "magic drain turns passed from last cast");
+    error += check_range(info->spells.magic_drain.extra_damage_flat, 0, 50, info->name,
+            "magic drain extra flat damage");
+    error += check_range(info->spells.magic_drain.extra_dice_amount, 0, 50, info->name,
+            "magic drain extra dice amount");
+    error += check_range(info->spells.magic_drain.extra_dice_faces, 0, 50, info->name,
+            "magic drain extra dice faces");
+    error += check_range(info->spells.magic_drain.cooldown, 0, 50, info->name,
+            "magic drain cooldown");
+    error += check_range(info->debufs.magic_drain.damage_flat, 0, 50, info->name,
+            "magic drain flat damage (debuff)");
+    error += check_range(info->debufs.magic_drain.damage_dice_amount, 0, 50, info->name,
+            "magic drain dice amount (debuff)");
+    error += check_range(info->debufs.magic_drain.damage_dice_faces, 0, 50, info->name,
+            "magic drain dice faces (debuff)");
+    error += check_range(info->debufs.magic_drain.spell_slot_total_level_drain, 0, 50, info->name,
+            "magic drain spell slot total level drain (debuff)");
+    error += check_range(info->debufs.magic_drain.con_save, 0, 50, info->name,
+            "magic drain con save (debuff)");
+    error += check_range(info->debufs.magic_drain.extra_damage_flat, 0, 50, info->name,
+            "magic drain extra flat damage (debuff)");
+    error += check_range(info->debufs.magic_drain.extra_dice_amount, 0, 50, info->name,
+            "magic drain extra dice amount (debuff)");
+    error += check_range(info->debufs.magic_drain.extra_dice_faces, 0, 50, info->name,
+            "magic drain extra dice faces (debuff)");
+    error += check_range(info->spells.magic_drain.learned, 0, 1, info->name,
+            "magic drain learned (spell)");
+    error += check_range(info->debufs.fell_poison.duration, 0, 50, info->name,
+            "fell poison debuff duration");
+    return (error);
 
 }
 
@@ -244,17 +244,17 @@ static int check_other_buffs_debuffs(t_char * info)
     if (info->bufs.lightning_strike.duration < 0)
     {
         pf_printf("%s: lightning strike duration (%d) is negative\n", info->name,
-				info->bufs.lightning_strike.duration);
+                info->bufs.lightning_strike.duration);
         error++;
     }
     if (info->debufs.hunters_mark.amount < 0 || info->debufs.hunters_mark.amount
-			!= ft_double_char_length(const_cast<const char **>(info->debufs.hunters_mark.caster_name)))
+            != ft_double_char_length(const_cast<const char **>(info->debufs.hunters_mark.caster_name)))
     {
         pf_printf("%s: hunters mark data is not correct\n", info->name);
         error++;
     }
-	if (info->debufs.magic_drain.amount < 0 || info->debufs.magic_drain.amount
-			!= ft_double_char_length(const_cast<const char **>(info->debufs.magic_drain.caster)))
+    if (info->debufs.magic_drain.amount < 0 || info->debufs.magic_drain.amount
+            != ft_double_char_length(const_cast<const char **>(info->debufs.magic_drain.caster)))
     {
         pf_printf("%s: magic drain data is not correct\n", info->name);
         error++;
@@ -262,13 +262,13 @@ static int check_other_buffs_debuffs(t_char * info)
     if (info->bufs.protective_winds.duration < 0)
     {
         pf_printf("%s: protective winds duration (%d) is negative\n", info->name,
-				info->bufs.protective_winds.duration);
+                info->bufs.protective_winds.duration);
         error++;
     }
     if (info->bufs.chaos_armor.duration < 0)
     {
         pf_printf("%s: chaos armor duration (%d) is negative\n", info->name,
-				info->bufs.chaos_armor.duration);
+                info->bufs.chaos_armor.duration);
         error++;
     }
     return (error);
@@ -297,7 +297,7 @@ static int check_spell_slot(t_char * info, const char *slot_name, t_spell_slot *
         {
             error++;
             pf_printf("%s: Warlock slot level is 0, but total (%d) or available " \
-					"(%d) slots are not 0\n", info->name, slot->total, slot->available);
+                    "(%d) slots are not 0\n", info->name, slot->total, slot->available);
         }
     }
     else
@@ -306,7 +306,7 @@ static int check_spell_slot(t_char * info, const char *slot_name, t_spell_slot *
         {
             error++;
             pf_printf("%s: Spell slot %s should have level 0, but found %d\n", 
-					info->name, slot_name, slot->level);
+                    info->name, slot_name, slot->level);
         }
     }
     error += check_range(slot->total, 0, 9, info->name, "total_slots");
@@ -314,7 +314,7 @@ static int check_spell_slot(t_char * info, const char *slot_name, t_spell_slot *
     {
         error++;
         pf_printf("%s: Available slots (%d) for %s are out of range (0 to %d)\n",
-				info->name, slot->available, slot_name, slot->total);
+                info->name, slot->available, slot_name, slot->total);
     }
     return (error);
 }
@@ -345,6 +345,6 @@ int ft_npc_check_info(t_char * info)
     error += ft_npc_check_info_2(info);
     if (error)
         pf_printf("%s: Error with the save file, please reinitialize it with the " \
-				"correct values\n", info->name);
+                "correct values\n", info->name);
     return (error);
 }

@@ -12,7 +12,7 @@ inline static bool ft_is_crackback_possible(t_char * info, int number)
 inline static void ft_notify_no_weapon(t_char * info, const char *weapon_type)
 {
     pf_printf_fd(2, "No %s set for %s\n", weapon_type, info->name);
-	return ;
+    return ;
 }
 
 static bool ft_handle_attack_choice(t_char * info, const char *choice)
@@ -82,7 +82,7 @@ static void ft_execute_crackback(t_char * info)
                 ranged_missing = true;
 
             pf_printf_fd(2, "118-Error: Invalid input Crackback, valid inputs are melee, " \
-					"ranged or exit\n");
+                    "ranged or exit\n");
             cma_free(line);
         }
 
@@ -90,7 +90,7 @@ static void ft_execute_crackback(t_char * info)
         if ((melee_missing && ranged_missing) || info->flags.reaction_used || max_tries >= 10)
             break ;
     }
-	return ;
+    return ;
 }
 
 void ft_crackback(t_char * info, int number)
@@ -98,7 +98,7 @@ void ft_crackback(t_char * info, int number)
     if (!ft_is_crackback_possible(info, number))
         return ;
     pf_printf("Because of the low attack roll %s has the opportunity to react with " \
-			"an opportunity attack\n", info->name);
+            "an opportunity attack\n", info->name);
     ft_execute_crackback(info);
-	return ;
+    return ;
 }

@@ -382,6 +382,9 @@ void        ft_concentration_remove_magic_drain(t_char *character, t_target_data
 // Resistance
 int         ft_get_resistance(t_char * info, const char *type);
 
+// Ability modifier
+int         ft_ability_mod(int ability_score);
+
 // Advantage or disadvantage
 void        ft_reroll(t_char * info, int *result);
 

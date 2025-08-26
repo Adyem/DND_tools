@@ -20,7 +20,7 @@ static void ft_npc_update_hp(t_char * info, const char **input)
     else if (info->stats.health < 0)
         info->stats.health = 0;
     ft_print_character_status(info, number, temp);
-	return ;
+    return ;
 }
 
 void ft_npc_set_stat(t_char * info, const char **input)
@@ -79,15 +79,15 @@ void ft_npc_set_stat(t_char * info, const char **input)
     }
     else if (ft_strcmp_dnd(input[1], "cast") == 0)
     {
-		if (ft_strcmp_dnd(input[2], "chaos_armor") == 0)
+        if (ft_strcmp_dnd(input[2], "chaos_armor") == 0)
             ft_cast_chaos_armor(info);
-		else if (ft_strcmp_dnd(input[2], "cure_wounds") == 0)
-			ft_cast_cure_wounds(info);
-		else if (ft_strcmp_dnd(input[2], "lightning_bolt") == 0)
-			ft_cast_lightning_bolt(info);
-		else if (ft_strcmp_dnd(input[2], "bless") == 0)
-			ft_cast_bless(info, input);
-		else
+        else if (ft_strcmp_dnd(input[2], "cure_wounds") == 0)
+            ft_cast_cure_wounds(info);
+        else if (ft_strcmp_dnd(input[2], "lightning_bolt") == 0)
+            ft_cast_lightning_bolt(info);
+        else if (ft_strcmp_dnd(input[2], "bless") == 0)
+            ft_cast_bless(info, input);
+        else
             pf_printf("7-%s invalid command\n", info->name);
     }
     else if (ft_strcmp_dnd(input[1], "initiative") == 0)
@@ -105,5 +105,5 @@ void ft_npc_set_stat(t_char * info, const char **input)
         pf_printf("5-%s Invalid argument given\n", info->name);
         return ;
     }
-	return ;
+    return ;
 }

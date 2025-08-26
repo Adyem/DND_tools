@@ -3,7 +3,7 @@
 #include "libft/CPP_class/nullptr.hpp"
 
 t_char *ft_validate_and_fetch_target(char *target_name, t_char * info,
-		int *error_code)
+        int *error_code)
 {
     if (!ft_set_stats_check_name(target_name))
     {

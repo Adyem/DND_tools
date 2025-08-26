@@ -102,39 +102,39 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, FLAME_GEYSER_DURATION_KEY, &info->bufs.flame_geyser.duration, 0);
     tree_node_insert(node, FLAME_GEYSER_AMOUNT_KEY, &info->bufs.flame_geyser.amount, 0);
     tree_node_insert(node, FLAME_GEYSER_CLOSE_TO_TOWER_D_KEY,
-			&info->bufs.flame_geyser.close_to_tower_d, 0);
+            &info->bufs.flame_geyser.close_to_tower_d, 0);
     tree_node_insert(node, FLAME_GEYSER_TOWER_EXPLODE_D_KEY,
-			&info->bufs.flame_geyser.tower_explode_d, 0);
+            &info->bufs.flame_geyser.tower_explode_d, 0);
     tree_node_insert(node, METEOR_STRIKE_DURATION_KEY,
-			&info->bufs.meteor_strike.duration, 0);
+            &info->bufs.meteor_strike.duration, 0);
     tree_node_insert(node, METEOR_STRIKE_ONE_TARGET_D_KEY,
-			&info->bufs.meteor_strike.one_target_d, 0);
+            &info->bufs.meteor_strike.one_target_d, 0);
     tree_node_insert(node, METEOR_STRIKE_TWO_TARGETS_D_KEY,
-			&info->bufs.meteor_strike.two_targets_d, 0);
+            &info->bufs.meteor_strike.two_targets_d, 0);
     tree_node_insert(node, METEOR_STRIKE_THREE_TARGETS_D_KEY,
-			&info->bufs.meteor_strike.three_targets_d, 0);
+            &info->bufs.meteor_strike.three_targets_d, 0);
     tree_node_insert(node, METEOR_STRIKE_FOUR_TARGETS_D_KEY,
-			&info->bufs.meteor_strike.four_targets_d, 0);
+            &info->bufs.meteor_strike.four_targets_d, 0);
     tree_node_insert(node, METEOR_STRIKE_FIVE_TARGETS_D_KEY,
-			&info->bufs.meteor_strike.five_targets_d, 0);
+            &info->bufs.meteor_strike.five_targets_d, 0);
     tree_node_insert(node, LIGHTNING_STRIKE_DURATION_KEY, &info->bufs.lightning_strike.duration, 0);
     tree_node_insert(node, LIGHTNING_STRIKE_AMOUNT_KEY, &info->bufs.lightning_strike.amount, 0);
     tree_node_insert(node, LIGHTNING_STRIKE_DISTANCE_KEY, &info->bufs.lightning_strike.distance, 0);
     tree_node_insert(node, LIGHTNING_STRIKE_DICE_AMOUNT_KEY,
-			&info->bufs.lightning_strike.dice_amount, 0);
+            &info->bufs.lightning_strike.dice_amount, 0);
     tree_node_insert(node, LIGHTNING_STRIKE_DICE_FACES_KEY,
-			&info->bufs.lightning_strike.dice_faces, 0);
+            &info->bufs.lightning_strike.dice_faces, 0);
     tree_node_insert(node, LIGHTNING_STRIKE_EXTRA_DAMAGE_KEY,
-			&info->bufs.lightning_strike.extra_damage, 0);
+            &info->bufs.lightning_strike.extra_damage, 0);
     tree_node_insert(node, LIGHTNING_STRIKEV2_DURATION_KEY,
-			&info->bufs.lightning_strikeV2.duration, 0);
+            &info->bufs.lightning_strikeV2.duration, 0);
     tree_node_insert(node, LIGHTNING_STRIKEV2_AMOUNT_KEY, &info->bufs.lightning_strikeV2.amount, 0);
     tree_node_insert(node, LIGHTNING_STRIKEV2_DISTANCE_KEY,
-			&info->bufs.lightning_strikeV2.distance, 0);
+            &info->bufs.lightning_strikeV2.distance, 0);
     tree_node_insert(node, LIGHTNING_STRIKEV2_DICE_AMOUNT_KEY,
                      &info->bufs.lightning_strikeV2.dice_amount, 0);
     tree_node_insert(node, LIGHTNING_STRIKEV2_DICE_FACES_KEY,
-			&info->bufs.lightning_strikeV2.dice_faces, 0);
+            &info->bufs.lightning_strikeV2.dice_faces, 0);
     tree_node_insert(node, LIGHTNING_STRIKEV2_EXTRA_DAMAGE_KEY,
                      &info->bufs.lightning_strikeV2.extra_damage, 0);
     tree_node_insert(node, EARTH_POUNCE_ACTIVE_KEY, &info->bufs.earth_pounce.active, 0);
@@ -142,7 +142,7 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, ARCANE_POUNCE_ACTIVE_KEY, &info->bufs.arcane_pounce.active, 0);
     tree_node_insert(node, ARCANE_POUNCE_EREA_DAMAGE_KEY, &info->bufs.arcane_pounce.erea_damage, 0);
     tree_node_insert(node, ARCANE_POUNCE_MAGIC_DAMAGE_KEY,
-			&info->bufs.arcane_pounce.magic_damage, 0);
+            &info->bufs.arcane_pounce.magic_damage, 0);
     tree_node_insert(node, FROST_BREATH_ACTIVE_KEY, &info->bufs.frost_breath.active, 0);
     tree_node_insert(node, FROST_BREATH_DAMAGE_KEY, &info->bufs.frost_breath.damage, 0);
     tree_node_insert(node, REACTION_USED_KEY, &info->flags.reaction_used, 0);
@@ -159,56 +159,56 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, ARCANE_POUNCE_TARGET_ID_KEY, &info->bufs.arcane_pounce.target_id);
     tree_node_insert(node, EARTH_POUNCE_TARGET_ID_KEY, &info->bufs.earth_pounce.target_id);
     tree_node_insert(node, BUFF_BLESS_CASTER_NAME_KEY, &info->bufs.bless.caster_name);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_TARGET_KEY, &info->spells.magic_drain.target);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_DAMAGE_FLAT_KEY,
-			&info->spells.magic_drain.damage_flat, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
-			&info->spells.magic_drain.spell_slot_total_level_drain, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_DICE_AMOUNT_KEY,
-			&info->spells.magic_drain.damage_dice_amount, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_DICE_FACES_KEY,
-			&info->spells.magic_drain.damage_dice_faces, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_DEX_SAVE_KEY, 
-			&info->spells.magic_drain.dex_save, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_TURNS_PASSED_FROM_LAST_CAST_KEY,
-			&info->spells.magic_drain.turns_passed_fron_last_cast, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
-			&info->spells.magic_drain.extra_damage_flat, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DICE_AMOUNT_KEY,
-			&info->spells.magic_drain.extra_dice_amount, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DICE_FACES_KEY,
-			&info->spells.magic_drain.extra_dice_faces, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_COOLDOWN_KEY,
-			&info->spells.magic_drain.cooldown, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_CASTER_KEY, 
-			&info->debufs.magic_drain.caster);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_DAMAGE_FLAT_KEY,
-			&info->debufs.magic_drain.damage_flat, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
-			&info->debufs.magic_drain.spell_slot_total_level_drain, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_DICE_AMOUNT_KEY,
-			&info->debufs.magic_drain.damage_dice_amount, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_DICE_FACES_KEY,
-			&info->debufs.magic_drain.damage_dice_faces, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_CON_SAVE_KEY,
-			&info->debufs.magic_drain.con_save, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
-			&info->debufs.magic_drain.extra_damage_flat, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DICE_AMOUNT_KEY,
-			&info->debufs.magic_drain.extra_dice_amount, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DICE_FACES_KEY,
-			&info->debufs.magic_drain.extra_dice_faces, -1);
-	tree_node_insert(node, SPELL_MAGIC_DRAIN_LEARNED_KEY, &info->spells.magic_drain.learned, -1);
-	tree_node_insert(node, DEBUFF_MAGIC_DRAIN_AMOUNT_KEY, &info->debufs.magic_drain.amount, -1);
-	tree_node_insert(node, DEBUFF_FELL_POISON_DURATION_KEY, &info->debufs.fell_poison.duration, -1);
-	tree_node_insert(node, BUFF_REJUVENATION_DURATION_KEY, &info->bufs.rejuvenation.duration, -1);
-	tree_node_insert(node, BUFF_REJUVENATION_DICE_AMOUNT_KEY,
-			&info->bufs.rejuvenation.healing_dice_faces, -1);
-	tree_node_insert(node, BUFF_REJUVENATION_DICE_FACES_KEY,
-			&info->bufs.rejuvenation.healing_dice_amount, -1);
-	tree_node_insert(node, BUFF_REJUVENATION_EXTRA_KEY, &info->bufs.rejuvenation.healing_extra, -1);
-	tree_node_insert(node, BUFF_GROWTH_STACKS_KEY, &info->bufs.growth.stacks, -1);
-	if (tree_node_get_error(node))
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_TARGET_KEY, &info->spells.magic_drain.target);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_DAMAGE_FLAT_KEY,
+            &info->spells.magic_drain.damage_flat, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
+            &info->spells.magic_drain.spell_slot_total_level_drain, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_DICE_AMOUNT_KEY,
+            &info->spells.magic_drain.damage_dice_amount, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_DICE_FACES_KEY,
+            &info->spells.magic_drain.damage_dice_faces, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_DEX_SAVE_KEY, 
+            &info->spells.magic_drain.dex_save, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_TURNS_PASSED_FROM_LAST_CAST_KEY,
+            &info->spells.magic_drain.turns_passed_fron_last_cast, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
+            &info->spells.magic_drain.extra_damage_flat, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DICE_AMOUNT_KEY,
+            &info->spells.magic_drain.extra_dice_amount, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_EXTRA_DICE_FACES_KEY,
+            &info->spells.magic_drain.extra_dice_faces, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_COOLDOWN_KEY,
+            &info->spells.magic_drain.cooldown, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_CASTER_KEY, 
+            &info->debufs.magic_drain.caster);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_DAMAGE_FLAT_KEY,
+            &info->debufs.magic_drain.damage_flat, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
+            &info->debufs.magic_drain.spell_slot_total_level_drain, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_DICE_AMOUNT_KEY,
+            &info->debufs.magic_drain.damage_dice_amount, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_DICE_FACES_KEY,
+            &info->debufs.magic_drain.damage_dice_faces, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_CON_SAVE_KEY,
+            &info->debufs.magic_drain.con_save, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
+            &info->debufs.magic_drain.extra_damage_flat, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DICE_AMOUNT_KEY,
+            &info->debufs.magic_drain.extra_dice_amount, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_EXTRA_DICE_FACES_KEY,
+            &info->debufs.magic_drain.extra_dice_faces, -1);
+    tree_node_insert(node, SPELL_MAGIC_DRAIN_LEARNED_KEY, &info->spells.magic_drain.learned, -1);
+    tree_node_insert(node, DEBUFF_MAGIC_DRAIN_AMOUNT_KEY, &info->debufs.magic_drain.amount, -1);
+    tree_node_insert(node, DEBUFF_FELL_POISON_DURATION_KEY, &info->debufs.fell_poison.duration, -1);
+    tree_node_insert(node, BUFF_REJUVENATION_DURATION_KEY, &info->bufs.rejuvenation.duration, -1);
+    tree_node_insert(node, BUFF_REJUVENATION_DICE_AMOUNT_KEY,
+            &info->bufs.rejuvenation.healing_dice_faces, -1);
+    tree_node_insert(node, BUFF_REJUVENATION_DICE_FACES_KEY,
+            &info->bufs.rejuvenation.healing_dice_amount, -1);
+    tree_node_insert(node, BUFF_REJUVENATION_EXTRA_KEY, &info->bufs.rejuvenation.healing_extra, -1);
+    tree_node_insert(node, BUFF_GROWTH_STACKS_KEY, &info->bufs.growth.stacks, -1);
+    if (tree_node_get_error(node))
         return (1);
     return (0);
 }

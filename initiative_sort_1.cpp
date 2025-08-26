@@ -47,7 +47,7 @@ static void ft_initiative_players_init(t_pc *players)
     players->next = ft_nullptr;
     players->name = ft_nullptr;
     players->initiative = -2;
-	return ;
+    return ;
 }
 
 t_pc *ft_initiative_players_am(char **content)
@@ -100,5 +100,5 @@ void ft_initiative_sort(ft_file &file)
     ft_initiative_sort_2(players);
     ft_free_players(players);
     ft_initiative_print();
-	return ;
+    return ;
 }

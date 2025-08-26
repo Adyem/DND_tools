@@ -16,10 +16,10 @@ void ft_roll_initiative(t_char * info)
     int dex_mod;
     int result;
 
-    dex_mod = (info->stats.dex - 10) / 2;
+    dex_mod = ft_ability_mod(info->stats.dex);
     result = ft_dice_roll(1, 20);
     info->initiative = result + dex_mod;
     pf_printf("%s rolled %d+%d=%d on his/her initiative\n",
-			info->name, result, dex_mod, info->initiative);
+            info->name, result, dex_mod, info->initiative);
     return ;
 }

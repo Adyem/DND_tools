@@ -42,5 +42,5 @@ void ft_cast_cure_wounds(t_char * character)
     pf_printf("%s cast Cure Wounds at level %i and healed %i HP\n",
               character->name, cast_at_level, healing);
     ft_remove_spell_slot(&character->spell_slots, cast_at_level);
-	return ;
+    return ;
 }

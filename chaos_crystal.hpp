@@ -6,36 +6,36 @@
 # include "libft/CPP_class/nullptr.hpp"
 # include <stddef.h>
 
-typedef struct	s_name t_name;
-typedef struct	s_char t_char;
+typedef struct    s_name t_name;
+typedef struct    s_char t_char;
 
-void	ft_chaos_crystal_turn(t_char * info);
+void    ft_chaos_crystal_turn(t_char * info);
 
-static const	t_stats CHAOS_CRYSTAL_DEFAULT_STATS =
+static const    t_stats CHAOS_CRYSTAL_DEFAULT_STATS =
 {
-	.phase = 0,
-	.turn = 1,
-	.health = 5,
-	.temp_hp = 0,
-	.str = 20,
-	.dex = 20,
-	.con = 20,
-	.inte = 20,
-	.wis = 20,
-	.cha = 20,
+    .phase = 0,
+    .turn = 1,
+    .health = 5,
+    .temp_hp = 0,
+    .str = 20,
+    .dex = 20,
+    .con = 20,
+    .inte = 20,
+    .wis = 20,
+    .cha = 20,
 };
 
-static const	t_save CHAOS_CRYSTAL_SAVE_MODS =
+static const    t_save CHAOS_CRYSTAL_SAVE_MODS =
 {
     .str = 1,
     .dex = 3,
-	.inte = 0,
-	.wis = 0, 
+    .inte = 0,
+    .wis = 0, 
     .cha = 0,
-	.con = 0,
+    .con = 0,
 };
 
-static const	t_skills CHAOS_CRYSTAL_SKILL_MODS =
+static const    t_skills CHAOS_CRYSTAL_SKILL_MODS =
 {
     .athletics = 2,
     .acrobatics = 2,
@@ -57,56 +57,56 @@ static const	t_skills CHAOS_CRYSTAL_SKILL_MODS =
     .persuasion = 0,
 };
 
-static const	t_attack CHAOS_CRYSTAL_ATTACK =
+static const    t_attack CHAOS_CRYSTAL_ATTACK =
 {
-	.attack_bonus = 0,
-	.ranged_bonus = 0,
+    .attack_bonus = 0,
+    .ranged_bonus = 0,
 };
 
 
-static const	t_crit_mod CHAOS_CRYSTAL_CRIT =
+static const    t_crit_mod CHAOS_CRYSTAL_CRIT =
 {
-	.attack = 0,
-	.attack_d = 0,
-	.save = 0,
-	.skill = 0,
-	.attack_fail = 0,
-	.save_fail = 0,
-	.skill_fail = 0,
+    .attack = 0,
+    .attack_d = 0,
+    .save = 0,
+    .skill = 0,
+    .attack_fail = 0,
+    .save_fail = 0,
+    .skill_fail = 0,
 };
 
-static const	t_resistance CHAOS_CRYSTAL_DEFAULT_RESISTANCE =
+static const    t_resistance CHAOS_CRYSTAL_DEFAULT_RESISTANCE =
 {
-	.acid = 99,
-	.bludgeoning = 99,
-	.cold = 99,
-	.fire = 99,
-	.force = 99,
-	.lightning = 99,
-	.necrotic = 99,
-	.piercing = 99,
-	.poison = 99,
-	.psychic = 99,
-	.radiant = 99,
-	.slashing = 99,
-	.thunder = 99,
+    .acid = 99,
+    .bludgeoning = 99,
+    .cold = 99,
+    .fire = 99,
+    .force = 99,
+    .lightning = 99,
+    .necrotic = 99,
+    .piercing = 99,
+    .poison = 99,
+    .psychic = 99,
+    .radiant = 99,
+    .slashing = 99,
+    .thunder = 99,
 };
 
 
-static const	t_equipment CHAOS_CRYSTAL_EQUIPMENT =
+static const    t_equipment CHAOS_CRYSTAL_EQUIPMENT =
 {
-	.weapon = INITIALIZE_EQUIPMENT_ID,
-	.offhand_weapon = INITIALIZE_EQUIPMENT_ID,
-	.ranged_weapon = INITIALIZE_EQUIPMENT_ID,
-	.armor = INITIALIZE_EQUIPMENT_ID,
-	.helmet = INITIALIZE_EQUIPMENT_ID,
-	.shield = INITIALIZE_EQUIPMENT_ID,
-	.boots = INITIALIZE_EQUIPMENT_ID,
-	.gloves = INITIALIZE_EQUIPMENT_ID,
-	.amulet = INITIALIZE_EQUIPMENT_ID,
-	.ring_01 = INITIALIZE_EQUIPMENT_ID,
-	.ring_02 = INITIALIZE_EQUIPMENT_ID,
-	.belt = INITIALIZE_EQUIPMENT_ID,
+    .weapon = INITIALIZE_EQUIPMENT_ID,
+    .offhand_weapon = INITIALIZE_EQUIPMENT_ID,
+    .ranged_weapon = INITIALIZE_EQUIPMENT_ID,
+    .armor = INITIALIZE_EQUIPMENT_ID,
+    .helmet = INITIALIZE_EQUIPMENT_ID,
+    .shield = INITIALIZE_EQUIPMENT_ID,
+    .boots = INITIALIZE_EQUIPMENT_ID,
+    .gloves = INITIALIZE_EQUIPMENT_ID,
+    .amulet = INITIALIZE_EQUIPMENT_ID,
+    .ring_01 = INITIALIZE_EQUIPMENT_ID,
+    .ring_02 = INITIALIZE_EQUIPMENT_ID,
+    .belt = INITIALIZE_EQUIPMENT_ID,
 };
 
 static const t_physical CHAOS_CRYSTAL_PHYSICAL =
@@ -127,12 +127,12 @@ static const t_char CHAOS_CRYSTAL_INFO =
     .save_file = ft_nullptr,
     .name = ft_nullptr,
     .turn = ft_chaos_crystal_turn,
-	.drop_loot = ft_nullptr,
-	.loot = INITIALIZE_LOOT,
-	.hit_dice = INITIALIZ_HIT_DICE,
-	.inventory = INITIALIZE_INVENTORY,
-	.spells = INITIALIZE_SPELLS,
-	.spell_slots = INITIALIZE_SPELL_SLOTS,
+    .drop_loot = ft_nullptr,
+    .loot = INITIALIZE_LOOT,
+    .hit_dice = INITIALIZ_HIT_DICE,
+    .inventory = INITIALIZE_INVENTORY,
+    .spells = INITIALIZE_SPELLS,
+    .spell_slots = INITIALIZE_SPELL_SLOTS,
     .flags = INITIALIZE_FLAGS,
     .crit = CHAOS_CRYSTAL_CRIT,
     .attack_bonus = CHAOS_CRYSTAL_ATTACK,

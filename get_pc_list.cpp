@@ -55,11 +55,11 @@ char **ft_get_pc_list()
         cma_free_double(player_list);
         return ft_nullptr;
     }
-	int index = 0;
-	while (DEBUG == 1 && player_list[index])
-	{
-		pf_printf("player %i on the list is %s\n", index, player_list[index]);
-		index++;
-	}
+    int index = 0;
+    while (DEBUG == 1 && player_list[index])
+    {
+        pf_printf("player %i on the list is %s\n", index, player_list[index]);
+        index++;
+    }
     return (player_list);
 }

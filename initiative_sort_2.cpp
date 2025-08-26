@@ -120,12 +120,12 @@ void ft_initiative_sort_2(t_pc *players)
         if (turn == 0)
         {
             pf_printf_fd(initiative_file.get_fd(), "--turn--%s=%d\n", temp->name,
-					temp->initiative);
+                    temp->initiative);
             turn = 1;
         }
         else
             pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", temp->name,
-					temp->initiative);
+                    temp->initiative);
         temp = temp->next;
     }
 }

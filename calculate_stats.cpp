@@ -1,14 +1,24 @@
 #include "dnd_tools.hpp"
 
+int ft_ability_mod(int ability_score)
+{
+    int mod = ability_score - 10;
+    if (mod < 0)
+        return (mod - 1) / 2;
+    return mod / 2;
+}
+
 int ft_calculate_ac(t_char * info)
 {
     int ac;
+    int dex_mod;
 
     ac = 10;
-    if (((ft_calculate_dex(info) - 10) / 2) > info->equipment.armor.dex_ac_max_bonus)
+    dex_mod = ft_ability_mod(ft_calculate_dex(info));
+    if (dex_mod > info->equipment.armor.dex_ac_max_bonus)
         ac += info->equipment.armor.dex_ac_max_bonus;
     else
-        ac += (ft_calculate_dex(info) - 10) / 2;
+        ac += dex_mod;
     ac += info->equipment.weapon.ac;
     ac += info->equipment.offhand_weapon.ac;
     ac += info->equipment.ranged_weapon.ac;

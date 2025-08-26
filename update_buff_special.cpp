@@ -17,12 +17,12 @@ void ft_update_lightning_strike(t_char * info)
     {
         result = ft_dice_roll(1, 8) + info->bufs.lightning_strike.extra_damage;
         pf_printf("%s his lightning strike markers explode dealing %d " \
-				"lightning damage to anyone standing within %d ft.\n",
+                "lightning damage to anyone standing within %d ft.\n",
                 info->name, result, info->bufs.lightning_strike.distance);
     }
     else if (info->bufs.lightning_strike.duration == 1)
         pf_printf("%s his lightning strike markers will explode on his next turn\n",
-				info->name);
+                info->name);
     else
         pf_printf("%s his lightning strike markers will explode in %d turns\n",
                   info->name, info->bufs.lightning_strike.duration);
@@ -66,109 +66,109 @@ void ft_update_flame_geyser(t_char * info)
     if (info->bufs.flame_geyser.duration == 0)
     {
         pf_printf("Flame geyser explode this turn: \n");
-		pf_printf("Everyone under a flame geyser takes %i damage\n",
-				info->bufs.flame_geyser.close_to_tower_d);
-		pf_printf("If a tower has no player under it it explodes dealing %i damage " \
-				"to all players\n", info->bufs.flame_geyser.tower_explode_d);
+        pf_printf("Everyone under a flame geyser takes %i damage\n",
+                info->bufs.flame_geyser.close_to_tower_d);
+        pf_printf("If a tower has no player under it it explodes dealing %i damage " \
+                "to all players\n", info->bufs.flame_geyser.tower_explode_d);
     }
     else if (info->bufs.flame_geyser.duration == 1)
         pf_printf("Flame Geyser will explode on the boss's next turn.\n");
     else
        pf_printf("Flame Geyser will explode in %d turns.\n",
-			   info->bufs.flame_geyser.duration);
+               info->bufs.flame_geyser.duration);
 }
 
 void ft_update_meteor_strike(t_char * info)
 {
-	const char *target;
+    const char *target;
 
-	if (info->bufs.meteor_strike.duration <= 0 ||
+    if (info->bufs.meteor_strike.duration <= 0 ||
         info->bufs.meteor_strike.one_target_d < 0 ||
         info->bufs.meteor_strike.two_targets_d < 0 ||
         info->bufs.meteor_strike.three_targets_d < 0 ||
         info->bufs.meteor_strike.four_targets_d < 0 ||
         info->bufs.meteor_strike.five_targets_d < 0)
         return ;
-	info->bufs.meteor_strike.duration--;
-	if (info->bufs.meteor_strike.target_id)
-		target = info->bufs.meteor_strike.target_id;
-	else
-		target = "the target";
-	if (info->bufs.meteor_strike.duration == 0)
-	{
+    info->bufs.meteor_strike.duration--;
+    if (info->bufs.meteor_strike.target_id)
+        target = info->bufs.meteor_strike.target_id;
+    else
+        target = "the target";
+    if (info->bufs.meteor_strike.duration == 0)
+    {
         pf_printf("The Meteor above %s lands, dealing damage depending on the total " \
-				"amount of players in the area.\n", target);
+                "amount of players in the area.\n", target);
         pf_printf("If 5 or more players were hit, they each take %i damage.\n",
-				info->bufs.meteor_strike.five_targets_d);
+                info->bufs.meteor_strike.five_targets_d);
         pf_printf("If 4 players were hit, they each take %i damage.\n",
-				info->bufs.meteor_strike.four_targets_d);
+                info->bufs.meteor_strike.four_targets_d);
         pf_printf("If 3 players were hit, they each take %i damage.\n",
-				info->bufs.meteor_strike.three_targets_d);
+                info->bufs.meteor_strike.three_targets_d);
         pf_printf("If 2 players were hit, they each take %i damage.\n",
-				info->bufs.meteor_strike.two_targets_d);
+                info->bufs.meteor_strike.two_targets_d);
         pf_printf("If 1 player was hit, he/she takes %i damage.\n",
-				info->bufs.meteor_strike.one_target_d);
-	}
-	else if (info->bufs.meteor_strike.duration == 1)
+                info->bufs.meteor_strike.one_target_d);
+    }
+    else if (info->bufs.meteor_strike.duration == 1)
         pf_printf("Meteor Strike will impact on the boss's next turn.\n");
-	else
+    else
         pf_printf("Meteor Strike will impact in %d turns.\n",
-				info->bufs.meteor_strike.duration);
-	cma_free(info->bufs.meteor_strike.target_id);
-	info->bufs.meteor_strike.target_id = ft_nullptr;
+                info->bufs.meteor_strike.duration);
+    cma_free(info->bufs.meteor_strike.target_id);
+    info->bufs.meteor_strike.target_id = ft_nullptr;
 }
 
 void ft_update_earth_pounce(t_char * info)
 {
-	const char *target;
+    const char *target;
 
-	if (info->bufs.earth_pounce.active != 1 ||
+    if (info->bufs.earth_pounce.active != 1 ||
         info->bufs.earth_pounce.base_damage < 0)
         return ;
-	if (info->bufs.earth_pounce.target_id)
-		target = info->bufs.earth_pounce.target_id;
-	else
-		target = "the target";
+    if (info->bufs.earth_pounce.target_id)
+        target = info->bufs.earth_pounce.target_id;
+    else
+        target = "the target";
     info->bufs.earth_pounce.active = 0;
     pf_printf("%s will jump towards %s and pounce, dealing %i damage reduced by the " \
-			"total AC of the target.\n", target, info->name, info->bufs.earth_pounce.base_damage);
-	cma_free(info->bufs.earth_pounce.target_id);
-	info->bufs.earth_pounce.target_id = ft_nullptr;
-	return ;
+            "total AC of the target.\n", target, info->name, info->bufs.earth_pounce.base_damage);
+    cma_free(info->bufs.earth_pounce.target_id);
+    info->bufs.earth_pounce.target_id = ft_nullptr;
+    return ;
 }
 
 void ft_update_arcane_pounce(t_char * info)
 {
-	const char *target;
+    const char *target;
 
-	if (info->bufs.arcane_pounce.active != 1 ||
+    if (info->bufs.arcane_pounce.active != 1 ||
         info->bufs.arcane_pounce.erea_damage < 0 ||
         info->bufs.arcane_pounce.magic_damage < 0)
         return ;
-	info->bufs.arcane_pounce.active = 0;
-	if (info->bufs.arcane_pounce.target_id)
-		target = info->bufs.arcane_pounce.target_id;
-	else
-		target = "the target";
-	pf_printf("%s will jump towards %s and pounce, dealing ", target, info->name);
+    info->bufs.arcane_pounce.active = 0;
+    if (info->bufs.arcane_pounce.target_id)
+        target = info->bufs.arcane_pounce.target_id;
+    else
+        target = "the target";
+    pf_printf("%s will jump towards %s and pounce, dealing ", target, info->name);
     pf_printf("%i damage and %i damage to anyone within 10ft.\n",
               info->bufs.arcane_pounce.magic_damage, info->bufs.arcane_pounce.erea_damage);
-	cma_free(info->bufs.arcane_pounce.target_id);
-	info->bufs.arcane_pounce.target_id = ft_nullptr;
+    cma_free(info->bufs.arcane_pounce.target_id);
+    info->bufs.arcane_pounce.target_id = ft_nullptr;
     return ;
 }
 
 void ft_update_frost_breath(t_char * info)
 {
-	if (info->bufs.frost_breath.active != 1 ||
+    if (info->bufs.frost_breath.active != 1 ||
         info->bufs.frost_breath.damage < 0)
         return ;
     pf_printf("The boss breathes out dealing %s damage to annyone in a 90%i degree " \
-			"in front of him\n", info->bufs.frost_breath.target_id,
-			info->bufs.frost_breath.damage);
-	info->bufs.frost_breath.active = 0;
-	info->bufs.frost_breath.damage = 0;
-	cma_free(info->bufs.frost_breath.target_id);
+            "in front of him\n", info->bufs.frost_breath.target_id,
+            info->bufs.frost_breath.damage);
+    info->bufs.frost_breath.active = 0;
+    info->bufs.frost_breath.damage = 0;
+    cma_free(info->bufs.frost_breath.target_id);
         info->bufs.frost_breath.target_id = ft_nullptr;
     return ;
 }

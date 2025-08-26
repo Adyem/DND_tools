@@ -9,11 +9,11 @@ typedef int (*RollExecuteFunc)(char *, int *, int);
 void ft_calculate_j(char *string, int *j)
 {
     *j = 0;
-	while (string[*j] && string[*j] != ')')
-		(*j)++;
-	if (DEBUG == 1)
-		pf_printf("The new value of J is %d\n", *j);
-	return ;
+    while (string[*j] && string[*j] != ')')
+        (*j)++;
+    if (DEBUG == 1)
+        pf_printf("The new value of J is %d\n", *j);
+    return ;
 }
 
 static int execute_roll_function(char *string, RollExecuteFunc func)
@@ -69,8 +69,8 @@ static int ft_command_roll_parse(char *string, int nested)
 
 void ft_command_roll(char **argv)
 {
-    char	*result = ft_nullptr;
-    int		index = 0;
+    char    *result = ft_nullptr;
+    int        index = 0;
 
     while (argv[index] && DEBUG == 1)
     {
@@ -103,5 +103,5 @@ void ft_command_roll(char **argv)
     ft_command_roll_parse(result, 0);
     pf_printf("%s\n", result);
     cma_free(result);
-	return ;
+    return ;
 }
