@@ -47,6 +47,9 @@ static void ft_initiative_players_init(t_pc *players)
     players->next = ft_nullptr;
     players->name = ft_nullptr;
     players->initiative = -2;
+    players->position.x = 0;
+    players->position.y = 0;
+    players->position.z = 0;
     return ;
 }
 
