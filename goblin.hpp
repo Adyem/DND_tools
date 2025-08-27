@@ -151,6 +151,7 @@ static const t_char GOBLIN_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = GOBLIN_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

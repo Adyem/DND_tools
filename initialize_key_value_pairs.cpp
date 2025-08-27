@@ -22,6 +22,9 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, CHA_KEY, &info->stats.cha, -1);
     tree_node_insert(node, TURN_KEY, &info->stats.turn, -1);
     tree_node_insert(node, INITIATIVE_KEY, &info->initiative, -1);
+    tree_node_insert(node, POSITION_X_KEY, &info->position.x, -1);
+    tree_node_insert(node, POSITION_Y_KEY, &info->position.y, -1);
+    tree_node_insert(node, POSITION_Z_KEY, &info->position.z, -1);
     tree_node_insert(node, BLESS_DUR_KEY, &info->bufs.bless.duration, 0);
     tree_node_insert(node, PHASE_KEY, &info->stats.phase, -1);
     tree_node_insert(node, LIGHTNING_STRIKE_DUR_KEY, &info->bufs.lightning_strike.duration, 0);

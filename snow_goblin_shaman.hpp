@@ -185,6 +185,7 @@ static const t_char SNOW_GOBLIN_SHAMAN_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = SNOW_GOBLIN_SHAMAN_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 template <int Amount, int Faces>

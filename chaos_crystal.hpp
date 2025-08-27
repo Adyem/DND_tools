@@ -149,6 +149,7 @@ static const t_char CHAOS_CRYSTAL_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = CHAOS_CRYSTAL_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

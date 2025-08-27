@@ -554,6 +554,13 @@ typedef struct s_hit_dice
     int dice_faces;
 } t_hit_dice;
 
+typedef struct s_position
+{
+    int x;
+    int y;
+    int z;
+} t_position;
+
 typedef struct    s_char
 {
     int                level;
@@ -586,6 +593,7 @@ typedef struct    s_char
     t_feats            feats;
     t_name            *struct_name;
     t_physical      physical;
+    t_position      position;
 }    t_char;
 
 typedef int        (*cast_buff_debuff)(t_char * , const char **, t_buff *);

@@ -222,6 +222,7 @@ static const t_char DWARF_PALADIN_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = DWARF_PALADIN_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

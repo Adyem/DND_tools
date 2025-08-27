@@ -150,6 +150,7 @@ static const t_char GOBLIN_WARMASTER_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = GOBLIN_WARMASTER_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

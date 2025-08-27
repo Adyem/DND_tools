@@ -149,6 +149,7 @@ static const    t_char DORGAR_STONEGUARD_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = DORGAR_STONEGUARD_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

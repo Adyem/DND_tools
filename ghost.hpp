@@ -164,6 +164,7 @@ static const t_char GHOST_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = GHOST_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

@@ -104,6 +104,9 @@ static void ft_npc_write_file_1(t_char * info, t_stats *stats, ft_file &file)
     file.printf("%s%i\n", TURN_KEY, stats->turn);
     file.printf("%s%i\n", PHASE_KEY, stats->phase);
     file.printf("%s%i\n", INITIATIVE_KEY, info->initiative);
+    file.printf("%s%i\n", POSITION_X_KEY, info->position.x);
+    file.printf("%s%i\n", POSITION_Y_KEY, info->position.y);
+    file.printf("%s%i\n", POSITION_Z_KEY, info->position.z);
     file.printf("%s%i\n", BLESS_DUR_KEY, info->bufs.bless.duration);
     file.printf("%s%i\n", PROTECTIVE_WINDS_DUR_KEY,
             info->bufs.protective_winds.duration);
