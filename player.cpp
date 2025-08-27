@@ -74,6 +74,9 @@ void    ft_player(const char **input)
                 return ;
             }
             player->initiative = 0;
+            player->position.x = 0;
+            player->position.y = 0;
+            player->position.z = 0;
             ft_add_player(player);
         }
         else if (ft_strcmp_dnd(input[0], "list"))

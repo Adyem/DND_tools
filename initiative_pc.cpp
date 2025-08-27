@@ -3,6 +3,7 @@
 #include "libft/CPP_class/nullptr.hpp"
 #include "libft/Libft/libft.hpp"
 #include "dnd_tools.hpp"
+#include "key_list.hpp"
 #include <cstdlib>
 #include <cstring>
 
@@ -48,6 +49,9 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
 
     player->name = ft_nullptr;
     player->initiative = -1;
+    player->position.x = -1;
+    player->position.y = -1;
+    player->position.z = -1;
     player->next = ft_nullptr;
     while (content[line_index])
     {
@@ -66,6 +70,15 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
             if (!player->name)
                 return (1);
         }
+        else if (ft_strncmp(content[line_index], POSITION_X_KEY, static_cast<int>(constexpr_strlen(POSITION_X_KEY))) == 0
+                && player->position.x == -1)
+            player->position.x = ft_check_int(content[line_index], static_cast<int>(constexpr_strlen(POSITION_X_KEY)), filename);
+        else if (ft_strncmp(content[line_index], POSITION_Y_KEY, static_cast<int>(constexpr_strlen(POSITION_Y_KEY))) == 0
+                && player->position.y == -1)
+            player->position.y = ft_check_int(content[line_index], static_cast<int>(constexpr_strlen(POSITION_Y_KEY)), filename);
+        else if (ft_strncmp(content[line_index], POSITION_Z_KEY, static_cast<int>(constexpr_strlen(POSITION_Z_KEY))) == 0
+                && player->position.z == -1)
+            player->position.z = ft_check_int(content[line_index], static_cast<int>(constexpr_strlen(POSITION_Z_KEY)), filename);
         else
         {
             pf_printf_fd(2, "3-There is an error with the line: %s\n", content[line_index]);
@@ -76,6 +89,21 @@ int ft_check_stat_pc(t_pc *player, char **content, char *filename)
     if (!(player->initiative >= 0 && player->initiative <= 50))
     {
         pf_printf_fd(2, "Initiative value not found: %d\n", player->initiative);
+        return (1);
+    }
+    if (!(player->position.x >= 0 && player->position.x <= MAX_COORDINATE))
+    {
+        pf_printf_fd(2, "Position X value not found: %d\n", player->position.x);
+        return (1);
+    }
+    if (!(player->position.y >= 0 && player->position.y <= MAX_COORDINATE))
+    {
+        pf_printf_fd(2, "Position Y value not found: %d\n", player->position.y);
+        return (1);
+    }
+    if (!(player->position.z >= 0 && player->position.z <= MAX_COORDINATE))
+    {
+        pf_printf_fd(2, "Position Z value not found: %d\n", player->position.z);
         return (1);
     }
     if (!player->name)
