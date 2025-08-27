@@ -149,6 +149,7 @@ static const    t_char GUNDREN_ROCKSEEKER_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = GUNDREN_ROCKSEEKER_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

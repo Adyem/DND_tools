@@ -184,6 +184,7 @@ static const t_char SHADOW_ILLUSION_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = SHADOW_ILLUSION_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 template <int Amount, int Faces>

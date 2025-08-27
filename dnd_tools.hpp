@@ -14,6 +14,7 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 
 # define MAX_ERROR_COUNT 5
 # define MAX_PLAYERS 8
+# define MAX_COORDINATE 10000
 # define CRIT_SUCCES 999
 # define CRIT_FAIL -999
 # define RL_CRIT_SUCCES 1

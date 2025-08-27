@@ -52,6 +52,9 @@ constexpr bool is_valid_key(const char* str)
     X(CHA_KEY, "CHA=") \
     X(TURN_KEY, "TURN=") \
     X(INITIATIVE_KEY, "INITIATIVE=") \
+    X(POSITION_X_KEY, "POSITION_X=") \
+    X(POSITION_Y_KEY, "POSITION_Y=") \
+    X(POSITION_Z_KEY, "POSITION_Z=") \
     X(BLESS_DUR_KEY, "BLESS_DUR=") \
     X(PHASE_KEY, "PHASE=") \
     X(CONCENTRATION_KEY, "CONCENTRATION=") \

@@ -149,6 +149,7 @@ static const    t_char HILDA_STORMSHIELD_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = HILDA_STORMSHIELD_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

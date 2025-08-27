@@ -152,6 +152,7 @@ static const t_char CHAOS_GOBLIN_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = CHAOS_GOBLIN_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

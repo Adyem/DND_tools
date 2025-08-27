@@ -204,6 +204,7 @@ static const t_char VERAAK_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = VERAAK_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #define CHAOS_SMASH "Veraak conjures a hammer made out of dark energy hitting his" \
