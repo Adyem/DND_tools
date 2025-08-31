@@ -184,6 +184,7 @@ static const t_char DEMONIC_PORTAL_A_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = DEMONIC_PORTAL_A_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 template <int Amount, int Faces>

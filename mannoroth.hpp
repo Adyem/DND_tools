@@ -185,6 +185,7 @@ static const t_char MANNOROTH_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = MANNOROTH_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 template <int Amount, int Faces>

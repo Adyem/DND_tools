@@ -151,6 +151,7 @@ static const t_char FRANK_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = FRANK_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

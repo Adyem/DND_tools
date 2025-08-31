@@ -150,6 +150,7 @@ static const t_char MAVERICK_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = MAVERICK_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #define MAVERICK_MASS_TELEPORT "Mass Teleport: Teleport all players to random locations"\

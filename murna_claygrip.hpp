@@ -149,6 +149,7 @@ static const    t_char MURNA_CLAYGRIP_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = MURNA_CLAYGRIP_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

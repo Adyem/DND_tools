@@ -163,6 +163,13 @@ static const    t_stats INITIALIZE_STATS =
     .cha = -1,
 };
 
+static const    t_position INITIALIZE_POSITION =
+{
+    .x = 0,
+    .y = 0,
+    .z = 0,
+};
+
 static const    t_concentration INITIALIZE_CONCENTRATION =
 {
     .concentration = 0,

@@ -72,6 +72,15 @@ static int check_resistances(t_char * info)
     return (error);
 }
 
+static int check_position(t_char * info)
+{
+    int error = 0;
+    error += check_range(info->position.x, 0, MAX_COORDINATE, info->name, "position_x");
+    error += check_range(info->position.y, 0, MAX_COORDINATE, info->name, "position_y");
+    error += check_range(info->position.z, 0, MAX_COORDINATE, info->name, "position_z");
+    return (error);
+}
+
 static int check_concentration(t_char * info)
 {
     int error = 0;
@@ -339,6 +348,7 @@ int ft_npc_check_info(t_char * info)
 {
     int error = 0;
     error += check_stats(info);
+    error += check_position(info);
     error += check_spell_slots(info);
     error += check_other_buffs_debuffs(info);
     error += ft_check_equipment_slots(info);

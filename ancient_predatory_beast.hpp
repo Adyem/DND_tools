@@ -184,6 +184,7 @@ static const t_char ANCIENT_PREDATORY_BEAST_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = ANCIENT_PREDATORY_BEAST_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 template <int Amount, int Faces>

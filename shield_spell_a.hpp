@@ -184,6 +184,7 @@ static const t_char SHIELD_SPELL_A_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = SHIELD_SPELL_A_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 template <int Amount, int Faces>

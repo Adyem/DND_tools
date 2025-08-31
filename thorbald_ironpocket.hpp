@@ -149,6 +149,7 @@ static const    t_char THORBALD_IRONPOCKET_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = THORBALD_IRONPOCKET_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 #endif

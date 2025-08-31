@@ -185,6 +185,7 @@ static const t_char XAVIUS_INFO =
     .feats = INITIALIZE_FEATS,
     .struct_name = ft_nullptr,
     .physical = XAVIUS_PHYSICAL,
+    .position = INITIALIZE_POSITION,
 };
 
 template <int Amount, int Faces>
