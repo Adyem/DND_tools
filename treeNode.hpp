@@ -10,18 +10,18 @@
 
 typedef struct s_treeNode_value
 {
-    size_t   key_length;
-    int       unset_value;
-    int       *return_field_integer;
-    char      **return_field_string;
-    char      ***return_field_double;
+    size_t   _key_length;
+    int       _unset_value;
+    int       *_return_field_integer;
+    char      **_return_field_string;
+    char      ***_return_field_double;
 } t_treeNode_value;
 
 typedef struct s_treeNode
 {
-    t_treeNode_value *data;
-    int error;
-    ft_unord_map<char, struct s_treeNode*> children;
+    t_treeNode_value *_data;
+    int _error;
+    ft_unord_map<char, struct s_treeNode*> _children;
 } TreeNode;
 
 // Function declarations for creating/destroying nodes:
