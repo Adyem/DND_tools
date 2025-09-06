@@ -8,7 +8,7 @@ constexpr std::size_t constexpr_strlen(const char* str)
     std::size_t len = 0;
     while (str[len] != '\0')
         ++len;
-    return len;
+    return (len);
 }
 
 constexpr bool ends_with(const char* str, const char* suffix)
@@ -16,13 +16,15 @@ constexpr bool ends_with(const char* str, const char* suffix)
     std::size_t str_len = constexpr_strlen(str);
     std::size_t suffix_len = constexpr_strlen(suffix);
     if (suffix_len > str_len)
-        return false;
-    for (std::size_t i = 0; i < suffix_len; ++i)
+        return (false);
+    std::size_t i = 0;
+    while (i < suffix_len)
     {
         if (str[str_len - suffix_len + i] != suffix[i])
-            return false;
+            return (false);
+        ++i;
     }
-    return true;
+    return (true);
 }
 
 constexpr bool is_valid_key_impl(const char* str, std::size_t i)
@@ -31,13 +33,13 @@ constexpr bool is_valid_key_impl(const char* str, std::size_t i)
         return (i > 0 && str[i + 1] == '\0');
     if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] == '_') ||
         (str[i] >= '0' && str[i] <= '9'))
-        return is_valid_key_impl(str, i + 1);
-    return false;
+        return (is_valid_key_impl(str, i + 1));
+    return (false);
 }
 
 constexpr bool is_valid_key(const char* str)
 {
-    return is_valid_key_impl(str, 0);
+    return (is_valid_key_impl(str, 0));
 }
 
 #define KEY_LIST \

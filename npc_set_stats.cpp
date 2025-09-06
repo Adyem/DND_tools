@@ -9,25 +9,25 @@ static int ft_handle_int_mapping(char **content, int index, t_char * info)
         = tree_node_search(*(ft_return_main_treeNode()), content[index]);
     if (!return_value)
         return (1);
-    if (return_value->return_field_integer && (return_value->key_length != 0
-                && return_value->return_field_integer != ft_nullptr)
-                && ((return_value->unset_value == -1
-                || *(return_value->return_field_integer) == return_value->unset_value)))
+    if (return_value->_return_field_integer && (return_value->_key_length != 0
+                && return_value->_return_field_integer != ft_nullptr)
+                && ((return_value->_unset_value == -1
+                || *(return_value->_return_field_integer) == return_value->_unset_value)))
     {
-        *(return_value->return_field_integer) = ft_check_stat(info, content[index],
-                return_value->key_length);
+        *(return_value->_return_field_integer) = ft_check_stat(info, content[index],
+                return_value->_key_length);
         return (0);
     }
-    else if (return_value->return_field_double)
+    else if (return_value->_return_field_double)
     {
-        *return_value->return_field_double = ft_set_stats_con_targets(content[index],
-                return_value->key_length, *return_value->return_field_double, info);
+        *return_value->_return_field_double = ft_set_stats_con_targets(content[index],
+                return_value->_key_length, *return_value->_return_field_double, info);
         return (0);
     }
-    else if (return_value->return_field_string)
+    else if (return_value->_return_field_string)
     {
-        ft_set_stat_player(return_value->key_length,
-                const_cast<const char **>(return_value->return_field_string), content[index]);
+        ft_set_stat_player(return_value->_key_length,
+                const_cast<const char **>(return_value->_return_field_string), content[index]);
         return (0);
     }
     return (1);
