@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H
 # define CHARACTER_H
 
-#include "libft/CPP_class/file.hpp"
+#include "libft/CPP_class/class_file.hpp"
 
 # define ERROR_RESISTANCE 9999
 

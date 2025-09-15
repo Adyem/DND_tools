@@ -6,7 +6,7 @@
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "armor.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
 

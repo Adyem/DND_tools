@@ -1,10 +1,11 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/file.hpp"
+#include "libft/CPP_class/class_file.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
+#include "libft/CPP_class/class_fd_istream.hpp"
 #include <cstdlib>
 #include <cstring>
 #include <cerrno>
@@ -92,8 +93,9 @@ void ft_initiative_sort(ft_file &file)
 {
     t_pc *players;
     char **content;
+    ft_fd_istream file_stream(file.get_fd());
 
-    content = ft_read_file_lines(file);
+    content = ft_read_file_lines(file_stream, 1024);
     if (!content)
         return ;
     players = ft_initiative_players_am(content);

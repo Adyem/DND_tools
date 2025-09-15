@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 
 t_char *ft_validate_and_fetch_target(char *target_name, t_char * info,
         int *error_code)

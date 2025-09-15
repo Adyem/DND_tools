@@ -1,9 +1,9 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/file/open_dir.hpp"
+#include "libft/File/open_dir.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -23,18 +23,18 @@ int ft_check_player_entry(const char *entry)
 
 char **ft_get_pc_list()
 {
-    FT_DIR *dir = ft_opendir("data");
+    file_dir *dir = file_opendir("data");
     if (!dir)
         return (ft_nullptr);
     char **player_list = static_cast<char **>(cma_calloc(MAX_PLAYERS, sizeof(char *)));
     if (!player_list)
     {
-        ft_closedir(dir);
+        file_closedir(dir);
         return (ft_nullptr);
     }
     int player_count = 0;
-    ft_dirent *dir_entry;
-    while ((dir_entry = ft_readdir(dir)) != ft_nullptr && player_count < MAX_PLAYERS)
+    file_dirent *dir_entry;
+    while ((dir_entry = file_readdir(dir)) != ft_nullptr && player_count < MAX_PLAYERS)
     {
         if (ft_strncmp("PC--", dir_entry->d_name, 4) == 0)
         {
@@ -42,13 +42,13 @@ char **ft_get_pc_list()
             if (!player_name)
             {
                 cma_free_double(player_list);
-                ft_closedir(dir);
+                file_closedir(dir);
                 return (ft_nullptr);
             }
             player_list[player_count++] = player_name;
         }
     }
-    ft_closedir(dir);
+    file_closedir(dir);
     if (player_count == 0)
     {
         pf_printf_fd(2, "Error: No player character found\n");

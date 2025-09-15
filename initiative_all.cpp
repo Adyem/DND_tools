@@ -1,9 +1,10 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/file/open_dir.hpp"
+#include "libft/CPP_class/class_fd_istream.hpp"
+#include "libft/File/open_dir.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
 #include <fcntl.h>
@@ -63,7 +64,8 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
     t_pc *player;
     int error;
 
-    content = ft_read_file_lines(file);
+    ft_fd_istream file_stream(file.get_fd());
+    content = ft_read_file_lines(file_stream, 1024);
     if (!content)
         return (static_cast<t_pc *>(ft_initiative_pc_error("253 Error allocating memory")));
     player = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
@@ -110,21 +112,21 @@ void ft_open_all_files(t_name *name)
     int error = 0;
     t_char *info;
     t_pc *player = ft_nullptr;
-    FT_DIR *dir = ft_nullptr;
-    ft_dirent *entry = ft_nullptr;
+    file_dir *dir = ft_nullptr;
+    file_dirent *entry = ft_nullptr;
     char filepath[1024];
     ft_file info_save_file;
 
     info_save_file.open("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if (info_save_file.get_error())
         error = 1;
-    dir = ft_opendir("data");
+    dir = file_opendir("data");
     if (dir == ft_nullptr)
     {
         pf_printf_fd(2, "Unable to open directory: %s\n", strerror(errno));
         return ;
     }
-    while ((entry = ft_readdir(dir)) != ft_nullptr)
+    while ((entry = file_readdir(dir)) != ft_nullptr)
     {
         if (ft_strcmp_dnd(entry->d_name, ".") == 0 || ft_strcmp_dnd(entry->d_name, "..") == 0)
             continue ;
@@ -172,7 +174,7 @@ void ft_open_all_files(t_name *name)
             ft_free_info(info);
         }
     }
-    ft_closedir(dir);
+    file_closedir(dir);
     ft_file initiative_file;
     initiative_file.open("data/data--initiative", O_RDONLY);
     ft_initiative_sort(initiative_file);

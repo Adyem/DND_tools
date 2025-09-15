@@ -3,7 +3,7 @@
 #include <cstring>
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 
 static size_t str_len(const char *str)
 {

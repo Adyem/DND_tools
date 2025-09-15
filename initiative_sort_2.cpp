@@ -1,8 +1,9 @@
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/file.hpp"
+#include "libft/CPP_class/class_file.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
+#include "libft/CPP_class/class_fd_istream.hpp"
 #include "dnd_tools.hpp"
 #include "player_character.hpp"
 #include <fcntl.h>
@@ -22,7 +23,8 @@ void ft_initiative_print(void)
         pf_printf("Error opening file: %s\n", file.get_error_str());
         return ;
     }
-    content = ft_read_file_lines(file);
+    ft_fd_istream file_stream(file.get_fd());
+    content = ft_read_file_lines(file_stream, 1024);
     if (!content)
     {
         pf_printf("261-Error allocating memory\n");

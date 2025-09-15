@@ -2,7 +2,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 
 static void list_learned_spells(t_known_spell known_spells[])

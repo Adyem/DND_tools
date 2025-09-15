@@ -3,7 +3,7 @@
 #include "chaos_crystal.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/RNG/rng.hpp"
 #include "veraak.hpp"
 #include <fcntl.h>
 #include <sys/types.h>

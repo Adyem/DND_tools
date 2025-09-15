@@ -3,7 +3,7 @@
 #include "libft/ReadLine/readline.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/RNG/rng.hpp"
 #include <cstdlib>
 #include <cstring>
 #include <cerrno>

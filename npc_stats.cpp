@@ -1,7 +1,8 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/file.hpp"
+#include "libft/CPP_class/class_file.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
+#include "libft/CPP_class/class_fd_istream.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
 #include <fcntl.h>
@@ -22,7 +23,8 @@ int ft_npc_open_file(t_char * info)
     }
     if (DEBUG == 1)
         pf_printf("Opening file %s on fd %d\n", info->save_file, info_file.get_fd());
-    content = ft_read_file_lines(info_file);
+    ft_fd_istream info_stream(info_file.get_fd());
+    content = ft_read_file_lines(info_stream, 1024);
     if (DEBUG == 1)
         pf_printf("Content is at address %p\n", content);
     if (!content)

@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
-#include "libft/file/open_dir.hpp"
+#include "libft/File/open_dir.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "identification.hpp"
 #include <fcntl.h>
 #include <unistd.h>
@@ -20,8 +20,8 @@ static void remove_exclude_prefix(char* filename)
 
 int ft_set_stats_check_name(const char *name)
 {
-    FT_DIR *dir;
-    ft_dirent *entry;
+    file_dir *dir;
+    file_dirent *entry;
     char filename[256];
 
     if (!name)
@@ -29,7 +29,7 @@ int ft_set_stats_check_name(const char *name)
         pf_printf_fd(2, "259-Error: Name does not exist\n");
         return (-1);
     }
-    dir = ft_opendir(DATA_FOLDER);
+    dir = file_opendir(DATA_FOLDER);
     if (dir == ft_nullptr)
     {
         pf_printf_fd(2, "295-Error: Opendir has failed: %s\n", strerror(errno));
@@ -37,7 +37,7 @@ int ft_set_stats_check_name(const char *name)
     }
     while (1)
     {
-        entry = ft_readdir(dir);
+        entry = file_readdir(dir);
         if (!entry)
             break ;
         if (ft_strncmp(entry->d_name, PREFIX_TO_SKIP, ft_strlen(PREFIX_TO_SKIP)) == 0)
@@ -49,24 +49,24 @@ int ft_set_stats_check_name(const char *name)
             pf_printf("Checking %s %s\n", filename, name);
         if (ft_strcmp_dnd(filename, name) == 0)
         {
-            ft_closedir(dir);
+            file_closedir(dir);
             if (DEBUG == 1)
                 pf_printf("Found %s\n", name);
             return (0);
         }
     }
-    ft_closedir(dir);
+    file_closedir(dir);
     pf_printf_fd(2, "258-Error: Target does not exist\n");
     return (1);
 }
 
 int ft_check_player_character(const char *name)
 {
-    FT_DIR *dir;
-    ft_dirent *entry;
+    file_dir *dir;
+    file_dirent *entry;
     char filename[256];
 
-    dir = ft_opendir(DATA_FOLDER);
+    dir = file_opendir(DATA_FOLDER);
     if (dir == ft_nullptr)
     {
         pf_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
@@ -74,7 +74,7 @@ int ft_check_player_character(const char *name)
     }
     while (1)
     {
-        entry = ft_readdir(dir);
+        entry = file_readdir(dir);
         if (!entry)
             break ;
         if (ft_strncmp(entry->d_name, PC_PREFIX, ft_strlen(PC_PREFIX)) != 0)
@@ -85,12 +85,12 @@ int ft_check_player_character(const char *name)
             pf_printf("Checking %s against %s\n", filename, name);
         if (ft_strcmp_dnd(filename, name) == 0)
         {
-            ft_closedir(dir);
+            file_closedir(dir);
             if (DEBUG == 1)
                 pf_printf("Found %s\n", name);
             return (0);
         }
     }
-    ft_closedir(dir);
+    file_closedir(dir);
     return (1);
 }

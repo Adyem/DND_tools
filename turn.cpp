@@ -1,10 +1,11 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/file.hpp"
+#include "libft/CPP_class/class_file.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
+#include "libft/CPP_class/class_fd_istream.hpp"
 #include <cstdlib>
 #include <fcntl.h>
 #include <unistd.h>
@@ -148,7 +149,8 @@ void ft_turn_next(t_name *name)
         pf_printf("Error opening data initiative file %s\n", initiative_file.get_error_str());
         return ;
     }
-    content = ft_read_file_lines(initiative_file);
+    ft_fd_istream initiative_stream(initiative_file.get_fd());
+    content = ft_read_file_lines(initiative_stream, 1024);
     if (!content)
         return ;
     players = ft_initiative_players_am(content);

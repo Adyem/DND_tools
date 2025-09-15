@@ -1,6 +1,6 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 
 t_char *ft_get_info(const char *tf_name, t_name *name)
 {

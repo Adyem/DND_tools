@@ -1,7 +1,7 @@
 #ifndef CHAOS_GOBLIN_H
 # define CHAOS_GOBLIN_H
 
-# include "libft/CPP_class/nullptr.hpp"
+# include "libft/CPP_class/class_nullptr.hpp"
 # include "armor.hpp"
 # include "ranged_weapons.hpp"
 # include "melee_weapons.hpp"

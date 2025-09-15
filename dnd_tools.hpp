@@ -6,7 +6,7 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 #include <cstdio>
 #include "character.hpp"
 #include "player_character.hpp"
-#include "libft/CPP_class/file.hpp"
+#include "libft/CPP_class/class_file.hpp"
 
 # ifndef DEBUG
 #  define DEBUG 0

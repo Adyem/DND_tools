@@ -7,7 +7,7 @@
 #include "identification.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include <stddef.h>
 
 typedef struct    s_name t_name;

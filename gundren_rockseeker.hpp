@@ -1,7 +1,7 @@
 #ifndef GUNDREN_ROCKSEEKER_HPP
 # define GUNDREN_ROCKSEEKER_HPP
 
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "character.hpp"

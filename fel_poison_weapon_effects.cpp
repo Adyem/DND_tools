@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/RNG/rng.hpp"
 
 void ft_fel_poison_attack_effects(t_char *info, t_equipment_id *weapon,
         t_equipment_effect *effect, t_attack_info *attack_info)

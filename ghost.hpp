@@ -2,7 +2,7 @@
 # define GHOST_HPP
 
 #include "melee_weapons.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
 #include <stddef.h>

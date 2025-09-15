@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
 #include "night_elven_guard.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/RNG/rng.hpp"
 #include "libft/CMA/CMA.hpp"
 
 void ft_night_elven_guard_turn(t_char * info)

@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include <cstdlib>
 
 char **ft_resize_double_char(char **double_string, const char *string, size_t size)

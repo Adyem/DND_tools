@@ -1,7 +1,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/nullptr.hpp"
-#include "libft/CPP_class/file.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/CPP_class/class_file.hpp"
 #include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
 #include <fcntl.h>

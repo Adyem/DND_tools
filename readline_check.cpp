@@ -2,8 +2,8 @@
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/RNG/rng.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
 

@@ -1,5 +1,5 @@
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/RNG/rng.hpp"
 #include "dnd_tools.hpp"
 #include <climits>
 

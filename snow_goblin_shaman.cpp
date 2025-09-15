@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
 #include "snow_goblin_shaman.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/RNG/rng.hpp"
 #include "libft/CMA/CMA.hpp"
 
 void ft_snow_goblin_shaman_turn(t_char * info)

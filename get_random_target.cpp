@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/RNG/rng.hpp"
 
 void    ft_get_random_target(char **player_list, char **target_field)
 {

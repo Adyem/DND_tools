@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 
 void    ft_cast_rejuvenation(const char **input, t_char *info)
 {

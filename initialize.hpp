@@ -3,7 +3,7 @@
 
 # include <stddef.h>
 # include "character.hpp"
-# include "libft/CPP_class/nullptr.hpp"
+# include "libft/CPP_class/class_nullptr.hpp"
 
 static const    t_buff INITIALIZE_T_BUFF =
 {

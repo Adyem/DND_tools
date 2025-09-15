@@ -1,7 +1,7 @@
 #ifndef HILDA_STORMSHIELD_HPP
 # define HILDA_STORMSHIELD_HPP
 
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
 #include "character.hpp"

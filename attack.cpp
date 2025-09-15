@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/RNG/RNG.hpp"
+#include "libft/RNG/rng.hpp"
 
 static void    ft_test_mode(bool *is_hit)
 {

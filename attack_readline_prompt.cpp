@@ -2,7 +2,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 
 int ft_readline_prompt_hit_or_miss(void)
 {

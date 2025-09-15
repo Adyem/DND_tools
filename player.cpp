@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
-#include "libft/file/open_dir.hpp"
+#include "libft/File/open_dir.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include <cerrno>
 #include <cstdlib>
 #include <cstring>
@@ -34,21 +34,21 @@ static void ft_add_player(t_pc *player)
 
 static void ft_list_players(void)
 {
-    FT_DIR *dir;
-    ft_dirent *entry;
+    file_dir *dir;
+    file_dirent *entry;
 
-    dir = ft_opendir("data");
+    dir = file_opendir("data");
     if (dir == ft_nullptr)
     {
         pf_printf("Unable to open data folder: %s", strerror(errno));
         return ;
     }
-    while ((entry = ft_readdir(dir)) != ft_nullptr)
+    while ((entry = file_readdir(dir)) != ft_nullptr)
     {
         if (strncmp(entry->d_name, "pc--", 4) == 0)
             pf_printf("%s\n", entry->d_name + 4);
     }
-    ft_closedir(dir);
+    file_closedir(dir);
     return ;
 }
 

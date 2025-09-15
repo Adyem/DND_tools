@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include <cstdlib>
 
 static char **ft_handle_memory_error(t_char * info, char **data, int error_code)

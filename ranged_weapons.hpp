@@ -6,7 +6,7 @@
 # include "dnd_tools.hpp"
 # include "identification.hpp"
 # include "initialize.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 
 void    ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand);
 

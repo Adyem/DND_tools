@@ -4,7 +4,7 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include <cstdlib>
 
 void ft_free_memory_name(t_name *name, int exit_failure)

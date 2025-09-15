@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 
 static int ft_handle_custom_commands(const char **input, int argc, t_name *name)

@@ -2,7 +2,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/CPP_class/nullptr.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 
 typedef int (*RollExecuteFunc)(char *, int *, int);
 
