@@ -4,6 +4,7 @@
 static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 
 #include <cstdio>
+#include "libft/Libft/libft.hpp"
 #include "character.hpp"
 #include "player_character.hpp"
 #include "libft/CPP_class/class_file.hpp"
@@ -394,7 +395,6 @@ int         ft_open_file_write_only(const char *filename, ft_file &file);
 
 // Utils
 int         ft_create_data_dir();
-int         ft_strcmp_dnd(const char *string1, const char *string2);
 int         ft_initialize_info(t_char * character, char **content);
 int         ft_check_value(const char *input);
 void        ft_print_character_status(t_char * info, int number, int temp);

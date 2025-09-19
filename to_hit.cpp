@@ -16,7 +16,7 @@ void ft_npc_check_ac(t_char * info, const char **input)
     int armor_class = ft_calculate_ac(info);
     pf_printf("%s has an ac of %i\n", info->name, armor_class);
     ft_to_hit_check_buff(info);
-    if (ft_strcmp_dnd(input[2], "crit") == 0)
+    if (ft_strcmp(input[2], "crit") == 0)
     {
         if (info->bufs.protective_winds.duration > 0)
             pf_printf("%s has protective winds running, any projectiles are thrown "

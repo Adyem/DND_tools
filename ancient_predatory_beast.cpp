@@ -52,7 +52,7 @@ t_char *ft_ancient_predatory_beast(const int index, const char **input, t_name *
     }
     if (index == 2)
     {
-        if (ft_strcmp_dnd(input[1], "init") == 0)
+        if (ft_strcmp(input[1], "init") == 0)
         {
             int result = ft_dice_roll(info->hit_dice.dice_amount, info->hit_dice.dice_faces);
             if (result == -1)

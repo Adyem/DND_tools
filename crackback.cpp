@@ -17,7 +17,7 @@ inline static void ft_notify_no_weapon(t_char * info, const char *weapon_type)
 
 static bool ft_handle_attack_choice(t_char * info, const char *choice)
 {
-    if (ft_strcmp_dnd(choice, "melee") == 0)
+    if (ft_strcmp(choice, "melee") == 0)
     {
         if (info->equipment.weapon.attack.function)
         {
@@ -31,7 +31,7 @@ static bool ft_handle_attack_choice(t_char * info, const char *choice)
             return (false);
         }
     }
-    else if (ft_strcmp_dnd(choice, "ranged") == 0)
+    else if (ft_strcmp(choice, "ranged") == 0)
     {
         if (info->equipment.ranged_weapon.attack.function)
         {
@@ -64,7 +64,7 @@ static void ft_execute_crackback(t_char * info)
             return ;
         }
 
-        if (ft_strcmp_dnd(line, "exit") == 0)
+        if (ft_strcmp(line, "exit") == 0)
         {
             cma_free(line);
             return ;
@@ -76,9 +76,9 @@ static void ft_execute_crackback(t_char * info)
         }
         else
         {
-            if (ft_strcmp_dnd(line, "melee") == 0)
+            if (ft_strcmp(line, "melee") == 0)
                 melee_missing = true;
-            else if (ft_strcmp_dnd(line, "ranged") == 0)
+            else if (ft_strcmp(line, "ranged") == 0)
                 ranged_missing = true;
 
             pf_printf_fd(2, "118-Error: Invalid input Crackback, valid inputs are melee, " \

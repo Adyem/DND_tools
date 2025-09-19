@@ -25,7 +25,7 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
     temp = name;
     while (temp != ft_nullptr)
     {
-        if (argc > 0 && ft_strcmp_dnd(input[0], temp->name) == 0)
+        if (argc > 0 && ft_strcmp(input[0], temp->name) == 0)
         {
             temp->function(argc, const_cast<const char **>(input), name, 0);
             return (1);
@@ -37,25 +37,25 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
 
 static int ft_handle_builtins(char **input, int i, t_name *name, char *input_string)
 {
-    if (ft_strcmp_dnd(input[0], "roll") == 0)
+    if (ft_strcmp(input[0], "roll") == 0)
         ft_command_roll(input);
-    else if (i == 1 && ft_strcmp_dnd(input[0], "exit") == 0)
+    else if (i == 1 && ft_strcmp(input[0], "exit") == 0)
         return (ft_free_input(input, input_string), -1);
-    else if (i == 1 && ft_strcmp_dnd(input[0], "fclean") == 0)
+    else if (i == 1 && ft_strcmp(input[0], "fclean") == 0)
         ft_fclean();
-    else if (i == 1 && ft_strcmp_dnd(input[0], "clean") == 0)
+    else if (i == 1 && ft_strcmp(input[0], "clean") == 0)
         ft_clean();
-    else if (i == 1 && ft_strcmp_dnd(input[0], "initiative") == 0)
+    else if (i == 1 && ft_strcmp(input[0], "initiative") == 0)
         ft_open_all_files(name);
-    else if (i == 1 && ft_strcmp_dnd(input[0], "turn") == 0)
+    else if (i == 1 && ft_strcmp(input[0], "turn") == 0)
         ft_turn_next(name);
-    else if (i == 1 && ft_strcmp_dnd(input[0], "test") == 0)
+    else if (i == 1 && ft_strcmp(input[0], "test") == 0)
         ft_test(name);
-    else if (i == 1 && ft_strcmp_dnd(input[0], "help") == 0)
+    else if (i == 1 && ft_strcmp(input[0], "help") == 0)
         ft_print_help();
-        else if (i == 3 && ft_strcmp_dnd(input[1], "player") == 0)
+        else if (i == 3 && ft_strcmp(input[1], "player") == 0)
         ft_player(const_cast<const char **>(input));
-        else if (i >= 2 && ft_strcmp_dnd(input[0], "encounter") == 0)
+        else if (i >= 2 && ft_strcmp(input[0], "encounter") == 0)
                 ft_encounter(i - 1, const_cast<const char **>(input + 1), name);
     else
         return (0);

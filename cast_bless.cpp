@@ -95,7 +95,7 @@ void    ft_concentration_remove_bless(t_char * character,
         caster_index = 0;
         while (targets_data->target[target_index]->bufs.bless.caster_name[caster_index])
         {
-            if (ft_strcmp_dnd(targets_data->target[target_index]->bufs.bless.caster_name
+            if (ft_strcmp(targets_data->target[target_index]->bufs.bless.caster_name
                     [caster_index],
                 character->name) == 0)
             {

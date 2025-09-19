@@ -4,7 +4,7 @@
 
 void    ft_encounter(int argument_count, const char **argument_vector, t_name *name)
 {
-    if (argument_count >= 1 && ft_strcmp_dnd(argument_vector[0], "xavius") == 0)
+    if (argument_count >= 1 && ft_strcmp(argument_vector[0], "xavius") == 0)
     {
         if (argument_count == 1)
         {
@@ -13,9 +13,9 @@ void    ft_encounter(int argument_count, const char **argument_vector, t_name *n
             ft_excecute_test("xavius", "init", name);
             ft_excecute_test("malfurion", "init", name);
         }
-        else if (argument_count >= 3 && ft_strcmp_dnd(argument_vector[1], "damage") == 0)
+        else if (argument_count >= 3 && ft_strcmp(argument_vector[1], "damage") == 0)
         {
-            if (ft_strcmp_dnd(argument_vector[2], "portal") == 0)
+            if (ft_strcmp(argument_vector[2], "portal") == 0)
             {
                 const char      *input[] = {"demonic_portal_a", ft_nullptr};
                 t_char          *info = ft_demonic_portal_a(1, input, name, 1);
@@ -32,8 +32,8 @@ void    ft_encounter(int argument_count, const char **argument_vector, t_name *n
                 }
             }
             else if (argument_count >= 4 &&
-                    ft_strcmp_dnd(argument_vector[2], "shield") == 0 &&
-                    ft_strcmp_dnd(argument_vector[3], "spell") == 0)
+                    ft_strcmp(argument_vector[2], "shield") == 0 &&
+                    ft_strcmp(argument_vector[3], "spell") == 0)
             {
                 const char      *input[] = {"shield_spell_a", ft_nullptr};
                 t_char          *info = ft_shield_spell_a(1, input, name, 1);

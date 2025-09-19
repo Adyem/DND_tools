@@ -52,7 +52,7 @@ t_char *ft_grizz(const int index, const char **input, t_name *name, int exceptio
     }
     if (index == 2)
     {
-        if (ft_strcmp_dnd(input[1], "init") == 0)
+        if (ft_strcmp(input[1], "init") == 0)
         {
             ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
             if (file.get_error())

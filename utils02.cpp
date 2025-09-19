@@ -19,7 +19,7 @@ int ft_is_caster_name_present(char **caster_name_list, const char *name)
     int index = 0;
     while (caster_name_list[index])
     {
-        if (ft_strcmp_dnd(caster_name_list[index], name) == 0)
+        if (ft_strcmp(caster_name_list[index], name) == 0)
             return (1);
         index++;
     }

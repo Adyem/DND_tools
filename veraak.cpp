@@ -14,7 +14,7 @@ static void ft_veraak_kill_crystal(const char *crystal, t_char *info,
     name = info->struct_name;
     while (name != ft_nullptr)
     {
-        if (ft_strcmp_dnd(name->name, crystal) == 0)
+        if (ft_strcmp(name->name, crystal) == 0)
         {
             input[0] = name->name;
             input[1] = "kill";
@@ -113,7 +113,7 @@ t_char *ft_veraak(const int index, const char **input, t_name *name,
         ft_free_info(info);
         return (ft_nullptr);
     }
-    if (index == 2 && ft_strcmp_dnd(input[1], "init") == 0)
+    if (index == 2 && ft_strcmp(input[1], "init") == 0)
     {
         ft_file file(info->save_file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
         if (file.get_error())

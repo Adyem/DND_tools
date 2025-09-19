@@ -58,7 +58,7 @@ void    ft_player(const char **input)
 
     if (input[1] && input[2])
     {
-        if (ft_strcmp_dnd(input[0], "add") == 0)
+        if (ft_strcmp(input[0], "add") == 0)
         {
             player = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
             if (!player)
@@ -79,7 +79,7 @@ void    ft_player(const char **input)
             player->position.z = 0;
             ft_add_player(player);
         }
-        else if (ft_strcmp_dnd(input[0], "list"))
+        else if (ft_strcmp(input[0], "list"))
             ft_list_players();
     }
     else

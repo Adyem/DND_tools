@@ -22,7 +22,7 @@ static t_char *ft_check_name(t_name *name, char *file_name)
         pf_printf("Printing file name again: %s\n", file_name);
     while (name != ft_nullptr)
     {
-        if (ft_strcmp_dnd(name->name, file_name) == 0)
+        if (ft_strcmp(name->name, file_name) == 0)
         {
             input[0] = name->name;
             input[1] = ft_nullptr;
@@ -128,7 +128,7 @@ void ft_open_all_files(t_name *name)
     }
     while ((entry = file_readdir(dir)) != ft_nullptr)
     {
-        if (ft_strcmp_dnd(entry->d_name, ".") == 0 || ft_strcmp_dnd(entry->d_name, "..") == 0)
+        if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
             continue ;
         snprintf(filepath, sizeof(filepath), "%s/%s", "data", entry->d_name);
         if (DEBUG == 1)
