@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
+#include "set_utils.hpp"
 #include <cstdlib>
 #include <cstring>
 
@@ -80,7 +81,7 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
         count = target->debufs.hunters_mark.caster_name.size();
         if (count > 0)
         {
-            names = target->debufs.hunters_mark.caster_name.data();
+            names = ft_set_get_raw_data(target->debufs.hunters_mark.caster_name);
             if (names)
             {
                 index = 0;

@@ -2,6 +2,7 @@
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "key_list.hpp"
+#include "set_utils.hpp"
 #include <fcntl.h>
 #include <unistd.h>
 #include <cerrno>
@@ -33,7 +34,7 @@ static void ft_npc_write_file_string_set(const char *msg, const ft_set<ft_string
     count = targets.size();
     if (count == 0)
         return ;
-    names = targets.data();
+    names = ft_set_get_raw_data(targets);
     if (!names)
         return ;
     index = 0;
