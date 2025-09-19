@@ -4,6 +4,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/rng.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/Errno/errno.hpp"
 
 static void ft_portal_surge(t_char *info)
 {
@@ -21,19 +22,25 @@ static void ft_portal_surge(t_char *info)
                 "on attacks\n");
     else if (roll == 4)
     {
-        char    **player_list;
-        int             i;
-        int             damage;
+        ft_vector<ft_string>    player_list = ft_get_pc_list();
+        int                     i;
+        int                     damage;
 
-        player_list = ft_get_pc_list();
-        if (!player_list)
+        if (player_list.get_error() != ER_SUCCESS || player_list.size() == 0)
+        {
+            player_list.clear();
             return ;
-        i = ft_double_char_length(const_cast<const char **>(player_list));
-        i = ft_dice_roll(1, i) - 1;
+        }
+        i = ft_dice_roll(1, static_cast<int>(player_list.size())) - 1;
+        if (i < 0)
+        {
+            player_list.clear();
+            return ;
+        }
         damage = ft_dice_roll(2, 6);
         pf_printf("Portal Surge: Arcane backlash hits %s for %d force damage\n",
-                player_list[i], damage);
-        cma_free_double(player_list);
+                player_list[static_cast<size_t>(i)].c_str(), damage);
+        player_list.clear();
     }
     else
         pf_printf("Portal Surge: Calm moment - no effect\n");
@@ -70,7 +77,7 @@ t_char *ft_demonic_portal_a(const int index, const char **input, t_name *name, i
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
         return (ft_nullptr);
     }
-    *info = DEMONIC_PORTAL_A_INFO;
+    ft_initialize_character_template(info, &DEMONIC_PORTAL_A_INFO);
     info->name = input[0];
     info->struct_name = name;
     info->save_file = cma_strjoin("data/", input[0]);

@@ -3,6 +3,7 @@
 #include "chaos_crystal.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/Errno/errno.hpp"
 #include "libft/RNG/rng.hpp"
 #include "veraak.hpp"
 #include <fcntl.h>
@@ -12,18 +13,24 @@
 
 static void ft_chaos_crystal_damage(t_char * info)
 {
-    char    **player_list;
-    int        i;
+    ft_vector<ft_string>    player_list = ft_get_pc_list();
+    int                     i;
 
-    player_list = ft_get_pc_list();
-    if (!player_list)
+    if (player_list.get_error() != ER_SUCCESS || player_list.size() == 0)
+    {
+        player_list.clear();
         return ;
-    i = ft_double_char_length(const_cast<const char **>(player_list));
-    i = ft_dice_roll(1, i) - 1;
+    }
+    i = ft_dice_roll(1, static_cast<int>(player_list.size())) - 1;
+    if (i < 0)
+    {
+        player_list.clear();
+        return ;
+    }
     pf_printf("%s shoots a magic missile at %s and he/she takes 1 force damage, " \
             " the target does not need to make a concentration save for this damage\n",
-            info->name, player_list[i]);
-    cma_free_double(player_list);
+            info->name, player_list[static_cast<size_t>(i)].c_str());
+    player_list.clear();
     return ;
 }
 
@@ -53,7 +60,7 @@ t_char *ft_chaos_crystal(const int index, const char **input, t_name *name,
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
         return (ft_nullptr);
     }
-    *info = VERAAK_INFO;
+    ft_initialize_character_template(info, &CHAOS_CRYSTAL_INFO);
     info->name = input[0];
     info->struct_name = name;
     info->save_file = cma_strjoin("data/", input[0]);

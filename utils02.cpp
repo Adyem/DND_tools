@@ -3,16 +3,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-int ft_double_char_length(const char **double_char)
-{
-    if (!double_char)
-        return (0);
-    int index = 0;
-    while (double_char[index])
-        index++;
-    return (index);
-}
-
 int ft_is_caster_name_present(ft_set<ft_string> *caster_name_list, const char *name)
 {
     const ft_string    *existing_name;

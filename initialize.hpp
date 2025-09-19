@@ -183,14 +183,17 @@ static const    t_concentration INITIALIZE_CONCENTRATION =
 };
 
 
-static const    t_buff_bless INITIALIZE_BUFF_BLESS =
+static t_buff_bless ft_initialize_buff_bless()
 {
-    .duration = 0,
-    .dice_amount_mod = 0,
-    .dice_faces_mod = 0,
-    .base_mod = 0,
-    .caster_name = ft_set<ft_string>(),
-};
+    t_buff_bless    bless;
+
+    bless.duration = 0;
+    bless.dice_amount_mod = 0;
+    bless.dice_faces_mod = 0;
+    bless.base_mod = 0;
+    bless.caster_name.clear();
+    return (bless);
+}
 
 static const    t_buff_protective_winds INITIALIZE_BUFF_PROTECTIVE_WINDS =
 {
@@ -281,47 +284,56 @@ static const    t_buff_growth INITIALIZE_BUFF_GROWTH =
 };
 
 
-static const    t_bufs INITIALIZE_BUFFS =
+static inline t_bufs ft_initialize_buffs()
 {
-    .bless = INITIALIZE_BUFF_BLESS,
-    .protective_winds = INITIALIZE_BUFF_PROTECTIVE_WINDS,
-    .lightning_strike = INITIALIZE_BUFF_LIGHTNING_STRIKE,
-    .lightning_strikeV2 = INITIALIZE_BUFF_LIGHTNING_STRIKE,
-    .flame_geyser = INITIALIZE_BUFF_FLAME_GEYSER,
-    .meteor_strike = INITIALIZE_BUFF_METEOR_STRIKE,
-    .chaos_armor = INITIALIZE_BUFF_CHAOS_ARMOR,
-    .arcane_pounce = INITIALIZE_BUFF_ARCANE_POUNCE,
-    .earth_pounce = INITIALIZE_BUFF_EARTH_POUNCE,
-    .frost_breath = INITIALIZE_BUFF_FROST_BREATH,
-    .shadow_illusion = INITIALIZE_BUFF_SHADOW_ILLUSION,
-    .growth = INITIALIZE_BUFF_GROWTH,
-    .rejuvenation = INITIALIZE_BUFF_REJUVENATION,
-};
+    t_bufs  buffs;
 
-static const    t_debuff_hunters_mark INITIALIZE_HUNTERS_MARK =
+    buffs.bless = ft_initialize_buff_bless();
+    buffs.protective_winds = INITIALIZE_BUFF_PROTECTIVE_WINDS;
+    buffs.lightning_strike = INITIALIZE_BUFF_LIGHTNING_STRIKE;
+    buffs.lightning_strikeV2 = INITIALIZE_BUFF_LIGHTNING_STRIKE;
+    buffs.flame_geyser = INITIALIZE_BUFF_FLAME_GEYSER;
+    buffs.meteor_strike = INITIALIZE_BUFF_METEOR_STRIKE;
+    buffs.chaos_armor = INITIALIZE_BUFF_CHAOS_ARMOR;
+    buffs.arcane_pounce = INITIALIZE_BUFF_ARCANE_POUNCE;
+    buffs.earth_pounce = INITIALIZE_BUFF_EARTH_POUNCE;
+    buffs.frost_breath = INITIALIZE_BUFF_FROST_BREATH;
+    buffs.shadow_illusion = INITIALIZE_BUFF_SHADOW_ILLUSION;
+    buffs.growth = INITIALIZE_BUFF_GROWTH;
+    buffs.rejuvenation = INITIALIZE_BUFF_REJUVENATION;
+    return (buffs);
+}
+
+static t_debuff_hunters_mark ft_initialize_hunters_mark()
 {
-    .amount = 0,
-    .caster_name = ft_set<ft_string>(),
-};
+    t_debuff_hunters_mark    debuff;
+
+    debuff.amount = 0;
+    debuff.caster_name.clear();
+    return (debuff);
+}
 
 static const    t_debuff_blinded INITIALIZE_BLINDED =
 {
     .duration = 0,
 };
 
-static const    t_debuff_magic_drain INITIALIZE_DEBUFF_MAGIC_DRAIN =
+static t_debuff_magic_drain ft_initialize_debuff_magic_drain()
 {
-    .caster = ft_set<ft_string>(),
-    .amount = 0,
-    .damage_flat = 0,
-    .damage_dice_amount = 0,
-    .damage_dice_faces = 0,
-    .extra_damage_flat = 0,
-    .extra_dice_amount = 0,
-    .extra_dice_faces = 0,
-    .spell_slot_total_level_drain = 0,
-    .con_save = 0,
-};
+    t_debuff_magic_drain    debuff;
+
+    debuff.caster.clear();
+    debuff.amount = 0;
+    debuff.damage_flat = 0;
+    debuff.damage_dice_amount = 0;
+    debuff.damage_dice_faces = 0;
+    debuff.extra_damage_flat = 0;
+    debuff.extra_dice_amount = 0;
+    debuff.extra_dice_faces = 0;
+    debuff.spell_slot_total_level_drain = 0;
+    debuff.con_save = 0;
+    return (debuff);
+}
 
 static const    t_debuff_fell_poison INITIALIZE_FELL_POISON =
 {
@@ -335,14 +347,17 @@ static const    t_debuff_shadow_touched INITIALIZE_SHADOW_TOUCHED =
     .armor_reduction_amount = 0,
 };
 
-static const    t_debufs INITIALIZE_DEBUFFS =
+static inline t_debufs ft_initialize_debuffs()
 {
-    .hunters_mark = INITIALIZE_HUNTERS_MARK,
-    .blinded = INITIALIZE_BLINDED,
-    .magic_drain = INITIALIZE_DEBUFF_MAGIC_DRAIN,
-    .fell_poison = INITIALIZE_FELL_POISON,
-    .shadow_touched = INITIALIZE_SHADOW_TOUCHED,
-};
+    t_debufs    debuffs;
+
+    debuffs.hunters_mark = ft_initialize_hunters_mark();
+    debuffs.blinded = INITIALIZE_BLINDED;
+    debuffs.magic_drain = ft_initialize_debuff_magic_drain();
+    debuffs.fell_poison = INITIALIZE_FELL_POISON;
+    debuffs.shadow_touched = INITIALIZE_SHADOW_TOUCHED;
+    return (debuffs);
+}
 
 static const    t_flags INITIALIZE_FLAGS =
 {

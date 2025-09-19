@@ -87,7 +87,9 @@ void ft_request_input(t_name *name)
         input = ft_parse_input(input_string);
         if (!input)
             continue ;
-        int index = ft_double_char_length(const_cast<const char **>(input));
+        int index = 0;
+        while (input[index])
+            index++;
         int found = ft_handle_builtins(input, index, name, input_string);
         if (found == -1)
         {

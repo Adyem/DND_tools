@@ -34,7 +34,7 @@ t_char *ft_shield_spell_a(const int index, const char **input, t_name *name, int
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
         return (ft_nullptr);
     }
-    *info = SHIELD_SPELL_A_INFO;
+    ft_initialize_character_template(info, &SHIELD_SPELL_A_INFO);
     info->name = input[0];
     info->struct_name = name;
     info->save_file = cma_strjoin("data/", input[0]);

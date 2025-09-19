@@ -5,6 +5,8 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 
 #include <cstdio>
 #include "libft/Libft/libft.hpp"
+#include "libft/CPP_class/class_string_class.hpp"
+#include "libft/Template/vector.hpp"
 #include "character.hpp"
 #include "player_character.hpp"
 #include "libft/CPP_class/class_file.hpp"
@@ -24,6 +26,8 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 # define RL_CRIT_FAIL 4
 
 extern bool g_dnd_test;
+
+void        ft_initialize_character_template(t_char * dst, const t_char * src);
 
 // NPC
 void        ft_npc_change_stats(t_char * info, int argument_count, const char **argument_vector);
@@ -163,8 +167,8 @@ void        ft_ancient_predatory_beast_turn(t_char * info);
 // Maverick
 t_char      *ft_maverick(const int index, const char **input, t_name *name, int exception);
 void        ft_maverick_turn(t_char * info);
-void        ft_maverick_print_s(int first, int second, t_char * info, char **player_list);
-void        ft_maverick_print_f(int first, int second, t_char * info, char **player_list);
+void        ft_maverick_print_s(int first, int second, t_char * info, ft_vector<ft_string> &player_list);
+void        ft_maverick_print_f(int first, int second, t_char * info, ft_vector<ft_string> &player_list);
 
 // Commands
 void        ft_request_input(t_name *name);
@@ -402,16 +406,14 @@ void        ft_skill_throw(t_char * info, const char *skill, int ability_mod, in
 int         ft_set_stats(t_char * info, char **content);
 int         ft_check_stat(t_char * info, const char *stat, const size_t index);
 char        **ft_set_stats_con_targets(char *content, size_t ofset, char **data, t_char *info);
-int         ft_double_char_length(const char **double_char);
 void        ft_dual_save_file(t_char * info, t_char * target);
 char        *ft_strtrim_prefix(const char *s1, const char *prefix);
 const char  *ft_ordinal_suffix(int number);
 int         ft_check_equipment_slots(t_char * character);
 void        ft_initialize_suggestions_readline();
-char        **ft_get_pc_list();
-void        ft_remove_element(char **array, char *element, bool free_element);
+ft_vector<ft_string>    ft_get_pc_list();
 void        ft_add_element(const char ***array, const char *element);
-void        ft_get_random_target(char **player_list, char **target_field);
+void        ft_get_random_target(ft_vector<ft_string> &player_list, char **target_field);
 int         ft_check_player_entry(const char *entry);
 int         ft_set_stat_player(size_t key_len, const char **field, const char *content);
 int         ft_check_write_permissions(const char *filepath);

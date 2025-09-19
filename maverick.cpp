@@ -2,22 +2,27 @@
 #include "maverick.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/Errno/errno.hpp"
 #include "libft/RNG/rng.hpp"
 
 void    ft_maverick_turn(t_char * info)
 {
     int        first;
     int        second;
-    char    **player_list;
+    ft_vector<ft_string>    player_list = ft_get_pc_list();
 
     ft_update_buf(info);
     pf_printf("\n\n");
-    player_list = ft_get_pc_list();
-        if (ft_double_char_length(const_cast<const char **>(player_list)) < 2)
+    if (player_list.get_error() != ER_SUCCESS)
     {
-        if (ft_double_char_length(const_cast<const char **>(player_list)) > 0)
+        player_list.clear();
+        return ;
+    }
+    if (player_list.size() < 2)
+    {
+        if (player_list.size() > 0)
             pf_printf_fd(2, "283-Error not enough targets for %s\n", info->name);
-        cma_free_double(player_list);
+        player_list.clear();
         return ;
     }
     first = 0;
@@ -30,7 +35,7 @@ void    ft_maverick_turn(t_char * info)
     ft_maverick_print_f(first, second, info, player_list);
     ft_maverick_print_s(first, second, info, player_list);
     pf_printf("\n\n");
-    cma_free_double(player_list);
+    player_list.clear();
     return ;
 }
 
@@ -49,7 +54,7 @@ t_char *ft_maverick(const int index, const char **input, t_name *name, int excep
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
         return (ft_nullptr);
     }
-    *info = MAVERICK_INFO;
+    ft_initialize_character_template(info, &MAVERICK_INFO);
     info->name = input[0];
     info->struct_name = name;
     info->save_file = cma_strjoin("data/", input[0]);

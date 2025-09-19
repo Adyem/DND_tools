@@ -38,7 +38,7 @@ static void    ft_maverick_flame_geyser(t_char * info)
     return ;
 }
 
-static void ft_maverick_meteor_strike(t_char * info, char **player_list)
+static void ft_maverick_meteor_strike(t_char * info, ft_vector<ft_string> &player_list)
 {
     cma_free(info->bufs.meteor_strike.target_id);
     info->bufs.meteor_strike.target_id = ft_nullptr;
@@ -53,7 +53,7 @@ static void ft_maverick_meteor_strike(t_char * info, char **player_list)
     return ;
 }
 
-static void    ft_maverick_earth_pounce(t_char * info, char **player_list)
+static void    ft_maverick_earth_pounce(t_char * info, ft_vector<ft_string> &player_list)
 {
     cma_free(info->bufs.earth_pounce.target_id);
     info->bufs.earth_pounce.target_id = ft_nullptr;
@@ -64,7 +64,7 @@ static void    ft_maverick_earth_pounce(t_char * info, char **player_list)
     return ;
 }
 
-static void    ft_maverick_arcane_pounce(t_char * info, char **player_list)
+static void    ft_maverick_arcane_pounce(t_char * info, ft_vector<ft_string> &player_list)
 {
     cma_free(info->bufs.frost_breath.target_id);
     info->bufs.frost_breath.target_id = ft_nullptr;
@@ -76,7 +76,7 @@ static void    ft_maverick_arcane_pounce(t_char * info, char **player_list)
     return ;
 }
 
-static void    ft_maverick_frost_breath(t_char * info, char **player_list)
+static void    ft_maverick_frost_breath(t_char * info, ft_vector<ft_string> &player_list)
 {
     cma_free(info->bufs.frost_breath.target_id);
     info->bufs.frost_breath.target_id = ft_nullptr;
@@ -115,7 +115,7 @@ static void print_mass_teleport(int tp_number)
     return ;
 }
 
-void ft_maverick_print_f(int first, int second, t_char * info, char **player_list)
+void ft_maverick_print_f(int first, int second, t_char * info, ft_vector<ft_string> &player_list)
 {
     if (first == 1)
         print_mass_teleport(second);
@@ -136,7 +136,7 @@ void ft_maverick_print_f(int first, int second, t_char * info, char **player_lis
     return ;
 }
 
-void ft_maverick_print_s(int first, int second, t_char * info, char **player_list)
+void ft_maverick_print_s(int first, int second, t_char * info, ft_vector<ft_string> &player_list)
 {
     if (second == 1)
         print_mass_teleport(first);

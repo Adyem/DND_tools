@@ -41,7 +41,7 @@ t_char *ft_malfurion(const int index, const char **input, t_name *name, int exce
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
         return (ft_nullptr);
     }
-    *info = MALFURION_INFO;
+    ft_initialize_character_template(info, &MALFURION_INFO);
     info->name = input[0];
     info->struct_name = name;
     info->save_file = cma_strjoin("data/", input[0]);

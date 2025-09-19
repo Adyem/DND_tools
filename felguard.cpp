@@ -41,7 +41,7 @@ t_char *ft_felguard(const int index, const char **input, t_name *name, int excep
         pf_printf_fd(2, "105-Error: Failed to allocate memory info %s\n", input[0]);
         return (ft_nullptr);
     }
-    *info = FELGUARD_INFO;
+    ft_initialize_character_template(info, &FELGUARD_INFO);
     info->name = input[0];
     info->struct_name = name;
     info->save_file = cma_strjoin("data/", input[0]);
