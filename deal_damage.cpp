@@ -65,7 +65,12 @@ void ft_deal_damage(t_char * info, const char *input, const char *d_type,
             pf_printf("The %s damage was increased by %d.\n", d_type, -damage_reduction);
         if (damage < 0)
             damage = 0;
-        if (d_type && resistance > 0)
+        if (d_type && resistance == 100)
+        {
+            pf_printf("%s is immune to %s damage.\n", info->name, d_type);
+            damage = 0;
+        }
+        else if (d_type && resistance > 0)
         {
             extra = (damage * resistance) / 100;
             pf_printf("%s is resistant to %s damage and takes %d%% less damage for a " \
@@ -78,11 +83,6 @@ void ft_deal_damage(t_char * info, const char *input, const char *d_type,
             pf_printf("%s is vulnerable to %s damage and takes %d%% more damage for a " \
                     "total of %d more damage.\n", info->name, d_type, -resistance, extra);
             damage = damage + extra;
-        }
-        else if (d_type && resistance == 100)
-        {
-            pf_printf("%s is immune to %s damage.\n", info->name, d_type);
-            damage = 0;
         }
         if (info->bufs.growth.stacks > 0) {
             damage -= info->bufs.growth.stacks;
