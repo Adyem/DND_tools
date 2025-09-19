@@ -20,13 +20,23 @@ void ft_fclean(void)
     int         status;
     const char  *command[4];
     pid_t       pid;
+    int         confirm;
 
     command[0] = "/bin/sh";
     command[1] = "-c";
     command[2] = "rm -rf ./data/*";
     command[3] = ft_nullptr;
-    if (g_dnd_test == false && ft_readline_confirm("type yes to confirm or no to abort: "))
-        return ;
+    if (g_dnd_test == false)
+    {
+        confirm = ft_readline_confirm("type yes to confirm or no to abort: ");
+        if (confirm == RL_INPUT_CANCEL)
+        {
+            pf_printf("Command cancelled.\n");
+            return ;
+        }
+        if (confirm != 0)
+            return ;
+    }
     pid = fork();
     if (pid == -1)
     {
@@ -50,8 +60,19 @@ void ft_fclean(void)
         }
     }
 #else
-    if (g_dnd_test == false && ft_readline_confirm("type yes to confirm or no to abort: "))
-        return ;
+    int confirm;
+
+    if (g_dnd_test == false)
+    {
+        confirm = ft_readline_confirm("type yes to confirm or no to abort: ");
+        if (confirm == RL_INPUT_CANCEL)
+        {
+            pf_printf("Command cancelled.\n");
+            return ;
+        }
+        if (confirm != 0)
+            return ;
+    }
     std::error_code ec;
     for (const auto &entry : std::filesystem::directory_iterator("./data", ec))
     {
@@ -71,14 +92,24 @@ void ft_clean(void)
     int         status;
     const char  *command[4];
     pid_t       pid;
+    int         confirm;
 
     command[0] = "/bin/sh";
     command[1] = "-c";
     command[2] = "find ./data -mindepth 1 -maxdepth 1 \\( ! -name 'data--*' !" \
                                   "-name 'pc--*' \\) -exec rm -rf {} +";
     command[3] = ft_nullptr;
-    if (g_dnd_test == 0 && ft_readline_confirm("type yes to confirm or no to abort: "))
-        return ;
+    if (g_dnd_test == 0)
+    {
+        confirm = ft_readline_confirm("type yes to confirm or no to abort: ");
+        if (confirm == RL_INPUT_CANCEL)
+        {
+            pf_printf("Command cancelled.\n");
+            return ;
+        }
+        if (confirm != 0)
+            return ;
+    }
     pid = fork();
     if (pid == -1)
     {
@@ -102,8 +133,19 @@ void ft_clean(void)
         }
     }
 #else
-    if (g_dnd_test == 0 && ft_readline_confirm("type yes to confirm or no to abort: "))
-        return ;
+    int confirm;
+
+    if (g_dnd_test == 0)
+    {
+        confirm = ft_readline_confirm("type yes to confirm or no to abort: ");
+        if (confirm == RL_INPUT_CANCEL)
+        {
+            pf_printf("Command cancelled.\n");
+            return ;
+        }
+        if (confirm != 0)
+            return ;
+    }
     std::error_code ec;
     for (const auto &entry : std::filesystem::directory_iterator("./data", ec))
     {

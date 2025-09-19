@@ -24,6 +24,7 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 # define RL_SUCCES 2
 # define RL_FAIL 3
 # define RL_CRIT_FAIL 4
+# define RL_INPUT_CANCEL 5
 
 extern bool g_dnd_test;
 

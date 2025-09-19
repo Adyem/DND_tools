@@ -60,7 +60,15 @@ void    ft_cast_magic_drain(t_char *info, const char **input)
     ft_string message;
     if (generate_magic_drain_message(info, message))
         return ;
-    if (ft_readline_confirm(message))
+    int confirm;
+
+    confirm = ft_readline_confirm(message);
+    if (confirm == RL_INPUT_CANCEL)
+    {
+        pf_printf("Magic Drain cancelled.\n");
+        return ;
+    }
+    if (confirm != 0)
         return ;
     t_buff buff_info = MAKE_BUFF_MAGIC_DRAIN(info->spells.magic_drain, input[3]);
     int error = ft_cast_concentration(info, input, &buff_info);

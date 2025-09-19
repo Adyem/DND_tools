@@ -7,7 +7,7 @@
 #include "dnd_tools.hpp"
 #include <cstdlib>
 
-int    ft_readline_confirm(const char *message)
+int ft_readline_confirm(const char *message)
 {
     char    *input;
 
@@ -15,58 +15,58 @@ int    ft_readline_confirm(const char *message)
         return (ft_dice_roll(1, 2) - 1);
     while ((input = rl_readline(message)) != ft_nullptr)
     {
-        if ((ft_strcmp(input, "y") == 0) || (ft_strcmp(input, "Y") == 0) ||
-                (ft_strcmp(input, "yes") == 0))
+        if ((ft_strcmp(input, "y") == 0) || (ft_strcmp(input, "Y") == 0)
+            || (ft_strcmp(input, "yes") == 0))
         {
             cma_free(input);
             return (0);
         }
-        else if ((ft_strcmp(input, "n") == 0) || (ft_strcmp(input, "N") == 0) ||
-                (ft_strcmp(input, "no") == 0))
+        else if ((ft_strcmp(input, "n") == 0) || (ft_strcmp(input, "N") == 0)
+            || (ft_strcmp(input, "no") == 0))
         {
             cma_free(input);
             return (1);
         }
+        cma_free(input);
     }
-        pf_printf_fd(2, "116-Error: read line memory allocation failed\n");
-        return (-1);
+    return (RL_INPUT_CANCEL);
 }
 
-int     ft_readline_check_succes_or_fail(const char *message)
+int ft_readline_check_succes_or_fail(const char *message)
 {
-        char    *input;
+    char    *input;
 
-        if (g_dnd_test == true)
-                return (ft_dice_roll(1, 4));
-        while ((input = rl_readline(message)) != ft_nullptr)
+    if (g_dnd_test == true)
+        return (ft_dice_roll(1, 4));
+    while ((input = rl_readline(message)) != ft_nullptr)
+    {
+        if ((ft_strcmp(input, "crit succes") == 0)
+            || (ft_strcmp(input, "crit success") == 0))
         {
-                if ((ft_strcmp(input, "crit succes") == 0)
-                        || (ft_strcmp(input, "crit success") == 0))
-                {
-                        cma_free(input);
-                        return (RL_CRIT_SUCCES);
-                }
-                else if ((ft_strcmp(input, "succes") == 0)
-                        || (ft_strcmp(input, "success") == 0))
-                {
-                        cma_free(input);
-                        return (RL_SUCCES);
-                }
-                else if ((ft_strcmp(input, "crit fail") == 0)
-                        || (ft_strcmp(input, "critical fail") == 0))
-                {
-                        cma_free(input);
-                        return (RL_CRIT_FAIL);
-                }
-                else if ((ft_strcmp(input, "fail") == 0)
-                        || (ft_strcmp(input, "failure") == 0))
-                {
-                        cma_free(input);
-                        return (RL_FAIL);
-                }
+            cma_free(input);
+            return (RL_CRIT_SUCCES);
         }
-        pf_printf_fd(2, "116-Error: read line memory allocation failed\n");
-        return (-1);
+        else if ((ft_strcmp(input, "succes") == 0)
+            || (ft_strcmp(input, "success") == 0))
+        {
+            cma_free(input);
+            return (RL_SUCCES);
+        }
+        else if ((ft_strcmp(input, "crit fail") == 0)
+            || (ft_strcmp(input, "critical fail") == 0))
+        {
+            cma_free(input);
+            return (RL_CRIT_FAIL);
+        }
+        else if ((ft_strcmp(input, "fail") == 0)
+            || (ft_strcmp(input, "failure") == 0))
+        {
+            cma_free(input);
+            return (RL_FAIL);
+        }
+        cma_free(input);
+    }
+    return (RL_INPUT_CANCEL);
 }
 
 static int ft_check_spell_slots(int spell_level, t_char * character)
