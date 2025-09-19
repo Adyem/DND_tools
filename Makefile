@@ -6,6 +6,7 @@ endif
 
 NAME        = dnd_tools$(EXE_EXT)
 NAME_DEBUG  = dnd_tools_debug$(EXE_EXT)
+TEST_NAME   = automated_tests$(EXE_EXT)
 
 HEADER      = dnd_tools.hpp \
               character.hpp \
@@ -230,6 +231,7 @@ LIBFT_DIR   = ./libft
 
 OBJ_DIR         = ./objs
 OBJ_DIR_DEBUG   = ./objs_debug
+OBJ_DIR_TEST    = ./objs_tests
 
 ENABLE_LTO  ?= 0
 ENABLE_PGO  ?= 0
@@ -264,11 +266,22 @@ endif
 
 OBJS        = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
+TEST_SRC    = tests/automated_tests.cpp \
+              trim_start.cpp \
+              ordinal_suffix.cpp \
+              roll_validate_string.cpp \
+              roll_validate_utils.cpp
+
+TEST_OBJS   = $(TEST_SRC:%.cpp=$(OBJ_DIR_TEST)/%.o)
+
 all: dirs $(TARGET)
+
+tests: dirs $(TEST_NAME)
 
 dirs:
 	-$(MKDIR) $(OBJ_DIR)
 	-$(MKDIR) $(OBJ_DIR_DEBUG)
+	-$(MKDIR) $(OBJ_DIR_TEST)
 
 debug:
 	$(MAKE) all DEBUG=1
@@ -276,24 +289,35 @@ debug:
 $(TARGET): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
 
+$(TEST_NAME): $(LIBFT) $(TEST_OBJS)
+	$(CC) $(CFLAGS) $(TEST_OBJS) -o $@ $(LDFLAGS)
+
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR) $(if $(DEBUG), debug)
 
 $(OBJ_DIR)/%.o: %.cpp $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR_TEST)/%.o: %.cpp $(HEADER)
+	-$(MKDIR) $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
 	-$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR_DEBUG)/*.o
+	-$(RM) $(OBJ_DIR_TEST)/*.o $(OBJ_DIR_TEST)/tests/*.o
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 fclean: clean
-	-$(RM) $(NAME) $(NAME_DEBUG)
-	-$(RMDIR) $(OBJ_DIR) $(OBJ_DIR_DEBUG) data
+	-$(RM) $(NAME) $(NAME_DEBUG) $(TEST_NAME)
+	-$(RMDIR) $(OBJ_DIR) $(OBJ_DIR_DEBUG) $(OBJ_DIR_TEST) data
 
 re: fclean all
+
+test: $(TEST_NAME)
+	./$(TEST_NAME)
 
 both: all debug
 
 re_both: re both
 
-.PHONY: all dirs clean fclean re debug both re_both
+.PHONY: all dirs clean fclean re debug both re_both tests test
