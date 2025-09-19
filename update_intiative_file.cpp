@@ -165,7 +165,7 @@ void ft_initiative_add(t_char * info)
         pf_printf_fd(initiative_file, "%s\n", content[i]);
         i++;
     }
-    if (!content && !added)
+    if (added == 0)
     {
         pf_printf_fd(initiative_file, "%s=%d\n", info->name, info->initiative);
         added = 1;
