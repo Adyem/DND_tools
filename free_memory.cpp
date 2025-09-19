@@ -6,13 +6,7 @@
 
 void    ft_free_input(char **input, char *input_string)
 {
-    int    index = 0;
-    while (input[index])
-    {
-        cma_free(input[index]);
-        index++;
-    }
-    cma_free(input);
+    cma_free_double(input);
     cma_free(input_string);
 }
 
