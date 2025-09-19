@@ -1,8 +1,5 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
 
 void ft_add_element(const char ***array, const char *element)
 {
@@ -24,7 +21,7 @@ void ft_add_element(const char ***array, const char *element)
     i = 0;
     while ((*array)[i] != NULL)
     {
-        if (strcmp((*array)[i], element) == 0)
+        if (ft_strcmp((*array)[i], element) == 0)
             return ;
         i++;
     }
