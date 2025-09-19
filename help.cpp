@@ -15,5 +15,6 @@ void ft_print_help(void)
     pf_printf("  add player <name>   Add a new player\n");
     pf_printf("  encounter <name>    Start encounter from file\n");
     pf_printf("  encounter xavius damage <portal|shield spell>   Deal 1 damage\n");
+    pf_printf("\nPrompts can be cancelled with Ctrl+D (EOF) without raising an error.\n");
     return ;
 }
