@@ -480,26 +480,7 @@ int         ft_initiative_remove(t_char * info);
 void        ft_initiative_add(t_char * info);
 
 // Command roll
-void        ft_command_roll(char **argv);
-void        ft_free_parse(char **to_parse);
-int         ft_command_roll_validate(char *string);
-int         ft_check_string_number(char *string);
-int         ft_roll_itoa(int result, int *i, char *string);
-int         ft_roll_check_character(char c);
-int         ft_roll_check_number_next(char *string, int i);
-int         ft_roll_check_number_previous(char *string, int i);
-void        ft_calculate_j(char *string, int *j);
-
-// Roll parser
-int         ft_roll_excecute_droll(char *string, int *i, int j);
-int         ft_roll_excecute_md(char *string, int *i, int j);
-int         ft_roll_excecute_pm(char *string, int *i, int j);
-int         ft_roll_parse_brackets(char *string);
-int         ft_process_sign(char *string, int *i, int j, int *error);
-
-// Roll convert numbers
-int         ft_roll_convert_previous(char *string, int *i, int *error);
-int         ft_roll_convert_next(char *string, int i, int *error);
+int         *ft_command_roll(char **argv);
 
 // Player
 void        ft_player(const char **input);
