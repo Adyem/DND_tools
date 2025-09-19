@@ -5,6 +5,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/CPP_class/class_string_class.hpp"
+#include "set_utils.hpp"
 
 #define MAKE_BUFF_MAGIC_DRAIN(magic_drain, target_str) \
     (t_buff){ \
@@ -100,7 +101,7 @@ int    ft_magic_drain_apply_debuff(t_char *target, const char **input, t_buff *b
         count = target->debufs.magic_drain.caster.size();
         if (count > 0)
         {
-            names = target->debufs.magic_drain.caster.data();
+            names = ft_set_get_raw_data(target->debufs.magic_drain.caster);
             if (names)
             {
                 index = 0;

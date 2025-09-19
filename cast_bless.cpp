@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
+#include "set_utils.hpp"
 #include <cstdlib>
 #include <cstring>
 
@@ -80,7 +81,7 @@ int ft_cast_bless_apply_debuf(t_char * target, const char **input, t_buff *buff)
         count = target->bufs.bless.caster_name.size();
         if (count > 0)
         {
-            names = target->bufs.bless.caster_name.data();
+            names = ft_set_get_raw_data(target->bufs.bless.caster_name);
             if (names)
             {
                 index = 0;
