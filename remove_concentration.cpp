@@ -59,8 +59,11 @@ int ft_remove_concentration(t_char * info)
     buff.target_amount = i;
     targets.buff_info = &buff;
     ft_file info_save_file(ft_check_and_open(&targets, info));
-    if (info_save_file.get_error())
+    if (info_save_file.get_error() || info_save_file.get_fd() == -1)
+    {
+        ft_free_memory_cmt(&targets, i);
         return (FAILURE);
+    }
     ft_concentration_remove_buf(info, &targets);
     ft_cast_concentration_save_files(info, &targets, info_save_file);
     info->flags.alreaddy_saved = 0;
