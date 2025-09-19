@@ -2,8 +2,9 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/CPP_class/class_fd_istream.hpp"
+#include "libft/GetNextLine/get_next_line.hpp"
+#include "libft/JSon/document.hpp"
 #include "libft/File/open_dir.hpp"
 #include "dnd_tools.hpp"
 #include <cstdlib>
@@ -58,20 +59,74 @@ static void *ft_initiative_pc_error(const char *message)
     return (ft_nullptr);
 }
 
+static char **ft_initiative_load_json_lines(const char *filepath)
+{
+    json_document       document;
+    json_group          *lines_group;
+    json_item           *item;
+    size_t              count;
+    char                **content;
+    size_t              index;
+
+    if (document.read_from_file(filepath) != 0)
+        return (ft_nullptr);
+    lines_group = document.find_group("lines");
+    if (!lines_group)
+        return (ft_nullptr);
+    count = 0;
+    item = lines_group->items;
+    while (item)
+    {
+        count++;
+        item = item->next;
+    }
+    content = static_cast<char **>(cma_malloc(sizeof(char *) * (count + 1)));
+    if (!content)
+        return (ft_nullptr);
+    index = 0;
+    item = lines_group->items;
+    while (item)
+    {
+        content[index] = cma_strdup(item->value);
+        if (!content[index])
+        {
+            content[index] = ft_nullptr;
+            cma_free_double(content);
+            return (ft_nullptr);
+        }
+        index++;
+        item = item->next;
+    }
+    content[index] = ft_nullptr;
+    return (content);
+}
+
+static char **ft_initiative_load_legacy_lines(ft_file &file)
+{
+    ft_fd_istream    file_stream(file.get_fd());
+    char            **content;
+
+    content = ft_read_file_lines(file_stream, 1024);
+    return (content);
+}
+
 static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
 {
-    char **content;
-    t_pc *player;
-    int error;
+    char                **content;
+    t_pc                *player;
+    int                 error;
 
-    ft_fd_istream file_stream(file.get_fd());
-    content = ft_read_file_lines(file_stream, 1024);
+    content = ft_initiative_load_json_lines(filepath);
     if (!content)
-        return (static_cast<t_pc *>(ft_initiative_pc_error("253 Error allocating memory")));
+    {
+        content = ft_initiative_load_legacy_lines(file);
+        if (!content)
+            return (static_cast<t_pc *>(ft_initiative_pc_error("253 Error allocating memory")));
+    }
     player = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
     if (!player)
     {
-        cma_free(content);
+        cma_free_double(content);
         return (static_cast<t_pc *>(ft_initiative_pc_error("252 Error allocating memory")));
     }
     error = ft_check_stat_pc(player, content, filename);

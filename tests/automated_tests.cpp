@@ -10,7 +10,7 @@ int main()
     run_ordinal_suffix_tests();
     run_roll_validation_tests();
     run_create_data_folder_tests();
-    cma_cleanup();
+    run_save_load_tests();
     std::printf("All tests passed.\n");
     return (0);
 }

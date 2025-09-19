@@ -5,5 +5,6 @@ void    run_string_prefix_tests();
 void    run_ordinal_suffix_tests();
 void    run_roll_validation_tests();
 void    run_create_data_folder_tests();
+void    run_save_load_tests();
 
 #endif
