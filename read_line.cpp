@@ -3,6 +3,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Errno/errno.hpp"
 #include <cstdlib>
 
 static char    **ft_parse_input(char *input_string)
@@ -38,7 +39,21 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
 static int ft_handle_builtins(char **input, int i, t_name *name, char *input_string)
 {
     if (ft_strcmp(input[0], "roll") == 0)
-        ft_command_roll(input);
+    {
+        int *roll_value;
+
+        roll_value = ft_command_roll(input);
+        if (!roll_value)
+        {
+            if (ft_errno != ER_SUCCESS)
+                pf_printf_fd(2, "Roll failed: %s\n", ft_strerror(ft_errno));
+        }
+        else
+        {
+            pf_printf("%d\n", *roll_value);
+            cma_free(roll_value);
+        }
+    }
     else if (i == 1 && ft_strcmp(input[0], "exit") == 0)
         return (ft_free_input(input, input_string), -1);
     else if (i == 1 && ft_strcmp(input[0], "fclean") == 0)

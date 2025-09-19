@@ -110,13 +110,6 @@ SRC         = name.cpp \
               to_hit.cpp \
               readline_check.cpp \
               roll.cpp \
-              roll_utilities.cpp \
-              roll_parse_dice.cpp \
-              roll_validate_string.cpp \
-              roll_validate_utils.cpp \
-              roll_parse_md.cpp \
-              roll_parse_pm.cpp \
-              roll_parse_brackets.cpp \
               fclean.cpp \
               player.cpp \
               concentration.cpp \
@@ -147,7 +140,6 @@ SRC         = name.cpp \
               calculate_damage_reduction.cpp \
               cast_chaos_armor.cpp \
               cast_concentration_caster.cpp \
-              roll_parse_utils.cpp \
               roll_dice.cpp \
               create_data_folder.cpp \
               cast_concentration_multi_target_01.cpp \
