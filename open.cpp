@@ -71,14 +71,16 @@ void    ft_cast_concentration_save_files(t_char * info, t_target_data *target_da
 
 static void    ft_revert_changes_info(t_char * info, ft_file &file)
 {
-    cma_free(info->concentration.targets[0]);
-    cma_free(info->concentration.targets);
-    info->concentration.targets = ft_nullptr;
-       info->concentration.concentration = 0;
-       info->concentration.spell_id = 0;
-       info->concentration.dice_faces_mod = 0;
-       info->concentration.dice_amount_mod = 0;
-       info->concentration.duration = 0;
+    if (info->concentration.targets != ft_nullptr)
+    {
+        cma_free_double(info->concentration.targets);
+        info->concentration.targets = ft_nullptr;
+    }
+    info->concentration.concentration = 0;
+    info->concentration.spell_id = 0;
+    info->concentration.dice_faces_mod = 0;
+    info->concentration.dice_amount_mod = 0;
+    info->concentration.duration = 0;
     ft_npc_write_file(info, &info->stats, &info->c_resistance, file);
     return ;
 }
