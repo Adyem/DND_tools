@@ -130,9 +130,15 @@ int ft_readline_spell_level(const char *message, t_char * character,
         if (!input)
             return (-1);
         if (ft_strcmp("exit", input) == 0)
+        {
+            cma_free(input);
+            input = ft_nullptr;
             return (-1);
+        }
         if (ft_check_value(input))
         {
+            cma_free(input);
+            input = ft_nullptr;
             pf_printf_fd(2, "Invalid input\n");
             (*invalid_input_amount)++;
             if (*invalid_input_amount >= 5)
