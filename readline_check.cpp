@@ -15,14 +15,23 @@ int ft_readline_confirm(const char *message)
         return (ft_dice_roll(1, 2) - 1);
     while ((input = rl_readline(message)) != ft_nullptr)
     {
-        if ((ft_strcmp(input, "y") == 0) || (ft_strcmp(input, "Y") == 0)
-            || (ft_strcmp(input, "yes") == 0))
+        ft_to_lower(input);
+        if (ft_strcmp(input, "y") == 0)
         {
             cma_free(input);
             return (0);
         }
-        else if ((ft_strcmp(input, "n") == 0) || (ft_strcmp(input, "N") == 0)
-            || (ft_strcmp(input, "no") == 0))
+        else if (ft_strcmp(input, "yes") == 0)
+        {
+            cma_free(input);
+            return (0);
+        }
+        else if (ft_strcmp(input, "n") == 0)
+        {
+            cma_free(input);
+            return (1);
+        }
+        else if (ft_strcmp(input, "no") == 0)
         {
             cma_free(input);
             return (1);
@@ -40,26 +49,43 @@ int ft_readline_check_succes_or_fail(const char *message)
         return (ft_dice_roll(1, 4));
     while ((input = rl_readline(message)) != ft_nullptr)
     {
-        if ((ft_strcmp(input, "crit succes") == 0)
-            || (ft_strcmp(input, "crit success") == 0))
+        ft_to_lower(input);
+        if (ft_strcmp(input, "crit succes") == 0)
         {
             cma_free(input);
             return (RL_CRIT_SUCCES);
         }
-        else if ((ft_strcmp(input, "succes") == 0)
-            || (ft_strcmp(input, "success") == 0))
+        else if (ft_strcmp(input, "crit success") == 0)
+        {
+            cma_free(input);
+            return (RL_CRIT_SUCCES);
+        }
+        else if (ft_strcmp(input, "succes") == 0)
         {
             cma_free(input);
             return (RL_SUCCES);
         }
-        else if ((ft_strcmp(input, "crit fail") == 0)
-            || (ft_strcmp(input, "critical fail") == 0))
+        else if (ft_strcmp(input, "success") == 0)
+        {
+            cma_free(input);
+            return (RL_SUCCES);
+        }
+        else if (ft_strcmp(input, "crit fail") == 0)
         {
             cma_free(input);
             return (RL_CRIT_FAIL);
         }
-        else if ((ft_strcmp(input, "fail") == 0)
-            || (ft_strcmp(input, "failure") == 0))
+        else if (ft_strcmp(input, "critical fail") == 0)
+        {
+            cma_free(input);
+            return (RL_CRIT_FAIL);
+        }
+        else if (ft_strcmp(input, "fail") == 0)
+        {
+            cma_free(input);
+            return (RL_FAIL);
+        }
+        else if (ft_strcmp(input, "failure") == 0)
         {
             cma_free(input);
             return (RL_FAIL);
