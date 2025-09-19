@@ -263,10 +263,28 @@ TEST_SRC    = tests/automated_tests.cpp \
               tests/ordinal_suffix_tests.cpp \
               tests/roll_validation_tests.cpp \
               tests/create_data_folder_tests.cpp \
+              tests/save_load_test_stubs.cpp \
+              tests/save_load_tests.cpp \
               trim_start.cpp \
               ordinal_suffix.cpp \
               roll.cpp \
-              create_data_folder.cpp
+              create_data_folder.cpp \
+              save_player.cpp \
+              save_data.cpp \
+              npc_stats.cpp \
+              init_info.cpp \
+              npc_set_stats.cpp \
+              npc_set_stats_string.cpp \
+              npc_set_stats_player.cpp \
+              initialize_key_value_pairs.cpp \
+              treeNode.cpp \
+              treeNode_functions.cpp \
+              check_data.cpp \
+              check_equipment.cpp \
+              check_name.cpp \
+              cast_concentration_caster.cpp \
+              utils01.cpp \
+              initiative_pc.cpp
 
 TEST_OBJS   = $(TEST_SRC:%.cpp=$(OBJ_DIR_TEST)/%.o)
 

@@ -1,0 +1,303 @@
+#include "../dnd_tools.hpp"
+
+int ft_check_player_entry(const char *entry)
+{
+    (void)entry;
+    return (0);
+}
+
+int ft_calculate_athletics(t_char *info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_str(t_char *info)
+{
+    (void)info;
+    return (0);
+}
+
+void ft_skill_throw(t_char * info, const char *skill, int ability_mod, int save_mod)
+{
+    (void)info;
+    (void)skill;
+    (void)ability_mod;
+    (void)save_mod;
+    return ;
+}
+
+int ft_calculate_acrobatics(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_dex(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_sleight_of_hand(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_stealth(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_arcana(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_inte(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_history(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_investigation(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_nature(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_religion(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_animal_handling(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_wis(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_insight(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_medicine(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_perception(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_survival(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_deception(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_cha(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_intimidation(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_performance(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+int ft_calculate_persuasion(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+void ft_kill(t_char * info)
+{
+    (void)info;
+    return ;
+}
+
+int ft_request_damage(t_char * info)
+{
+    (void)info;
+    return (0);
+}
+
+void ft_check_initiative(t_char * info)
+{
+    (void)info;
+    return ;
+}
+
+void ft_print_character_status(t_char * info, int number, int temp)
+{
+    (void)info;
+    (void)number;
+    (void)temp;
+    return ;
+}
+
+void ft_set_debuf_blinded(t_char * info, const char **input)
+{
+    (void)info;
+    (void)input;
+    return ;
+}
+
+void ft_npc_update_lightning_strike(t_char * info, const char **input)
+{
+    (void)info;
+    (void)input;
+    return ;
+}
+
+void ft_npc_update_buff(t_char * info, const char **input, int *buff, const char *name)
+{
+    (void)info;
+    (void)input;
+    (void)buff;
+    (void)name;
+    return ;
+}
+
+void ft_npc_check_ac(t_char * info, const char **input)
+{
+    (void)info;
+    (void)input;
+    return ;
+}
+
+int ft_saving_throw(t_char * info, const char *ability_score, int ability_mod, int save_mod)
+{
+    (void)info;
+    (void)ability_score;
+    (void)ability_mod;
+    (void)save_mod;
+    return (0);
+}
+
+void ft_cast_chaos_armor(t_char *info)
+{
+    (void)info;
+    return ;
+}
+
+void ft_cast_cure_wounds(t_char * character)
+{
+    (void)character;
+    return ;
+}
+
+void ft_cast_lightning_bolt(t_char * character)
+{
+    (void)character;
+    return ;
+}
+
+void ft_cast_bless(t_char *info, const char **input)
+{
+    (void)info;
+    (void)input;
+    return ;
+}
+
+void ft_roll_initiative(t_char * info)
+{
+    (void)info;
+    return ;
+}
+
+void ft_cast_hunters_mark(t_char *info, const char **input)
+{
+    (void)info;
+    (void)input;
+    return ;
+}
+
+void ft_deal_damage(t_char * info, const char *input, const char *d_type, int resistance, int concentration)
+{
+    (void)info;
+    (void)input;
+    (void)d_type;
+    (void)resistance;
+    (void)concentration;
+    return ;
+}
+
+int ft_get_resistance(t_char * info, const char *type)
+{
+    (void)info;
+    (void)type;
+    return (0);
+}
+
+void ft_npc_sstuff(t_char * info, const char **input)
+{
+    (void)info;
+    (void)input;
+    return ;
+}
+
+void ft_npc_set_stat(t_char * info, const char **input)
+{
+    (void)info;
+    (void)input;
+    return ;
+}
+
+void ft_growth_stack(t_char * info, const char **input, int argc)
+{
+    (void)info;
+    (void)input;
+    (void)argc;
+    return ;
+}
+
+void ft_change_stats_04(t_char * info, const char **input)
+{
+    (void)info;
+    (void)input;
+    return ;
+}

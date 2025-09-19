@@ -1,38 +1,90 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/class_file.hpp"
-#include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/CPP_class/class_fd_istream.hpp"
+#include "libft/GetNextLine/get_next_line.hpp"
+#include "libft/JSon/document.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
 
-int ft_npc_open_file(t_char * info)
+static char **ft_npc_load_json_lines(const char *filepath)
 {
-    int error;
-    char **content;
+    json_document       document;
+    json_group          *lines_group;
+    json_item           *item;
+    size_t              count;
+    char                **content;
+    size_t              index;
 
-    ft_file info_file(info->save_file, O_RDONLY);
+    if (document.read_from_file(filepath) != 0)
+        return (ft_nullptr);
+    lines_group = document.find_group("lines");
+    if (!lines_group)
+        return (ft_nullptr);
+    count = 0;
+    item = lines_group->items;
+    while (item)
+    {
+        count++;
+        item = item->next;
+    }
+    content = static_cast<char **>(cma_malloc(sizeof(char *) * (count + 1)));
+    if (!content)
+        return (ft_nullptr);
+    index = 0;
+    item = lines_group->items;
+    while (item)
+    {
+        content[index] = cma_strdup(item->value);
+        if (!content[index])
+        {
+            content[index] = ft_nullptr;
+            cma_free_double(content);
+            return (ft_nullptr);
+        }
+        index++;
+        item = item->next;
+    }
+    content[index] = ft_nullptr;
+    return (content);
+}
+
+static char **ft_npc_load_legacy_lines(const char *filepath)
+{
+    ft_file info_file(filepath, O_RDONLY);
+    char    **content;
+
     if (info_file.get_error())
     {
-        pf_printf_fd(2, "1-Error opening file %s: %s\n", info->save_file,
-                info_file.get_error_str());
-        return (1);
+        pf_printf_fd(2, "1-Error opening file %s: %s\n", filepath, info_file.get_error_str());
+        return (ft_nullptr);
     }
     if (DEBUG == 1)
-        pf_printf("Opening file %s on fd %d\n", info->save_file, info_file.get_fd());
+        pf_printf("Opening file %s on fd %d\n", filepath, info_file.get_fd());
     ft_fd_istream info_stream(info_file.get_fd());
     content = ft_read_file_lines(info_stream, 1024);
-    if (DEBUG == 1)
-        pf_printf("Content is at address %p\n", content);
     if (!content)
-        return (1);
+        pf_printf_fd(2, "1-Error reading legacy save %s\n", filepath);
+    return (content);
+}
+
+int ft_npc_open_file(t_char * info)
+{
+    char    **content;
+    int     error;
+
+    content = ft_npc_load_json_lines(info->save_file);
+    if (!content)
+    {
+        content = ft_npc_load_legacy_lines(info->save_file);
+        if (!content)
+            return (1);
+    }
     error = ft_initialize_info(info, content);
     cma_free_double(content);
-    if (DEBUG == 1)
-        pf_printf("The value of error is %d %d\n", error, info->flags.error);
     if (info->flags.error || error)
         return (1);
     if (ft_npc_check_info(info))
