@@ -1,6 +1,7 @@
 #include "libft/CPP_class/class_file.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include <cerrno>
@@ -24,12 +25,33 @@ static void    ft_set_not_save_flag(t_target_data *target_data, t_char * info)
     return ;
 }
 
+static void    ft_cleanup_concentration_targets(t_char * info, int last_index)
+{
+    int    cleanup_index;
+
+    if (!info->concentration.targets)
+        return ;
+    cleanup_index = last_index;
+    while (cleanup_index >= 0)
+    {
+        if (info->concentration.targets[cleanup_index])
+        {
+            cma_free(info->concentration.targets[cleanup_index]);
+            info->concentration.targets[cleanup_index] = ft_nullptr;
+        }
+        cleanup_index--;
+    }
+    cma_free(info->concentration.targets);
+    info->concentration.targets = ft_nullptr;
+    return ;
+}
+
 static int    ft_apply_concentration(t_target_data *target_data, t_char * info, const char **input)
 {
     int    index = 0;
 
     info->concentration.targets =
-        static_cast<char **>(cma_calloc(static_cast<size_t>(target_data->buff_info->target_amount),
+        static_cast<char **>(cma_calloc(static_cast<size_t>(target_data->buff_info->target_amount + 1),
             sizeof(char *)));
     if (!info->concentration.targets)
         return (FAILURE);
@@ -39,13 +61,20 @@ static int    ft_apply_concentration(t_target_data *target_data, t_char * info, 
         {
             if (target_data->buff_info->cast_spell(target_data->target[index], input,
                         target_data->buff_info))
+            {
+                ft_cleanup_concentration_targets(info, index - 1);
                 return (FAILURE);
+            }
             info->concentration.targets[index] = cma_strdup(target_data->Pchar_name[index]);
             if (!info->concentration.targets[index])
+            {
+                ft_cleanup_concentration_targets(info, index - 1);
                 return (FAILURE);
+            }
         }
         index++;
     }
+    info->concentration.targets[target_data->buff_info->target_amount] = ft_nullptr;
     info->concentration.concentration = 1;
     info->concentration.extra = target_data->buff_info->mod;
     info->concentration.spell_id = target_data->buff_info->spell_id;
