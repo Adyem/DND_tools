@@ -4,31 +4,22 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/rng.hpp"
-#include <cstdlib>
-#include <cstring>
-#include <cerrno>
+#include "libft/Errno/errno.hpp"
 
 int ft_request_initiative(t_pc *player)
 {
-    char *temp;
     char *message;
     char *input;
     int initiative;
 
     if (g_dnd_test == true)
         return (player->initiative = ft_dice_roll(1, 20));
-    message = NULL;
-    temp = cma_strjoin("Requesting initiative for ", player->name);
-    if (!temp)
+    message = cma_strjoin_multiple(3, "Requesting initiative for ",
+        player->name, ": ");
+    if (message == ft_nullptr)
     {
-        pf_printf_fd(2, "250 Error allocating memory: %s\n", strerror(errno));
-        return (1);
-    }
-    message = cma_strjoin(temp, ": ");
-    cma_free(temp);
-    if (!message)
-    {
-        pf_printf_fd(2, "251 Error allocating memory: %s\n", strerror(errno));
+        pf_printf_fd(2, "250 Error allocating memory: %s\n",
+            ft_strerror(ft_errno));
         return (1);
     }
     while ((input = rl_readline(message)))
