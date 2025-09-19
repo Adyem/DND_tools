@@ -1,6 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/File/open_dir.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include <cerrno>
@@ -45,7 +46,7 @@ static void ft_list_players(void)
     }
     while ((entry = file_readdir(dir)) != ft_nullptr)
     {
-        if (strncmp(entry->d_name, "pc--", 4) == 0)
+        if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
             pf_printf("%s\n", entry->d_name + 4);
     }
     file_closedir(dir);
@@ -56,32 +57,29 @@ void    ft_player(const char **input)
 {
     t_pc *player = ft_nullptr;
 
-    if (input[1] && input[2])
+    if (input[2] && ft_strcmp(input[0], "add") == 0)
     {
-        if (ft_strcmp(input[0], "add") == 0)
+        player = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
+        if (!player)
         {
-            player = static_cast<t_pc *>(cma_malloc(sizeof(t_pc)));
-            if (!player)
-            {
-                pf_printf("248-Error: Allocating memory for player\n");
-                return ;
-            }
-            player->name = cma_strdup(input[2]);
-            if (!player->name)
-            {
-                pf_printf("249-Error: Allocating memory for player name\n");
-                cma_free(player);
-                return ;
-            }
-            player->initiative = 0;
-            player->position.x = 0;
-            player->position.y = 0;
-            player->position.z = 0;
-            ft_add_player(player);
+            pf_printf("248-Error: Allocating memory for player\n");
+            return ;
         }
-        else if (ft_strcmp(input[0], "list"))
-            ft_list_players();
+        player->name = cma_strdup(input[2]);
+        if (!player->name)
+        {
+            pf_printf("249-Error: Allocating memory for player name\n");
+            cma_free(player);
+            return ;
+        }
+        player->initiative = 0;
+        player->position.x = 0;
+        player->position.y = 0;
+        player->position.z = 0;
+        ft_add_player(player);
     }
+    else if (input[1] && ft_strcmp(input[0], "list") == 0)
+        ft_list_players();
     else
         pf_printf("243-Error: Invalid input for player\n");
     if (player)
