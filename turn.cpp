@@ -35,39 +35,70 @@ static int ft_turn_check_marker(t_pc *players)
 static int ft_turn_move_marker(t_pc *players)
 {
     t_pc *temp;
-    char *name;
+    char *old_name;
+    char *trimmed_name;
+    char *new_name;
+    char *target_old;
+    const char *base_name;
 
     temp = players;
     while (temp)
     {
         if (ft_strncmp("--turn--", temp->name, 8) == 0)
         {
-            name = ft_strtrim_prefix(temp->name, "--turn--");
-            if (!name)
+            old_name = temp->name;
+            trimmed_name = ft_strtrim_prefix(old_name, "--turn--");
+            if (!trimmed_name)
+            {
                 pf_printf("244-Error allocating memory turn\n");
-            cma_free(temp->name);
-            temp->name = name;
+                return (1);
+            }
+            temp->name = trimmed_name;
             if (temp->next)
             {
-                name = cma_strjoin("--turn--", temp->next->name);
-                if (!name)
+                target_old = temp->next->name;
+                new_name = cma_strjoin("--turn--", target_old);
+                if (!new_name)
                 {
                     pf_printf("245-Error allocating memory turn strjoin\n");
+                    cma_free(temp->name);
+                    temp->name = old_name;
                     return (1);
                 }
-                cma_free(temp->next->name);
-                temp->next->name = name;
+                temp->next->name = new_name;
+                cma_free(old_name);
+                cma_free(target_old);
             }
             else
             {
-                name = cma_strjoin("--turn--", players->name);
-                if (!name)
+                target_old = ft_nullptr;
+                if (players == temp)
+                    base_name = temp->name;
+                else
+                {
+                    target_old = players->name;
+                    base_name = target_old;
+                }
+                new_name = cma_strjoin("--turn--", base_name);
+                if (!new_name)
                 {
                     pf_printf("246-Error allocating memory turn strjoin\n");
+                    cma_free(temp->name);
+                    temp->name = old_name;
                     return (1);
                 }
-                cma_free(players->name);
-                players->name = name;
+                if (players == temp)
+                {
+                    cma_free(temp->name);
+                    temp->name = new_name;
+                    cma_free(old_name);
+                }
+                else
+                {
+                    players->name = new_name;
+                    cma_free(old_name);
+                    cma_free(target_old);
+                }
             }
             break ;
         }
