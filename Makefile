@@ -259,10 +259,15 @@ endif
 OBJS        = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 TEST_SRC    = tests/automated_tests.cpp \
+              tests/test_support.cpp \
+              tests/string_prefix_tests.cpp \
+              tests/ordinal_suffix_tests.cpp \
+              tests/roll_validation_tests.cpp \
+              tests/create_data_folder_tests.cpp \
               trim_start.cpp \
               ordinal_suffix.cpp \
-              roll_validate_string.cpp \
-              roll_validate_utils.cpp
+              roll.cpp \
+              create_data_folder.cpp
 
 TEST_OBJS   = $(TEST_SRC:%.cpp=$(OBJ_DIR_TEST)/%.o)
 

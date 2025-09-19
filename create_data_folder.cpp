@@ -1,67 +1,86 @@
 #include "libft/Printf/printf.hpp"
+#include "libft/Errno/errno.hpp"
+#include "libft/File/file_utils.hpp"
+#include "libft/File/open_dir.hpp"
+#include "libft/System_utils/system_utils.hpp"
 #include "dnd_tools.hpp"
-#include <sys/stat.h>
-#include <cstring>
-#include <cerrno>
-#if defined(_WIN32)
-# include <direct.h>
-# include <io.h>
-# ifndef R_OK
-#  define R_OK 4
-# endif
-# ifndef W_OK
-#  define W_OK 2
-# endif
-#else
-# include <unistd.h>
-#endif
-
-#if defined(_WIN32)
-# define FT_MKDIR(path, mode) _mkdir(path)
-# define FT_ACCESS(path, mode) _access(path, mode)
-#else
-# define FT_MKDIR(path, mode) mkdir(path, mode)
-# define FT_ACCESS(path, mode) access(path, mode)
-#endif
+#include <fcntl.h>
 
 int ft_create_data_dir()
 {
-    struct stat st;
+    int directory_status;
+    file_dir *directory_stream;
+    su_file *write_probe;
+    const char *probe_path;
 
-    memset(&st, 0, sizeof(st));
-    if (stat("data", &st) == -1)
+    ft_errno = ER_SUCCESS;
+    directory_status = file_dir_exists("data");
+    if (directory_status == -1)
     {
-        if (errno == ENOENT)
+        pf_printf_fd(2, "002-Error failed to query 'data' directory: %s\n",
+            ft_strerror(ft_errno));
+        return (1);
+    }
+    if (directory_status == 1)
+    {
+        if (file_exists("data") == 1)
         {
-            if (FT_MKDIR("data", 0700) == -1)
-            {
-                pf_printf_fd(2, "001-Error failed to create directory: %s\n", strerror(errno));
-                return (1);
-            }
-            else if (DEBUG == 1)
-                pf_printf("Data folder created successfully\n");
-        }
-        else
-        {
-            pf_printf_fd(2, "002-Error failed to stat directory: %s\n", strerror(errno));
+            pf_printf_fd(2, "004-Error path exists but is not a directory\n");
             return (1);
         }
-    }
-    else if (S_ISDIR(st.st_mode))
-    {
-        if (FT_ACCESS("data", R_OK | W_OK) == -1)
+        if (file_create_directory("data", 0700) == -1)
         {
-            pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
-                    strerror(errno));
+            ft_errno = CHECK_DIR_FAIL;
+            pf_printf_fd(2, "001-Error failed to create 'data' directory: %s\n",
+                ft_strerror(ft_errno));
             return (1);
         }
         if (DEBUG == 1)
-            pf_printf("Data folder already exists with proper access rights\n");
+            pf_printf("Data folder created successfully\n");
+        ft_errno = ER_SUCCESS;
+        return (0);
     }
-    else
+    directory_stream = file_opendir("data");
+    if (!directory_stream)
     {
-        pf_printf_fd(2, "004-Error path exists but is not a directory\n");
+        ft_errno = CHECK_DIR_FAIL;
+        pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
+            ft_strerror(ft_errno));
         return (1);
     }
+    if (file_closedir(directory_stream) == -1)
+    {
+        ft_errno = CHECK_DIR_FAIL;
+        pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
+            ft_strerror(ft_errno));
+        return (1);
+    }
+    probe_path = "data/.dnd_tools_access.tmp";
+    write_probe = su_fopen(probe_path, O_CREAT | O_RDWR, 0600);
+    if (!write_probe)
+    {
+        ft_errno = CHECK_DIR_FAIL;
+        pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
+            ft_strerror(ft_errno));
+        return (1);
+    }
+    if (su_fclose(write_probe) == -1)
+    {
+        ft_errno = CHECK_DIR_FAIL;
+        pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
+            ft_strerror(ft_errno));
+        file_delete(probe_path);
+        return (1);
+    }
+    if (file_delete(probe_path) == -1)
+    {
+        ft_errno = CHECK_DIR_FAIL;
+        pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
+            ft_strerror(ft_errno));
+        return (1);
+    }
+    if (DEBUG == 1)
+        pf_printf("Data folder already exists with proper access rights\n");
+    ft_errno = ER_SUCCESS;
     return (0);
 }
