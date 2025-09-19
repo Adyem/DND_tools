@@ -120,7 +120,7 @@ static int ft_turn_run(t_pc *players, t_name *name)
             n_temp = name;
             while (n_temp != ft_nullptr && found != 2)
             {
-                if (ft_strcmp_dnd(n_temp->name, character_name) == 0)
+                if (ft_strcmp(n_temp->name, character_name) == 0)
                 {
                     temp[0] = character_name;
                     temp[1] = ft_nullptr;

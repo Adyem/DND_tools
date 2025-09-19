@@ -299,7 +299,7 @@ static int check_spell_slot(t_char * info, const char *slot_name, t_spell_slot *
     int error = 0;
 
     error += check_flag(slot->replenishing_slot, info->name, "replenishing_slot");
-    if (ft_strcmp_dnd(slot_name, "warlock") == 0)
+    if (ft_strcmp(slot_name, "warlock") == 0)
     {
         error += check_range(slot->level, 0, 9, info->name, "warlock_slot_level");
         if (slot->level == 0 && (slot->total != 0 || slot->available != 0))

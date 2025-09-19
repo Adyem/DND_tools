@@ -4,31 +4,31 @@
 
 static int ft_get_damage_reduction(t_char * info, const char *type)
 {
-    if (ft_strcmp_dnd(type, "acid") == 0)
+    if (ft_strcmp(type, "acid") == 0)
         return (ft_calculate_acid_dr(info));
-    else if (ft_strcmp_dnd(type, "bludgeoning") == 0)
+    else if (ft_strcmp(type, "bludgeoning") == 0)
         return (ft_calculate_bludgeoning_dr(info));
-    else if (ft_strcmp_dnd(type, "cold") == 0)
+    else if (ft_strcmp(type, "cold") == 0)
         return (ft_calculate_cold_dr(info));
-    else if (ft_strcmp_dnd(type, "fire") == 0)
+    else if (ft_strcmp(type, "fire") == 0)
         return (ft_calculate_fire_dr(info));
-    else if (ft_strcmp_dnd(type, "force") == 0)
+    else if (ft_strcmp(type, "force") == 0)
         return (ft_calculate_force_dr(info));
-    else if (ft_strcmp_dnd(type, "lightning") == 0)
+    else if (ft_strcmp(type, "lightning") == 0)
         return (ft_calculate_lightning_dr(info));
-    else if (ft_strcmp_dnd(type, "necrotic") == 0)
+    else if (ft_strcmp(type, "necrotic") == 0)
         return (ft_calculate_necrotic_dr(info));
-    else if (ft_strcmp_dnd(type, "piercing") == 0)
+    else if (ft_strcmp(type, "piercing") == 0)
         return (ft_calculate_piercing_dr(info));
-    else if (ft_strcmp_dnd(type, "poison") == 0)
+    else if (ft_strcmp(type, "poison") == 0)
         return (ft_calculate_poison_dr(info));
-    else if (ft_strcmp_dnd(type, "psychic") == 0)
+    else if (ft_strcmp(type, "psychic") == 0)
         return (ft_calculate_psychic_dr(info));
-    else if (ft_strcmp_dnd(type, "radiant") == 0)
+    else if (ft_strcmp(type, "radiant") == 0)
         return (ft_calculate_radiant_dr(info));
-    else if (ft_strcmp_dnd(type, "slashing") == 0)
+    else if (ft_strcmp(type, "slashing") == 0)
         return (ft_calculate_slashing_dr(info));
-    else if (ft_strcmp_dnd(type, "thunder") == 0)
+    else if (ft_strcmp(type, "thunder") == 0)
         return (ft_calculate_thunder_dr(info));
     return (ERROR_RESISTANCE);
 }

@@ -23,31 +23,31 @@ static int    ft_free_request_damage(char *line, char **input)
 
 int ft_get_resistance(t_char * info, const char *type)
 {
-    if (ft_strcmp_dnd(type, "acid") == 0)
+    if (ft_strcmp(type, "acid") == 0)
         return (ft_calculate_acid_resistance(info));
-    else if (ft_strcmp_dnd(type, "bludgeoning") == 0)
+    else if (ft_strcmp(type, "bludgeoning") == 0)
         return (ft_calculate_bludgeoning_resistance(info));
-    else if (ft_strcmp_dnd(type, "cold") == 0)
+    else if (ft_strcmp(type, "cold") == 0)
         return (ft_calculate_cold_resistance(info));
-    else if (ft_strcmp_dnd(type, "fire") == 0)
+    else if (ft_strcmp(type, "fire") == 0)
         return (ft_calculate_fire_resistance(info));
-    else if (ft_strcmp_dnd(type, "force") == 0)
+    else if (ft_strcmp(type, "force") == 0)
         return (ft_calculate_force_resistance(info));
-    else if (ft_strcmp_dnd(type, "lightning") == 0)
+    else if (ft_strcmp(type, "lightning") == 0)
         return (ft_calculate_lightning_resistance(info));
-    else if (ft_strcmp_dnd(type, "necrotic") == 0)
+    else if (ft_strcmp(type, "necrotic") == 0)
         return (ft_calculate_necrotic_resistance(info));
-    else if (ft_strcmp_dnd(type, "piercing") == 0)
+    else if (ft_strcmp(type, "piercing") == 0)
         return (ft_calculate_piercing_resistance(info));
-    else if (ft_strcmp_dnd(type, "poison") == 0)
+    else if (ft_strcmp(type, "poison") == 0)
         return (ft_calculate_poison_resistance(info));
-    else if (ft_strcmp_dnd(type, "psychic") == 0)
+    else if (ft_strcmp(type, "psychic") == 0)
         return (ft_calculate_psychic_resistance(info));
-    else if (ft_strcmp_dnd(type, "radiant") == 0)
+    else if (ft_strcmp(type, "radiant") == 0)
         return (ft_calculate_radiant_resistance(info));
-    else if (ft_strcmp_dnd(type, "slashing") == 0)
+    else if (ft_strcmp(type, "slashing") == 0)
         return (ft_calculate_slashing_resistance(info));
-    else if (ft_strcmp_dnd(type, "thunder") == 0)
+    else if (ft_strcmp(type, "thunder") == 0)
         return (ft_calculate_thunder_resistance(info));
     return (-9999);
 }
@@ -61,7 +61,7 @@ int ft_request_damage(t_char * info)
 
     while ((line = rl_readline("How much damage was dealt: ")))
     {
-        if (ft_strcmp_dnd(line, "exit") == 0)
+        if (ft_strcmp(line, "exit") == 0)
         {
             ft_deal_damage(info, ft_nullptr, ft_nullptr, 0, 2);
             cma_free(line);

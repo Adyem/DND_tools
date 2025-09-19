@@ -11,19 +11,19 @@ int ft_readline_prompt_hit_or_miss(void)
 
     while ((input = rl_readline("Does the attack [hit/miss/exit]? ")) != ft_nullptr)
     {
-        if ((ft_strcmp_dnd(input, "y") == 0) || (ft_strcmp_dnd(input, "yes") == 0)
-            || (ft_strcmp_dnd(input, "hit") == 0))
+        if ((ft_strcmp(input, "y") == 0) || (ft_strcmp(input, "yes") == 0)
+            || (ft_strcmp(input, "hit") == 0))
         {
             cma_free(input);
             return (0);
         }
-        else if ((ft_strcmp_dnd(input, "n") == 0) || (ft_strcmp_dnd(input, "no") == 0)
-                 || (ft_strcmp_dnd(input, "miss") == 0))
+        else if ((ft_strcmp(input, "n") == 0) || (ft_strcmp(input, "no") == 0)
+                 || (ft_strcmp(input, "miss") == 0))
         {
             cma_free(input);
             return (1);
         }
-        else if (ft_strcmp_dnd(input, "exit") == 0)
+        else if (ft_strcmp(input, "exit") == 0)
         {
             cma_free(input);
             return (2);

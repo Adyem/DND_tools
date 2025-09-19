@@ -47,7 +47,7 @@ int ft_set_stats_check_name(const char *name)
         remove_exclude_prefix(filename);
         if (DEBUG == 1)
             pf_printf("Checking %s %s\n", filename, name);
-        if (ft_strcmp_dnd(filename, name) == 0)
+        if (ft_strcmp(filename, name) == 0)
         {
             file_closedir(dir);
             if (DEBUG == 1)
@@ -83,7 +83,7 @@ int ft_check_player_character(const char *name)
         filename[sizeof(filename) - 1] = '\0';
         if (DEBUG == 1)
             pf_printf("Checking %s against %s\n", filename, name);
-        if (ft_strcmp_dnd(filename, name) == 0)
+        if (ft_strcmp(filename, name) == 0)
         {
             file_closedir(dir);
             if (DEBUG == 1)

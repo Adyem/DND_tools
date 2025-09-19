@@ -10,7 +10,7 @@ t_char *ft_get_info(const char *tf_name, t_name *name)
     const char    *input[2] = {tf_name, ft_nullptr};
     while (temp != ft_nullptr && !found)
     {
-        if (ft_strcmp_dnd(tf_name, temp->name) == 0)
+        if (ft_strcmp(tf_name, temp->name) == 0)
         {
             info = temp->function(0, input, name, 1);
             found = 1;

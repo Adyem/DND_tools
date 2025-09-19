@@ -62,10 +62,10 @@ void ft_npc_change_stats(t_char * info, const int argument_count, const char **a
     else if (argument_count == 3)
         ft_npc_set_stat(info, argument_vector);
     else if ((argument_count == 4 || argument_count == 5) &&
-        ((ft_strcmp_dnd(argument_vector[1], "add") == 0) ||
-        (ft_strcmp_dnd(argument_vector[1], "remove") == 0)) &&
-        ft_strcmp_dnd(argument_vector[2], "stack") == 0 &&
-        ft_strcmp_dnd(argument_vector[3], "growth") == 0)
+        ((ft_strcmp(argument_vector[1], "add") == 0) ||
+        (ft_strcmp(argument_vector[1], "remove") == 0)) &&
+        ft_strcmp(argument_vector[2], "stack") == 0 &&
+        ft_strcmp(argument_vector[3], "growth") == 0)
             ft_growth_stack(info, argument_vector, argument_count);
     else if (argument_count == 4)
         ft_change_stats_04(info, argument_vector);

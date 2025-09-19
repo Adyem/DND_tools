@@ -25,17 +25,17 @@ static void ft_npc_update_hp(t_char * info, const char **input)
 
 void ft_npc_set_stat(t_char * info, const char **input)
 {
-    if (ft_strcmp_dnd(input[2], "flank") == 0 || ft_strcmp_dnd(input[2], "flanking") == 0)
+    if (ft_strcmp(input[2], "flank") == 0 || ft_strcmp(input[2], "flanking") == 0)
     {
         info->flags.flanking = 1;
-        if (ft_strcmp_dnd(input[1], "attack") == 0)
+        if (ft_strcmp(input[1], "attack") == 0)
         {
             if (info->equipment.weapon.attack.function)
                 info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
             else
                 pf_printf("%s No attack set\n", info->name);
         }
-        else if (ft_strcmp_dnd(input[1], "ranged_attack") == 0)
+        else if (ft_strcmp(input[1], "ranged_attack") == 0)
         {
             if (info->equipment.ranged_weapon.attack.function)
                 info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon, 0);
@@ -47,29 +47,29 @@ void ft_npc_set_stat(t_char * info, const char **input)
             pf_printf("6-Error: Invalid argument given\n");
         }
     }
-    else if (ft_strcmp_dnd(input[1], "blinded") == 0)
+    else if (ft_strcmp(input[1], "blinded") == 0)
         ft_set_debuf_blinded(info, input);
-    else if (ft_strcmp_dnd(input[1], "hp") == 0)
+    else if (ft_strcmp(input[1], "hp") == 0)
         ft_npc_update_hp(info, input);
-    else if (ft_strcmp_dnd(input[1], "lightning_strike") == 0)
+    else if (ft_strcmp(input[1], "lightning_strike") == 0)
         ft_npc_update_lightning_strike(info, input);
-    else if (ft_strcmp_dnd(input[1], "protective_winds") == 0)
+    else if (ft_strcmp(input[1], "protective_winds") == 0)
         ft_npc_update_buff(info, input, &info->bufs.protective_winds.duration, "protective winds");
-    else if (ft_strcmp_dnd(input[1], "to_hit") == 0)
+    else if (ft_strcmp(input[1], "to_hit") == 0)
         ft_npc_check_ac(info, input);
-    else if (ft_strcmp_dnd(input[2], "save") == 0)
+    else if (ft_strcmp(input[2], "save") == 0)
     {
-        if (ft_strcmp_dnd(input[1], "str") == 0 || ft_strcmp_dnd(input[1], "strength") == 0)
+        if (ft_strcmp(input[1], "str") == 0 || ft_strcmp(input[1], "strength") == 0)
             ft_saving_throw(info, "strength", ft_calculate_str(info), info->save_mod.str);
-        else if (ft_strcmp_dnd(input[1], "dex") == 0 || ft_strcmp_dnd(input[1], "dexterity") == 0)
+        else if (ft_strcmp(input[1], "dex") == 0 || ft_strcmp(input[1], "dexterity") == 0)
             ft_saving_throw(info, "dexterity", ft_calculate_dex(info), info->save_mod.dex);
-        else if (ft_strcmp_dnd(input[1], "con") == 0 || ft_strcmp_dnd(input[1], "constitution") == 0)
+        else if (ft_strcmp(input[1], "con") == 0 || ft_strcmp(input[1], "constitution") == 0)
             ft_saving_throw(info, "constitution", ft_calculate_con(info), info->save_mod.con);
-        else if (ft_strcmp_dnd(input[1], "int") == 0 || ft_strcmp_dnd(input[1], "intelligence") == 0)
+        else if (ft_strcmp(input[1], "int") == 0 || ft_strcmp(input[1], "intelligence") == 0)
             ft_saving_throw(info, "intelligence", ft_calculate_inte(info), info->save_mod.inte);
-        else if (ft_strcmp_dnd(input[1], "wis") == 0 || ft_strcmp_dnd(input[1], "wisdom") == 0)
+        else if (ft_strcmp(input[1], "wis") == 0 || ft_strcmp(input[1], "wisdom") == 0)
             ft_saving_throw(info, "wisdom", ft_calculate_wis(info), info->save_mod.wis);
-        else if (ft_strcmp_dnd(input[1], "cha") == 0 || ft_strcmp_dnd(input[1], "charisma") == 0)
+        else if (ft_strcmp(input[1], "cha") == 0 || ft_strcmp(input[1], "charisma") == 0)
             ft_saving_throw(info, "charisma", ft_calculate_cha(info), info->save_mod.cha);
         else
         {
@@ -77,22 +77,22 @@ void ft_npc_set_stat(t_char * info, const char **input)
             return ;
         }
     }
-    else if (ft_strcmp_dnd(input[1], "cast") == 0)
+    else if (ft_strcmp(input[1], "cast") == 0)
     {
-        if (ft_strcmp_dnd(input[2], "chaos_armor") == 0)
+        if (ft_strcmp(input[2], "chaos_armor") == 0)
             ft_cast_chaos_armor(info);
-        else if (ft_strcmp_dnd(input[2], "cure_wounds") == 0)
+        else if (ft_strcmp(input[2], "cure_wounds") == 0)
             ft_cast_cure_wounds(info);
-        else if (ft_strcmp_dnd(input[2], "lightning_bolt") == 0)
+        else if (ft_strcmp(input[2], "lightning_bolt") == 0)
             ft_cast_lightning_bolt(info);
-        else if (ft_strcmp_dnd(input[2], "bless") == 0)
+        else if (ft_strcmp(input[2], "bless") == 0)
             ft_cast_bless(info, input);
         else
             pf_printf("7-%s invalid command\n", info->name);
     }
-    else if (ft_strcmp_dnd(input[1], "initiative") == 0)
+    else if (ft_strcmp(input[1], "initiative") == 0)
     {
-        if (ft_strcmp_dnd(input[2], "roll") == 0)
+        if (ft_strcmp(input[2], "roll") == 0)
             ft_roll_initiative(info);
         else
         {

@@ -107,7 +107,7 @@ void    ft_concentration_remove_magic_drain(t_char *character, t_target_data *ta
         caster_index = 0;
         while (targets_data->target[target_index]->debufs.magic_drain.caster[caster_index])
         {
-            if (ft_strcmp_dnd(targets_data->target[target_index]->debufs.magic_drain.caster
+            if (ft_strcmp(targets_data->target[target_index]->debufs.magic_drain.caster
                         [caster_index],
                     character->name) == 0)
             {

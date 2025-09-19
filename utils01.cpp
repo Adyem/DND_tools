@@ -29,15 +29,3 @@ int    ft_check_value(const char *input)
     }
     return (0);
 }
-
-int    ft_strcmp_dnd(const char *string1, const char *string2)
-{
-    if (!string1 || !string2)
-        return (-1);
-    while (*string1 && (*string1) == (*string2))
-    {
-        string1++;
-        string2++;
-    }
-    return (static_cast<int>(*string1) - static_cast<int>(*string2));
-}

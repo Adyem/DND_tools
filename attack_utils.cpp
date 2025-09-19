@@ -8,19 +8,19 @@ int ft_weapon_find_stat(t_char * info, t_equipment_id *weapon)
 {
     if (!weapon->attack.stat)
         return (0);
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_STR) == 0)
+    if (ft_strcmp(weapon->attack.stat, STAT_STR) == 0)
         return (ft_calculate_str(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_DEX) == 0)
+    if (ft_strcmp(weapon->attack.stat, STAT_DEX) == 0)
         return (ft_calculate_dex(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_CON) == 0)
+    if (ft_strcmp(weapon->attack.stat, STAT_CON) == 0)
         return (ft_calculate_con(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_INT) == 0)
+    if (ft_strcmp(weapon->attack.stat, STAT_INT) == 0)
         return (ft_calculate_inte(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_WIS) == 0)
+    if (ft_strcmp(weapon->attack.stat, STAT_WIS) == 0)
         return (ft_calculate_wis(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, STAT_CHA) == 0)
+    if (ft_strcmp(weapon->attack.stat, STAT_CHA) == 0)
         return (ft_calculate_cha(info));
-    if (ft_strcmp_dnd(weapon->attack.stat, FINESSE) == 0)
+    if (ft_strcmp(weapon->attack.stat, FINESSE) == 0)
         return ft_max(ft_calculate_str(info), ft_calculate_dex(info));
     return (0);
 }

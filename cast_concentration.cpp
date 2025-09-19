@@ -123,7 +123,7 @@ int    ft_cast_concentration(t_char *info, const char **input, t_buff *buff)
         if (!target)
             return (pf_printf("297-Error getting info %s\n", input[2]), 1);
     }
-    if (ft_strcmp_dnd(target->name, info->name) == 0)
+    if (ft_strcmp(target->name, info->name) == 0)
     {
         ft_cast_concentration_cleanup(info, target, save_files, buff, 1);
         return (1);

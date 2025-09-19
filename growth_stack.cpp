@@ -19,7 +19,7 @@ void    ft_growth_stack(t_char *info, const char **input, int argc)
         pf_printf_fd(2, "Growth stack expects a number between 1 and 10\n");
         return ;
     }
-    if (ft_strcmp_dnd(input[1], "add") == 0)
+    if (ft_strcmp(input[1], "add") == 0)
     {
         info->bufs.growth.stacks += amount;
         if (info->bufs.growth.stacks > 10)
@@ -27,7 +27,7 @@ void    ft_growth_stack(t_char *info, const char **input, int argc)
         pf_printf("%s gains %d growth stack(s) (total %d)\n", info->name, amount,
                   info->bufs.growth.stacks);
     }
-    else if (ft_strcmp_dnd(input[1], "remove") == 0)
+    else if (ft_strcmp(input[1], "remove") == 0)
     {
         info->bufs.growth.stacks -= amount;
         if (info->bufs.growth.stacks < 0)

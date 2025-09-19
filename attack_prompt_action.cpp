@@ -44,7 +44,7 @@ static bool handle_spell_cast(t_char * character, t_known_spell known_spells[],
     int index = 0;
     while (known_spells[index].cmd != nullptr)
     {
-        if (ft_strcmp_dnd(input, known_spells[index].cmd) == 0)
+        if (ft_strcmp(input, known_spells[index].cmd) == 0)
         {
             if (*(known_spells[index].learned) == 0)
             {
@@ -68,7 +68,7 @@ static void prompt_user_for_spell(t_known_spell known_spells[], t_char * charact
     char *input = ft_nullptr;
     while ((input = rl_readline("Cast a learned spell or type 'exit': ")) != ft_nullptr)
     {
-        if (ft_strcmp_dnd(input, "exit") == 0)
+        if (ft_strcmp(input, "exit") == 0)
         {
             pf_printf("Exiting spell prompt.\n");
             cma_free(input);
