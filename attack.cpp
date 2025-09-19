@@ -47,9 +47,11 @@ void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
     if (d_info.result <= 1 + ft_calculate_crit_attack_fail_bonus(info))
         pf_printf("A critical fail (%d)! That can't be good...\n", d_info.result);
     bool is_hit = false;
+    bool is_crit = false;
     if (d_info.result >= 20 - info->crit.attack)
     {
         is_hit = true;
+        is_crit = true;
         pf_printf("%s critical hit (%d)!\n", info->name, d_info.result);
     }
     else if (d_info.result <= 1 + ft_calculate_crit_attack_success_bonus(info))
@@ -58,7 +60,6 @@ void ft_weapon_attack(t_char *info, t_equipment_id *weapon, int offhand)
         ft_test_mode(&is_hit);
     else
         ft_normal_mode(info, &is_hit);
-    bool is_crit = false;
     ft_check_dice_amount_and_faces(weapon, &d_info, offhand, info);
     if (is_hit)
     {
