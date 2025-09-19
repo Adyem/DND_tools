@@ -33,7 +33,8 @@ void tree_node_delete(TreeNode *node)
 }
 
 static int tree_node_insert_helper(TreeNode *node, const char *key, int unset_value,
-                              int *int_val, char **str_val, char ***dbl_val)
+                              int *int_val, char **str_val, char ***dbl_val,
+                              ft_set<ft_string> *set_val)
 {
     if (node->_error)
         return (1);
@@ -70,22 +71,32 @@ static int tree_node_insert_helper(TreeNode *node, const char *key, int unset_va
     current->_data->_return_field_integer  = int_val;
     current->_data->_return_field_string   = str_val;
     current->_data->_return_field_double   = dbl_val;
+    current->_data->_return_field_string_set = set_val;
     return (0);
 }
 
 int tree_node_insert(TreeNode *node, const char *key, int *value, int unset_value)
 {
-    return (tree_node_insert_helper(node, key, unset_value, value, ft_nullptr, ft_nullptr));
+    return (tree_node_insert_helper(node, key, unset_value, value, ft_nullptr, ft_nullptr,
+            ft_nullptr));
 }
 
 int tree_node_insert(TreeNode *node, const char *key, char **value)
 {
-    return (tree_node_insert_helper(node, key, 0, ft_nullptr, value, ft_nullptr));
+    return (tree_node_insert_helper(node, key, 0, ft_nullptr, value, ft_nullptr,
+            ft_nullptr));
 }
 
 int tree_node_insert(TreeNode *node, const char *key, char ***value)
 {
-    return (tree_node_insert_helper(node, key, 0, ft_nullptr, ft_nullptr, value));
+    return (tree_node_insert_helper(node, key, 0, ft_nullptr, ft_nullptr, value,
+            ft_nullptr));
+}
+
+int tree_node_insert(TreeNode *node, const char *key, ft_set<ft_string> *value)
+{
+    return (tree_node_insert_helper(node, key, 0, ft_nullptr, ft_nullptr, ft_nullptr,
+            value));
 }
 
 const t_treeNode_value *tree_node_search(const TreeNode *node, const char *key)

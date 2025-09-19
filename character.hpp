@@ -2,6 +2,8 @@
 # define CHARACTER_H
 
 #include "libft/CPP_class/class_file.hpp"
+#include "libft/Template/set.hpp"
+#include "libft/CPP_class/class_string_class.hpp"
 
 # define ERROR_RESISTANCE 9999
 
@@ -86,7 +88,7 @@ typedef struct    s_buff_bless
     int        dice_amount_mod;
     int        dice_faces_mod;
     int        base_mod;
-    char    **caster_name;
+    ft_set<ft_string>    caster_name;
 }    t_buff_bless;
 
 typedef struct    s_buff_protective_winds
@@ -197,7 +199,7 @@ typedef struct    s_bufs
 
 typedef struct    s_debuff_magic_drain
 {
-    char    **caster;
+    ft_set<ft_string>    caster;
     int        amount;
     int        damage_flat;
     int        damage_dice_amount;
@@ -212,7 +214,7 @@ typedef struct    s_debuff_magic_drain
 typedef struct    s_debuff_hunters_mark
 {
     int        amount;
-    char    **caster_name;
+    ft_set<ft_string>    caster_name;
 }    t_debuff_hunters_mark;
 
 typedef struct    s_debuff_blinded

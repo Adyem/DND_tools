@@ -1,38 +1,22 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
+#include "libft/Errno/errno.hpp"
 #include "libft/Printf/printf.hpp"
 
-int ft_update_caster_name(char ***caster_name, const char *input_name)
+int ft_update_caster_name(ft_set<ft_string> *caster_name, const char *input_name)
 {
-    char **temp;
+    int error_code;
 
+    if (!caster_name || !input_name)
+        return (1);
     if (DEBUG == 1)
         pf_printf("adding the new caster name to the target struct %s\n", input_name);
-    if (!(*caster_name))
+    caster_name->insert(ft_string(input_name));
+    error_code = caster_name->get_error();
+    if (error_code != ER_SUCCESS && error_code != SET_NOT_FOUND)
     {
-        *caster_name = static_cast<char **>(cma_calloc(2, sizeof(char *)));
-        if (!(*caster_name))
-        {
-            pf_printf_fd(2, "165-Error allocating memory for caster name\n");
-            return (1);
-        }
-        **caster_name = cma_strdup(input_name);
-        if (!(**caster_name))
-        {
-            pf_printf_fd(2, "162-Error allocating memory for caster name\n");
-            return (1);
-        }
-    }
-    else
-    {
-        temp = ft_resize_double_char(*caster_name, input_name, 1);
-        if (!temp)
-        {
-            pf_printf_fd(2, "298-Error allocating memory for caster name\n");
-            return (1);
-        }
-        cma_free_double(*caster_name);
-        *caster_name = temp;
+        pf_printf_fd(2, "165-Error updating caster name: %s\n",
+            caster_name->get_error_str());
+        return (1);
     }
     return (0);
 }

@@ -62,7 +62,7 @@ int ft_cast_bless_apply_debuf(t_char * target, const char **input, t_buff *buff)
     (void)buff;
     if (target)
     {
-        if (ft_is_caster_name_present(target->bufs.bless.caster_name, input[0]))
+        if (ft_is_caster_name_present(&target->bufs.bless.caster_name, input[0]))
         {
             pf_printf_fd(2, "102-Error: Caster name already present\n");
             return (1);
@@ -73,12 +73,23 @@ int ft_cast_bless_apply_debuf(t_char * target, const char **input, t_buff *buff)
 
     if (DEBUG == 1 && target)
     {
-        int index = 0;
-        while (target->bufs.bless.caster_name
-                && target->bufs.bless.caster_name[index])
+        size_t              index;
+        size_t              count;
+        const ft_string    *names;
+
+        count = target->bufs.bless.caster_name.size();
+        if (count > 0)
         {
-            pf_printf("%s has cast bless\n", target->bufs.bless.caster_name[index]);
-            index++;
+            names = target->bufs.bless.caster_name.data();
+            if (names)
+            {
+                index = 0;
+                while (index < count)
+                {
+                    pf_printf("%s has cast bless\n", names[index].c_str());
+                    index++;
+                }
+            }
         }
     }
     return (0);
@@ -88,24 +99,10 @@ void    ft_concentration_remove_bless(t_char * character,
             t_target_data *targets_data)
 {
     int target_index = 0;
-    int caster_index;
-
     while (targets_data->target[target_index])
     {
-        caster_index = 0;
-        while (targets_data->target[target_index]->bufs.bless.caster_name[caster_index])
-        {
-            if (ft_strcmp(targets_data->target[target_index]->bufs.bless.caster_name
-                    [caster_index],
-                character->name) == 0)
-            {
-                cma_free(targets_data->target[target_index]->bufs.bless.caster_name
-                        [caster_index]);
-                targets_data->target[target_index]->bufs.bless.caster_name[caster_index]
-                    = ft_nullptr;
-            }
-            caster_index++;
-        }
+        targets_data->target[target_index]->bufs.bless.caster_name.remove(
+            ft_string(character->name));
         target_index++;
     }
     character->concentration.concentration = 0;

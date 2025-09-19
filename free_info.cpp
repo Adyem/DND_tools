@@ -7,9 +7,10 @@ void    ft_free_info(t_char * info)
 {
     if (info && DEBUG == 1)
         pf_printf("freeing info %s\n", info->name);
-    cma_free_double(info->debufs.hunters_mark.caster_name);
+    info->bufs.bless.caster_name.clear();
+    info->debufs.hunters_mark.caster_name.clear();
     cma_free_double(info->concentration.targets);
-    cma_free_double(info->debufs.magic_drain.caster);
+    info->debufs.magic_drain.caster.clear();
     cma_free(info->bufs.meteor_strike.target_id);
     cma_free(info->bufs.frost_breath.target_id);
     cma_free(info->bufs.arcane_pounce.target_id);

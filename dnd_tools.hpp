@@ -361,11 +361,11 @@ int         ft_cast_concentration(t_char *info, const char **input, t_buff *buff
 void        ft_check_concentration(t_char *info, int  damage);
 int         ft_remove_concentration(t_char *info);
 void        ft_cast_chaos_armor(t_char *info);
-int         ft_update_caster_name(char ***caster_name, const char *input_name);
+int         ft_update_caster_name(ft_set<ft_string> *caster_name, const char *input_name);
 int         ft_cast_concentration_multi_target_01(t_char *info, t_buff *buff, const char **input);
 void        ft_cast_concentration_multi_target_02(t_char *info,
                 t_target_data *target_data, const char **input);
-int         ft_is_caster_name_present(char **caster_name_list, const char *name);
+int         ft_is_caster_name_present(ft_set<ft_string> *caster_name_list, const char *name);
 
 // Hunters mark
 void        ft_concentration_remove_hunters_mark(t_char *character, t_target_data *targets_data);
@@ -402,7 +402,6 @@ void        ft_skill_throw(t_char * info, const char *skill, int ability_mod, in
 int         ft_set_stats(t_char * info, char **content);
 int         ft_check_stat(t_char * info, const char *stat, const size_t index);
 char        **ft_set_stats_con_targets(char *content, size_t ofset, char **data, t_char *info);
-char        **ft_resize_double_char(char **double_string, const char *string, size_t size);
 int         ft_double_char_length(const char **double_char);
 void        ft_dual_save_file(t_char * info, t_char * target);
 char        *ft_strtrim_prefix(const char *s1, const char *prefix);

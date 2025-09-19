@@ -189,7 +189,7 @@ static const    t_buff_bless INITIALIZE_BUFF_BLESS =
     .dice_amount_mod = 0,
     .dice_faces_mod = 0,
     .base_mod = 0,
-    .caster_name = ft_nullptr,
+    .caster_name = ft_set<ft_string>(),
 };
 
 static const    t_buff_protective_winds INITIALIZE_BUFF_PROTECTIVE_WINDS =
@@ -301,7 +301,7 @@ static const    t_bufs INITIALIZE_BUFFS =
 static const    t_debuff_hunters_mark INITIALIZE_HUNTERS_MARK =
 {
     .amount = 0,
-    .caster_name = ft_nullptr,
+    .caster_name = ft_set<ft_string>(),
 };
 
 static const    t_debuff_blinded INITIALIZE_BLINDED =
@@ -311,7 +311,7 @@ static const    t_debuff_blinded INITIALIZE_BLINDED =
 
 static const    t_debuff_magic_drain INITIALIZE_DEBUFF_MAGIC_DRAIN =
 {
-    .caster = ft_nullptr,
+    .caster = ft_set<ft_string>(),
     .amount = 0,
     .damage_flat = 0,
     .damage_dice_amount = 0,

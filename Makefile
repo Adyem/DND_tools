@@ -126,7 +126,6 @@ SRC         = name.cpp \
               cast_concentration.cpp \
               free_info.cpp \
               get_character_info.cpp \
-              resize_double_char.cpp \
               check_buff_damage.cpp \
               attack.cpp \
               to_hit_check_buffs.cpp \

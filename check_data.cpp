@@ -244,6 +244,7 @@ static int check_buffs(t_char * info)
 static int check_other_buffs_debuffs(t_char * info)
 {
     int error = 0;
+    int caster_count;
     error += check_range(info->bufs.bless.duration, 0, 50, info->name, "bless duration");
     if (info->initiative < -50)
     {
@@ -256,14 +257,16 @@ static int check_other_buffs_debuffs(t_char * info)
                 info->bufs.lightning_strike.duration);
         error++;
     }
+    caster_count = static_cast<int>(info->debufs.hunters_mark.caster_name.size());
     if (info->debufs.hunters_mark.amount < 0 || info->debufs.hunters_mark.amount
-            != ft_double_char_length(const_cast<const char **>(info->debufs.hunters_mark.caster_name)))
+            != caster_count)
     {
         pf_printf("%s: hunters mark data is not correct\n", info->name);
         error++;
     }
+    caster_count = static_cast<int>(info->debufs.magic_drain.caster.size());
     if (info->debufs.magic_drain.amount < 0 || info->debufs.magic_drain.amount
-            != ft_double_char_length(const_cast<const char **>(info->debufs.magic_drain.caster)))
+            != caster_count)
     {
         pf_printf("%s: magic drain data is not correct\n", info->name);
         error++;

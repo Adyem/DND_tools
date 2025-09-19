@@ -63,7 +63,7 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
     (void)buff;
     if (target)
     {
-        if (ft_is_caster_name_present(target->debufs.hunters_mark.caster_name, input[0]))
+        if (ft_is_caster_name_present(&target->debufs.hunters_mark.caster_name, input[0]))
         {
             pf_printf_fd(2, "102-Error: Caster name already present\n");
             return (1);
@@ -73,12 +73,23 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
     }
     if (DEBUG == 1 && target)
     {
-        int index = 0;
-        while (target->debufs.hunters_mark.caster_name
-                && target->debufs.hunters_mark.caster_name[index])
+        size_t              index;
+        size_t              count;
+        const ft_string    *names;
+
+        count = target->debufs.hunters_mark.caster_name.size();
+        if (count > 0)
         {
-            pf_printf("%s has cast hunter's mark\n", target->debufs.hunters_mark.caster_name[index]);
-            index++;
+            names = target->debufs.hunters_mark.caster_name.data();
+            if (names)
+            {
+                index = 0;
+                while (index < count)
+                {
+                    pf_printf("%s has cast hunter's mark\n", names[index].c_str());
+                    index++;
+                }
+            }
         }
     }
     target->debufs.hunters_mark.amount++;
@@ -88,24 +99,22 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
 void    ft_concentration_remove_hunters_mark(t_char *character, t_target_data *targets_data)
 {
     int target_index = 0;
-    int caster_index;
-
     while (targets_data->target[target_index])
     {
-        caster_index = 0;
-        while (targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index])
+        ft_string                       caster_name(character->name);
+        ft_set<ft_string>               *caster_set;
+        const ft_string                *existing_name;
+
+        if (!caster_name.get_error())
         {
-            if (ft_strcmp(targets_data->target[target_index]->debufs.hunters_mark.caster_name
-                        [caster_index],
-                    character->name) == 0)
+            caster_set = &targets_data->target[target_index]->debufs.hunters_mark.caster_name;
+            existing_name = caster_set->find(caster_name);
+            if (existing_name)
             {
-                cma_free(targets_data->target[target_index]->debufs.hunters_mark.caster_name
-                        [caster_index]);
-                targets_data->target[target_index]->debufs.hunters_mark.caster_name[caster_index]
-                    = ft_nullptr;
-                targets_data->target[target_index]->debufs.hunters_mark.amount--;
+                caster_set->remove(caster_name);
+                if (targets_data->target[target_index]->debufs.hunters_mark.amount > 0)
+                    targets_data->target[target_index]->debufs.hunters_mark.amount--;
             }
-            caster_index++;
         }
         target_index++;
     }

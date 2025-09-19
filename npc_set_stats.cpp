@@ -24,6 +24,16 @@ static int ft_handle_int_mapping(char **content, int index, t_char * info)
                 return_value->_key_length, *return_value->_return_field_double, info);
         return (0);
     }
+    else if (return_value->_return_field_string_set)
+    {
+        if (ft_update_caster_name(return_value->_return_field_string_set,
+                &content[index][return_value->_key_length]))
+        {
+            info->flags.error = 1;
+            return (1);
+        }
+        return (0);
+    }
     else if (return_value->_return_field_string)
     {
         ft_set_stat_player(return_value->_key_length,

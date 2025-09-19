@@ -7,6 +7,8 @@
 
 #include <csignal>
 #include "libft/Template/unordened_map.hpp"
+#include "libft/Template/set.hpp"
+#include "libft/CPP_class/class_string_class.hpp"
 
 typedef struct s_treeNode_value
 {
@@ -15,6 +17,7 @@ typedef struct s_treeNode_value
     int       *_return_field_integer;
     char      **_return_field_string;
     char      ***_return_field_double;
+    ft_set<ft_string> *_return_field_string_set;
 } t_treeNode_value;
 
 typedef struct s_treeNode
@@ -32,6 +35,7 @@ void tree_node_delete(TreeNode *node);
 int tree_node_insert(TreeNode *node, const char *key, int *value, int unset_value);
 int tree_node_insert(TreeNode *node, const char *key, char **value);
 int tree_node_insert(TreeNode *node, const char *key, char ***value);
+int tree_node_insert(TreeNode *node, const char *key, ft_set<ft_string> *value);
 
 // Search function:
 const t_treeNode_value *tree_node_search(const TreeNode *node, const char *key);

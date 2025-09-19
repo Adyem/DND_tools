@@ -23,6 +23,30 @@ static void ft_npc_write_file_double_char(const char *msg, char **targets, ft_fi
     return ;
 }
 
+static void ft_npc_write_file_string_set(const char *msg, const ft_set<ft_string> &targets,
+        ft_file &file, t_char *info)
+{
+    size_t              index;
+    size_t              count;
+    const ft_string    *names;
+
+    count = targets.size();
+    if (count == 0)
+        return ;
+    names = targets.data();
+    if (!names)
+        return ;
+    index = 0;
+    while (index < count)
+    {
+        if (DEBUG == 1)
+            pf_printf_fd(1, "saving array %s %s%s\n", info->name, msg, names[index].c_str());
+        file.printf("%s%s\n", msg, names[index].c_str());
+        index++;
+    }
+    return ;
+}
+
 static void ft_npc_write_spell_slots(t_char * info, ft_file &file)
 {
     file.printf("%s%i\n", LEVEL_1_AVAILABLE_KEY, info->spell_slots.level_1.available);
@@ -79,7 +103,7 @@ static void ft_npc_write_spell_slots(t_char * info, ft_file &file)
     file.printf("%s%i\n", BUFF_BLESS_DURATION_KEY, info->bufs.bless.duration);
     file.printf("%s%i\n", BUFF_BLESS_DICE_FACES_MOD_KEY, info->bufs.bless.dice_faces_mod);
     file.printf("%s%i\n", BUFF_BLESS_DICE_AMOUNT_MOD_KEY, info->bufs.bless.dice_amount_mod);
-    ft_npc_write_file_double_char(BUFF_BLESS_CASTER_NAME_KEY,
+    ft_npc_write_file_string_set(BUFF_BLESS_CASTER_NAME_KEY,
             info->bufs.bless.caster_name, file, info);
     file.printf("%s%i\n", BUFF_REJUVENATION_DURATION_KEY, info->bufs.rejuvenation.duration);
     file.printf("%s%i\n", BUFF_REJUVENATION_DICE_AMOUNT_KEY,
@@ -138,7 +162,7 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
             info->concentration.targets, file, info);
     file.printf("%s%i\n", HUNTERS_MARK_AMOUNT_KEY,
             info->debufs.hunters_mark.amount);
-    ft_npc_write_file_double_char(HUNTERS_MARK_CASTER_KEY,
+    ft_npc_write_file_string_set(HUNTERS_MARK_CASTER_KEY,
             info->debufs.hunters_mark.caster_name, file, info);
     file.printf("%s%i\n", CHAOS_ARMOR_DURATION_KEY,
             info->bufs.chaos_armor.duration);
@@ -248,8 +272,8 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
             info->debufs.magic_drain.damage_dice_faces);
     file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_SPELL_SLOT_TOTAL_LEVEL_DRAIN_KEY,
             info->debufs.magic_drain.spell_slot_total_level_drain);
-    ft_npc_write_file_double_char(DEBUFF_MAGIC_DRAIN_CASTER_KEY, info->debufs.magic_drain.caster,
-            file, info);
+    ft_npc_write_file_string_set(DEBUFF_MAGIC_DRAIN_CASTER_KEY,
+            info->debufs.magic_drain.caster, file, info);
     file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_CON_SAVE_KEY, info->debufs.magic_drain.con_save);
     file.printf("%s%i\n", DEBUFF_MAGIC_DRAIN_EXTRA_DAMAGE_FLAT_KEY,
             info->debufs.magic_drain.extra_damage_flat);
