@@ -5,6 +5,8 @@
 #include "libft/Errno/errno.hpp"
 #include "libft/Math/roll.hpp"
 
+int math_roll_validate(char *string);
+
 int *ft_command_roll(char **argv)
 {
     char    *expression;
@@ -38,4 +40,23 @@ int *ft_command_roll(char **argv)
         return (ft_nullptr);
     ft_errno = ER_SUCCESS;
     return (value);
+}
+
+int ft_command_roll_validate(char *expression)
+{
+    int validation_result;
+
+    if (!expression)
+    {
+        ft_errno = FT_EINVAL;
+        return (1);
+    }
+    validation_result = math_roll_validate(expression);
+    if (validation_result == 0)
+    {
+        ft_errno = ER_SUCCESS;
+        return (0);
+    }
+    ft_errno = FT_EINVAL;
+    return (validation_result);
 }

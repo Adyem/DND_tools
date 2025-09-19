@@ -481,6 +481,7 @@ void        ft_initiative_add(t_char * info);
 
 // Command roll
 int         *ft_command_roll(char **argv);
+int         ft_command_roll_validate(char *expression);
 
 // Player
 void        ft_player(const char **input);
