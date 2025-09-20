@@ -250,6 +250,8 @@ int         ft_attack_roll_check_buffs(t_char * info, int *roll);
 void        ft_to_hit_check_buff(t_char * info);
 
 // Cast spell
+int         ft_divine_smite_damage_roll(t_spell_divine_smite *divine_smite,
+                int cast_at_level, bool critical_strike);
 void        ft_cast_divine_smite(t_char * character, bool critical_strike);
 void        ft_cast_cure_wounds(t_char * character);
 void        ft_cast_lightning_bolt(t_char * character);

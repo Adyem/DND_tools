@@ -11,5 +11,6 @@ void    run_resistance_tests();
 void    run_calculate_stats_tests();
 void    run_calculate_skills_tests();
 void    run_calculate_util_stats_tests();
+void    run_divine_smite_tests();
 
 #endif

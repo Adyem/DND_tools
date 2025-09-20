@@ -157,7 +157,8 @@ SRC         = name.cpp \
               npc_set_stats_player.cpp \
               crackback.cpp \
               frank.cpp \
-			  cast_divine_smite.cpp \
+                          cast_divine_smite.cpp \
+                          divine_smite_utils.cpp \
 			  cast_cure_wounds.cpp \
               cast_lightning_bolt.cpp \
 			  spell_utils.cpp \
@@ -267,9 +268,11 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/calculate_stats_tests.cpp \
              tests/calculate_skills_tests.cpp \
              tests/calculate_util_stats_tests.cpp \
+             tests/divine_smite_tests.cpp \
              tests/create_data_folder_tests.cpp \
               tests/save_load_test_stubs.cpp \
               tests/save_load_tests.cpp \
+             divine_smite_utils.cpp \
               trim_start.cpp \
               ordinal_suffix.cpp \
               roll.cpp \
