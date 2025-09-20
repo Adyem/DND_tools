@@ -261,8 +261,13 @@ TEST_SRC    = tests/automated_tests.cpp \
               tests/test_support.cpp \
               tests/string_prefix_tests.cpp \
               tests/ordinal_suffix_tests.cpp \
-              tests/roll_validation_tests.cpp \
-              tests/create_data_folder_tests.cpp \
+             tests/roll_validation_tests.cpp \
+             tests/roll_command_tests.cpp \
+             tests/resistance_tests.cpp \
+             tests/calculate_stats_tests.cpp \
+             tests/calculate_skills_tests.cpp \
+             tests/calculate_util_stats_tests.cpp \
+             tests/create_data_folder_tests.cpp \
               tests/save_load_test_stubs.cpp \
               tests/save_load_tests.cpp \
               trim_start.cpp \
@@ -276,15 +281,20 @@ TEST_SRC    = tests/automated_tests.cpp \
               npc_set_stats.cpp \
               npc_set_stats_string.cpp \
               npc_set_stats_player.cpp \
-              initialize_key_value_pairs.cpp \
-              treeNode.cpp \
-              treeNode_functions.cpp \
-              check_data.cpp \
-              check_equipment.cpp \
-              check_name.cpp \
-              cast_concentration_caster.cpp \
-              utils01.cpp \
-              initiative_pc.cpp
+             initialize_key_value_pairs.cpp \
+             treeNode.cpp \
+             treeNode_functions.cpp \
+             check_data.cpp \
+             calculate_resistance.cpp \
+             calculate_damage_reduction.cpp \
+             calculate_stats.cpp \
+             calculate_skills.cpp \
+             calculate_util_stats.cpp \
+             check_equipment.cpp \
+             check_name.cpp \
+             cast_concentration_caster.cpp \
+             utils01.cpp \
+             initiative_pc.cpp
 
 TEST_OBJS   = $(TEST_SRC:%.cpp=$(OBJ_DIR_TEST)/%.o)
 
