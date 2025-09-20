@@ -144,7 +144,10 @@ void    ft_concentration_remove_magic_drain(t_char *character, t_target_data *ta
     character->concentration.dice_amount_mod = 0;
     character->concentration.dice_faces_mod = 0;
     character->concentration.base_mod = 0;
+    char    **targets;
+
+    targets = character->concentration.targets;
+    cma_free_double(targets);
     character->concentration.targets = ft_nullptr;
-    cma_free_double(character->concentration.targets);
     return ;
 }
