@@ -5,26 +5,44 @@
 #include "libft/Printf/printf.hpp"
 #include <cassert>
 
+static t_spell_slot *ft_get_spell_slot(t_char *character, int level)
+{
+    if (level == 1)
+        return (&character->spell_slots.level_1);
+    else if (level == 2)
+        return (&character->spell_slots.level_2);
+    else if (level == 3)
+        return (&character->spell_slots.level_3);
+    else if (level == 4)
+        return (&character->spell_slots.level_4);
+    else if (level == 5)
+        return (&character->spell_slots.level_5);
+    else if (level == 6)
+        return (&character->spell_slots.level_6);
+    else if (level == 7)
+        return (&character->spell_slots.level_7);
+    else if (level == 8)
+        return (&character->spell_slots.level_8);
+    else if (level == 9)
+        return (&character->spell_slots.level_9);
+    return (0);
+}
+
 static int ft_auto_cast(t_char *character, int base_level, const char *spell_name)
 {
-    if (character->spell_slots.level_1.available > 0 && base_level >= 1)
-        return (1);
-    if (character->spell_slots.level_2.available > 0 && base_level >= 2)
-        return (2);
-    if (character->spell_slots.level_3.available > 0 && base_level >= 3)
-        return (3);
-    if (character->spell_slots.level_4.available > 0 && base_level >= 4)
-        return (4);
-    if (character->spell_slots.level_5.available > 0 && base_level >= 5)
-        return (5);
-    if (character->spell_slots.level_6.available > 0 && base_level >= 6)
-        return (6);
-    if (character->spell_slots.level_7.available > 0 && base_level >= 7)
-        return (7);
-    if (character->spell_slots.level_8.available > 0 && base_level >= 8)
-        return (8);
-    if (character->spell_slots.level_9.available > 0 && base_level >= 9)
-        return (9);
+    int current_level;
+    t_spell_slot *spell_slot;
+
+    current_level = base_level;
+    if (current_level < 1)
+        current_level = 1;
+    while (current_level <= 9)
+    {
+        spell_slot = ft_get_spell_slot(character, current_level);
+        if (spell_slot != 0 && spell_slot->available > 0)
+            return (current_level);
+        current_level++;
+    }
     pf_printf_fd(2, "Error: No available spell slots for %s to cast %s.\n",
             character->name, spell_name);
     return (-1);
