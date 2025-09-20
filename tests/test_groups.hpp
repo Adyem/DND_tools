@@ -12,5 +12,6 @@ void    run_calculate_stats_tests();
 void    run_calculate_skills_tests();
 void    run_calculate_util_stats_tests();
 void    run_divine_smite_tests();
+void    run_spell_utils_tests();
 
 #endif

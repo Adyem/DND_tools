@@ -269,6 +269,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/calculate_skills_tests.cpp \
              tests/calculate_util_stats_tests.cpp \
              tests/divine_smite_tests.cpp \
+             tests/spell_utils_tests.cpp \
              tests/create_data_folder_tests.cpp \
               tests/save_load_test_stubs.cpp \
               tests/save_load_tests.cpp \
