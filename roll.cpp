@@ -37,7 +37,11 @@ int *ft_command_roll(char **argv)
     value = math_roll(expression);
     cma_free(expression);
     if (!value)
+    {
+        if (ft_errno == ER_SUCCESS)
+            ft_errno = FT_EINVAL;
         return (ft_nullptr);
+    }
     ft_errno = ER_SUCCESS;
     return (value);
 }
