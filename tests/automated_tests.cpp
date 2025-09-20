@@ -16,6 +16,7 @@ int main()
     run_calculate_stats_tests();
     run_calculate_skills_tests();
     run_calculate_util_stats_tests();
+    run_divine_smite_tests();
     std::printf("All tests passed.\n");
     return (0);
 }
