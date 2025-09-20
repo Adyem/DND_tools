@@ -97,7 +97,7 @@ static int ft_cast_concentration_open_file(ft_file save_files[2], t_char *info,
         info->concentration.dice_faces_mod = 0;
         info->concentration.dice_amount_mod = 0;
         info->concentration.duration = 0;
-        ft_npc_write_file(info, &info->stats, &info->c_resistance, save_files[1]);
+        ft_npc_write_file(info, &info->stats, &info->c_resistance, save_files[0]);
         return (1);
     }
     return (0);
