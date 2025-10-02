@@ -3,6 +3,7 @@
 #include "libft/CPP_class/class_string_class.hpp"
 #include "libft/RNG/rng.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
 #include <cassert>
 
 static t_spell_slot *ft_get_spell_slot(t_char *character, int level)
@@ -25,7 +26,7 @@ static t_spell_slot *ft_get_spell_slot(t_char *character, int level)
         return (&character->spell_slots.level_8);
     else if (level == 9)
         return (&character->spell_slots.level_9);
-    return (0);
+    return (ft_nullptr);
 }
 
 static int ft_auto_cast(t_char *character, int base_level, const char *spell_name)
@@ -39,7 +40,7 @@ static int ft_auto_cast(t_char *character, int base_level, const char *spell_nam
     while (current_level <= 9)
     {
         spell_slot = ft_get_spell_slot(character, current_level);
-        if (spell_slot != 0 && spell_slot->available > 0)
+        if (spell_slot != ft_nullptr && spell_slot->available > 0)
             return (current_level);
         current_level++;
     }
@@ -77,11 +78,11 @@ static ft_string ft_check_availeble_spell_slots(t_char *character, int base_leve
 
 int ft_prompt_spell_level(t_char *character, int base_level, const char *spell_name)
 {
-        assert (base_level >= 0 && base_level <= 9);
+    assert(base_level >= 0 && base_level <= 9);
 
-        if (g_dnd_test)
-                return (ft_auto_cast(character, base_level, spell_name));
-        ft_string available_slots = ft_check_availeble_spell_slots(character, base_level);
+    if (g_dnd_test)
+        return (ft_auto_cast(character, base_level, spell_name));
+    ft_string available_slots = ft_check_availeble_spell_slots(character, base_level);
     if (available_slots.get_error())
     {
         pf_printf_fd(2, "Error: Failed to retrieve available spell slots for %s.\n",

@@ -264,11 +264,16 @@ TEST_SRC    = tests/automated_tests.cpp \
               tests/ordinal_suffix_tests.cpp \
              tests/roll_validation_tests.cpp \
              tests/roll_command_tests.cpp \
+             tests/roll_command_argument_tests.cpp \
+             tests/roll_command_expression_tests.cpp \
+             tests/roll_command_error_tests.cpp \
              tests/resistance_tests.cpp \
              tests/calculate_stats_tests.cpp \
              tests/calculate_skills_tests.cpp \
              tests/calculate_util_stats_tests.cpp \
              tests/divine_smite_tests.cpp \
+             spell_utils.cpp \
+             readline_check.cpp \
              tests/spell_utils_tests.cpp \
              tests/create_data_folder_tests.cpp \
               tests/save_load_test_stubs.cpp \

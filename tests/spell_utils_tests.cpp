@@ -2,11 +2,26 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../character.hpp"
-#include <cstring>
-
 static void initialize_character(t_char *character, const char *name)
 {
-    std::memset(character, 0, sizeof(t_char));
+    t_spell_slot empty_slot;
+    t_spell_slots empty_slots;
+
+    empty_slot.available = 0;
+    empty_slot.total = 0;
+    empty_slot.level = 0;
+    empty_slot.replenishing_slot = 0;
+    empty_slots.level_1 = empty_slot;
+    empty_slots.level_2 = empty_slot;
+    empty_slots.level_3 = empty_slot;
+    empty_slots.level_4 = empty_slot;
+    empty_slots.level_5 = empty_slot;
+    empty_slots.level_6 = empty_slot;
+    empty_slots.level_7 = empty_slot;
+    empty_slots.level_8 = empty_slot;
+    empty_slots.level_9 = empty_slot;
+    empty_slots.warlock = empty_slot;
+    character->spell_slots = empty_slots;
     character->name = name;
     return ;
 }
