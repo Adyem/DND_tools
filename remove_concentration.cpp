@@ -66,6 +66,7 @@ int ft_remove_concentration(t_char * info)
     }
     ft_concentration_remove_buf(info, &targets);
     ft_cast_concentration_save_files(info, &targets, info_save_file);
+    ft_free_memory_cmt(&targets, i);
     info->flags.alreaddy_saved = 0;
     return (SUCCES);
 }
