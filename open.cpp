@@ -25,7 +25,6 @@ void ft_dual_save_file(t_char * info, t_char * target)
     ft_file file_info;
     ft_file file_target;
 
-    pf_printf("HELLO WORLD!!!\n");
     ft_open_file_write_only(target->save_file, file_target);
     if (file_target.get_error())
     {
