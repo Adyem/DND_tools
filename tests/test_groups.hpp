@@ -9,6 +9,7 @@ void    run_roll_command_argument_tests();
 void    run_roll_command_expression_tests();
 void    run_roll_command_error_tests();
 void    run_clean_tests();
+void    run_check_name_tests();
 void    run_create_data_folder_tests();
 void    run_save_load_tests();
 void    run_resistance_tests();
