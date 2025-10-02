@@ -97,7 +97,7 @@ void ft_clean(void)
     command[0] = "/bin/sh";
     command[1] = "-c";
     command[2] = "find ./data -mindepth 1 -maxdepth 1 \\( ! -name 'data--*' !" \
-                                  "-name 'pc--*' \\) -exec rm -rf {} +";
+                                  " -iname 'pc--*' \\) -exec rm -rf {} +";
     command[3] = ft_nullptr;
     if (g_dnd_test == 0)
     {
@@ -150,7 +150,8 @@ void ft_clean(void)
     for (const auto &entry : std::filesystem::directory_iterator("./data", ec))
     {
         std::string name = entry.path().filename().string();
-        if (name.rfind("data--", 0) == 0 || name.rfind("pc--", 0) == 0)
+        if (name.rfind("data--", 0) == 0 || name.rfind("pc--", 0) == 0
+            || name.rfind("PC--", 0) == 0)
             continue;
         std::filesystem::remove_all(entry, ec);
         if (ec)
