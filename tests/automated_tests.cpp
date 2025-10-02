@@ -19,6 +19,7 @@ int main()
     run_calculate_util_stats_tests();
     run_divine_smite_tests();
     run_spell_utils_tests();
+    run_concentration_tests();
     std::printf("All tests passed.\n");
     return (0);
 }

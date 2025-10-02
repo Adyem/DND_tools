@@ -273,6 +273,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/calculate_skills_tests.cpp \
              tests/calculate_util_stats_tests.cpp \
              tests/divine_smite_tests.cpp \
+             tests/concentration_tests.cpp \
              spell_utils.cpp \
              readline_check.cpp \
              fclean.cpp \
@@ -291,7 +292,9 @@ TEST_SRC    = tests/automated_tests.cpp \
               init_info.cpp \
               npc_set_stats.cpp \
               npc_set_stats_string.cpp \
-              npc_set_stats_player.cpp \
+             npc_set_stats_player.cpp \
+             fetch_target.cpp \
+             get_character_info.cpp \
              initialize_key_value_pairs.cpp \
              treeNode.cpp \
              treeNode_functions.cpp \
