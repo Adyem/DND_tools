@@ -28,7 +28,7 @@ static void test_create_data_dir_creates_directory_when_missing()
     remove_data_path();
     result = ft_create_data_dir();
     test_assert_true(result == 0, "ft_create_data_dir should create missing data directory");
-    test_assert_true(file_dir_exists("data") == 0, "ft_create_data_dir did not create the data directory");
+    test_assert_true(file_dir_exists("data") == 1, "ft_create_data_dir did not create the data directory");
     test_assert_true(ft_errno == ER_SUCCESS, "ft_create_data_dir should set errno to success after creating directory");
     remove_data_path();
     return ;

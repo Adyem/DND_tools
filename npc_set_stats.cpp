@@ -36,8 +36,15 @@ static int ft_handle_int_mapping(char **content, int index, t_char * info)
     }
     else if (return_value->_return_field_string)
     {
-        ft_set_stat_player(return_value->_key_length,
+        int player_stat_status;
+
+        player_stat_status = ft_set_stat_player(return_value->_key_length,
                 const_cast<const char **>(return_value->_return_field_string), content[index]);
+        if (player_stat_status != 0)
+        {
+            info->flags.error = 1;
+            return (1);
+        }
         return (0);
     }
     return (1);
