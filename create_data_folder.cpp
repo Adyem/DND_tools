@@ -21,7 +21,7 @@ int ft_create_data_dir()
             ft_strerror(ft_errno));
         return (1);
     }
-    if (directory_status == 1)
+    if (directory_status == 0)
     {
         if (file_exists("data") == 1)
         {

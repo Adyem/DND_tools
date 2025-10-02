@@ -141,6 +141,27 @@ static void cleanup_loaded_npc(t_char &npc)
     return ;
 }
 
+static void test_npc_set_stats_player_entry_failure_sets_error()
+{
+    t_char npc = {};
+    char *content[2];
+    int parse_error;
+
+    npc.name = const_cast<char *>("Test NPC");
+    content[0] = const_cast<char *>("SPELL_MAGIC_DRAIN=INVALID_PLAYER_ENTRY");
+    content[1] = ft_nullptr;
+    parse_error = ft_set_stats(&npc, content);
+    test_assert_true(parse_error == 1, "ft_set_stats did not report failure when player entry validation failed");
+    test_assert_true(npc.flags.error == 1, "ft_set_stats did not set the NPC error flag when player entry validation failed");
+    if (npc.spells.magic_drain.target)
+    {
+        cma_free(npc.spells.magic_drain.target);
+        npc.spells.magic_drain.target = ft_nullptr;
+    }
+    ft_cleanup_treeNode();
+    return ;
+}
+
 static void test_npc_json_save_writes_lines()
 {
     ensure_tests_output_directory();
@@ -290,6 +311,7 @@ static void test_player_json_save_and_load()
 
 void run_save_load_tests()
 {
+    test_npc_set_stats_player_entry_failure_sets_error();
     test_npc_json_save_writes_lines();
     test_npc_json_load_populates_fields();
     test_player_json_save_and_load();

@@ -1,8 +1,10 @@
 #include "../dnd_tools.hpp"
+#include <cstring>
 
 int ft_check_player_entry(const char *entry)
 {
-    (void)entry;
+    if (entry && std::strcmp(entry, "INVALID_PLAYER_ENTRY") == 0)
+        return (1);
     return (0);
 }
 
