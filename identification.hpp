@@ -167,7 +167,7 @@ ABILITY_LIST
 
 # define DATA_FOLDER "data"
 # define PREFIX_TO_SKIP "data--"
-# define EXCLUDE_PREFIX "pc--"
-# define PC_PREFIX "pc--"
+# define EXCLUDE_PREFIX "PC--"
+# define PC_PREFIX "PC--"
 
 #endif

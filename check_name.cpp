@@ -9,12 +9,38 @@
 #include <cstring>
 #include <cerrno>
 #include <dirent.h>
+#include <cctype>
+
+static int has_prefix_case_insensitive(const char *value, const char *prefix)
+{
+    size_t  index;
+
+    if (!value || !prefix)
+        return (0);
+    index = 0;
+    while (prefix[index] != '\0')
+    {
+        if (value[index] == '\0')
+            return (0);
+        if (std::tolower(static_cast<unsigned char>(value[index]))
+            != std::tolower(static_cast<unsigned char>(prefix[index])))
+            return (0);
+        index++;
+    }
+    return (1);
+}
 
 static void remove_exclude_prefix(char* filename)
 {
-    if (ft_strncmp(filename, EXCLUDE_PREFIX, ft_strlen(EXCLUDE_PREFIX)) == 0)
-        ft_memmove(filename, filename + ft_strlen(EXCLUDE_PREFIX),
-            ft_strlen(filename) - ft_strlen(EXCLUDE_PREFIX) + 1);
+    size_t  prefix_length;
+    size_t  filename_length;
+
+    prefix_length = ft_strlen(EXCLUDE_PREFIX);
+    if (has_prefix_case_insensitive(filename, EXCLUDE_PREFIX) == 0)
+        return ;
+    filename_length = ft_strlen(filename);
+    ft_memmove(filename, filename + prefix_length,
+        filename_length - prefix_length + 1);
     return ;
 }
 
@@ -40,10 +66,17 @@ int ft_set_stats_check_name(const char *name)
         entry = file_readdir(dir);
         if (!entry)
             break ;
-        if (ft_strncmp(entry->d_name, PREFIX_TO_SKIP, ft_strlen(PREFIX_TO_SKIP)) == 0)
+        if (has_prefix_case_insensitive(entry->d_name, PREFIX_TO_SKIP) == 1)
             continue ;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
+        if (ft_strcmp(filename, name) == 0)
+        {
+            file_closedir(dir);
+            if (DEBUG == 1)
+                pf_printf("Found %s\n", name);
+            return (0);
+        }
         remove_exclude_prefix(filename);
         if (DEBUG == 1)
             pf_printf("Checking %s %s\n", filename, name);
@@ -77,12 +110,20 @@ int ft_check_player_character(const char *name)
         entry = file_readdir(dir);
         if (!entry)
             break ;
-        if (ft_strncmp(entry->d_name, PC_PREFIX, ft_strlen(PC_PREFIX)) != 0)
+        if (has_prefix_case_insensitive(entry->d_name, PC_PREFIX) == 0)
             continue ;
         strncpy(filename, entry->d_name, sizeof(filename) - 1);
         filename[sizeof(filename) - 1] = '\0';
         if (DEBUG == 1)
             pf_printf("Checking %s against %s\n", filename, name);
+        if (ft_strcmp(filename, name) == 0)
+        {
+            file_closedir(dir);
+            if (DEBUG == 1)
+                pf_printf("Found %s\n", name);
+            return (0);
+        }
+        remove_exclude_prefix(filename);
         if (ft_strcmp(filename, name) == 0)
         {
             file_closedir(dir);

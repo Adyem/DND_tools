@@ -268,6 +268,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/roll_command_expression_tests.cpp \
              tests/roll_command_error_tests.cpp \
              tests/clean_tests.cpp \
+             tests/check_name_tests.cpp \
              tests/resistance_tests.cpp \
              tests/calculate_stats_tests.cpp \
              tests/calculate_skills_tests.cpp \
