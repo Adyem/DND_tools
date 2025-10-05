@@ -58,17 +58,34 @@ int ft_initiative_remove(t_char * info)
             char    *value;
             char    *newline;
             char    saved_char;
+            char    *carriage_return;
+            char    saved_carriage;
+            size_t  value_len;
             int     check_result;
 
             value = &temp[name_len + 1];
             newline = ft_strchr(value, '\n');
             saved_char = '\0';
+            carriage_return = ft_nullptr;
+            saved_carriage = '\0';
             if (newline)
             {
                 saved_char = *newline;
                 *newline = '\0';
             }
+            value_len = ft_strlen(value);
+            if (value_len > 0)
+            {
+                if (value[value_len - 1] == '\r')
+                {
+                    carriage_return = &value[value_len - 1];
+                    saved_carriage = *carriage_return;
+                    *carriage_return = '\0';
+                }
+            }
             check_result = ft_check_value(value);
+            if (carriage_return)
+                *carriage_return = saved_carriage;
             if (newline)
                 *newline = saved_char;
             if (check_result == FT_SUCCESS)
