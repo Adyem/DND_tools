@@ -1,5 +1,7 @@
 #include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/CMA/CMA.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Errno/errno.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
@@ -137,8 +139,21 @@ void ft_initiative_add(t_char * info)
     if (info->initiative <= 0)
         return ;
     content = ft_open_and_read_file("data/data--initiative", 1024);
-    if (!content)
-        return ;
+    if (content == ft_nullptr)
+    {
+        if (ft_errno == ER_SUCCESS || ft_errno == FILE_END_OF_FILE)
+        {
+            content = static_cast<char **>(cma_calloc(1, sizeof(char *)));
+            if (!content)
+            {
+                pf_printf("Error: failed to allocate initiative buffer\n");
+                return ;
+            }
+            ft_errno = ER_SUCCESS;
+        }
+        else
+            return ;
+    }
     if (ft_initiative_check_content(info, content))
     {
         cma_free_double(content);
