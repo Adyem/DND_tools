@@ -56,9 +56,12 @@ int ft_initiative_remove(t_char * info)
                         content[index][ft_strlen(info->name)]);
             index++;
             if (turn_marker)
+            {
                 removed_turn = 1;
-            if (turn_marker)
-                pf_printf_fd(initiative_file, "--turn--");
+                if (content[index])
+                    pf_printf_fd(initiative_file, "--turn--");
+                turn_marker = 0;
+            }
             continue ;
         }
         pf_printf_fd(initiative_file, "%s", content[index]);
