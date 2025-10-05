@@ -126,6 +126,7 @@ void ft_initiative_add(t_char * info)
     int     added;
     int     error;
     int     count;
+    int     turn_marker_present;
     typedef struct s_validated_line
     {
         char    *line;
@@ -177,6 +178,7 @@ void ft_initiative_add(t_char * info)
         }
     }
     i = 0;
+    turn_marker_present = 0;
     while (i < count)
     {
         validated[i].line = content[i];
@@ -190,6 +192,8 @@ void ft_initiative_add(t_char * info)
             return ;
         }
         *validated[i].newline_mark = '\0';
+        if (ft_strncmp(validated[i].line, "--turn--", 8) == 0)
+            turn_marker_present = 1;
         error = ft_initiative_check(info, content, i);
         if (DEBUG == 1)
             pf_printf("%s\n", content[i]);
@@ -221,6 +225,11 @@ void ft_initiative_add(t_char * info)
     {
         if (!added && validated[i].check_result == 0)
         {
+            if (turn_marker_present == 0)
+            {
+                pf_printf_fd(initiative_file, "--turn--");
+                turn_marker_present = 1;
+            }
             pf_printf_fd(initiative_file, "%s=%d\n", info->name, info->initiative);
             added = 1;
         }
@@ -229,6 +238,11 @@ void ft_initiative_add(t_char * info)
     }
     if (added == 0)
     {
+        if (turn_marker_present == 0)
+        {
+            pf_printf_fd(initiative_file, "--turn--");
+            turn_marker_present = 1;
+        }
         pf_printf_fd(initiative_file, "%s=%d\n", info->name, info->initiative);
         added = 1;
     }
