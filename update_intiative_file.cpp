@@ -141,7 +141,9 @@ void ft_initiative_add(t_char * info)
     content = ft_open_and_read_file("data/data--initiative", 1024);
     if (content == ft_nullptr)
     {
-        if (ft_errno == ER_SUCCESS || ft_errno == FILE_END_OF_FILE)
+        if (ft_errno == ER_SUCCESS || ft_errno == FILE_END_OF_FILE
+                || ft_errno == FILE_INVALID_FD
+                || ft_errno == ERRNO_OFFSET + ENOENT)
         {
             content = static_cast<char **>(cma_calloc(1, sizeof(char *)));
             if (!content)
