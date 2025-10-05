@@ -119,11 +119,18 @@ static int ft_initiative_check_content(t_char * info, char **content)
 
 void ft_initiative_add(t_char * info)
 {
-    char    *n_line;
     char    **content;
     int     i;
     int     added;
     int     error;
+    int     count;
+    typedef struct s_validated_line
+    {
+        char    *line;
+        char    *newline_mark;
+        int     check_result;
+    }   t_validated_line;
+    t_validated_line   *validated;
 
     if (DEBUG == 1)
         pf_printf("readding initiative %s %d\n", info->name, info->initiative);
@@ -138,42 +145,69 @@ void ft_initiative_add(t_char * info)
         pf_printf("%s is already in initiative\n", info->name);
         return ;
     }
-    ft_file initiative_file("data/data--initiative", O_WRONLY | O_TRUNC);
+    count = 0;
+    while (content[count])
+        count++;
+    validated = NULL;
+    if (count > 0)
+    {
+        validated = (t_validated_line *)malloc(sizeof(t_validated_line) * count);
+        if (!validated)
+        {
+            cma_free_double(content);
+            pf_printf("Error: data--initiative file is corrupted\n");
+            return ;
+        }
+    }
+    i = 0;
+    while (i < count)
+    {
+        validated[i].line = content[i];
+        validated[i].newline_mark = ft_strchr(content[i], '\n');
+        if (!validated[i].newline_mark)
+        {
+            if (validated)
+                free(validated);
+            cma_free_double(content);
+            pf_printf("Error: data--initiative file is corrupted\n");
+            return ;
+        }
+        *validated[i].newline_mark = '\0';
+        error = ft_initiative_check(info, content, i);
+        if (DEBUG == 1)
+            pf_printf("%s\n", content[i]);
+        if (DEBUG == 1)
+            pf_printf("Error = %d\n", error);
+        if (error != 0 && error != 1)
+        {
+            if (validated)
+                free(validated);
+            cma_free_double(content);
+            pf_printf("Error: data--initiative file is corrupted\n");
+            return ;
+        }
+        validated[i].check_result = error;
+        i++;
+    }
+    ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC);
     if (initiative_file == -1)
     {
-        pf_printf("Error opening file: %s\n", initiative_file.get_error_str());
+        if (validated)
+            free(validated);
         cma_free_double(content);
+        pf_printf("Error opening file: %s\n", initiative_file.get_error_str());
         return ;
     }
     added = 0;
     i = 0;
-    while (content[i])
+    while (i < count)
     {
-        n_line = ft_strchr(content[i], '\n');
-        if (!n_line)
-        {
-            cma_free_double(content);
-            pf_printf("Error: data--initiative file is corrupted\n");
-            return ;
-        }
-        *n_line = '\0';
-        if (DEBUG == 1)
-            pf_printf("%s\n", content[i]);
-        error = ft_initiative_check(info, content, i);
-        if (DEBUG == 1)
-            pf_printf("Error = %d\n", error);
-        if (!added && error == 0)
+        if (!added && validated[i].check_result == 0)
         {
             pf_printf_fd(initiative_file, "%s=%d\n", info->name, info->initiative);
             added = 1;
         }
-        if (error != 1 && error != 0)
-        {
-            cma_free_double(content);
-            pf_printf("Error: data--initiative file is corrupted\n");
-            return ;
-        }
-        pf_printf_fd(initiative_file, "%s\n", content[i]);
+        pf_printf_fd(initiative_file, "%s\n", validated[i].line);
         i++;
     }
     if (added == 0)
@@ -181,6 +215,14 @@ void ft_initiative_add(t_char * info)
         pf_printf_fd(initiative_file, "%s=%d\n", info->name, info->initiative);
         added = 1;
     }
+    i = 0;
+    while (i < count)
+    {
+        *validated[i].newline_mark = '\n';
+        i++;
+    }
+    if (validated)
+        free(validated);
     cma_free_double(content);
     if (DEBUG == 1)
         pf_printf("added = %d\n", added);
