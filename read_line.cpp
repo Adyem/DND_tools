@@ -21,6 +21,9 @@ static char    **ft_parse_input(char *input_string)
 
 static int ft_handle_custom_commands(char **input, int argc, t_name *name)
 {
+    if (input[0] == ft_nullptr)
+        return (0);
+
     t_name *temp;
 
     temp = name;
@@ -38,6 +41,9 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
 
 static int ft_handle_builtins(char **input, int i, t_name *name, char *input_string)
 {
+    if (input[0] == ft_nullptr)
+        return (0);
+
     if (ft_strcmp(input[0], "roll") == 0)
     {
         int *roll_value;
@@ -87,6 +93,11 @@ void ft_request_input(t_name *name)
         input = ft_parse_input(input_string);
         if (!input)
             continue ;
+        if (input[0] == ft_nullptr)
+        {
+            ft_free_input(input, input_string);
+            continue ;
+        }
         int index = 0;
         while (input[index])
             index++;
