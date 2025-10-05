@@ -95,12 +95,20 @@ static int ft_initiative_check_content(t_char * info, char **content)
         name_len++;
     while (content[index])
     {
-        size_t j = 0;
-        while (j < name_len && content[index][j] &&
-               content[index][j] == info->name[j])
+        char    *line;
+        size_t  j;
+
+        line = content[index];
+        if (ft_strncmp(line, "--turn--", 8) == 0)
+            line = line + 8;
+        j = 0;
+        while (j < name_len && line[j] && line[j] == info->name[j])
             j++;
         if (j == name_len)
-            return (1);
+        {
+            if (line[j] == '=' || line[j] == '\0')
+                return (1);
+        }
         index++;
     }
     return (0);
