@@ -49,7 +49,7 @@ int ft_initiative_remove(t_char * info)
         if ((ft_strncmp(info->name, temp, ft_strlen_size_t(info->name)) == 0)
                 && (ft_strlen(temp) > ft_strlen(info->name))
                 && (temp[ft_strlen(info->name)] == '=')
-                && (ft_check_value(&temp[ft_strlen(info->name) + 1])))
+                && (ft_check_value(&temp[ft_strlen(info->name) + 1]) == FT_SUCCESS))
         {
             if (DEBUG == 1)
                 pf_printf("found one %s and %c\n", content[index],
