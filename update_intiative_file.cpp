@@ -7,6 +7,7 @@
 #include "dnd_tools.hpp"
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/stat.h>
 #include <cstdlib>
 #include <cerrno>
 #include <cstring>
@@ -230,7 +231,8 @@ void ft_initiative_add(t_char * info)
         validated[i].check_result = error;
         i++;
     }
-    ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC);
+    ft_file initiative_file("data/data--initiative", O_WRONLY | O_CREAT | O_TRUNC,
+            S_IRUSR | S_IWUSR);
     if (initiative_file == -1)
     {
         if (validated)
