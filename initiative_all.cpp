@@ -137,13 +137,15 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
         return (ft_nullptr);
     }
     error = ft_request_initiative(player);
-    if (!error)
+    if (error)
     {
-        file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-        if (file.get_error())
-            return (ft_nullptr);
-        ft_save_pc(player, file);
+        ft_free_pc(player);
+        return (ft_nullptr);
     }
+    file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    if (file.get_error())
+        return (ft_nullptr);
+    ft_save_pc(player, file);
     return (player);
 }
 
