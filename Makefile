@@ -220,6 +220,7 @@ else
 endif
 
 LIBFT_DIR   = ./libft
+SUBMODULE_SENTINEL = $(LIBFT_DIR)/Makefile
 
 OBJ_DIR         = ./objs
 OBJ_DIR_DEBUG   = ./objs_debug
@@ -313,9 +314,9 @@ TEST_SRC    = tests/automated_tests.cpp \
 
 TEST_OBJS   = $(TEST_SRC:%.cpp=$(OBJ_DIR_TEST)/%.o)
 
-all: dirs $(TARGET)
+all: ensure_libft dirs $(TARGET)
 
-tests: dirs $(TEST_NAME)
+tests: ensure_libft dirs $(TEST_NAME)
 
 dirs:
 	-$(MKDIR) $(OBJ_DIR)
@@ -331,8 +332,17 @@ $(TARGET): $(LIBFT) $(OBJS)
 $(TEST_NAME): $(LIBFT) $(TEST_OBJS)
 	$(CC) $(CFLAGS) $(TEST_OBJS) -o $@ $(LDFLAGS)
 
-$(LIBFT):
+$(LIBFT): ensure_libft
 	$(MAKE) -C $(LIBFT_DIR) $(if $(DEBUG), debug)
+
+initialize:
+	git submodule update --init --recursive
+
+ensure_libft:
+	@if [ ! -f $(SUBMODULE_SENTINEL) ]; then \
+		printf 'The libft submodule is not initialized. Please run \"make initialize\" before building.\n'; \
+		exit 1; \
+	fi
 
 $(OBJ_DIR)/%.o: %.cpp $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -344,7 +354,11 @@ $(OBJ_DIR_TEST)/%.o: %.cpp $(HEADER)
 clean:
 	-$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR_DEBUG)/*.o
 	-$(RM) $(OBJ_DIR_TEST)/*.o $(OBJ_DIR_TEST)/tests/*.o
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	@if [ -f $(SUBMODULE_SENTINEL) ]; then \
+		$(MAKE) -C $(LIBFT_DIR) fclean; \
+	else \
+		printf 'Skipping libft clean because the submodule is not initialized. Run "make initialize" to set it up.\n'; \
+	fi
 
 fclean: clean
 	-$(RM) $(NAME) $(NAME_DEBUG) $(TEST_NAME)
@@ -359,4 +373,4 @@ both: all debug
 
 re_both: re both
 
-.PHONY: all dirs clean fclean re debug both re_both tests test
+.PHONY: all dirs clean fclean re debug both re_both tests test initialize ensure_libft

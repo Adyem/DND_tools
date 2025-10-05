@@ -27,16 +27,16 @@ static int    ft_remove_concentration_fetch_targets(t_target_data *targets,
     if (error || !targets->target[i])
     {
         ft_free_memory_cmt(targets, i);
-        return (FAILURE);
+        return (FT_FAILURE);
     }
     targets->target_copy[i] = ft_validate_and_fetch_target(info->concentration.targets[i],
             info, &error);
     if (error || !targets->target_copy[i])
     {
         ft_free_memory_cmt(targets, i);
-        return (FAILURE);
+        return (FT_FAILURE);
     }
-    return (SUCCES);
+    return (FT_SUCCESS);
 }
 
 int ft_remove_concentration(t_char * info)
@@ -52,7 +52,7 @@ int ft_remove_concentration(t_char * info)
     while (info->concentration.targets && info->concentration.targets[i])
     {
         if (ft_remove_concentration_fetch_targets(&targets, info, i))
-            return (FAILURE);
+            return (FT_FAILURE);
         i++;
     }
     t_buff buff = INITIALIZE_T_BUFF;
@@ -62,11 +62,11 @@ int ft_remove_concentration(t_char * info)
     if (info_save_file.get_error() || info_save_file.get_fd() == -1)
     {
         ft_free_memory_cmt(&targets, i);
-        return (FAILURE);
+        return (FT_FAILURE);
     }
     ft_concentration_remove_buf(info, &targets);
     ft_cast_concentration_save_files(info, &targets, info_save_file);
     ft_free_memory_cmt(&targets, i);
     info->flags.alreaddy_saved = 0;
-    return (SUCCES);
+    return (FT_SUCCESS);
 }
