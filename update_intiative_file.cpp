@@ -37,8 +37,10 @@ int ft_initiative_remove(t_char * info)
         return (0);
     }
     int index = 0;
+    size_t  name_len;
     turn_marker = 0;
     removed_turn = 0;
+    name_len = ft_strlen(info->name);
     while (content[index])
     {
         if (ft_strncmp(content[index], "--turn--", 8) == 0)
@@ -48,23 +50,41 @@ int ft_initiative_remove(t_char * info)
         }
         else
             temp = content[index];
-        if ((ft_strncmp(info->name, temp, ft_strlen_size_t(info->name)) == 0)
-                && (ft_strlen(temp) > ft_strlen(info->name))
-                && (temp[ft_strlen(info->name)] == '=')
-                && (ft_check_value(&temp[ft_strlen(info->name) + 1]) == FT_SUCCESS))
+        if ((ft_strncmp(info->name, temp, name_len) == 0)
+                && (ft_strlen(temp) > name_len)
+                && (temp[name_len] == '='))
         {
-            if (DEBUG == 1)
-                pf_printf("found one %s and %c\n", content[index],
-                        content[index][ft_strlen(info->name)]);
-            index++;
-            if (turn_marker)
+            char    *value;
+            char    *newline;
+            char    saved_char;
+            int     check_result;
+
+            value = &temp[name_len + 1];
+            newline = ft_strchr(value, '\n');
+            saved_char = '\0';
+            if (newline)
             {
-                removed_turn = 1;
-                if (content[index])
-                    pf_printf_fd(initiative_file, "--turn--");
-                turn_marker = 0;
+                saved_char = *newline;
+                *newline = '\0';
             }
-            continue ;
+            check_result = ft_check_value(value);
+            if (newline)
+                *newline = saved_char;
+            if (check_result == FT_SUCCESS)
+            {
+                if (DEBUG == 1)
+                    pf_printf("found one %s and %c\n", content[index],
+                            content[index][name_len]);
+                index++;
+                if (turn_marker)
+                {
+                    removed_turn = 1;
+                    if (content[index])
+                        pf_printf_fd(initiative_file, "--turn--");
+                    turn_marker = 0;
+                }
+                continue ;
+            }
         }
         pf_printf_fd(initiative_file, "%s", content[index]);
         turn_marker = 0;
