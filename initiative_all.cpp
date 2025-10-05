@@ -13,6 +13,7 @@
 #include <cstring>
 #include <cerrno>
 #include <dirent.h>
+#include <sys/stat.h>
 
 static t_char *ft_check_name(t_name *name, char *file_name)
 {
@@ -195,44 +196,54 @@ void ft_open_all_files(t_name *name)
             pf_printf("%s\n", filepath);
         if (ft_strncmp(entry->d_name, "data--", 6) == 0)
             continue ;
-        if (entry->d_type == DT_REG)
-        {
-            ft_file file;
-            file.open(filepath, O_RDONLY);
-            if (file.get_error())
-            {
-                pf_printf_fd(2, "Unable to open file '%s': %s\n", filepath, strerror(errno));
-                continue ;
-            }
-            if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
-            {
-                player = ft_read_pc_file(file, entry->d_name, filepath);
-                if (!player)
-                    continue ;
-                ft_initiative_write(player->initiative, entry->d_name);
-                ft_free_pc(player);
-                continue ;
-            }
-            info = ft_read_all_files(file, name, filepath);
-            if (!info)
-                continue ;
-            if (DEBUG == 1)
-                pf_printf("2. Name of the save file is %s\n", filepath);
-            ft_file write_file;
-            write_file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-            if (write_file.get_error())
-            {
-                pf_printf_fd(2, "Unable to open file '%s' for writing: %s\n",
-                             filepath, strerror(errno));
-                ft_free_info(info);
-                continue ;
-            }
-            ft_npc_write_file(info, &info->stats, &info->c_resistance, write_file);
-            if (error == 0)
-                ft_initiative_write(info->initiative, entry->d_name);
+        int is_regular_file;
+        struct stat path_stat;
 
-            ft_free_info(info);
+        is_regular_file = 0;
+        if (entry->d_type == DT_REG)
+            is_regular_file = 1;
+        else if (entry->d_type == DT_UNKNOWN)
+        {
+            if (stat(filepath, &path_stat) == 0 && S_ISREG(path_stat.st_mode))
+                is_regular_file = 1;
         }
+        if (is_regular_file == 0)
+            continue ;
+        ft_file file;
+        file.open(filepath, O_RDONLY);
+        if (file.get_error())
+        {
+            pf_printf_fd(2, "Unable to open file '%s': %s\n", filepath, strerror(errno));
+            continue ;
+        }
+        if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
+        {
+            player = ft_read_pc_file(file, entry->d_name, filepath);
+            if (!player)
+                continue ;
+            ft_initiative_write(player->initiative, entry->d_name);
+            ft_free_pc(player);
+            continue ;
+        }
+        info = ft_read_all_files(file, name, filepath);
+        if (!info)
+            continue ;
+        if (DEBUG == 1)
+            pf_printf("2. Name of the save file is %s\n", filepath);
+        ft_file write_file;
+        write_file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+        if (write_file.get_error())
+        {
+            pf_printf_fd(2, "Unable to open file '%s' for writing: %s\n",
+                         filepath, strerror(errno));
+            ft_free_info(info);
+            continue ;
+        }
+        ft_npc_write_file(info, &info->stats, &info->c_resistance, write_file);
+        if (error == 0)
+            ft_initiative_write(info->initiative, entry->d_name);
+
+        ft_free_info(info);
     }
     file_closedir(dir);
     ft_file initiative_file;
