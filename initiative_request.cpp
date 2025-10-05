@@ -11,6 +11,7 @@ int ft_request_initiative(t_pc *player)
     char *message;
     char *input;
     int initiative;
+    int has_initiative;
 
     if (g_dnd_test == true)
     {
@@ -25,6 +26,7 @@ int ft_request_initiative(t_pc *player)
             ft_strerror(ft_errno));
         return (1);
     }
+    has_initiative = 0;
     while ((input = rl_readline(message)))
     {
         if (ft_check_value(input))
@@ -41,8 +43,11 @@ int ft_request_initiative(t_pc *player)
             continue ;
         }
         player->initiative = initiative;
+        has_initiative = 1;
         break ;
     }
     cma_free(message);
+    if (has_initiative == 0)
+        return (2);
     return (0);
 }
