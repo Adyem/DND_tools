@@ -144,7 +144,10 @@ static t_pc *ft_read_pc_file(ft_file &file, char *filename, char *filepath)
     }
     file.open(filepath, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if (file.get_error())
+    {
+        ft_free_pc(player);
         return (ft_nullptr);
+    }
     ft_save_pc(player, file);
     return (player);
 }
