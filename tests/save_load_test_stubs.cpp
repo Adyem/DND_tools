@@ -34,13 +34,6 @@ void ft_print_character_status(t_char * info, int number, int temp)
     return ;
 }
 
-void ft_set_debuf_blinded(t_char * info, const char **input)
-{
-    (void)info;
-    (void)input;
-    return ;
-}
-
 void ft_npc_update_lightning_strike(t_char * info, const char **input)
 {
     (void)info;
