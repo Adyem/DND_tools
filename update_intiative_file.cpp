@@ -165,6 +165,7 @@ void ft_initiative_add(t_char * info)
     int     error;
     int     count;
     int     turn_marker_present;
+    int     turn_marker_count;
     typedef struct s_validated_line
     {
         char    *line;
@@ -220,6 +221,7 @@ void ft_initiative_add(t_char * info)
     }
     i = 0;
     turn_marker_present = 0;
+    turn_marker_count = 0;
     size_t  line_len;
 
     while (i < count)
@@ -249,7 +251,18 @@ void ft_initiative_add(t_char * info)
             }
         }
         if (ft_strncmp(validated[i].line, "--turn--", 8) == 0)
+        {
+            turn_marker_count++;
+            if (turn_marker_count > 1)
+            {
+                if (validated)
+                    free(validated);
+                cma_free_double(content);
+                pf_printf("Error: data--initiative file is corrupted\n");
+                return ;
+            }
             turn_marker_present = 1;
+        }
         error = ft_initiative_check(info, content, i);
         if (DEBUG == 1)
             pf_printf("%s\n", content[i]);
