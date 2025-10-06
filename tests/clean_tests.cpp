@@ -46,7 +46,9 @@ static void test_ft_clean_preserves_player_directory()
 
 void run_clean_tests()
 {
+    test_begin_suite("clean_tests");
     test_ft_clean_preserves_player_directory();
+    test_end_suite_success();
     return ;
 }
 

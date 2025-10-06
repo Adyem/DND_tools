@@ -268,27 +268,38 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/roll_command_argument_tests.cpp \
              tests/roll_command_expression_tests.cpp \
              tests/roll_command_error_tests.cpp \
+             tests/dice_roll_tests.cpp \
              tests/clean_tests.cpp \
              tests/check_name_tests.cpp \
+             tests/check_equipment_tests.cpp \
+             tests/check_buff_tests.cpp \
+             tests/attack_utils_tests.cpp \
              tests/resistance_tests.cpp \
              tests/calculate_stats_tests.cpp \
              tests/calculate_skills_tests.cpp \
              tests/calculate_util_stats_tests.cpp \
              tests/divine_smite_tests.cpp \
              tests/concentration_tests.cpp \
+             tests/set_debuf_tests.cpp \
+             tests/npc_check_info_tests.cpp \
+             attack_utils.cpp \
              spell_utils.cpp \
              readline_check.cpp \
              fclean.cpp \
              tests/spell_utils_tests.cpp \
              tests/create_data_folder_tests.cpp \
+             tests/add_element_tests.cpp \
               tests/save_load_test_stubs.cpp \
               tests/save_load_tests.cpp \
              divine_smite_utils.cpp \
-              trim_start.cpp \
-              ordinal_suffix.cpp \
-              roll.cpp \
-              create_data_folder.cpp \
-              save_player.cpp \
+             trim_start.cpp \
+             set_debuf.cpp \
+             ordinal_suffix.cpp \
+             roll.cpp \
+             roll_dice.cpp \
+             create_data_folder.cpp \
+             add_element.cpp \
+             save_player.cpp \
               save_data.cpp \
               npc_stats.cpp \
               init_info.cpp \
@@ -308,6 +319,11 @@ TEST_SRC    = tests/automated_tests.cpp \
              calculate_util_stats.cpp \
              check_equipment.cpp \
              check_name.cpp \
+             check_buff_attack.cpp \
+             check_buff_save.cpp \
+             check_buff_skill.cpp \
+             check_buff_general.cpp \
+             check_buff_damage.cpp \
              cast_concentration_caster.cpp \
              utils01.cpp \
              initiative_pc.cpp

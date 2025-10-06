@@ -102,6 +102,7 @@ static void test_strtrim_prefix_with_longer_prefix_returns_copy()
 
 void run_string_prefix_tests()
 {
+    test_begin_suite("string_prefix_tests");
     test_strtrim_prefix_removes_prefix();
     test_strtrim_prefix_without_match_returns_copy();
     test_strtrim_prefix_handles_null_input();
@@ -110,5 +111,6 @@ void run_string_prefix_tests()
     test_strtrim_prefix_handles_empty_prefix();
     test_strtrim_prefix_only_removes_leading_match();
     test_strtrim_prefix_with_longer_prefix_returns_copy();
+    test_end_suite_success();
     return ;
 }

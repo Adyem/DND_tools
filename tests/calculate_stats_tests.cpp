@@ -183,6 +183,7 @@ static void test_calculate_ac_applies_negative_dex_modifier()
 
 void run_calculate_stats_tests()
 {
+    test_begin_suite("calculate_stats_tests");
     test_ability_mod_returns_zero_for_average_score();
     test_ability_mod_rounds_down_positive_scores();
     test_ability_mod_handles_negative_scores();
@@ -196,5 +197,6 @@ void run_calculate_stats_tests()
     test_calculate_ac_caps_dex_bonus();
     test_calculate_ac_uses_full_dex_when_under_cap();
     test_calculate_ac_applies_negative_dex_modifier();
+    test_end_suite_success();
     return ;
 }

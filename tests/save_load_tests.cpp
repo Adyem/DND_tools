@@ -146,13 +146,44 @@ static void test_npc_set_stats_player_entry_failure_sets_error()
     t_char npc = {};
     char *content[2];
     int parse_error;
+    const char  *output_path;
+    const char  *error_path;
+    std::string output_log;
+    std::string error_log;
+    const char  *expected_message;
 
     npc.name = const_cast<char *>("Test NPC");
     content[0] = const_cast<char *>("SPELL_MAGIC_DRAIN=INVALID_PLAYER_ENTRY");
     content[1] = ft_nullptr;
+    output_path = "tests_output/save_load_player_entry_output.log";
+    error_path = "tests_output/save_load_player_entry_error.log";
+    expected_message = "1-Something is wrong with the save file for Test NPC at the line: "
+        "SPELL_MAGIC_DRAIN=INVALID_PLAYER_ENTRY, please reinitialize the save\n";
+    test_begin_output_capture(output_path);
+    test_begin_error_capture(error_path);
     parse_error = ft_set_stats(&npc, content);
+    test_end_output_capture();
+    test_end_error_capture();
     test_assert_true(parse_error == 1, "ft_set_stats did not report failure when player entry validation failed");
     test_assert_true(npc.flags.error == 1, "ft_set_stats did not set the NPC error flag when player entry validation failed");
+    output_log = test_read_file_to_string(output_path);
+    error_log = test_read_file_to_string(error_path);
+    test_assert_true(!output_log.empty() || !error_log.empty(),
+        "ft_set_stats should log validation failures");
+    if (!output_log.empty())
+    {
+        test_assert_true(output_log == expected_message,
+            "ft_set_stats should describe the invalid player entry in stdout");
+        test_assert_true(error_log.empty(),
+            "ft_set_stats should not duplicate the error message across streams");
+    }
+    else
+    {
+        test_assert_true(error_log == expected_message,
+            "ft_set_stats should describe the invalid player entry in stderr");
+    }
+    test_delete_file(output_path);
+    test_delete_file(error_path);
     if (npc.spells.magic_drain.target)
     {
         cma_free(npc.spells.magic_drain.target);
@@ -311,9 +342,11 @@ static void test_player_json_save_and_load()
 
 void run_save_load_tests()
 {
+    test_begin_suite("save_load_tests");
     test_npc_set_stats_player_entry_failure_sets_error();
     test_npc_json_save_writes_lines();
     test_npc_json_load_populates_fields();
     test_player_json_save_and_load();
+    test_end_suite_success();
     return ;
 }

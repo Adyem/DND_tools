@@ -75,10 +75,12 @@ static void test_calculate_crit_attack_success_bonus_includes_belt_slot()
 
 void run_calculate_util_stats_tests()
 {
+    test_begin_suite("calculate_util_stats_tests");
     test_calculate_crit_attack_fail_bonus_sums_all_slots();
     test_calculate_crit_attack_success_bonus_handles_negatives();
     test_calculate_crit_attack_success_bonus_defaults_to_zero();
     test_calculate_crit_attack_fail_bonus_handles_negative_modifiers();
     test_calculate_crit_attack_success_bonus_includes_belt_slot();
+    test_end_suite_success();
     return ;
 }

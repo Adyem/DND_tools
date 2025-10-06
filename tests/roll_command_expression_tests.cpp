@@ -4,6 +4,7 @@
 #include "../libft/CMA/CMA.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
 #include "../libft/Errno/errno.hpp"
+#include <string>
 
 static void test_command_roll_handles_parentheses_and_unary_minus()
 {
@@ -51,13 +52,24 @@ static void test_command_roll_rejects_uppercase_dice_identifier()
 {
     char *arguments[3];
     int *result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     arguments[0] = const_cast<char *>("roll");
     arguments[1] = const_cast<char *>("1D1+2");
     arguments[2] = ft_nullptr;
+    file_path = "tests_output/roll_command_uppercase_identifier.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll(arguments);
+    test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject uppercase dice identifiers");
     test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL for uppercase dice identifiers");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "403-Error: Failed to evaluate roll expression: 1D1+2\n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll should log uppercase dice identifier error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -200,6 +212,7 @@ static void test_command_roll_evaluates_large_dice_counts_and_mixed_groups()
 
 void run_roll_command_expression_tests()
 {
+    test_begin_suite("roll_command_expression_tests");
     test_command_roll_handles_parentheses_and_unary_minus();
     test_command_roll_handles_multiple_dice_segments();
     test_command_roll_rejects_uppercase_dice_identifier();
@@ -210,5 +223,6 @@ void run_roll_command_expression_tests()
     test_command_roll_evaluates_deeply_nested_mixed_operations();
     test_command_roll_supports_leading_unary_parentheses_groups();
     test_command_roll_evaluates_large_dice_counts_and_mixed_groups();
+    test_end_suite_success();
     return ;
 }

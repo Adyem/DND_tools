@@ -3,6 +3,8 @@
 #include "../dnd_tools.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
 #include "../libft/Errno/errno.hpp"
+#include <string>
+#include <cstdio>
 
 static void test_command_roll_validate_accepts_valid_expression()
 {
@@ -19,10 +21,26 @@ static void test_command_roll_validate_rejects_mismatched_parenthesis()
 {
     char expression[] = "2d6+3)";
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
+    file_path = "tests_output/roll_validate_mismatched_parenthesis.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
+    test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate accepted an invalid roll expression");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll_validate should set errno to FT_EINVAL on invalid input");
+    char errno_message[128];
+
+    std::snprintf(errno_message, sizeof(errno_message),
+        "ft_command_roll_validate should set errno to FT_EINVAL on invalid input (errno %d)",
+        ft_errno);
+    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "405-Error: Roll validation failed for expression: 2d6+3)\n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll_validate should log mismatched parenthesis error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -40,10 +58,25 @@ static void test_command_roll_validate_accepts_complex_expression()
 static void test_command_roll_validate_handles_null_expression()
 {
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
+    char        errno_message[128];
 
+    file_path = "tests_output/roll_validate_null_expression.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll_validate(ft_nullptr);
+    test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression is null");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll_validate should set errno to FT_EINVAL when expression is null");
+    std::snprintf(errno_message, sizeof(errno_message),
+        "ft_command_roll_validate should set errno to FT_EINVAL when expression is null (errno %d)",
+        ft_errno);
+    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "404-Error: Roll validation expression is missing\n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll_validate should log null expression error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -51,10 +84,25 @@ static void test_command_roll_validate_rejects_empty_expression()
 {
     char expression[] = "";
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
+    char        errno_message[128];
 
+    file_path = "tests_output/roll_validate_empty_expression.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
+    test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression is empty");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll_validate should set errno to FT_EINVAL for empty expression");
+    std::snprintf(errno_message, sizeof(errno_message),
+        "ft_command_roll_validate should set errno to FT_EINVAL for empty expression (errno %d)",
+        ft_errno);
+    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "405-Error: Roll validation failed for expression: \n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll_validate should log empty expression error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -62,10 +110,25 @@ static void test_command_roll_validate_rejects_trailing_operator()
 {
     char expression[] = "2d6+";
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
+    char        errno_message[128];
 
+    file_path = "tests_output/roll_validate_trailing_operator.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
+    test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression ends with an operator");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll_validate should set errno to FT_EINVAL when expression ends with operator");
+    std::snprintf(errno_message, sizeof(errno_message),
+        "ft_command_roll_validate should set errno to FT_EINVAL when expression ends with operator (errno %d)",
+        ft_errno);
+    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "405-Error: Roll validation failed for expression: 2d6+\n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll_validate should log trailing operator error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -73,10 +136,25 @@ static void test_command_roll_validate_rejects_missing_dice_size()
 {
     char expression[] = "10d";
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
+    char        errno_message[128];
 
+    file_path = "tests_output/roll_validate_missing_dice_size.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
+    test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when dice sides are missing");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll_validate should set errno to FT_EINVAL when dice sides are missing");
+    std::snprintf(errno_message, sizeof(errno_message),
+        "ft_command_roll_validate should set errno to FT_EINVAL when dice sides are missing (errno %d)",
+        ft_errno);
+    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "405-Error: Roll validation failed for expression: 10d\n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll_validate should log missing dice size error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -84,10 +162,25 @@ static void test_command_roll_validate_rejects_invalid_characters()
 {
     char expression[] = "2d6+x";
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
+    char        errno_message[128];
 
+    file_path = "tests_output/roll_validate_invalid_characters.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
+    test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression contains invalid characters");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll_validate should set errno to FT_EINVAL for invalid characters");
+    std::snprintf(errno_message, sizeof(errno_message),
+        "ft_command_roll_validate should set errno to FT_EINVAL for invalid characters (errno %d)",
+        ft_errno);
+    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "405-Error: Roll validation failed for expression: 2d6+x\n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll_validate should log invalid character error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -106,15 +199,31 @@ static void test_command_roll_validate_rejects_whitespace()
 {
     char expression[] = "2d6 + 3";
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
+    char        errno_message[128];
 
+    file_path = "tests_output/roll_validate_whitespace.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
+    test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression contains whitespace");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll_validate should set errno to FT_EINVAL when whitespace appears in expression");
+    std::snprintf(errno_message, sizeof(errno_message),
+        "ft_command_roll_validate should set errno to FT_EINVAL when whitespace appears in expression (errno %d)",
+        ft_errno);
+    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "405-Error: Roll validation failed for expression: 2d6 + 3\n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll_validate should log whitespace error message");
+    test_delete_file(file_path);
     return ;
 }
 
 void run_roll_validation_tests()
 {
+    test_begin_suite("roll_validation_tests");
     test_command_roll_validate_accepts_valid_expression();
     test_command_roll_validate_rejects_mismatched_parenthesis();
     test_command_roll_validate_accepts_complex_expression();
@@ -125,5 +234,6 @@ void run_roll_validation_tests()
     test_command_roll_validate_rejects_invalid_characters();
     test_command_roll_validate_accepts_uppercase_dice_identifier();
     test_command_roll_validate_rejects_whitespace();
+    test_end_suite_success();
     return ;
 }

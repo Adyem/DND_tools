@@ -60,21 +60,34 @@ static void test_auto_cast_reports_error_when_no_valid_slot()
 {
     t_char character;
     int cast_level;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     initialize_character(&character, "Tester");
     character.spell_slots.level_4.available = 1;
+    file_path = "tests_output/spell_utils_auto_cast_error.log";
+    test_begin_error_capture(file_path);
     g_dnd_test = true;
     cast_level = ft_prompt_spell_level(&character, 5, "Wall of Light");
     g_dnd_test = false;
+    test_end_error_capture();
     test_assert_true(cast_level == -1,
             "Auto cast should fail when no slots meet the required level");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "Error: No available spell slots for Tester to cast Wall of Light.\n";
+    test_assert_true(error_output == expected_message,
+            "Auto cast should report missing spell slots in error output");
+    test_delete_file(file_path);
     return ;
 }
 
 void run_spell_utils_tests()
 {
+    test_begin_suite("spell_utils_tests");
     test_auto_cast_uses_exact_level_when_available();
     test_auto_cast_selects_next_highest_slot();
     test_auto_cast_reports_error_when_no_valid_slot();
+    test_end_suite_success();
     return ;
 }

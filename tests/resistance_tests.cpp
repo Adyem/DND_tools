@@ -399,6 +399,7 @@ static void test_calculate_psychic_dr_handles_mixed_values()
 
 void run_resistance_tests()
 {
+    test_begin_suite("resistance_tests");
     test_calculate_resistance_includes_character_base();
     test_calculate_resistance_defaults_to_zero();
     test_calculate_resistance_separates_types();
@@ -426,5 +427,6 @@ void run_resistance_tests()
     test_calculate_necrotic_dr_handles_negative_modifiers();
     test_calculate_poison_dr_totals_equipment();
     test_calculate_psychic_dr_handles_mixed_values();
+    test_end_suite_success();
     return ;
 }

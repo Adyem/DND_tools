@@ -67,9 +67,11 @@ static void test_ordinal_suffix_handles_non_positive_numbers()
 
 void run_ordinal_suffix_tests()
 {
+    test_begin_suite("ordinal_suffix_tests");
     test_ordinal_suffix_values();
     test_ordinal_suffix_table_matches_expected();
     test_ordinal_suffix_handles_teens();
     test_ordinal_suffix_handles_non_positive_numbers();
+    test_end_suite_success();
     return ;
 }

@@ -285,6 +285,7 @@ static void test_calculate_insight_sums_all_sources()
 
 void run_calculate_skills_tests()
 {
+    test_begin_suite("calculate_skills_tests");
     test_calculate_athletics_totals_all_sources();
     test_calculate_perception_handles_negative_modifiers();
     test_calculate_deception_isolated_from_other_skills();
@@ -303,5 +304,6 @@ void run_calculate_skills_tests()
     test_calculate_religion_includes_jewelry();
     test_calculate_animal_handling_defaults_to_zero();
     test_calculate_insight_sums_all_sources();
+    test_end_suite_success();
     return ;
 }

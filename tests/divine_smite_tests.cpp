@@ -83,8 +83,10 @@ static void test_divine_smite_does_not_reduce_damage_when_cast_lower()
 
 void run_divine_smite_tests()
 {
+    test_begin_suite("divine_smite_tests");
     test_divine_smite_upcast_adds_extra_dice();
     test_divine_smite_critical_upcast_doubles_dice();
     test_divine_smite_does_not_reduce_damage_when_cast_lower();
+    test_end_suite_success();
     return ;
 }
