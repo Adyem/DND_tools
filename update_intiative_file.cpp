@@ -169,6 +169,9 @@ void ft_initiative_add(t_char * info)
     {
         char    *line;
         char    *newline_mark;
+        char    saved_newline;
+        char    *carriage_mark;
+        char    saved_carriage;
         int     check_result;
     }   t_validated_line;
     t_validated_line   *validated;
@@ -217,6 +220,8 @@ void ft_initiative_add(t_char * info)
     }
     i = 0;
     turn_marker_present = 0;
+    size_t  line_len;
+
     while (i < count)
     {
         validated[i].line = content[i];
@@ -229,7 +234,20 @@ void ft_initiative_add(t_char * info)
             pf_printf("Error: data--initiative file is corrupted\n");
             return ;
         }
+        validated[i].saved_newline = *validated[i].newline_mark;
         *validated[i].newline_mark = '\0';
+        validated[i].carriage_mark = ft_nullptr;
+        validated[i].saved_carriage = '\0';
+        line_len = ft_strlen(validated[i].line);
+        if (line_len > 0)
+        {
+            if (validated[i].line[line_len - 1] == '\r')
+            {
+                validated[i].carriage_mark = &validated[i].line[line_len - 1];
+                validated[i].saved_carriage = *validated[i].carriage_mark;
+                *validated[i].carriage_mark = '\0';
+            }
+        }
         if (ft_strncmp(validated[i].line, "--turn--", 8) == 0)
             turn_marker_present = 1;
         error = ft_initiative_check(info, content, i);
@@ -288,7 +306,9 @@ void ft_initiative_add(t_char * info)
     i = 0;
     while (i < count)
     {
-        *validated[i].newline_mark = '\n';
+        if (validated[i].carriage_mark)
+            *validated[i].carriage_mark = validated[i].saved_carriage;
+        *validated[i].newline_mark = validated[i].saved_newline;
         i++;
     }
     if (validated)
