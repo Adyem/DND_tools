@@ -271,12 +271,14 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/clean_tests.cpp \
              tests/check_name_tests.cpp \
              tests/check_equipment_tests.cpp \
+             tests/attack_utils_tests.cpp \
              tests/resistance_tests.cpp \
              tests/calculate_stats_tests.cpp \
              tests/calculate_skills_tests.cpp \
              tests/calculate_util_stats_tests.cpp \
              tests/divine_smite_tests.cpp \
              tests/concentration_tests.cpp \
+             attack_utils.cpp \
              spell_utils.cpp \
              readline_check.cpp \
              fclean.cpp \

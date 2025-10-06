@@ -21,5 +21,6 @@ void    run_spell_utils_tests();
 void    run_concentration_tests();
 void    run_add_element_tests();
 void    run_check_equipment_tests();
+void    run_attack_utils_tests();
 
 #endif
