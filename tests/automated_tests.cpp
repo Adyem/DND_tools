@@ -15,6 +15,7 @@ int main()
     run_clean_tests();
     run_check_name_tests();
     run_check_equipment_tests();
+    run_check_buff_tests();
     run_attack_utils_tests();
     run_set_debuf_tests();
     run_save_load_tests();

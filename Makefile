@@ -271,6 +271,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/clean_tests.cpp \
              tests/check_name_tests.cpp \
              tests/check_equipment_tests.cpp \
+             tests/check_buff_tests.cpp \
              tests/attack_utils_tests.cpp \
              tests/resistance_tests.cpp \
              tests/calculate_stats_tests.cpp \
@@ -294,6 +295,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              set_debuf.cpp \
              ordinal_suffix.cpp \
              roll.cpp \
+             roll_dice.cpp \
              create_data_folder.cpp \
              add_element.cpp \
              save_player.cpp \
@@ -316,6 +318,11 @@ TEST_SRC    = tests/automated_tests.cpp \
              calculate_util_stats.cpp \
              check_equipment.cpp \
              check_name.cpp \
+             check_buff_attack.cpp \
+             check_buff_save.cpp \
+             check_buff_skill.cpp \
+             check_buff_general.cpp \
+             check_buff_damage.cpp \
              cast_concentration_caster.cpp \
              utils01.cpp \
              initiative_pc.cpp

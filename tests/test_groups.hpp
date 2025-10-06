@@ -24,5 +24,6 @@ void    run_check_equipment_tests();
 void    run_attack_utils_tests();
 void    run_set_debuf_tests();
 void    run_npc_check_info_tests();
+void    run_check_buff_tests();
 
 #endif
