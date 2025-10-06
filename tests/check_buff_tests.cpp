@@ -37,13 +37,24 @@ static void test_check_bless_returns_zero_on_dice_roll_error()
 {
     t_char  character = {};
     int     result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     character.name = "Acolyte";
     character.bufs.bless.duration = 2;
     character.bufs.bless.dice_amount_mod = 1;
     character.bufs.bless.dice_faces_mod = -1;
+    file_path = "tests_output/check_buff_bless_error.log";
+    test_begin_error_capture(file_path);
     result = ft_check_bless(&character);
+    test_end_error_capture();
     test_assert_true(result == 0, "ft_check_bless should return zero when dice rolling fails");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "144-Error: dice rolling bless\n";
+    test_assert_true(error_output == expected_message,
+        "ft_check_bless should log dice roll failure message");
+    test_delete_file(file_path);
     return ;
 }
 

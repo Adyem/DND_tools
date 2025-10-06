@@ -36,11 +36,22 @@ static void test_check_equipment_detects_two_handed_offhand()
 {
     t_char  character;
     int     result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     character = {};
     character.equipment.offhand_weapon.slot = SLOT_TWO_HANDED_WEAPON;
+    file_path = "tests_output/check_equipment_two_handed_offhand.log";
+    test_begin_error_capture(file_path);
     result = ft_check_equipment_slots(&character);
+    test_end_error_capture();
     test_assert_true(result == 1, "ft_check_equipment_slots should flag two-handed offhand weapon");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "135-Error: Two-handed weapon in offhand slot\n";
+    test_assert_true(error_output == expected_message,
+        "ft_check_equipment_slots should log two-handed offhand error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -48,12 +59,23 @@ static void test_check_equipment_detects_mismatched_armor_slot()
 {
     t_char  character;
     int     result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     character = {};
     set_valid_equipment_slots(&character);
     character.equipment.armor.slot = SLOT_SHIELD;
+    file_path = "tests_output/check_equipment_mismatched_armor.log";
+    test_begin_error_capture(file_path);
     result = ft_check_equipment_slots(&character);
+    test_end_error_capture();
     test_assert_true(result == 4, "ft_check_equipment_slots should return armor error code when armor slot mismatches");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "126-Error: Armor is not in the correct slot.\n";
+    test_assert_true(error_output == expected_message,
+        "ft_check_equipment_slots should log armor mismatch error message");
+    test_delete_file(file_path);
     return ;
 }
 
