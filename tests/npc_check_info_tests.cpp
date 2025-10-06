@@ -1,6 +1,7 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
+#include <string>
 
 static void configure_valid_character(t_char &character)
 {
@@ -140,11 +141,23 @@ static void test_npc_check_info_detects_health_above_max()
 {
     t_char character = {};
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     configure_valid_character(character);
     character.stats.health = 41;
+    file_path = "tests_output/npc_check_info_health.log";
+    test_begin_output_capture(file_path);
     result = ft_npc_check_info(&character);
+    test_end_output_capture();
     test_assert_true(result > 0, "ft_npc_check_info should report health values above maximum");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "Valid NPC: health value (41) out of bounds (0 to 40)\n"
+        "Valid NPC: Error with the save file, please reinitialize it with the correct values\n";
+    test_assert_true(error_output == expected_message,
+        "ft_npc_check_info should log health overflow details");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -152,11 +165,23 @@ static void test_npc_check_info_detects_spell_slot_overflow()
 {
     t_char character = {};
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     configure_valid_character(character);
     character.spell_slots.level_1.available = 4;
+    file_path = "tests_output/npc_check_info_spell_slots.log";
+    test_begin_output_capture(file_path);
     result = ft_npc_check_info(&character);
+    test_end_output_capture();
     test_assert_true(result == 1, "ft_npc_check_info should flag spell slot availability above total");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "Valid NPC: Available slots (4) for level_1 are out of range (0 to 3)\n"
+        "Valid NPC: Error with the save file, please reinitialize it with the correct values\n";
+    test_assert_true(error_output == expected_message,
+        "ft_npc_check_info should log spell slot overflow details");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -164,11 +189,23 @@ static void test_npc_check_info_detects_warlock_level_mismatch()
 {
     t_char character = {};
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     configure_valid_character(character);
     character.spell_slots.warlock.level = 0;
+    file_path = "tests_output/npc_check_info_warlock.log";
+    test_begin_output_capture(file_path);
     result = ft_npc_check_info(&character);
+    test_end_output_capture();
     test_assert_true(result == 1, "ft_npc_check_info should require warlock slot level when slots exist");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "Valid NPC: Warlock slot level is 0, but total (2) or available (2) slots are not 0\n"
+        "Valid NPC: Error with the save file, please reinitialize it with the correct values\n";
+    test_assert_true(error_output == expected_message,
+        "ft_npc_check_info should log warlock slot validation errors");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -176,11 +213,23 @@ static void test_npc_check_info_detects_resistance_out_of_bounds()
 {
     t_char character = {};
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     configure_valid_character(character);
     character.c_resistance.fire = 600;
+    file_path = "tests_output/npc_check_info_resistance.log";
+    test_begin_output_capture(file_path);
     result = ft_npc_check_info(&character);
+    test_end_output_capture();
     test_assert_true(result == 1, "ft_npc_check_info should clamp resistances to allowed range");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "Valid NPC: fire resistance value (600) out of bounds (-500 to 500)\n"
+        "Valid NPC: Error with the save file, please reinitialize it with the correct values\n";
+    test_assert_true(error_output == expected_message,
+        "ft_npc_check_info should log resistance range errors");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -188,11 +237,23 @@ static void test_npc_check_info_detects_hunters_mark_mismatch()
 {
     t_char character = {};
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     configure_valid_character(character);
     character.debufs.hunters_mark.amount = 1;
+    file_path = "tests_output/npc_check_info_hunters_mark.log";
+    test_begin_output_capture(file_path);
     result = ft_npc_check_info(&character);
+    test_end_output_capture();
     test_assert_true(result == 1, "ft_npc_check_info should validate hunters mark caster tracking");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "Valid NPC: hunters mark data is not correct\n"
+        "Valid NPC: Error with the save file, please reinitialize it with the correct values\n";
+    test_assert_true(error_output == expected_message,
+        "ft_npc_check_info should log hunter's mark mismatches");
+    test_delete_file(file_path);
     return ;
 }
 

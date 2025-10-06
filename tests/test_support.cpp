@@ -9,6 +9,7 @@
 #include <unistd.h>
 
 static int  g_saved_stderr_fd = -1;
+static int  g_saved_stdout_fd = -1;
 
 static void ensure_tests_output_directory()
 {
@@ -66,6 +67,44 @@ void    test_end_error_capture()
     test_assert_true(restore_result != -1, "Failed to restore stderr after capture");
     close(g_saved_stderr_fd);
     g_saved_stderr_fd = -1;
+    return ;
+}
+
+void    test_begin_output_capture(const char *file_path)
+{
+    FILE    *file;
+    int     file_descriptor;
+    int     duplicate_result;
+
+    if (file_path == NULL)
+        return ;
+    ensure_tests_output_directory();
+    std::fflush(stdout);
+    if (g_saved_stdout_fd == -1)
+    {
+        g_saved_stdout_fd = dup(fileno(stdout));
+        test_assert_true(g_saved_stdout_fd != -1, "Failed to duplicate stdout for capture");
+    }
+    file = std::fopen(file_path, "w");
+    test_assert_true(file != NULL, "Failed to open output capture file");
+    file_descriptor = fileno(file);
+    duplicate_result = dup2(file_descriptor, fileno(stdout));
+    test_assert_true(duplicate_result != -1, "Failed to redirect stdout to capture file");
+    std::fclose(file);
+    return ;
+}
+
+void    test_end_output_capture()
+{
+    int restore_result;
+
+    if (g_saved_stdout_fd == -1)
+        return ;
+    std::fflush(stdout);
+    restore_result = dup2(g_saved_stdout_fd, fileno(stdout));
+    test_assert_true(restore_result != -1, "Failed to restore stdout after capture");
+    close(g_saved_stdout_fd);
+    g_saved_stdout_fd = -1;
     return ;
 }
 
