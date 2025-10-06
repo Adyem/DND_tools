@@ -10,6 +10,7 @@
 #include <system_error>
 #include <cstdio>
 #include <fcntl.h>
+#include <string>
 
 static void remove_data_path()
 {
@@ -51,17 +52,28 @@ static void test_create_data_dir_reports_file_collision()
 {
     su_file *file_handle;
     int result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
 
     remove_data_path();
     file_handle = su_fopen("data", O_CREAT | O_RDWR, 0600);
     test_assert_true(file_handle != ft_nullptr, "failed to create file for collision test");
     if (file_handle != ft_nullptr)
         test_assert_true(su_fclose(file_handle) == 0, "failed to close collision file");
+    file_path = "tests_output/create_data_dir_collision.log";
+    test_begin_error_capture(file_path);
     result = ft_create_data_dir();
+    test_end_error_capture();
     test_assert_true(result == 1, "ft_create_data_dir should fail when path is a file");
     test_assert_true(ft_errno == ER_SUCCESS, "ft_create_data_dir should not modify errno for collision case");
     test_assert_true(file_exists("data") == 1, "collision file should remain after failure");
     test_assert_true(file_delete("data") == 0, "failed to delete collision file");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "004-Error path exists but is not a directory\n";
+    test_assert_true(error_output == expected_message,
+        "ft_create_data_dir should log collision error message");
+    test_delete_file(file_path);
     return ;
 }
 

@@ -5,6 +5,7 @@
 #include <system_error>
 #include <fstream>
 #include <cstdio>
+#include <string>
 
 static void reset_data_directory()
 {
@@ -60,8 +61,54 @@ static void test_check_name_handles_pc_prefix_variants()
     return ;
 }
 
+static void test_set_stats_check_name_rejects_null_name()
+{
+    int         result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
+
+    reset_data_directory();
+    file_path = "tests_output/check_name_null_name.log";
+    test_begin_error_capture(file_path);
+    result = ft_set_stats_check_name(NULL);
+    test_end_error_capture();
+    test_assert_true(result == -1, "ft_set_stats_check_name should return -1 when name is null");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "259-Error: Name does not exist\n";
+    test_assert_true(error_output == expected_message,
+        "ft_set_stats_check_name should log null name error message");
+    test_delete_file(file_path);
+    reset_data_directory();
+    return ;
+}
+
+static void test_set_stats_check_name_reports_missing_target()
+{
+    int         result;
+    const char  *file_path;
+    std::string error_output;
+    const char  *expected_message;
+
+    reset_data_directory();
+    file_path = "tests_output/check_name_missing_target.log";
+    test_begin_error_capture(file_path);
+    result = ft_set_stats_check_name("Unknown");
+    test_end_error_capture();
+    test_assert_true(result == 1, "ft_set_stats_check_name should return 1 when target does not exist");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "258-Error: Target does not exist\n";
+    test_assert_true(error_output == expected_message,
+        "ft_set_stats_check_name should log missing target error message");
+    test_delete_file(file_path);
+    reset_data_directory();
+    return ;
+}
+
 void run_check_name_tests()
 {
     test_check_name_handles_pc_prefix_variants();
+    test_set_stats_check_name_rejects_null_name();
+    test_set_stats_check_name_reports_missing_target();
     return ;
 }
