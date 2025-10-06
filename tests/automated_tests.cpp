@@ -23,12 +23,15 @@ int main()
     run_set_debuf_tests();
     run_save_load_tests();
     run_resistance_tests();
+    run_calculate_damage_reduction_tests();
     run_calculate_stats_tests();
     run_calculate_skills_tests();
     run_calculate_util_stats_tests();
     run_divine_smite_tests();
     run_spell_utils_tests();
     run_npc_check_info_tests();
+    run_get_pc_list_tests();
     run_concentration_tests();
+    run_deal_damage_tests();
     return (0);
 }

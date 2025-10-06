@@ -275,6 +275,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/check_buff_tests.cpp \
              tests/attack_utils_tests.cpp \
              tests/resistance_tests.cpp \
+             tests/calculate_damage_reduction_tests.cpp \
              tests/calculate_stats_tests.cpp \
              tests/calculate_skills_tests.cpp \
              tests/calculate_util_stats_tests.cpp \
@@ -282,12 +283,15 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/concentration_tests.cpp \
              tests/set_debuf_tests.cpp \
              tests/npc_check_info_tests.cpp \
+             tests/deal_damage_tests.cpp \
+             deal_damage.cpp \
              attack_utils.cpp \
              spell_utils.cpp \
              readline_check.cpp \
              fclean.cpp \
              tests/spell_utils_tests.cpp \
              tests/create_data_folder_tests.cpp \
+             tests/get_pc_list_tests.cpp \
              tests/add_element_tests.cpp \
               tests/save_load_test_stubs.cpp \
               tests/save_load_tests.cpp \
@@ -300,14 +304,16 @@ TEST_SRC    = tests/automated_tests.cpp \
              create_data_folder.cpp \
              add_element.cpp \
              save_player.cpp \
-              save_data.cpp \
+             save_data.cpp \
               npc_stats.cpp \
               init_info.cpp \
               npc_set_stats.cpp \
               npc_set_stats_string.cpp \
              npc_set_stats_player.cpp \
+             initialize.cpp \
              fetch_target.cpp \
              get_character_info.cpp \
+             get_pc_list.cpp \
              initialize_key_value_pairs.cpp \
              treeNode.cpp \
              treeNode_functions.cpp \
@@ -326,6 +332,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              check_buff_damage.cpp \
              cast_concentration_caster.cpp \
              utils01.cpp \
+             utils02.cpp \
              initiative_pc.cpp
 
 TEST_OBJS   = $(TEST_SRC:%.cpp=$(OBJ_DIR_TEST)/%.o)

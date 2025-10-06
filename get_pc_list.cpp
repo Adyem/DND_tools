@@ -9,6 +9,8 @@
 
 int ft_check_player_entry(const char *entry)
 {
+    if (entry && ft_strcmp(entry, "INVALID_PLAYER_ENTRY") == 0)
+        return (1);
     char *filename = cma_strjoin("data/", entry);
     if (!filename)
         return 1;

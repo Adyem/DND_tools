@@ -14,6 +14,7 @@ void    run_check_name_tests();
 void    run_create_data_folder_tests();
 void    run_save_load_tests();
 void    run_resistance_tests();
+void    run_calculate_damage_reduction_tests();
 void    run_calculate_stats_tests();
 void    run_calculate_skills_tests();
 void    run_calculate_util_stats_tests();
@@ -26,5 +27,7 @@ void    run_attack_utils_tests();
 void    run_set_debuf_tests();
 void    run_npc_check_info_tests();
 void    run_check_buff_tests();
+void    run_deal_damage_tests();
+void    run_get_pc_list_tests();
 
 #endif

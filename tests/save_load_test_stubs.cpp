@@ -1,13 +1,6 @@
 #include "../dnd_tools.hpp"
 #include <cstring>
 
-int ft_check_player_entry(const char *entry)
-{
-    if (entry && std::strcmp(entry, "INVALID_PLAYER_ENTRY") == 0)
-        return (1);
-    return (0);
-}
-
 void ft_kill(t_char * info)
 {
     (void)info;
@@ -104,13 +97,10 @@ void ft_cast_hunters_mark(t_char *info, const char **input)
     return ;
 }
 
-void ft_deal_damage(t_char * info, const char *input, const char *d_type, int resistance, int concentration)
+void ft_check_concentration(t_char * info, int damage)
 {
     (void)info;
-    (void)input;
-    (void)d_type;
-    (void)resistance;
-    (void)concentration;
+    (void)damage;
     return ;
 }
 
