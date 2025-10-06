@@ -279,6 +279,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/divine_smite_tests.cpp \
              tests/concentration_tests.cpp \
              tests/set_debuf_tests.cpp \
+             tests/npc_check_info_tests.cpp \
              attack_utils.cpp \
              spell_utils.cpp \
              readline_check.cpp \
