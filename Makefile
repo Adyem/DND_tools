@@ -270,6 +270,7 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/roll_command_error_tests.cpp \
              tests/clean_tests.cpp \
              tests/check_name_tests.cpp \
+             tests/check_equipment_tests.cpp \
              tests/resistance_tests.cpp \
              tests/calculate_stats_tests.cpp \
              tests/calculate_skills_tests.cpp \
@@ -281,14 +282,16 @@ TEST_SRC    = tests/automated_tests.cpp \
              fclean.cpp \
              tests/spell_utils_tests.cpp \
              tests/create_data_folder_tests.cpp \
+             tests/add_element_tests.cpp \
               tests/save_load_test_stubs.cpp \
               tests/save_load_tests.cpp \
              divine_smite_utils.cpp \
               trim_start.cpp \
               ordinal_suffix.cpp \
-              roll.cpp \
-              create_data_folder.cpp \
-              save_player.cpp \
+             roll.cpp \
+             create_data_folder.cpp \
+             add_element.cpp \
+             save_player.cpp \
               save_data.cpp \
               npc_stats.cpp \
               init_info.cpp \

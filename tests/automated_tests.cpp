@@ -11,8 +11,10 @@ int main()
     run_roll_validation_tests();
     run_roll_command_tests();
     run_create_data_folder_tests();
+    run_add_element_tests();
     run_clean_tests();
     run_check_name_tests();
+    run_check_equipment_tests();
     run_save_load_tests();
     run_resistance_tests();
     run_calculate_stats_tests();

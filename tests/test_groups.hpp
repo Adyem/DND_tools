@@ -19,5 +19,7 @@ void    run_calculate_util_stats_tests();
 void    run_divine_smite_tests();
 void    run_spell_utils_tests();
 void    run_concentration_tests();
+void    run_add_element_tests();
+void    run_check_equipment_tests();
 
 #endif
