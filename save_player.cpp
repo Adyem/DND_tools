@@ -5,41 +5,30 @@
 #include "libft/JSon/document.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/Libft/libft.hpp"
-#include <cstdarg>
-#include <cstdio>
-#include <cstdlib>
 #include "key_list.hpp"
 
-static int ft_add_player_line(json_document &document, json_group *group, int index,
-        const char *format, ...)
+static int ft_add_player_field(json_document &document, json_group *group,
+        const char *key, const char *value)
 {
-    va_list args;
-    char *buffer;
-    size_t buffer_size;
-    FILE *stream;
-    char *index_string;
     json_item *item;
 
-    buffer = ft_nullptr;
-    buffer_size = 0;
-    stream = open_memstream(&buffer, &buffer_size);
-    if (!stream)
+    if (!group || !key || !value)
         return (1);
-    va_start(args, format);
-    ft_vfprintf(stream, format, args);
-    va_end(args);
-    fclose(stream);
-    if (!buffer)
+    item = document.create_item(key, value);
+    if (!item)
         return (1);
-    index_string = cma_itoa(index);
-    if (!index_string)
-    {
-        free(buffer);
+    document.add_item(group, item);
+    return (0);
+}
+
+static int ft_add_player_field_int(json_document &document, json_group *group,
+        const char *key, int value)
+{
+    json_item *item;
+
+    if (!group || !key)
         return (1);
-    }
-    item = document.create_item(index_string, buffer);
-    cma_free(index_string);
-    free(buffer);
+    item = document.create_item(key, value);
     if (!item)
         return (1);
     document.add_item(group, item);
@@ -49,23 +38,23 @@ static int ft_add_player_line(json_document &document, json_group *group, int in
 void    ft_save_pc(t_pc *player, ft_file &file)
 {
     json_document       document;
-    json_group          *group;
+    json_group          *player_group;
     char                *content;
 
-    group = document.create_group("lines");
-    if (!group)
+    player_group = document.create_group(PLAYER_JSON_GROUP_NAME);
+    if (!player_group)
     {
-        pf_printf_fd(2, "Failed to create JSON group for player save\n");
+        pf_printf_fd(2, "Failed to create JSON player group for player save\n");
         return ;
     }
-    document.append_group(group);
-    if (ft_add_player_line(document, group, 0, "NAME=%s", player->name)
-        || ft_add_player_line(document, group, 1, "INITIATIVE=%d", player->initiative)
-        || ft_add_player_line(document, group, 2, "%s%d", POSITION_X_KEY, player->position.x)
-        || ft_add_player_line(document, group, 3, "%s%d", POSITION_Y_KEY, player->position.y)
-        || ft_add_player_line(document, group, 4, "%s%d", POSITION_Z_KEY, player->position.z))
+    document.append_group(player_group);
+    if (ft_add_player_field(document, player_group, PLAYER_JSON_NAME_KEY, player->name)
+        || ft_add_player_field_int(document, player_group, PLAYER_JSON_INITIATIVE_KEY, player->initiative)
+        || ft_add_player_field_int(document, player_group, PLAYER_JSON_POSITION_X_KEY, player->position.x)
+        || ft_add_player_field_int(document, player_group, PLAYER_JSON_POSITION_Y_KEY, player->position.y)
+        || ft_add_player_field_int(document, player_group, PLAYER_JSON_POSITION_Z_KEY, player->position.z))
     {
-        pf_printf_fd(2, "Failed to build JSON player save\n");
+        pf_printf_fd(2, "Failed to build player fields for JSON save\n");
         return ;
     }
     content = document.write_to_string();

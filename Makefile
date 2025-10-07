@@ -254,7 +254,7 @@ export COMPILE_FLAGS
 ifeq ($(OS),Windows_NT)
     LDFLAGS     = $(LIBFT)
 else
-    LDFLAGS     = $(LIBFT) -lreadline
+    LDFLAGS     = $(LIBFT) -lreadline -pthread
 endif
 
 OBJS        = $(SRC:%.cpp=$(OBJ_DIR)/%.o)

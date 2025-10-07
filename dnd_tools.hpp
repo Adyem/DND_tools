@@ -7,6 +7,7 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 #include "libft/Libft/libft.hpp"
 #include "libft/CPP_class/class_string_class.hpp"
 #include "libft/Template/vector.hpp"
+#include "libft/JSon/document.hpp"
 #include "character.hpp"
 #include "player_character.hpp"
 #include "libft/CPP_class/class_file.hpp"
@@ -25,6 +26,12 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 # define RL_FAIL 3
 # define RL_CRIT_FAIL 4
 # define RL_INPUT_CANCEL 5
+# define PLAYER_JSON_GROUP_NAME "player"
+# define PLAYER_JSON_NAME_KEY "name"
+# define PLAYER_JSON_INITIATIVE_KEY "initiative"
+# define PLAYER_JSON_POSITION_X_KEY "position_x"
+# define PLAYER_JSON_POSITION_Y_KEY "position_y"
+# define PLAYER_JSON_POSITION_Z_KEY "position_z"
 
 extern bool g_dnd_test;
 
@@ -472,7 +479,8 @@ void        ft_clean(void);
 void        ft_check_initiative(t_char * info);
 void        ft_roll_initiative(t_char * info);
 void        ft_open_all_files(t_name *name);
-int         ft_check_stat_pc(t_pc *player, char **content, char *filename);
+int         ft_check_stat_pc_json_object(t_pc *player, json_document *document,
+                json_group *player_group, char *filename);
 int         ft_request_initiative(t_pc *player);
 void        ft_initiative_sort(ft_file &file);
 void        ft_initiative_sort_2(t_pc *players);
