@@ -5,7 +5,6 @@
 # define DEBUG 0
 #endif
 
-#include <csignal>
 #include "libft/Template/unordened_map.hpp"
 #include "libft/Template/set.hpp"
 #include "libft/CPP_class/class_string_class.hpp"

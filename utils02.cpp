@@ -1,7 +1,5 @@
 #include "dnd_tools.hpp"
 #include "libft/Errno/errno.hpp"
-#include <fcntl.h>
-#include <unistd.h>
 
 int ft_is_caster_name_present(ft_set<ft_string> *caster_name_list, const char *name)
 {

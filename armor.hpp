@@ -1,7 +1,6 @@
 #ifndef ARMOR_H
 # define ARMOR_H
 
-#include <stddef.h>
 #include "character.hpp"
 #include "identification.hpp"
 #include "initialize.hpp"

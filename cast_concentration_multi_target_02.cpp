@@ -4,10 +4,6 @@
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
-#include <cerrno>
-#include <cstdlib>
-#include <cstring>
-#include <strings.h>
 
 static void    ft_set_not_save_flag(t_target_data *target_data, t_char * info)
 {

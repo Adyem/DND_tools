@@ -3,14 +3,10 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/CPP_class/class_fd_istream.hpp"
 #include "libft/Errno/errno.hpp"
 #include "dnd_tools.hpp"
 #include "player_character.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <cstring>
-#include <cerrno>
+#include "read_file_lines.hpp"
 
 
 void ft_initiative_print(void)
@@ -24,8 +20,7 @@ void ft_initiative_print(void)
         pf_printf("Error opening file: %s\n", file.get_error_str());
         return ;
     }
-    ft_fd_istream file_stream(file.get_fd());
-    content = ft_read_file_lines(file_stream, 1024);
+    content = ft_read_file_lines_fd(file.get_fd(), 1024);
     if (!content)
     {
         if (ft_errno == ER_SUCCESS)

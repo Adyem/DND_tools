@@ -1,7 +1,6 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "dnd_tools.hpp"
-#include <cstdlib>
 
 void    ft_free_info(t_char * info)
 {

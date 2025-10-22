@@ -5,8 +5,6 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "set_utils.hpp"
-#include <cstdlib>
-#include <cstring>
 
 #define MAKE_BUFF_BLESS(bless, level, target_str) \
     (t_buff) { \

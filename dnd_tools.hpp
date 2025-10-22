@@ -3,7 +3,6 @@
 
 static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 
-#include <cstdio>
 #include "libft/Libft/libft.hpp"
 #include "libft/CPP_class/class_string_class.hpp"
 #include "libft/Template/vector.hpp"

@@ -1,4 +1,3 @@
-#include <cerrno>
 #include "dnd_tools.hpp"
 #include "chaos_crystal.hpp"
 #include "libft/Printf/printf.hpp"
@@ -6,10 +5,6 @@
 #include "libft/Errno/errno.hpp"
 #include "libft/RNG/rng.hpp"
 #include "veraak.hpp"
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
 static void ft_chaos_crystal_damage(t_char * info)
 {

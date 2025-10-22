@@ -6,7 +6,6 @@
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
-#include <stddef.h>
 
 typedef struct    s_name t_name;
 typedef struct    s_char t_char;

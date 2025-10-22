@@ -4,12 +4,8 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/class_file.hpp"
+#include "libft/Errno/errno.hpp"
 #include "dnd_tools.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <cstdlib>
-#include <cerrno>
-#include <cstring>
 
 
 static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
@@ -33,10 +29,6 @@ static void ft_cast_concentration_cleanup(t_char *info, t_char *target,
         pf_printf("299-Error allocating memory for targets\n");
     else if (error == 3)
         pf_printf("299-Error allocating memory for targets[0]\n");
-    else if (error == 4)
-        pf_printf("320-Error opening file: %s\n", strerror(errno));
-    else if (error == 5)
-        pf_printf("321-Error opening file: %s\n", strerror(errno));
     if (target)
         ft_free_info(target);
     return ;
@@ -82,13 +74,13 @@ static int ft_cast_concentration_open_file(ft_file save_files[2], t_char *info,
     if (ft_open_file_write_only(info->save_file, save_files[0]))
     {
         pf_printf_fd(2, "Unexpected error opening file %s: %s\n", info->save_file,
-                strerror(errno));
+                ft_strerror(ft_errno));
         return (1);
     }
     if (ft_open_file_write_only(target->save_file, save_files[1]))
     {
         pf_printf_fd(2, "Unexpected error opening file %s: %s\n", target->save_file,
-                strerror(errno));
+                ft_strerror(ft_errno));
         cma_free(info->concentration.targets[0]);
         cma_free(info->concentration.targets);
         info->concentration.targets = ft_nullptr;

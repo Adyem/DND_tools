@@ -5,12 +5,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/CPP_class/class_fd_istream.hpp"
-#include <cstdlib>
-#include <fcntl.h>
-#include <unistd.h>
-#include <cerrno>
-#include <cstring>
+#include "read_file_lines.hpp"
 
 static int ft_turn_check_marker(t_pc *players)
 {
@@ -180,8 +175,7 @@ void ft_turn_next(t_name *name)
         pf_printf("Error opening data initiative file %s\n", initiative_file.get_error_str());
         return ;
     }
-    ft_fd_istream initiative_stream(initiative_file.get_fd());
-    content = ft_read_file_lines(initiative_stream, 1024);
+    content = ft_read_file_lines_fd(initiative_file.get_fd(), 1024);
     if (!content)
         return ;
     players = ft_initiative_players_am(content);

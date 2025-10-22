@@ -1,7 +1,7 @@
 #include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
 #include "libft/Libft/libft.hpp"
-#include <unistd.h>
+#include "libft/File/file_utils.hpp"
 
 static void ft_remove_dead_shadow_illusion(t_char *info, int had_turn)
 {
@@ -9,7 +9,7 @@ static void ft_remove_dead_shadow_illusion(t_char *info, int had_turn)
     {
         if (info->save_file)
         {
-            if (unlink(info->save_file) == 0 && DEBUG == 1)
+            if (file_delete(info->save_file) == 0 && DEBUG == 1)
                 pf_printf("Deleted save file for %s\n", info->name);
         }
         if (had_turn)

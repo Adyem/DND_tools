@@ -3,8 +3,7 @@
 #include "../dnd_tools.hpp"
 #include "../libft/CMA/CMA.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
-
-#include <string>
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void initialize_character(t_char &character, const char *name)
 {
@@ -21,7 +20,7 @@ static void test_deal_damage_applies_flat_reduction()
 {
     t_char      character;
     const char  *output_path;
-    std::string output;
+    ft_string   output;
 
     initialize_character(character, "Test Warrior");
     character.equipment.shield.flat_dr.slashing = 3;
@@ -41,7 +40,7 @@ static void test_deal_damage_applies_resistance_and_growth()
 {
     t_char      character;
     const char  *output_path;
-    std::string output;
+    ft_string   output;
 
     initialize_character(character, "Test Guardian");
     character.stats.health = 18;
@@ -63,7 +62,7 @@ static void test_deal_damage_handles_unknown_type()
 {
     t_char      character;
     const char  *error_path;
-    std::string error_output;
+    ft_string   error_output;
 
     initialize_character(character, "Test Ranger");
     character.stats.health = 25;

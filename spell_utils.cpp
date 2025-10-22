@@ -4,7 +4,6 @@
 #include "libft/RNG/rng.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
-#include <cassert>
 
 static t_spell_slot *ft_get_spell_slot(t_char *character, int level)
 {
@@ -78,7 +77,12 @@ static ft_string ft_check_availeble_spell_slots(t_char *character, int base_leve
 
 int ft_prompt_spell_level(t_char *character, int base_level, const char *spell_name)
 {
-    assert(base_level >= 0 && base_level <= 9);
+    if (!(base_level >= 0 && base_level <= 9))
+    {
+        pf_printf_fd(2, "Error: Invalid base level %d for %s.\n", base_level,
+                spell_name ? spell_name : "spell");
+        return (-1);
+    }
 
     if (g_dnd_test)
         return (ft_auto_cast(character, base_level, spell_name));
@@ -161,7 +165,11 @@ static void ft_set_slot_used(t_spell_slot *spell_slot)
 
 void ft_remove_spell_slot(t_spell_slots *spell_slots, int level_spell_used)
 {
-    assert(level_spell_used >= 1 && level_spell_used <= 9);
+    if (!(level_spell_used >= 1 && level_spell_used <= 9))
+    {
+        pf_printf_fd(2, "Error: Invalid spell slot level %d.\n", level_spell_used);
+        return ;
+    }
 
     if (level_spell_used == 1 && spell_slots->level_1.available > 0)
         ft_set_slot_used(&spell_slots->level_1);

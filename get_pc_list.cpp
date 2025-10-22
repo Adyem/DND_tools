@@ -4,8 +4,6 @@
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/File/open_dir.hpp"
-#include <fcntl.h>
-#include <unistd.h>
 
 int ft_check_player_entry(const char *entry)
 {
@@ -14,8 +12,10 @@ int ft_check_player_entry(const char *entry)
     char *filename = cma_strjoin("data/", entry);
     if (!filename)
         return 1;
-    if (access(filename, R_OK | W_OK) == 0)
+    ft_file permission_check(filename, O_RDWR);
+    if (!permission_check.get_error())
     {
+        permission_check.close();
         cma_free(filename);
         return 1;
     }

@@ -1,8 +1,6 @@
 #include "treeNode.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/Libft/libft.hpp"
-#include <csignal>
-#include <cassert>
 
 TreeNode *tree_node_new(void)
 {

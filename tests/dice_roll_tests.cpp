@@ -3,14 +3,14 @@
 #include "../dnd_tools.hpp"
 #include "../libft/Errno/errno.hpp"
 #include "../libft/RNG/rng.hpp"
-#include <string>
-#include <cstdio>
+#include "../libft/Printf/printf.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void test_dice_roll_rejects_invalid_parameters()
 {
     int         result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     file_path = "tests_output/dice_roll_invalid_parameters.log";
@@ -21,7 +21,7 @@ static void test_dice_roll_rejects_invalid_parameters()
         "ft_dice_roll should return -1 when the number of dice is invalid");
     char errno_message[128];
 
-    std::snprintf(errno_message, sizeof(errno_message),
+    pf_snprintf(errno_message, sizeof(errno_message),
         "ft_dice_roll should set errno to FT_EINVAL for invalid dice parameters (errno %d)",
         ft_errno);
     test_assert_true(ft_errno == FT_EINVAL, errno_message);

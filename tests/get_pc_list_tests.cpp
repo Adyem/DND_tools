@@ -2,35 +2,37 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
-#include <filesystem>
-#include <fstream>
-#include <string>
+#include "../libft/CPP_class/class_ofstream.hpp"
+#include "../libft/Libft/libft.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void remove_data_directory()
 {
-    std::error_code error;
-
-    std::filesystem::remove_all("data", error);
+    test_remove_directory("data");
+    test_remove_path("data");
     return ;
 }
 
 static void ensure_data_directory()
 {
-    std::error_code error;
-
-    std::filesystem::create_directories("data", error);
-    test_assert_true(error.value() == 0, "failed to create data directory for test setup");
+    test_create_directory("data");
+    test_assert_true(ft_errno == ER_SUCCESS,
+        "failed to create data directory for test setup");
     return ;
 }
 
-static void create_data_file(const std::string &name)
+static void create_data_file(const ft_string &name)
 {
-    std::ofstream file_stream;
+    ft_ofstream file_stream;
+    ft_string   file_path;
 
     ensure_data_directory();
-    file_stream.open("data/" + name);
-    test_assert_true(file_stream.is_open(), "failed to create data file for test setup");
+    file_path = ft_string("data/") + name;
+    test_assert_true(file_stream.open(file_path.c_str()) == 0,
+        "failed to create data file for test setup");
     file_stream.close();
+    test_assert_true(file_stream.get_error() == ER_SUCCESS,
+        "failed to close data file after creation");
     return ;
 }
 
@@ -160,7 +162,7 @@ static void test_get_pc_list_reports_when_directory_has_no_players()
     ft_vector<ft_string>    player_list;
     size_t                  size;
     const char              *capture_path;
-    std::string             error_output;
+    ft_string               error_output;
 
     remove_data_directory();
     ensure_data_directory();

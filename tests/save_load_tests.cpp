@@ -7,17 +7,13 @@
 #include "../libft/CPP_class/class_string_class.hpp"
 #include "../libft/JSon/document.hpp"
 #include "../libft/File/file_utils.hpp"
-#include <filesystem>
-#include <system_error>
-#include <cstring>
-#include <cstdlib>
-#include <fcntl.h>
+#include "../libft/Libft/libft.hpp"
 
 static void ensure_tests_output_directory()
 {
-    std::error_code error_code;
-    std::filesystem::create_directories("tests_output", error_code);
-    test_assert_true(error_code.value() == 0, "Failed to create tests_output directory");
+    test_create_directory("tests_output");
+    test_assert_true(ft_errno == ER_SUCCESS,
+        "Failed to create tests_output directory");
     return ;
 }
 
@@ -28,11 +24,11 @@ static char *duplicate_line(const char *value)
 
     if (!value)
         return (ft_nullptr);
-    length = std::strlen(value);
-    copy = static_cast<char *>(std::malloc(length + 1));
+    length = static_cast<size_t>(ft_strlen(value));
+    copy = static_cast<char *>(cma_malloc(length + 1));
     if (!copy)
         return (ft_nullptr);
-    std::memcpy(copy, value, length + 1);
+    ft_memcpy(copy, value, length + 1);
     return (copy);
 }
 
@@ -57,7 +53,7 @@ static char **load_json_lines_from_file(const char *file_path)
         count++;
         item = item->next;
     }
-    content = static_cast<char **>(std::malloc(sizeof(char *) * (count + 1)));
+    content = static_cast<char **>(cma_calloc(count + 1, sizeof(char *)));
     if (!content)
         return (ft_nullptr);
     index = 0;
@@ -71,10 +67,10 @@ static char **load_json_lines_from_file(const char *file_path)
             size_t cleanup_index = 0;
             while (content[cleanup_index])
             {
-                std::free(content[cleanup_index]);
+                cma_free(content[cleanup_index]);
                 cleanup_index++;
             }
-            std::free(content);
+            cma_free(content);
             return (ft_nullptr);
         }
         index++;
@@ -93,10 +89,10 @@ static void free_json_lines(char **content)
     index = 0;
     while (content[index])
     {
-        std::free(content[index]);
+        cma_free(content[index]);
         index++;
     }
-    std::free(content);
+    cma_free(content);
     return ;
 }
 
@@ -109,7 +105,7 @@ static bool lines_contains_line(char **content, const char *expected)
     index = 0;
     while (content[index])
     {
-        if (std::strcmp(content[index], expected) == 0)
+        if (ft_strcmp(content[index], expected) == 0)
             return (true);
         index++;
     }
@@ -329,7 +325,8 @@ static void test_player_json_save_and_load()
     test_assert_true(parse_error == 0, "Failed to parse player data from JSON save");
     test_assert_true(parsed.name != ft_nullptr, "Player name was not restored from JSON save");
     if (parsed.name)
-        test_assert_true(std::strcmp(parsed.name, "Player One") == 0, "Player name did not round-trip through JSON save");
+        test_assert_true(ft_strcmp(parsed.name, "Player One") == 0,
+            "Player name did not round-trip through JSON save");
     test_assert_true(parsed.initiative == player.initiative, "Player initiative did not round-trip through JSON save");
     test_assert_true(parsed.position.x == player.position.x, "Player position X did not round-trip through JSON save");
     test_assert_true(parsed.position.y == player.position.y, "Player position Y did not round-trip through JSON save");
@@ -389,7 +386,7 @@ static void test_player_json_object_load()
     test_assert_true(parse_error == 0, "Failed to parse player data from JSON object save");
     test_assert_true(parsed.name != ft_nullptr, "Player name not restored from JSON object save");
     if (parsed.name)
-        test_assert_true(std::strcmp(parsed.name, "Player Json") == 0,
+        test_assert_true(ft_strcmp(parsed.name, "Player Json") == 0,
             "Player name mismatch after JSON object load");
     test_assert_true(parsed.initiative == 13,
         "Player initiative mismatch after JSON object load");

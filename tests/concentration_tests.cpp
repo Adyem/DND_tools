@@ -3,10 +3,9 @@
 #include "../dnd_tools.hpp"
 #include "../character.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
-#include <filesystem>
-#include <fstream>
-#include <system_error>
-#include <string>
+#include "../libft/CPP_class/class_ofstream.hpp"
+#include "../libft/Libft/libft.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static t_char g_stub_target;
 
@@ -30,18 +29,21 @@ static t_char *load_stub_target(int index, const char **input, t_name *name, int
 
 static void create_data_entry(const char *path)
 {
-    std::filesystem::create_directories("data");
-    std::ofstream file(path);
-    test_assert_true(file.good(), "Failed to create data entry for test");
-    file.close();
+    ft_ofstream stream;
+
+    test_create_directory("data");
+    test_assert_true(ft_errno == ER_SUCCESS, "Failed to create data directory");
+    test_assert_true(stream.open(path) == 0, "Failed to create data entry for test");
+    stream.close();
+    test_assert_true(stream.get_error() == ER_SUCCESS,
+        "Failed to close data entry after creation");
     return ;
 }
 
 static void remove_data_entries()
 {
-    std::error_code remove_error;
-
-    std::filesystem::remove_all("data", remove_error);
+    test_remove_directory("data");
+    test_remove_path("data");
     return ;
 }
 
@@ -75,7 +77,7 @@ static void test_validate_fetch_skips_player_character()
     int         error_code;
     t_char      *result;
     const char  *file_path;
-    std::string output;
+    ft_string   output;
 
     create_data_entry("data/pc--guardian");
     reset_stub_target();
@@ -108,11 +110,11 @@ static void test_validate_fetch_reports_missing_target()
     t_char      *result;
     const char  *output_path;
     const char  *error_path;
-    std::string output_log;
-    std::string error_log;
+    ft_string   output_log;
+    ft_string   error_log;
     const char  *expected_message;
 
-    std::filesystem::create_directories("data");
+    test_create_directory("data");
     reset_stub_target();
     entry.name = const_cast<char *>("npc-target");
     entry.function = &load_stub_target;
@@ -138,7 +140,7 @@ static void test_validate_fetch_reports_missing_target()
     test_assert_true(!output_log.empty(),
         "ft_validate_and_fetch_target should describe missing target lookup");
     test_assert_true(error_log == expected_message
-            || error_log == std::string(expected_message) + "\n",
+            || error_log == ft_string(expected_message) + "\n",
         "ft_validate_and_fetch_target should log the missing target error code");
     test_assert_true(output_log == "111-Error: target does not exist"
             || output_log == "111-Error: target does not exist\n",

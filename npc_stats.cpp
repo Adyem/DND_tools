@@ -1,14 +1,10 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/class_file.hpp"
-#include "libft/CPP_class/class_fd_istream.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/JSon/document.hpp"
 #include "dnd_tools.hpp"
-#include <cerrno>
-#include <fcntl.h>
-#include <unistd.h>
-#include <cstring>
+#include "read_file_lines.hpp"
 
 static char **ft_npc_load_json_lines(const char *filepath)
 {
@@ -64,8 +60,7 @@ static char **ft_npc_load_legacy_lines(const char *filepath)
     }
     if (DEBUG == 1)
         pf_printf("Opening file %s on fd %d\n", filepath, info_file.get_fd());
-    ft_fd_istream info_stream(info_file.get_fd());
-    content = ft_read_file_lines(info_stream, 1024);
+    content = ft_read_file_lines_fd(info_file.get_fd(), 1024);
     if (!content)
         pf_printf_fd(2, "1-Error reading legacy save %s\n", filepath);
     return (content);

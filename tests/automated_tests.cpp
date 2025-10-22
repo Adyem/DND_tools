@@ -2,7 +2,6 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../libft/CMA/CMA.hpp"
-#include <cstdio>
 
 int main()
 {

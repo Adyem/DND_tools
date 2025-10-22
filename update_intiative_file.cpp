@@ -4,13 +4,9 @@
 #include "libft/Errno/errno.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/File/file_utils.hpp"
 #include "dnd_tools.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <cstdlib>
-#include <cerrno>
-#include <cstring>
+#include "read_file_lines.hpp"
 
 int ft_initiative_remove(t_char * info)
 {
@@ -21,13 +17,16 @@ int ft_initiative_remove(t_char * info)
 
     if (DEBUG == 1)
         pf_printf("removing initiative %s\n", info->name);
-    if (access("data/data--initiative", F_OK) == -1)
+    if (file_exists("data/data--initiative") != 1)
     {
         if (DEBUG == 1)
             pf_printf("File does not exist: data/data--initiative\n");
         return (0);
     }
-    content = ft_open_and_read_file("data/data--initiative", 1024);
+    ft_file read_file("data/data--initiative", O_RDONLY);
+    if (read_file.get_error())
+        return (0);
+    content = ft_read_file_lines_fd(read_file.get_fd(), 1024);
     if (!content)
         return (0);
     ft_file initiative_file("data/data--initiative", O_WRONLY | O_TRUNC);
@@ -51,8 +50,11 @@ int ft_initiative_remove(t_char * info)
         }
         else
             temp = content[index];
+        size_t  temp_length;
+
+        temp_length = static_cast<size_t>(ft_strlen(temp));
         if ((ft_strncmp(info->name, temp, name_len) == 0)
-                && (ft_strlen(temp) > name_len)
+                && (temp_length > name_len)
                 && (temp[name_len] == '='))
         {
             char    *value;
@@ -181,13 +183,27 @@ void ft_initiative_add(t_char * info)
         pf_printf("readding initiative %s %d\n", info->name, info->initiative);
     if (info->initiative <= 0)
         return ;
-    content = ft_open_and_read_file("data/data--initiative", 1024);
-    if (content == ft_nullptr)
+    if (file_exists("data/data--initiative") != 1)
     {
-        if (ft_errno == ER_SUCCESS || ft_errno == FILE_END_OF_FILE
-                || ft_errno == FILE_INVALID_FD
-                || ft_errno == ERRNO_OFFSET + ENOENT)
+        content = static_cast<char **>(cma_calloc(1, sizeof(char *)));
+        if (!content)
         {
+            pf_printf("Error: failed to allocate initiative buffer\n");
+            return ;
+        }
+        ft_errno = ER_SUCCESS;
+    }
+    else
+    {
+        ft_file read_file("data/data--initiative", O_RDONLY);
+
+        if (read_file.get_error())
+            return ;
+        content = ft_read_file_lines_fd(read_file.get_fd(), 1024);
+        if (!content)
+        {
+            if (ft_errno != ER_SUCCESS)
+                return ;
             content = static_cast<char **>(cma_calloc(1, sizeof(char *)));
             if (!content)
             {
@@ -196,8 +212,6 @@ void ft_initiative_add(t_char * info)
             }
             ft_errno = ER_SUCCESS;
         }
-        else
-            return ;
     }
     if (ft_initiative_check_content(info, content))
     {
@@ -208,10 +222,10 @@ void ft_initiative_add(t_char * info)
     count = 0;
     while (content[count])
         count++;
-    validated = NULL;
+    validated = ft_nullptr;
     if (count > 0)
     {
-        validated = (t_validated_line *)malloc(sizeof(t_validated_line) * count);
+        validated = static_cast<t_validated_line *>(cma_malloc(sizeof(t_validated_line) * count));
         if (!validated)
         {
             cma_free_double(content);
@@ -231,7 +245,7 @@ void ft_initiative_add(t_char * info)
         if (!validated[i].newline_mark)
         {
             if (validated)
-                free(validated);
+                cma_free(validated);
             cma_free_double(content);
             pf_printf("Error: data--initiative file is corrupted\n");
             return ;
@@ -256,7 +270,7 @@ void ft_initiative_add(t_char * info)
             if (turn_marker_count > 1)
             {
                 if (validated)
-                    free(validated);
+                    cma_free(validated);
                 cma_free_double(content);
                 pf_printf("Error: data--initiative file is corrupted\n");
                 return ;
@@ -271,7 +285,7 @@ void ft_initiative_add(t_char * info)
         if (error != 0 && error != 1)
         {
             if (validated)
-                free(validated);
+                cma_free(validated);
             cma_free_double(content);
             pf_printf("Error: data--initiative file is corrupted\n");
             return ;
@@ -284,7 +298,7 @@ void ft_initiative_add(t_char * info)
     if (initiative_file == -1)
     {
         if (validated)
-            free(validated);
+            cma_free(validated);
         cma_free_double(content);
         pf_printf("Error opening file: %s\n", initiative_file.get_error_str());
         return ;
@@ -325,7 +339,7 @@ void ft_initiative_add(t_char * info)
         i++;
     }
     if (validated)
-        free(validated);
+        cma_free(validated);
     cma_free_double(content);
     if (DEBUG == 1)
         pf_printf("added = %d\n", added);
