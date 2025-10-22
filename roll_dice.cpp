@@ -1,8 +1,6 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/rng.hpp"
 #include "dnd_tools.hpp"
-#include <climits>
-#include <cstdlib>
 
 void ft_reroll(t_char * info, int *result)
 {

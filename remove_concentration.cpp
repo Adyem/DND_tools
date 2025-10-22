@@ -5,10 +5,6 @@
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <cerrno>
-#include <cstring>
 
 static void ft_concentration_remove_buf(t_char * info, t_target_data *targets)
 {

@@ -5,8 +5,13 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 #include "set_utils.hpp"
-#include <cstdlib>
-#include <cstring>
+
+static int  ft_int_absolute(int value)
+{
+    if (value < 0)
+        return (-value);
+    return (value);
+}
 
 #define MAKE_BUFF_HUNTERS_MARK(hunters_mark, level, target_str) \
     (t_buff){ \
@@ -14,13 +19,13 @@
         .target = cma_strdup(target_str), \
         .spell_id = HUNTERS_MARK_ID, \
         .dice_faces_mod = (hunters_mark).dice_faces + ((hunters_mark).upcast_extra_dice_face \
-                * ((((level) - (hunters_mark).base_level) + abs((level) \
+                * ((((level) - (hunters_mark).base_level) + ft_int_absolute((level) \
                 - (hunters_mark).base_level)) / 2)), \
         .dice_amount_mod = (hunters_mark).dice_amount + ((hunters_mark).upcast_extra_dice_amount \
-                * ((((level) - (hunters_mark).base_level) + abs((level) \
+                * ((((level) - (hunters_mark).base_level) + ft_int_absolute((level) \
                 - (hunters_mark).base_level)) / 2)), \
         .mod = (hunters_mark).extra_damage + ((hunters_mark).upcast_extra_damage * ((((level) \
-                - (hunters_mark).base_level) + abs((level) \
+                - (hunters_mark).base_level) + ft_int_absolute((level) \
                 - (hunters_mark).base_level)) / 2)), \
         .extra_dice_faces = 0, \
         .extra_dice_amount = 0, \

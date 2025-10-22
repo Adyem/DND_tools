@@ -3,8 +3,6 @@
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
-#include <cstdlib>
-#include <cstring>
 
 static int    ft_free_request_damage(char *line, char **input)
 {

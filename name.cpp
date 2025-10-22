@@ -5,7 +5,7 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
-#include <cstdlib>
+#include "libft/Errno/errno.hpp"
 
 void ft_free_memory_name(t_name *name, int exit_failure)
 {
@@ -23,8 +23,7 @@ void ft_free_memory_name(t_name *name, int exit_failure)
     if (exit_failure)
     {
         rl_clear_suggestions();
-        cma_cleanup();
-        exit(exit_failure);
+        ft_exit(ft_nullptr, exit_failure);
     }
     return ;
 }
@@ -69,7 +68,11 @@ static char *ft_new_name(const char *name, int index)
         pf_printf_fd(2, "114-Error: Malloc failure in Name Struct\n");
         return (ft_nullptr);
     }
-    snprintf(new_name, new_name_length, "%s_%02d", name, index);
+    if (pf_snprintf(new_name, new_name_length, "%s_%02d", name, index) < 0)
+    {
+        cma_free(new_name);
+        return (ft_nullptr);
+    }
     return (new_name);
 }
 

@@ -134,6 +134,7 @@ SRC         = name.cpp \
               trim_start.cpp \
               set_debuf.cpp \
               cast_hunters_mark.cpp \
+              read_file_lines.cpp \
               read_line.cpp \
               calculate_skills.cpp \
               calculate_resistance.cpp \
@@ -186,6 +187,8 @@ SRC         = name.cpp \
               update_buff_healing.cpp \
               help.cpp
 
+MAKEFLAGS  += --no-print-directory
+
 CC          = g++
 
 OPT_LEVEL ?= 0
@@ -226,6 +229,12 @@ OBJ_DIR         = ./objs
 OBJ_DIR_DEBUG   = ./objs_debug
 OBJ_DIR_TEST    = ./objs_tests
 
+MODULE_NAME         = DND_tools
+MODULE_NAME_TESTS   = DND_tools Tests
+
+TOTAL_SRCS       = $(words $(SRC))
+TOTAL_TEST_SRCS  = $(words $(TEST_SRC))
+
 ENABLE_LTO  ?= 0
 ENABLE_PGO  ?= 0
 export ENABLE_LTO ENABLE_PGO
@@ -244,9 +253,11 @@ ifeq ($(DEBUG),1)
     OBJ_DIR    = $(OBJ_DIR_DEBUG)
     TARGET     = $(NAME_DEBUG)
     LIBFT      = $(LIBFT_DIR)/Full_Libft_debug.a
+    LIBFT_MAKE_TARGET = debug
 else
     TARGET     = $(NAME)
     LIBFT      = $(LIBFT_DIR)/Full_Libft.a
+    LIBFT_MAKE_TARGET = all
 endif
 
 export COMPILE_FLAGS
@@ -342,55 +353,75 @@ all: ensure_libft dirs $(TARGET)
 tests: ensure_libft dirs $(TEST_NAME)
 
 dirs:
-	-$(MKDIR) $(OBJ_DIR)
-	-$(MKDIR) $(OBJ_DIR_DEBUG)
-	-$(MKDIR) $(OBJ_DIR_TEST)
+	@-$(MKDIR) $(OBJ_DIR)
+	@-$(MKDIR) $(OBJ_DIR_DEBUG)
+	@-$(MKDIR) $(OBJ_DIR_TEST)
+	@printf '        [$(MODULE_NAME)] Build directories ready\n'
 
 debug:
-	$(MAKE) all DEBUG=1
+	@printf '        [$(MODULE_NAME)] Building debug configuration\n'
+	@$(MAKE) all DEBUG=1
 
 $(TARGET): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
+	@printf '        [$(MODULE_NAME)] Linking executable %s\n' "$@"
+	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
+	@printf '        [$(MODULE_NAME)] Build complete\n'
 
 $(TEST_NAME): $(LIBFT) $(TEST_OBJS)
-	$(CC) $(CFLAGS) $(TEST_OBJS) -o $@ $(LDFLAGS)
+	@printf '        [$(MODULE_NAME_TESTS)] Linking executable %s\n' "$@"
+	@$(CC) $(CFLAGS) $(TEST_OBJS) -o $@ $(LDFLAGS)
+	@printf '        [$(MODULE_NAME_TESTS)] Build complete\n'
 
 $(LIBFT): ensure_libft
-	$(MAKE) -C $(LIBFT_DIR) $(if $(DEBUG), debug)
+	@if $(MAKE) -C $(LIBFT_DIR) $(LIBFT_MAKE_TARGET) --question >/dev/null 2>&1; then \
+                printf '        [Libft] Library up to date\n'; \
+        else \
+                printf '        [Libft] Rebuilding library\n'; \
+                $(MAKE) -C $(LIBFT_DIR) $(LIBFT_MAKE_TARGET); \
+        fi
 
 initialize:
-	git submodule update --init --recursive
+	@printf '        [$(MODULE_NAME)] Initializing submodules\n'
+	@git submodule update --init --recursive
 
 ensure_libft:
 	@if [ ! -f $(SUBMODULE_SENTINEL) ]; then \
-		printf 'The libft submodule is not initialized. Please run \"make initialize\" before building.\n'; \
-		exit 1; \
-	fi
+                printf '        [Libft] Submodule missing. Run "make initialize" before building.\n'; \
+                exit 1; \
+        fi
 
 $(OBJ_DIR)/%.o: %.cpp $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@count=$$(find $(OBJ_DIR) -maxdepth 1 -name '*.o' 2>/dev/null | wc -l); \
+                printf '        [$(MODULE_NAME)] Files built: %d/%d\n' $$count $(TOTAL_SRCS)
 
 $(OBJ_DIR_TEST)/%.o: %.cpp $(HEADER)
-	-$(MKDIR) $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@-$(MKDIR) $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@count=$$(find $(OBJ_DIR_TEST) -name '*.o' 2>/dev/null | wc -l); \
+                printf '        [$(MODULE_NAME_TESTS)] Files built: %d/%d\n' $$count $(TOTAL_TEST_SRCS)
 
 clean:
-	-$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR_DEBUG)/*.o
-	-$(RM) $(OBJ_DIR_TEST)/*.o $(OBJ_DIR_TEST)/tests/*.o
+	@-$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR_DEBUG)/*.o
+	@-$(RM) $(OBJ_DIR_TEST)/*.o $(OBJ_DIR_TEST)/tests/*.o
 	@if [ -f $(SUBMODULE_SENTINEL) ]; then \
-		$(MAKE) -C $(LIBFT_DIR) fclean; \
-	else \
-		printf 'Skipping libft clean because the submodule is not initialized. Run "make initialize" to set it up.\n'; \
-	fi
+                printf '        [Libft] Cleaning submodule\n'; \
+                $(MAKE) -C $(LIBFT_DIR) fclean; \
+        else \
+                printf '        [Libft] Skipping clean, submodule missing. Run "make initialize".\n'; \
+        fi
+	@printf '        [$(MODULE_NAME)] clean: complete\n'
 
 fclean: clean
-	-$(RM) $(NAME) $(NAME_DEBUG) $(TEST_NAME)
-	-$(RMDIR) $(OBJ_DIR) $(OBJ_DIR_DEBUG) $(OBJ_DIR_TEST) data
+	@-$(RM) $(NAME) $(NAME_DEBUG) $(TEST_NAME)
+	@-$(RMDIR) $(OBJ_DIR) $(OBJ_DIR_DEBUG) $(OBJ_DIR_TEST) data
+	@printf '        [$(MODULE_NAME)] fclean: complete\n'
 
 re: fclean all
 
 test: $(TEST_NAME)
-	./$(TEST_NAME)
+	@printf '        [$(MODULE_NAME_TESTS)] Running automated tests\n'
+	@./$(TEST_NAME)
 
 both: all debug
 

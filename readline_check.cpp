@@ -5,7 +5,6 @@
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/RNG/rng.hpp"
 #include "dnd_tools.hpp"
-#include <cstdlib>
 
 int ft_readline_confirm(const char *message)
 {

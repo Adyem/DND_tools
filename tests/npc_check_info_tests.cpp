@@ -1,7 +1,7 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include <string>
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void configure_valid_character(t_char &character)
 {
@@ -142,7 +142,7 @@ static void test_npc_check_info_detects_health_above_max()
     t_char character = {};
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     configure_valid_character(character);
@@ -166,7 +166,7 @@ static void test_npc_check_info_detects_spell_slot_overflow()
     t_char character = {};
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     configure_valid_character(character);
@@ -190,7 +190,7 @@ static void test_npc_check_info_detects_warlock_level_mismatch()
     t_char character = {};
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     configure_valid_character(character);
@@ -214,7 +214,7 @@ static void test_npc_check_info_detects_resistance_out_of_bounds()
     t_char character = {};
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     configure_valid_character(character);
@@ -238,7 +238,7 @@ static void test_npc_check_info_detects_hunters_mark_mismatch()
     t_char character = {};
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     configure_valid_character(character);

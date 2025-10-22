@@ -2,10 +2,6 @@
 #include "libft/CMA/CMA.hpp"
 #include "maverick.hpp"
 #include "libft/Printf/printf.hpp"
-#include <cerrno>
-#include <cstring>
-#include <unistd.h>
-#include <fcntl.h>
 
 static void    ft_maverick_lightning_strike(t_char * info)
 {

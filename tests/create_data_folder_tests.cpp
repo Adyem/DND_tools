@@ -6,19 +6,13 @@
 #include "../libft/File/open_dir.hpp"
 #include "../libft/System_utils/system_utils.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
-#include <filesystem>
-#include <system_error>
-#include <cstdio>
-#include <fcntl.h>
-#include <string>
+#include "../libft/Libft/libft.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void remove_data_path()
 {
-    std::error_code remove_error;
-
-    std::filesystem::remove_all("data", remove_error);
-    if (remove_error.value() != 0)
-        std::remove("data");
+    test_remove_directory("data");
+    test_remove_path("data");
     return ;
 }
 
@@ -40,7 +34,8 @@ static void test_create_data_dir_handles_existing_directory()
     int result;
 
     remove_data_path();
-    test_assert_true(file_create_directory("data", 0700) == 0, "failed to create directory for setup");
+    test_create_directory("data");
+    test_assert_true(ft_errno == ER_SUCCESS, "failed to create directory for setup");
     result = ft_create_data_dir();
     test_assert_true(result == 0, "ft_create_data_dir should succeed when directory already exists");
     test_assert_true(ft_errno == ER_SUCCESS, "ft_create_data_dir should leave errno as success when directory exists");
@@ -53,7 +48,7 @@ static void test_create_data_dir_reports_file_collision()
     su_file *file_handle;
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     remove_data_path();

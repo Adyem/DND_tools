@@ -5,8 +5,6 @@
 #include "libft/JSon/document.hpp"
 #include "dnd_tools.hpp"
 #include "key_list.hpp"
-#include <cstdlib>
-#include <cstring>
 
 static void ft_reset_player_defaults(t_pc *player)
 {

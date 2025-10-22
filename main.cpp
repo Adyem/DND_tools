@@ -3,7 +3,7 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
-#include <cstdlib>
+#include "libft/RNG/rng.hpp"
 
 bool g_dnd_test = 0;
 
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     if (DEBUG == 1)
     {
         pf_printf("DEBUGGING\n");
-        pf_printf("Rand Max = %d\n", RAND_MAX);
+        pf_printf("Random sample = %d\n", ft_random_int());
     }
     if (ft_create_data_dir())
         return (1);
@@ -30,6 +30,5 @@ int main(int argc, char **argv)
     ft_free_memory_name(name, 0);
     rl_clear_suggestions();
     ft_cleanup_treeNode();
-    cma_cleanup();
     return (0);
 }

@@ -1,10 +1,6 @@
 #include "character.hpp"
 #include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <cerrno>
-#include <cstring>
 
 void ft_check_concentration(t_char * info, int damage)
 {

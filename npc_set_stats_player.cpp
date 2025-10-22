@@ -1,8 +1,7 @@
 #include "dnd_tools.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Libft/libft.hpp"
-#include "assert.h"
-#include <cstddef>
+#include "libft/Printf/printf.hpp"
 
 int    ft_set_stat_player(size_t key_len, const char **field, const char *content)
 {
@@ -12,8 +11,10 @@ int    ft_set_stat_player(size_t key_len, const char **field, const char *conten
 
     content_len = ft_strlen(content);
     if (content_len < key_len)
+    {
+        pf_printf_fd(2, "Error: Content is shorter than key!\n");
         return (-1);
-    assert(content_len >= key_len && "Content is shorter than key!");
+    }
     previous_value = *field;
     duplicate = cma_strdup(&content[key_len]);
     if (!duplicate)

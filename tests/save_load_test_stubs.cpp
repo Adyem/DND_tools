@@ -1,5 +1,4 @@
 #include "../dnd_tools.hpp"
-#include <cstring>
 
 void ft_kill(t_char * info)
 {

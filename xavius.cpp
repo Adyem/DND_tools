@@ -4,7 +4,6 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/RNG/rng.hpp"
 #include "libft/CMA/CMA.hpp"
-#include <unistd.h>
 
 static void    ft_xavius_lightningV2_strike(t_char *info)
 {

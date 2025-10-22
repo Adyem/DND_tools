@@ -4,7 +4,6 @@
 #include "libft/File/open_dir.hpp"
 #include "libft/System_utils/system_utils.hpp"
 #include "dnd_tools.hpp"
-#include <fcntl.h>
 
 int ft_create_data_dir()
 {
@@ -30,7 +29,7 @@ int ft_create_data_dir()
         }
         if (file_create_directory("data", 0700) == -1)
         {
-            ft_errno = CHECK_DIR_FAIL;
+            ft_errno = FT_EIO;
             pf_printf_fd(2, "001-Error failed to create 'data' directory: %s\n",
                 ft_strerror(ft_errno));
             return (1);
@@ -43,14 +42,14 @@ int ft_create_data_dir()
     directory_stream = file_opendir("data");
     if (!directory_stream)
     {
-        ft_errno = CHECK_DIR_FAIL;
+        ft_errno = FT_EIO;
         pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
             ft_strerror(ft_errno));
         return (1);
     }
     if (file_closedir(directory_stream) == -1)
     {
-        ft_errno = CHECK_DIR_FAIL;
+        ft_errno = FT_EIO;
         pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
             ft_strerror(ft_errno));
         return (1);
@@ -59,14 +58,14 @@ int ft_create_data_dir()
     write_probe = su_fopen(probe_path, O_CREAT | O_RDWR, 0600);
     if (!write_probe)
     {
-        ft_errno = CHECK_DIR_FAIL;
+        ft_errno = FT_EIO;
         pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
             ft_strerror(ft_errno));
         return (1);
     }
     if (su_fclose(write_probe) == -1)
     {
-        ft_errno = CHECK_DIR_FAIL;
+        ft_errno = FT_EIO;
         pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
             ft_strerror(ft_errno));
         file_delete(probe_path);
@@ -74,7 +73,7 @@ int ft_create_data_dir()
     }
     if (file_delete(probe_path) == -1)
     {
-        ft_errno = CHECK_DIR_FAIL;
+        ft_errno = FT_EIO;
         pf_printf_fd(2, "003-Error no read/write access to 'data' directory: %s\n",
             ft_strerror(ft_errno));
         return (1);

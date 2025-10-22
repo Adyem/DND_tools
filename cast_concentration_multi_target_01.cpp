@@ -5,9 +5,6 @@
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "dnd_tools.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <cstdlib>
 
 static int ft_check_target_amount(int target_amount)
 {
@@ -24,7 +21,9 @@ static char *ft_read_target_name(int index)
     char    message[55];
     char    *target_name;
 
-    sprintf(message, "Requesting the name of the %s target", ft_ordinal_suffix(index + 1));
+    if (pf_snprintf(message, sizeof(message), "Requesting the name of the %s target",
+            ft_ordinal_suffix(index + 1)) < 0)
+        return (ft_nullptr);
     target_name = rl_readline(message);
     if (!target_name)
     {

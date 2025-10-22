@@ -1,11 +1,11 @@
 #ifndef KEY_LIST_HPP
 # define KEY_LIST_HPP
 
-#include <cstddef>
+#include "libft/Libft/libft.hpp"
 
-constexpr std::size_t constexpr_strlen(const char* str)
+constexpr size_t constexpr_strlen(const char* str)
 {
-    std::size_t len = 0;
+    size_t  len = 0;
     while (str[len] != '\0')
         ++len;
     return (len);
@@ -13,11 +13,11 @@ constexpr std::size_t constexpr_strlen(const char* str)
 
 constexpr bool ends_with(const char* str, const char* suffix)
 {
-    std::size_t str_len = constexpr_strlen(str);
-    std::size_t suffix_len = constexpr_strlen(suffix);
+    size_t  str_len = constexpr_strlen(str);
+    size_t  suffix_len = constexpr_strlen(suffix);
     if (suffix_len > str_len)
         return (false);
-    std::size_t i = 0;
+    size_t  i = 0;
     while (i < suffix_len)
     {
         if (str[str_len - suffix_len + i] != suffix[i])
@@ -27,7 +27,7 @@ constexpr bool ends_with(const char* str, const char* suffix)
     return (true);
 }
 
-constexpr bool is_valid_key_impl(const char* str, std::size_t i)
+constexpr bool is_valid_key_impl(const char* str, size_t i)
 {
     if (str[i] == '=')
         return (i > 0 && str[i + 1] == '\0');

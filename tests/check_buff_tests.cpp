@@ -2,32 +2,31 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../identification.hpp"
-#include <string>
+#include "../libft/Libft/libft.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
-static void verify_numeric_line(const std::string &output,
+static void verify_numeric_line(const ft_string &output,
     const char *prefix,
     const char *suffix)
 {
-    std::string prefix_string;
-    std::string suffix_string;
+    const char  *output_data;
     size_t      prefix_length;
     size_t      suffix_length;
     size_t      content_length;
     size_t      index;
 
-    prefix_string = prefix;
-    suffix_string = suffix;
-    prefix_length = prefix_string.length();
-    suffix_length = suffix_string.length();
-    test_assert_true(output.length() >= prefix_length + suffix_length,
+    output_data = output.c_str();
+    prefix_length = ft_strlen(prefix);
+    suffix_length = ft_strlen(suffix);
+    test_assert_true(output.size() >= prefix_length + suffix_length,
         "Captured output was shorter than the expected prefix and suffix");
-    test_assert_true(output.compare(0, prefix_length, prefix_string) == 0,
+    test_assert_true(ft_strncmp(output_data, prefix, prefix_length) == 0,
         "Captured output did not match the expected prefix");
-    test_assert_true(output.compare(output.length() - suffix_length,
-            suffix_length,
-            suffix_string) == 0,
+    test_assert_true(ft_strncmp(output_data + output.size() - suffix_length,
+            suffix,
+            suffix_length) == 0,
         "Captured output did not match the expected suffix");
-    content_length = output.length() - prefix_length - suffix_length;
+    content_length = output.size() - prefix_length - suffix_length;
     test_assert_true(content_length > 0,
         "Captured output did not contain a numeric value");
     index = 0;
@@ -35,7 +34,7 @@ static void verify_numeric_line(const std::string &output,
     {
         char current;
 
-        current = output[prefix_length + index];
+        current = output_data[prefix_length + index];
         test_assert_true(current >= '0' && current <= '9',
             "Captured output contained non-numeric characters in the value segment");
         index++;
@@ -63,7 +62,7 @@ static void test_check_bless_returns_base_modifier_without_dice()
     t_char  character = {};
     int     result;
     const char  *file_path;
-    std::string output;
+    ft_string   output;
 
     character.name = "Priest";
     character.bufs.bless.duration = 3;
@@ -88,7 +87,7 @@ static void test_check_bless_returns_zero_on_dice_roll_error()
     t_char  character = {};
     int     result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     character.name = "Acolyte";
@@ -116,10 +115,10 @@ static void test_attack_roll_check_buffs_applies_bless_and_flanking()
     int     roll;
     int     bonus;
     const char  *file_path;
-    std::string output;
+    ft_string   output;
     size_t      newline_position;
-    std::string first_line;
-    std::string second_line;
+    ft_string   first_line;
+    ft_string   second_line;
 
     character.name = "Fighter";
     character.bufs.bless.duration = 1;
@@ -135,8 +134,8 @@ static void test_attack_roll_check_buffs_applies_bless_and_flanking()
     test_assert_true(bonus == 3, "ft_attack_roll_check_buffs should include bless bonus");
     test_assert_true(character.flags.advantage == 1, "ft_attack_roll_check_buffs should grant advantage when flanking");
     output = test_read_file_to_string(file_path);
-    newline_position = output.find('\n');
-    test_assert_true(newline_position != std::string::npos,
+    newline_position = output.find("\n");
+    test_assert_true(newline_position != ft_string::npos,
         "Attack buff output should contain a newline separating messages");
     first_line = output.substr(0, newline_position + 1);
     second_line = output.substr(newline_position + 1);
@@ -155,7 +154,7 @@ static void test_attack_roll_check_buffs_penalizes_blinded_characters()
     t_char  character = {};
     int     roll;
     const char  *file_path;
-    std::string output;
+    ft_string   output;
 
     character.name = "Rogue";
     character.debufs.blinded.duration = 1;
@@ -179,10 +178,10 @@ static void test_save_check_buff_grants_advantage_for_mighty_resilience()
     int     roll;
     int     bonus;
     const char  *file_path;
-    std::string output;
+    ft_string   output;
     size_t      newline_position;
-    std::string first_line;
-    std::string second_line;
+    ft_string   first_line;
+    ft_string   second_line;
 
     character.name = "Paladin";
     character.bufs.bless.duration = 1;
@@ -198,8 +197,8 @@ static void test_save_check_buff_grants_advantage_for_mighty_resilience()
     test_assert_true(bonus == 2, "ft_save_check_buff should include bless bonus");
     test_assert_true(character.flags.advantage == 1, "ft_save_check_buff should grant advantage on strength saves with mighty resilience");
     output = test_read_file_to_string(file_path);
-    newline_position = output.find('\n');
-    test_assert_true(newline_position != std::string::npos,
+    newline_position = output.find("\n");
+    test_assert_true(newline_position != ft_string::npos,
         "Save buff output should contain two lines");
     first_line = output.substr(0, newline_position + 1);
     second_line = output.substr(newline_position + 1);
@@ -262,7 +261,7 @@ static void test_check_buff_damage_handles_hunters_mark_extra_damage()
     char    target_buffer[] = "Target";
     char    *targets[2];
     const char  *file_path;
-    std::string output;
+    ft_string   output;
 
     character.name = "Ranger";
     character.concentration.spell_id = HUNTERS_MARK_ID;

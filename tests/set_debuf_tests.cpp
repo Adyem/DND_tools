@@ -3,7 +3,7 @@
 #include "../dnd_tools.hpp"
 #include "../libft/CMA/CMA.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
-#include <string>
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void test_check_stat_parses_positive_values()
 {
@@ -34,7 +34,7 @@ static void test_check_stat_reports_invalid_strings()
     t_char  character = {};
     int     result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     character.name = "Invalid";
@@ -72,7 +72,7 @@ static void test_set_debuf_blinded_rejects_negative_duration()
     t_char          character = {};
     const char      *input[4];
     const char      *file_path;
-    std::string     error_output;
+    ft_string       error_output;
     const char      *expected_message;
 
     character.name = "Negative";
@@ -99,7 +99,7 @@ static void test_set_debuf_blinded_rejects_excessive_duration()
     t_char          character = {};
     const char      *input[4];
     const char      *file_path;
-    std::string     error_output;
+    ft_string       error_output;
     const char      *expected_message;
 
     character.name = "Excess";
@@ -126,7 +126,7 @@ static void test_set_debuf_blinded_rejects_non_numeric_input()
     t_char          character = {};
     const char      *input[4];
     const char      *file_path;
-    std::string     error_output;
+    ft_string       error_output;
     const char      *expected_message;
 
     character.name = "NonNumeric";

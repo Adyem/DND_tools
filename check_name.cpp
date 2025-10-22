@@ -2,14 +2,19 @@
 #include "libft/File/open_dir.hpp"
 #include "libft/Libft/libft.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/Errno/errno.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "identification.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <cstring>
-#include <cerrno>
-#include <dirent.h>
-#include <cctype>
+
+static char ft_char_to_lower(unsigned char value)
+{
+    char buffer[2];
+
+    buffer[0] = static_cast<char>(value);
+    buffer[1] = '\0';
+    ft_to_lower(buffer);
+    return (buffer[0]);
+}
 
 static int has_prefix_case_insensitive(const char *value, const char *prefix)
 {
@@ -22,8 +27,8 @@ static int has_prefix_case_insensitive(const char *value, const char *prefix)
     {
         if (value[index] == '\0')
             return (0);
-        if (std::tolower(static_cast<unsigned char>(value[index]))
-            != std::tolower(static_cast<unsigned char>(prefix[index])))
+        if (ft_char_to_lower(static_cast<unsigned char>(value[index]))
+            != ft_char_to_lower(static_cast<unsigned char>(prefix[index])))
             return (0);
         index++;
     }
@@ -58,7 +63,7 @@ int ft_set_stats_check_name(const char *name)
     dir = file_opendir(DATA_FOLDER);
     if (dir == ft_nullptr)
     {
-        pf_printf_fd(2, "295-Error: Opendir has failed: %s\n", strerror(errno));
+        pf_printf_fd(2, "295-Error: Opendir has failed: %s\n", ft_strerror(ft_errno));
         return (-2);
     }
     while (1)
@@ -68,8 +73,7 @@ int ft_set_stats_check_name(const char *name)
             break ;
         if (has_prefix_case_insensitive(entry->d_name, PREFIX_TO_SKIP) == 1)
             continue ;
-        strncpy(filename, entry->d_name, sizeof(filename) - 1);
-        filename[sizeof(filename) - 1] = '\0';
+        ft_strlcpy(filename, entry->d_name, sizeof(filename));
         if (ft_strcmp(filename, name) == 0)
         {
             file_closedir(dir);
@@ -102,7 +106,7 @@ int ft_check_player_character(const char *name)
     dir = file_opendir(DATA_FOLDER);
     if (dir == ft_nullptr)
     {
-        pf_printf_fd(2, "307-Error: Opendir has failed: %s\n", strerror(errno));
+        pf_printf_fd(2, "307-Error: Opendir has failed: %s\n", ft_strerror(ft_errno));
         return (-2);
     }
     while (1)
@@ -112,8 +116,7 @@ int ft_check_player_character(const char *name)
             break ;
         if (has_prefix_case_insensitive(entry->d_name, PC_PREFIX) == 0)
             continue ;
-        strncpy(filename, entry->d_name, sizeof(filename) - 1);
-        filename[sizeof(filename) - 1] = '\0';
+        ft_strlcpy(filename, entry->d_name, sizeof(filename));
         if (DEBUG == 1)
             pf_printf("Checking %s against %s\n", filename, name);
         if (ft_strcmp(filename, name) == 0)

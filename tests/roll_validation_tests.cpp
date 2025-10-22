@@ -3,8 +3,8 @@
 #include "../dnd_tools.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
 #include "../libft/Errno/errno.hpp"
-#include <string>
-#include <cstdio>
+#include "../libft/Printf/printf.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void test_command_roll_validate_accepts_valid_expression()
 {
@@ -22,7 +22,7 @@ static void test_command_roll_validate_rejects_mismatched_parenthesis()
     char expression[] = "2d6+3)";
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     file_path = "tests_output/roll_validate_mismatched_parenthesis.log";
@@ -32,7 +32,7 @@ static void test_command_roll_validate_rejects_mismatched_parenthesis()
     test_assert_true(result != 0, "ft_command_roll_validate accepted an invalid roll expression");
     char errno_message[128];
 
-    std::snprintf(errno_message, sizeof(errno_message),
+    pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_EINVAL on invalid input (errno %d)",
         ft_errno);
     test_assert_true(ft_errno == FT_EINVAL, errno_message);
@@ -59,7 +59,7 @@ static void test_command_roll_validate_handles_null_expression()
 {
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
 
@@ -68,7 +68,7 @@ static void test_command_roll_validate_handles_null_expression()
     result = ft_command_roll_validate(ft_nullptr);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression is null");
-    std::snprintf(errno_message, sizeof(errno_message),
+    pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_EINVAL when expression is null (errno %d)",
         ft_errno);
     test_assert_true(ft_errno == FT_EINVAL, errno_message);
@@ -85,7 +85,7 @@ static void test_command_roll_validate_rejects_empty_expression()
     char expression[] = "";
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
 
@@ -94,7 +94,7 @@ static void test_command_roll_validate_rejects_empty_expression()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression is empty");
-    std::snprintf(errno_message, sizeof(errno_message),
+    pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_EINVAL for empty expression (errno %d)",
         ft_errno);
     test_assert_true(ft_errno == FT_EINVAL, errno_message);
@@ -111,7 +111,7 @@ static void test_command_roll_validate_rejects_trailing_operator()
     char expression[] = "2d6+";
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
 
@@ -120,7 +120,7 @@ static void test_command_roll_validate_rejects_trailing_operator()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression ends with an operator");
-    std::snprintf(errno_message, sizeof(errno_message),
+    pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_EINVAL when expression ends with operator (errno %d)",
         ft_errno);
     test_assert_true(ft_errno == FT_EINVAL, errno_message);
@@ -137,7 +137,7 @@ static void test_command_roll_validate_rejects_missing_dice_size()
     char expression[] = "10d";
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
 
@@ -146,7 +146,7 @@ static void test_command_roll_validate_rejects_missing_dice_size()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when dice sides are missing");
-    std::snprintf(errno_message, sizeof(errno_message),
+    pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_EINVAL when dice sides are missing (errno %d)",
         ft_errno);
     test_assert_true(ft_errno == FT_EINVAL, errno_message);
@@ -163,7 +163,7 @@ static void test_command_roll_validate_rejects_invalid_characters()
     char expression[] = "2d6+x";
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
 
@@ -172,7 +172,7 @@ static void test_command_roll_validate_rejects_invalid_characters()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression contains invalid characters");
-    std::snprintf(errno_message, sizeof(errno_message),
+    pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_EINVAL for invalid characters (errno %d)",
         ft_errno);
     test_assert_true(ft_errno == FT_EINVAL, errno_message);
@@ -200,7 +200,7 @@ static void test_command_roll_validate_rejects_whitespace()
     char expression[] = "2d6 + 3";
     int result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
 
@@ -209,7 +209,7 @@ static void test_command_roll_validate_rejects_whitespace()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression contains whitespace");
-    std::snprintf(errno_message, sizeof(errno_message),
+    pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_EINVAL when whitespace appears in expression (errno %d)",
         ft_errno);
     test_assert_true(ft_errno == FT_EINVAL, errno_message);

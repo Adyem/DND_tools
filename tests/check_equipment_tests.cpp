@@ -2,6 +2,7 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../identification.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void set_valid_equipment_slots(t_char *character)
 {
@@ -37,7 +38,7 @@ static void test_check_equipment_detects_two_handed_offhand()
     t_char  character;
     int     result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     character = {};
@@ -60,7 +61,7 @@ static void test_check_equipment_detects_mismatched_armor_slot()
     t_char  character;
     int     result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     character = {};

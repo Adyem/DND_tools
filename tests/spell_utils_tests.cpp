@@ -2,6 +2,7 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../character.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 static void initialize_character(t_char *character, const char *name)
 {
     t_spell_slot empty_slot;
@@ -61,7 +62,7 @@ static void test_auto_cast_reports_error_when_no_valid_slot()
     t_char character;
     int cast_level;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     initialize_character(&character, "Tester");

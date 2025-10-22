@@ -4,7 +4,6 @@
 #include "libft/ReadLine/readline.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/Errno/errno.hpp"
-#include <cstdlib>
 
 static char    **ft_parse_input(char *input_string)
 {

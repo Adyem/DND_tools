@@ -2,7 +2,6 @@
 #include "gundren_rockseeker.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
-#include <fcntl.h>
 
 void ft_gundren_rockseeker_turn(t_char * info)
 {

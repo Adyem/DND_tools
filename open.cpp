@@ -2,12 +2,9 @@
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/CPP_class/class_file.hpp"
-#include "libft/Printf/printf.hpp"
+#include "libft/Errno/errno.hpp"
+#include "libft/File/file_utils.hpp"
 #include "dnd_tools.hpp"
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <errno.h>
 
 int ft_open_file_write_only(const char *filename, ft_file &file)
 {
@@ -45,10 +42,12 @@ void ft_dual_save_file(t_char * info, t_char * target)
 
 int ft_check_write_permissions(const char *filepath)
 {
-    if (access(filepath, F_OK) == 0)
+    if (file_exists(filepath) == 1)
     {
-        if (access(filepath, W_OK) != 0)
+        ft_file write_probe(filepath, O_WRONLY);
+        if (write_probe.get_error())
             return (-1);
+        write_probe.close();
     }
     return (0);
 }
@@ -102,7 +101,8 @@ ft_file ft_check_and_open(t_target_data *target_data, t_char * info)
             target_data->file[target_index]);
         if (target_data->file[target_index].get_error())
         {
-            pf_printf_fd(2, "119-Error opening file: %s", strerror(errno));
+            pf_printf_fd(2, "119-Error opening file: %s",
+                    target_data->file[target_index].get_error_str());
             ft_revert_changes_info(info, info_save_file);
             int rollback_index = 0;
             while (rollback_index <= target_index)

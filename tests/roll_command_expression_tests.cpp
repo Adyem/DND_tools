@@ -4,7 +4,7 @@
 #include "../libft/CMA/CMA.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
 #include "../libft/Errno/errno.hpp"
-#include <string>
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void test_command_roll_handles_parentheses_and_unary_minus()
 {
@@ -53,7 +53,7 @@ static void test_command_roll_rejects_uppercase_dice_identifier()
     char *arguments[3];
     int *result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     arguments[0] = const_cast<char *>("roll");

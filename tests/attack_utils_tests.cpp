@@ -2,7 +2,7 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../identification.hpp"
-#include <string>
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void test_weapon_find_stat_returns_strength_score()
 {
@@ -101,7 +101,7 @@ static void test_calculate_damage_applies_growth_reduction()
     t_equipment_id  weapon = {};
     t_damage_info   damage = {};
     const char      *file_path;
-    std::string     output;
+    ft_string       output;
     const char      *expected_output;
 
     character.bufs.growth.stacks = 3;
@@ -129,7 +129,7 @@ static void test_calculate_damage_never_drops_below_zero()
     t_equipment_id  weapon = {};
     t_damage_info   damage = {};
     const char      *file_path;
-    std::string     output;
+    ft_string       output;
     const char      *expected_output;
 
     character.bufs.growth.stacks = 20;

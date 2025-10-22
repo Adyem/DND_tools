@@ -4,14 +4,14 @@
 #include "../libft/CMA/CMA.hpp"
 #include "../libft/CPP_class/class_nullptr.hpp"
 #include "../libft/Errno/errno.hpp"
-#include <cstdio>
-#include <string>
+#include "../libft/Printf/printf.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void test_command_roll_rejects_null_argv()
 {
     int *result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     file_path = "tests_output/roll_command_null_argv.log";
@@ -33,7 +33,7 @@ static void test_command_roll_requires_expression_argument()
     char *arguments[2];
     int *result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     arguments[0] = const_cast<char *>("roll");
@@ -92,7 +92,7 @@ static void test_command_roll_concatenates_tokenized_parentheses_expression()
     result = ft_command_roll(arguments);
     char message[128];
 
-    std::snprintf(message, sizeof(message),
+    pf_snprintf(message, sizeof(message),
         "ft_command_roll should join tokenized parentheses expressions correctly (errno %d)",
         ft_errno);
     test_assert_true(result != ft_nullptr, message);
@@ -141,7 +141,7 @@ static void test_command_roll_resets_errno_after_error()
     char *valid_arguments[3];
     int *result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     invalid_arguments[0] = const_cast<char *>("roll");

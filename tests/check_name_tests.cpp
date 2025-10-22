@@ -1,34 +1,29 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include <filesystem>
-#include <system_error>
-#include <fstream>
-#include <cstdio>
-#include <string>
+#include "../libft/Libft/libft.hpp"
+#include "../libft/CPP_class/class_ofstream.hpp"
+#include "../libft/CPP_class/class_string_class.hpp"
 
 static void reset_data_directory()
 {
-    std::error_code remove_error;
-    std::error_code create_error;
-
-    std::filesystem::remove_all("data", remove_error);
-    if (remove_error.value() != 0)
-        std::remove("data");
-    std::filesystem::create_directory("data", create_error);
-    test_assert_true(create_error.value() == 0,
+    test_remove_directory("data");
+    test_remove_path("data");
+    test_create_directory("data");
+    test_assert_true(ft_errno == ER_SUCCESS,
         "failed to create data directory for check_name tests");
     return ;
 }
 
 static void create_test_file(const char *path)
 {
-    std::ofstream stream;
+    ft_ofstream stream;
 
-    stream.open(path);
-    test_assert_true(stream.is_open() == true, "failed to create test save file");
-    stream << "{}";
+    test_assert_true(stream.open(path) == 0, "failed to create test save file");
+    test_assert_true(stream.write("{}") == 2, "failed to write test save data");
     stream.close();
+    test_assert_true(stream.get_error() == ER_SUCCESS,
+        "failed to close test save file");
     return ;
 }
 
@@ -65,7 +60,7 @@ static void test_set_stats_check_name_rejects_null_name()
 {
     int         result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     reset_data_directory();
@@ -87,7 +82,7 @@ static void test_set_stats_check_name_reports_missing_target()
 {
     int         result;
     const char  *file_path;
-    std::string error_output;
+    ft_string   error_output;
     const char  *expected_message;
 
     reset_data_directory();

@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
 #include "initialize.hpp"
-#include <stddef.h>
+#include "libft/Libft/libft.hpp"
 
 void    ft_initialize_character_template(t_char * dst, const t_char * src)
 {

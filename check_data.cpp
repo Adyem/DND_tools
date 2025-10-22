@@ -1,6 +1,5 @@
 #include "libft/Printf/printf.hpp"
 #include "dnd_tools.hpp"
-#include <climits>
 
 static int check_range(const int &value, const int &min, const int &max, const char *name,
         const char *field_name)

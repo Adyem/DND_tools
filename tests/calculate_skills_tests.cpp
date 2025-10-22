@@ -1,7 +1,7 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include <cstdio>
+#include "../libft/Printf/printf.hpp"
 
 static void test_calculate_athletics_totals_all_sources()
 {
@@ -24,7 +24,8 @@ static void test_calculate_athletics_totals_all_sources()
     result = ft_calculate_athletics(&character);
     char message[128];
 
-    std::snprintf(message, sizeof(message), "ft_calculate_athletics expected 91 but got %d", result);
+    pf_snprintf(message, sizeof(message),
+        "ft_calculate_athletics expected 91 but got %d", result);
     test_assert_true(result == 91, message);
     return ;
 }

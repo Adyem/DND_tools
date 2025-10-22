@@ -6,7 +6,6 @@
 #include "character.hpp"
 #include "initialize.hpp"
 #include "armor.hpp"
-#include <stddef.h>
 
 typedef struct    s_name t_name;
 typedef struct    s_char t_char;

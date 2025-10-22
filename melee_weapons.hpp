@@ -2,7 +2,6 @@
 # define MELEE_WEAPONS_H
 
 #include "dnd_tools.hpp"
-#include <stddef.h>
 #include "character.hpp"
 #include "identification.hpp"
 #include "initialize.hpp"

@@ -4,14 +4,15 @@
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "libft/JSon/document.hpp"
 #include "libft/File/open_dir.hpp"
+#include "libft/Errno/errno.hpp"
 #include "dnd_tools.hpp"
-#include <cstdlib>
-#include <fcntl.h>
-#include <unistd.h>
-#include <cstring>
-#include <cerrno>
-#include <dirent.h>
-#include <sys/stat.h>
+
+#ifndef DT_REG
+# define DT_REG 8
+#endif
+#ifndef DT_UNKNOWN
+# define DT_UNKNOWN 0
+#endif
 
 static t_char *ft_check_name(t_name *name, char *file_name)
 {
@@ -145,27 +146,40 @@ void ft_open_all_files(t_name *name)
     dir = file_opendir("data");
     if (dir == ft_nullptr)
     {
-        pf_printf_fd(2, "Unable to open directory: %s\n", strerror(errno));
+        pf_printf_fd(2, "Unable to open directory: %s\n", ft_strerror(ft_errno));
         return ;
     }
     while ((entry = file_readdir(dir)) != ft_nullptr)
     {
         if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
             continue ;
-        snprintf(filepath, sizeof(filepath), "%s/%s", "data", entry->d_name);
+        int format_result;
+
+        format_result = pf_snprintf(filepath, sizeof(filepath), "%s/%s", "data", entry->d_name);
+        if (format_result < 0)
+        {
+            pf_printf_fd(2, "Unable to prepare path for %s\n", entry->d_name);
+            continue ;
+        }
         if (DEBUG == 1)
             pf_printf("%s\n", filepath);
         if (ft_strncmp(entry->d_name, "data--", 6) == 0)
             continue ;
         int is_regular_file;
-        struct stat path_stat;
+        int directory_check;
 
         is_regular_file = 0;
         if (entry->d_type == DT_REG)
             is_regular_file = 1;
         else if (entry->d_type == DT_UNKNOWN)
         {
-            if (stat(filepath, &path_stat) == 0 && S_ISREG(path_stat.st_mode))
+            directory_check = file_dir_exists(filepath);
+            if (directory_check < 0)
+            {
+                pf_printf_fd(2, "Unable to inspect '%s': %s\n", filepath,
+                        ft_strerror(ft_errno));
+            }
+            else if (directory_check == 0)
                 is_regular_file = 1;
         }
         if (is_regular_file == 0)
@@ -174,7 +188,8 @@ void ft_open_all_files(t_name *name)
         file.open(filepath, O_RDONLY);
         if (file.get_error())
         {
-            pf_printf_fd(2, "Unable to open file '%s': %s\n", filepath, strerror(errno));
+            pf_printf_fd(2, "Unable to open file '%s': %s\n", filepath,
+                    file.get_error_str());
             continue ;
         }
         if (ft_strncmp(entry->d_name, "PC--", 4) == 0)
@@ -196,7 +211,7 @@ void ft_open_all_files(t_name *name)
         if (write_file.get_error())
         {
             pf_printf_fd(2, "Unable to open file '%s' for writing: %s\n",
-                         filepath, strerror(errno));
+                         filepath, write_file.get_error_str());
             ft_free_info(info);
             continue ;
         }
