@@ -31,11 +31,13 @@ static void test_command_roll_validate_rejects_mismatched_parenthesis()
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate accepted an invalid roll expression");
     char errno_message[128];
+    int  error_code;
 
+    error_code = ft_errno;
     pf_snprintf(errno_message, sizeof(errno_message),
-        "ft_command_roll_validate should set errno to FT_EINVAL on invalid input (errno %d)",
-        ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+        "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT on invalid input (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
     error_output = test_read_file_to_string(file_path);
     expected_message = "405-Error: Roll validation failed for expression: 2d6+3)\n";
     test_assert_true(error_output == expected_message,
@@ -62,16 +64,18 @@ static void test_command_roll_validate_handles_null_expression()
     ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
+    int         error_code;
 
     file_path = "tests_output/roll_validate_null_expression.log";
     test_begin_error_capture(file_path);
     result = ft_command_roll_validate(ft_nullptr);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression is null");
+    error_code = ft_errno;
     pf_snprintf(errno_message, sizeof(errno_message),
-        "ft_command_roll_validate should set errno to FT_EINVAL when expression is null (errno %d)",
-        ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+        "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT when expression is null (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
     error_output = test_read_file_to_string(file_path);
     expected_message = "404-Error: Roll validation expression is missing\n";
     test_assert_true(error_output == expected_message,
@@ -88,16 +92,18 @@ static void test_command_roll_validate_rejects_empty_expression()
     ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
+    int         error_code;
 
     file_path = "tests_output/roll_validate_empty_expression.log";
     test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression is empty");
+    error_code = ft_errno;
     pf_snprintf(errno_message, sizeof(errno_message),
-        "ft_command_roll_validate should set errno to FT_EINVAL for empty expression (errno %d)",
-        ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+        "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT for empty expression (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
     error_output = test_read_file_to_string(file_path);
     expected_message = "405-Error: Roll validation failed for expression: \n";
     test_assert_true(error_output == expected_message,
@@ -114,16 +120,18 @@ static void test_command_roll_validate_rejects_trailing_operator()
     ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
+    int         error_code;
 
     file_path = "tests_output/roll_validate_trailing_operator.log";
     test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression ends with an operator");
+    error_code = ft_errno;
     pf_snprintf(errno_message, sizeof(errno_message),
-        "ft_command_roll_validate should set errno to FT_EINVAL when expression ends with operator (errno %d)",
-        ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+        "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT when expression ends with operator (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
     error_output = test_read_file_to_string(file_path);
     expected_message = "405-Error: Roll validation failed for expression: 2d6+\n";
     test_assert_true(error_output == expected_message,
@@ -140,16 +148,18 @@ static void test_command_roll_validate_rejects_missing_dice_size()
     ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
+    int         error_code;
 
     file_path = "tests_output/roll_validate_missing_dice_size.log";
     test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when dice sides are missing");
+    error_code = ft_errno;
     pf_snprintf(errno_message, sizeof(errno_message),
-        "ft_command_roll_validate should set errno to FT_EINVAL when dice sides are missing (errno %d)",
-        ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+        "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT when dice sides are missing (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
     error_output = test_read_file_to_string(file_path);
     expected_message = "405-Error: Roll validation failed for expression: 10d\n";
     test_assert_true(error_output == expected_message,
@@ -166,16 +176,18 @@ static void test_command_roll_validate_rejects_invalid_characters()
     ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
+    int         error_code;
 
     file_path = "tests_output/roll_validate_invalid_characters.log";
     test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression contains invalid characters");
+    error_code = ft_errno;
     pf_snprintf(errno_message, sizeof(errno_message),
-        "ft_command_roll_validate should set errno to FT_EINVAL for invalid characters (errno %d)",
-        ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+        "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT for invalid characters (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
     error_output = test_read_file_to_string(file_path);
     expected_message = "405-Error: Roll validation failed for expression: 2d6+x\n";
     test_assert_true(error_output == expected_message,
@@ -184,14 +196,31 @@ static void test_command_roll_validate_rejects_invalid_characters()
     return ;
 }
 
-static void test_command_roll_validate_accepts_uppercase_dice_identifier()
+static void test_command_roll_validate_rejects_uppercase_dice_identifier()
 {
-    char expression[] = "2D6+3";
-    int result;
+    char        expression[] = "2D6+3";
+    int         result;
+    const char  *file_path;
+    ft_string   error_output;
+    const char  *expected_message;
+    char        errno_message[128];
+    int         error_code;
 
+    file_path = "tests_output/roll_validate_uppercase_identifier.log";
+    test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
-    test_assert_true(result == 0, "ft_command_roll_validate should accept uppercase dice identifiers");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll_validate should set errno to success for uppercase dice identifiers");
+    test_end_error_capture();
+    test_assert_true(result != 0, "ft_command_roll_validate should reject uppercase dice identifiers");
+    error_code = ft_errno;
+    pf_snprintf(errno_message, sizeof(errno_message),
+        "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT for uppercase identifiers (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "405-Error: Roll validation failed for expression: 2D6+3\n";
+    test_assert_true(error_output == expected_message,
+        "ft_command_roll_validate should log uppercase identifier error message");
+    test_delete_file(file_path);
     return ;
 }
 
@@ -203,16 +232,18 @@ static void test_command_roll_validate_rejects_whitespace()
     ft_string   error_output;
     const char  *expected_message;
     char        errno_message[128];
+    int         error_code;
 
     file_path = "tests_output/roll_validate_whitespace.log";
     test_begin_error_capture(file_path);
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression contains whitespace");
+    error_code = ft_errno;
     pf_snprintf(errno_message, sizeof(errno_message),
-        "ft_command_roll_validate should set errno to FT_EINVAL when whitespace appears in expression (errno %d)",
-        ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+        "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT when whitespace appears in expression (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
     error_output = test_read_file_to_string(file_path);
     expected_message = "405-Error: Roll validation failed for expression: 2d6 + 3\n";
     test_assert_true(error_output == expected_message,
@@ -232,7 +263,7 @@ void run_roll_validation_tests()
     test_command_roll_validate_rejects_trailing_operator();
     test_command_roll_validate_rejects_missing_dice_size();
     test_command_roll_validate_rejects_invalid_characters();
-    test_command_roll_validate_accepts_uppercase_dice_identifier();
+    test_command_roll_validate_rejects_uppercase_dice_identifier();
     test_command_roll_validate_rejects_whitespace();
     test_end_suite_success();
     return ;

@@ -28,7 +28,7 @@ void ft_npc_update_buff(t_char * info, const char **input, int *buff, const char
 {
     int number;
 
-    if (ft_check_value(input[2]))
+    if (ft_validate_int(input[2]))
     {
         pf_printf_fd(2, "1-Buff Error: Expecting a number between 0 and 50\n");
         return ;

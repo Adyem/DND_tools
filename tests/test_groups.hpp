@@ -24,10 +24,14 @@ void    run_concentration_tests();
 void    run_add_element_tests();
 void    run_check_equipment_tests();
 void    run_attack_utils_tests();
+void    run_attack_prompt_tests();
 void    run_set_debuf_tests();
 void    run_npc_check_info_tests();
 void    run_check_buff_tests();
 void    run_deal_damage_tests();
 void    run_get_pc_list_tests();
+void    run_initiative_sort_tests();
+void    run_command_builtin_tests();
+void    run_npc_command_tests();
 
 #endif

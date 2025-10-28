@@ -78,6 +78,38 @@ static void test_set_stats_check_name_rejects_null_name()
     return ;
 }
 
+static void test_check_name_handles_case_insensitive_prefixes()
+{
+    int result;
+
+    reset_data_directory();
+    create_test_file("data/pc--Ranger");
+    create_test_file("data/DATA--Archive");
+
+    result = ft_set_stats_check_name("Ranger");
+    test_assert_true(result == 0,
+        "ft_set_stats_check_name should match player names with lowercase pc prefix");
+    test_assert_true(ft_errno == ER_SUCCESS,
+        "ft_set_stats_check_name should set ft_errno to ER_SUCCESS on success");
+
+    result = ft_check_player_character("Ranger");
+    test_assert_true(result == 0,
+        "ft_check_player_character should match player names with lowercase pc prefix");
+    test_assert_true(ft_errno == ER_SUCCESS,
+        "ft_check_player_character should set ft_errno to ER_SUCCESS on success");
+
+    result = ft_set_stats_check_name("Archive");
+    test_assert_true(result == 1,
+        "ft_set_stats_check_name should ignore names with the data prefix regardless of case");
+
+    result = ft_check_player_character("Archive");
+    test_assert_true(result == 1,
+        "ft_check_player_character should ignore names that do not use the pc prefix");
+
+    reset_data_directory();
+    return ;
+}
+
 static void test_set_stats_check_name_reports_missing_target()
 {
     int         result;
@@ -105,6 +137,7 @@ void run_check_name_tests()
     test_begin_suite("check_name_tests");
     test_check_name_handles_pc_prefix_variants();
     test_set_stats_check_name_rejects_null_name();
+    test_check_name_handles_case_insensitive_prefixes();
     test_set_stats_check_name_reports_missing_target();
     test_end_suite_success();
     return ;

@@ -1,7 +1,12 @@
 #include "dnd_tools.hpp"
+#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/CPP_class/class_string_class.hpp"
+#include "libft/Errno/errno.hpp"
 #include "libft/Printf/printf.hpp"
+#include "libft/Template/map.hpp"
 
 typedef int (*t_skill_calc)(t_char * info);
+typedef t_npc_command_status    (*t_npc_command_handler)(t_char * info, const char **input);
 
 typedef struct s_skill_table_entry
 {
@@ -9,6 +14,18 @@ typedef struct s_skill_table_entry
     t_skill_calc ability;
     t_skill_calc skill;
 }   t_skill_table_entry;
+
+typedef struct s_skill_handler_entry
+{
+    t_skill_calc ability;
+    t_skill_calc skill;
+}   t_skill_handler_entry;
+
+typedef struct s_npc_command_entry
+{
+    const char              *name;
+    t_npc_command_handler   handler;
+}   t_npc_command_entry;
 
 static const t_skill_table_entry g_skill_table[] = {
     {"athletics", &ft_calculate_str, &ft_calculate_athletics},
@@ -31,77 +48,289 @@ static const t_skill_table_entry g_skill_table[] = {
     {"persuasion", &ft_calculate_cha, &ft_calculate_persuasion}
 };
 
-static const int g_skill_table_size = 18;
-
-static int    ft_skill_roll(t_char * info, const char **input)
+static int  ft_populate_skill_map(ft_map<ft_string, t_skill_handler_entry> &map)
 {
-    int index;
+    size_t  index;
+    size_t  count;
 
+    count = sizeof(g_skill_table) / sizeof(g_skill_table[0]);
     index = 0;
-    while (index < g_skill_table_size)
+    while (index < count)
     {
-        if (ft_strcmp(input[1], g_skill_table[index].name) == 0)
-        {
-            ft_skill_throw(info, g_skill_table[index].name,
-                g_skill_table[index].ability(info),
-                g_skill_table[index].skill(info));
-            return (0);
-        }
-        index++;
+        ft_string   key(g_skill_table[index].name);
+        t_skill_handler_entry   entry;
+
+        if (key.get_error() != ER_SUCCESS)
+            return (-1);
+        entry.ability = g_skill_table[index].ability;
+        entry.skill = g_skill_table[index].skill;
+        map.insert(key, entry);
+        if (map.get_error() != ER_SUCCESS)
+            return (-1);
+        index = index + 1;
     }
-    return (1);
+    return (0);
+}
+
+static ft_map<ft_string, t_skill_handler_entry>  &ft_skill_handler_map(void)
+{
+    static ft_map<ft_string, t_skill_handler_entry> map(32);
+    static bool                                     initialized = false;
+
+    if (initialized == false)
+    {
+        if (ft_populate_skill_map(map) != 0)
+        {
+            map.clear();
+            ft_errno = FT_ERR_INVALID_ARGUMENT;
+            return (map);
+        }
+        initialized = true;
+    }
+    return (map);
+}
+
+static t_npc_command_status    ft_execute_skill_roll(t_char * info, const char **input)
+{
+    Pair<ft_string, t_skill_handler_entry>  *entry;
+    ft_string                               key;
+    ft_map<ft_string, t_skill_handler_entry>    *map_pointer;
+    t_skill_handler_entry                   handler;
+
+    if (input == ft_nullptr || input[1] == ft_nullptr)
+        return (FT_NPC_COMMAND_NOT_FOUND);
+    map_pointer = &ft_skill_handler_map();
+    if (map_pointer == ft_nullptr)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (FT_NPC_COMMAND_ERROR);
+    }
+    ft_map<ft_string, t_skill_handler_entry>    &map = *map_pointer;
+    if (map.get_error() != ER_SUCCESS)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (FT_NPC_COMMAND_ERROR);
+    }
+    key = ft_string(input[1]);
+    if (key.get_error() != ER_SUCCESS)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (FT_NPC_COMMAND_ERROR);
+    }
+    entry = map.find(key);
+    if (entry == ft_nullptr)
+        return (FT_NPC_COMMAND_NOT_FOUND);
+    handler = entry->value;
+    if (handler.ability == ft_nullptr || handler.skill == ft_nullptr)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (FT_NPC_COMMAND_ERROR);
+    }
+    ft_skill_throw(info, entry->key.c_str(), handler.ability(info), handler.skill(info));
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_attack(t_char * info, const char **input)
+{
+    (void)input;
+    if (info->equipment.weapon.attack.function != ft_nullptr)
+    {
+        info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
+        return (FT_NPC_COMMAND_HANDLED);
+    }
+    pf_printf_fd(2, "no weapon attack set for %s\n", info->name);
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_loot(t_char * info, const char **input)
+{
+    (void)input;
+    if (info->drop_loot != ft_nullptr)
+    {
+        info->drop_loot(info);
+        return (FT_NPC_COMMAND_HANDLED);
+    }
+    pf_printf("This mob doesnt drop anny loot");
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_ranged_attack(t_char * info, const char **input)
+{
+    (void)input;
+    if (info->equipment.ranged_weapon.attack.function != ft_nullptr)
+    {
+        info->equipment.ranged_weapon.attack.function(info,
+            &info->equipment.ranged_weapon, 0);
+        return (FT_NPC_COMMAND_HANDLED);
+    }
+    pf_printf_fd(2, "no ranged weapon attack set for %s\n", info->name);
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_move(t_char * info, const char **input)
+{
+    (void)input;
+    if (info->flags.prone != 0)
+    {
+        pf_printf("%s has %i movement", info->name, info->physical.speed / 2);
+        return (FT_NPC_COMMAND_HANDLED);
+    }
+    pf_printf("%s has %i movement", info->name, info->physical.speed);
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_prone(t_char * info, const char **input)
+{
+    (void)input;
+    info->flags.prone = 1;
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_kill(t_char * info, const char **input)
+{
+    (void)input;
+    ft_kill(info);
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_damage(t_char * info, const char **input)
+{
+    (void)input;
+    ft_request_damage(info);
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_turn(t_char * info, const char **input)
+{
+    (void)input;
+    if (info->turn != ft_nullptr)
+    {
+        info->turn(info);
+        return (FT_NPC_COMMAND_HANDLED);
+    }
+    pf_printf("%s doesn't take any actions on his/her turn\n", info->name);
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_hp(t_char * info, const char **input)
+{
+    (void)input;
+    pf_printf("HP: %d\n", info->stats.health);
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static t_npc_command_status    ft_npc_command_initiative(t_char * info, const char **input)
+{
+    (void)input;
+    ft_check_initiative(info);
+    return (FT_NPC_COMMAND_HANDLED);
+}
+
+static int  ft_populate_npc_command_map(ft_map<ft_string, t_npc_command_handler> &map)
+{
+    t_npc_command_entry entries[] = {
+        {"attack", &ft_npc_command_attack},
+        {"loot", &ft_npc_command_loot},
+        {"ranged_attack", &ft_npc_command_ranged_attack},
+        {"move", &ft_npc_command_move},
+        {"prone", &ft_npc_command_prone},
+        {"kill", &ft_npc_command_kill},
+        {"damage", &ft_npc_command_damage},
+        {"turn", &ft_npc_command_turn},
+        {"hp", &ft_npc_command_hp},
+        {"initiative", &ft_npc_command_initiative}
+    };
+    size_t  index;
+    size_t  count;
+
+    count = sizeof(entries) / sizeof(entries[0]);
+    index = 0;
+    while (index < count)
+    {
+        ft_string   key(entries[index].name);
+
+        if (key.get_error() != ER_SUCCESS)
+            return (-1);
+        map.insert(key, entries[index].handler);
+        if (map.get_error() != ER_SUCCESS)
+            return (-1);
+        index = index + 1;
+    }
+    return (0);
+}
+
+static ft_map<ft_string, t_npc_command_handler>  &ft_npc_command_map(void)
+{
+    static ft_map<ft_string, t_npc_command_handler> map(16);
+    static bool                                    initialized = false;
+
+    if (initialized == false)
+    {
+        if (ft_populate_npc_command_map(map) != 0)
+        {
+            map.clear();
+            ft_errno = FT_ERR_INVALID_ARGUMENT;
+            return (map);
+        }
+        initialized = true;
+    }
+    return (map);
+}
+
+t_npc_command_status    ft_npc_execute_command(t_char * info, const char **input)
+{
+    Pair<ft_string, t_npc_command_handler> *entry;
+    t_npc_command_handler                   handler;
+    ft_string                               key;
+    ft_map<ft_string, t_npc_command_handler>    *map_pointer;
+    int                                     previous_errno;
+
+    previous_errno = ft_errno;
+    if (info == ft_nullptr || input == ft_nullptr || input[1] == ft_nullptr)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (FT_NPC_COMMAND_ERROR);
+    }
+    map_pointer = &ft_npc_command_map();
+    if (map_pointer == ft_nullptr)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (FT_NPC_COMMAND_ERROR);
+    }
+    ft_map<ft_string, t_npc_command_handler>    &map = *map_pointer;
+    if (map.get_error() != ER_SUCCESS)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (FT_NPC_COMMAND_ERROR);
+    }
+    key = ft_string(input[1]);
+    if (key.get_error() != ER_SUCCESS)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (FT_NPC_COMMAND_ERROR);
+    }
+    entry = map.find(key);
+    if (entry != ft_nullptr)
+    {
+        handler = entry->value;
+        if (handler == ft_nullptr)
+        {
+            ft_errno = FT_ERR_INVALID_ARGUMENT;
+            return (FT_NPC_COMMAND_ERROR);
+        }
+        ft_errno = previous_errno;
+        return (handler(info, input));
+    }
+    ft_errno = previous_errno;
+    return (ft_execute_skill_roll(info, input));
 }
 
 void    ft_npc_sstuff(t_char * info, const char **input)
 {
-    if (ft_strcmp(input[1], "attack") == 0)
-    {
-        if (info->equipment.weapon.attack.function)
-            info->equipment.weapon.attack.function(info, &info->equipment.weapon, 0);
-        else
-            pf_printf_fd(2, "no weapon attack set for %s\n", info->name);
-    }
-        else if (ft_strcmp(input[1], "loot") == 0)
-        {
-                if (info->drop_loot)
-                        info->drop_loot(info);
-                else
-                        pf_printf("This mob doesnt drop anny loot");
-        }
-    else if (ft_strcmp(input[1], "ranged_attack") == 0)
-    {
-        if (info->equipment.ranged_weapon.attack.function)
-            info->equipment.ranged_weapon.attack.function(info, &info->equipment.ranged_weapon, 0);
-        else
-            pf_printf_fd(2, "no ranged weapon attack set for %s\n", info->name);
-    }
-    else if (ft_strcmp(input[1], "move") == 0)
-    {
-        if (info->flags.prone)
-            pf_printf("%s has %i movement", info->name, info->physical.speed / 2);
-        else
-            pf_printf("%s has %i movement", info->name, info->physical.speed);
-    }
-    else if (ft_strcmp(input[1], "prone") == 0)
-        info->flags.prone = 1;
-    else if (ft_strcmp(input[1], "kill") == 0)
-        ft_kill(info);
-    else if (ft_strcmp(input[1], "damage") == 0)
-        ft_request_damage(info);
-    else if (ft_strcmp(input[1], "turn") == 0)
-    {
-        if (info->turn)
-            info->turn(info);
-        else
-            pf_printf("%s doesn't take any actions on his/her turn\n", info->name);
-    }
-    else if (ft_strcmp(input[1], "hp") == 0)
-        pf_printf("HP: %d\n", info->stats.health);
-    else if (ft_strcmp(input[1], "initiative") == 0)
-        ft_check_initiative(info);
-    else if (ft_skill_roll(info, input) == 0)
-        return ;
-    else
+    t_npc_command_status    status;
+
+    status = ft_npc_execute_command(info, input);
+    if (status == FT_NPC_COMMAND_NOT_FOUND || status == FT_NPC_COMMAND_ERROR)
         pf_printf_fd(2, "4-Invalid command given\n");
     return ;
 }

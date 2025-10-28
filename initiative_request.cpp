@@ -29,7 +29,7 @@ int ft_request_initiative(t_pc *player)
     has_initiative = 0;
     while ((input = rl_readline(message)))
     {
-        if (ft_check_value(input))
+        if (ft_validate_int(input))
         {
             cma_free(input);
             pf_printf("Requesting a number between 1 and 50\n");

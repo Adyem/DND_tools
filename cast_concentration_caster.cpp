@@ -12,7 +12,7 @@ int ft_update_caster_name(ft_set<ft_string> *caster_name, const char *input_name
         pf_printf("adding the new caster name to the target struct %s\n", input_name);
     caster_name->insert(ft_string(input_name));
     error_code = caster_name->get_error();
-    if (error_code != ER_SUCCESS && error_code != SET_NOT_FOUND)
+    if (error_code != ER_SUCCESS && error_code != FT_ERR_NOT_FOUND)
     {
         pf_printf_fd(2, "165-Error updating caster name: %s\n",
             caster_name->get_error_str());

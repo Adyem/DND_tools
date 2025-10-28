@@ -17,6 +17,72 @@ static void ensure_tests_output_directory()
     return ;
 }
 
+static void test_collect_concentration_targets_copies_entries()
+{
+    const char              *targets[3];
+    ft_vector<ft_string>    collected;
+    int                     result;
+    size_t                  size;
+
+    targets[0] = "TargetOne";
+    targets[1] = "TargetTwo";
+    targets[2] = ft_nullptr;
+    result = ft_collect_concentration_targets(targets, &collected);
+    test_assert_true(result == 0,
+        "ft_collect_concentration_targets should report success when targets exist");
+    test_assert_true(ft_errno == ER_SUCCESS,
+        "ft_collect_concentration_targets should reset errno after success");
+    size = collected.size();
+    test_assert_true(size == 2,
+        "ft_collect_concentration_targets should copy each non-null target");
+    if (size >= 2)
+    {
+        test_assert_true(collected[0] == "TargetOne",
+            "ft_collect_concentration_targets should preserve first target order");
+        test_assert_true(collected[1] == "TargetTwo",
+            "ft_collect_concentration_targets should preserve second target order");
+    }
+    collected.clear();
+    return ;
+}
+
+static void test_collect_concentration_targets_handles_null_input()
+{
+    ft_vector<ft_string>    collected;
+    ft_string               existing("Existing");
+    int                     result;
+
+    test_assert_true(existing.get_error() == ER_SUCCESS,
+        "ft_string should construct without error for setup");
+    collected.push_back(existing);
+    test_assert_true(collected.get_error() == ER_SUCCESS,
+        "ft_vector should accept initial value before collection");
+    result = ft_collect_concentration_targets(ft_nullptr, &collected);
+    test_assert_true(result == 0,
+        "ft_collect_concentration_targets should succeed when targets pointer is null");
+    test_assert_true(ft_errno == ER_SUCCESS,
+        "ft_collect_concentration_targets should leave errno clear when nothing to copy");
+    test_assert_true(collected.size() == 0,
+        "ft_collect_concentration_targets should clear existing values on success");
+    return ;
+}
+
+static void test_collect_concentration_targets_rejects_null_output()
+{
+    const char  *targets[2];
+    int         result;
+
+    targets[0] = "Entry";
+    targets[1] = ft_nullptr;
+    ft_errno = ER_SUCCESS;
+    result = ft_collect_concentration_targets(targets, ft_nullptr);
+    test_assert_true(result == -1,
+        "ft_collect_concentration_targets should fail when output vector pointer is null");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT,
+        "ft_collect_concentration_targets should set errno when output pointer is invalid");
+    return ;
+}
+
 static char *duplicate_line(const char *value)
 {
     size_t length;
@@ -292,6 +358,89 @@ static void test_npc_json_load_populates_fields()
     return ;
 }
 
+static void test_npc_json_load_handles_many_lines()
+{
+    ensure_tests_output_directory();
+    const char *file_path = "tests_output/npc_json_many_lines_fixture.json";
+    json_document document;
+    json_group *group;
+    json_item *line_item;
+    int write_error;
+    t_char loaded = {};
+    int open_error;
+
+    group = document.create_group("lines");
+    test_assert_true(group != ft_nullptr, "Failed to allocate JSON group for NPC many lines test");
+    document.append_group(group);
+
+    line_item = document.create_item("0", "HEALTH=111");
+    test_assert_true(line_item != ft_nullptr, "Failed to build health line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("1", "MAX_HEALTH=222");
+    test_assert_true(line_item != ft_nullptr, "Failed to build max health line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("2", "TEMP_HP=5");
+    test_assert_true(line_item != ft_nullptr, "Failed to build temp hp line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("3", "STR=18");
+    test_assert_true(line_item != ft_nullptr, "Failed to build strength line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("4", "DEX=12");
+    test_assert_true(line_item != ft_nullptr, "Failed to build dexterity line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("5", "CON=14");
+    test_assert_true(line_item != ft_nullptr, "Failed to build constitution line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("6", "INITIATIVE=7");
+    test_assert_true(line_item != ft_nullptr, "Failed to build initiative line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("7", "POSITION_X=3");
+    test_assert_true(line_item != ft_nullptr, "Failed to build position X line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("8", "POSITION_Y=4");
+    test_assert_true(line_item != ft_nullptr, "Failed to build position Y line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("9", "ACID_RESISTANCE=25");
+    test_assert_true(line_item != ft_nullptr, "Failed to build acid resistance line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("A", "COLD_RESISTANCE=30");
+    test_assert_true(line_item != ft_nullptr, "Failed to build cold resistance line for NPC many lines test");
+    document.add_item(group, line_item);
+    line_item = document.create_item("B", "FIRE_RESISTANCE=35");
+    test_assert_true(line_item != ft_nullptr, "Failed to build fire resistance line for NPC many lines test");
+    document.add_item(group, line_item);
+
+    write_error = document.write_to_file(file_path);
+    test_assert_true(write_error == 0, "Failed to write NPC many lines JSON fixture");
+
+    loaded.name = const_cast<char *>("Many Lines NPC");
+    loaded.save_file = cma_strdup(file_path);
+    test_assert_true(loaded.save_file != ft_nullptr, "Failed to duplicate NPC many lines file path");
+    loaded.c_resistance.acid = -501;
+    loaded.c_resistance.cold = -501;
+    loaded.c_resistance.fire = -501;
+
+    open_error = ft_npc_open_file(&loaded);
+    test_assert_true(open_error == 0, "Failed to load NPC from many lines JSON fixture");
+    test_assert_true(loaded.stats.health == 111, "NPC many lines load did not restore health");
+    test_assert_true(loaded.dstats.health == 222, "NPC many lines load did not restore max health");
+    test_assert_true(loaded.stats.temp_hp == 5, "NPC many lines load did not restore temp hp");
+    test_assert_true(loaded.stats.str == 18, "NPC many lines load did not restore strength");
+    test_assert_true(loaded.stats.dex == 12, "NPC many lines load did not restore dexterity");
+    test_assert_true(loaded.stats.con == 14, "NPC many lines load did not restore constitution");
+    test_assert_true(loaded.initiative == 7, "NPC many lines load did not restore initiative");
+    test_assert_true(loaded.position.x == 3, "NPC many lines load did not restore position X");
+    test_assert_true(loaded.position.y == 4, "NPC many lines load did not restore position Y");
+    test_assert_true(loaded.c_resistance.acid == 25, "NPC many lines load did not restore acid resistance");
+    test_assert_true(loaded.c_resistance.cold == 30, "NPC many lines load did not restore cold resistance");
+    test_assert_true(loaded.c_resistance.fire == 35, "NPC many lines load did not restore fire resistance");
+
+    cleanup_loaded_npc(loaded);
+    ft_cleanup_treeNode();
+    file_delete(file_path);
+    return ;
+}
+
 static void test_player_json_save_and_load()
 {
     ensure_tests_output_directory();
@@ -540,9 +689,13 @@ static void test_player_json_object_invalid_value_reports_error()
 void run_save_load_tests()
 {
     test_begin_suite("save_load_tests");
+    test_collect_concentration_targets_copies_entries();
+    test_collect_concentration_targets_handles_null_input();
+    test_collect_concentration_targets_rejects_null_output();
     test_npc_set_stats_player_entry_failure_sets_error();
     test_npc_json_save_writes_lines();
     test_npc_json_load_populates_fields();
+    test_npc_json_load_handles_many_lines();
     test_player_json_save_and_load();
     test_player_json_object_load();
     test_player_json_object_missing_key_reports_error();

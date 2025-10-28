@@ -134,7 +134,7 @@ int ft_readline_spell_level(const char *message, t_char * character,
             input = ft_nullptr;
             return (-1);
         }
-        if (ft_check_value(input))
+        if (ft_validate_int(input))
         {
             cma_free(input);
             input = ft_nullptr;

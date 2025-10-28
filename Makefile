@@ -31,8 +31,9 @@ HEADER      = dnd_tools.hpp \
 			  hilda_stormshield.hpp \
 			  murna_claygrip.hpp \
 			  thorbald_ironpocket.hpp \
-			  key_list.hpp \
-			  treeNode.hpp \
+                          key_list.hpp \
+                          command_builtins.hpp \
+                          treeNode.hpp \
 			  dwarf_paladin.hpp \
 			  felbeast.hpp \
 			  ancient_predatory_beast.hpp \
@@ -79,7 +80,6 @@ SRC         = name.cpp \
               npc_change_stats_04.cpp \
               npc_update_buff_01.cpp \
               growth_stack.cpp \
-              utils01.cpp \
               utils02.cpp \
               debug.cpp \
 			  add_element.cpp \
@@ -110,6 +110,7 @@ SRC         = name.cpp \
               update_lightning_strike.cpp \
               to_hit.cpp \
               readline_check.cpp \
+              command_builtins.cpp \
               roll.cpp \
               fclean.cpp \
               player.cpp \
@@ -265,7 +266,7 @@ export COMPILE_FLAGS
 ifeq ($(OS),Windows_NT)
     LDFLAGS     = $(LIBFT)
 else
-    LDFLAGS     = $(LIBFT) -lreadline -pthread
+    LDFLAGS     = $(LIBFT) -lreadline -pthread -lsqlite3 -lssl -lcrypto
 endif
 
 OBJS        = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
@@ -285,6 +286,10 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/check_equipment_tests.cpp \
              tests/check_buff_tests.cpp \
              tests/attack_utils_tests.cpp \
+             tests/attack_prompt_tests.cpp \
+             tests/command_builtin_tests.cpp \
+             tests/npc_command_tests.cpp \
+             tests/command_builtin_stubs.cpp \
              tests/resistance_tests.cpp \
              tests/calculate_damage_reduction_tests.cpp \
              tests/calculate_stats_tests.cpp \
@@ -292,20 +297,32 @@ TEST_SRC    = tests/automated_tests.cpp \
              tests/calculate_util_stats_tests.cpp \
              tests/divine_smite_tests.cpp \
              tests/concentration_tests.cpp \
+             tests/concentration_test_stubs.cpp \
              tests/set_debuf_tests.cpp \
              tests/npc_check_info_tests.cpp \
              tests/deal_damage_tests.cpp \
+             tests/initiative_sort_tests.cpp \
              deal_damage.cpp \
+             initiative_sort_1.cpp \
+             initiative_sort_2.cpp \
+             free_memory.cpp \
+             free_info.cpp \
              attack_utils.cpp \
+             attack_prompt_action.cpp \
+             attack_readline_prompt.cpp \
              spell_utils.cpp \
              readline_check.cpp \
+             command_builtins.cpp \
+             read_file_lines.cpp \
              fclean.cpp \
              tests/spell_utils_tests.cpp \
              tests/create_data_folder_tests.cpp \
              tests/get_pc_list_tests.cpp \
              tests/add_element_tests.cpp \
-              tests/save_load_test_stubs.cpp \
+             tests/save_load_test_stubs.cpp \
               tests/save_load_tests.cpp \
+             npc_change_stats_02.cpp \
+             cast_divine_smite.cpp \
              divine_smite_utils.cpp \
              trim_start.cpp \
              set_debuf.cpp \
@@ -341,8 +358,11 @@ TEST_SRC    = tests/automated_tests.cpp \
              check_buff_skill.cpp \
              check_buff_general.cpp \
              check_buff_damage.cpp \
+             update_buff.cpp \
+             update_buff_special.cpp \
+             skill_throw.cpp \
+             update_buff_healing.cpp \
              cast_concentration_caster.cpp \
-             utils01.cpp \
              utils02.cpp \
              initiative_pc.cpp
 
@@ -386,9 +406,13 @@ initialize:
 
 ensure_libft:
 	@if [ ! -f $(SUBMODULE_SENTINEL) ]; then \
-                printf '        [Libft] Submodule missing. Run "make initialize" before building.\n'; \
-                exit 1; \
-        fi
+		printf '        [Libft] Submodule missing. Initializing automatically.\n'; \
+		git submodule update --init --recursive $(LIBFT_DIR); \
+	fi
+	@if [ ! -f $(SUBMODULE_SENTINEL) ]; then \
+		printf '        [Libft] Submodule initialization failed. Run "make initialize" manually.\n'; \
+		exit 1; \
+	fi
 
 $(OBJ_DIR)/%.o: %.cpp $(HEADER)
 	@$(CC) $(CFLAGS) -c $< -o $@

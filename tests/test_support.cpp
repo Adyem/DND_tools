@@ -1,12 +1,13 @@
 #include "test_support.hpp"
-#include "../libft/CMA/CMA.hpp"
-#include "../libft/Printf/printf.hpp"
 #include "../libft/Libft/libft.hpp"
 #include "../libft/File/file_utils.hpp"
 #include "../libft/File/open_dir.hpp"
 #include "../libft/GetNextLine/get_next_line.hpp"
 #include "../libft/Compatebility/compatebility_internal.hpp"
+#include "../libft/System_utils/test_runner.hpp"
+#include "../libft/Errno/errno.hpp"
 #include "../dnd_tools.hpp"
+#include <setjmp.h>
 #if defined(_WIN32)
 # include <windows.h>
 #else
@@ -16,6 +17,8 @@
 static int          g_saved_stderr_fd = -1;
 static int          g_saved_stdout_fd = -1;
 static const char   *g_current_test_suite = NULL;
+static jmp_buf      g_test_jump_buffer;
+static int          g_jump_active = 0;
 
 static void test_create_directory_component(const char *directory_path, size_t length)
 {
@@ -83,7 +86,7 @@ int     test_path_exists(const char *path)
         ft_errno = ER_SUCCESS;
         return (1);
     }
-    if (ft_errno == FT_EINVAL)
+    if (ft_errno == FT_ERR_INVALID_ARGUMENT)
         ft_errno = ER_SUCCESS;
     return (0);
 }
@@ -105,13 +108,13 @@ void    test_remove_directory(const char *directory_path)
         if (last_error != 0)
             ft_errno = static_cast<int>(last_error) + ERRNO_OFFSET;
         else
-            ft_errno = FT_EINVAL;
+            ft_errno = FT_ERR_INVALID_ARGUMENT;
     }
     else
         ft_errno = ER_SUCCESS;
 #else
     if (rmdir(directory_path) != 0)
-        ft_errno = FT_EIO;
+        ft_errno = FT_ERR_IO;
     else
         ft_errno = ER_SUCCESS;
 #endif
@@ -133,7 +136,7 @@ void    test_remove_path(const char *path)
             ft_errno = ER_SUCCESS;
         return ;
     }
-    if (ft_errno == FT_EINVAL)
+    if (ft_errno == FT_ERR_INVALID_ARGUMENT)
         ft_errno = ER_SUCCESS;
     return ;
 }
@@ -167,7 +170,7 @@ static int  test_remove_directory_contents(const char *directory_path)
                 file_closedir(directory_stream);
                 return (-1);
             }
-            if (directory_entry->d_type == DT_DIR)
+            if (cmp_directory_exists(entry_path.c_str()) == 1)
             {
                 test_remove_directory(entry_path.c_str());
                 if (ft_errno != ER_SUCCESS)
@@ -192,19 +195,20 @@ static int  test_remove_directory_contents(const char *directory_path)
 
 bool g_dnd_test = false;
 
-void test_assert_true(int condition, const char *message)
+void test_assert_true_impl(int condition, const char *message, const char *file_path, int line_number)
 {
-    if (!condition)
+    if (condition != 0)
+        return ;
+    if (message == NULL)
+        message = "Test assertion failed";
+    ft_test_fail(message, file_path, line_number);
+    ft_errno = ER_SUCCESS;
+    if (g_jump_active == 1)
     {
-        if (g_current_test_suite != NULL)
-        {
-            pf_printf("%s: FAIL\n", g_current_test_suite);
-            g_current_test_suite = NULL;
-        }
-        ft_fprintf(stderr, "Test failed: %s\n", message);
-        ft_errno = ER_SUCCESS;
-        ft_exit(ft_nullptr, 1);
+        g_jump_active = 0;
+        longjmp(g_test_jump_buffer, 1);
     }
+    ft_exit(ft_nullptr, 1);
     return ;
 }
 
@@ -216,11 +220,30 @@ void    test_begin_suite(const char *suite_name)
 
 void    test_end_suite_success()
 {
-    if (g_current_test_suite == NULL)
-        return ;
-    pf_printf("%s: PASS\n", g_current_test_suite);
     g_current_test_suite = NULL;
     return ;
+}
+
+int     test_run_suite(void (*suite_func)(void))
+{
+    int jump_result;
+
+    if (suite_func == NULL)
+        return (1);
+    g_dnd_test = true;
+    g_jump_active = 1;
+    jump_result = setjmp(g_test_jump_buffer);
+    if (jump_result != 0)
+    {
+        g_dnd_test = false;
+        g_jump_active = 0;
+        g_current_test_suite = NULL;
+        return (0);
+    }
+    suite_func();
+    g_dnd_test = false;
+    g_jump_active = 0;
+    return (1);
 }
 
 void    test_begin_error_capture(const char *file_path)
@@ -301,23 +324,25 @@ void    test_end_output_capture()
 
 ft_string    test_read_file_to_string(const char *file_path)
 {
-    char    **lines;
+    FILE        *file;
     ft_string   content;
-    int     index;
+    char        buffer[1024];
+    char        *read_result;
 
     if (file_path == NULL)
         return (ft_string());
-    lines = ft_open_and_read_file(file_path, 256);
-    if (lines == ft_nullptr)
+    file = ft_fopen(file_path, "r");
+    if (file == NULL)
         return (ft_string());
-    index = 0;
-    while (lines[index] != ft_nullptr)
+    while (1)
     {
-        content.append(lines[index]);
-        cma_free(lines[index]);
-        index++;
+        read_result = ft_fgets(buffer, static_cast<int>(sizeof(buffer)), file);
+        if (read_result == NULL)
+            break ;
+        content.append(buffer);
     }
-    cma_free(lines);
+    ft_fclose(file);
+    ft_errno = ER_SUCCESS;
     return (content);
 }
 

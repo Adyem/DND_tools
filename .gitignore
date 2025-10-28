@@ -1,0 +1,6 @@
+automated_tests
+objs_tests/
+tests_output/
+test_failures.log
+tmp
+tmp.cpp

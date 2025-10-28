@@ -1,31 +1,90 @@
 #include "dnd_tools.hpp"
+#include "libft/Errno/errno.hpp"
+#include "libft/Template/vector.hpp"
+
+static int ft_add_skill_source(ft_vector<t_skills*> &sources, t_skills *source)
+{
+    sources.push_back(source);
+    if (sources.get_error() != ER_SUCCESS)
+    {
+        ft_errno = sources.get_error();
+        return (-1);
+    }
+    return (0);
+}
+
+static int ft_populate_skill_sources(t_char *info, ft_vector<t_skills*> &sources)
+{
+    if (ft_add_skill_source(sources, &info->skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.weapon.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.offhand_weapon.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.ranged_weapon.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.armor.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.helmet.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.shield.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.boots.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.gloves.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.amulet.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.ring_01.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.ring_02.skill_mod) != 0)
+        return (-1);
+    if (ft_add_skill_source(sources, &info->equipment.belt.skill_mod) != 0)
+        return (-1);
+    return (0);
+}
 
 static int ft_calculate_skill_total(t_char *info, int t_skills::*member)
 {
-    t_skills    *sources[13];
-    int         index;
-    int         total;
+    size_t  count;
+    size_t  index;
+    int     total;
 
-    sources[0] = &info->skill_mod;
-    sources[1] = &info->equipment.weapon.skill_mod;
-    sources[2] = &info->equipment.offhand_weapon.skill_mod;
-    sources[3] = &info->equipment.ranged_weapon.skill_mod;
-    sources[4] = &info->equipment.armor.skill_mod;
-    sources[5] = &info->equipment.helmet.skill_mod;
-    sources[6] = &info->equipment.shield.skill_mod;
-    sources[7] = &info->equipment.boots.skill_mod;
-    sources[8] = &info->equipment.gloves.skill_mod;
-    sources[9] = &info->equipment.amulet.skill_mod;
-    sources[10] = &info->equipment.ring_01.skill_mod;
-    sources[11] = &info->equipment.ring_02.skill_mod;
-    sources[12] = &info->equipment.belt.skill_mod;
-    total = 0;
-    index = 0;
-    while (index < 13)
+    if (!info)
     {
-        total += sources[index]->*member;
-        index++;
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (0);
     }
+    ft_vector<t_skills*>    sources(13);
+    if (sources.get_error() != ER_SUCCESS)
+    {
+        ft_errno = sources.get_error();
+        return (0);
+    }
+    if (ft_populate_skill_sources(info, sources) != 0)
+        return (0);
+    count = sources.size();
+    if (sources.get_error() != ER_SUCCESS)
+    {
+        ft_errno = sources.get_error();
+        return (0);
+    }
+    index = 0;
+    total = 0;
+    while (index < count)
+    {
+        t_skills    *skill_source;
+
+        skill_source = sources[index];
+        if (sources.get_error() != ER_SUCCESS)
+        {
+            ft_errno = sources.get_error();
+            return (0);
+        }
+        total += skill_source->*member;
+        index = index + 1;
+    }
+    ft_errno = ER_SUCCESS;
     return (total);
 }
 

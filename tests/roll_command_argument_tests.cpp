@@ -19,7 +19,7 @@ static void test_command_roll_rejects_null_argv()
     result = ft_command_roll(ft_nullptr);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should return null when argv is null");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL when argv is null");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when argv is null");
     error_output = test_read_file_to_string(file_path);
     expected_message = "401-Error: Roll command expression is missing\n";
     test_assert_true(error_output == expected_message,
@@ -43,7 +43,7 @@ static void test_command_roll_requires_expression_argument()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should return null when expression argument is missing");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL when expression argument is missing");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when expression argument is missing");
     error_output = test_read_file_to_string(file_path);
     expected_message = "401-Error: Roll command expression is missing\n";
     test_assert_true(error_output == expected_message,
@@ -152,7 +152,7 @@ static void test_command_roll_resets_errno_after_error()
     result = ft_command_roll(invalid_arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should fail when expression terminates with an operator");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL after an invalid expression");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT after an invalid expression");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1d1+\n";
     test_assert_true(error_output == expected_message,

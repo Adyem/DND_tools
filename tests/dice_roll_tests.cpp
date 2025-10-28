@@ -20,16 +20,17 @@ static void test_dice_roll_rejects_invalid_parameters()
     test_assert_true(result == -1,
         "ft_dice_roll should return -1 when the number of dice is invalid");
     char errno_message[128];
+    int  error_code;
 
+    error_code = ft_errno;
     pf_snprintf(errno_message, sizeof(errno_message),
-        "ft_dice_roll should set errno to FT_EINVAL for invalid dice parameters (errno %d)",
-        ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, errno_message);
+        "ft_dice_roll should set errno to FT_ERR_INVALID_ARGUMENT for invalid dice parameters (errno %d)",
+        error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, errno_message);
     error_output = test_read_file_to_string(file_path);
-    expected_message =
-        "410-Error: Dice roll parameters must be positive (dice=0 faces=6)\n";
+    expected_message = "";
     test_assert_true(error_output == expected_message,
-        "ft_dice_roll should log invalid parameter error message");
+        "ft_dice_roll should not emit stderr output for invalid parameters");
     test_delete_file(file_path);
     return ;
 }

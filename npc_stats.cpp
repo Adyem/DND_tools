@@ -1,51 +1,109 @@
 #include "libft/Printf/printf.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/class_file.hpp"
+#include "libft/CPP_class/class_string_class.hpp"
+#include "libft/Errno/errno.hpp"
 #include "libft/GetNextLine/get_next_line.hpp"
 #include "libft/JSon/document.hpp"
+#include "libft/Template/vector.hpp"
 #include "dnd_tools.hpp"
 #include "read_file_lines.hpp"
+
+static int ft_append_json_line(ft_vector<ft_string> &lines, const char *value)
+{
+    ft_string   line(value);
+
+    if (line.get_error() != ER_SUCCESS)
+    {
+        ft_errno = line.get_error();
+        return (-1);
+    }
+    lines.push_back(line);
+    if (lines.get_error() != ER_SUCCESS)
+    {
+        ft_errno = lines.get_error();
+        return (-1);
+    }
+    return (0);
+}
+
+static char **ft_duplicate_json_lines(ft_vector<ft_string> &lines)
+{
+    size_t  line_count;
+    char    **content;
+    size_t  index;
+
+    line_count = lines.size();
+    if (lines.get_error() != ER_SUCCESS)
+    {
+        ft_errno = lines.get_error();
+        return (ft_nullptr);
+    }
+    content = static_cast<char **>(cma_calloc(line_count + 1, sizeof(char *)));
+    if (!content)
+    {
+        ft_errno = FT_ERR_NO_MEMORY;
+        return (ft_nullptr);
+    }
+    index = 0;
+    while (index < line_count)
+    {
+        const ft_string   &entry = lines[index];
+
+        if (lines.get_error() != ER_SUCCESS)
+        {
+            ft_errno = lines.get_error();
+            break ;
+        }
+        content[index] = cma_strdup(entry.c_str());
+        if (!content[index])
+        {
+            ft_errno = FT_ERR_NO_MEMORY;
+            break ;
+        }
+        index++;
+    }
+    if (index < line_count)
+    {
+        size_t  cleanup_index;
+
+        cleanup_index = 0;
+        while (cleanup_index < line_count)
+        {
+            if (content[cleanup_index])
+                cma_free(content[cleanup_index]);
+            cleanup_index++;
+        }
+        cma_free(content);
+        return (ft_nullptr);
+    }
+    content[index] = ft_nullptr;
+    return (content);
+}
 
 static char **ft_npc_load_json_lines(const char *filepath)
 {
     json_document       document;
     json_group          *lines_group;
     json_item           *item;
-    size_t              count;
-    char                **content;
-    size_t              index;
+    ft_vector<ft_string>    lines(8);
 
     if (document.read_from_file(filepath) != 0)
         return (ft_nullptr);
     lines_group = document.find_group("lines");
     if (!lines_group)
         return (ft_nullptr);
-    count = 0;
     item = lines_group->items;
     while (item)
     {
-        count++;
-        item = item->next;
-    }
-    content = static_cast<char **>(cma_malloc(sizeof(char *) * (count + 1)));
-    if (!content)
-        return (ft_nullptr);
-    index = 0;
-    item = lines_group->items;
-    while (item)
-    {
-        content[index] = cma_strdup(item->value);
-        if (!content[index])
+        if (ft_append_json_line(lines, item->value) != 0)
         {
-            content[index] = ft_nullptr;
-            cma_free_double(content);
+            lines.clear();
             return (ft_nullptr);
         }
-        index++;
         item = item->next;
     }
-    content[index] = ft_nullptr;
-    return (content);
+    return (ft_duplicate_json_lines(lines));
 }
 
 static char **ft_npc_load_legacy_lines(const char *filepath)

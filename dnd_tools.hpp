@@ -11,6 +11,19 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 #include "player_character.hpp"
 #include "libft/CPP_class/class_file.hpp"
 
+# ifndef FT_ERR_INVALID_ARGUMENT
+#  define FT_ERR_INVALID_ARGUMENT FT_EINVAL
+# endif
+# ifndef FT_ERR_IO
+#  define FT_ERR_IO FT_EIO
+# endif
+# ifndef FT_ERR_NO_MEMORY
+#  define FT_ERR_NO_MEMORY FT_EALLOC
+# endif
+# ifndef FT_ERR_NOT_FOUND
+#  define FT_ERR_NOT_FOUND SET_NOT_FOUND
+# endif
+
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
@@ -34,6 +47,9 @@ static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 
 extern bool g_dnd_test;
 
+int         ft_collect_concentration_targets(const char *const *targets,
+                ft_vector<ft_string> *out);
+
 void        ft_initialize_character_template(t_char * dst, const t_char * src);
 
 // NPC
@@ -41,6 +57,15 @@ void        ft_npc_change_stats(t_char * info, int argument_count, const char **
 void        ft_npc_set_stat(t_char * info, const char **input);
 int         ft_npc_open_file(t_char * info);
 void        ft_npc_init_stats(t_char * info);
+
+typedef enum e_npc_command_status
+{
+    FT_NPC_COMMAND_ERROR = -1,
+    FT_NPC_COMMAND_HANDLED = 0,
+    FT_NPC_COMMAND_NOT_FOUND = 1
+}   t_npc_command_status;
+
+t_npc_command_status    ft_npc_execute_command(t_char * info, const char **input);
 
 // Template
 t_char      *ft_shadow_illusion(const int index, const char **input, t_name *name, int exception);
@@ -212,6 +237,8 @@ void        ft_attack_additional_effects(t_char *info, t_equipment_id *weapon,
                 t_attack_info *attack_info);
 void        ft_weapon_attack(t_char * info, t_equipment_id *weapon, int offhand);
 int         ft_readline_prompt_hit_or_miss(void);
+int         ft_attack_prompt_parse_response(const char *input, int *prompt_result);
+int         ft_collect_known_spells(t_char * character, ft_vector<t_known_spell> &known_spells);
 void        ft_prompt_on_attack_success(t_char * character, bool critical_strike);
 int         ft_weapon_find_stat(t_char * info, t_equipment_id *weapon);
 void        ft_check_dice_amount_and_faces(t_equipment_id *weapon, t_damage_info *d_info,
@@ -409,7 +436,6 @@ int         ft_open_file_write_only(const char *filename, ft_file &file);
 // Utils
 int         ft_create_data_dir();
 int         ft_initialize_info(t_char * character, char **content);
-int         ft_check_value(const char *input);
 void        ft_print_character_status(t_char * info, int number, int temp);
 void        ft_skill_throw(t_char * info, const char *skill, int ability_mod, int save_mod);
 int         ft_set_stats(t_char * info, char **content);
