@@ -34,5 +34,7 @@ void    ft_cast_rejuvenation(const char **input, t_char *info)
             "turn will heal for %id%i + %i\n", info->name, target_name,
             info->spells.rejuvenation.duration, info->spells.rejuvenation.healing_dice_amount,
             info->spells.rejuvenation.healing_dice_faces, info->spells.rejuvenation.healing_extra);
+    if (target)
+        print_rejuvenation(target);
     return ;
 }

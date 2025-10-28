@@ -277,6 +277,8 @@ static void ft_npc_write_spell_slots(t_char * info, ft_file &file,
     ft_write_line_int(file, writer, BUFF_REJUVENATION_DICE_FACES_KEY,
             info->bufs.rejuvenation.healing_dice_faces);
     ft_write_line_int(file, writer,BUFF_REJUVENATION_EXTRA_KEY, info->bufs.rejuvenation.healing_extra);
+    ft_write_line_int(file, writer, BUFF_SANCTUARY_DURATION_KEY, info->bufs.sanctuary.duration);
+    ft_write_line_int(file, writer, BUFF_SANCTUARY_SAVE_DC_KEY, info->bufs.sanctuary.save_dc);
     return ;
 }
 
@@ -338,6 +340,8 @@ static void ft_npc_write_file_2(t_char * info, t_resistance *resistance, ft_file
             info->flags.prone);
     ft_write_line_int(file, writer, BLINDED_KEY,
             info->debufs.blinded.duration);
+    ft_write_line_int(file, writer, FAERIE_FIRE_KEY,
+            info->debufs.faerie_fire.duration);
     ft_write_line_int(file, writer, FLAME_GEYSER_DURATION_KEY,
             info->bufs.flame_geyser.duration);
     ft_write_line_int(file, writer, FLAME_GEYSER_CLOSE_TO_TOWER_D_KEY,

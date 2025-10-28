@@ -114,6 +114,16 @@ int    ft_magic_drain_apply_debuff(t_char *target, const char **input, t_buff *b
         }
     }
     target->debufs.magic_drain.amount++;
+    if (target)
+    {
+        target->debufs.magic_drain.damage_flat = buff->mod;
+        target->debufs.magic_drain.damage_dice_amount = buff->dice_amount_mod;
+        target->debufs.magic_drain.damage_dice_faces = buff->dice_faces_mod;
+        target->debufs.magic_drain.extra_damage_flat = buff->extra_mod;
+        target->debufs.magic_drain.extra_dice_amount = buff->extra_dice_amount;
+        target->debufs.magic_drain.extra_dice_faces = buff->extra_dice_faces;
+        print_magic_drain(target);
+    }
     return (0);
 }
 

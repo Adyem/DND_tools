@@ -91,6 +91,14 @@ int ft_cast_bless_apply_debuf(t_char * target, const char **input, t_buff *buff)
             }
         }
     }
+    if (target)
+    {
+        target->bufs.bless.duration = buff->duration;
+        target->bufs.bless.dice_amount_mod = buff->dice_amount_mod;
+        target->bufs.bless.dice_faces_mod = buff->dice_faces_mod;
+        target->bufs.bless.base_mod = buff->mod;
+        print_bless(target);
+    }
     return (0);
 }
 

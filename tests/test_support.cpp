@@ -353,3 +353,21 @@ void    test_delete_file(const char *file_path)
     test_remove_path(file_path);
     return ;
 }
+
+void    print_blinded(const t_char *info)
+{
+    (void)info;
+    return ;
+}
+
+void    print_faerie_fire(const t_char *info)
+{
+    (void)info;
+    return ;
+}
+
+void    print_sanctuary(const t_char *info)
+{
+    (void)info;
+    return ;
+}

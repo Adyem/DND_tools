@@ -99,6 +99,7 @@ int ft_cast_hunters_mark_apply_debuf(t_char *target, const char **input, t_buff 
         }
     }
     target->debufs.hunters_mark.amount++;
+    print_hunters_mark(target);
     return (0);
 }
 

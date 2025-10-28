@@ -102,6 +102,7 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, CHAOS_ARMOR_DURATION_KEY, &info->bufs.chaos_armor.duration, 0);
     tree_node_insert(node, PRONE_KEY, &info->flags.prone, 0);
     tree_node_insert(node, BLINDED_KEY, &info->debufs.blinded.duration, 0);
+    tree_node_insert(node, FAERIE_FIRE_KEY, &info->debufs.faerie_fire.duration, 0);
     tree_node_insert(node, FLAME_GEYSER_DURATION_KEY, &info->bufs.flame_geyser.duration, 0);
     tree_node_insert(node, FLAME_GEYSER_AMOUNT_KEY, &info->bufs.flame_geyser.amount, 0);
     tree_node_insert(node, FLAME_GEYSER_CLOSE_TO_TOWER_D_KEY,
@@ -210,6 +211,8 @@ int initialize_stat_key_value_pairs(t_char *info)
     tree_node_insert(node, BUFF_REJUVENATION_DICE_FACES_KEY,
             &info->bufs.rejuvenation.healing_dice_amount, -1);
     tree_node_insert(node, BUFF_REJUVENATION_EXTRA_KEY, &info->bufs.rejuvenation.healing_extra, -1);
+    tree_node_insert(node, BUFF_SANCTUARY_DURATION_KEY, &info->bufs.sanctuary.duration, -1);
+    tree_node_insert(node, BUFF_SANCTUARY_SAVE_DC_KEY, &info->bufs.sanctuary.save_dc, -1);
     tree_node_insert(node, BUFF_GROWTH_STACKS_KEY, &info->bufs.growth.stacks, -1);
     if (tree_node_get_error(node))
         return (1);

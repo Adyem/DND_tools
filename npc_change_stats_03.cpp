@@ -49,6 +49,10 @@ void ft_npc_set_stat(t_char * info, const char **input)
     }
     else if (ft_strcmp(input[1], "blinded") == 0)
         ft_set_debuf_blinded(info, input);
+    else if (ft_strcmp(input[1], "faerie_fire") == 0)
+        ft_set_debuf_faerie_fire(info, input);
+    else if (ft_strcmp(input[1], "sanctuary") == 0)
+        ft_set_buff_sanctuary(info, input);
     else if (ft_strcmp(input[1], "hp") == 0)
         ft_npc_update_hp(info, input);
     else if (ft_strcmp(input[1], "lightning_strike") == 0)

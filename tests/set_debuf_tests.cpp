@@ -149,6 +149,112 @@ static void test_set_debuf_blinded_rejects_non_numeric_input()
     return ;
 }
 
+static void test_set_buff_sanctuary_accepts_duration_and_dc()
+{
+    t_char          character = {};
+    const char      *input[5];
+
+    character.name = "Sanctuary";
+    character.bufs.sanctuary.duration = 0;
+    character.bufs.sanctuary.save_dc = 0;
+    input[0] = "set";
+    input[1] = "sanctuary";
+    input[2] = "4";
+    input[3] = "15";
+    input[4] = ft_nullptr;
+    ft_set_buff_sanctuary(&character, input);
+    test_assert_true(character.bufs.sanctuary.duration == 4,
+        "ft_set_buff_sanctuary should update the sanctuary duration");
+    test_assert_true(character.bufs.sanctuary.save_dc == 15,
+        "ft_set_buff_sanctuary should store the requested save DC");
+    return ;
+}
+
+static void test_set_buff_sanctuary_rejects_out_of_range_duration()
+{
+    t_char          character = {};
+    const char      *input[5];
+    const char      *file_path;
+    ft_string       error_output;
+    const char      *expected_message;
+
+    character.name = "Ward";
+    character.bufs.sanctuary.duration = 3;
+    character.bufs.sanctuary.save_dc = 12;
+    input[0] = "set";
+    input[1] = "sanctuary";
+    input[2] = "55";
+    input[3] = "14";
+    input[4] = ft_nullptr;
+    file_path = "tests_output/set_buff_sanctuary_duration.log";
+    test_begin_error_capture(file_path);
+    ft_set_buff_sanctuary(&character, input);
+    test_end_error_capture();
+    test_assert_true(character.bufs.sanctuary.duration == 3,
+        "ft_set_buff_sanctuary should ignore out-of-range durations");
+    test_assert_true(character.bufs.sanctuary.save_dc == 12,
+        "ft_set_buff_sanctuary should not change the save DC when rejecting duration");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "232-Error sanctuary duration out of bounds or not found\n";
+    test_assert_true(error_output == expected_message,
+        "ft_set_buff_sanctuary should report duration range errors");
+    test_delete_file(file_path);
+    return ;
+}
+
+static void test_set_buff_sanctuary_rejects_out_of_range_dc()
+{
+    t_char          character = {};
+    const char      *input[5];
+    const char      *file_path;
+    ft_string       error_output;
+    const char      *expected_message;
+
+    character.name = "Ward DC";
+    character.bufs.sanctuary.duration = 6;
+    character.bufs.sanctuary.save_dc = 13;
+    input[0] = "set";
+    input[1] = "sanctuary";
+    input[2] = "5";
+    input[3] = "40";
+    input[4] = ft_nullptr;
+    file_path = "tests_output/set_buff_sanctuary_dc.log";
+    test_begin_error_capture(file_path);
+    ft_set_buff_sanctuary(&character, input);
+    test_end_error_capture();
+    test_assert_true(character.bufs.sanctuary.duration == 6,
+        "ft_set_buff_sanctuary should not change duration when the DC is invalid");
+    test_assert_true(character.bufs.sanctuary.save_dc == 13,
+        "ft_set_buff_sanctuary should keep the existing DC when rejecting a new one");
+    error_output = test_read_file_to_string(file_path);
+    expected_message = "233-Error sanctuary save dc out of bounds or not found\n";
+    test_assert_true(error_output == expected_message,
+        "ft_set_buff_sanctuary should report DC range errors");
+    test_delete_file(file_path);
+    return ;
+}
+
+static void test_set_buff_sanctuary_preserves_dc_when_not_provided()
+{
+    t_char          character = {};
+    const char      *input[5];
+
+    character.name = "Sanctuary Keep";
+    character.bufs.sanctuary.duration = 0;
+    character.bufs.sanctuary.save_dc = 17;
+    input[0] = "set";
+    input[1] = "sanctuary";
+    input[2] = "3";
+    input[3] = ft_nullptr;
+    input[4] = ft_nullptr;
+    ft_set_buff_sanctuary(&character, input);
+    test_assert_true(character.bufs.sanctuary.duration == 3,
+        "ft_set_buff_sanctuary should update duration even without a DC argument");
+    test_assert_true(character.bufs.sanctuary.save_dc == 17,
+        "ft_set_buff_sanctuary should preserve the existing DC when not provided");
+    return ;
+}
+
 void    run_set_debuf_tests()
 {
     test_begin_suite("set_debuf_tests");
@@ -159,6 +265,10 @@ void    run_set_debuf_tests()
     test_set_debuf_blinded_rejects_negative_duration();
     test_set_debuf_blinded_rejects_excessive_duration();
     test_set_debuf_blinded_rejects_non_numeric_input();
+    test_set_buff_sanctuary_accepts_duration_and_dc();
+    test_set_buff_sanctuary_rejects_out_of_range_duration();
+    test_set_buff_sanctuary_rejects_out_of_range_dc();
+    test_set_buff_sanctuary_preserves_dc_when_not_provided();
     test_end_suite_success();
     return ;
 }
