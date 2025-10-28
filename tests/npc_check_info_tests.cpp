@@ -93,9 +93,12 @@ static void configure_valid_character(t_char &character)
     character.bufs.rejuvenation.healing_dice_amount = 0;
     character.bufs.rejuvenation.healing_dice_faces = 0;
     character.bufs.rejuvenation.healing_extra = 0;
+    character.bufs.sanctuary.duration = 0;
+    character.bufs.sanctuary.save_dc = 0;
     character.debufs.hunters_mark.amount = 0;
     character.debufs.hunters_mark.caster_name.clear();
     character.debufs.blinded.duration = 0;
+    character.debufs.faerie_fire.duration = 0;
     character.debufs.magic_drain.caster.clear();
     character.debufs.magic_drain.amount = 0;
     character.debufs.magic_drain.damage_flat = 0;

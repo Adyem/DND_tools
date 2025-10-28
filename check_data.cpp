@@ -114,6 +114,8 @@ static int check_debuffs(t_char * info)
     int error = 0;
     error += check_range(info->debufs.blinded.duration, 0, 50, info->name,
             "blinded debuff duration");
+    error += check_range(info->debufs.faerie_fire.duration, 0, 50, info->name,
+            "faerie fire debuff duration");
     return (error);
 }
 
@@ -194,6 +196,10 @@ static int check_buffs(t_char * info)
             "rejuvenation dice faces");
     error += check_range(info->bufs.rejuvenation.healing_extra, 0, 20, info->name,
             "rejuvenation healing extra");
+    error += check_range(info->bufs.sanctuary.duration, 0, 50, info->name,
+            "sanctuary duration");
+    error += check_range(info->bufs.sanctuary.save_dc, 0, 30, info->name,
+            "sanctuary save_dc");
     error += check_range(info->bufs.growth.stacks, 0, 10, info->name,
             "growth stacks");
     error += check_range(info->spells.magic_drain.damage_flat, 0, 50, info->name,

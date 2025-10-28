@@ -214,6 +214,16 @@ void        print_lightning_strike_v2(const t_char * info);
 void        print_arcane_pounce(const t_char * info);
 void        print_earth_pounce(const t_char * info);
 void        print_shadow_illusion(const t_char * info);
+void        print_protective_winds(const t_char * info);
+void        print_chaos_armor(const t_char * info);
+void        print_rejuvenation(const t_char * info);
+void        print_sanctuary(const t_char * info);
+void        print_growth(const t_char * info);
+void        print_bless(const t_char * info);
+void        print_hunters_mark(const t_char * info);
+void        print_magic_drain(const t_char * info);
+void        print_blinded(const t_char * info);
+void        print_faerie_fire(const t_char * info);
 
 // Tester
 void        ft_test(t_name *name);
@@ -374,6 +384,8 @@ void        ft_kill(t_char * info);
 
 // Update debuf
 void        ft_set_debuf_blinded(t_char * info, const char **input);
+void        ft_set_debuf_faerie_fire(t_char * info, const char **input);
+void        ft_set_buff_sanctuary(t_char * info, const char **input);
 
 // Update buff
 void        ft_update_buf(t_char * info);

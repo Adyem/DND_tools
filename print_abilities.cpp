@@ -120,3 +120,227 @@ void print_shadow_illusion(const t_char * info)
             "instead.\n");
     return ;
 }
+
+void print_protective_winds(const t_char * info)
+{
+    if (info->bufs.protective_winds.duration == 1)
+        pf_printf("Protective Winds: Howling gusts surround the boss for 1 turn, " \
+                "deflecting ranged attacks back at their originator.\n");
+    else
+        pf_printf("Protective Winds: Howling gusts surround the boss for %d turns, " \
+                "deflecting ranged attacks back at their originator.\n",
+                info->bufs.protective_winds.duration);
+    pf_printf("While the winds persist, any projectile that hits the barrier is " \
+            "hurled at the attacker instead.\n");
+    return ;
+}
+
+void print_chaos_armor(const t_char * info)
+{
+    if (info->bufs.chaos_armor.duration == 1)
+        pf_printf("Chaos Armor: Unstable elemental energy coats the target for 1 " \
+                "turn.\n");
+    else
+        pf_printf("Chaos Armor: Unstable elemental energy coats the target for %d " \
+                "turns.\n", info->bufs.chaos_armor.duration);
+    pf_printf("Whenever the wearer is struck, roll on the chaos surge table to " \
+            "determine the retaliatory elemental backlash.\n");
+    return ;
+}
+
+void print_rejuvenation(const t_char * info)
+{
+    pf_printf("Rejuvenation: At the start of the affected creature's turn it heals " \
+            "for %d d%d + %d for the next %d turn(s).\n",
+            info->bufs.rejuvenation.healing_dice_amount,
+            info->bufs.rejuvenation.healing_dice_faces,
+            info->bufs.rejuvenation.healing_extra,
+            info->bufs.rejuvenation.duration);
+    pf_printf("The healing dice and bonus were set when the spell was cast and do " \
+            "not change while the buff lasts.\n");
+    return ;
+}
+
+void print_sanctuary(const t_char * info)
+{
+    if (info->bufs.sanctuary.duration <= 0)
+        pf_printf("Sanctuary: %s is no longer sheltered by sacred warding.\n",
+                info->name);
+    else if (info->bufs.sanctuary.duration == 1)
+        pf_printf("Sanctuary: %s is warded for 1 turn; foes must hesitate before " \
+                "attacking.\n", info->name);
+    else
+        pf_printf("Sanctuary: %s is warded for %d turns; foes must hesitate before " \
+                "attacking.\n", info->name, info->bufs.sanctuary.duration);
+    if (info->bufs.sanctuary.duration > 0)
+    {
+        if (info->bufs.sanctuary.save_dc > 0)
+            pf_printf("Hostile creatures must succeed on a DC %d Wisdom save before " \
+                    "they can target the warded creature.\n",
+                    info->bufs.sanctuary.save_dc);
+        else
+            pf_printf("Hostile creatures must succeed on a Wisdom save before they can " \
+                    "target the warded creature.\n");
+        pf_printf("Making an attack or casting a harmful spell ends the sanctuary " \
+                "early.\n");
+    }
+    else
+        pf_printf("No sanctuary magic protects them until the blessing is recast.\n");
+    return ;
+}
+
+void print_growth(const t_char * info)
+{
+    if (info->bufs.growth.stacks == 0)
+        pf_printf("Growth: The target currently has no growth stacks.\n");
+    else if (info->bufs.growth.stacks == 1)
+        pf_printf("Growth: The target carries 1 stack, reducing the next incoming " \
+                "damage by 1.\n");
+    else
+        pf_printf("Growth: The target carries %d stacks, reducing incoming damage " \
+                "by that amount (up to a maximum of 10).\n",
+                info->bufs.growth.stacks);
+    pf_printf("Stacks are consumed automatically as damage is taken and can be " \
+            "built up through the growth ability.\n");
+    return ;
+}
+
+void print_bless(const t_char * info)
+{
+    int caster_count;
+
+    caster_count = static_cast<int>(info->bufs.bless.caster_name.size());
+    if (info->bufs.bless.duration <= 0)
+        pf_printf("Bless: %s currently has no active blessing.\n", info->name);
+    else if (info->bufs.bless.duration == 1)
+        pf_printf("Bless: %s is under divine favor for 1 turn.\n", info->name);
+    else
+        pf_printf("Bless: %s is under divine favor for %d turns.\n", info->name,
+                info->bufs.bless.duration);
+    if (info->bufs.bless.dice_amount_mod > 0
+            && info->bufs.bless.dice_faces_mod > 0)
+        pf_printf("Each attack roll or saving throw gains +%dd%d plus %d from the " \
+                "blessing.\n", info->bufs.bless.dice_amount_mod,
+                info->bufs.bless.dice_faces_mod, info->bufs.bless.base_mod);
+    else if (info->bufs.bless.base_mod != 0)
+        pf_printf("Each attack roll or saving throw gains +%d from the " \
+                "blessing.\n", info->bufs.bless.base_mod);
+    else
+        pf_printf("The blessing currently grants no bonus dice or flat modifier.\n");
+    if (caster_count == 0)
+        pf_printf("No casters are maintaining the effect right now.\n");
+    else if (caster_count == 1)
+        pf_printf("1 caster is concentrating on the blessing.\n");
+    else
+        pf_printf("%d casters are concentrating on the blessing.\n", caster_count);
+    return ;
+}
+
+void print_hunters_mark(const t_char * info)
+{
+    int mark_count;
+    int caster_count;
+
+    mark_count = info->debufs.hunters_mark.amount;
+    caster_count = static_cast<int>(info->debufs.hunters_mark.caster_name.size());
+    if (mark_count <= 0)
+        pf_printf("Hunter's Mark: No hunters are tracking %s at the moment.\n",
+                info->name);
+    else if (mark_count == 1)
+        pf_printf("Hunter's Mark: %s is tracked by a single hunter; their next " \
+                "hits deal extra damage.\n", info->name);
+    else
+        pf_printf("Hunter's Mark: %s is tracked by %d hunters; their weapon hits " \
+                "deal extra damage equal to the number of marks.\n",
+                info->name, mark_count);
+    if (caster_count == 0)
+        pf_printf("No casters are sustaining the mark.\n");
+    else if (caster_count == 1)
+        pf_printf("Maintained by 1 hunter focusing on the prey.\n");
+    else
+        pf_printf("Maintained by %d hunters focusing on the prey.\n", caster_count);
+    return ;
+}
+
+void print_magic_drain(const t_char * info)
+{
+    int stack_count;
+    int caster_count;
+
+    stack_count = info->debufs.magic_drain.amount;
+    caster_count = static_cast<int>(info->debufs.magic_drain.caster.size());
+    pf_printf("Magic Drain: Arcane tendrils siphon power from %s.\n", info->name);
+    if (stack_count <= 0)
+        pf_printf("No siphons are currently active.\n");
+    else if (stack_count == 1)
+        pf_printf("1 siphon is active, ready to erupt when triggered.\n");
+    else
+        pf_printf("%d siphons are active, each primed to erupt when triggered.\n",
+                stack_count);
+    if (info->debufs.magic_drain.damage_dice_amount > 0
+            && info->debufs.magic_drain.damage_dice_faces > 0)
+        pf_printf("Each siphon deals %dd%d + %d damage on activation.\n",
+                info->debufs.magic_drain.damage_dice_amount,
+                info->debufs.magic_drain.damage_dice_faces,
+                info->debufs.magic_drain.damage_flat);
+    else if (info->debufs.magic_drain.damage_flat > 0)
+        pf_printf("Each siphon deals %d damage on activation.\n",
+                info->debufs.magic_drain.damage_flat);
+    else
+        pf_printf("The siphons currently have no damage configured.\n");
+    if (info->debufs.magic_drain.extra_dice_amount > 0
+            && info->debufs.magic_drain.extra_dice_faces > 0)
+        pf_printf("Failed saves add %dd%d + %d additional damage.\n",
+                info->debufs.magic_drain.extra_dice_amount,
+                info->debufs.magic_drain.extra_dice_faces,
+                info->debufs.magic_drain.extra_damage_flat);
+    else if (info->debufs.magic_drain.extra_damage_flat > 0)
+        pf_printf("Failed saves add %d additional damage.\n",
+                info->debufs.magic_drain.extra_damage_flat);
+    if (info->debufs.magic_drain.spell_slot_total_level_drain > 0
+            && info->debufs.magic_drain.con_save > 0)
+        pf_printf("Failing the DC %d Constitution save drains spell slots totaling " \
+                "%d levels.\n", info->debufs.magic_drain.con_save,
+                info->debufs.magic_drain.spell_slot_total_level_drain);
+    else if (info->debufs.magic_drain.con_save > 0)
+        pf_printf("A DC %d Constitution save can resist the siphon.\n",
+                info->debufs.magic_drain.con_save);
+    if (caster_count == 0)
+        pf_printf("No casters are sustaining the drain at this time.\n");
+    else if (caster_count == 1)
+        pf_printf("Maintained by 1 spellcaster.\n");
+    else
+        pf_printf("Maintained by %d spellcasters.\n", caster_count);
+    return ;
+}
+
+void print_blinded(const t_char * info)
+{
+    if (info->debufs.blinded.duration <= 0)
+        pf_printf("Blinded: %s can see again.\n", info->name);
+    else if (info->debufs.blinded.duration == 1)
+        pf_printf("Blinded: %s stumbles sightless for 1 turn, attacking at " \
+                "disadvantage and failing sight-based checks.\n", info->name);
+    else
+        pf_printf("Blinded: %s is sightless for %d turns, attacking at disadvantage " \
+                "and failing sight-based checks.\n", info->name,
+                info->debufs.blinded.duration);
+    return ;
+}
+
+void print_faerie_fire(const t_char * info)
+{
+    if (info->debufs.faerie_fire.duration <= 0)
+        pf_printf("Faerie Fire: %s is no longer limned in sparkling light.\n",
+                info->name);
+    else if (info->debufs.faerie_fire.duration == 1)
+        pf_printf("Faerie Fire: %s glows with violet starlight for 1 turn, granting " \
+                "advantage to attacks and canceling invisibility.\n", info->name);
+    else
+        pf_printf("Faerie Fire: %s shines with violet starlight for %d turns, " \
+                "granting advantage to attacks and canceling invisibility.\n",
+                info->name, info->debufs.faerie_fire.duration);
+    pf_printf("Outlined creatures cannot benefit from invisibility while the " \
+            "sparkles dance around them.\n");
+    return ;
+}

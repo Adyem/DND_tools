@@ -175,6 +175,12 @@ typedef struct    s_buff_rejuvenation
     int    healing_extra;
 }    t_buff_rejuvenation;
 
+typedef struct    s_buff_sanctuary
+{
+    int    duration;
+    int    save_dc;
+}    t_buff_sanctuary;
+
 typedef struct  s_buff_growth
 {
     int     stacks;
@@ -195,6 +201,7 @@ typedef struct    s_bufs
     t_buff_shadow_illusion      shadow_illusion;
     t_buff_growth                growth;
     t_buff_rejuvenation            rejuvenation;
+    t_buff_sanctuary            sanctuary;
 }    t_bufs;
 
 typedef struct    s_debuff_magic_drain
@@ -222,6 +229,11 @@ typedef struct    s_debuff_blinded
     int    duration;
 }    t_debuff_blinded;
 
+typedef struct    s_debuff_faerie_fire
+{
+    int    duration;
+}    t_debuff_faerie_fire;
+
 typedef struct    s_debuff_fell_poison
 {
     int duration;
@@ -238,6 +250,7 @@ typedef struct s_debufs
 {
     t_debuff_hunters_mark    hunters_mark;
     t_debuff_blinded        blinded;
+    t_debuff_faerie_fire    faerie_fire;
     t_debuff_magic_drain    magic_drain;
     t_debuff_fell_poison    fell_poison;
     t_debuff_shadow_touched    shadow_touched;

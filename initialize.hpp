@@ -278,6 +278,11 @@ static const    t_buff_rejuvenation INITIALIZE_BUFF_REJUVENATION =
     .healing_dice_faces = 0,
     .healing_extra = 0,
 };
+static const    t_buff_sanctuary INITIALIZE_BUFF_SANCTUARY =
+{
+    .duration = 0,
+    .save_dc = 0,
+};
 static const    t_buff_growth INITIALIZE_BUFF_GROWTH =
 {
         .stacks = 0,
@@ -301,6 +306,7 @@ static inline t_bufs ft_initialize_buffs()
     buffs.shadow_illusion = INITIALIZE_BUFF_SHADOW_ILLUSION;
     buffs.growth = INITIALIZE_BUFF_GROWTH;
     buffs.rejuvenation = INITIALIZE_BUFF_REJUVENATION;
+    buffs.sanctuary = INITIALIZE_BUFF_SANCTUARY;
     return (buffs);
 }
 
@@ -314,6 +320,11 @@ static t_debuff_hunters_mark ft_initialize_hunters_mark()
 }
 
 static const    t_debuff_blinded INITIALIZE_BLINDED =
+{
+    .duration = 0,
+};
+
+static const    t_debuff_faerie_fire INITIALIZE_FAERIE_FIRE =
 {
     .duration = 0,
 };
@@ -353,6 +364,7 @@ static inline t_debufs ft_initialize_debuffs()
 
     debuffs.hunters_mark = ft_initialize_hunters_mark();
     debuffs.blinded = INITIALIZE_BLINDED;
+    debuffs.faerie_fire = INITIALIZE_FAERIE_FIRE;
     debuffs.magic_drain = ft_initialize_debuff_magic_drain();
     debuffs.fell_poison = INITIALIZE_FELL_POISON;
     debuffs.shadow_touched = INITIALIZE_SHADOW_TOUCHED;

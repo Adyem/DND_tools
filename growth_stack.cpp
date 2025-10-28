@@ -26,6 +26,7 @@ void    ft_growth_stack(t_char *info, const char **input, int argc)
             info->bufs.growth.stacks = 10;
         pf_printf("%s gains %d growth stack(s) (total %d)\n", info->name, amount,
                   info->bufs.growth.stacks);
+        print_growth(info);
     }
     else if (ft_strcmp(input[1], "remove") == 0)
     {
@@ -34,6 +35,7 @@ void    ft_growth_stack(t_char *info, const char **input, int argc)
             info->bufs.growth.stacks = 0;
         pf_printf("%s loses %d growth stack(s) (total %d)\n", info->name, amount,
                   info->bufs.growth.stacks);
+        print_growth(info);
     }
     else
         pf_printf_fd(2, "Growth stack invalid command\n");

@@ -41,6 +41,8 @@ void ft_npc_update_buff(t_char * info, const char **input, int *buff, const char
             *buff = number;
         else if (number == 0)
             *buff = number;
+        if (buff == &info->bufs.protective_winds.duration && *buff > 0)
+            print_protective_winds(info);
     }
     else
         pf_printf_fd(2, "2-Buff Error: Expecting a number between 0 and 50\n");
