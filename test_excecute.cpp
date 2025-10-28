@@ -1,4 +1,6 @@
 #include "dnd_tools.hpp"
+#include "command_builtins.hpp"
+#include "libft/CMA/CMA.hpp"
 #include "libft/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 
@@ -19,38 +21,30 @@ static int ft_handle_custom_commands(const char **input, int argc, t_name *name)
     return (0);
 }
 
-static int ft_handle_builtins(const char **input, int index, t_name *name)
-{
-    if (index == 1 && ft_strcmp(input[0], "exit") == 0)
-        return (-1);
-    else if (index == 1 && ft_strcmp(input[0], "fclean") == 0)
-        ft_fclean();
-    else if (index == 1 && ft_strcmp(input[0], "clean") == 0)
-        ft_clean();
-    else if (index == 1 && ft_strcmp(input[0], "initiative") == 0)
-        ft_open_all_files(name);
-    else if (index == 1 && ft_strcmp(input[0], "turn") == 0)
-        ft_turn_next(name);
-    else if (index == 1 && ft_strcmp(input[0], "test") == 0)
-        ft_test(name);
-    else if (index == 1 && ft_strcmp(input[0], "help") == 0)
-        ft_print_help();
-        else if (index == 3 && ft_strcmp(input[1], "player") == 0)
-        ft_player(input);
-        else if (index >= 2 && ft_strcmp(input[0], "encounter") == 0)
-                ft_encounter(index - 1, input + 1, name);
-    else
-        return (0);
-    return (1);
-}
-
 int ft_test_excecute(const char **input, int argc, t_name *name)
 {
-    int    found;
+    char    **mutable_input;
+    int     builtin_status;
+    int     index;
 
-    found = ft_handle_builtins(input, argc, name);
-    if (found)
+    if (input == ft_nullptr)
         return (0);
-    found = ft_handle_custom_commands(input, argc, name);
+    mutable_input = static_cast<char **>(cma_calloc(static_cast<size_t>(argc + 1),
+                sizeof(char *)));
+    if (mutable_input == ft_nullptr)
+        return (0);
+    index = 0;
+    while (index < argc)
+    {
+        mutable_input[index] = const_cast<char *>(input[index]);
+        index++;
+    }
+    mutable_input[index] = ft_nullptr;
+    builtin_status = ft_dispatch_builtin_command(mutable_input, argc, name);
+    cma_free(mutable_input);
+    if (builtin_status == FT_BUILTIN_HANDLED || builtin_status == FT_BUILTIN_EXIT
+        || builtin_status == FT_BUILTIN_ERROR)
+        return (0);
+    ft_handle_custom_commands(input, argc, name);
     return (0);
 }

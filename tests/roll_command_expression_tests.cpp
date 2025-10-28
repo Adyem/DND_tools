@@ -64,7 +64,7 @@ static void test_command_roll_rejects_uppercase_dice_identifier()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject uppercase dice identifiers");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL for uppercase dice identifiers");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for uppercase dice identifiers");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1D1+2\n";
     test_assert_true(error_output == expected_message,

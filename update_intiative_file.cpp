@@ -85,7 +85,7 @@ int ft_initiative_remove(t_char * info)
                     *carriage_return = '\0';
                 }
             }
-            check_result = ft_check_value(value);
+            check_result = ft_validate_int(value);
             if (carriage_return)
                 *carriage_return = saved_carriage;
             if (newline)
@@ -123,7 +123,7 @@ static int ft_initiative_check(t_char * info, char **content, int i)
     if (!mark)
         return (2);
     mark++;
-    if (ft_check_value(mark))
+    if (ft_validate_int(mark))
         return (2);
     initiative = ft_atoi(mark);
     if (info->initiative > initiative)

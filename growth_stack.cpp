@@ -7,7 +7,7 @@ void    ft_growth_stack(t_char *info, const char **input, int argc)
     int amount = 1;
     if (argc == 5)
     {
-        if (ft_check_value(input[4]))
+        if (ft_validate_int(input[4]))
         {
             pf_printf_fd(2, "Growth stack expects a number between 1 and 10\n");
             return ;

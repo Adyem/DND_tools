@@ -24,7 +24,7 @@ void ft_npc_check_ac(t_char * info, const char **input)
         pf_printf("%s was hit by a critical strike\n", info->name);
         return ;
     }
-    else if (ft_check_value(input[2]))
+    else if (ft_validate_int(input[2]))
     {
         pf_printf_fd(2, "1-to hit expecting a number between 1 and 99 or the word 'crit'\n");
         return ;

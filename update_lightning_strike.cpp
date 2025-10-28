@@ -6,7 +6,7 @@ void ft_npc_update_lightning_strike(t_char * info, const char **input)
 {
     int number;
 
-    if (ft_check_value(input[2]))
+    if (ft_validate_int(input[2]))
     {
         pf_printf_fd(2, "1-Lightning strike expecting a number between 0 and 1\n");
         return ;

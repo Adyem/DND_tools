@@ -1,28 +1,81 @@
 #include "dnd_tools.hpp"
+#include "libft/Errno/errno.hpp"
+#include "libft/Template/vector.hpp"
+
+typedef t_equipment_id t_equipment::*t_equipment_slot;
+
+static int    ft_add_equipment_slot(ft_vector<t_equipment_slot> &slots,
+                t_equipment_slot slot)
+{
+    slots.push_back(slot);
+    if (slots.get_error() != ER_SUCCESS)
+    {
+        ft_errno = slots.get_error();
+        return (-1);
+    }
+    return (0);
+}
+
+static int    ft_populate_equipment_slots(ft_vector<t_equipment_slot> &slots)
+{
+    if (ft_add_equipment_slot(slots, &t_equipment::weapon) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::offhand_weapon) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::ranged_weapon) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::armor) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::helmet) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::shield) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::boots) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::gloves) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::amulet) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::ring_01) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::ring_02) != 0)
+        return (-1);
+    if (ft_add_equipment_slot(slots, &t_equipment::belt) != 0)
+        return (-1);
+    return (0);
+}
 
 static int    ft_calculate_total_resistance(t_char * info, int t_resistance::*field)
 {
-    t_equipment_id    *equipment_slots[12];
-    int                index;
-    int                total;
+    ft_vector<t_equipment_slot>    slots(12);
+    size_t                          slot_count;
+    size_t                          index;
+    int                             total;
 
-    equipment_slots[0] = &info->equipment.weapon;
-    equipment_slots[1] = &info->equipment.offhand_weapon;
-    equipment_slots[2] = &info->equipment.ranged_weapon;
-    equipment_slots[3] = &info->equipment.armor;
-    equipment_slots[4] = &info->equipment.helmet;
-    equipment_slots[5] = &info->equipment.shield;
-    equipment_slots[6] = &info->equipment.boots;
-    equipment_slots[7] = &info->equipment.gloves;
-    equipment_slots[8] = &info->equipment.amulet;
-    equipment_slots[9] = &info->equipment.ring_01;
-    equipment_slots[10] = &info->equipment.ring_02;
-    equipment_slots[11] = &info->equipment.belt;
-    total = (info->c_resistance).*field;
-    index = 0;
-    while (index < 12)
+    if (slots.get_error() != ER_SUCCESS)
     {
-        total += ((equipment_slots[index]->resistance).*field);
+        ft_errno = slots.get_error();
+        return (0);
+    }
+    if (ft_populate_equipment_slots(slots) != 0)
+        return (0);
+    slot_count = slots.size();
+    if (slots.get_error() != ER_SUCCESS)
+    {
+        ft_errno = slots.get_error();
+        return (0);
+    }
+    index = 0;
+    total = (info->c_resistance).*field;
+    while (index < slot_count)
+    {
+        t_equipment_slot slot = slots[index];
+        if (slots.get_error() != ER_SUCCESS)
+        {
+            ft_errno = slots.get_error();
+            return (0);
+        }
+        total += ((info->equipment.*slot).resistance.*field);
         index = index + 1;
     }
     return (total);

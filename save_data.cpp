@@ -16,6 +16,49 @@ typedef struct s_json_line_writer
     bool                    error;
 }   t_json_line_writer;
 
+int ft_collect_concentration_targets(const char *const *targets,
+        ft_vector<ft_string> *out)
+{
+    size_t      index;
+    ft_string   current;
+
+    if (!out)
+    {
+        ft_errno = FT_ERR_INVALID_ARGUMENT;
+        return (-1);
+    }
+    out->clear();
+    if (out->get_error() != ER_SUCCESS)
+    {
+        ft_errno = out->get_error();
+        out->clear();
+        return (-1);
+    }
+    ft_errno = ER_SUCCESS;
+    if (!targets)
+        return (0);
+    index = 0;
+    while (targets[index])
+    {
+        current = ft_string(targets[index]);
+        if (current.get_error() != ER_SUCCESS)
+        {
+            out->clear();
+            ft_errno = current.get_error();
+            return (-1);
+        }
+        out->push_back(current);
+        if (out->get_error() != ER_SUCCESS)
+        {
+            ft_errno = out->get_error();
+            out->clear();
+            return (-1);
+        }
+        index++;
+    }
+    return (0);
+}
+
 static void ft_json_line_writer_init(t_json_line_writer *writer)
 {
     if (!writer)
@@ -118,18 +161,29 @@ static void ft_write_line_int(ft_file &file, t_json_line_writer *writer, const c
 }
 
 static void ft_npc_write_file_double_char(const char *msg, char **targets, ft_file &file,
-                                            t_char *info, t_json_line_writer *writer)
+        t_char *info, t_json_line_writer *writer)
 {
-    int index = 0;
-    if (targets)
+    ft_vector<ft_string>    collected_targets;
+    size_t                  index;
+    size_t                  count;
+
+    if (!writer)
+        return ;
+    if (ft_collect_concentration_targets(
+            const_cast<const char *const *>(targets), &collected_targets) != 0)
     {
-        while (targets[index])
-        {
-            if (DEBUG == 1)
-                pf_printf_fd(1, "saving array %s %s%s\n", info->name, msg, targets[index]);
-            ft_write_line_string(file, writer, msg, targets[index]);
-            index++;
-        }
+        writer->error = true;
+        return ;
+    }
+    count = collected_targets.size();
+    index = 0;
+    while (index < count)
+    {
+        if (DEBUG == 1)
+            pf_printf_fd(1, "saving array %s %s%s\n", info->name, msg,
+                collected_targets[index].c_str());
+        ft_write_line_string(file, writer, msg, collected_targets[index].c_str());
+        index++;
     }
     return ;
 }

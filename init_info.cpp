@@ -13,7 +13,7 @@ int ft_check_stat(t_char * info, const char *stat, size_t index)
         stat++;
         index--;
     }
-    if (ft_check_value(stat))
+    if (ft_validate_int(stat))
     {
         while (temp)
         {

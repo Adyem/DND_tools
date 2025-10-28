@@ -7,7 +7,7 @@ static void ft_npc_update_hp(t_char * info, const char **input)
     int number;
     int temp;
 
-    if (ft_check_value(input[2]))
+    if (ft_validate_int(input[2]))
     {
         pf_printf("Expecting a positive or negative integer\n");
         return ;

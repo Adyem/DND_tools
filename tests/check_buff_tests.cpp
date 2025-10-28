@@ -2,6 +2,8 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../identification.hpp"
+#include "../libft/CMA/CMA.hpp"
+#include "../libft/Errno/errno.hpp"
 #include "../libft/Libft/libft.hpp"
 #include "../libft/CPP_class/class_string_class.hpp"
 
@@ -89,6 +91,8 @@ static void test_check_bless_returns_zero_on_dice_roll_error()
     const char  *file_path;
     ft_string   error_output;
     const char  *expected_message;
+    size_t      message_length;
+    size_t      output_length;
 
     character.name = "Acolyte";
     character.bufs.bless.duration = 2;
@@ -100,10 +104,14 @@ static void test_check_bless_returns_zero_on_dice_roll_error()
     test_end_error_capture();
     test_assert_true(result == 0, "ft_check_bless should return zero when dice rolling fails");
     error_output = test_read_file_to_string(file_path);
-    expected_message =
-        "410-Error: Dice roll parameters must be positive (dice=1 faces=-1)\n"
-        "144-Error: dice rolling bless\n";
-    test_assert_true(error_output == expected_message,
+    expected_message = "144-Error: dice rolling bless";
+    message_length = ft_strlen(expected_message);
+    output_length = error_output.size();
+    test_assert_true(output_length == message_length
+        || output_length == message_length + 1,
+        "ft_check_bless should only log the bless dice roll failure message");
+    test_assert_true(ft_strncmp(error_output.c_str(), expected_message,
+            message_length) == 0,
         "ft_check_bless should log dice roll failure message");
     test_delete_file(file_path);
     return ;
@@ -284,6 +292,108 @@ static void test_check_buff_damage_handles_hunters_mark_extra_damage()
     return ;
 }
 
+static void test_update_buf_uses_vector_driven_updates()
+{
+    t_char      character = {};
+    const char  *file_path;
+    ft_string   output;
+
+    character.name = "Invoker";
+    character.bufs.bless.duration = 2;
+    character.bufs.protective_winds.duration = 1;
+    character.bufs.rejuvenation.duration = 1;
+    character.bufs.rejuvenation.healing_dice_amount = 0;
+    character.bufs.rejuvenation.healing_dice_faces = 0;
+    character.bufs.rejuvenation.healing_extra = 7;
+    character.bufs.chaos_armor.duration = 1;
+    character.bufs.lightning_strike.duration = 0;
+    character.bufs.lightning_strikeV2.duration = 0;
+    character.bufs.flame_geyser.duration = 0;
+    character.bufs.meteor_strike.duration = 0;
+    character.bufs.earth_pounce.active = 0;
+    character.bufs.arcane_pounce.active = 0;
+    character.bufs.frost_breath.active = 0;
+    character.bufs.shadow_illusion.active = 0;
+    file_path = "tests_output/update_buf_vectors_basic.log";
+    ft_errno = FT_ERR_INVALID_ARGUMENT;
+    test_begin_output_capture(file_path);
+    ft_update_buf(&character);
+    test_end_output_capture();
+    output = test_read_file_to_string(file_path);
+    test_assert_true(character.bufs.bless.duration == 1,
+        "ft_update_buf should reduce bless duration through the vector helper");
+    test_assert_true(character.bufs.protective_winds.duration == 0,
+        "ft_update_buf should exhaust protective winds when duration reaches zero");
+    test_assert_true(character.bufs.rejuvenation.duration == 0,
+        "ft_update_buf should run rejuvenation when a duration is present");
+    test_assert_true(character.bufs.rejuvenation.healing_extra == 0,
+        "ft_update_buf should reset rejuvenation fields after the final tick");
+    test_assert_true(character.bufs.chaos_armor.duration == 0,
+        "ft_update_buf should process chaos armor through the shared callback vector");
+    test_assert_true(character.concentration.duration == 0,
+        "ft_update_buf should synchronize concentration duration with chaos armor");
+    test_assert_true(output.find("protective winds") != ft_string::npos,
+        "ft_update_buf should emit protective winds countdown output");
+    test_assert_true(output.find("rejuvenation heals Invoker") != ft_string::npos,
+        "ft_update_buf should log rejuvenation healing details");
+    test_delete_file(file_path);
+    test_assert_true(ft_errno == ER_SUCCESS,
+        "ft_update_buf should leave ft_errno clear after successful updates");
+    return ;
+}
+
+static void test_update_buf_handles_flagged_buffs()
+{
+    t_char      character = {};
+    const char  *file_path;
+    ft_string   output;
+
+    character.name = "Warlock";
+    character.bufs.earth_pounce.active = 1;
+    character.bufs.earth_pounce.base_damage = 12;
+    character.bufs.arcane_pounce.active = 1;
+    character.bufs.arcane_pounce.magic_damage = 9;
+    character.bufs.arcane_pounce.erea_damage = 5;
+    character.bufs.frost_breath.active = 1;
+    character.bufs.frost_breath.damage = 18;
+    character.bufs.frost_breath.target_id = cma_strdup("cold");
+    character.bufs.shadow_illusion.active = 1;
+    character.bufs.shadow_illusion.duration = 2;
+    character.bufs.lightning_strike.duration = 0;
+    character.bufs.lightning_strikeV2.duration = 0;
+    character.bufs.flame_geyser.duration = 0;
+    character.bufs.meteor_strike.duration = 0;
+    character.bufs.rejuvenation.duration = 0;
+    character.bufs.chaos_armor.duration = 0;
+    file_path = "tests_output/update_buf_vectors_flags.log";
+    test_begin_output_capture(file_path);
+    ft_update_buf(&character);
+    test_end_output_capture();
+    output = test_read_file_to_string(file_path);
+    test_assert_true(character.bufs.earth_pounce.active == 0,
+        "ft_update_buf should clear earth pounce after invoking the callback");
+    test_assert_true(character.bufs.arcane_pounce.active == 0,
+        "ft_update_buf should clear arcane pounce after invoking the callback");
+    test_assert_true(character.bufs.frost_breath.active == 0,
+        "ft_update_buf should clear frost breath after invoking the callback");
+    test_assert_true(character.bufs.frost_breath.target_id == ft_nullptr,
+        "ft_update_buf should release frost breath target memory through the callback");
+    test_assert_true(character.bufs.shadow_illusion.duration == 1,
+        "ft_update_buf should decrement shadow illusion duration through the flag vector");
+    test_assert_true(character.bufs.shadow_illusion.active == 1,
+        "ft_update_buf should keep shadow illusion active while turns remain");
+    test_assert_true(output.find("dealing 12 damage reduced") != ft_string::npos,
+        "ft_update_buf should log earth pounce damage output");
+    test_assert_true(output.find("dealing 9 damage and 5 damage") != ft_string::npos,
+        "ft_update_buf should log arcane pounce splash output");
+    test_assert_true(output.find("breathes out dealing cold damage") != ft_string::npos,
+        "ft_update_buf should log frost breath text using the allocated target");
+    test_assert_true(output.find("shadow illusion") != ft_string::npos,
+        "ft_update_buf should log shadow illusion countdown");
+    test_delete_file(file_path);
+    return ;
+}
+
 void    run_check_buff_tests()
 {
     test_begin_suite("check_buff_tests");
@@ -297,6 +407,8 @@ void    run_check_buff_tests()
     test_skill_check_buff_leaves_roll_unchanged_without_advantage();
     test_check_buff_damage_ignores_non_hunters_mark_spells();
     test_check_buff_damage_handles_hunters_mark_extra_damage();
+    test_update_buf_uses_vector_driven_updates();
+    test_update_buf_handles_flagged_buffs();
     test_end_suite_success();
     return ;
 }

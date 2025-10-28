@@ -55,7 +55,7 @@ static int ft_player_json_assign_int(int *target, const char *value, const char 
         return (1);
     if (!value)
         return (ft_player_json_report_missing(field, filename));
-    if (ft_check_value(value))
+    if (ft_validate_int(value))
         return (ft_player_json_report_invalid(field, value, filename));
     *target = ft_atoi(value);
     return (0);

@@ -1,4 +1,5 @@
 #include "dnd_tools.hpp"
+#include "command_builtins.hpp"
 #include "libft/CMA/CMA.hpp"
 #include "libft/Printf/printf.hpp"
 #include "libft/ReadLine/readline.hpp"
@@ -38,50 +39,6 @@ static int ft_handle_custom_commands(char **input, int argc, t_name *name)
     return (0);
 }
 
-static int ft_handle_builtins(char **input, int i, t_name *name, char *input_string)
-{
-    if (input[0] == ft_nullptr)
-        return (0);
-
-    if (ft_strcmp(input[0], "roll") == 0)
-    {
-        int *roll_value;
-
-        roll_value = ft_command_roll(input);
-        if (!roll_value)
-        {
-            if (ft_errno != ER_SUCCESS)
-                pf_printf_fd(2, "Roll failed: %s\n", ft_strerror(ft_errno));
-        }
-        else
-        {
-            pf_printf("%d\n", *roll_value);
-            cma_free(roll_value);
-        }
-    }
-    else if (i == 1 && ft_strcmp(input[0], "exit") == 0)
-        return (ft_free_input(input, input_string), -1);
-    else if (i == 1 && ft_strcmp(input[0], "fclean") == 0)
-        ft_fclean();
-    else if (i == 1 && ft_strcmp(input[0], "clean") == 0)
-        ft_clean();
-    else if (i == 1 && ft_strcmp(input[0], "initiative") == 0)
-        ft_open_all_files(name);
-    else if (i == 1 && ft_strcmp(input[0], "turn") == 0)
-        ft_turn_next(name);
-    else if (i == 1 && ft_strcmp(input[0], "test") == 0)
-        ft_test(name);
-    else if (i == 1 && ft_strcmp(input[0], "help") == 0)
-        ft_print_help();
-    else if (i >= 2 && ft_strcmp(input[1], "player") == 0)
-        ft_player(const_cast<const char **>(input));
-    else if (i >= 2 && ft_strcmp(input[0], "encounter") == 0)
-        ft_encounter(i - 1, const_cast<const char **>(input + 1), name);
-    else
-        return (0);
-    return (1);
-}
-
 void ft_request_input(t_name *name)
 {
     char *input_string;
@@ -100,14 +57,29 @@ void ft_request_input(t_name *name)
         int index = 0;
         while (input[index])
             index++;
-        int found = ft_handle_builtins(input, index, name, input_string);
-        if (found == -1)
+        int builtin_status;
+        int found;
+
+        builtin_status = ft_dispatch_builtin_command(input, index, name);
+        if (builtin_status == FT_BUILTIN_EXIT)
         {
             rl_clear_history();
+            ft_free_input(input, input_string);
             return ;
         }
-        else if (!found)
-            found = ft_handle_custom_commands(input, index, name);
+        if (builtin_status == FT_BUILTIN_HANDLED)
+        {
+            ft_free_input(input, input_string);
+            continue ;
+        }
+        if (builtin_status == FT_BUILTIN_ERROR)
+        {
+            pf_printf_fd(2, "008-Error failed to process builtin command: %s\n",
+                ft_strerror(ft_errno));
+            ft_free_input(input, input_string);
+            continue ;
+        }
+        found = ft_handle_custom_commands(input, index, name);
         if (!found)
             pf_printf_fd(2, "007-Error unknown command: %s\n", input_string);
         ft_free_input(input, input_string);

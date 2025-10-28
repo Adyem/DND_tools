@@ -13,7 +13,7 @@ int ft_is_caster_name_present(ft_set<ft_string> *caster_name_list, const char *n
     existing_name = caster_name_list->find(search_value);
     if (existing_name)
         return (1);
-    if (caster_name_list->get_error() != SET_NOT_FOUND
+    if (caster_name_list->get_error() != FT_ERR_NOT_FOUND
         && caster_name_list->get_error() != ER_SUCCESS)
         return (1);
     return (0);

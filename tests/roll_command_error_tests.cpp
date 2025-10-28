@@ -24,10 +24,12 @@ static void test_command_roll_rejects_invalid_expression()
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should return null when expression is invalid");
     char message[128];
+    int  error_code;
 
+    error_code = ft_errno;
     pf_snprintf(message, sizeof(message),
-        "ft_command_roll invalid expression errno %d", ft_errno);
-    test_assert_true(ft_errno == FT_EINVAL, message);
+        "ft_command_roll invalid expression errno %d", error_code);
+    test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, message);
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 2d6+\n";
     test_assert_true(error_output == expected_message,
@@ -53,7 +55,7 @@ static void test_command_roll_rejects_whitespace_in_expression()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should return null when expression contains whitespace");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL when whitespace is present");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when whitespace is present");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1d1+2 \n";
     test_assert_true(error_output == expected_message,
@@ -78,7 +80,7 @@ static void test_command_roll_detects_division_by_zero()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject division by zero expressions");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL for division by zero");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for division by zero");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1d1/0\n";
     test_assert_true(error_output == expected_message,
@@ -103,7 +105,7 @@ static void test_command_roll_rejects_unbalanced_parentheses()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject expressions with unbalanced parentheses");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL for unbalanced parentheses");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for unbalanced parentheses");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: (1d1+2))\n";
     test_assert_true(error_output == expected_message,
@@ -128,7 +130,7 @@ static void test_command_roll_rejects_invalid_character()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject expressions containing invalid characters");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL for invalid characters");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for invalid characters");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1d1+2#3\n";
     test_assert_true(error_output == expected_message,
@@ -153,7 +155,7 @@ static void test_command_roll_detects_overflow_result()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject expressions whose results overflow");
-    test_assert_true(ft_errno == FT_EINVAL, "ft_command_roll should set errno to FT_EINVAL when overflow is detected");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when overflow is detected");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 2147483647+1\n";
     test_assert_true(error_output == expected_message,

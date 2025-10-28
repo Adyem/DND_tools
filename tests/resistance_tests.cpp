@@ -1,6 +1,8 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
+#include "../libft/CPP_class/class_nullptr.hpp"
+#include "../libft/Errno/errno.hpp"
 
 static void set_resistance_sequence(t_char &character, int t_resistance::*field)
 {
@@ -397,6 +399,35 @@ static void test_calculate_psychic_dr_handles_mixed_values()
     return ;
 }
 
+static void test_get_resistance_returns_total_for_type()
+{
+    t_char  character = {};
+    int     result;
+
+    character.c_resistance.fire = 4;
+    character.equipment.shield.resistance.fire = 2;
+    character.equipment.ring_01.resistance.fire = 3;
+    result = ft_get_resistance(&character, "fire");
+    test_assert_true(result == 9, "ft_get_resistance should total base and equipment resistances for the requested type");
+    return ;
+}
+
+static void test_get_resistance_handles_invalid_type()
+{
+    t_char  character = {};
+    int     result;
+
+    ft_errno = ER_SUCCESS;
+    result = ft_get_resistance(&character, "shadow");
+    test_assert_true(result == -9999, "ft_get_resistance should signal failure for unknown damage types");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_get_resistance should set ft_errno when lookup fails");
+    result = ft_get_resistance(&character, ft_nullptr);
+    test_assert_true(result == -9999, "ft_get_resistance should reject null damage types");
+    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_get_resistance should maintain ft_errno for null damage types");
+    ft_errno = ER_SUCCESS;
+    return ;
+}
+
 void run_resistance_tests()
 {
     test_begin_suite("resistance_tests");
@@ -427,6 +458,8 @@ void run_resistance_tests()
     test_calculate_necrotic_dr_handles_negative_modifiers();
     test_calculate_poison_dr_totals_equipment();
     test_calculate_psychic_dr_handles_mixed_values();
+    test_get_resistance_returns_total_for_type();
+    test_get_resistance_handles_invalid_type();
     test_end_suite_success();
     return ;
 }
