@@ -1,9 +1,9 @@
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_file.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_file.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/GetNextLine/get_next_line.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 #include "dnd_tools.hpp"
 #include "player_character.hpp"
 #include "read_file_lines.hpp"
@@ -20,10 +20,10 @@ void ft_initiative_print(void)
         pf_printf("Error opening file: %s\n", file.get_error_str());
         return ;
     }
-    content = ft_read_file_lines_fd(file.get_fd(), 1024);
+    content = ft_read_file_lines_fd(file.get_file_descriptor(), 1024);
     if (!content)
     {
-        if (ft_errno == ER_SUCCESS)
+        if (FT_ERR_SUCCESS == FT_ERR_SUCCESS)
         {
             pf_printf("\n\nInitiative rolls are:\n");
             return ;
@@ -122,12 +122,12 @@ void ft_initiative_sort_2(t_pc *players)
     {
         if (turn == 0)
         {
-            pf_printf_fd(initiative_file.get_fd(), "--turn--%s=%d\n", temp->name,
+            pf_printf_fd(initiative_file.get_file_descriptor(), "--turn--%s=%d\n", temp->name,
                     temp->initiative);
             turn = 1;
         }
         else
-            pf_printf_fd(initiative_file.get_fd(), "%s=%d\n", temp->name,
+            pf_printf_fd(initiative_file.get_file_descriptor(), "%s=%d\n", temp->name,
                     temp->initiative);
         temp = temp->next;
     }

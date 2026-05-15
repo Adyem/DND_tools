@@ -1,10 +1,10 @@
 #include "character.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_file.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_file.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 #include "dnd_tools.hpp"
 
 
@@ -39,7 +39,7 @@ static int ft_apply_concentration_buff(t_char *info, t_char *target,
 {
     char    **temp;
 
-    temp = static_cast<char **>(cma_calloc(2, sizeof(char *)));
+    temp = static_cast<char **>(adv_calloc(2, sizeof(char *)));
     if (!temp)
     {
         ft_cast_concentration_cleanup(info, target, save_files, buff, 2);
@@ -74,13 +74,13 @@ static int ft_cast_concentration_open_file(ft_file save_files[2], t_char *info,
     if (ft_open_file_write_only(info->save_file, save_files[0]))
     {
         pf_printf_fd(2, "Unexpected error opening file %s: %s\n", info->save_file,
-                ft_strerror(ft_errno));
+                ft_strerror(FT_ERR_SUCCESS));
         return (1);
     }
     if (ft_open_file_write_only(target->save_file, save_files[1]))
     {
         pf_printf_fd(2, "Unexpected error opening file %s: %s\n", target->save_file,
-                ft_strerror(ft_errno));
+                ft_strerror(FT_ERR_SUCCESS));
         cma_free(info->concentration.targets[0]);
         cma_free(info->concentration.targets);
         info->concentration.targets = ft_nullptr;

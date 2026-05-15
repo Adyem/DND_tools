@@ -1,9 +1,9 @@
-#include "libft/Libft/libft.hpp"
-#include "libft/ReadLine/readline.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/RNG/rng.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/RNG/rng.hpp"
 #include "dnd_tools.hpp"
 
 int ft_readline_confirm(const char *message)

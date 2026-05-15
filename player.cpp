@@ -1,16 +1,16 @@
 #include "dnd_tools.hpp"
-#include "libft/File/open_dir.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/File/open_dir.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 
 static void ft_add_player(t_pc *player)
 {
     char *filename;
 
-    filename = cma_strjoin("data/PC--", player->name);
+    filename = adv_strjoin("data/PC--", player->name);
     if (!filename)
     {
         pf_printf("240-Error: Allocating memory for player string join\n");
@@ -36,7 +36,7 @@ static void ft_list_players(void)
     dir = file_opendir("data");
     if (dir == ft_nullptr)
     {
-        pf_printf("Unable to open data folder: %s", ft_strerror(ft_errno));
+        pf_printf("Unable to open data folder: %s", ft_strerror(FT_ERR_SUCCESS));
         return ;
     }
     while ((entry = file_readdir(dir)) != ft_nullptr)
@@ -60,7 +60,7 @@ void    ft_player(const char **input)
             pf_printf("248-Error: Allocating memory for player\n");
             return ;
         }
-        player->name = cma_strdup(input[2]);
+        player->name = adv_strdup(input[2]);
         if (!player->name)
         {
             pf_printf("249-Error: Allocating memory for player name\n");

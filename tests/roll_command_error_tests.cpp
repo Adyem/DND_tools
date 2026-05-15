@@ -1,11 +1,11 @@
 #include "test_support.hpp"
 #include "test_groups.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/CMA/CMA.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/Errno/errno.hpp"
-#include "../libft/Printf/printf.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/CMA/CMA.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
+#include "../libft/Modules/Printf/printf.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void test_command_roll_rejects_invalid_expression()
 {
@@ -26,7 +26,7 @@ static void test_command_roll_rejects_invalid_expression()
     char message[128];
     int  error_code;
 
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(message, sizeof(message),
         "ft_command_roll invalid expression errno %d", error_code);
     test_assert_true(error_code == FT_ERR_INVALID_ARGUMENT, message);
@@ -55,7 +55,7 @@ static void test_command_roll_rejects_whitespace_in_expression()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should return null when expression contains whitespace");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when whitespace is present");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when whitespace is present");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1d1+2 \n";
     test_assert_true(error_output == expected_message,
@@ -80,7 +80,7 @@ static void test_command_roll_detects_division_by_zero()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject division by zero expressions");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for division by zero");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for division by zero");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1d1/0\n";
     test_assert_true(error_output == expected_message,
@@ -105,7 +105,7 @@ static void test_command_roll_rejects_unbalanced_parentheses()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject expressions with unbalanced parentheses");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for unbalanced parentheses");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for unbalanced parentheses");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: (1d1+2))\n";
     test_assert_true(error_output == expected_message,
@@ -130,7 +130,7 @@ static void test_command_roll_rejects_invalid_character()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject expressions containing invalid characters");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for invalid characters");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT for invalid characters");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1d1+2#3\n";
     test_assert_true(error_output == expected_message,
@@ -155,7 +155,7 @@ static void test_command_roll_detects_overflow_result()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should reject expressions whose results overflow");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when overflow is detected");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when overflow is detected");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 2147483647+1\n";
     test_assert_true(error_output == expected_message,
@@ -174,7 +174,7 @@ static void test_command_roll_handles_zero_dice_quantity()
     arguments[2] = ft_nullptr;
     result = ft_command_roll(arguments);
     test_assert_true(result != ft_nullptr, "ft_command_roll should treat zero-dice segments as contributing zero");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll should set errno to success when zero dice are requested");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_command_roll should set errno to success when zero dice are requested");
     if (result != ft_nullptr)
     {
         cma_free(result);
@@ -192,7 +192,7 @@ static void test_command_roll_handles_zero_sided_die()
     arguments[2] = ft_nullptr;
     result = ft_command_roll(arguments);
     test_assert_true(result != ft_nullptr, "ft_command_roll should handle zero-sided dice as zero contribution");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll should set errno to success when zero-sided dice are used");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_command_roll should set errno to success when zero-sided dice are used");
     if (result != ft_nullptr)
     {
         cma_free(result);

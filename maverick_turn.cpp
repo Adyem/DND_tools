@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
 #include "maverick.hpp"
-#include "libft/Printf/printf.hpp"
+#include "libft/Modules/Printf/printf.hpp"
 
 static void    ft_maverick_lightning_strike(t_char * info)
 {

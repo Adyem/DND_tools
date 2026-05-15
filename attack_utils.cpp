@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/Template/math.hpp"
-#include "libft/RNG/rng.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Template/math.hpp"
+#include "libft/Modules/RNG/rng.hpp"
 
 int ft_weapon_find_stat(t_char * info, t_equipment_id *weapon)
 {

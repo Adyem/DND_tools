@@ -1,11 +1,11 @@
 #include "test_support.hpp"
 #include "test_groups.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/CMA/CMA.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/Errno/errno.hpp"
-#include "../libft/Printf/printf.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/CMA/CMA.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
+#include "../libft/Modules/Printf/printf.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void test_command_roll_rejects_null_argv()
 {
@@ -19,7 +19,7 @@ static void test_command_roll_rejects_null_argv()
     result = ft_command_roll(ft_nullptr);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should return null when argv is null");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when argv is null");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when argv is null");
     error_output = test_read_file_to_string(file_path);
     expected_message = "401-Error: Roll command expression is missing\n";
     test_assert_true(error_output == expected_message,
@@ -43,7 +43,7 @@ static void test_command_roll_requires_expression_argument()
     result = ft_command_roll(arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should return null when expression argument is missing");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when expression argument is missing");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT when expression argument is missing");
     error_output = test_read_file_to_string(file_path);
     expected_message = "401-Error: Roll command expression is missing\n";
     test_assert_true(error_output == expected_message,
@@ -63,7 +63,7 @@ static void test_command_roll_concatenates_arguments_and_rolls_expression()
     arguments[3] = ft_nullptr;
     result = ft_command_roll(arguments);
     test_assert_true(result != ft_nullptr, "ft_command_roll should return result pointer for valid expression");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll should set errno to success for valid expression");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_command_roll should set errno to success for valid expression");
     if (result != ft_nullptr)
     {
         test_assert_true(*result == 4, "ft_command_roll should evaluate 1d1+3 to deterministic value 4");
@@ -94,9 +94,9 @@ static void test_command_roll_concatenates_tokenized_parentheses_expression()
 
     pf_snprintf(message, sizeof(message),
         "ft_command_roll should join tokenized parentheses expressions correctly (errno %d)",
-        ft_errno);
+        FT_ERR_SUCCESS);
     test_assert_true(result != ft_nullptr, message);
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll should succeed when tokens form a valid expression");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_command_roll should succeed when tokens form a valid expression");
     if (result != ft_nullptr)
     {
         test_assert_true(*result == 2, "ft_command_roll should evaluate (1d1+2d1)+(3d1-4d1) to 2");
@@ -126,7 +126,7 @@ static void test_command_roll_concatenates_fragmented_tokens_into_expression()
     arguments[13] = ft_nullptr;
     result = ft_command_roll(arguments);
     test_assert_true(result != ft_nullptr, "ft_command_roll should concatenate fragmented tokens into a full expression");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll should succeed when fragmented tokens form a valid expression");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_command_roll should succeed when fragmented tokens form a valid expression");
     if (result != ft_nullptr)
     {
         test_assert_true(*result == 13, "ft_command_roll should evaluate (1d1+2d1)*3d1+5-1 to 13");
@@ -152,7 +152,7 @@ static void test_command_roll_resets_errno_after_error()
     result = ft_command_roll(invalid_arguments);
     test_end_error_capture();
     test_assert_true(result == ft_nullptr, "ft_command_roll should fail when expression terminates with an operator");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT after an invalid expression");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_command_roll should set errno to FT_ERR_INVALID_ARGUMENT after an invalid expression");
     error_output = test_read_file_to_string(file_path);
     expected_message = "403-Error: Failed to evaluate roll expression: 1d1+\n";
     test_assert_true(error_output == expected_message,
@@ -163,7 +163,7 @@ static void test_command_roll_resets_errno_after_error()
     valid_arguments[2] = ft_nullptr;
     result = ft_command_roll(valid_arguments);
     test_assert_true(result != ft_nullptr, "ft_command_roll should succeed immediately after a failure");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll should reset errno to success for a valid expression");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_command_roll should reset errno to success for a valid expression");
     if (result != ft_nullptr)
     {
         test_assert_true(*result == 6, "ft_command_roll should evaluate 1d1+5 to 6 after resetting errno");

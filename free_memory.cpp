@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 
 void    ft_free_input(char **input, char *input_string)
 {

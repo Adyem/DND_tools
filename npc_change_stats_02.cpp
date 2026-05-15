@@ -1,9 +1,9 @@
 #include "dnd_tools.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/Template/map.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Template/map.hpp"
 
 typedef int (*t_skill_calc)(t_char * info);
 typedef t_npc_command_status    (*t_npc_command_handler)(t_char * info, const char **input);
@@ -60,12 +60,12 @@ static int  ft_populate_skill_map(ft_map<ft_string, t_skill_handler_entry> &map)
         ft_string   key(g_skill_table[index].name);
         t_skill_handler_entry   entry;
 
-        if (key.get_error() != ER_SUCCESS)
+        if (key.get_error() != FT_ERR_SUCCESS)
             return (-1);
         entry.ability = g_skill_table[index].ability;
         entry.skill = g_skill_table[index].skill;
         map.insert(key, entry);
-        if (map.get_error() != ER_SUCCESS)
+        if (map.get_error() != FT_ERR_SUCCESS)
             return (-1);
         index = index + 1;
     }
@@ -82,7 +82,6 @@ static ft_map<ft_string, t_skill_handler_entry>  &ft_skill_handler_map(void)
         if (ft_populate_skill_map(map) != 0)
         {
             map.clear();
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (map);
         }
         initialized = true;
@@ -102,19 +101,16 @@ static t_npc_command_status    ft_execute_skill_roll(t_char * info, const char *
     map_pointer = &ft_skill_handler_map();
     if (map_pointer == ft_nullptr)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_NPC_COMMAND_ERROR);
     }
     ft_map<ft_string, t_skill_handler_entry>    &map = *map_pointer;
-    if (map.get_error() != ER_SUCCESS)
+    if (map.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_NPC_COMMAND_ERROR);
     }
     key = ft_string(input[1]);
-    if (key.get_error() != ER_SUCCESS)
+    if (key.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_NPC_COMMAND_ERROR);
     }
     entry = map.find(key);
@@ -123,7 +119,6 @@ static t_npc_command_status    ft_execute_skill_roll(t_char * info, const char *
     handler = entry->value;
     if (handler.ability == ft_nullptr || handler.skill == ft_nullptr)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_NPC_COMMAND_ERROR);
     }
     ft_skill_throw(info, entry->key.c_str(), handler.ability(info), handler.skill(info));
@@ -249,10 +244,10 @@ static int  ft_populate_npc_command_map(ft_map<ft_string, t_npc_command_handler>
     {
         ft_string   key(entries[index].name);
 
-        if (key.get_error() != ER_SUCCESS)
+        if (key.get_error() != FT_ERR_SUCCESS)
             return (-1);
         map.insert(key, entries[index].handler);
-        if (map.get_error() != ER_SUCCESS)
+        if (map.get_error() != FT_ERR_SUCCESS)
             return (-1);
         index = index + 1;
     }
@@ -269,7 +264,6 @@ static ft_map<ft_string, t_npc_command_handler>  &ft_npc_command_map(void)
         if (ft_populate_npc_command_map(map) != 0)
         {
             map.clear();
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (map);
         }
         initialized = true;
@@ -283,30 +277,24 @@ t_npc_command_status    ft_npc_execute_command(t_char * info, const char **input
     t_npc_command_handler                   handler;
     ft_string                               key;
     ft_map<ft_string, t_npc_command_handler>    *map_pointer;
-    int                                     previous_errno;
 
-    previous_errno = ft_errno;
     if (info == ft_nullptr || input == ft_nullptr || input[1] == ft_nullptr)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_NPC_COMMAND_ERROR);
     }
     map_pointer = &ft_npc_command_map();
     if (map_pointer == ft_nullptr)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_NPC_COMMAND_ERROR);
     }
     ft_map<ft_string, t_npc_command_handler>    &map = *map_pointer;
-    if (map.get_error() != ER_SUCCESS)
+    if (map.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_NPC_COMMAND_ERROR);
     }
     key = ft_string(input[1]);
-    if (key.get_error() != ER_SUCCESS)
+    if (key.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_NPC_COMMAND_ERROR);
     }
     entry = map.find(key);
@@ -315,13 +303,10 @@ t_npc_command_status    ft_npc_execute_command(t_char * info, const char **input
         handler = entry->value;
         if (handler == ft_nullptr)
         {
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (FT_NPC_COMMAND_ERROR);
         }
-        ft_errno = previous_errno;
         return (handler(info, input));
     }
-    ft_errno = previous_errno;
     return (ft_execute_skill_roll(info, input));
 }
 

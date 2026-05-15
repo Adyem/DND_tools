@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "identification.hpp"
 #include "initialize.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 
 static const t_equipment_id LEATHER_ARMOR =
 {

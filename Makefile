@@ -209,7 +209,8 @@ endif
 COMPILE_FLAGS = -Wall -Werror -Wextra -std=c++17 -Wmissing-declarations \
 				-Wold-style-cast -Wshadow -Wconversion -Wformat=2 -Wundef \
 				-Wfloat-equal -Wconversion -Wodr -Wuseless-cast \
-				-Wzero-as-null-pointer-constant -Wmaybe-uninitialized $(OPT_FLAGS)
+				-Wzero-as-null-pointer-constant -Wmaybe-uninitialized \
+				-DLIBFT_INTERNAL_HEADERS $(OPT_FLAGS)
 
 CFLAGS = $(COMPILE_FLAGS)
 
@@ -261,7 +262,7 @@ else
     LIBFT_MAKE_TARGET = all
 endif
 
-export COMPILE_FLAGS
+unexport COMPILE_FLAGS
 
 ifeq ($(OS),Windows_NT)
     LDFLAGS     = $(LIBFT)

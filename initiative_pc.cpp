@@ -1,8 +1,8 @@
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/JSon/document.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/JSon/document.hpp"
 #include "dnd_tools.hpp"
 #include "key_list.hpp"
 
@@ -102,7 +102,7 @@ int ft_check_stat_pc_json_object(t_pc *player, json_document *document, json_gro
     item = document->find_item(player_group, PLAYER_JSON_NAME_KEY);
     if (!item || !item->value)
         return (ft_player_json_report_missing(PLAYER_JSON_NAME_KEY, filename));
-    player->name = cma_strdup(item->value);
+    player->name = adv_strdup(item->value);
     if (!player->name)
         return (1);
     item = document->find_item(player_group, PLAYER_JSON_INITIATIVE_KEY);

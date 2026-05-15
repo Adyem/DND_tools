@@ -2,7 +2,7 @@
 #include "melee_weapons.hpp"
 #include "ranged_weapons.hpp"
 #include "armor.hpp"
-#include "libft/Printf/printf.hpp"
+#include "libft/Modules/Printf/printf.hpp"
 
 void print_weapon_info(const t_equipment_id *weapon)
 {

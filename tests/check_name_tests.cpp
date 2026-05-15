@@ -1,16 +1,16 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/Libft/libft.hpp"
-#include "../libft/CPP_class/class_ofstream.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
+#include "../libft/Modules/CPP_class/class_ofstream.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void reset_data_directory()
 {
     test_remove_directory("data");
     test_remove_path("data");
     test_create_directory("data");
-    test_assert_true(ft_errno == ER_SUCCESS,
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
         "failed to create data directory for check_name tests");
     return ;
 }
@@ -22,7 +22,7 @@ static void create_test_file(const char *path)
     test_assert_true(stream.open(path) == 0, "failed to create test save file");
     test_assert_true(stream.write("{}") == 2, "failed to write test save data");
     stream.close();
-    test_assert_true(stream.get_error() == ER_SUCCESS,
+    test_assert_true(stream.get_error() == FT_ERR_SUCCESS,
         "failed to close test save file");
     return ;
 }
@@ -89,14 +89,14 @@ static void test_check_name_handles_case_insensitive_prefixes()
     result = ft_set_stats_check_name("Ranger");
     test_assert_true(result == 0,
         "ft_set_stats_check_name should match player names with lowercase pc prefix");
-    test_assert_true(ft_errno == ER_SUCCESS,
-        "ft_set_stats_check_name should set ft_errno to ER_SUCCESS on success");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
+        "ft_set_stats_check_name should set FT_ERR_SUCCESS to FT_ERR_SUCCESS on success");
 
     result = ft_check_player_character("Ranger");
     test_assert_true(result == 0,
         "ft_check_player_character should match player names with lowercase pc prefix");
-    test_assert_true(ft_errno == ER_SUCCESS,
-        "ft_check_player_character should set ft_errno to ER_SUCCESS on success");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
+        "ft_check_player_character should set FT_ERR_SUCCESS to FT_ERR_SUCCESS on success");
 
     result = ft_set_stats_check_name("Archive");
     test_assert_true(result == 1,

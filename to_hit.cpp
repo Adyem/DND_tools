@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
 
 static void ft_pc_specific(t_char * info, int number)
 {

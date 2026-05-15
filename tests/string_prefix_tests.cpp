@@ -1,8 +1,8 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/CMA/CMA.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/CMA/CMA.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
 
 static void test_strtrim_prefix_removes_prefix()
 {

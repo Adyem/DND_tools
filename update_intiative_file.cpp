@@ -1,10 +1,10 @@
-#include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/File/file_utils.hpp"
+#include "libft/Modules/GetNextLine/get_next_line.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/File/file_utils.hpp"
 #include "dnd_tools.hpp"
 #include "read_file_lines.hpp"
 
@@ -26,7 +26,7 @@ int ft_initiative_remove(t_char * info)
     ft_file read_file("data/data--initiative", O_RDONLY);
     if (read_file.get_error())
         return (0);
-    content = ft_read_file_lines_fd(read_file.get_fd(), 1024);
+    content = ft_read_file_lines_fd(read_file.get_file_descriptor(), 1024);
     if (!content)
         return (0);
     ft_file initiative_file("data/data--initiative", O_WRONLY | O_TRUNC);
@@ -90,7 +90,7 @@ int ft_initiative_remove(t_char * info)
                 *carriage_return = saved_carriage;
             if (newline)
                 *newline = saved_char;
-            if (check_result == FT_SUCCESS)
+            if (check_result == 0)
             {
                 if (DEBUG == 1)
                     pf_printf("found one %s and %c\n", content[index],
@@ -185,13 +185,12 @@ void ft_initiative_add(t_char * info)
         return ;
     if (file_exists("data/data--initiative") != 1)
     {
-        content = static_cast<char **>(cma_calloc(1, sizeof(char *)));
+        content = static_cast<char **>(adv_calloc(1, sizeof(char *)));
         if (!content)
         {
             pf_printf("Error: failed to allocate initiative buffer\n");
             return ;
         }
-        ft_errno = ER_SUCCESS;
     }
     else
     {
@@ -199,18 +198,17 @@ void ft_initiative_add(t_char * info)
 
         if (read_file.get_error())
             return ;
-        content = ft_read_file_lines_fd(read_file.get_fd(), 1024);
+        content = ft_read_file_lines_fd(read_file.get_file_descriptor(), 1024);
         if (!content)
         {
-            if (ft_errno != ER_SUCCESS)
+            if (FT_ERR_SUCCESS != FT_ERR_SUCCESS)
                 return ;
-            content = static_cast<char **>(cma_calloc(1, sizeof(char *)));
+            content = static_cast<char **>(adv_calloc(1, sizeof(char *)));
             if (!content)
             {
                 pf_printf("Error: failed to allocate initiative buffer\n");
                 return ;
             }
-            ft_errno = ER_SUCCESS;
         }
     }
     if (ft_initiative_check_content(info, content))

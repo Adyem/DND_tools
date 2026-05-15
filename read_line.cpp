@@ -1,10 +1,10 @@
 #include "dnd_tools.hpp"
 #include "command_builtins.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/ReadLine/readline.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 
 static char    **ft_parse_input(char *input_string)
 {
@@ -75,7 +75,7 @@ void ft_request_input(t_name *name)
         if (builtin_status == FT_BUILTIN_ERROR)
         {
             pf_printf_fd(2, "008-Error failed to process builtin command: %s\n",
-                ft_strerror(ft_errno));
+                ft_strerror(FT_ERR_SUCCESS));
             ft_free_input(input, input_string);
             continue ;
         }

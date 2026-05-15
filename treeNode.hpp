@@ -5,9 +5,9 @@
 # define DEBUG 0
 #endif
 
-#include "libft/Template/unordened_map.hpp"
-#include "libft/Template/set.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
+#include "libft/Modules/Template/unordered_map.hpp"
+#include "libft/Modules/Template/set.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
 
 typedef struct s_treeNode_value
 {

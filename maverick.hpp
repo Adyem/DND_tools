@@ -2,7 +2,7 @@
 # define MAVERICK_HPP
 
 # include "melee_weapons.hpp"
-# include "libft/CPP_class/class_nullptr.hpp"
+# include "libft/Modules/CPP_class/class_nullptr.hpp"
 # include "character.hpp"
 # include "initialize.hpp"
 # include <stddef.h>

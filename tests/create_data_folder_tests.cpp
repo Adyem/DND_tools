@@ -1,13 +1,13 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/Errno/errno.hpp"
-#include "../libft/File/file_utils.hpp"
-#include "../libft/File/open_dir.hpp"
-#include "../libft/System_utils/system_utils.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/Libft/libft.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
+#include "../libft/Modules/File/file_utils.hpp"
+#include "../libft/Modules/File/open_dir.hpp"
+#include "../libft/Modules/System_utils/system_utils.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void remove_data_path()
 {
@@ -24,7 +24,7 @@ static void test_create_data_dir_creates_directory_when_missing()
     result = ft_create_data_dir();
     test_assert_true(result == 0, "ft_create_data_dir should create missing data directory");
     test_assert_true(file_dir_exists("data") == 1, "ft_create_data_dir did not create the data directory");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_create_data_dir should set errno to success after creating directory");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_create_data_dir should set errno to success after creating directory");
     remove_data_path();
     return ;
 }
@@ -35,10 +35,10 @@ static void test_create_data_dir_handles_existing_directory()
 
     remove_data_path();
     test_create_directory("data");
-    test_assert_true(ft_errno == ER_SUCCESS, "failed to create directory for setup");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "failed to create directory for setup");
     result = ft_create_data_dir();
     test_assert_true(result == 0, "ft_create_data_dir should succeed when directory already exists");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_create_data_dir should leave errno as success when directory exists");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_create_data_dir should leave errno as success when directory exists");
     remove_data_path();
     return ;
 }
@@ -61,7 +61,7 @@ static void test_create_data_dir_reports_file_collision()
     result = ft_create_data_dir();
     test_end_error_capture();
     test_assert_true(result == 1, "ft_create_data_dir should fail when path is a file");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_create_data_dir should not modify errno for collision case");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_create_data_dir should not modify errno for collision case");
     test_assert_true(file_exists("data") == 1, "collision file should remain after failure");
     test_assert_true(file_delete("data") == 0, "failed to delete collision file");
     error_output = test_read_file_to_string(file_path);

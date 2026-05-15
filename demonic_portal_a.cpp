@@ -1,10 +1,10 @@
 #include "dnd_tools.hpp"
 #include "demonic_portal_a.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/RNG/rng.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/RNG/rng.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 
 static void ft_portal_surge(t_char *info)
 {
@@ -26,7 +26,7 @@ static void ft_portal_surge(t_char *info)
         int                     i;
         int                     damage;
 
-        if (player_list.get_error() != ER_SUCCESS || player_list.size() == 0)
+        if (player_list.get_error() != FT_ERR_SUCCESS || player_list.size() == 0)
         {
             player_list.clear();
             return ;
@@ -80,7 +80,7 @@ t_char *ft_demonic_portal_a(const int index, const char **input, t_name *name, i
     ft_initialize_character_template(info, &DEMONIC_PORTAL_A_INFO);
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0]);
+    info->save_file = adv_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         ft_free_info(info);

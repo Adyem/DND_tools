@@ -1,10 +1,10 @@
-#include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/JSon/document.hpp"
-#include "libft/File/open_dir.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/JSon/document.hpp"
+#include "libft/Modules/File/open_dir.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 #include "dnd_tools.hpp"
 
 #ifndef DT_REG
@@ -47,7 +47,7 @@ static t_char *ft_read_all_files(ft_file &file, t_name *name, char *file_name)
     if (!info)
         return (ft_nullptr);
     if (DEBUG == 1)
-        pf_printf("Initiative file descriptor is %d\n", file.get_fd());
+        pf_printf("Initiative file descriptor is %d\n", file.get_file_descriptor());
     info->name = file_name + 5;
     ft_roll_initiative(info);
     return (info);
@@ -127,7 +127,7 @@ static void ft_initiative_write(int initiative, char *name)
     }
     if (DEBUG == 1)
         pf_printf("%s=%i\n", name, initiative);
-    pf_printf_fd(file.get_fd(), "%s=%i\n", name, initiative);
+    pf_printf_fd(file.get_file_descriptor(), "%s=%i\n", name, initiative);
 }
 
 void ft_open_all_files(t_name *name)
@@ -146,7 +146,7 @@ void ft_open_all_files(t_name *name)
     dir = file_opendir("data");
     if (dir == ft_nullptr)
     {
-        pf_printf_fd(2, "Unable to open directory: %s\n", ft_strerror(ft_errno));
+        pf_printf_fd(2, "Unable to open directory: %s\n", ft_strerror(FT_ERR_SUCCESS));
         return ;
     }
     while ((entry = file_readdir(dir)) != ft_nullptr)
@@ -177,7 +177,7 @@ void ft_open_all_files(t_name *name)
             if (directory_check < 0)
             {
                 pf_printf_fd(2, "Unable to inspect '%s': %s\n", filepath,
-                        ft_strerror(ft_errno));
+                        ft_strerror(FT_ERR_SUCCESS));
             }
             else if (directory_check == 0)
                 is_regular_file = 1;

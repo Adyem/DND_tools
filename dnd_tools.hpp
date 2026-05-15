@@ -3,26 +3,14 @@
 
 static_assert(sizeof(int) == 4, "Expected int to be 4 bytes");
 
-#include "libft/Libft/libft.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/Template/vector.hpp"
-#include "libft/JSon/document.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Advanced/advanced.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/Template/vector.hpp"
+#include "libft/Modules/JSon/document.hpp"
 #include "character.hpp"
 #include "player_character.hpp"
-#include "libft/CPP_class/class_file.hpp"
-
-# ifndef FT_ERR_INVALID_ARGUMENT
-#  define FT_ERR_INVALID_ARGUMENT FT_EINVAL
-# endif
-# ifndef FT_ERR_IO
-#  define FT_ERR_IO FT_EIO
-# endif
-# ifndef FT_ERR_NO_MEMORY
-#  define FT_ERR_NO_MEMORY FT_EALLOC
-# endif
-# ifndef FT_ERR_NOT_FOUND
-#  define FT_ERR_NOT_FOUND SET_NOT_FOUND
-# endif
+#include "libft/Modules/CPP_class/class_file.hpp"
 
 # ifndef DEBUG
 #  define DEBUG 0

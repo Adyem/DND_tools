@@ -1,7 +1,7 @@
-#include "libft/CPP_class/class_file.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_file.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
 
@@ -47,10 +47,10 @@ static int    ft_apply_concentration(t_target_data *target_data, t_char * info, 
     int    index = 0;
 
     info->concentration.targets =
-        static_cast<char **>(cma_calloc(static_cast<size_t>(target_data->buff_info->target_amount + 1),
+        static_cast<char **>(adv_calloc(static_cast<size_t>(target_data->buff_info->target_amount + 1),
             sizeof(char *)));
     if (!info->concentration.targets)
-        return (FT_FAILURE);
+        return (1);
     while (index < target_data->buff_info->target_amount)
     {
         if (target_data->target[index])
@@ -59,13 +59,13 @@ static int    ft_apply_concentration(t_target_data *target_data, t_char * info, 
                         target_data->buff_info))
             {
                 ft_cleanup_concentration_targets(info, index - 1);
-                return (FT_FAILURE);
+                return (1);
             }
-            info->concentration.targets[index] = cma_strdup(target_data->Pchar_name[index]);
+            info->concentration.targets[index] = adv_strdup(target_data->Pchar_name[index]);
             if (!info->concentration.targets[index])
             {
                 ft_cleanup_concentration_targets(info, index - 1);
-                return (FT_FAILURE);
+                return (1);
             }
         }
         index++;
@@ -77,7 +77,7 @@ static int    ft_apply_concentration(t_target_data *target_data, t_char * info, 
     info->concentration.dice_faces_mod = target_data->buff_info->dice_faces_mod;
     info->concentration.dice_amount_mod = target_data->buff_info->dice_amount_mod;
     info->concentration.duration = target_data->buff_info->duration;
-    return (FT_SUCCESS);
+    return (0);
 }
 
 void    ft_cast_concentration_multi_target_02(t_char * info,

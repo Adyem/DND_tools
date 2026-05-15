@@ -1,9 +1,9 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/Template/map.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Template/map.hpp"
 
 typedef int (*t_damage_reduction_calculator)(t_char *);
 
@@ -37,10 +37,10 @@ static int    ft_populate_damage_reduction_map(
     while (index < sizeof(entries) / sizeof(entries[0]))
     {
         ft_string key(entries[index].type);
-        if (key.get_error() != ER_SUCCESS)
+        if (key.get_error() != FT_ERR_SUCCESS)
             return (-1);
         map.insert(key, entries[index].calculator);
-        if (map.get_error() != ER_SUCCESS)
+        if (map.get_error() != FT_ERR_SUCCESS)
             return (-1);
         index = index + 1;
     }
@@ -57,7 +57,6 @@ static ft_map<ft_string, t_damage_reduction_calculator>    &ft_damage_reduction_
         if (ft_populate_damage_reduction_map(map) != 0)
         {
             map.clear();
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (map);
         }
         initialized = true;
@@ -74,27 +73,22 @@ static int    ft_get_damage_reduction(t_char * info, const char *type)
 
     if (!type)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (ERROR_RESISTANCE);
     }
-    if (key.get_error() != ER_SUCCESS)
+    if (key.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (ERROR_RESISTANCE);
     }
     entry = map.find(key);
     if (!entry)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (ERROR_RESISTANCE);
     }
     calculator = entry->value;
     if (!calculator)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (ERROR_RESISTANCE);
     }
-    ft_errno = ER_SUCCESS;
     return (calculator(info));
 }
 

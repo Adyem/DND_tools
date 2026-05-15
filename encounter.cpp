@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Printf/printf.hpp"
 
 void    ft_encounter(int argument_count, const char **argument_vector, t_name *name)
 {

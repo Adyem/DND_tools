@@ -1,12 +1,12 @@
 #include "read_file_lines.hpp"
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/CPP_class/class_fd_istream.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/Template/vector.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/CPP_class/class_fd_istream.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/GetNextLine/get_next_line.hpp"
+#include "libft/Modules/Template/vector.hpp"
 
 static void ft_clear_partial_lines(char **lines, size_t count)
 {
@@ -32,15 +32,13 @@ static char **ft_duplicate_lines(ft_vector<ft_string> &lines)
     size_t  index;
 
     line_count = lines.size();
-    if (lines.get_error() != ER_SUCCESS)
+    if (lines.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = lines.get_error();
         return (ft_nullptr);
     }
-    content = static_cast<char **>(cma_calloc(line_count + 1, sizeof(char *)));
+    content = static_cast<char **>(adv_calloc(line_count + 1, sizeof(char *)));
     if (!content)
     {
-        ft_errno = FT_ERR_NO_MEMORY;
         return (ft_nullptr);
     }
     index = 0;
@@ -48,15 +46,13 @@ static char **ft_duplicate_lines(ft_vector<ft_string> &lines)
     {
         const ft_string   &entry = lines[index];
 
-        if (lines.get_error() != ER_SUCCESS)
+        if (lines.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = lines.get_error();
             break ;
         }
-        content[index] = cma_strdup(entry.c_str());
+        content[index] = adv_strdup(entry.c_str());
         if (!content[index])
         {
-            ft_errno = FT_ERR_NO_MEMORY;
             break ;
         }
         index++;
@@ -67,7 +63,6 @@ static char **ft_duplicate_lines(ft_vector<ft_string> &lines)
         return (ft_nullptr);
     }
     content[line_count] = ft_nullptr;
-    ft_errno = ER_SUCCESS;
     return (content);
 }
 
@@ -79,7 +74,6 @@ char    **ft_read_file_lines_fd(int file_descriptor, size_t buffer_size)
 
     if (file_descriptor < 0)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (ft_nullptr);
     }
     if (buffer_size == 0)
@@ -90,16 +84,14 @@ char    **ft_read_file_lines_fd(int file_descriptor, size_t buffer_size)
         ft_string   entry(line);
 
         cma_free(line);
-        if (entry.get_error() != ER_SUCCESS)
+        if (entry.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = entry.get_error();
             lines.clear();
             return (ft_nullptr);
         }
         lines.push_back(entry);
-        if (lines.get_error() != ER_SUCCESS)
+        if (lines.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = lines.get_error();
             lines.clear();
             return (ft_nullptr);
         }

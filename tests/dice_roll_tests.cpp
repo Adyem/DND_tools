@@ -1,10 +1,10 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/Errno/errno.hpp"
-#include "../libft/RNG/rng.hpp"
-#include "../libft/Printf/printf.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
+#include "../libft/Modules/RNG/rng.hpp"
+#include "../libft/Modules/Printf/printf.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void test_dice_roll_rejects_invalid_parameters()
 {
@@ -22,7 +22,7 @@ static void test_dice_roll_rejects_invalid_parameters()
     char errno_message[128];
     int  error_code;
 
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_dice_roll should set errno to FT_ERR_INVALID_ARGUMENT for invalid dice parameters (errno %d)",
         error_code);
@@ -48,7 +48,7 @@ static void test_dice_roll_returns_values_within_expected_range()
     while (iteration < 32)
     {
         result = ft_dice_roll(3, 6);
-        test_assert_true(ft_errno == ER_SUCCESS,
+        test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
             "ft_dice_roll should set errno to success for valid rolls");
         test_assert_true(result >= 3,
             "ft_dice_roll should never produce a value below the minimum sum");
@@ -74,7 +74,7 @@ static void test_dice_roll_handles_zero_dice_and_faces()
     result = ft_dice_roll(0, 0);
     test_assert_true(result == 0,
         "ft_dice_roll should return zero when both dice and faces are zero");
-    test_assert_true(ft_errno == ER_SUCCESS,
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
         "ft_dice_roll should set errno to success when both parameters are zero");
     return ;
 }

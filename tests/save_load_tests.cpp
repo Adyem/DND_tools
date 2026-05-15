@@ -2,17 +2,17 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../treeNode.hpp"
-#include "../libft/CMA/CMA.hpp"
-#include "../libft/CPP_class/class_file.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
-#include "../libft/JSon/document.hpp"
-#include "../libft/File/file_utils.hpp"
-#include "../libft/Libft/libft.hpp"
+#include "../libft/Modules/CMA/CMA.hpp"
+#include "../libft/Modules/CPP_class/class_file.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
+#include "../libft/Modules/JSon/document.hpp"
+#include "../libft/Modules/File/file_utils.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
 
 static void ensure_tests_output_directory()
 {
     test_create_directory("tests_output");
-    test_assert_true(ft_errno == ER_SUCCESS,
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
         "Failed to create tests_output directory");
     return ;
 }
@@ -30,7 +30,7 @@ static void test_collect_concentration_targets_copies_entries()
     result = ft_collect_concentration_targets(targets, &collected);
     test_assert_true(result == 0,
         "ft_collect_concentration_targets should report success when targets exist");
-    test_assert_true(ft_errno == ER_SUCCESS,
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
         "ft_collect_concentration_targets should reset errno after success");
     size = collected.size();
     test_assert_true(size == 2,
@@ -52,15 +52,15 @@ static void test_collect_concentration_targets_handles_null_input()
     ft_string               existing("Existing");
     int                     result;
 
-    test_assert_true(existing.get_error() == ER_SUCCESS,
+    test_assert_true(existing.get_error() == FT_ERR_SUCCESS,
         "ft_string should construct without error for setup");
     collected.push_back(existing);
-    test_assert_true(collected.get_error() == ER_SUCCESS,
+    test_assert_true(collected.get_error() == FT_ERR_SUCCESS,
         "ft_vector should accept initial value before collection");
     result = ft_collect_concentration_targets(ft_nullptr, &collected);
     test_assert_true(result == 0,
         "ft_collect_concentration_targets should succeed when targets pointer is null");
-    test_assert_true(ft_errno == ER_SUCCESS,
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
         "ft_collect_concentration_targets should leave errno clear when nothing to copy");
     test_assert_true(collected.size() == 0,
         "ft_collect_concentration_targets should clear existing values on success");
@@ -74,11 +74,10 @@ static void test_collect_concentration_targets_rejects_null_output()
 
     targets[0] = "Entry";
     targets[1] = ft_nullptr;
-    ft_errno = ER_SUCCESS;
     result = ft_collect_concentration_targets(targets, ft_nullptr);
     test_assert_true(result == -1,
         "ft_collect_concentration_targets should fail when output vector pointer is null");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT,
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT,
         "ft_collect_concentration_targets should set errno when output pointer is invalid");
     return ;
 }
@@ -119,7 +118,7 @@ static char **load_json_lines_from_file(const char *file_path)
         count++;
         item = item->next;
     }
-    content = static_cast<char **>(cma_calloc(count + 1, sizeof(char *)));
+    content = static_cast<char **>(adv_calloc(count + 1, sizeof(char *)));
     if (!content)
         return (ft_nullptr);
     index = 0;
@@ -341,7 +340,7 @@ static void test_npc_json_load_populates_fields()
     test_assert_true(write_error == 0, "Failed to write NPC load test JSON fixture");
 
     loaded.name = const_cast<char *>("Test NPC");
-    loaded.save_file = cma_strdup(file_path);
+    loaded.save_file = adv_strdup(file_path);
     test_assert_true(loaded.save_file != ft_nullptr, "Failed to duplicate NPC load file path");
     int open_error = ft_npc_open_file(&loaded);
     test_assert_true(open_error == 0, "Failed to load NPC from JSON fixture");
@@ -414,7 +413,7 @@ static void test_npc_json_load_handles_many_lines()
     test_assert_true(write_error == 0, "Failed to write NPC many lines JSON fixture");
 
     loaded.name = const_cast<char *>("Many Lines NPC");
-    loaded.save_file = cma_strdup(file_path);
+    loaded.save_file = adv_strdup(file_path);
     test_assert_true(loaded.save_file != ft_nullptr, "Failed to duplicate NPC many lines file path");
     loaded.c_resistance.acid = -501;
     loaded.c_resistance.cold = -501;

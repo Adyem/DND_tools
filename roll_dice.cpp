@@ -1,5 +1,5 @@
-#include "libft/Printf/printf.hpp"
-#include "libft/RNG/rng.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/RNG/rng.hpp"
 #include "dnd_tools.hpp"
 
 void ft_reroll(t_char * info, int *result)

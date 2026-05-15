@@ -1,11 +1,11 @@
 #include "dnd_tools.hpp"
-#include "libft/File/open_dir.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/Template/vector.hpp"
+#include "libft/Modules/File/open_dir.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/Template/vector.hpp"
 #include "identification.hpp"
 
 static char ft_char_to_lower(unsigned char value)
@@ -41,22 +41,22 @@ static int append_entry_variants(ft_vector<ft_string> &entries, const char *entr
 {
     ft_string   full_name(entry_name);
 
-    if (full_name.get_error() != ER_SUCCESS)
+    if (full_name.get_error() != FT_ERR_SUCCESS)
         return (-1);
     entries.push_back(full_name);
-    if (entries.get_error() != ER_SUCCESS)
+    if (entries.get_error() != FT_ERR_SUCCESS)
         return (-1);
     if (has_prefix_case_insensitive(entry_name, EXCLUDE_PREFIX) == 1)
     {
         ft_string   trimmed(entry_name);
         size_t      prefix_length;
 
-        if (trimmed.get_error() != ER_SUCCESS)
+        if (trimmed.get_error() != FT_ERR_SUCCESS)
             return (-1);
         prefix_length = ft_strlen(EXCLUDE_PREFIX);
         trimmed.erase(0, prefix_length);
         entries.push_back(trimmed);
-        if (entries.get_error() != ER_SUCCESS)
+        if (entries.get_error() != FT_ERR_SUCCESS)
             return (-1);
     }
     return (0);
@@ -101,10 +101,8 @@ static int collect_directory_entries(ft_vector<ft_string> &entries,
     }
     if (file_closedir(directory) != 0)
     {
-        ft_errno = FT_ERR_IO;
         return (-1);
     }
-    ft_errno = ER_SUCCESS;
     return (0);
 }
 
@@ -130,20 +128,19 @@ static int match_candidate_name(ft_vector<ft_string> &entries,
     const ft_string *candidate;
 
     total_entries = entries.size();
-    if (entries.get_error() != ER_SUCCESS)
+    if (entries.get_error() != FT_ERR_SUCCESS)
         return (-1);
     index = 0;
     while (index < total_entries)
     {
         candidate = &entries[index];
-        if (entries.get_error() != ER_SUCCESS)
+        if (entries.get_error() != FT_ERR_SUCCESS)
             return (-1);
         debug_print_candidate(*candidate, name, use_against);
         if (ft_strcmp(candidate->c_str(), name) == 0)
         {
             if (DEBUG == 1)
                 pf_printf("Found %s\n", name);
-            ft_errno = ER_SUCCESS;
             return (1);
         }
         index++;
@@ -164,13 +161,13 @@ int ft_set_stats_check_name(const char *name)
     result = collect_directory_entries(entries, ft_nullptr, PREFIX_TO_SKIP);
     if (result == -2)
     {
-        pf_printf_fd(2, "295-Error: Opendir has failed: %s\n", ft_strerror(ft_errno));
+        pf_printf_fd(2, "295-Error: Opendir has failed: %s\n", ft_strerror(FT_ERR_SUCCESS));
         return (-2);
     }
     if (result != 0)
     {
         pf_printf_fd(2, "296-Error: Failed to collect player names: %s\n",
-            ft_strerror(ft_errno));
+            ft_strerror(FT_ERR_SUCCESS));
         return (-2);
     }
     result = match_candidate_name(entries, name, 0);
@@ -179,7 +176,7 @@ int ft_set_stats_check_name(const char *name)
     if (result == -1)
     {
         pf_printf_fd(2, "297-Error: Failed to iterate player names: %s\n",
-            ft_strerror(ft_errno));
+            ft_strerror(FT_ERR_SUCCESS));
         return (-2);
     }
     pf_printf_fd(2, "258-Error: Target does not exist\n");
@@ -194,13 +191,13 @@ int ft_check_player_character(const char *name)
     result = collect_directory_entries(entries, PC_PREFIX, ft_nullptr);
     if (result == -2)
     {
-        pf_printf_fd(2, "307-Error: Opendir has failed: %s\n", ft_strerror(ft_errno));
+        pf_printf_fd(2, "307-Error: Opendir has failed: %s\n", ft_strerror(FT_ERR_SUCCESS));
         return (-2);
     }
     if (result != 0)
     {
         pf_printf_fd(2, "308-Error: Failed to collect player names: %s\n",
-            ft_strerror(ft_errno));
+            ft_strerror(FT_ERR_SUCCESS));
         return (-2);
     }
     result = match_candidate_name(entries, name, 1);
@@ -209,7 +206,7 @@ int ft_check_player_character(const char *name)
     if (result == -1)
     {
         pf_printf_fd(2, "309-Error: Failed to iterate player names: %s\n",
-            ft_strerror(ft_errno));
+            ft_strerror(FT_ERR_SUCCESS));
         return (-2);
     }
     return (1);

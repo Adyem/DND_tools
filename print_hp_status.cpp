@@ -1,7 +1,7 @@
-#include "libft/Printf/printf.hpp"
+#include "libft/Modules/Printf/printf.hpp"
 #include "dnd_tools.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/File/file_utils.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/File/file_utils.hpp"
 
 static void ft_remove_dead_shadow_illusion(t_char *info, int had_turn)
 {

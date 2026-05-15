@@ -1,8 +1,8 @@
 #include "character.hpp"
 #include "initialize.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
 
@@ -23,16 +23,16 @@ static int    ft_remove_concentration_fetch_targets(t_target_data *targets,
     if (error || !targets->target[i])
     {
         ft_free_memory_cmt(targets, i);
-        return (FT_FAILURE);
+        return (1);
     }
     targets->target_copy[i] = ft_validate_and_fetch_target(info->concentration.targets[i],
             info, &error);
     if (error || !targets->target_copy[i])
     {
         ft_free_memory_cmt(targets, i);
-        return (FT_FAILURE);
+        return (1);
     }
-    return (FT_SUCCESS);
+    return (0);
 }
 
 int ft_remove_concentration(t_char * info)
@@ -48,21 +48,21 @@ int ft_remove_concentration(t_char * info)
     while (info->concentration.targets && info->concentration.targets[i])
     {
         if (ft_remove_concentration_fetch_targets(&targets, info, i))
-            return (FT_FAILURE);
+            return (1);
         i++;
     }
     t_buff buff = INITIALIZE_T_BUFF;
     buff.target_amount = i;
     targets.buff_info = &buff;
     ft_file info_save_file(ft_check_and_open(&targets, info));
-    if (info_save_file.get_error() || info_save_file.get_fd() == -1)
+    if (info_save_file.get_error() || info_save_file.get_file_descriptor() == -1)
     {
         ft_free_memory_cmt(&targets, i);
-        return (FT_FAILURE);
+        return (1);
     }
     ft_concentration_remove_buf(info, &targets);
     ft_cast_concentration_save_files(info, &targets, info_save_file);
     ft_free_memory_cmt(&targets, i);
     info->flags.alreaddy_saved = 0;
-    return (FT_SUCCESS);
+    return (0);
 }

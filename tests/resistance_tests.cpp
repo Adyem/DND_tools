@@ -1,8 +1,8 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/Errno/errno.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
 
 static void set_resistance_sequence(t_char &character, int t_resistance::*field)
 {
@@ -417,14 +417,12 @@ static void test_get_resistance_handles_invalid_type()
     t_char  character = {};
     int     result;
 
-    ft_errno = ER_SUCCESS;
     result = ft_get_resistance(&character, "shadow");
     test_assert_true(result == -9999, "ft_get_resistance should signal failure for unknown damage types");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_get_resistance should set ft_errno when lookup fails");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_get_resistance should set FT_ERR_SUCCESS when lookup fails");
     result = ft_get_resistance(&character, ft_nullptr);
     test_assert_true(result == -9999, "ft_get_resistance should reject null damage types");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT, "ft_get_resistance should maintain ft_errno for null damage types");
-    ft_errno = ER_SUCCESS;
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT, "ft_get_resistance should maintain FT_ERR_SUCCESS for null damage types");
     return ;
 }
 

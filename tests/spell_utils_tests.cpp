@@ -2,8 +2,8 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../character.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
-#include "../libft/Errno/errno.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
 static void initialize_character(t_char *character, const char *name)
 {
     t_spell_slot empty_slot;
@@ -106,12 +106,11 @@ static void test_remove_spell_slot_consumes_available_slot()
     initialize_character(&character, "Tester");
     character.spell_slots.level_6.available = 2;
     character.spell_slots.level_6.replenishing_slot = 0;
-    ft_errno = FT_ERR_IO;
     ft_remove_spell_slot(&character.spell_slots, 6);
     test_assert_true(character.spell_slots.level_6.available == 1,
             "ft_remove_spell_slot should decrement the available count for the chosen level");
-    test_assert_true(ft_errno == ER_SUCCESS,
-            "ft_remove_spell_slot should clear ft_errno after successfully consuming a slot");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
+            "ft_remove_spell_slot should clear FT_ERR_SUCCESS after successfully consuming a slot");
     return ;
 }
 

@@ -1,8 +1,8 @@
 #include "dnd_tools.hpp"
 #include "chaos_goblin.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/RNG/rng.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/RNG/rng.hpp"
 
 void ft_chaos_goblin_turn(t_char *info)
 {
@@ -42,7 +42,7 @@ t_char *ft_chaos_goblin(const int index, const char **input, t_name *name,
     ft_initialize_character_template(info, &CHAOS_GOBLIN_INFO);
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0]);
+    info->save_file = adv_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         pf_printf_fd(2, "104-Error: Failed to allocate memory save_file name %s\n", info->name);

@@ -1,5 +1,5 @@
-#include "libft/Printf/printf.hpp"
-#include "libft/Libft/libft.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Basic/basic.hpp"
 #include "dnd_tools.hpp"
 
 int ft_check_stat(t_char * info, const char *stat, size_t index)

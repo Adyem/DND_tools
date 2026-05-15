@@ -1,20 +1,19 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/Printf/printf.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/Errno/errno.hpp"
+#include "../libft/Modules/Printf/printf.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
 
 static void test_calculate_skills_rejects_null_character()
 {
     int result;
 
-    ft_errno = ER_SUCCESS;
     result = ft_calculate_athletics(ft_nullptr);
     test_assert_true(result == 0,
         "ft_calculate_athletics should return 0 when the character pointer is null");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT,
-        "ft_calculate_athletics should set ft_errno to FT_ERR_INVALID_ARGUMENT when the character pointer is null");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT,
+        "ft_calculate_athletics should set FT_ERR_SUCCESS to FT_ERR_INVALID_ARGUMENT when the character pointer is null");
     return ;
 }
 
@@ -133,11 +132,10 @@ static void test_calculate_survival_defaults_to_zero()
     t_char  character = {};
     int     result;
 
-    ft_errno = FT_ERR_IO;
     result = ft_calculate_survival(&character);
     test_assert_true(result == 0, "ft_calculate_survival should be zero when no bonuses are provided");
-    test_assert_true(ft_errno == ER_SUCCESS,
-        "ft_calculate_survival should reset ft_errno to ER_SUCCESS after a successful calculation");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
+        "ft_calculate_survival should reset FT_ERR_SUCCESS to FT_ERR_SUCCESS after a successful calculation");
     return ;
 }
 

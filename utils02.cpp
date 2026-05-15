@@ -1,5 +1,5 @@
 #include "dnd_tools.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 
 int ft_is_caster_name_present(ft_set<ft_string> *caster_name_list, const char *name)
 {
@@ -14,7 +14,7 @@ int ft_is_caster_name_present(ft_set<ft_string> *caster_name_list, const char *n
     if (existing_name)
         return (1);
     if (caster_name_list->get_error() != FT_ERR_NOT_FOUND
-        && caster_name_list->get_error() != ER_SUCCESS)
+        && caster_name_list->get_error() != FT_ERR_SUCCESS)
         return (1);
     return (0);
 }

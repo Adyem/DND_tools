@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "command_builtins.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 
 static int ft_handle_custom_commands(const char **input, int argc, t_name *name)
@@ -29,7 +29,7 @@ int ft_test_excecute(const char **input, int argc, t_name *name)
 
     if (input == ft_nullptr)
         return (0);
-    mutable_input = static_cast<char **>(cma_calloc(static_cast<size_t>(argc + 1),
+    mutable_input = static_cast<char **>(adv_calloc(static_cast<size_t>(argc + 1),
                 sizeof(char *)));
     if (mutable_input == ft_nullptr)
         return (0);

@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/RNG/rng.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/RNG/rng.hpp"
 
 int ft_divine_smite_damage_roll(t_spell_divine_smite *divine_smite,
         int cast_at_level, bool critical_strike)

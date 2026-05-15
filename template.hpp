@@ -3,7 +3,7 @@
 
 #include "ranged_weapons.hpp"
 #include "melee_weapons.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "initialize.hpp"
 

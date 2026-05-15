@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 #include "treeNode.hpp"
 
 static int ft_handle_int_mapping(char **content, int index, t_char * info)

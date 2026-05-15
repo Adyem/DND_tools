@@ -1,10 +1,10 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_file.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/GetNextLine/get_next_line.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_file.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/GetNextLine/get_next_line.hpp"
 #include "read_file_lines.hpp"
 
 static int ft_turn_check_marker(t_pc *players)
@@ -52,7 +52,7 @@ static int ft_turn_move_marker(t_pc *players)
             if (temp->next)
             {
                 target_old = temp->next->name;
-                new_name = cma_strjoin("--turn--", target_old);
+                new_name = adv_strjoin("--turn--", target_old);
                 if (!new_name)
                 {
                     pf_printf("245-Error allocating memory turn strjoin\n");
@@ -74,7 +74,7 @@ static int ft_turn_move_marker(t_pc *players)
                     target_old = players->name;
                     base_name = target_old;
                 }
-                new_name = cma_strjoin("--turn--", base_name);
+                new_name = adv_strjoin("--turn--", base_name);
                 if (!new_name)
                 {
                     pf_printf("246-Error allocating memory turn strjoin\n");
@@ -175,7 +175,7 @@ void ft_turn_next(t_name *name)
         pf_printf("Error opening data initiative file %s\n", initiative_file.get_error_str());
         return ;
     }
-    content = ft_read_file_lines_fd(initiative_file.get_fd(), 1024);
+    content = ft_read_file_lines_fd(initiative_file.get_file_descriptor(), 1024);
     if (!content)
         return ;
     players = ft_initiative_players_am(content);

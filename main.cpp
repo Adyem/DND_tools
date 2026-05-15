@@ -1,9 +1,9 @@
 #include "dnd_tools.hpp"
 #include "treeNode.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/ReadLine/readline.hpp"
-#include "libft/RNG/rng.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
+#include "libft/Modules/RNG/rng.hpp"
 
 bool g_dnd_test = 0;
 

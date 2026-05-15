@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Template/vector.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Template/vector.hpp"
 
 typedef t_equipment_id t_equipment::*t_equipment_slot;
 
@@ -8,9 +8,8 @@ static int    ft_add_equipment_slot(ft_vector<t_equipment_slot> &slots,
                 t_equipment_slot slot)
 {
     slots.push_back(slot);
-    if (slots.get_error() != ER_SUCCESS)
+    if (slots.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = slots.get_error();
         return (-1);
     }
     return (0);
@@ -52,17 +51,15 @@ static int    ft_calculate_total_dr(t_char * info, int t_resistance::*field)
     size_t                          index;
     int                             total;
 
-    if (slots.get_error() != ER_SUCCESS)
+    if (slots.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = slots.get_error();
         return (0);
     }
     if (ft_populate_equipment_slots(slots) != 0)
         return (0);
     slot_count = slots.size();
-    if (slots.get_error() != ER_SUCCESS)
+    if (slots.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = slots.get_error();
         return (0);
     }
     index = 0;
@@ -70,9 +67,8 @@ static int    ft_calculate_total_dr(t_char * info, int t_resistance::*field)
     while (index < slot_count)
     {
         t_equipment_slot slot = slots[index];
-        if (slots.get_error() != ER_SUCCESS)
+        if (slots.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = slots.get_error();
             return (0);
         }
         total += ((info->equipment.*slot).flat_dr.*field);

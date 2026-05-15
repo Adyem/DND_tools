@@ -1,12 +1,12 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/JSon/document.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/Template/vector.hpp"
-#include "libft/Libft/libft.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/JSon/document.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Template/vector.hpp"
+#include "libft/Modules/Basic/basic.hpp"
 #include "key_list.hpp"
 #include "set_utils.hpp"
 
@@ -24,33 +24,28 @@ int ft_collect_concentration_targets(const char *const *targets,
 
     if (!out)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (-1);
     }
     out->clear();
-    if (out->get_error() != ER_SUCCESS)
+    if (out->get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = out->get_error();
         out->clear();
         return (-1);
     }
-    ft_errno = ER_SUCCESS;
     if (!targets)
         return (0);
     index = 0;
     while (targets[index])
     {
         current = ft_string(targets[index]);
-        if (current.get_error() != ER_SUCCESS)
+        if (current.get_error() != FT_ERR_SUCCESS)
         {
             out->clear();
-            ft_errno = current.get_error();
             return (-1);
         }
         out->push_back(current);
-        if (out->get_error() != ER_SUCCESS)
+        if (out->get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = out->get_error();
             out->clear();
             return (-1);
         }
@@ -87,7 +82,7 @@ static int ft_json_line_writer_flush(t_json_line_writer *writer, ft_file &file)
     index = 0;
     while (index < total)
     {
-        key_string = cma_itoa(static_cast<int>(index));
+        key_string = adv_itoa(static_cast<int>(index));
         if (!key_string)
             return (1);
         item = document.create_item(key_string, writer->lines[index].c_str());
@@ -101,7 +96,7 @@ static int ft_json_line_writer_flush(t_json_line_writer *writer, ft_file &file)
     if (!content)
         return (1);
     file.write(content);
-    if (file.get_error() != ER_SUCCESS)
+    if (file.get_error() != FT_ERR_SUCCESS)
     {
         cma_free(content);
         return (1);
@@ -118,19 +113,19 @@ static void ft_json_line_writer_append_key_value(t_json_line_writer *writer, con
     if (!writer || writer->error || !key || !value)
         return ;
     line = ft_string(key);
-    if (line.get_error() != ER_SUCCESS)
+    if (line.get_error() != FT_ERR_SUCCESS)
     {
         writer->error = true;
         return ;
     }
     line.append(value);
-    if (line.get_error() != ER_SUCCESS)
+    if (line.get_error() != FT_ERR_SUCCESS)
     {
         writer->error = true;
         return ;
     }
     writer->lines.push_back(line);
-    if (writer->lines.get_error() != ER_SUCCESS)
+    if (writer->lines.get_error() != FT_ERR_SUCCESS)
         writer->error = true;
     return ;
 }
@@ -148,7 +143,7 @@ static void ft_write_line_int(ft_file &file, t_json_line_writer *writer, const c
     char    *number;
 
     (void)file;
-    number = cma_itoa(value);
+    number = adv_itoa(value);
     if (!number)
     {
         if (writer)
@@ -464,7 +459,7 @@ void ft_npc_write_file(t_char * info, t_stats *stats, t_resistance *resistance,
     t_json_line_writer    *writer;
 
     if (DEBUG == 1)
-        pf_printf("fd = %i\n", file.get_fd());
+        pf_printf("fd = %i\n", file.get_file_descriptor());
     if (info->flags.alreaddy_saved)
         return ;
     if (DEBUG == 1)

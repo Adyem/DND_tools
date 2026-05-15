@@ -1,12 +1,12 @@
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/ReadLine/readline.hpp"
-#include "libft/Template/map.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
+#include "libft/Modules/Template/map.hpp"
 
 typedef int (*t_resistance_calculator)(t_char *);
 
@@ -47,10 +47,10 @@ static int    ft_initialize_resistance_map(
     while (index < sizeof(entries) / sizeof(entries[0]))
     {
         ft_string key(entries[index].type);
-        if (key.get_error() != ER_SUCCESS)
+        if (key.get_error() != FT_ERR_SUCCESS)
             return (-1);
         map.insert(key, entries[index].calculator);
-        if (map.get_error() != ER_SUCCESS)
+        if (map.get_error() != FT_ERR_SUCCESS)
             return (-1);
         index++;
     }
@@ -67,7 +67,6 @@ static ft_map<ft_string, t_resistance_calculator>    &ft_damage_resistance_map(v
         if (ft_initialize_resistance_map(map) != 0)
         {
             map.clear();
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (map);
         }
         initialized = true;
@@ -84,24 +83,20 @@ int ft_get_resistance(t_char * info, const char *type)
 
     if (!type)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (-9999);
     }
-    if (key.get_error() != ER_SUCCESS)
+    if (key.get_error() != FT_ERR_SUCCESS)
         return (-9999);
     entry = map.find(key);
     if (!entry)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (-9999);
     }
     calculator = entry->value;
     if (!calculator)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (-9999);
     }
-    ft_errno = ER_SUCCESS;
     return (calculator(info));
 }
 

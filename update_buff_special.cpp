@@ -1,7 +1,7 @@
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/RNG/rng.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/RNG/rng.hpp"
 #include "dnd_tools.hpp"
 
 void ft_update_lightning_strike(t_char * info)

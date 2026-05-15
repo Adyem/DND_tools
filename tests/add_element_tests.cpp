@@ -1,7 +1,7 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/CMA/CMA.hpp"
+#include "../libft/Modules/CMA/CMA.hpp"
 
 static void free_const_array(const char **array)
 {

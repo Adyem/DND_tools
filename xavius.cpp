@@ -1,9 +1,9 @@
 #include "dnd_tools.hpp"
 #include "xavius.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/RNG/rng.hpp"
-#include "libft/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/RNG/rng.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
 
 static void    ft_xavius_lightningV2_strike(t_char *info)
 {
@@ -16,21 +16,21 @@ static void    ft_xavius_lightningV2_strike(t_char *info)
 }
 static char    *ft_shadow_clone_name(int index)
 {
-    char    *id = cma_itoa(index);
+    char    *id = adv_itoa(index);
     char    *name;
 
     if (!id)
         return (ft_nullptr);
     if (index < 10)
     {
-        char    *tmp = cma_strjoin("0", id);
+        char    *tmp = adv_strjoin("0", id);
 
         cma_free(id);
         if (!tmp)
             return (ft_nullptr);
         id = tmp;
     }
-    name = cma_strjoin("shadow_illusion_", id);
+    name = adv_strjoin("shadow_illusion_", id);
     cma_free(id);
     if (!name)
         return (ft_nullptr);
@@ -48,7 +48,7 @@ static void     ft_spawn_shadow_clone(t_char *info)
 
         if (!name)
             return ;
-        path = cma_strjoin("data/", name);
+        path = adv_strjoin("data/", name);
         if (!path)
         {
             cma_free(name);
@@ -130,7 +130,7 @@ t_char *ft_xavius(const int index, const char **input, t_name *name, int excepti
     ft_initialize_character_template(info, &XAVIUS_INFO);
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0]);
+    info->save_file = adv_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         ft_free_info(info);

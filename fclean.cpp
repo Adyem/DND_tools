@@ -1,12 +1,12 @@
 #include "dnd_tools.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/File/file_utils.hpp"
-#include "libft/File/open_dir.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/System_utils/system_utils.hpp"
-#include "libft/Compatebility/compatebility_internal.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/File/file_utils.hpp"
+#include "libft/Modules/File/open_dir.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/System_utils/system_utils.hpp"
+#include "libft/Modules/Compatebility/compatebility_internal.hpp"
 #if defined(_WIN32)
 # include <windows.h>
 #endif
@@ -33,9 +33,7 @@ static int ft_handle_remove_error(void)
 
     last_error = GetLastError();
     if (last_error != 0)
-        ft_errno = static_cast<int>(last_error) + ERRNO_OFFSET;
     else
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
     return (-1);
 }
 #endif
@@ -45,15 +43,12 @@ static int ft_remove_directory_leaf(const char *path)
 #if defined(_WIN32)
     if (RemoveDirectoryA(path) == 0)
         return (ft_handle_remove_error());
-    ft_errno = ER_SUCCESS;
     return (0);
 #else
     if (rmdir(path) != 0)
     {
-        ft_errno = FT_ERR_IO;
         return (-1);
     }
-    ft_errno = ER_SUCCESS;
     return (0);
 #endif
 }
@@ -68,7 +63,7 @@ static int ft_remove_directory_entry(const char *entry_path, unsigned char entry
     directory_check = cmp_directory_exists(entry_path);
     if (directory_check == 1)
         return (ft_remove_directory_contents(entry_path));
-    if (ft_errno != ER_SUCCESS)
+    if (FT_ERR_SUCCESS != FT_ERR_SUCCESS)
         return (-1);
     return (file_delete(entry_path));
 }
@@ -85,7 +80,6 @@ static int ft_remove_directory_contents(const char *directory_path)
     {
         if (cmp_directory_exists(directory_path) != 1)
         {
-            ft_errno = ER_SUCCESS;
             return (0);
         }
         return (-1);
@@ -120,7 +114,7 @@ static int ft_remove_directory_contents(const char *directory_path)
                     return (-1);
                 }
             }
-            else if (directory_check == 0 && ft_errno != ER_SUCCESS)
+            else if (directory_check == 0 && FT_ERR_SUCCESS != FT_ERR_SUCCESS)
             {
                 file_closedir(directory_stream);
                 return (-1);
@@ -130,7 +124,6 @@ static int ft_remove_directory_contents(const char *directory_path)
     }
     if (file_closedir(directory_stream) != 0)
         return (-1);
-    ft_errno = ER_SUCCESS;
     return (0);
 }
 
@@ -146,7 +139,6 @@ static int ft_clear_directory_entries(const char *directory_path, int remove_all
     {
         if (cmp_directory_exists(directory_path) != 1)
         {
-            ft_errno = ER_SUCCESS;
             return (0);
         }
         return (-1);
@@ -181,7 +173,7 @@ static int ft_clear_directory_entries(const char *directory_path, int remove_all
                     return (-1);
                 }
             }
-            else if (directory_status == 0 && ft_errno != ER_SUCCESS)
+            else if (directory_status == 0 && FT_ERR_SUCCESS != FT_ERR_SUCCESS)
             {
                 file_closedir(directory_stream);
                 return (-1);
@@ -191,7 +183,6 @@ static int ft_clear_directory_entries(const char *directory_path, int remove_all
     }
     if (file_closedir(directory_stream) != 0)
         return (-1);
-    ft_errno = ER_SUCCESS;
     return (0);
 }
 
@@ -215,7 +206,7 @@ void ft_fclean(void)
     {
         const char  *error_message;
 
-        error_message = ft_strerror(ft_errno);
+        error_message = ft_strerror(FT_ERR_SUCCESS);
         if (!error_message)
             error_message = "unknown error";
         pf_printf_fd(2, "138-Error: remove failed: %s\n", error_message);
@@ -243,7 +234,7 @@ void ft_clean(void)
     {
         const char  *error_message;
 
-        error_message = ft_strerror(ft_errno);
+        error_message = ft_strerror(FT_ERR_SUCCESS);
         if (!error_message)
             error_message = "unknown error";
         pf_printf_fd(2, "143-Error: remove failed: %s\n", error_message);

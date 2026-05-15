@@ -1,9 +1,9 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/Libft/libft.hpp"
-#include "../libft/Errno/errno.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
 
 static int  g_attack_calls = 0;
 static int  g_loot_calls = 0;
@@ -103,7 +103,7 @@ static void test_npc_execute_command_rejects_null_input()
     status = ft_npc_execute_command(&info, ft_nullptr);
     test_assert_true(status == FT_NPC_COMMAND_ERROR,
         "ft_npc_execute_command should reject null command arrays");
-    test_assert_true(ft_errno == FT_ERR_INVALID_ARGUMENT,
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT,
         "ft_npc_execute_command should set errno for invalid arguments");
     return ;
 }

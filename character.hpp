@@ -1,9 +1,9 @@
 #ifndef CHARACTER_H
 # define CHARACTER_H
 
-#include "libft/CPP_class/class_file.hpp"
-#include "libft/Template/set.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
+#include "libft/Modules/CPP_class/class_file.hpp"
+#include "libft/Modules/Template/set.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
 
 # define ERROR_RESISTANCE 9999
 

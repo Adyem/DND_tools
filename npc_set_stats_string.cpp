@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 
 static char **ft_handle_memory_error(t_char * info, char **data, int error_code)
 {
@@ -28,7 +28,7 @@ static char **ft_allocate_initial_data(char *content, size_t ofset, t_char * inf
     data = static_cast<char **>(cma_malloc(sizeof(char *) * 2));
     if (!data)
         return (ft_handle_memory_error(info, ft_nullptr, 293));
-    data[0] = cma_strdup(&content[ofset]);
+    data[0] = adv_strdup(&content[ofset]);
     if (!data[0])
         return (ft_handle_memory_error(info, data, 294));
     data[1] = ft_nullptr;
@@ -62,7 +62,7 @@ static char **ft_append_target_to_data(char **data, char *content, size_t ofset,
     data = ft_reallocate_data_array(data, index + 2, info);
     if (!data)
         return (ft_nullptr);
-    data[index] = cma_strdup(&content[ofset]);
+    data[index] = adv_strdup(&content[ofset]);
     if (!data[index])
         return ft_handle_memory_error(info, data, 296);
     data[index + 1] = ft_nullptr;

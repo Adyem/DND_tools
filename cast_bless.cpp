@@ -1,6 +1,6 @@
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
@@ -9,7 +9,7 @@
 #define MAKE_BUFF_BLESS(bless, level, target_str) \
     (t_buff) { \
         .target_amount = (bless).target_amount + (bless).upcast_extra_targets, \
-        .target = cma_strdup(target_str), \
+        .target = adv_strdup(target_str), \
         .spell_id = BLESS_ID, \
         .dice_faces_mod = (bless).dice_faces + ((bless).upcast_extra_dice_faces \
                 * ((level) - (bless).base_level)), \

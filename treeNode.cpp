@@ -1,6 +1,6 @@
 #include "treeNode.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Libft/libft.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Basic/basic.hpp"
 
 TreeNode *tree_node_new(void)
 {

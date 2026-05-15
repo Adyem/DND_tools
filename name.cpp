@@ -1,11 +1,11 @@
 #include "dnd_tools.hpp"
 #include "character.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/ReadLine/readline.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 
 void ft_free_memory_name(t_name *name, int exit_failure)
 {
@@ -39,7 +39,7 @@ static t_name *ft_add_node(t_name *first_node, t_name **last_node, const char *n
         pf_printf_fd(2, "112-Error: Malloc failure in Name Struct\n");
         ft_free_memory_name(first_node, 1);
     }
-    new_node->name = cma_strdup(new_name);
+    new_node->name = adv_strdup(new_name);
     if (!new_node->name)
     {
         cma_free(new_node);
@@ -62,7 +62,7 @@ static char *ft_new_name(const char *name, int index)
     size_t new_name_length = static_cast<size_t>(ft_strlen(name) + 4);
     char *new_name;
 
-        new_name = static_cast<char *>(cma_calloc(new_name_length, sizeof(char)));
+        new_name = static_cast<char *>(adv_calloc(new_name_length, sizeof(char)));
     if (!new_name)
     {
         pf_printf_fd(2, "114-Error: Malloc failure in Name Struct\n");

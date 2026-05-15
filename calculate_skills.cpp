@@ -1,13 +1,12 @@
 #include "dnd_tools.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Template/vector.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Template/vector.hpp"
 
 static int ft_add_skill_source(ft_vector<t_skills*> &sources, t_skills *source)
 {
     sources.push_back(source);
-    if (sources.get_error() != ER_SUCCESS)
+    if (sources.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = sources.get_error();
         return (-1);
     }
     return (0);
@@ -52,21 +51,18 @@ static int ft_calculate_skill_total(t_char *info, int t_skills::*member)
 
     if (!info)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (0);
     }
     ft_vector<t_skills*>    sources(13);
-    if (sources.get_error() != ER_SUCCESS)
+    if (sources.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = sources.get_error();
         return (0);
     }
     if (ft_populate_skill_sources(info, sources) != 0)
         return (0);
     count = sources.size();
-    if (sources.get_error() != ER_SUCCESS)
+    if (sources.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = sources.get_error();
         return (0);
     }
     index = 0;
@@ -76,15 +72,13 @@ static int ft_calculate_skill_total(t_char *info, int t_skills::*member)
         t_skills    *skill_source;
 
         skill_source = sources[index];
-        if (sources.get_error() != ER_SUCCESS)
+        if (sources.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = sources.get_error();
             return (0);
         }
         total += skill_source->*member;
         index = index + 1;
     }
-    ft_errno = ER_SUCCESS;
     return (total);
 }
 

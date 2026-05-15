@@ -1,11 +1,11 @@
 #include "test_support.hpp"
-#include "../libft/Libft/libft.hpp"
-#include "../libft/File/file_utils.hpp"
-#include "../libft/File/open_dir.hpp"
-#include "../libft/GetNextLine/get_next_line.hpp"
-#include "../libft/Compatebility/compatebility_internal.hpp"
-#include "../libft/System_utils/test_runner.hpp"
-#include "../libft/Errno/errno.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
+#include "../libft/Modules/File/file_utils.hpp"
+#include "../libft/Modules/File/open_dir.hpp"
+#include "../libft/Modules/GetNextLine/get_next_line.hpp"
+#include "../libft/Modules/Compatebility/compatebility_internal.hpp"
+#include "../libft/Modules/System_utils/test_system_utils_runner.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
 #include "../dnd_tools.hpp"
 #include <setjmp.h>
 #if defined(_WIN32)
@@ -31,13 +31,11 @@ static void test_create_directory_component(const char *directory_path, size_t l
         return ;
     if (cmp_directory_exists(partial.c_str()) == 1)
     {
-        ft_errno = ER_SUCCESS;
         return ;
     }
     if (file_create_directory(partial.c_str(), 0777) != 0)
     {
         if (cmp_directory_exists(partial.c_str()) == 1)
-            ft_errno = ER_SUCCESS;
     }
     return ;
 }
@@ -51,7 +49,6 @@ void    test_create_directory(const char *directory_path)
         return ;
     if (cmp_directory_exists(directory_path) == 1)
     {
-        ft_errno = ER_SUCCESS;
         return ;
     }
     length = static_cast<size_t>(ft_strlen(directory_path));
@@ -78,16 +75,13 @@ int     test_path_exists(const char *path)
         return (0);
     if (cmp_directory_exists(path) == 1)
     {
-        ft_errno = ER_SUCCESS;
         return (1);
     }
     if (file_exists(path) == 1)
     {
-        ft_errno = ER_SUCCESS;
         return (1);
     }
-    if (ft_errno == FT_ERR_INVALID_ARGUMENT)
-        ft_errno = ER_SUCCESS;
+    if (FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT)
     return (0);
 }
 
@@ -106,17 +100,12 @@ void    test_remove_directory(const char *directory_path)
 
         last_error = GetLastError();
         if (last_error != 0)
-            ft_errno = static_cast<int>(last_error) + ERRNO_OFFSET;
         else
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
     }
     else
-        ft_errno = ER_SUCCESS;
 #else
     if (rmdir(directory_path) != 0)
-        ft_errno = FT_ERR_IO;
     else
-        ft_errno = ER_SUCCESS;
 #endif
     return ;
 }
@@ -133,11 +122,9 @@ void    test_remove_path(const char *path)
     if (file_exists(path) == 1)
     {
         if (file_delete(path) == 0)
-            ft_errno = ER_SUCCESS;
         return ;
     }
-    if (ft_errno == FT_ERR_INVALID_ARGUMENT)
-        ft_errno = ER_SUCCESS;
+    if (FT_ERR_SUCCESS == FT_ERR_INVALID_ARGUMENT)
     return ;
 }
 
@@ -151,7 +138,6 @@ static int  test_remove_directory_contents(const char *directory_path)
     {
         if (cmp_directory_exists(directory_path) != 1)
         {
-            ft_errno = ER_SUCCESS;
             return (0);
         }
         return (-1);
@@ -165,7 +151,7 @@ static int  test_remove_directory_contents(const char *directory_path)
             ft_string   entry_path;
 
             entry_path = file_path_join(directory_path, directory_entry->d_name);
-            if (entry_path.get_error() != ER_SUCCESS)
+            if (entry_path.get_error() != FT_ERR_SUCCESS)
             {
                 file_closedir(directory_stream);
                 return (-1);
@@ -173,7 +159,7 @@ static int  test_remove_directory_contents(const char *directory_path)
             if (cmp_directory_exists(entry_path.c_str()) == 1)
             {
                 test_remove_directory(entry_path.c_str());
-                if (ft_errno != ER_SUCCESS)
+                if (FT_ERR_SUCCESS != FT_ERR_SUCCESS)
                 {
                     file_closedir(directory_stream);
                     return (-1);
@@ -189,7 +175,6 @@ static int  test_remove_directory_contents(const char *directory_path)
     }
     if (file_closedir(directory_stream) != 0)
         return (-1);
-    ft_errno = ER_SUCCESS;
     return (0);
 }
 
@@ -202,7 +187,6 @@ void test_assert_true_impl(int condition, const char *message, const char *file_
     if (message == NULL)
         message = "Test assertion failed";
     ft_test_fail(message, file_path, line_number);
-    ft_errno = ER_SUCCESS;
     if (g_jump_active == 1)
     {
         g_jump_active = 0;
@@ -342,7 +326,6 @@ ft_string    test_read_file_to_string(const char *file_path)
         content.append(buffer);
     }
     ft_fclose(file);
-    ft_errno = ER_SUCCESS;
     return (content);
 }
 

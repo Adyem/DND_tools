@@ -1,5 +1,5 @@
-#include "libft/Printf/printf.hpp"
-#include "libft/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
 #include "dnd_tools.hpp"
 
 void    ft_free_info(t_char * info)

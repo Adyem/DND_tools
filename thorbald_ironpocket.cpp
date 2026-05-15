@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
 #include "thorbald_ironpocket.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
 
 void ft_thorbald_ironpocket_turn(t_char * info)
 {
@@ -38,7 +38,7 @@ t_char *ft_thorbald_ironpocket(const int index, const char **input, t_name *name
     ft_initialize_character_template(info, &THORBALD_IRONPOCKET_INFO);
     info->name = input[0];
     info->struct_name = name;
-    info->save_file = cma_strjoin("data/", input[0]);
+    info->save_file = adv_strjoin("data/", input[0]);
     if (!info->save_file)
     {
         ft_free_info(info);

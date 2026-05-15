@@ -1,10 +1,10 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/Errno/errno.hpp"
-#include "../libft/Printf/printf.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
+#include "../libft/Modules/Printf/printf.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void test_command_roll_validate_accepts_valid_expression()
 {
@@ -13,7 +13,7 @@ static void test_command_roll_validate_accepts_valid_expression()
 
     result = ft_command_roll_validate(expression);
     test_assert_true(result == 0, "ft_command_roll_validate rejected a valid roll expression");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll_validate should set errno to success on valid expression");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_command_roll_validate should set errno to success on valid expression");
     return ;
 }
 
@@ -33,7 +33,7 @@ static void test_command_roll_validate_rejects_mismatched_parenthesis()
     char errno_message[128];
     int  error_code;
 
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT on invalid input (errno %d)",
         error_code);
@@ -53,7 +53,7 @@ static void test_command_roll_validate_accepts_complex_expression()
 
     result = ft_command_roll_validate(expression);
     test_assert_true(result == 0, "ft_command_roll_validate rejected a complex roll expression");
-    test_assert_true(ft_errno == ER_SUCCESS, "ft_command_roll_validate should set errno to success for complex expression");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "ft_command_roll_validate should set errno to success for complex expression");
     return ;
 }
 
@@ -71,7 +71,7 @@ static void test_command_roll_validate_handles_null_expression()
     result = ft_command_roll_validate(ft_nullptr);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression is null");
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT when expression is null (errno %d)",
         error_code);
@@ -99,7 +99,7 @@ static void test_command_roll_validate_rejects_empty_expression()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression is empty");
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT for empty expression (errno %d)",
         error_code);
@@ -127,7 +127,7 @@ static void test_command_roll_validate_rejects_trailing_operator()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression ends with an operator");
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT when expression ends with operator (errno %d)",
         error_code);
@@ -155,7 +155,7 @@ static void test_command_roll_validate_rejects_missing_dice_size()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when dice sides are missing");
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT when dice sides are missing (errno %d)",
         error_code);
@@ -183,7 +183,7 @@ static void test_command_roll_validate_rejects_invalid_characters()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression contains invalid characters");
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT for invalid characters (errno %d)",
         error_code);
@@ -211,7 +211,7 @@ static void test_command_roll_validate_rejects_uppercase_dice_identifier()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should reject uppercase dice identifiers");
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT for uppercase identifiers (errno %d)",
         error_code);
@@ -239,7 +239,7 @@ static void test_command_roll_validate_rejects_whitespace()
     result = ft_command_roll_validate(expression);
     test_end_error_capture();
     test_assert_true(result != 0, "ft_command_roll_validate should fail when expression contains whitespace");
-    error_code = ft_errno;
+    error_code = FT_ERR_SUCCESS;
     pf_snprintf(errno_message, sizeof(errno_message),
         "ft_command_roll_validate should set errno to FT_ERR_INVALID_ARGUMENT when whitespace appears in expression (errno %d)",
         error_code);

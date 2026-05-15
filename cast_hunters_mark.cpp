@@ -1,6 +1,6 @@
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
@@ -16,7 +16,7 @@ static int  ft_int_absolute(int value)
 #define MAKE_BUFF_HUNTERS_MARK(hunters_mark, level, target_str) \
     (t_buff){ \
         .target_amount = 1, \
-        .target = cma_strdup(target_str), \
+        .target = adv_strdup(target_str), \
         .spell_id = HUNTERS_MARK_ID, \
         .dice_faces_mod = (hunters_mark).dice_faces + ((hunters_mark).upcast_extra_dice_face \
                 * ((((level) - (hunters_mark).base_level) + ft_int_absolute((level) \

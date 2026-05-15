@@ -2,10 +2,10 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../identification.hpp"
-#include "../libft/CMA/CMA.hpp"
-#include "../libft/Errno/errno.hpp"
-#include "../libft/Libft/libft.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/CMA/CMA.hpp"
+#include "../libft/Modules/Errno/errno.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void verify_numeric_line(const ft_string &output,
     const char *prefix,
@@ -315,7 +315,6 @@ static void test_update_buf_uses_vector_driven_updates()
     character.bufs.frost_breath.active = 0;
     character.bufs.shadow_illusion.active = 0;
     file_path = "tests_output/update_buf_vectors_basic.log";
-    ft_errno = FT_ERR_INVALID_ARGUMENT;
     test_begin_output_capture(file_path);
     ft_update_buf(&character);
     test_end_output_capture();
@@ -337,8 +336,8 @@ static void test_update_buf_uses_vector_driven_updates()
     test_assert_true(output.find("rejuvenation heals Invoker") != ft_string::npos,
         "ft_update_buf should log rejuvenation healing details");
     test_delete_file(file_path);
-    test_assert_true(ft_errno == ER_SUCCESS,
-        "ft_update_buf should leave ft_errno clear after successful updates");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
+        "ft_update_buf should leave FT_ERR_SUCCESS clear after successful updates");
     return ;
 }
 
@@ -356,7 +355,7 @@ static void test_update_buf_handles_flagged_buffs()
     character.bufs.arcane_pounce.erea_damage = 5;
     character.bufs.frost_breath.active = 1;
     character.bufs.frost_breath.damage = 18;
-    character.bufs.frost_breath.target_id = cma_strdup("cold");
+    character.bufs.frost_breath.target_id = adv_strdup("cold");
     character.bufs.shadow_illusion.active = 1;
     character.bufs.shadow_illusion.duration = 2;
     character.bufs.lightning_strike.duration = 0;

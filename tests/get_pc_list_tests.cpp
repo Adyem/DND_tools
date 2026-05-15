@@ -1,10 +1,10 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/CPP_class/class_ofstream.hpp"
-#include "../libft/Libft/libft.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/CPP_class/class_ofstream.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void remove_data_directory()
 {
@@ -16,7 +16,7 @@ static void remove_data_directory()
 static void ensure_data_directory()
 {
     test_create_directory("data");
-    test_assert_true(ft_errno == ER_SUCCESS,
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS,
         "failed to create data directory for test setup");
     return ;
 }
@@ -31,7 +31,7 @@ static void create_data_file(const ft_string &name)
     test_assert_true(file_stream.open(file_path.c_str()) == 0,
         "failed to create data file for test setup");
     file_stream.close();
-    test_assert_true(file_stream.get_error() == ER_SUCCESS,
+    test_assert_true(file_stream.get_error() == FT_ERR_SUCCESS,
         "failed to close data file after creation");
     return ;
 }
@@ -67,7 +67,7 @@ static void test_is_caster_name_present_detects_existing_entries()
     int                  result;
 
     caster_names.insert(ft_string("Alice"));
-    test_assert_true(caster_names.get_error() == ER_SUCCESS,
+    test_assert_true(caster_names.get_error() == FT_ERR_SUCCESS,
         "ft_set should insert caster names without error");
     result = ft_is_caster_name_present(&caster_names, "Alice");
     test_assert_true(result == 1, "ft_is_caster_name_present should find existing names");
@@ -86,10 +86,10 @@ static void test_is_caster_name_present_handles_multiple_entries()
     int                  result;
 
     caster_names.insert(ft_string("Bob"));
-    test_assert_true(caster_names.get_error() == ER_SUCCESS,
+    test_assert_true(caster_names.get_error() == FT_ERR_SUCCESS,
         "ft_set should insert Bob without error");
     caster_names.insert(ft_string("Alice"));
-    test_assert_true(caster_names.get_error() == ER_SUCCESS,
+    test_assert_true(caster_names.get_error() == FT_ERR_SUCCESS,
         "ft_set should insert Alice without error");
     result = ft_is_caster_name_present(&caster_names, "Alice");
     test_assert_true(result == 1,

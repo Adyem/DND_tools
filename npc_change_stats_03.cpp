@@ -1,5 +1,5 @@
-#include "libft/Printf/printf.hpp"
-#include "libft/Libft/libft.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Basic/basic.hpp"
 #include "dnd_tools.hpp"
 
 static void ft_npc_update_hp(t_char * info, const char **input)

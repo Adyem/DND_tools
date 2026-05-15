@@ -1,15 +1,15 @@
 #include "dnd_tools.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/File/open_dir.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/File/open_dir.hpp"
 
 int ft_check_player_entry(const char *entry)
 {
     if (entry && ft_strcmp(entry, "INVALID_PLAYER_ENTRY") == 0)
         return (1);
-    char *filename = cma_strjoin("data/", entry);
+    char *filename = adv_strjoin("data/", entry);
     if (!filename)
         return 1;
     ft_file permission_check(filename, O_RDWR);
@@ -39,14 +39,14 @@ ft_vector<ft_string>    ft_get_pc_list()
         if (ft_strncmp("PC--", dir_entry->d_name, 4) == 0)
         {
             ft_string player_name(dir_entry->d_name + 4);
-            if (player_name.get_error() != ER_SUCCESS)
+            if (player_name.get_error() != FT_ERR_SUCCESS)
             {
                 file_closedir(dir);
                 player_list.clear();
                 return (player_list);
             }
             player_list.push_back(player_name);
-            if (player_list.get_error() != ER_SUCCESS)
+            if (player_list.get_error() != FT_ERR_SUCCESS)
             {
                 file_closedir(dir);
                 player_list.clear();

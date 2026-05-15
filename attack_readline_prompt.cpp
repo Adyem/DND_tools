@@ -1,12 +1,12 @@
 #include "dnd_tools.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/ReadLine/readline.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/Template/vector.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Errno/errno.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/Template/vector.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Errno/errno.hpp"
 
 typedef struct s_attack_prompt_option
 {
@@ -22,46 +22,44 @@ static int    ft_attack_prompt_add_option(ft_vector<t_attack_prompt_option> &opt
     option.keyword = keyword;
     option.outcome = outcome;
     options.push_back(option);
-    if (options.get_error() != ER_SUCCESS)
+    if (options.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = options.get_error();
-        return (FT_FAILURE);
+        return (1);
     }
-    return (FT_SUCCESS);
+    return (0);
 }
 
 static int    ft_attack_prompt_populate_options(ft_vector<t_attack_prompt_option> &options)
 {
-    if (ft_attack_prompt_add_option(options, "hit", 0) == FT_FAILURE)
-        return (FT_FAILURE);
-    if (ft_attack_prompt_add_option(options, "y", 0) == FT_FAILURE)
-        return (FT_FAILURE);
-    if (ft_attack_prompt_add_option(options, "yes", 0) == FT_FAILURE)
-        return (FT_FAILURE);
-    if (ft_attack_prompt_add_option(options, "miss", 1) == FT_FAILURE)
-        return (FT_FAILURE);
-    if (ft_attack_prompt_add_option(options, "n", 1) == FT_FAILURE)
-        return (FT_FAILURE);
-    if (ft_attack_prompt_add_option(options, "no", 1) == FT_FAILURE)
-        return (FT_FAILURE);
-    if (ft_attack_prompt_add_option(options, "exit", 2) == FT_FAILURE)
-        return (FT_FAILURE);
-    if (ft_attack_prompt_add_option(options, "quit", 2) == FT_FAILURE)
-        return (FT_FAILURE);
-    return (FT_SUCCESS);
+    if (ft_attack_prompt_add_option(options, "hit", 0) == 1)
+        return (1);
+    if (ft_attack_prompt_add_option(options, "y", 0) == 1)
+        return (1);
+    if (ft_attack_prompt_add_option(options, "yes", 0) == 1)
+        return (1);
+    if (ft_attack_prompt_add_option(options, "miss", 1) == 1)
+        return (1);
+    if (ft_attack_prompt_add_option(options, "n", 1) == 1)
+        return (1);
+    if (ft_attack_prompt_add_option(options, "no", 1) == 1)
+        return (1);
+    if (ft_attack_prompt_add_option(options, "exit", 2) == 1)
+        return (1);
+    if (ft_attack_prompt_add_option(options, "quit", 2) == 1)
+        return (1);
+    return (0);
 }
 
 int ft_attack_prompt_parse_response(const char *input, int *prompt_result)
 {
     if ((input == ft_nullptr) || (prompt_result == ft_nullptr))
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
-        return (FT_FAILURE);
+        return (1);
     }
     int                                 result;
     int                                 final_errno;
 
-    result = FT_FAILURE;
+    result = 1;
     final_errno = FT_ERR_INVALID_ARGUMENT;
     {
         ft_vector<t_attack_prompt_option>    options(8);
@@ -70,27 +68,27 @@ int ft_attack_prompt_parse_response(const char *input, int *prompt_result)
         size_t                              index;
         t_attack_prompt_option              *option;
 
-        if (normalized_input.get_error() != ER_SUCCESS)
+        if (normalized_input.get_error() != FT_ERR_SUCCESS)
             final_errno = normalized_input.get_error();
         else
         {
             ft_to_lower(normalized_input.data());
-            if (normalized_input.get_error() != ER_SUCCESS)
+            if (normalized_input.get_error() != FT_ERR_SUCCESS)
                 final_errno = normalized_input.get_error();
-            else if (ft_attack_prompt_populate_options(options) == FT_FAILURE)
-                final_errno = ft_errno;
+            else if (ft_attack_prompt_populate_options(options) == 1)
+                final_errno = FT_ERR_SUCCESS;
             else
             {
                 option_count = options.size();
-                if (options.get_error() != ER_SUCCESS)
+                if (options.get_error() != FT_ERR_SUCCESS)
                     final_errno = options.get_error();
                 else
                 {
                     index = 0;
-                    while (index < option_count && result == FT_FAILURE)
+                    while (index < option_count && result == 1)
                     {
                         option = &options[index];
-                        if (options.get_error() != ER_SUCCESS)
+                        if (options.get_error() != FT_ERR_SUCCESS)
                         {
                             final_errno = options.get_error();
                             break;
@@ -98,8 +96,8 @@ int ft_attack_prompt_parse_response(const char *input, int *prompt_result)
                         if (ft_strcmp(normalized_input.c_str(), option->keyword) == 0)
                         {
                             *prompt_result = option->outcome;
-                            final_errno = ER_SUCCESS;
-                            result = FT_SUCCESS;
+                            final_errno = FT_ERR_SUCCESS;
+                            result = 0;
                         }
                         index++;
                     }
@@ -107,7 +105,6 @@ int ft_attack_prompt_parse_response(const char *input, int *prompt_result)
             }
         }
     }
-    ft_errno = final_errno;
     return (result);
 }
 
@@ -122,12 +119,12 @@ int ft_readline_prompt_hit_or_miss(void)
     {
         parse_status = ft_attack_prompt_parse_response(input, &prompt_result);
         cma_free(input);
-        if (parse_status == FT_SUCCESS)
+        if (parse_status == 0)
             return (prompt_result);
-        if (ft_errno != FT_ERR_INVALID_ARGUMENT)
+        if (FT_ERR_SUCCESS != FT_ERR_INVALID_ARGUMENT)
         {
             pf_printf_fd(2, "Error: failed to parse attack prompt response: %s\n",
-                ft_strerror(ft_errno));
+                ft_strerror(FT_ERR_SUCCESS));
             return (-1);
         }
         invalid_attempts++;

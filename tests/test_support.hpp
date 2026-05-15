@@ -1,7 +1,7 @@
 #ifndef TEST_SUPPORT_HPP
 # define TEST_SUPPORT_HPP
 
-# include "../libft/CPP_class/class_string_class.hpp"
+# include "../libft/Modules/CPP_class/class_string.hpp"
 
 void    test_assert_true_impl(int condition, const char *message, const char *file_path, int line_number);
 #define test_assert_true(condition, message) \

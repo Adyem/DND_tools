@@ -1,11 +1,11 @@
-#include "libft/Printf/printf.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_file.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/GetNextLine/get_next_line.hpp"
-#include "libft/JSon/document.hpp"
-#include "libft/Template/vector.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_file.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/GetNextLine/get_next_line.hpp"
+#include "libft/Modules/JSon/document.hpp"
+#include "libft/Modules/Template/vector.hpp"
 #include "dnd_tools.hpp"
 #include "read_file_lines.hpp"
 
@@ -13,15 +13,13 @@ static int ft_append_json_line(ft_vector<ft_string> &lines, const char *value)
 {
     ft_string   line(value);
 
-    if (line.get_error() != ER_SUCCESS)
+    if (line.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = line.get_error();
         return (-1);
     }
     lines.push_back(line);
-    if (lines.get_error() != ER_SUCCESS)
+    if (lines.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = lines.get_error();
         return (-1);
     }
     return (0);
@@ -34,15 +32,13 @@ static char **ft_duplicate_json_lines(ft_vector<ft_string> &lines)
     size_t  index;
 
     line_count = lines.size();
-    if (lines.get_error() != ER_SUCCESS)
+    if (lines.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = lines.get_error();
         return (ft_nullptr);
     }
-    content = static_cast<char **>(cma_calloc(line_count + 1, sizeof(char *)));
+    content = static_cast<char **>(adv_calloc(line_count + 1, sizeof(char *)));
     if (!content)
     {
-        ft_errno = FT_ERR_NO_MEMORY;
         return (ft_nullptr);
     }
     index = 0;
@@ -50,15 +46,13 @@ static char **ft_duplicate_json_lines(ft_vector<ft_string> &lines)
     {
         const ft_string   &entry = lines[index];
 
-        if (lines.get_error() != ER_SUCCESS)
+        if (lines.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = lines.get_error();
             break ;
         }
-        content[index] = cma_strdup(entry.c_str());
+        content[index] = adv_strdup(entry.c_str());
         if (!content[index])
         {
-            ft_errno = FT_ERR_NO_MEMORY;
             break ;
         }
         index++;
@@ -117,8 +111,8 @@ static char **ft_npc_load_legacy_lines(const char *filepath)
         return (ft_nullptr);
     }
     if (DEBUG == 1)
-        pf_printf("Opening file %s on fd %d\n", filepath, info_file.get_fd());
-    content = ft_read_file_lines_fd(info_file.get_fd(), 1024);
+        pf_printf("Opening file %s on fd %d\n", filepath, info_file.get_file_descriptor());
+    content = ft_read_file_lines_fd(info_file.get_file_descriptor(), 1024);
     if (!content)
         pf_printf_fd(2, "1-Error reading legacy save %s\n", filepath);
     return (content);

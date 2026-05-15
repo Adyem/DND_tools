@@ -1,16 +1,16 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
 #include "identification.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
 #include "set_utils.hpp"
 
 #define MAKE_BUFF_MAGIC_DRAIN(magic_drain, target_str) \
     (t_buff){ \
         .target_amount = 1, \
-        .target = cma_strdup(target_str), \
+        .target = adv_strdup(target_str), \
         .spell_id = MAGIC_DRAIN_ID, \
         .dice_faces_mod = (magic_drain).damage_dice_faces, \
         .dice_amount_mod = (magic_drain).damage_dice_amount, \
@@ -27,7 +27,7 @@
 
 static bool generate_magic_drain_message(const t_char *info, ft_string &out_message)
 {
-    char *dex_save = cma_itoa(info->spells.magic_drain.dex_save);
+    char *dex_save = adv_itoa(info->spells.magic_drain.dex_save);
     if (!dex_save)
     {
         pf_printf_fd(2, "151-Error: %s Magic Drain allocation failure", info->name);

@@ -1,10 +1,10 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_file.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/JSon/document.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/Libft/libft.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_file.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/JSon/document.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Basic/basic.hpp"
 #include "key_list.hpp"
 
 static int ft_add_player_field(json_document &document, json_group *group,
@@ -64,7 +64,7 @@ void    ft_save_pc(t_pc *player, ft_file &file)
         return ;
     }
     file.write(content);
-    if (file.get_error() != ER_SUCCESS)
+    if (file.get_error() != FT_ERR_SUCCESS)
         pf_printf_fd(2, "Failed to write player save: %s\n", file.get_error_str());
     cma_free(content);
     return ;

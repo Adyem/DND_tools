@@ -1,7 +1,7 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
 
 int    ft_set_stat_player(size_t key_len, const char **field, const char *content)
 {
@@ -16,7 +16,7 @@ int    ft_set_stat_player(size_t key_len, const char **field, const char *conten
         return (-1);
     }
     previous_value = *field;
-    duplicate = cma_strdup(&content[key_len]);
+    duplicate = adv_strdup(&content[key_len]);
     if (!duplicate)
         return (-1);
     if (ft_check_player_entry(duplicate))

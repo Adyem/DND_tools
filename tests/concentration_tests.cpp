@@ -2,10 +2,10 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../character.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/CPP_class/class_ofstream.hpp"
-#include "../libft/Libft/libft.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/CPP_class/class_ofstream.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static t_char g_stub_target;
 
@@ -32,10 +32,10 @@ static void create_data_entry(const char *path)
     ft_ofstream stream;
 
     test_create_directory("data");
-    test_assert_true(ft_errno == ER_SUCCESS, "Failed to create data directory");
+    test_assert_true(FT_ERR_SUCCESS == FT_ERR_SUCCESS, "Failed to create data directory");
     test_assert_true(stream.open(path) == 0, "Failed to create data entry for test");
     stream.close();
-    test_assert_true(stream.get_error() == ER_SUCCESS,
+    test_assert_true(stream.get_error() == FT_ERR_SUCCESS,
         "Failed to close data entry after creation");
     return ;
 }

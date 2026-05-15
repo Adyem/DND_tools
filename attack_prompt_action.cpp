@@ -1,10 +1,10 @@
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/ReadLine/readline.hpp"
-#include "libft/Template/vector.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
+#include "libft/Modules/Template/vector.hpp"
 #include "character.hpp"
 
 static int ft_append_spell(ft_vector<t_known_spell> &known_spells,
@@ -18,9 +18,8 @@ static int ft_append_spell(ft_vector<t_known_spell> &known_spells,
     entry.learned = learned;
     entry.cast_func = cast_func;
     known_spells.push_back(entry);
-    if (known_spells.get_error() != ER_SUCCESS)
+    if (known_spells.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = known_spells.get_error();
         return (-1);
     }
     return (0);
@@ -30,13 +29,11 @@ int ft_collect_known_spells(t_char * character, ft_vector<t_known_spell> &known_
 {
     if (!character)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (-1);
     }
     known_spells.clear();
-    if (known_spells.get_error() != ER_SUCCESS)
+    if (known_spells.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = known_spells.get_error();
         return (-1);
     }
     if (ft_append_spell(known_spells,
@@ -44,7 +41,6 @@ int ft_collect_known_spells(t_char * character, ft_vector<t_known_spell> &known_
             &character->spells.divine_smite.learned,
             ft_cast_divine_smite) != 0)
         return (-1);
-    ft_errno = ER_SUCCESS;
     return (0);
 }
 
@@ -55,9 +51,8 @@ static int ft_list_learned_spells(ft_vector<t_known_spell> &known_spells)
     int     first_spell;
 
     count = known_spells.size();
-    if (known_spells.get_error() != ER_SUCCESS)
+    if (known_spells.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = known_spells.get_error();
         return (-1);
     }
     index = 0;
@@ -66,9 +61,8 @@ static int ft_list_learned_spells(ft_vector<t_known_spell> &known_spells)
     {
         t_known_spell   &spell = known_spells[index];
 
-        if (known_spells.get_error() != ER_SUCCESS)
+        if (known_spells.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = known_spells.get_error();
             return (-1);
         }
         if (*(spell.learned) != 0)
@@ -92,9 +86,8 @@ static int ft_all_spells_not_learned(ft_vector<t_known_spell> &known_spells, int
     size_t  not_learned;
 
     count = known_spells.size();
-    if (known_spells.get_error() != ER_SUCCESS)
+    if (known_spells.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = known_spells.get_error();
         return (-1);
     }
     index = 0;
@@ -103,9 +96,8 @@ static int ft_all_spells_not_learned(ft_vector<t_known_spell> &known_spells, int
     {
         t_known_spell   &spell = known_spells[index];
 
-        if (known_spells.get_error() != ER_SUCCESS)
+        if (known_spells.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = known_spells.get_error();
             return (-1);
         }
         if (*(spell.learned) == 0)
@@ -125,9 +117,8 @@ static int ft_handle_spell_cast(t_char * character,
     size_t  index;
 
     count = known_spells.size();
-    if (known_spells.get_error() != ER_SUCCESS)
+    if (known_spells.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = known_spells.get_error();
         return (-1);
     }
     index = 0;
@@ -135,9 +126,8 @@ static int ft_handle_spell_cast(t_char * character,
     {
         t_known_spell   &spell = known_spells[index];
 
-        if (known_spells.get_error() != ER_SUCCESS)
+        if (known_spells.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = known_spells.get_error();
             return (-1);
         }
         if (ft_strcmp(input, spell.cmd) == 0)
@@ -177,7 +167,7 @@ static void ft_prompt_user_for_spell(ft_vector<t_known_spell> &known_spells,
 
         if (status == -1)
         {
-            pf_printf_fd(2, "Error resolving spell command: %s\n", ft_strerror(ft_errno));
+            pf_printf_fd(2, "Error resolving spell command: %s\n", ft_strerror(FT_ERR_SUCCESS));
             cma_free(input);
             return ;
         }
@@ -207,27 +197,26 @@ void ft_prompt_on_attack_success(t_char * character, bool critical_strike)
     ft_vector<t_known_spell>    known_spells(4);
     int                         all_not_learned;
 
-    if (known_spells.get_error() != ER_SUCCESS)
+    if (known_spells.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = known_spells.get_error();
         pf_printf_fd(2, "Error initializing known spell storage: %s\n",
-            ft_strerror(ft_errno));
+            ft_strerror(FT_ERR_SUCCESS));
         return ;
     }
     if (ft_collect_known_spells(character, known_spells) != 0)
     {
-        pf_printf_fd(2, "Error collecting known spells: %s\n", ft_strerror(ft_errno));
+        pf_printf_fd(2, "Error collecting known spells: %s\n", ft_strerror(FT_ERR_SUCCESS));
         return ;
     }
     if (ft_list_learned_spells(known_spells) != 0)
     {
-        pf_printf_fd(2, "Error listing known spells: %s\n", ft_strerror(ft_errno));
+        pf_printf_fd(2, "Error listing known spells: %s\n", ft_strerror(FT_ERR_SUCCESS));
         return ;
     }
     if (ft_all_spells_not_learned(known_spells, &all_not_learned) != 0)
     {
         pf_printf_fd(2, "Error calculating spell availability: %s\n",
-            ft_strerror(ft_errno));
+            ft_strerror(FT_ERR_SUCCESS));
         return ;
     }
     if (all_not_learned)

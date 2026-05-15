@@ -2,7 +2,7 @@
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
 #include "../identification.hpp"
-#include "../libft/CPP_class/class_string_class.hpp"
+#include "../libft/Modules/CPP_class/class_string.hpp"
 
 static void test_weapon_find_stat_returns_strength_score()
 {

@@ -1,9 +1,9 @@
 #include "character.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/ReadLine/readline.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
 #include "dnd_tools.hpp"
 
 static int ft_check_target_amount(int target_amount)
@@ -42,17 +42,17 @@ int    ft_cast_concentration_multi_target_01(t_char * info, t_buff *buff,
     int                error_code;
 
     if (ft_remove_concentration(info))
-        return (FT_FAILURE);
+        return (1);
     ft_initialize_variables(&target_data);
     if (!ft_check_target_amount(buff->target_amount))
-        return (FT_FAILURE);
+        return (1);
     while (targets_collected < buff->target_amount)
     {
         target_data.Pchar_name[targets_collected] = ft_read_target_name(targets_collected);
         if (!target_data.Pchar_name[targets_collected])
         {
             ft_free_memory_cmt(&target_data, targets_collected);
-            return (FT_FAILURE);
+            return (1);
         }
         target_data.target[targets_collected] = ft_validate_and_fetch_target
             (target_data.Pchar_name[targets_collected], info, &error_code);
@@ -73,7 +73,7 @@ int    ft_cast_concentration_multi_target_01(t_char * info, t_buff *buff,
                 if (error >= MAX_ERROR_COUNT)
                 {
                     ft_free_memory_cmt(&target_data, targets_collected);
-                    return (FT_FAILURE);
+                    return (1);
                 }
                 continue ;
             }
@@ -84,5 +84,5 @@ int    ft_cast_concentration_multi_target_01(t_char * info, t_buff *buff,
     target_data.buff_info = buff;
     ft_cast_concentration_multi_target_02(info, &target_data, input);
     ft_free_memory_cmt(&target_data, buff->target_amount);
-    return (FT_SUCCESS);
+    return (0);
 }

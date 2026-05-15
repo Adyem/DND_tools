@@ -1,20 +1,19 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/RNG/rng.hpp"
-#include "libft/Template/vector.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/RNG/rng.hpp"
+#include "libft/Modules/Template/vector.hpp"
 
 static int ft_append_spell_slot_reference(ft_vector<t_spell_slot*> &slots,
         t_spell_slot *spell_slot)
 {
     slots.push_back(spell_slot);
-    if (slots.get_error() != ER_SUCCESS)
+    if (slots.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = slots.get_error();
         return (-1);
     }
     return (0);
@@ -25,13 +24,11 @@ static int ft_collect_spell_slots(t_spell_slots *spell_slots,
 {
     if (spell_slots == ft_nullptr)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (-1);
     }
     slots.clear();
-    if (slots.get_error() != ER_SUCCESS)
+    if (slots.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = slots.get_error();
         return (-1);
     }
     if (ft_append_spell_slot_reference(slots, &spell_slots->level_1) != 0)
@@ -52,7 +49,6 @@ static int ft_collect_spell_slots(t_spell_slots *spell_slots,
         return (-1);
     if (ft_append_spell_slot_reference(slots, &spell_slots->level_9) != 0)
         return (-1);
-    ft_errno = ER_SUCCESS;
     return (0);
 }
 
@@ -63,21 +59,17 @@ static int ft_get_collected_slot(ft_vector<t_spell_slot*> &slots,
 {
     if (out_slot == ft_nullptr)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (-1);
     }
     if (index >= slot_count)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (-1);
     }
     *out_slot = slots[index];
-    if (slots.get_error() != ER_SUCCESS)
+    if (slots.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = slots.get_error();
         return (-1);
     }
-    ft_errno = ER_SUCCESS;
     return (0);
 }
 
@@ -92,9 +84,8 @@ static int ft_auto_cast(t_char *character, int base_level, const char *spell_nam
     if (ft_collect_spell_slots(&character->spell_slots, spell_slots) != 0)
         return (-1);
     slot_count = spell_slots.size();
-    if (spell_slots.get_error() != ER_SUCCESS)
+    if (spell_slots.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = spell_slots.get_error();
         return (-1);
     }
     if (current_level < 1)
@@ -111,7 +102,6 @@ static int ft_auto_cast(t_char *character, int base_level, const char *spell_nam
             return (-1);
         if (spell_slot != ft_nullptr && spell_slot->available > 0)
         {
-            ft_errno = ER_SUCCESS;
             return (current_level);
         }
         current_level++;
@@ -129,12 +119,11 @@ static ft_string ft_check_availeble_spell_slots(t_char *character, int base_leve
     size_t index;
 
     if (ft_collect_spell_slots(&character->spell_slots, spell_slots) != 0)
-        return (ft_string(ft_errno));
+        return (ft_string(FT_ERR_SUCCESS));
     slot_count = spell_slots.size();
-    if (spell_slots.get_error() != ER_SUCCESS)
+    if (spell_slots.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = spell_slots.get_error();
-        return (ft_string(ft_errno));
+        return (ft_string(FT_ERR_SUCCESS));
     }
     index = 0;
     while (index < slot_count)
@@ -148,24 +137,24 @@ static ft_string ft_check_availeble_spell_slots(t_char *character, int base_leve
         {
             if (ft_get_collected_slot(spell_slots, slot_count, index,
                     &spell_slot) != 0)
-                return (ft_string(ft_errno));
+                return (ft_string(FT_ERR_SUCCESS));
             if (spell_slot != ft_nullptr && spell_slot->available > 0)
             {
                 available_levels.append(" ");
-                if (available_levels.get_error() != ER_SUCCESS)
+                if (available_levels.get_error() != FT_ERR_SUCCESS)
                     return (ft_string(available_levels.get_error()));
-                level_string = cma_itoa(level_value);
+                level_string = adv_itoa(level_value);
                 if (level_string == ft_nullptr)
-                    return (ft_string(ft_errno));
+                    return (ft_string(FT_ERR_SUCCESS));
                 available_levels.append(level_string);
-                if (available_levels.get_error() != ER_SUCCESS)
+                if (available_levels.get_error() != FT_ERR_SUCCESS)
                 {
                     cma_free(level_string);
                     return (ft_string(available_levels.get_error()));
                 }
                 cma_free(level_string);
                 available_levels.append(",");
-                if (available_levels.get_error() != ER_SUCCESS)
+                if (available_levels.get_error() != FT_ERR_SUCCESS)
                     return (ft_string(available_levels.get_error()));
             }
         }
@@ -174,10 +163,9 @@ static ft_string ft_check_availeble_spell_slots(t_char *character, int base_leve
     if (!available_levels.empty())
     {
         available_levels.erase(available_levels.size() - 1, 1);
-        if (available_levels.get_error() != ER_SUCCESS)
+        if (available_levels.get_error() != FT_ERR_SUCCESS)
             return (ft_string(available_levels.get_error()));
     }
-    ft_errno = ER_SUCCESS;
     return (available_levels);
 }
 
@@ -290,7 +278,7 @@ void ft_remove_spell_slot(t_spell_slots *spell_slots, int level_spell_used)
         return ;
     }
     slot_count = spell_slots_vector.size();
-    if (spell_slots_vector.get_error() != ER_SUCCESS)
+    if (spell_slots_vector.get_error() != FT_ERR_SUCCESS)
     {
         pf_printf_fd(2,
             "Error: Failed to access spell slots for level %d.\n",

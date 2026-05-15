@@ -1,6 +1,6 @@
 #include "dnd_tools.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
 
 void ft_update_buff_status(t_char * info, int current_dur, int duration,
                             const char *buff_name)

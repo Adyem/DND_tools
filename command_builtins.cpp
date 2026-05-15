@@ -1,11 +1,11 @@
 #include "command_builtins.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/CPP_class/class_string_class.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/Libft/libft.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/Template/map.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_string.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/Basic/basic.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/Template/map.hpp"
 
 typedef int (*t_builtin_handler)(char **input, int argc, t_name *name);
 
@@ -24,8 +24,8 @@ static int ft_builtin_roll(char **input, int argc, t_name *name)
     roll_value = ft_command_roll(input);
     if (roll_value == ft_nullptr)
     {
-        if (ft_errno != ER_SUCCESS)
-            pf_printf_fd(2, "Roll failed: %s\n", ft_strerror(ft_errno));
+        if (FT_ERR_SUCCESS != FT_ERR_SUCCESS)
+            pf_printf_fd(2, "Roll failed: %s\n", ft_strerror(FT_ERR_SUCCESS));
         return (FT_BUILTIN_HANDLED);
     }
     pf_printf("%d\n", *roll_value);
@@ -39,7 +39,6 @@ static int ft_builtin_exit(char **input, int argc, t_name *name)
     (void)name;
     if (argc != 1)
         return (FT_BUILTIN_NOT_FOUND);
-    ft_errno = ER_SUCCESS;
     return (FT_BUILTIN_EXIT);
 }
 
@@ -142,10 +141,10 @@ static int  ft_populate_builtin_map(ft_map<ft_string, t_builtin_handler> &map)
     while (index < count)
     {
         ft_string key(entries[index].key);
-        if (key.get_error() != ER_SUCCESS)
+        if (key.get_error() != FT_ERR_SUCCESS)
             return (-1);
         map.insert(key, entries[index].handler);
-        if (map.get_error() != ER_SUCCESS)
+        if (map.get_error() != FT_ERR_SUCCESS)
             return (-1);
         index = index + 1;
     }
@@ -162,7 +161,6 @@ static ft_map<ft_string, t_builtin_handler>    &ft_builtin_command_map(void)
         if (ft_populate_builtin_map(map) != 0)
         {
             map.clear();
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (map);
         }
         initialized = true;
@@ -179,9 +177,8 @@ static Pair<ft_string, t_builtin_handler>  *ft_find_builtin_entry(
     if (argc <= 0 || input[0] == ft_nullptr)
         return (ft_nullptr);
     key = ft_string(input[0]);
-    if (key.get_error() != ER_SUCCESS)
+    if (key.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (ft_nullptr);
     }
     entry = map.find(key);
@@ -189,21 +186,18 @@ static Pair<ft_string, t_builtin_handler>  *ft_find_builtin_entry(
     {
         ft_string combined(input[0]);
 
-        if (combined.get_error() != ER_SUCCESS)
+        if (combined.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (ft_nullptr);
         }
         combined.append(" ");
-        if (combined.get_error() != ER_SUCCESS)
+        if (combined.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (ft_nullptr);
         }
         combined.append(input[1]);
-        if (combined.get_error() != ER_SUCCESS)
+        if (combined.get_error() != FT_ERR_SUCCESS)
         {
-            ft_errno = FT_ERR_INVALID_ARGUMENT;
             return (ft_nullptr);
         }
         entry = map.find(combined);
@@ -215,39 +209,30 @@ int ft_dispatch_builtin_command(char **input, int argc, t_name *name)
 {
     Pair<ft_string, t_builtin_handler> *entry;
     t_builtin_handler                  handler;
-    int                                previous_errno;
     ft_map<ft_string, t_builtin_handler>   *map_pointer;
 
-    previous_errno = ft_errno;
     if (input == ft_nullptr || argc <= 0)
     {
-        ft_errno = previous_errno;
         return (FT_BUILTIN_NOT_FOUND);
     }
     map_pointer = &ft_builtin_command_map();
     if (map_pointer == ft_nullptr)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_BUILTIN_ERROR);
     }
     ft_map<ft_string, t_builtin_handler>   &map = *map_pointer;
-    if (map.get_error() != ER_SUCCESS)
+    if (map.get_error() != FT_ERR_SUCCESS)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_BUILTIN_ERROR);
     }
     entry = ft_find_builtin_entry(map, input, argc);
     if (entry == ft_nullptr)
     {
-        if (ft_errno == FT_ERR_INVALID_ARGUMENT)
-            return (FT_BUILTIN_ERROR);
-        ft_errno = previous_errno;
         return (FT_BUILTIN_NOT_FOUND);
     }
     handler = entry->value;
     if (handler == ft_nullptr)
     {
-        ft_errno = FT_ERR_INVALID_ARGUMENT;
         return (FT_BUILTIN_ERROR);
     }
     return (handler(input, argc, name));

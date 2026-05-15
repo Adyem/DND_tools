@@ -1,9 +1,9 @@
-#include "libft/Printf/printf.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/CPP_class/class_nullptr.hpp"
-#include "libft/CPP_class/class_file.hpp"
-#include "libft/Errno/errno.hpp"
-#include "libft/File/file_utils.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/CPP_class/class_nullptr.hpp"
+#include "libft/Modules/CPP_class/class_file.hpp"
+#include "libft/Modules/Errno/errno.hpp"
+#include "libft/Modules/File/file_utils.hpp"
 #include "dnd_tools.hpp"
 
 int ft_open_file_write_only(const char *filename, ft_file &file)
@@ -91,7 +91,7 @@ ft_file ft_check_and_open(t_target_data *target_data, t_char * info)
     if (info_save_file.get_error())
     {
         pf_printf_fd(2, "122-Error opening file: %s", info_save_file.get_error_str());
-        return (-1);
+        return (ft_file());
     }
     if (DEBUG == 1)
         pf_printf("memory address of buff info is %p", target_data->buff_info);
@@ -115,7 +115,7 @@ ft_file ft_check_and_open(t_target_data *target_data, t_char * info)
                 }
                 rollback_index++;
             }
-            return (-1);
+            return (ft_file());
         }
         target_index++;
     }

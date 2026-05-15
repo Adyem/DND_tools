@@ -1,7 +1,7 @@
 #ifndef KEY_LIST_HPP
 # define KEY_LIST_HPP
 
-#include "libft/Libft/libft.hpp"
+#include "libft/Modules/Basic/basic.hpp"
 
 constexpr size_t constexpr_strlen(const char* str)
 {

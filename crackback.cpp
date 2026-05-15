@@ -1,8 +1,8 @@
 #include "character.hpp"
 #include "dnd_tools.hpp"
-#include "libft/CMA/CMA.hpp"
-#include "libft/Printf/printf.hpp"
-#include "libft/ReadLine/readline.hpp"
+#include "libft/Modules/CMA/CMA.hpp"
+#include "libft/Modules/Printf/printf.hpp"
+#include "libft/Modules/ReadLine/readline.hpp"
 
 inline static bool ft_is_crackback_possible(t_char * info, int number)
 {

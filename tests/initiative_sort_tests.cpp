@@ -1,9 +1,9 @@
 #include "test_groups.hpp"
 #include "test_support.hpp"
 #include "../dnd_tools.hpp"
-#include "../libft/CMA/CMA.hpp"
-#include "../libft/CPP_class/class_nullptr.hpp"
-#include "../libft/Libft/libft.hpp"
+#include "../libft/Modules/CMA/CMA.hpp"
+#include "../libft/Modules/CPP_class/class_nullptr.hpp"
+#include "../libft/Modules/Basic/basic.hpp"
 
 static char **duplicate_lines(const char **lines)
 {
@@ -14,13 +14,13 @@ static char **duplicate_lines(const char **lines)
     count = 0;
     while (lines[count])
         count++;
-    copy = static_cast<char **>(cma_calloc(count + 1, sizeof(char *)));
+    copy = static_cast<char **>(adv_calloc(count + 1, sizeof(char *)));
     test_assert_true(copy != ft_nullptr,
         "duplicate_lines should allocate line array");
     index = 0;
     while (index < count)
     {
-        copy[index] = cma_strdup(lines[index]);
+        copy[index] = adv_strdup(lines[index]);
         test_assert_true(copy[index] != ft_nullptr,
             "duplicate_lines should duplicate source line");
         index++;
